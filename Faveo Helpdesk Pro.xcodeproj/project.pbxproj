@@ -76,6 +76,7 @@
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Faveo Helpdesk Pro.entitlements"; sourceTree = "<group>"; };
 		D9DBD3411E07ACFC00219F93 /* Faveo Helpdesk Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Faveo Helpdesk Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9DBD3451E07ACFC00219F93 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D9DBD3471E07ACFC00219F93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -232,6 +233,7 @@
 		D9DBD3431E07ACFC00219F93 /* Faveo Helpdesk Pro */ = {
 			isa = PBXGroup;
 			children = (
+				D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */,
 				D9EB9F4D1E07C1F70001115F /* Classes */,
 				D9DBD3441E07ACFC00219F93 /* Supporting Files */,
 				D9EB9FAD1E07C41C0001115F /* Library */,
@@ -493,6 +495,11 @@
 					D9DBD3401E07ACFC00219F93 = {
 						CreatedOnToolsVersion = 8.1;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					D9DBD3591E07ACFC00219F93 = {
 						CreatedOnToolsVersion = 8.1;
@@ -808,6 +815,7 @@
 			baseConfigurationReference = 71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Faveo Helpdesk Pro/Faveo Helpdesk Pro.entitlements";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -821,6 +829,7 @@
 			baseConfigurationReference = 87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Faveo Helpdesk Pro/Faveo Helpdesk Pro.entitlements";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
