@@ -1,0 +1,924 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
+		D9DBD3461E07ACFC00219F93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3451E07ACFC00219F93 /* main.m */; };
+		D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3481E07ACFC00219F93 /* AppDelegate.m */; };
+		D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD34D1E07ACFC00219F93 /* Main.storyboard */; };
+		D9DBD3511E07ACFC00219F93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD3501E07ACFC00219F93 /* Assets.xcassets */; };
+		D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD3521E07ACFC00219F93 /* LaunchScreen.storyboard */; };
+		D9DBD35F1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD35E1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m */; };
+		D9DBD36A1E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3691E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m */; };
+		D9EB9F581E07C2940001115F /* NetworkApi.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F561E07C2940001115F /* NetworkApi.m */; };
+		D9EB9F5B1E07C2A80001115F /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F5A1E07C2A80001115F /* Utils.m */; };
+		D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F5D1E07C2B70001115F /* MyWebservices.m */; };
+		D9EB9F631E07C2D00001115F /* Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F601E07C2D00001115F /* Data.m */; };
+		D9EB9F641E07C2D00001115F /* GlobalVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F621E07C2D00001115F /* GlobalVariables.m */; };
+		D9EB9F771E07C2F00001115F /* TicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F661E07C2F00001115F /* TicketTableViewCell.m */; };
+		D9EB9F781E07C2F00001115F /* TicketTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F671E07C2F00001115F /* TicketTableViewCell.xib */; };
+		D9EB9F791E07C2F00001115F /* ClientListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F691E07C2F00001115F /* ClientListTableViewCell.m */; };
+		D9EB9F7A1E07C2F00001115F /* ClientListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F6A1E07C2F00001115F /* ClientListTableViewCell.xib */; };
+		D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F6C1E07C2F00001115F /* ClientTicketTableViewCell.m */; };
+		D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */; };
+		D9EB9F7D1E07C2F00001115F /* ConversationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F6F1E07C2F00001115F /* ConversationTableViewCell.m */; };
+		D9EB9F7E1E07C2F00001115F /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F701E07C2F00001115F /* ConversationTableViewCell.xib */; };
+		D9EB9F7F1E07C2F00001115F /* OpenCloseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F721E07C2F00001115F /* OpenCloseTableViewCell.m */; };
+		D9EB9F801E07C2F00001115F /* OpenCloseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F731E07C2F00001115F /* OpenCloseTableViewCell.xib */; };
+		D9EB9F811E07C2F00001115F /* LoadingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F751E07C2F00001115F /* LoadingTableViewCell.m */; };
+		D9EB9F821E07C2F00001115F /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F761E07C2F00001115F /* LoadingTableViewCell.xib */; };
+		D9EB9F9F1E07C3270001115F /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F841E07C3270001115F /* LeftMenuViewController.m */; };
+		D9EB9FA01E07C3270001115F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F861E07C3270001115F /* LoginViewController.m */; };
+		D9EB9FA11E07C3270001115F /* UnassignedTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F881E07C3270001115F /* UnassignedTicketsViewController.m */; };
+		D9EB9FA21E07C3270001115F /* ClientListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F8A1E07C3270001115F /* ClientListViewController.m */; };
+		D9EB9FA31E07C3270001115F /* TrashTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F8C1E07C3270001115F /* TrashTicketsViewController.m */; };
+		D9EB9FA41E07C3270001115F /* ClosedTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F8E1E07C3270001115F /* ClosedTicketsViewController.m */; };
+		D9EB9FA51E07C3270001115F /* MyTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F901E07C3270001115F /* MyTicketsViewController.m */; };
+		D9EB9FA61E07C3270001115F /* CreateTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F921E07C3270001115F /* CreateTicketViewController.m */; };
+		D9EB9FA71E07C3270001115F /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F941E07C3270001115F /* InboxViewController.m */; };
+		D9EB9FA81E07C3270001115F /* TicketDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F961E07C3270001115F /* TicketDetailViewController.m */; };
+		D9EB9FA91E07C3270001115F /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F981E07C3270001115F /* AboutViewController.m */; };
+		D9EB9FAA1E07C3270001115F /* ClientDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F9A1E07C3270001115F /* ClientDetailViewController.m */; };
+		D9EB9FAB1E07C3270001115F /* ConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F9C1E07C3270001115F /* ConversationViewController.m */; };
+		D9EB9FAC1E07C3270001115F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F9E1E07C3270001115F /* DetailViewController.m */; };
+		D9EB9FBC1E07C4490001115F /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9FB01E07C4490001115F /* SlideNavigationController.m */; };
+		D9EB9FBD1E07C4490001115F /* SlideNavigationContorllerAnimatorFade.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9FB31E07C4490001115F /* SlideNavigationContorllerAnimatorFade.m */; };
+		D9EB9FBE1E07C4490001115F /* SlideNavigationContorllerAnimatorScale.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9FB51E07C4490001115F /* SlideNavigationContorllerAnimatorScale.m */; };
+		D9EB9FBF1E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9FB71E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.m */; };
+		D9EB9FC01E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9FB91E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.m */; };
+		D9EB9FC11E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9FBB1E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m */; };
+		D9EB9FC51E07C4610001115F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9FC41E07C4610001115F /* Reachability.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D9DBD35B1E07ACFC00219F93 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D9DBD3391E07ACFC00219F93 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9DBD3401E07ACFC00219F93;
+			remoteInfo = "Faveo Helpdesk Pro";
+		};
+		D9DBD3661E07ACFC00219F93 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D9DBD3391E07ACFC00219F93 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9DBD3401E07ACFC00219F93;
+			remoteInfo = "Faveo Helpdesk Pro";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
+		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
+		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9DBD3411E07ACFC00219F93 /* Faveo Helpdesk Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Faveo Helpdesk Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9DBD3451E07ACFC00219F93 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D9DBD3471E07ACFC00219F93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D9DBD3481E07ACFC00219F93 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D9DBD34E1E07ACFC00219F93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D9DBD3501E07ACFC00219F93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D9DBD3531E07ACFC00219F93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D9DBD3551E07ACFC00219F93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9DBD35A1E07ACFC00219F93 /* Faveo Helpdesk ProTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Faveo Helpdesk ProTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9DBD35E1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Faveo_Helpdesk_ProTests.m; sourceTree = "<group>"; };
+		D9DBD3601E07ACFC00219F93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9DBD3651E07ACFC00219F93 /* Faveo Helpdesk ProUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Faveo Helpdesk ProUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9DBD3691E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Faveo_Helpdesk_ProUITests.m; sourceTree = "<group>"; };
+		D9DBD36B1E07ACFC00219F93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9EB9F551E07C2940001115F /* NetworkApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkApi.h; sourceTree = "<group>"; };
+		D9EB9F561E07C2940001115F /* NetworkApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkApi.m; sourceTree = "<group>"; };
+		D9EB9F571E07C2940001115F /* AppConstanst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstanst.h; sourceTree = "<group>"; };
+		D9EB9F591E07C2A80001115F /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		D9EB9F5A1E07C2A80001115F /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		D9EB9F5C1E07C2B70001115F /* MyWebservices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWebservices.h; sourceTree = "<group>"; };
+		D9EB9F5D1E07C2B70001115F /* MyWebservices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWebservices.m; sourceTree = "<group>"; };
+		D9EB9F5F1E07C2D00001115F /* Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Data.h; sourceTree = "<group>"; };
+		D9EB9F601E07C2D00001115F /* Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Data.m; sourceTree = "<group>"; };
+		D9EB9F611E07C2D00001115F /* GlobalVariables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalVariables.h; sourceTree = "<group>"; };
+		D9EB9F621E07C2D00001115F /* GlobalVariables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalVariables.m; sourceTree = "<group>"; };
+		D9EB9F651E07C2F00001115F /* TicketTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketTableViewCell.h; sourceTree = "<group>"; };
+		D9EB9F661E07C2F00001115F /* TicketTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketTableViewCell.m; sourceTree = "<group>"; };
+		D9EB9F671E07C2F00001115F /* TicketTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketTableViewCell.xib; sourceTree = "<group>"; };
+		D9EB9F681E07C2F00001115F /* ClientListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientListTableViewCell.h; sourceTree = "<group>"; };
+		D9EB9F691E07C2F00001115F /* ClientListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientListTableViewCell.m; sourceTree = "<group>"; };
+		D9EB9F6A1E07C2F00001115F /* ClientListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientListTableViewCell.xib; sourceTree = "<group>"; };
+		D9EB9F6B1E07C2F00001115F /* ClientTicketTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientTicketTableViewCell.h; sourceTree = "<group>"; };
+		D9EB9F6C1E07C2F00001115F /* ClientTicketTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientTicketTableViewCell.m; sourceTree = "<group>"; };
+		D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientTicketTableViewCell.xib; sourceTree = "<group>"; };
+		D9EB9F6E1E07C2F00001115F /* ConversationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationTableViewCell.h; sourceTree = "<group>"; };
+		D9EB9F6F1E07C2F00001115F /* ConversationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationTableViewCell.m; sourceTree = "<group>"; };
+		D9EB9F701E07C2F00001115F /* ConversationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationTableViewCell.xib; sourceTree = "<group>"; };
+		D9EB9F711E07C2F00001115F /* OpenCloseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCloseTableViewCell.h; sourceTree = "<group>"; };
+		D9EB9F721E07C2F00001115F /* OpenCloseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenCloseTableViewCell.m; sourceTree = "<group>"; };
+		D9EB9F731E07C2F00001115F /* OpenCloseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenCloseTableViewCell.xib; sourceTree = "<group>"; };
+		D9EB9F741E07C2F00001115F /* LoadingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingTableViewCell.h; sourceTree = "<group>"; };
+		D9EB9F751E07C2F00001115F /* LoadingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingTableViewCell.m; sourceTree = "<group>"; };
+		D9EB9F761E07C2F00001115F /* LoadingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingTableViewCell.xib; sourceTree = "<group>"; };
+		D9EB9F831E07C3270001115F /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
+		D9EB9F841E07C3270001115F /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
+		D9EB9F851E07C3270001115F /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		D9EB9F861E07C3270001115F /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		D9EB9F871E07C3270001115F /* UnassignedTicketsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnassignedTicketsViewController.h; sourceTree = "<group>"; };
+		D9EB9F881E07C3270001115F /* UnassignedTicketsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnassignedTicketsViewController.m; sourceTree = "<group>"; };
+		D9EB9F891E07C3270001115F /* ClientListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientListViewController.h; sourceTree = "<group>"; };
+		D9EB9F8A1E07C3270001115F /* ClientListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientListViewController.m; sourceTree = "<group>"; };
+		D9EB9F8B1E07C3270001115F /* TrashTicketsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrashTicketsViewController.h; sourceTree = "<group>"; };
+		D9EB9F8C1E07C3270001115F /* TrashTicketsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrashTicketsViewController.m; sourceTree = "<group>"; };
+		D9EB9F8D1E07C3270001115F /* ClosedTicketsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClosedTicketsViewController.h; sourceTree = "<group>"; };
+		D9EB9F8E1E07C3270001115F /* ClosedTicketsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClosedTicketsViewController.m; sourceTree = "<group>"; };
+		D9EB9F8F1E07C3270001115F /* MyTicketsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTicketsViewController.h; sourceTree = "<group>"; };
+		D9EB9F901E07C3270001115F /* MyTicketsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTicketsViewController.m; sourceTree = "<group>"; };
+		D9EB9F911E07C3270001115F /* CreateTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateTicketViewController.h; sourceTree = "<group>"; };
+		D9EB9F921E07C3270001115F /* CreateTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateTicketViewController.m; sourceTree = "<group>"; };
+		D9EB9F931E07C3270001115F /* InboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxViewController.h; sourceTree = "<group>"; };
+		D9EB9F941E07C3270001115F /* InboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxViewController.m; sourceTree = "<group>"; };
+		D9EB9F951E07C3270001115F /* TicketDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketDetailViewController.h; sourceTree = "<group>"; };
+		D9EB9F961E07C3270001115F /* TicketDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketDetailViewController.m; sourceTree = "<group>"; };
+		D9EB9F971E07C3270001115F /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		D9EB9F981E07C3270001115F /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		D9EB9F991E07C3270001115F /* ClientDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientDetailViewController.h; sourceTree = "<group>"; };
+		D9EB9F9A1E07C3270001115F /* ClientDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientDetailViewController.m; sourceTree = "<group>"; };
+		D9EB9F9B1E07C3270001115F /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationViewController.h; sourceTree = "<group>"; };
+		D9EB9F9C1E07C3270001115F /* ConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationViewController.m; sourceTree = "<group>"; };
+		D9EB9F9D1E07C3270001115F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		D9EB9F9E1E07C3270001115F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		D9EB9FAF1E07C4490001115F /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
+		D9EB9FB01E07C4490001115F /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
+		D9EB9FB11E07C4490001115F /* SlideNavigationContorllerAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimator.h; sourceTree = "<group>"; };
+		D9EB9FB21E07C4490001115F /* SlideNavigationContorllerAnimatorFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimatorFade.h; sourceTree = "<group>"; };
+		D9EB9FB31E07C4490001115F /* SlideNavigationContorllerAnimatorFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorFade.m; sourceTree = "<group>"; };
+		D9EB9FB41E07C4490001115F /* SlideNavigationContorllerAnimatorScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimatorScale.h; sourceTree = "<group>"; };
+		D9EB9FB51E07C4490001115F /* SlideNavigationContorllerAnimatorScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorScale.m; sourceTree = "<group>"; };
+		D9EB9FB61E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimatorScaleAndFade.h; sourceTree = "<group>"; };
+		D9EB9FB71E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorScaleAndFade.m; sourceTree = "<group>"; };
+		D9EB9FB81E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimatorSlide.h; sourceTree = "<group>"; };
+		D9EB9FB91E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorSlide.m; sourceTree = "<group>"; };
+		D9EB9FBA1E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimatorSlideAndFade.h; sourceTree = "<group>"; };
+		D9EB9FBB1E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorSlideAndFade.m; sourceTree = "<group>"; };
+		D9EB9FC31E07C4610001115F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		D9EB9FC41E07C4610001115F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D9DBD33E1E07ACFC00219F93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9DBD3571E07ACFC00219F93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9DBD3621E07ACFC00219F93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2C616208362AC6156509CE49 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3763F1EAD4895AC1349D9964 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */,
+				87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D9DBD3381E07ACFC00219F93 = {
+			isa = PBXGroup;
+			children = (
+				D9DBD3431E07ACFC00219F93 /* Faveo Helpdesk Pro */,
+				D9DBD35D1E07ACFC00219F93 /* Faveo Helpdesk ProTests */,
+				D9DBD3681E07ACFC00219F93 /* Faveo Helpdesk ProUITests */,
+				D9DBD3421E07ACFC00219F93 /* Products */,
+				3763F1EAD4895AC1349D9964 /* Pods */,
+				2C616208362AC6156509CE49 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D9DBD3421E07ACFC00219F93 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D9DBD3411E07ACFC00219F93 /* Faveo Helpdesk Pro.app */,
+				D9DBD35A1E07ACFC00219F93 /* Faveo Helpdesk ProTests.xctest */,
+				D9DBD3651E07ACFC00219F93 /* Faveo Helpdesk ProUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D9DBD3431E07ACFC00219F93 /* Faveo Helpdesk Pro */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9F4D1E07C1F70001115F /* Classes */,
+				D9DBD3441E07ACFC00219F93 /* Supporting Files */,
+				D9EB9FAD1E07C41C0001115F /* Library */,
+			);
+			path = "Faveo Helpdesk Pro";
+			sourceTree = "<group>";
+		};
+		D9DBD3441E07ACFC00219F93 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D9DBD34D1E07ACFC00219F93 /* Main.storyboard */,
+				D9DBD3501E07ACFC00219F93 /* Assets.xcassets */,
+				D9DBD3521E07ACFC00219F93 /* LaunchScreen.storyboard */,
+				D9DBD3551E07ACFC00219F93 /* Info.plist */,
+				D9DBD3451E07ACFC00219F93 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D9DBD35D1E07ACFC00219F93 /* Faveo Helpdesk ProTests */ = {
+			isa = PBXGroup;
+			children = (
+				D9DBD35E1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m */,
+				D9DBD3601E07ACFC00219F93 /* Info.plist */,
+			);
+			path = "Faveo Helpdesk ProTests";
+			sourceTree = "<group>";
+		};
+		D9DBD3681E07ACFC00219F93 /* Faveo Helpdesk ProUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D9DBD3691E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m */,
+				D9DBD36B1E07ACFC00219F93 /* Info.plist */,
+			);
+			path = "Faveo Helpdesk ProUITests";
+			sourceTree = "<group>";
+		};
+		D9EB9F4D1E07C1F70001115F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9F4F1E07C2130001115F /* ViewControllers */,
+				D9EB9F511E07C22B0001115F /* WebServices */,
+				D9EB9F541E07C2500001115F /* OtherClasses */,
+				D9EB9F521E07C2320001115F /* Utils */,
+				D9EB9F501E07C21E0001115F /* Model */,
+				D9EB9F4E1E07C20B0001115F /* Xibs */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		D9EB9F4E1E07C20B0001115F /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9F651E07C2F00001115F /* TicketTableViewCell.h */,
+				D9EB9F661E07C2F00001115F /* TicketTableViewCell.m */,
+				D9EB9F671E07C2F00001115F /* TicketTableViewCell.xib */,
+				D9EB9F681E07C2F00001115F /* ClientListTableViewCell.h */,
+				D9EB9F691E07C2F00001115F /* ClientListTableViewCell.m */,
+				D9EB9F6A1E07C2F00001115F /* ClientListTableViewCell.xib */,
+				D9EB9F6B1E07C2F00001115F /* ClientTicketTableViewCell.h */,
+				D9EB9F6C1E07C2F00001115F /* ClientTicketTableViewCell.m */,
+				D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */,
+				D9EB9F6E1E07C2F00001115F /* ConversationTableViewCell.h */,
+				D9EB9F6F1E07C2F00001115F /* ConversationTableViewCell.m */,
+				D9EB9F701E07C2F00001115F /* ConversationTableViewCell.xib */,
+				D9EB9F711E07C2F00001115F /* OpenCloseTableViewCell.h */,
+				D9EB9F721E07C2F00001115F /* OpenCloseTableViewCell.m */,
+				D9EB9F731E07C2F00001115F /* OpenCloseTableViewCell.xib */,
+				D9EB9F741E07C2F00001115F /* LoadingTableViewCell.h */,
+				D9EB9F751E07C2F00001115F /* LoadingTableViewCell.m */,
+				D9EB9F761E07C2F00001115F /* LoadingTableViewCell.xib */,
+			);
+			name = Xibs;
+			sourceTree = "<group>";
+		};
+		D9EB9F4F1E07C2130001115F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9F831E07C3270001115F /* LeftMenuViewController.h */,
+				D9EB9F841E07C3270001115F /* LeftMenuViewController.m */,
+				D9EB9F851E07C3270001115F /* LoginViewController.h */,
+				D9EB9F861E07C3270001115F /* LoginViewController.m */,
+				D9EB9F871E07C3270001115F /* UnassignedTicketsViewController.h */,
+				D9EB9F881E07C3270001115F /* UnassignedTicketsViewController.m */,
+				D9EB9F891E07C3270001115F /* ClientListViewController.h */,
+				D9EB9F8A1E07C3270001115F /* ClientListViewController.m */,
+				D9EB9F8B1E07C3270001115F /* TrashTicketsViewController.h */,
+				D9EB9F8C1E07C3270001115F /* TrashTicketsViewController.m */,
+				D9EB9F8D1E07C3270001115F /* ClosedTicketsViewController.h */,
+				D9EB9F8E1E07C3270001115F /* ClosedTicketsViewController.m */,
+				D9EB9F8F1E07C3270001115F /* MyTicketsViewController.h */,
+				D9EB9F901E07C3270001115F /* MyTicketsViewController.m */,
+				D9EB9F911E07C3270001115F /* CreateTicketViewController.h */,
+				D9EB9F921E07C3270001115F /* CreateTicketViewController.m */,
+				D9EB9F931E07C3270001115F /* InboxViewController.h */,
+				D9EB9F941E07C3270001115F /* InboxViewController.m */,
+				D9EB9F951E07C3270001115F /* TicketDetailViewController.h */,
+				D9EB9F961E07C3270001115F /* TicketDetailViewController.m */,
+				D9EB9F971E07C3270001115F /* AboutViewController.h */,
+				D9EB9F981E07C3270001115F /* AboutViewController.m */,
+				D9EB9F991E07C3270001115F /* ClientDetailViewController.h */,
+				D9EB9F9A1E07C3270001115F /* ClientDetailViewController.m */,
+				D9EB9F9B1E07C3270001115F /* ConversationViewController.h */,
+				D9EB9F9C1E07C3270001115F /* ConversationViewController.m */,
+				D9EB9F9D1E07C3270001115F /* DetailViewController.h */,
+				D9EB9F9E1E07C3270001115F /* DetailViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D9EB9F501E07C21E0001115F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9F5F1E07C2D00001115F /* Data.h */,
+				D9EB9F601E07C2D00001115F /* Data.m */,
+				D9EB9F611E07C2D00001115F /* GlobalVariables.h */,
+				D9EB9F621E07C2D00001115F /* GlobalVariables.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D9EB9F511E07C22B0001115F /* WebServices */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9F5C1E07C2B70001115F /* MyWebservices.h */,
+				D9EB9F5D1E07C2B70001115F /* MyWebservices.m */,
+			);
+			name = WebServices;
+			sourceTree = "<group>";
+		};
+		D9EB9F521E07C2320001115F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9F591E07C2A80001115F /* Utils.h */,
+				D9EB9F5A1E07C2A80001115F /* Utils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		D9EB9F541E07C2500001115F /* OtherClasses */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9F551E07C2940001115F /* NetworkApi.h */,
+				D9EB9F561E07C2940001115F /* NetworkApi.m */,
+				D9EB9F571E07C2940001115F /* AppConstanst.h */,
+				D9DBD3471E07ACFC00219F93 /* AppDelegate.h */,
+				D9DBD3481E07ACFC00219F93 /* AppDelegate.m */,
+			);
+			name = OtherClasses;
+			sourceTree = "<group>";
+		};
+		D9EB9FAD1E07C41C0001115F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9FC21E07C44D0001115F /* Reachability */,
+				D9EB9FAE1E07C4320001115F /* SideMenu */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		D9EB9FAE1E07C4320001115F /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9FAF1E07C4490001115F /* SlideNavigationController.h */,
+				D9EB9FB01E07C4490001115F /* SlideNavigationController.m */,
+				D9EB9FB11E07C4490001115F /* SlideNavigationContorllerAnimator.h */,
+				D9EB9FB21E07C4490001115F /* SlideNavigationContorllerAnimatorFade.h */,
+				D9EB9FB31E07C4490001115F /* SlideNavigationContorllerAnimatorFade.m */,
+				D9EB9FB41E07C4490001115F /* SlideNavigationContorllerAnimatorScale.h */,
+				D9EB9FB51E07C4490001115F /* SlideNavigationContorllerAnimatorScale.m */,
+				D9EB9FB61E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.h */,
+				D9EB9FB71E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.m */,
+				D9EB9FB81E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.h */,
+				D9EB9FB91E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.m */,
+				D9EB9FBA1E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.h */,
+				D9EB9FBB1E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m */,
+			);
+			name = SideMenu;
+			sourceTree = "<group>";
+		};
+		D9EB9FC21E07C44D0001115F /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9FC31E07C4610001115F /* Reachability.h */,
+				D9EB9FC41E07C4610001115F /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D9DBD3401E07ACFC00219F93 /* Faveo Helpdesk Pro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9DBD36E1E07ACFC00219F93 /* Build configuration list for PBXNativeTarget "Faveo Helpdesk Pro" */;
+			buildPhases = (
+				8F0E8BAD0F155D7C629B4A80 /* [CP] Check Pods Manifest.lock */,
+				D9DBD33D1E07ACFC00219F93 /* Sources */,
+				D9DBD33E1E07ACFC00219F93 /* Frameworks */,
+				D9DBD33F1E07ACFC00219F93 /* Resources */,
+				E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */,
+				51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */,
+				D97B13761E07EF79007F46DA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Faveo Helpdesk Pro";
+			productName = "Faveo Helpdesk Pro";
+			productReference = D9DBD3411E07ACFC00219F93 /* Faveo Helpdesk Pro.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D9DBD3591E07ACFC00219F93 /* Faveo Helpdesk ProTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9DBD3711E07ACFC00219F93 /* Build configuration list for PBXNativeTarget "Faveo Helpdesk ProTests" */;
+			buildPhases = (
+				D9DBD3561E07ACFC00219F93 /* Sources */,
+				D9DBD3571E07ACFC00219F93 /* Frameworks */,
+				D9DBD3581E07ACFC00219F93 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D9DBD35C1E07ACFC00219F93 /* PBXTargetDependency */,
+			);
+			name = "Faveo Helpdesk ProTests";
+			productName = "Faveo Helpdesk ProTests";
+			productReference = D9DBD35A1E07ACFC00219F93 /* Faveo Helpdesk ProTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D9DBD3641E07ACFC00219F93 /* Faveo Helpdesk ProUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9DBD3741E07ACFC00219F93 /* Build configuration list for PBXNativeTarget "Faveo Helpdesk ProUITests" */;
+			buildPhases = (
+				D9DBD3611E07ACFC00219F93 /* Sources */,
+				D9DBD3621E07ACFC00219F93 /* Frameworks */,
+				D9DBD3631E07ACFC00219F93 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D9DBD3671E07ACFC00219F93 /* PBXTargetDependency */,
+			);
+			name = "Faveo Helpdesk ProUITests";
+			productName = "Faveo Helpdesk ProUITests";
+			productReference = D9DBD3651E07ACFC00219F93 /* Faveo Helpdesk ProUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D9DBD3391E07ACFC00219F93 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Ladybird websolutions pvt ltd";
+				TargetAttributes = {
+					D9DBD3401E07ACFC00219F93 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Manual;
+					};
+					D9DBD3591E07ACFC00219F93 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 8VY8B59STG;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D9DBD3401E07ACFC00219F93;
+					};
+					D9DBD3641E07ACFC00219F93 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 8VY8B59STG;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D9DBD3401E07ACFC00219F93;
+					};
+				};
+			};
+			buildConfigurationList = D9DBD33C1E07ACFC00219F93 /* Build configuration list for PBXProject "Faveo Helpdesk Pro" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D9DBD3381E07ACFC00219F93;
+			productRefGroup = D9DBD3421E07ACFC00219F93 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D9DBD3401E07ACFC00219F93 /* Faveo Helpdesk Pro */,
+				D9DBD3591E07ACFC00219F93 /* Faveo Helpdesk ProTests */,
+				D9DBD3641E07ACFC00219F93 /* Faveo Helpdesk ProUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D9DBD33F1E07ACFC00219F93 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */,
+				D9EB9F7A1E07C2F00001115F /* ClientListTableViewCell.xib in Resources */,
+				D9EB9F7E1E07C2F00001115F /* ConversationTableViewCell.xib in Resources */,
+				D9EB9F821E07C2F00001115F /* LoadingTableViewCell.xib in Resources */,
+				D9DBD3511E07ACFC00219F93 /* Assets.xcassets in Resources */,
+				D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */,
+				D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */,
+				D9EB9F801E07C2F00001115F /* OpenCloseTableViewCell.xib in Resources */,
+				D9EB9F781E07C2F00001115F /* TicketTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9DBD3581E07ACFC00219F93 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9DBD3631E07ACFC00219F93 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F0E8BAD0F155D7C629B4A80 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D97B13761E07EF79007F46DA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 3d31c3fca25cb228d17bfa05856d933d97e90db1 67564a3dc39ee26711efe06322fa00b99e69a63e26e5d755afe7339b6f22ceb1";
+		};
+		E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D9DBD33D1E07ACFC00219F93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9EB9FBD1E07C4490001115F /* SlideNavigationContorllerAnimatorFade.m in Sources */,
+				D9EB9FA51E07C3270001115F /* MyTicketsViewController.m in Sources */,
+				D9EB9FA81E07C3270001115F /* TicketDetailViewController.m in Sources */,
+				D9EB9FAC1E07C3270001115F /* DetailViewController.m in Sources */,
+				D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */,
+				D9EB9F641E07C2D00001115F /* GlobalVariables.m in Sources */,
+				D9EB9FA71E07C3270001115F /* InboxViewController.m in Sources */,
+				D9EB9F811E07C2F00001115F /* LoadingTableViewCell.m in Sources */,
+				D9EB9FAA1E07C3270001115F /* ClientDetailViewController.m in Sources */,
+				D9EB9FA31E07C3270001115F /* TrashTicketsViewController.m in Sources */,
+				D9EB9F7F1E07C2F00001115F /* OpenCloseTableViewCell.m in Sources */,
+				D9EB9F9F1E07C3270001115F /* LeftMenuViewController.m in Sources */,
+				D9DBD3461E07ACFC00219F93 /* main.m in Sources */,
+				D9EB9F581E07C2940001115F /* NetworkApi.m in Sources */,
+				D9EB9F5B1E07C2A80001115F /* Utils.m in Sources */,
+				D9EB9F7D1E07C2F00001115F /* ConversationTableViewCell.m in Sources */,
+				D9EB9FC51E07C4610001115F /* Reachability.m in Sources */,
+				D9EB9FBF1E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
+				D9EB9FA11E07C3270001115F /* UnassignedTicketsViewController.m in Sources */,
+				D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */,
+				D9EB9FA61E07C3270001115F /* CreateTicketViewController.m in Sources */,
+				D9EB9FC01E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
+				D9EB9F631E07C2D00001115F /* Data.m in Sources */,
+				D9EB9F771E07C2F00001115F /* TicketTableViewCell.m in Sources */,
+				D9EB9FA91E07C3270001115F /* AboutViewController.m in Sources */,
+				D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */,
+				D9EB9FA41E07C3270001115F /* ClosedTicketsViewController.m in Sources */,
+				D9EB9FC11E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
+				D9EB9F791E07C2F00001115F /* ClientListTableViewCell.m in Sources */,
+				D9EB9FBE1E07C4490001115F /* SlideNavigationContorllerAnimatorScale.m in Sources */,
+				D9EB9FAB1E07C3270001115F /* ConversationViewController.m in Sources */,
+				D9EB9FA01E07C3270001115F /* LoginViewController.m in Sources */,
+				D9EB9FA21E07C3270001115F /* ClientListViewController.m in Sources */,
+				D9EB9FBC1E07C4490001115F /* SlideNavigationController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9DBD3561E07ACFC00219F93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9DBD35F1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9DBD3611E07ACFC00219F93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9DBD36A1E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D9DBD35C1E07ACFC00219F93 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9DBD3401E07ACFC00219F93 /* Faveo Helpdesk Pro */;
+			targetProxy = D9DBD35B1E07ACFC00219F93 /* PBXContainerItemProxy */;
+		};
+		D9DBD3671E07ACFC00219F93 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9DBD3401E07ACFC00219F93 /* Faveo Helpdesk Pro */;
+			targetProxy = D9DBD3661E07ACFC00219F93 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D9DBD34D1E07ACFC00219F93 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9DBD34E1E07ACFC00219F93 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D9DBD3521E07ACFC00219F93 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9DBD3531E07ACFC00219F93 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D9DBD36C1E07ACFC00219F93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D9DBD36D1E07ACFC00219F93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D9DBD36F1E07ACFC00219F93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D9DBD3701E07ACFC00219F93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D9DBD3721E07ACFC00219F93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 8VY8B59STG;
+				INFOPLIST_FILE = "Faveo Helpdesk ProTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ladybirdwebsolutions.Faveo-Helpdesk-ProTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Faveo Helpdesk Pro.app/Faveo Helpdesk Pro";
+			};
+			name = Debug;
+		};
+		D9DBD3731E07ACFC00219F93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 8VY8B59STG;
+				INFOPLIST_FILE = "Faveo Helpdesk ProTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ladybirdwebsolutions.Faveo-Helpdesk-ProTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Faveo Helpdesk Pro.app/Faveo Helpdesk Pro";
+			};
+			name = Release;
+		};
+		D9DBD3751E07ACFC00219F93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 8VY8B59STG;
+				INFOPLIST_FILE = "Faveo Helpdesk ProUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ladybirdwebsolutions.Faveo-Helpdesk-ProUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Faveo Helpdesk Pro";
+			};
+			name = Debug;
+		};
+		D9DBD3761E07ACFC00219F93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 8VY8B59STG;
+				INFOPLIST_FILE = "Faveo Helpdesk ProUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ladybirdwebsolutions.Faveo-Helpdesk-ProUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Faveo Helpdesk Pro";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D9DBD33C1E07ACFC00219F93 /* Build configuration list for PBXProject "Faveo Helpdesk Pro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9DBD36C1E07ACFC00219F93 /* Debug */,
+				D9DBD36D1E07ACFC00219F93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9DBD36E1E07ACFC00219F93 /* Build configuration list for PBXNativeTarget "Faveo Helpdesk Pro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9DBD36F1E07ACFC00219F93 /* Debug */,
+				D9DBD3701E07ACFC00219F93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9DBD3711E07ACFC00219F93 /* Build configuration list for PBXNativeTarget "Faveo Helpdesk ProTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9DBD3721E07ACFC00219F93 /* Debug */,
+				D9DBD3731E07ACFC00219F93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9DBD3741E07ACFC00219F93 /* Build configuration list for PBXNativeTarget "Faveo Helpdesk ProUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9DBD3751E07ACFC00219F93 /* Debug */,
+				D9DBD3761E07ACFC00219F93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D9DBD3391E07ACFC00219F93 /* Project object */;
+}
