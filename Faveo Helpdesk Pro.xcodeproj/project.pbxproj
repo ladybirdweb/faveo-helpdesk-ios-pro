@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
+		D97B13791E080BA8007F46DA /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B13781E080BA8007F46DA /* UserNotifications.framework */; };
+		D97B137B1E080BC3007F46DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137A1E080BC3007F46DA /* UIKit.framework */; };
+		D97B137D1E080BCA007F46DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137C1E080BCA007F46DA /* SystemConfiguration.framework */; };
+		D97B137F1E080BDB007F46DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137E1E080BDB007F46DA /* CoreGraphics.framework */; };
+		D97B13811E080BE3007F46DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B13801E080BE3007F46DA /* Foundation.framework */; };
 		D9DBD3461E07ACFC00219F93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3451E07ACFC00219F93 /* main.m */; };
 		D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3481E07ACFC00219F93 /* AppDelegate.m */; };
 		D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD34D1E07ACFC00219F93 /* Main.storyboard */; };
@@ -77,6 +82,11 @@
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Faveo Helpdesk Pro.entitlements"; sourceTree = "<group>"; };
+		D97B13781E080BA8007F46DA /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		D97B137A1E080BC3007F46DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D97B137C1E080BCA007F46DA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D97B137E1E080BDB007F46DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D97B13801E080BE3007F46DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D9DBD3411E07ACFC00219F93 /* Faveo Helpdesk Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Faveo Helpdesk Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9DBD3451E07ACFC00219F93 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D9DBD3471E07ACFC00219F93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -170,6 +180,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D97B13811E080BE3007F46DA /* Foundation.framework in Frameworks */,
+				D97B137F1E080BDB007F46DA /* CoreGraphics.framework in Frameworks */,
+				D97B137D1E080BCA007F46DA /* SystemConfiguration.framework in Frameworks */,
+				D97B137B1E080BC3007F46DA /* UIKit.framework in Frameworks */,
+				D97B13791E080BA8007F46DA /* UserNotifications.framework in Frameworks */,
 				A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,6 +209,11 @@
 		2C616208362AC6156509CE49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D97B13801E080BE3007F46DA /* Foundation.framework */,
+				D97B137E1E080BDB007F46DA /* CoreGraphics.framework */,
+				D97B137C1E080BCA007F46DA /* SystemConfiguration.framework */,
+				D97B137A1E080BC3007F46DA /* UIKit.framework */,
+				D97B13781E080BA8007F46DA /* UserNotifications.framework */,
 				CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */,
 			);
 			name = Frameworks;
@@ -489,11 +509,12 @@
 		D9DBD3391E07ACFC00219F93 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Ladybird websolutions pvt ltd";
 				TargetAttributes = {
 					D9DBD3401E07ACFC00219F93 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 8VY8B59STG;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -740,10 +761,12 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development IOS Push Services: com.ladybirdwebsolutions.FaveoHelpdeskPro";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development IOS Push Services: com.ladybirdwebsolutions.FaveoHelpdeskPro";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -787,10 +810,12 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Push Services: com.ladybirdwebsolutions.FaveoHelpdeskPro";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Push Services: com.ladybirdwebsolutions.FaveoHelpdeskPro";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -816,11 +841,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Faveo Helpdesk Pro/Faveo Helpdesk Pro.entitlements";
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: narendra baratam (BCU77U4N5P)";
+				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c97427a4-2a61-4c88-921c-42aa728f1e55";
+				PROVISIONING_PROFILE_SPECIFIER = "Faveo Helpdesk Pro Dev";
 			};
 			name = Debug;
 		};
@@ -830,11 +859,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Faveo Helpdesk Pro/Faveo Helpdesk Pro.entitlements";
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ladybird Web Solution Private Limited (8VY8B59STG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ladybird Web Solution Private Limited (8VY8B59STG)";
+				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c8eccd09-66da-4f20-a53f-aaf14b298fcf";
+				PROVISIONING_PROFILE_SPECIFIER = "Faveo Helpdesk Pro Dis";
 			};
 			name = Release;
 		};
