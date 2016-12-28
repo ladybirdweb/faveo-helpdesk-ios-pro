@@ -7,7 +7,8 @@
 //
 #import <UIKit/UIKit.h>
 #import "SlideNavigationController.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface MyTicketsViewController :UIViewController<SlideNavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface MyTicketsViewController :UIViewController<SlideNavigationControllerDelegate,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 -(void)addBtnPressed;
 @end

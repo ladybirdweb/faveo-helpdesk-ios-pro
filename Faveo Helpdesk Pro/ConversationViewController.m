@@ -16,7 +16,7 @@
 #import "MyWebservices.h"
 #import "HexColors.h"
 #import "GlobalVariables.h"
-
+#import "RKDropdownAlert.h"
 
 @interface ConversationViewController ()<CNPPopupControllerDelegate,UIWebViewDelegate>{
     Utils *utils;
@@ -43,7 +43,7 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     [_activityIndicatorObject startAnimating];
     [self reload];
-     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
 }
 
@@ -51,17 +51,17 @@
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
-        //connection unavailable
-          [_activityIndicatorObject stopAnimating];
-          [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+        [self.refreshControl endRefreshing];
+        [_activityIndicatorObject stopAnimating];
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
-       
-          NSString *url=[NSString stringWithFormat:@"%@helpdesk/ticket-thread?api_key=%@&ip=%@&token=%@&id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariable.iD];
+        
+        NSString *url=[NSString stringWithFormat:@"%@helpdesk/ticket-thread?api_key=%@&ip=%@&token=%@&id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariable.iD];
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-
+            
             if (error || [msg containsString:@"Error"]) {
                 [self.refreshControl endRefreshing];
                 [_activityIndicatorObject stopAnimating];
@@ -150,54 +150,59 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ConversationTableViewCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
+    NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
     
-      cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
+    cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
     NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
     if (i==0) {
         [cell.internalNoteLabel setHidden:YES];
     }
     if(i==1){
-        [cell.internalNoteLabel setHidden:NO]; 
+        [cell.internalNoteLabel setHidden:NO];
     }
-   
-     cell.clientNameLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
-     [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+    NSString *fName=[finaldic objectForKey:@"first_name"];
+    if ([fName isEqualToString:@""]) {
+        fName=@"Not Available";
+    }else{
+        fName=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+    }
+    cell.clientNameLabel.text=fName;
+    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
     [self showWebview:[finaldic objectForKey:@"title"] body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 //- (void)webViewDidFinishLoad:(UIWebView *)theWebView
 //{
 //    CGSize contentSize = theWebView.scrollView.contentSize;
 //    CGSize viewSize = theWebView.bounds.size;
-//    
+//
 //    float rw = viewSize.width / contentSize.width;
-//    
+//
 //    theWebView.scrollView.minimumZoomScale = rw;
 //    theWebView.scrollView.maximumZoomScale = rw;
 //    theWebView.scrollView.zoomScale = rw;
-//    
+//
 //}
 
 -(void)showWebview:(NSString*)tittle body:(NSString*)body popupStyle:(CNPPopupStyle)popupStyle{
-
+    
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
@@ -207,17 +212,17 @@
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.numberOfLines = 0;
     titleLabel.attributedText = title;
- 
-//    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
-//    customView.backgroundColor = [UIColor hx_colorWithHexString:@"#00aeef"];
-//     [customView addSubview:titleLabel];
-
+    
+    //    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+    //    customView.backgroundColor = [UIColor hx_colorWithHexString:@"#00aeef"];
+    //     [customView addSubview:titleLabel];
+    
     UIWebView *webview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,self.view.frame.size.height/2)];
-   // webview.scalesPageToFit = YES;
+    // webview.scalesPageToFit = YES;
     webview.autoresizesSubviews = YES;
     //webview.delegate=self;
     webview.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
-  
+    
     NSRange range = [body rangeOfString:@"<body"];
     
     if(range.location != NSNotFound) {
@@ -227,7 +232,7 @@
         body = [NSString stringWithFormat:@"%@%@%@", [body substringToIndex:range.location], style, [body substringFromIndex:range.location]];
     }
     [webview loadHTMLString:body baseURL:nil];
-  
+    
     
     self.popupController = [[CNPPopupController alloc] initWithContents:@[titleLabel,webview]];
     self.popupController.theme = [CNPPopupTheme defaultTheme];
@@ -237,10 +242,10 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-   
+    
 }
 -(void)webViewDidStartLoad:(UIWebView *)webView{
-
+    
 }
 -(void)addUIRefresh{
     
@@ -260,6 +265,6 @@
 
 -(void)reloadd{
     [self reload];
-   // [refreshControl endRefreshing];
+    // [refreshControl endRefreshing];
 }
 @end

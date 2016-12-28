@@ -16,6 +16,8 @@
 #import "TicketDetailViewController.h"
 #import "OpenCloseTableViewCell.h"
 #import "GlobalVariables.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "RKDropdownAlert.h"
 
 @interface ClientDetailViewController ()
 {
@@ -28,7 +30,6 @@
 }
 
 @property (nonatomic,retain) UIActivityIndicatorView *activityIndicatorObject;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (nonatomic,strong) UILabel *noDataLabel;
 
 @end
@@ -40,6 +41,11 @@
     
     self.profileImageView.layer.cornerRadius = 26;
     self.profileImageView.clipsToBounds = YES;
+    self.profileImageView.layer.borderWidth=1.3f;
+    self.profileImageView.layer.borderColor=[[UIColor hx_colorWithHexRGBAString:@"#0288D1"] CGColor];
+  //  self.profileImageView.layer.borderColor=[[UIColor blackColor] CGColor];
+
+    [self setUserProfileimage:_imageURL];
     
     _activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     _activityIndicatorObject.center =CGPointMake(self.view.frame.size.width/2,(self.view.frame.size.height/2)-50);
@@ -74,9 +80,10 @@
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
+        [refresh endRefreshing];
         //connection unavailable
         [_activityIndicatorObject stopAnimating];
-        [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
         
@@ -172,9 +179,10 @@
     cell.ticketSubLbl.text=[finaldic objectForKey:@"title"];
 
     if ([[finaldic objectForKey:@"ticket_status_name"] isEqualToString:@"Open"]) {
-        cell.indicationView.layer.backgroundColor=[[UIColor greenColor] CGColor];
+        cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] CGColor];
     }else{
-        cell.indicationView.layer.backgroundColor=[[UIColor redColor] CGColor];
+        cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] CGColor];
+
     }
     return cell;
 }
@@ -230,18 +238,21 @@
 
 -(void)setUserProfileimage:(NSString*)imageUrl
 {
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-    dispatch_async(queue, ^(void) {
-        
-        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
-        
-        UIImage* image = [[UIImage alloc] initWithData:imageData];
-        if (image) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.profileImageView.image = image;
-            });
-        }
-    });
+//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+//    dispatch_async(queue, ^(void) {
+//        
+//        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
+//        
+//        UIImage* image = [[UIImage alloc] initWithData:imageData];
+//        if (image) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                self.profileImageView.image = image;
+//            });
+//        }
+//    });
+    
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]
+                           placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
 }
 
 //- (void)addSubview:(UIView *)subView toView:(UIView*)parentView {

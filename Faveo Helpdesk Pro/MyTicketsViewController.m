@@ -17,6 +17,8 @@
 #import "MyWebservices.h"
 #import "GlobalVariables.h"
 #import "LoadingTableViewCell.h"
+#import "RKDropdownAlert.h"
+#import "HexColors.h"
 
 @interface MyTicketsViewController (){
 
@@ -35,9 +37,65 @@
 
 @implementation MyTicketsViewController
 
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL) emptyDataSetShouldAllowImageViewAnimate:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"empty_data_set.png"];
+}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIColor whiteColor];
+}
+
+- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView
+{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"transform"];
+    
+    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0.0, 0.0, 1.0)];
+    
+    animation.duration = 0.25;
+    animation.cumulative = YES;
+    animation.repeatCount = MAXFLOAT;
+    
+    return animation;
+}
+
+//- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    NSString *text = @"No records!";
+//    
+//    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+//                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+//    
+//    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTitle:@"MyTickets"];
+    
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
+    
+    // A little trick for removing the cell separators
+    self.tableView.tableFooterView = [UIView new];
+    
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnPressed)]];
     
     [self addUIRefresh];
@@ -52,10 +110,10 @@
 -(void)reload{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
+    { [refresh endRefreshing];
         //connection unavailable
         [[AppDelegate sharedAppdelegate] hideProgressView];
-        [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
         
@@ -114,24 +172,25 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSInteger numOfSections = 0;
-    if ([_mutableArray count]==0)
-    {
-        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        noDataLabel.text             = @"Empty!!!";
-        noDataLabel.textColor        = [UIColor blackColor];
-        noDataLabel.textAlignment    = NSTextAlignmentCenter;
-        tableView.backgroundView = noDataLabel;
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
-    else
-    {
-        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        numOfSections                = 1;
-        tableView.backgroundView = nil;
-    }
-    
-    return numOfSections;
+    return 1;
+//    NSInteger numOfSections = 0;
+//    if ([_mutableArray count]==0)
+//    {
+//        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+//        noDataLabel.text             = @"Empty!!!";
+//        noDataLabel.textColor        = [UIColor blackColor];
+//        noDataLabel.textAlignment    = NSTextAlignmentCenter;
+//        tableView.backgroundView = noDataLabel;
+//        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    }
+//    else
+//    {
+//        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+//        numOfSections                = 1;
+//        tableView.backgroundView = nil;
+//    }
+//    
+//    return numOfSections;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -158,7 +217,7 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-        [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+       [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
         

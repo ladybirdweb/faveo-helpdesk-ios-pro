@@ -15,6 +15,8 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "GlobalVariables.h"
+#import "UINavigationController+M13ProgressViewBar.h"
+#import "RKDropdownAlert.h"
 
 @interface DetailViewController (){
 
@@ -87,7 +89,7 @@
     {
         //connection unavailable
         [_activityIndicatorObject stopAnimating];
-        [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
         
@@ -335,17 +337,23 @@
 - (IBAction)saveClicked:(id)sender {
     
     if (self.subjectTextField.text.length==0) {
-        [utils showAlertWithMessage:@"Please enter SUBJECT" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please enter SUBJECT" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        // [utils showAlertWithMessage:@"Please enter SUBJECT" sendViewController:self];
     }else if (self.helpTopicTextField.text.length==0) {
-        [utils showAlertWithMessage:@"Please select HELP-TOPIC" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please enter HELP-TOPIC" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+       // [utils showAlertWithMessage:@"Please select HELP-TOPIC" sendViewController:self];
     }else if (self.slaTextField.text.length==0){
-        [utils showAlertWithMessage:@"Please select SLA" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please enter SLA" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Please select SLA" sendViewController:self];
     }else if (self.priorityTextField.text.length==0){
-        [utils showAlertWithMessage:@"Please select PRIORITY" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please enter PRIORITY" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Please select PRIORITY" sendViewController:self];
     }else  if (self.statusTextField.text.length==0){
-        [utils showAlertWithMessage:@"Please select STATUS" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please enter STATUS" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Please select STATUS" sendViewController:self];
     }else  if (self.sourceTextField.text.length==0){
-        [utils showAlertWithMessage:@"Please select SOURCE" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please select SOURCE" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Please select SOURCE" sendViewController:self];
     }else  {
         [self save];
     }
@@ -356,13 +364,17 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-        [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
-        
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
     }else{
+        priority_id=[NSNumber numberWithInteger:1+[_priorityArray indexOfObject:_priorityTextField.text]];
+        help_topic_id = [NSNumber numberWithInteger:1+[_helptopicsArray indexOfObject:_helpTopicTextField.text]];
+        sla_id = [NSNumber numberWithInteger:1+[_slaPlansArray indexOfObject:_slaTextField.text]];
+        source_id = [NSNumber numberWithInteger:1+[_sourceArray indexOfObject:_sourceTextField.text]];
+         status_id = [NSNumber numberWithInteger:1+[_statusArray indexOfObject:_statusTextField.text]];
         
         [[AppDelegate sharedAppdelegate] showProgressView];
         
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&subject=%@&help_topic=%@&sla_plan=%@&ticket_priority=%@&ticket_source=%@&status=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,_subjectTextField.text,help_topic_id,sla_id,priority_id,source_id,status_id];
+        NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&help_topic=%@&sla_plan=%@&ticket_priority=%@&ticket_source=%@&status=%@&subject=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,help_topic_id,sla_id,priority_id,source_id,status_id,_subjectTextField.text];
 
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
@@ -394,7 +406,9 @@
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"result"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [utils showAlertWithMessage:@"Updated successfully!" sendViewController:self];
+                        [RKDropdownAlert title:APP_NAME message:@"Updated successfully!" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+
+                        //[utils showAlertWithMessage:@"Updated successfully!" sendViewController:self];
                     });
                 }
             }

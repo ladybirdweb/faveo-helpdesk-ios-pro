@@ -45,6 +45,8 @@
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:url]];
+   
+     //[request addValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setTimeoutInterval:45.0];
@@ -126,7 +128,7 @@
     [request setHTTPMethod:@"POST"];
     
    NSLog(@"Request body %@", [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding]);
-    
+     NSLog(@"Thread--httpResponsePOST--Request : %@", urlString);
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] ];
     
     
@@ -190,6 +192,7 @@
     NSError *error;
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     
+    //[request addValue:@"text/html" forHTTPHeaderField:@"Accept"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Offer-type"];
     [request setTimeoutInterval:45.0];
@@ -209,6 +212,7 @@
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] ];
     
     [[session dataTaskWithRequest:request completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+        NSLog(@"Response is required : %@",(NSHTTPURLResponse *) response);
         if (error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 block(error,nil,nil);
@@ -258,7 +262,6 @@
 
 }
 
-
 -(void)getNextPageURL:(NSString*)url callbackHandler:(callbackHandler)block{
    _userDefaults=[NSUserDefaults standardUserDefaults];
    NSString *urll=[NSString stringWithFormat:@"%@&api_key=%@&ip=%@&token=%@",url,API_KEY,IP,[_userDefaults objectForKey:@"token"]];
@@ -271,46 +274,5 @@
     }];
 
 }
-
-//-(void)refreshToken{
-//
-//    // NSString *result=[NSString alloc];
-//    userDefaults=[NSUserDefaults standardUserDefaults];
-//
-//    NSString *url=[NSString stringWithFormat:@"%@authenticate",[userDefaults objectForKey:@"companyURL"]];
-//
-//    NSDictionary *param=[NSDictionary dictionaryWithObjectsAndKeys:[userDefaults objectForKey:@"username"],@"username",[userDefaults objectForKey:@"password"],@"password",API_KEY,@"api_key",IP,@"ip",nil];
-//
-//    [[MyWebservices sharedInstance] httpResponsePOST:url parameter:param callbackHandler:^(NSError *error, id json,NSString * errorMsg){
-//
-//        if (error) {
-//            NSLog(@"Refresh-error == %@",error.localizedDescription);
-//
-//        }else{
-//            NSLog(@"Refresh-response -- %@",json);
-//            NSString *replyStr = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
-//
-//            NSLog(@"Get your response == %@", replyStr);
-//
-//            if ([replyStr containsString:@"token"]) {
-//                NSError *error=nil;
-//
-//                NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:json options:nil error:&error];
-//                if (error) {
-//                    NSLog(@"jsonerror--%@",error.localizedDescription);
-//                    return;
-//                }
-//
-//                [userDefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
-//                [userDefaults setObject:[jsonData objectForKey:@"user_id"] forKey:@"user_id"];
-//                [userDefaults synchronize];
-//
-//            }
-//
-//        }
-//
-//    }];
-//
-//}
 
 @end
