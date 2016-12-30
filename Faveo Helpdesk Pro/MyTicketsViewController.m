@@ -37,44 +37,44 @@
 
 @implementation MyTicketsViewController
 
-- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
-{
-    return YES;
-}
-
-- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
-{
-    return YES;
-}
-
-- (BOOL) emptyDataSetShouldAllowImageViewAnimate:(UIScrollView *)scrollView
-{
-    return YES;
-}
-
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
-    return [UIImage imageNamed:@"empty_data_set.png"];
-}
-
-- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
-{
-    return [UIColor whiteColor];
-}
-
-- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView
-{
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"transform"];
-    
-    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
-    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0.0, 0.0, 1.0)];
-    
-    animation.duration = 0.25;
-    animation.cumulative = YES;
-    animation.repeatCount = MAXFLOAT;
-    
-    return animation;
-}
+//- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+//{
+//    return YES;
+//}
+//
+//- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
+//{
+//    return YES;
+//}
+//
+//- (BOOL) emptyDataSetShouldAllowImageViewAnimate:(UIScrollView *)scrollView
+//{
+//    return YES;
+//}
+//
+//- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    return [UIImage imageNamed:@"empty_data_set.png"];
+//}
+//
+//- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    return [UIColor whiteColor];
+//}
+//
+//- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"transform"];
+//    
+//    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+//    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0.0, 0.0, 1.0)];
+//    
+//    animation.duration = 0.25;
+//    animation.cumulative = YES;
+//    animation.repeatCount = MAXFLOAT;
+//    
+//    return animation;
+//}
 
 //- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 //{
@@ -89,9 +89,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTitle:@"MyTickets"];
-    
-    self.tableView.emptyDataSetSource = self;
-    self.tableView.emptyDataSetDelegate = self;
     
     // A little trick for removing the cell separators
     self.tableView.tableFooterView = [UIView new];
@@ -159,6 +156,10 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                         [refresh endRefreshing];
+//                        self.tableView.delegate=self;
+//                        self.tableView.dataSource=self;
+                        //self.tableView.emptyDataSetSource = self;
+                       // self.tableView.emptyDataSetDelegate = self;
                         [self.tableView reloadData];
                     });
                 });
@@ -172,25 +173,25 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
-//    NSInteger numOfSections = 0;
-//    if ([_mutableArray count]==0)
-//    {
-//        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-//        noDataLabel.text             = @"Empty!!!";
-//        noDataLabel.textColor        = [UIColor blackColor];
-//        noDataLabel.textAlignment    = NSTextAlignmentCenter;
-//        tableView.backgroundView = noDataLabel;
-//        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    }
-//    else
-//    {
-//        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-//        numOfSections                = 1;
-//        tableView.backgroundView = nil;
-//    }
-//    
-//    return numOfSections;
+//    return 1;
+    NSInteger numOfSections = 0;
+    if ([_mutableArray count]==0)
+    {
+        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+        noDataLabel.text             = @"Empty!!!";
+        noDataLabel.textColor        = [UIColor blackColor];
+        noDataLabel.textAlignment    = NSTextAlignmentCenter;
+        tableView.backgroundView = noDataLabel;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    else
+    {
+        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        numOfSections                = 1;
+        tableView.backgroundView = nil;
+    }
+    
+    return numOfSections;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:

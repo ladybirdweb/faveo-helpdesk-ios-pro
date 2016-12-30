@@ -1,4 +1,4 @@
-platform:ios,'10.2'
+platform:ios,'9.3'
 
 target 'Faveo Helpdesk Pro' do
 pod 'Fabric'
@@ -11,8 +11,6 @@ pod 'CNPPopupController'
 pod 'ActionSheetPicker-3.0'
 pod 'Firebase/Core'
 pod 'Firebase/Messaging'
-pod 'M13ProgressSuite'
 pod 'SDWebImage'
-pod 'DZNEmptyDataSet'
 pod 'RKDropdownAlert'
 end

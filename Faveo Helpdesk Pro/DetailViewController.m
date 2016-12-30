@@ -15,7 +15,6 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "GlobalVariables.h"
-#import "UINavigationController+M13ProgressViewBar.h"
 #import "RKDropdownAlert.h"
 
 @interface DetailViewController (){
