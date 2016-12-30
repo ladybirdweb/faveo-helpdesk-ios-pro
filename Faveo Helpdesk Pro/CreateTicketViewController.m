@@ -240,7 +240,6 @@
 }
 
 - (IBAction)submitClicked:(id)sender {
-    [RKDropdownAlert show];
     
     if (self.emailTextField.text.length==0){
         [RKDropdownAlert title:APP_NAME message:@"Please enter EMAIL-ID" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
