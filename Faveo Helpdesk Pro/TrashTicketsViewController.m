@@ -17,6 +17,8 @@
 #import "AppDelegate.h"
 #import "LoadingTableViewCell.h"
 #import "GlobalVariables.h"
+#import "RKDropdownAlert.h"
+#import "HexColors.h"
 
 @interface TrashTicketsViewController (){
 
@@ -60,11 +62,10 @@
 -(void)reload{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
+    { [refresh endRefreshing];
         //connection unavailable
         [[AppDelegate sharedAppdelegate] hideProgressView];
-        [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
-        
+       [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
     }else{
         
         //        [[AppDelegate sharedAppdelegate] showProgressView];
@@ -163,7 +164,7 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-        [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+       [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
         

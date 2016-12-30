@@ -15,12 +15,17 @@
 #import "MyWebservices.h"
 #import "Utils.h"
 #import "HexColors.h"
+#import "RKDropdownAlert.h"
+
+@import FirebaseInstanceID;
+@import FirebaseMessaging;
 
 @interface LoginViewController (){
     Utils *utils;
     NSUserDefaults *userdefaults;
     NSString *errorMsg;
     NSString *baseURL;
+
 }
 
 @property (nonatomic, strong) MBProgressHUD *progressView;
@@ -33,6 +38,7 @@
     _loginButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     utils=[[Utils alloc]init];
     userdefaults=[NSUserDefaults standardUserDefaults];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -55,8 +61,10 @@
 
 - (IBAction)urlButton:(id)sender {
     [self.urlTextfield resignFirstResponder];
-    if (self.urlTextfield.text.length==0)
-        [utils showAlertWithMessage:@"Please Enter the URL" sendViewController:self];
+    if (self.urlTextfield.text.length==0){
+        [RKDropdownAlert title:APP_NAME message:@"Please Enter the URL" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Please Enter the URL" sendViewController:self];
+    }
     else{
         if ([Utils validateUrl:self.urlTextfield.text]) {
             
@@ -71,7 +79,9 @@
             if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
             {
                 //connection unavailable
-                [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+               // [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+             
+                [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
                 
             }else{
                 //connection available
@@ -138,14 +148,12 @@
                     
                     if ([replyStr containsString:@"success"]) {
                         
-                        
                         NSLog(@"Success");
-                   
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                              [[AppDelegate sharedAppdelegate] hideProgressView];
-                            
-                                 [self verifyBilling];
-                        });
+                       // [[AppDelegate sharedAppdelegate] hideProgressView];
+                        [self verifyBilling];
+//                        dispatch_async(dispatch_get_main_queue(), ^{
+//                            
+//                        });
                         
                         // NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
                         
@@ -157,7 +165,7 @@
                     }
                     
                     NSLog(@"Got response %@ with error %@.\n", response, error);
-                     [[AppDelegate sharedAppdelegate] hideProgressView];
+                    // [[AppDelegate sharedAppdelegate] hideProgressView];
                 }]resume];
             }
             
@@ -167,7 +175,7 @@
 }
 
 -(void)verifyBilling{
-      [[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
+      //[[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
     //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     NSString *url=[NSString stringWithFormat:@"%@?url=%@",BILLING_API,baseURL];
     MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -190,11 +198,12 @@
             if([[json objectForKey:@"result"] isEqualToString:@"success"]){
                 NSLog(@"Billing successful!");
                 dispatch_async(dispatch_get_main_queue(), ^{
+                   
+                    [RKDropdownAlert title:APP_NAME message:@"Verified URL" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     [self.companyURLview setHidden:YES];
                     [self.loginView setHidden:NO];
                     [utils viewSlideInFromRightToLeft:self.loginView];
-                    
                 });
                 [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
                 [userdefaults synchronize];
@@ -278,7 +287,7 @@
                 if ([replyStr containsString:@"token"]) {
                     
                     @try{
-                        //[self sendDeviceToken];
+                       
                         NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:nil error:&error];
                         
                         [userdefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
@@ -287,10 +296,11 @@
                         [userdefaults setObject:self.passcodeTextField.text forKey:@"password"];
                         [userdefaults setBool:YES forKey:@"loginSuccess"];
                         [userdefaults synchronize];
-                        
                         NSLog(@"token--%@",[jsonData objectForKey:@"token"]);
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
+                            [RKDropdownAlert title:APP_NAME message:@"Thank you, you have logged in successfully." backgroundColor:[UIColor hx_colorWithHexRGBAString:@"#689f38"] textColor:[UIColor whiteColor]];
+                            [self sendDeviceToken];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:inboxVC animated:YES];
@@ -332,9 +342,10 @@
 }
 
 -(void)sendDeviceToken{
-    
+    NSString *refreshedToken = [[FIRInstanceID instanceID] token];
+    NSLog(@"refreshed token  %@",refreshedToken);
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-    NSString *url=[NSString stringWithFormat:@"%@apnstoken?id=%@&token=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"user_id"],[userDefaults objectForKey:@"deviceToken"]];
+    NSString *url=[NSString stringWithFormat:@"%@fcmtoken?user_id=%@&fcm_token=%@&os=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"user_id"],[[FIRInstanceID instanceID] token],@"ios"];
     MyWebservices *webservices=[MyWebservices sharedInstance];
     [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
         if (error || [msg containsString:@"Error"]) {

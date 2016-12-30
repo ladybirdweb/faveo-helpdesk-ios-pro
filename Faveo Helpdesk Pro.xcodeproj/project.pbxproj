@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
+		D9040CC31E12A0CF005E1B37 /* empty_data_set.png in Resources */ = {isa = PBXBuildFile; fileRef = D9040CC21E12A0CF005E1B37 /* empty_data_set.png */; };
 		D97B13791E080BA8007F46DA /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B13781E080BA8007F46DA /* UserNotifications.framework */; };
 		D97B137B1E080BC3007F46DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137A1E080BC3007F46DA /* UIKit.framework */; };
 		D97B137D1E080BCA007F46DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137C1E080BCA007F46DA /* SystemConfiguration.framework */; };
 		D97B137F1E080BDB007F46DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137E1E080BDB007F46DA /* CoreGraphics.framework */; };
 		D97B13811E080BE3007F46DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B13801E080BE3007F46DA /* Foundation.framework */; };
+		D9B79EFF1E0E971100EFE2E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9B79EFE1E0E971100EFE2E6 /* GoogleService-Info.plist */; };
 		D9DBD3461E07ACFC00219F93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3451E07ACFC00219F93 /* main.m */; };
 		D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3481E07ACFC00219F93 /* AppDelegate.m */; };
 		D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD34D1E07ACFC00219F93 /* Main.storyboard */; };
@@ -20,7 +22,6 @@
 		D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD3521E07ACFC00219F93 /* LaunchScreen.storyboard */; };
 		D9DBD35F1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD35E1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m */; };
 		D9DBD36A1E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3691E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m */; };
-		D9EB9F581E07C2940001115F /* NetworkApi.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F561E07C2940001115F /* NetworkApi.m */; };
 		D9EB9F5B1E07C2A80001115F /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F5A1E07C2A80001115F /* Utils.m */; };
 		D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F5D1E07C2B70001115F /* MyWebservices.m */; };
 		D9EB9F631E07C2D00001115F /* Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F601E07C2D00001115F /* Data.m */; };
@@ -81,12 +82,14 @@
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9040CC21E12A0CF005E1B37 /* empty_data_set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty_data_set.png; path = ../../../../Downloads/empty_data_set.png; sourceTree = "<group>"; };
 		D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Faveo Helpdesk Pro.entitlements"; sourceTree = "<group>"; };
 		D97B13781E080BA8007F46DA /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D97B137A1E080BC3007F46DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D97B137C1E080BCA007F46DA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D97B137E1E080BDB007F46DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D97B13801E080BE3007F46DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D9B79EFE1E0E971100EFE2E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D9DBD3411E07ACFC00219F93 /* Faveo Helpdesk Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Faveo Helpdesk Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9DBD3451E07ACFC00219F93 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D9DBD3471E07ACFC00219F93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -101,8 +104,6 @@
 		D9DBD3651E07ACFC00219F93 /* Faveo Helpdesk ProUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Faveo Helpdesk ProUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9DBD3691E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Faveo_Helpdesk_ProUITests.m; sourceTree = "<group>"; };
 		D9DBD36B1E07ACFC00219F93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D9EB9F551E07C2940001115F /* NetworkApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkApi.h; sourceTree = "<group>"; };
-		D9EB9F561E07C2940001115F /* NetworkApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkApi.m; sourceTree = "<group>"; };
 		D9EB9F571E07C2940001115F /* AppConstanst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstanst.h; sourceTree = "<group>"; };
 		D9EB9F591E07C2A80001115F /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		D9EB9F5A1E07C2A80001115F /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
@@ -253,7 +254,6 @@
 		D9DBD3431E07ACFC00219F93 /* Faveo Helpdesk Pro */ = {
 			isa = PBXGroup;
 			children = (
-				D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */,
 				D9EB9F4D1E07C1F70001115F /* Classes */,
 				D9DBD3441E07ACFC00219F93 /* Supporting Files */,
 				D9EB9FAD1E07C41C0001115F /* Library */,
@@ -264,6 +264,9 @@
 		D9DBD3441E07ACFC00219F93 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */,
+				D9040CC21E12A0CF005E1B37 /* empty_data_set.png */,
+				D9B79EFE1E0E971100EFE2E6 /* GoogleService-Info.plist */,
 				D9DBD34D1E07ACFC00219F93 /* Main.storyboard */,
 				D9DBD3501E07ACFC00219F93 /* Assets.xcassets */,
 				D9DBD3521E07ACFC00219F93 /* LaunchScreen.storyboard */,
@@ -396,8 +399,6 @@
 		D9EB9F541E07C2500001115F /* OtherClasses */ = {
 			isa = PBXGroup;
 			children = (
-				D9EB9F551E07C2940001115F /* NetworkApi.h */,
-				D9EB9F561E07C2940001115F /* NetworkApi.m */,
 				D9EB9F571E07C2940001115F /* AppConstanst.h */,
 				D9DBD3471E07ACFC00219F93 /* AppDelegate.h */,
 				D9DBD3481E07ACFC00219F93 /* AppDelegate.m */,
@@ -563,11 +564,13 @@
 			files = (
 				D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */,
 				D9EB9F7A1E07C2F00001115F /* ClientListTableViewCell.xib in Resources */,
+				D9040CC31E12A0CF005E1B37 /* empty_data_set.png in Resources */,
 				D9EB9F7E1E07C2F00001115F /* ConversationTableViewCell.xib in Resources */,
 				D9EB9F821E07C2F00001115F /* LoadingTableViewCell.xib in Resources */,
 				D9DBD3511E07ACFC00219F93 /* Assets.xcassets in Resources */,
 				D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */,
 				D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */,
+				D9B79EFF1E0E971100EFE2E6 /* GoogleService-Info.plist in Resources */,
 				D9EB9F801E07C2F00001115F /* OpenCloseTableViewCell.xib in Resources */,
 				D9EB9F781E07C2F00001115F /* TicketTableViewCell.xib in Resources */,
 			);
@@ -668,7 +671,6 @@
 				D9EB9F7F1E07C2F00001115F /* OpenCloseTableViewCell.m in Sources */,
 				D9EB9F9F1E07C3270001115F /* LeftMenuViewController.m in Sources */,
 				D9DBD3461E07ACFC00219F93 /* main.m in Sources */,
-				D9EB9F581E07C2940001115F /* NetworkApi.m in Sources */,
 				D9EB9F5B1E07C2A80001115F /* Utils.m in Sources */,
 				D9EB9F7D1E07C2F00001115F /* ConversationTableViewCell.m in Sources */,
 				D9EB9FC51E07C4610001115F /* Reachability.m in Sources */,
@@ -785,7 +787,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -828,7 +830,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -844,12 +846,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: narendra baratam (BCU77U4N5P)";
 				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c97427a4-2a61-4c88-921c-42aa728f1e55";
 				PROVISIONING_PROFILE_SPECIFIER = "Faveo Helpdesk Pro Dev";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -863,12 +866,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ladybird Web Solution Private Limited (8VY8B59STG)";
 				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c8eccd09-66da-4f20-a53f-aaf14b298fcf";
 				PROVISIONING_PROFILE_SPECIFIER = "Faveo Helpdesk Pro Dis";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

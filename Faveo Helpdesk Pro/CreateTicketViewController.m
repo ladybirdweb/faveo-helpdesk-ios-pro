@@ -16,6 +16,7 @@
 #import "AppConstanst.h"
 #import "MyWebservices.h"
 #import "AppDelegate.h"
+#import "RKDropdownAlert.h"
 
 @interface CreateTicketViewController (){
     
@@ -239,27 +240,38 @@
 }
 
 - (IBAction)submitClicked:(id)sender {
+    [RKDropdownAlert show];
     
     if (self.emailTextField.text.length==0){
-        [utils showAlertWithMessage:@"Please enter EMAIL-ID" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please enter EMAIL-ID" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Please enter EMAIL-ID" sendViewController:self];
     }else if (self.nameTextField.text.length==0) {
-        [utils showAlertWithMessage:@"Please enter NAME" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please enter NAME" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Please enter NAME" sendViewController:self];
     }else if (self.helpTopicTextField.text.length==0) {
-        [utils showAlertWithMessage:@"Please select HELP-TOPIC" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please select HELP-TOPIC" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+       // [utils showAlertWithMessage:@"Please select HELP-TOPIC" sendViewController:self];
     }else if (self.slaTextField.text.length==0){
-        [utils showAlertWithMessage:@"Please select SLA" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please select SLA" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Please select SLA" sendViewController:self];
     }else if (self.deptTextField.text.length==0) {
-        [utils showAlertWithMessage:@"Please select DEPARTMENT" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please select DEPARTMENT" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+       // [utils showAlertWithMessage:@"Please select DEPARTMENT" sendViewController:self];
     }else if (self.subjectTextField.text.length==0) {
-        [utils showAlertWithMessage:@"Please enter SUBJECT" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please enter SUBJECT" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+       // [utils showAlertWithMessage:@"Please enter SUBJECT" sendViewController:self];
     }else if (self.msgTextField.text.length==0){
-        [utils showAlertWithMessage:@"Please enter ticket MESSAGE" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please enter ticket MESSAGE" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+       // [utils showAlertWithMessage:@"Please enter ticket MESSAGE" sendViewController:self];
     }else if (self.priorityTextField.text.length==0){
-        [utils showAlertWithMessage:@"Please select PRIORITY" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Please select PRIORITY" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Please select PRIORITY" sendViewController:self];
     }else if(![Utils emailValidation:self.emailTextField.text]){
-        [utils showAlertWithMessage:@"Invalid EMAIL_ID" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Invalid EMAIL_ID" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Invalid EMAIL_ID" sendViewController:self];
     }else if(![Utils userNameValidation:self.nameTextField.text]){
-        [utils showAlertWithMessage:@"Name should have more than 2 characters" sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:@"Name should have more than 2 characters" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Name should have more than 2 characters" sendViewController:self];
     }else {
         NSLog(@"ticketCreated dept_id-%@, help_id-%@ ,sla_id-%@, pri_id-%@",dept_id,help_topic_id,sla_id,priority_id);
         [self createTicket];
@@ -272,7 +284,8 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-        [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+        //[utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+         [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
         
@@ -316,6 +329,7 @@
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"response"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
+                         [RKDropdownAlert title:APP_NAME message:@"Ticket created successfully!" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         //[utils showAlertWithMessage:@"Ticket created successfully!" sendViewController:self];
                         InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                         [self.navigationController pushViewController:inboxVC animated:YES];
@@ -374,20 +388,12 @@
     
     if (textField.tag==100) {
         
-        //[textField resignFirstResponder];
-        //[self.view endEditing:YES];
         return NO;
     }else{
-        // [self.view endEditing:NO];
+
         return YES;
     }
     
-    //        if (textField==_helpTopicTextField || textField== _slaTextField || textField == _deptTextField || textField == _priorityTextField||textField==_codeTextField) {
-    //            [self.view endEditing:YES];
-    //            return NO;
-    //        }else {
-    //            return YES;
-    //        }
 }
 
 //tap on return key to hide the keyboard

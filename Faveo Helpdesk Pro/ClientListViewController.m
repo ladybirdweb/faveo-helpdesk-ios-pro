@@ -15,7 +15,8 @@
 #import "MyWebservices.h"
 #import "AppDelegate.h"
 #import "LoadingTableViewCell.h"
-
+#import "RKDropdownAlert.h"
+#import "HexColors.h"
 @interface ClientListViewController (){
 
     Utils *utils;
@@ -52,10 +53,10 @@
 -(void)reload{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
+    { [refresh endRefreshing];
         //connection unavailable
         [[AppDelegate sharedAppdelegate] hideProgressView];
-        [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+       [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
         
@@ -126,7 +127,7 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-        [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+      [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
         
@@ -278,8 +279,8 @@
     }
     
     ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
-   
-    [td setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+    td.imageURL=[finaldic objectForKey:@"profile_pic"];
+    //[td setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
     
     if ([isActive isEqualToString:@"1"]) {
         isActive=@"ACTIVE";
