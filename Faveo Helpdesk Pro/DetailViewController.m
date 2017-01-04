@@ -37,7 +37,6 @@
     NSMutableArray * status_idArray;
     NSMutableArray * source_idArray;
 
-
 }
 
 @property (nonatomic,retain) UIActivityIndicatorView *activityIndicatorObject;

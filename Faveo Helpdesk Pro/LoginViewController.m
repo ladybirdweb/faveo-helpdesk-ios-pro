@@ -46,7 +46,6 @@
     [[self navigationController] setNavigationBarHidden:YES];
     
     [utils viewSlideInFromRightToLeft:self.companyURLview];
-    
     [self.loginView setHidden:YES];
     [self.companyURLview setHidden:NO];
     
@@ -235,7 +234,7 @@
         if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
         {
             //connection unavailable
-            [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+             [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
             
         }else{
             
@@ -299,7 +298,7 @@
                         NSLog(@"token--%@",[jsonData objectForKey:@"token"]);
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            [RKDropdownAlert title:APP_NAME message:@"Thank you, you have logged in successfully." backgroundColor:[UIColor hx_colorWithHexRGBAString:@"#689f38"] textColor:[UIColor whiteColor]];
+                            [RKDropdownAlert title:APP_NAME message:@"Thank you, you have logged in successfully." backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             [self sendDeviceToken];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];

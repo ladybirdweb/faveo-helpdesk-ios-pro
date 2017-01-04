@@ -259,9 +259,15 @@
     }else if (self.subjectTextField.text.length==0) {
         [RKDropdownAlert title:APP_NAME message:@"Please enter SUBJECT" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
        // [utils showAlertWithMessage:@"Please enter SUBJECT" sendViewController:self];
+    }else  if (self.subjectTextField.text.length<5) {
+        [RKDropdownAlert title:APP_NAME message:@"SUBJECT requires at least 5 characters" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        // [utils showAlertWithMessage:@"Please enter SUBJECT" sendViewController:self];
     }else if (self.msgTextField.text.length==0){
         [RKDropdownAlert title:APP_NAME message:@"Please enter ticket MESSAGE" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
        // [utils showAlertWithMessage:@"Please enter ticket MESSAGE" sendViewController:self];
+    }else if (self.msgTextField.text.length<10){
+        [RKDropdownAlert title:APP_NAME message:@"MESSAGE requires at least 10 characters" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        // [utils showAlertWithMessage:@"Please enter ticket MESSAGE" sendViewController:self];
     }else if (self.priorityTextField.text.length==0){
         [RKDropdownAlert title:APP_NAME message:@"Please select PRIORITY" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         //[utils showAlertWithMessage:@"Please select PRIORITY" sendViewController:self];
