@@ -17,15 +17,18 @@
 #import "HexColors.h"
 #import "RKDropdownAlert.h"
 
+
+
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
+@import Firebase;
 
 @interface LoginViewController (){
     Utils *utils;
     NSUserDefaults *userdefaults;
     NSString *errorMsg;
     NSString *baseURL;
-
+   
 }
 
 @property (nonatomic, strong) MBProgressHUD *progressView;
@@ -51,7 +54,6 @@
     
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -61,7 +63,8 @@
 - (IBAction)urlButton:(id)sender {
     [self.urlTextfield resignFirstResponder];
     if (self.urlTextfield.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:@"Please Enter the URL" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please Enter the URL", "")  backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+      
         //[utils showAlertWithMessage:@"Please Enter the URL" sendViewController:self];
     }
     else{
@@ -85,10 +88,10 @@
             }else{
                 //connection available
                 
-                [[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Verifying URL"];
+                [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Verifying URL","")];
                 
                 NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/url?url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
-                
+                NSLog(@"URL :%@",url);
                 NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
                 [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
                 [request addValue:@"application/json" forHTTPHeaderField:@"Offer-type"];
@@ -119,6 +122,8 @@
                                 errorMsg = [error localizedDescription];
                                 break;
                         }
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                        [utils showAlertWithMessage:errorMsg sendViewController:self];
                         NSLog(@"dataTaskWithRequest error: %@", errorMsg);
                         return;
                     }else if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
@@ -149,7 +154,22 @@
                         
                         NSLog(@"Success");
                        // [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [self verifyBilling];
+//                        if (!Utils.isDebug) {
+                           [self verifyBilling];
+//                        }else{
+//                            dispatch_async(dispatch_get_main_queue(), ^{
+//                                
+//                                [RKDropdownAlert title:APP_NAME message:@"Verified URL" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+//                                [[AppDelegate sharedAppdelegate] hideProgressView];
+//                                [self.companyURLview setHidden:YES];
+//                                [self.loginView setHidden:NO];
+//                                [utils viewSlideInFromRightToLeft:self.loginView];
+//                            });
+//                            [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
+//                            [userdefaults synchronize];
+//                        }
+                        
+                        
 //                        dispatch_async(dispatch_get_main_queue(), ^{
 //                            
 //                        });
@@ -159,7 +179,7 @@
                     }else{
                         
                         [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [utils showAlertWithMessage:@"Error verifying URL" sendViewController:self];
+                        [utils showAlertWithMessage:NSLocalizedString(@"Error verifying URL",nil)sendViewController:self];
                         
                     }
                     
@@ -169,7 +189,7 @@
             }
             
         }else
-            [utils showAlertWithMessage:@"Please Enter a valid URL" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Please Enter a valid URL",nil) sendViewController:self];
     }
 }
 
@@ -194,11 +214,11 @@
         
         if (json) {
             NSLog(@"Thread-sendAPNS-token-json-%@",json);
-            if([[json objectForKey:@"result"] isEqualToString:@"success"]){
+           // if([[json objectForKey:@"result"] isEqualToString:@"success"]){
                 NSLog(@"Billing successful!");
                 dispatch_async(dispatch_get_main_queue(), ^{
                    
-                    [RKDropdownAlert title:APP_NAME message:@"Verified URL" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                    [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Verified URL",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     [self.companyURLview setHidden:YES];
                     [self.loginView setHidden:NO];
@@ -206,12 +226,12 @@
                 });
                 [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
                 [userdefaults synchronize];
-            }else {
-                
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            [utils showAlertWithMessage:@"Access denied, to use pro version!" sendViewController:self];
-            
-            }
+//            }else {
+//                
+//            [[AppDelegate sharedAppdelegate] hideProgressView];
+//            [utils showAlertWithMessage:NSLocalizedString(@"Access denied, to use pro version!",nil) sendViewController:self];
+//            
+//            }
             
         }
         
@@ -225,12 +245,9 @@
 
 - (IBAction)btnLogin:(id)sender {
     
-    if (self.userNameTextField.text.length==0)
-        [utils showAlertWithMessage:@"Please Enter Username" sendViewController:self];
-    else if(self.passcodeTextField.text.length==0)
-        [utils showAlertWithMessage:@"Please Enter Password" sendViewController:self];
-    else
-    {
+    if (self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0)
+        [utils showAlertWithMessage:NSLocalizedString(@"Please Enter Username & Password",nil) sendViewController:self];
+    else {
         if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
         {
             //connection unavailable
@@ -290,7 +307,23 @@
                         NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:nil error:&error];
                         
                         [userdefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
-                        [userdefaults setObject:[jsonData objectForKey:@"user_id"] forKey:@"user_id"];
+                        NSDictionary *jsonData1=[jsonData objectForKey:@"user_id"];
+                         [userdefaults setObject:[jsonData1 objectForKey:@"id"] forKey:@"user_id"];
+                         [userdefaults setObject:[jsonData1 objectForKey:@"profile_pic"] forKey:@"profile_pic"];
+                        NSLog(@"Role : %@",[jsonData1 objectForKey:@"role"]);
+                         [userdefaults setObject:[jsonData1 objectForKey:@"role"] forKey:@"role"];
+                        
+                        NSString *clientName=[jsonData1 objectForKey:@"first_name"];
+                        
+                        if ([clientName isEqualToString:@""]) {
+                            clientName=[jsonData1 objectForKey:@"user_name"];
+                        }else{
+                            clientName=[NSString stringWithFormat:@"%@ %@",clientName,[jsonData1 objectForKey:@"last_name"]];
+                        }
+
+                        
+                        [userdefaults setObject:clientName forKey:@"profile_name"];
+                        [userdefaults setObject:baseURL forKey:@"baseURL"];
                         [userdefaults setObject:self.userNameTextField.text forKey:@"username"];
                         [userdefaults setObject:self.passcodeTextField.text forKey:@"password"];
                         [userdefaults setBool:YES forKey:@"loginSuccess"];
@@ -298,10 +331,10 @@
                         NSLog(@"token--%@",[jsonData objectForKey:@"token"]);
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            [RKDropdownAlert title:APP_NAME message:@"Thank you, you have logged in successfully." backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             [self sendDeviceToken];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                            InboxViewController *inboxVC=[self.storyboard  instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:inboxVC animated:YES];
                             //[self.navigationController popViewControllerAnimated:YES];
                             [[self navigationController] setNavigationBarHidden:NO];
@@ -341,7 +374,7 @@
 }
 
 -(void)sendDeviceToken{
-    NSString *refreshedToken = [[FIRInstanceID instanceID] token];
+    NSString *refreshedToken =  [[FIRInstanceID instanceID] token];
     NSLog(@"refreshed token  %@",refreshedToken);
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     NSString *url=[NSString stringWithFormat:@"%@fcmtoken?user_id=%@&fcm_token=%@&os=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"user_id"],[[FIRInstanceID instanceID] token],@"ios"];

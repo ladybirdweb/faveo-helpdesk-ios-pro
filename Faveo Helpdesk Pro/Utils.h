@@ -15,6 +15,8 @@
 +(BOOL)emailValidation:(NSString *)strEmail;
 +(BOOL)phoneNovalidation:(NSString *)strPhonr;
 +(BOOL)validateUrl: (NSString *) url ;
+-(BOOL)compareDates:(NSString*)date1;
+
 
 -(void)viewSlideInFromRightToLeft:(UIView *)views;
 -(void)viewSlideInFromLeftToRight:(UIView *)views;
@@ -23,5 +25,7 @@
 
 -(void)showAlertWithMessage:(NSString*)message sendViewController:(UIViewController *)viewController;
 -(NSString *)getLocalDateTimeFromUTC:(NSString *)strDate;
+-(NSString *)getLocalDateTimeFromUTCDueDate:(NSString *)strDate;
+
 
 @end

@@ -11,4 +11,5 @@
 
 @interface TrashTicketsViewController :UIViewController<SlideNavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate>
 -(void)addBtnPressed;
+
 @end

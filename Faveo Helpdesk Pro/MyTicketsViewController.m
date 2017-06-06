@@ -88,7 +88,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setTitle:@"MyTickets"];
+    [self setTitle:NSLocalizedString(@"MyTickets",nil)];
     
     // A little trick for removing the cell separators
     self.tableView.tableFooterView = [UIView new];
@@ -99,7 +99,7 @@
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Getting Data"];
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
     // Do any additional setup after loading the view.
 }
@@ -116,6 +116,8 @@
         
         //        [[AppDelegate sharedAppdelegate] showProgressView];
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/my-tickets-agent?api_key=%@&ip=%@&token=%@&user_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],[userDefaults objectForKey:@"user_id"]];
+        
+        NSLog(@"Mytickets URL-%@",url);
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -178,7 +180,7 @@
     if ([_mutableArray count]==0)
     {
         UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        noDataLabel.text             = @"Empty!!!";
+        noDataLabel.text             =  NSLocalizedString(@"Empty!!!",nil);
         noDataLabel.textColor        = [UIColor blackColor];
         noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = noDataLabel;
@@ -302,10 +304,18 @@
         
         cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
         cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
-        cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
+        cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
         cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
         [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-        
+              cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
+        if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
+            
+            if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+                [cell.overDueLabel setHidden:NO];
+                
+            }else [cell.overDueLabel setHidden:YES];
+            
+        }
         return cell;
     }
 }
@@ -317,7 +327,7 @@
     
     globalVariables.iD=[finaldic objectForKey:@"id"];
     globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
-     globalVariables.title=[finaldic objectForKey:@"title"];
+    // globalVariables.title=[finaldic objectForKey:@"title"];
     [self.navigationController pushViewController:td animated:YES];
 }
 
@@ -350,7 +360,7 @@
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSAttributedString *refreshing = [[NSAttributedString alloc] initWithString:@"Refreshing" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSParagraphStyleAttributeName : paragraphStyle,NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    NSAttributedString *refreshing = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Refreshing",nil) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSParagraphStyleAttributeName : paragraphStyle,NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     refresh=[[UIRefreshControl alloc] init];
     refresh.tintColor=[UIColor whiteColor];

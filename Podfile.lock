@@ -1,9 +1,7 @@
 PODS:
   - ActionSheetPicker-3.0 (2.2.0)
   - CNPPopupController (0.3.3)
-  - Crashlytics (3.8.3):
-    - Fabric (~> 1.6.3)
-  - Fabric (1.6.11)
+  - DZNEmptyDataSet (1.8.1)
   - Firebase/Core (3.10.0):
     - FirebaseAnalytics (= 3.6.0)
     - FirebaseCore (= 3.4.5)
@@ -42,12 +40,12 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - XLForm (3.3.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0
   - CNPPopupController
-  - Crashlytics
-  - Fabric
+  - DZNEmptyDataSet
   - Firebase/Core
   - Firebase/Messaging
   - HexColors
@@ -56,12 +54,12 @@ DEPENDENCIES:
   - NSDate-Time-Ago
   - RKDropdownAlert
   - SDWebImage
+  - XLForm (~> 3.0)
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
   CNPPopupController: 59b06290762f68beab5fb0bbfa87eb4dcbefb7de
-  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
-  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Firebase: 387f37c7dca894a02708da9ff35ba147040eae9e
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
   FirebaseCore: 1e383fdfe37b6b5d6ff88e84204bdee30276af0f
@@ -76,7 +74,8 @@ SPEC CHECKSUMS:
   NSDate-Time-Ago: e9de167d0659ebe465c273e833e7b582f061fc41
   RKDropdownAlert: f4b3364c251829ad439dc666836a1f2dad26f4c7
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: 8eaa8340c6106d7e1fa6bc3d41c199b598ee94f1
+PODFILE CHECKSUM: a75a022ef1aae5817662324a9805083e3d1b80a8
 
 COCOAPODS: 1.1.1

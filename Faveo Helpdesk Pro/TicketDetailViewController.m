@@ -145,7 +145,7 @@
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSAttributedString *title = [[NSAttributedString alloc] initWithString:@"Internal Note" attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:24], NSParagraphStyleAttributeName : paragraphStyle}];
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Internal Note",nil) attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:24], NSParagraphStyleAttributeName : paragraphStyle}];
     //    NSAttributedString *lineOne = [[NSAttributedString alloc] initWithString:@"Message" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSParagraphStyleAttributeName : paragraphStyle}];
     //    NSAttributedString *lineTwo = [[NSAttributedString alloc] initWithString:@"Message" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSForegroundColorAttributeName : [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0], NSParagraphStyleAttributeName : paragraphStyle}];
     
@@ -162,7 +162,7 @@
     UILabel *lineTwoLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 100, 20)];
     //    lineTwoLabel.numberOfLines = 0;
     lineTwoLabel.textColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
-    lineTwoLabel.text = @"Message";
+    lineTwoLabel.text = NSLocalizedString(@"Message",nil);
     
     
     UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 270, 140)];
@@ -181,11 +181,11 @@
     CNPPopupButton *button = [[CNPPopupButton alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont boldSystemFontOfSize:18];
-    [button setTitle:@"Done" forState:UIControlStateNormal];
+    [button setTitle:NSLocalizedString(@"Done",nil) forState:UIControlStateNormal];
     button.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     button.layer.cornerRadius = 4;
     button.selectionHandler = ^(CNPPopupButton *button){
-        if ( textViewInternalNote.text.length!=0) {
+        if ( textViewInternalNote.text.length > 0 || textViewInternalNote.text != nil || ![textViewInternalNote.text isEqual:@""]||[textViewInternalNote hasText]) {
             [self postInternalNote];
             [self.popupController dismissPopupControllerAnimated:YES];
             NSLog(@"Message of InternalNote: %@",  textViewInternalNote.text);
@@ -207,9 +207,9 @@
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSAttributedString *title = [[NSAttributedString alloc] initWithString:@"Ticket Reply" attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:24], NSParagraphStyleAttributeName : paragraphStyle}];
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Ticket Reply",nil) attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:24], NSParagraphStyleAttributeName : paragraphStyle}];
     NSAttributedString *lineOne = [[NSAttributedString alloc] initWithString:@"Cc" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSForegroundColorAttributeName : [UIColor hx_colorWithHexRGBAString:@"#00aeef"]}];
-    NSMutableAttributedString *lineTwo = [[NSMutableAttributedString alloc] initWithString:@"Message*" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSForegroundColorAttributeName : [UIColor hx_colorWithHexRGBAString:@"#00aeef"]}];
+    NSMutableAttributedString *lineTwo = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Message*",nil) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSForegroundColorAttributeName : [UIColor hx_colorWithHexRGBAString:@"#00aeef"]}];
     [lineTwo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(7,1)];
     
     UILabel *titleLabel = [[UILabel alloc] init];
@@ -222,7 +222,7 @@
     //
     //    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon"]];
     
-    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 270, 200)];
+    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 270, 140)];
     //customView.backgroundColor = [UIColor lightGrayColor];
     
     
@@ -238,32 +238,34 @@
     textFieldCc.layer.borderColor=[[UIColor lightGrayColor] CGColor];
     
     
-    UILabel *lineTwoLabe2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 65, 100, 20)];
+    UILabel *lineTwoLabe2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 100, 20)];
     //    lineTwoLabel.numberOfLines = 0;
     //lineTwoLabe2.textColor=[UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
     lineTwoLabe2.attributedText = lineTwo;
     
-    textViewReply = [[UITextView alloc] initWithFrame:CGRectMake(10, 90, 250, 100)];
+    textViewReply = [[UITextView alloc] initWithFrame:CGRectMake(10, 30, 250, 100)];
+    //textViewReply.delegate=self;
     [textViewReply setReturnKeyType:UIReturnKeyDone];
     textViewReply.layer.cornerRadius=4;
     textViewReply.layer.borderWidth=1.0F;
     textViewReply.layer.borderColor=[[UIColor grayColor] CGColor];
     
     [customView addSubview:textViewReply];
-    [customView addSubview:textFieldCc];
-    [customView addSubview:lineTwoLabel];
+    //[customView addSubview:textFieldCc];
+   // [customView addSubview:lineTwoLabel];
     [customView addSubview:lineTwoLabe2];
     
     
     CNPPopupButton *button = [[CNPPopupButton alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont boldSystemFontOfSize:18];
-    [button setTitle:@"Done" forState:UIControlStateNormal];
+    [button setTitle:NSLocalizedString(@"Done",nil) forState:UIControlStateNormal];
     button.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     button.layer.cornerRadius = 4;
     
     button.selectionHandler = ^(CNPPopupButton *button){
-        if (textViewReply.text.length!=0) {
+        
+        if (textViewReply.text.length > 0 || textViewReply.text != nil || ![textViewReply.text isEqual:@""]) {
             [self postReply];
             
             [self.popupController dismissPopupControllerAnimated:YES];
@@ -327,7 +329,9 @@
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"thread"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
+                        [RKDropdownAlert title:APP_NAME message:@"Posted your note!"backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
+                       // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
                     });
                 }
             }
@@ -353,7 +357,7 @@
 //        
 //        NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply",[userDefaults objectForKey:@"companyURL"]];
         
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&token=%@&reply_content=%@&ticket_ID=%@&cc=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],textViewReply.text,globalVariables.iD,textFieldCc.text];
+        NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&token=%@&reply_content=%@&ticket_ID=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],textViewReply.text,globalVariables.iD];
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
@@ -385,7 +389,9 @@
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"result"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [utils showAlertWithMessage:@"Kindly Refresh!" sendViewController:self];
+                         [RKDropdownAlert title:APP_NAME message:@"Posted your reply!"backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
+                       // [utils showAlertWithMessage:@"Kindly Refresh!" sendViewController:self];
                     });
                 }
                 
@@ -395,4 +401,23 @@
         }];
     }
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)aTextField
+{
+    [aTextField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)aTextField
+{
+    return [self validate:aTextField.text];
+}
+
+- (BOOL) validate: (NSString *) candidate {
+    NSString *emailRegex = @"[a-zA-Z]*";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    
+    return [emailTest evaluateWithObject:candidate];
+}
+
 @end

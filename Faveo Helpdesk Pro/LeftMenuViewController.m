@@ -10,9 +10,14 @@
 #import "RKDropdownAlert.h"
 #import "HexColors.h"
 #import "AppConstanst.h"
-
-@interface LeftMenuViewController ()
-
+#import "GlobalVariables.h"
+#import "MyWebservices.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+@import Firebase;
+@interface LeftMenuViewController (){
+    NSUserDefaults *userDefaults;
+    GlobalVariables *globalVariables;
+}
 @end
 
 @implementation LeftMenuViewController
@@ -26,8 +31,53 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"Naaa-LeftMENU");
+   // _user_profileImage.clipsToBounds = YES;
+    userDefaults=[NSUserDefaults standardUserDefaults];
+    globalVariables=[GlobalVariables sharedInstance];
+    NSLog(@"Role : %@",[userDefaults objectForKey:@"role"]);
+   // _user_role.text=[[userDefaults objectForKey:@"role"] uppercaseString];
+    //_user_nameLabel.text=[userDefaults objectForKey:@"profile_name"];
+    //_url_label.text=[userDefaults objectForKey:@"baseURL"];
+   // _user_profileImage.layer.borderWidth=1.25f;
+   // _user_profileImage.layer.borderColor=[[UIColor hx_colorWithHexRGBAString:@"#0288D1"] CGColor];
+   // [_user_profileImage sd_setImageWithURL:[NSURL URLWithString:[userDefaults objectForKey:@"profile_pic"]]
+     //                     placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
-    // Do any additional setup after loading the view from its nib.
+    
+       // Do any additional setup after loading the view from its nib.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+
+//    NSInteger open =  [globalVariables.OpenCount integerValue];
+//    NSInteger closed = [globalVariables.ClosedCount integerValue];
+//    NSInteger trash = [globalVariables.DeletedCount integerValue];
+//    NSInteger unasigned = [globalVariables.UnassignedCount integerValue];
+//    NSInteger my_tickets = [globalVariables.MyticketsCount integerValue];
+//    
+//    if(open>999){
+//        _inbox_countLabel.text=@"999+";
+//    }else
+//        _inbox_countLabel.text=@(open).stringValue;
+//    if(closed>999){
+//        _closed_countLabel.text=@"999+";
+//    }else
+//        _closed_countLabel.text=@(closed).stringValue;
+//    if(trash>999){
+//        _trash_countLabel.text=@"999+";
+//    }else
+//        _trash_countLabel.text=@(trash).stringValue;
+//    if(unasigned>999){
+//        _unassigned_countLabel.text=@"999+";
+//    }else
+//        _unassigned_countLabel.text=@(unasigned).stringValue;
+//    if(my_tickets>999){
+//        _myTickets_countLabel.text=@"999+";
+//    }else
+//        _myTickets_countLabel.text=@(my_tickets).stringValue;
+//    [self.tableView reloadData];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,7 +112,7 @@
             break;
             
         case 2:
-             [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+            [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
             break;
         case 3:
             vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"InboxID"];
@@ -94,17 +144,17 @@
             [self wipeDataInLogout];
             //[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
             //[[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
-           
+            
             [RKDropdownAlert title:@"Faveo Helpdesk" message:@"You've logged out, successfully." backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
             vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"Login"];
-           // (vc.view.window!.rootViewController?).dismissViewControllerAnimated(false, completion: nil);
+            // (vc.view.window!.rootViewController?).dismissViewControllerAnimated(false, completion: nil);
             break;
             
-//        case 3:
-//            [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-//            [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
-//            return;
-//            break;
+            //        case 3:
+            //            [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+            //            [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
+            //            return;
+            //            break;
             
         default:
             break;
@@ -123,11 +173,12 @@
     } else {
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     }
-   
+    
 }
 
 -(void)wipeDataInLogout{
     
+    [self sendDeviceToken];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
@@ -135,7 +186,7 @@
     NSString *documentsPath = [paths objectAtIndex:0];
     // get the path to our Data/plist file
     NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
-     NSError *error;
+    NSError *error;
     if(![[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error])
     {
         NSLog(@"Error while removing the plist %@", error.localizedDescription);
@@ -149,9 +200,34 @@
     
 }
 
+-(void)sendDeviceToken{
+
+   // NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSString *url=[NSString stringWithFormat:@"%@fcmtoken?user_id=%@&fcm_token=%s&os=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"user_id"],"0",@"ios"];
+    MyWebservices *webservices=[MyWebservices sharedInstance];
+    [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
+        if (error || [msg containsString:@"Error"]) {
+            if (msg) {
+                
+                // [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
+            }else if(error)  {
+                //                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
+            }
+            return ;
+        }
+        if (json) {
+            
+            NSLog(@"Thread-sendAPNS-token-json-%@",json);
+        }
+        
+    }];
+}
+
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // rows in section 0 should not be selectable
-   // if ( indexPath.section == 0 ) return nil;
+    // if ( indexPath.section == 0 ) return nil;
     
     // first 3 rows in any section should not be selectable
     if ( (indexPath.row ==0) || (indexPath.row==2) ) return nil;
@@ -164,7 +240,7 @@
 //{
 //    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 //    [cell setUserInteractionEnabled:NO];
-//    
+//
 //    if (indexPath.section == 1 && indexPath.row == 2)
 //    {
 //        [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
@@ -173,13 +249,13 @@
 //}
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

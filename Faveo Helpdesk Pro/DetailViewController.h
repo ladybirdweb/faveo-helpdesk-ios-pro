@@ -10,15 +10,15 @@
 
 @interface DetailViewController : UITableViewController <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *clientNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *firstnameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *lastnameTextField;
+//@property (weak, nonatomic) IBOutlet UITextField *lastnameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *helpTopicTextField;
 @property (weak, nonatomic) IBOutlet UITextField *slaTextField;
 @property (weak, nonatomic) IBOutlet UITextField *deptTextField;
 @property (weak, nonatomic) IBOutlet UITextField *subjectTextField;
 @property (weak, nonatomic) IBOutlet UITextField *statusTextField;
+@property (weak, nonatomic) IBOutlet UITextField *typeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *priorityTextField;
 @property (weak, nonatomic) IBOutlet UITextField *sourceTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dueDateTextField;
@@ -31,6 +31,7 @@
 @property (nonatomic, strong) NSArray * priorityArray;
 @property (nonatomic, strong) NSArray * sourceArray;
 @property (nonatomic, strong) NSArray * statusArray;
+@property (nonatomic, strong) NSArray * typeArray;
 
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 
@@ -38,6 +39,7 @@
 @property (nonatomic, assign) NSInteger selectedIndex;
 
 - (IBAction)sourceClicked:(id)sender;
+- (IBAction)typeClicked:(id)sender;
 - (IBAction)statusClicked:(id)sender;
 - (IBAction)helpTopicClicked:(id)sender;
 - (IBAction)slaClicked:(id)sender;

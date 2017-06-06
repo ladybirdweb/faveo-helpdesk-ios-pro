@@ -1,0 +1,52 @@
+/*
+ Localization.strings
+ Faveo Helpdesk Pro
+ 
+ Created by Narendra on 03/04/17.
+ Copyright © 2017 Ladybird websolutions pvt ltd. All rights reserved.
+ */
+
+"Please Enter the URL"="";
+"Verifying URL"="";
+"Error verifying URL"="";
+"Please Enter a valid URL"="";
+"Verified URL"="";
+"Access denied, to use pro version!"="";
+"Please Enter Username"="";
+"Please Enter Password"="";
+"Thank you, you have logged in successfully."="";
+"Getting Data"="";
+"Refreshing"="";
+"CreateTicket"="";
+"Inbox"="";
+"Trash Tickets"="";
+"Client List"="";
+"Closed Tickets"="";
+"UnassignedTickets"="";
+"MyTickets"="";
+"About"="";
+"Not Available"="";
+"Select Helptopic"="";
+"Select CountryCode"="";
+"Please enter EMAIL-ID"="";
+"Please enter First Name"="";
+"Please select HELP-TOPIC"="";
+"Please select SLA"="";
+"Please select DEPARTMENT"="";
+"Please select PRIORITY"="";
+"Please enter SUBJECT"="";
+"SUBJECT requires at least 5 characters"="";
+"Please enter ticket MESSAGE"="";
+"MESSAGE requires at least 10 characters"="";
+"Invalid EMAIL_ID" ="";
+"Name should have more than 2 characters"="";
+"Ticket created successfully!"="";
+"Internal Note"="";
+"Message"="";
+"Done"="";
+"Ticket Reply"="";
+"Message*"="";
+"Empty!!!"="Vazio!!!";
+"Cc"="Cc";
+"Please wait"="por favor espera";
+

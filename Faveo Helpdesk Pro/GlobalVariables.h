@@ -12,8 +12,13 @@
 
 @property (strong, nonatomic) NSNumber *iD;
 @property (strong, nonatomic) NSString *ticket_number;
-@property (strong, nonatomic) NSString *title;
+//@property (strong, nonatomic) NSString *title;
 
+@property (strong, nonatomic) NSString *OpenCount;
+@property (strong, nonatomic) NSString *DeletedCount;
+@property (strong, nonatomic) NSString *ClosedCount;
+@property (strong, nonatomic) NSString *UnassignedCount;
+@property (strong, nonatomic) NSString *MyticketsCount;
 + (instancetype)sharedInstance;
 
 @end

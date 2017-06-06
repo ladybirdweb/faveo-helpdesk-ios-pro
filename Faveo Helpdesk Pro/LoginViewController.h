@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IQPreviousNextView.h"
+
+//#import "IQPreviousNextView.h"
 
 @interface LoginViewController : UIViewController<UITextFieldDelegate>
 

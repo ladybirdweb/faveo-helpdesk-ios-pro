@@ -24,6 +24,7 @@
 @import FirebaseMessaging;
 
 
+
 @interface InboxViewController (){
     Utils *utils;
     UIRefreshControl *refresh;
@@ -44,11 +45,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+     NSLog(@"Naa-Inbox");
+//    POPSpringAnimation *basicAnimation = [POPSpringAnimation animation];
+//    basicAnimation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
+//    basicAnimation.toValue=[NSValue valueWithCGRect:CGRectMake(0, 0, 90, 190)];
+//    basicAnimation.name=@"SomeAnimationNameYouChoose";
+//    basicAnimation.delegate=self;
+//    [self.tableView pop_addAnimation:basicAnimation forKey:@"WhatEverNameYouWant"];
+    
     NSString *refreshedToken = [[FIRInstanceID instanceID] token];
     NSLog(@"refreshed token  %@",refreshedToken);
     
-    [self setTitle:@"Inbox"];
+    [self setTitle:NSLocalizedString(@"Inbox",nil)];
     [self addUIRefresh];
+    NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
     _mutableArray=[[NSMutableArray alloc]init];
 
 //    UINib *nib = [UINib nibWithNibName:@"TicketTableViewCell" bundle:nil];
@@ -57,15 +67,16 @@
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
+    NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnPressed)]];
     
   
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Getting Data"];
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    //static dispatch_once_t onceToken;
+   // dispatch_once(&onceToken, ^{
         [self getDependencies];
-    });
+   // });
     // Do any additional setup after loading the view.
 }
 
@@ -165,15 +176,25 @@
                 
                 NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
                 NSDictionary *resultDic = [json objectForKey:@"result"];
-                //                   NSArray *deptArray=[resultDic objectForKey:@"departments"];
-                //                   NSArray *helpTopicArray=[resultDic objectForKey:@"helptopics"];
-                //                   NSArray *prioritiesArray=[resultDic objectForKey:@"priorities"];
-                //                   NSArray *slaArray=[resultDic objectForKey:@"sla"];
-                //                   NSArray *sourcesArray=[resultDic objectForKey:@"sources"];
-                //                   NSArray *staffsArray=[resultDic objectForKey:@"staffs"];
-                //                   NSArray *statusArray=[resultDic objectForKey:@"status"];
-                //                   NSArray *teamArray=[resultDic objectForKey:@"teams"];
-                //                   NSLog(@"%@,%@,%@,%@,%@,%@,%@,%@",deptArray,helpTopicArray,prioritiesArray,slaArray,sourcesArray,staffsArray,statusArray,teamArray);
+                NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
+                
+                for (int i = 0; i < ticketCountArray.count; i++) {
+                    NSString *name = [[ticketCountArray objectAtIndex:i]objectForKey:@"name"];
+                    NSString *count = [[ticketCountArray objectAtIndex:i]objectForKey:@"count"];
+                    if ([name isEqualToString:@"Open"]) {
+                        globalVariables.OpenCount=count;
+                    }else if ([name isEqualToString:@"Closed"]) {
+                        globalVariables.ClosedCount=count;
+                    }else if ([name isEqualToString:@"Deleted"]) {
+                        globalVariables.DeletedCount=count;
+                    }else if ([name isEqualToString:@"unassigned"]) {
+                        globalVariables.UnassignedCount=count;
+                    }else if ([name isEqualToString:@"mytickets"]) {
+                        globalVariables.MyticketsCount=count;
+                    }
+                }
+                
+
                 
                 NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
                 
@@ -210,7 +231,7 @@
     if ([_mutableArray count]==0)
     {
         UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        noDataLabel.text             = @"Empty!!!";
+        noDataLabel.text             =  NSLocalizedString(@"Empty!!!",nil);
         noDataLabel.textColor        = [UIColor blackColor];
         noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = noDataLabel;
@@ -338,10 +359,23 @@
             
             cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
             cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
-            cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
+            cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
             cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
-        
+
             [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        
+        if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
+            
+        if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+                [cell.overDueLabel setHidden:NO];
+        
+        }else [cell.overDueLabel setHidden:YES];
+        
+        }
+        
+       
+            cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
+        
             
         return cell;
     }
@@ -354,7 +388,7 @@
     
     globalVariables.iD=[finaldic objectForKey:@"id"];
     globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
-    globalVariables.title=[finaldic objectForKey:@"title"];
+    //globalVariables.title=[finaldic objectForKey:@"title"];
     //    globalVariables.first_name=[finaldic objectForKey:@"first_name"];
     //    globalVariables.last_name=[finaldic objectForKey:@"last_name"];
     //    globalVariables.email=[finaldic objectForKey:@"email"];
@@ -384,7 +418,7 @@
     
 }
 -(void)viewWillAppear:(BOOL)animated{
-    
+    [super viewWillAppear:YES];
     [[self navigationController] setNavigationBarHidden:NO];
     
 }
@@ -395,7 +429,7 @@
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSAttributedString *refreshing = [[NSAttributedString alloc] initWithString:@"Refreshing" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSParagraphStyleAttributeName : paragraphStyle,NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    NSAttributedString *refreshing = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Refreshing",nil) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSParagraphStyleAttributeName : paragraphStyle,NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     refresh=[[UIRefreshControl alloc] init];
     refresh.tintColor=[UIColor whiteColor];

@@ -17,6 +17,8 @@
 #import "MyWebservices.h"
 #import "AppDelegate.h"
 #import "RKDropdownAlert.h"
+#import "IQKeyboardManager.h"
+#import "Dat.h"
 
 @interface CreateTicketViewController (){
     
@@ -31,6 +33,8 @@
     NSMutableArray * dept_idArray;
     NSMutableArray * pri_idArray;
     NSMutableArray * helpTopic_idArray;
+    
+    NSDictionary *priDicc1;
 }
 
 - (void)helpTopicWasSelected:(NSNumber *)selectedIndex element:(id)element;
@@ -47,7 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self split];
-    
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     sla_id=[[NSNumber alloc]init];
     dept_id=[[NSNumber alloc]init];
     help_topic_id=[[NSNumber alloc]init];
@@ -57,13 +61,18 @@
     _codeTextField.text=[self setDefaultCountryCode];
     
     [self readFromPlist];
-    [self setTitle:@"CreateTicket"];
+    [self setTitle:NSLocalizedString(@"CreateTicket",nil)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
      self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
+
+}
 -(void)readFromPlist{
     // Read plist from bundle and get Root Dictionary out of it
     NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
@@ -98,11 +107,15 @@
     
     for (NSDictionary *dicc in deptArray) {
         if ([dicc objectForKey:@"name"]) {
+            
             [deptMU addObject:[dicc objectForKey:@"name"]];
             [dept_idArray addObject:[dicc objectForKey:@"id"]];
         }
         
     }
+    
+    priDicc1=[NSDictionary dictionaryWithObjects:priMU forKeys:pri_idArray];
+    
     
     for (NSDictionary *dicc in prioritiesArray) {
         if ([dicc objectForKey:@"priority"]) {
@@ -180,7 +193,7 @@
     [self removeKeyboard];
     
     if (!_helptopicsArray||!_helptopicsArray.count) {
-        _helpTopicTextField.text=@"Not Available";
+        _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
         help_topic_id=0;
     }else{
         [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
@@ -192,10 +205,10 @@
     [self removeKeyboard];
     
     if (!_slaPlansArray||!_slaPlansArray.count) {
-        _slaTextField.text=@"Not Available";
+        _slaTextField.text=NSLocalizedString(@"Not Available",nil);
         sla_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select SLA" rows:_slaPlansArray initialSelection:0 target:self successAction:@selector(slaWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select SLA",nil) rows:_slaPlansArray initialSelection:0 target:self successAction:@selector(slaWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
     
 }
@@ -204,31 +217,31 @@
     [self removeKeyboard];
     
     if (!_deptArray||!_deptArray.count) {
-        _deptTextField.text=@"Not Available";
+        _deptTextField.text=NSLocalizedString(@"Not Available",nil);
         dept_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Department" rows:_deptArray initialSelection:0 target:self successAction:@selector(deptWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Department",nil) rows:_deptArray initialSelection:0 target:self successAction:@selector(deptWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
     
 }
 
 -(void)removeKeyboard{
     [_emailTextField resignFirstResponder];
-    [_phoneTextField resignFirstResponder];
+    [_mobileTextField resignFirstResponder];
     [_msgTextField resignFirstResponder];
     [_subjectTextField resignFirstResponder];
-    [_nameTextField resignFirstResponder];
+    [_firstNameTextField resignFirstResponder];
     
 }
 
 - (IBAction)priorityClicked:(id)sender {
     [self removeKeyboard];
     if (!_priorityArray||![_priorityArray count]) {
-        _priorityTextField.text=@"Not Available";
+        _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
         priority_id=0;
         
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Priority" rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Priority",nil) rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
     
 }
@@ -236,50 +249,59 @@
 - (IBAction)countryCodeClicked:(id)sender {
     [self removeKeyboard];
     
-    [ActionSheetStringPicker showPickerWithTitle:@"Select CountryCode" rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+    [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
 }
 
 - (IBAction)submitClicked:(id)sender {
+//    
+//    if (self.slaTextField.text.length==0){
+//        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select SLA",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+//        //[utils showAlertWithMessage:@"Please select SLA" sendViewController:self];
+    //    }else if (self.deptTextField.text.length==0) {
+//    [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select DEPARTMENT",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+//    // [utils showAlertWithMessage:@"Please select DEPARTMENT" sendViewController:self];
+//}else
+//    if (self.phoneTextField.text.length!=0){
+//        if(self.phoneTextField.text.length>=15)
+//            [RKDropdownAlert title:APP_NAME message:@"Phone number should be maximum 15 digits" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+//    }
     
     if (self.emailTextField.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:@"Please enter EMAIL-ID" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter EMAIL-ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         //[utils showAlertWithMessage:@"Please enter EMAIL-ID" sendViewController:self];
-    }else if (self.nameTextField.text.length==0) {
-        [RKDropdownAlert title:APP_NAME message:@"Please enter NAME" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+    }else if (self.firstNameTextField.text.length==0) {
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter First Name",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         //[utils showAlertWithMessage:@"Please enter NAME" sendViewController:self];
     }else if (self.helpTopicTextField.text.length==0) {
-        [RKDropdownAlert title:APP_NAME message:@"Please select HELP-TOPIC" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
        // [utils showAlertWithMessage:@"Please select HELP-TOPIC" sendViewController:self];
-    }else if (self.slaTextField.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:@"Please select SLA" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-        //[utils showAlertWithMessage:@"Please select SLA" sendViewController:self];
-    }else if (self.deptTextField.text.length==0) {
-        [RKDropdownAlert title:APP_NAME message:@"Please select DEPARTMENT" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-       // [utils showAlertWithMessage:@"Please select DEPARTMENT" sendViewController:self];
-    }else if (self.subjectTextField.text.length==0) {
-        [RKDropdownAlert title:APP_NAME message:@"Please enter SUBJECT" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+    }else  if (self.subjectTextField.text.length==0) {
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter SUBJECT",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
        // [utils showAlertWithMessage:@"Please enter SUBJECT" sendViewController:self];
     }else  if (self.subjectTextField.text.length<5) {
-        [RKDropdownAlert title:APP_NAME message:@"SUBJECT requires at least 5 characters" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"SUBJECT requires at least 5 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         // [utils showAlertWithMessage:@"Please enter SUBJECT" sendViewController:self];
     }else if (self.msgTextField.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:@"Please enter ticket MESSAGE" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter ticket MESSAGE" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
        // [utils showAlertWithMessage:@"Please enter ticket MESSAGE" sendViewController:self];
     }else if (self.msgTextField.text.length<10){
-        [RKDropdownAlert title:APP_NAME message:@"MESSAGE requires at least 10 characters" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"MESSAGE requires at least 10 characters" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         // [utils showAlertWithMessage:@"Please enter ticket MESSAGE" sendViewController:self];
     }else if (self.priorityTextField.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:@"Please select PRIORITY" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select PRIORITY" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         //[utils showAlertWithMessage:@"Please select PRIORITY" sendViewController:self];
     }else if(![Utils emailValidation:self.emailTextField.text]){
-        [RKDropdownAlert title:APP_NAME message:@"Invalid EMAIL_ID" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Invalid EMAIL_ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         //[utils showAlertWithMessage:@"Invalid EMAIL_ID" sendViewController:self];
-    }else if(![Utils userNameValidation:self.nameTextField.text]){
-        [RKDropdownAlert title:APP_NAME message:@"Name should have more than 2 characters" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+    }else if(![Utils userNameValidation:self.firstNameTextField.text]){
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"FirstName should have more than 2 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         //[utils showAlertWithMessage:@"Name should have more than 2 characters" sendViewController:self];
     }else {
         NSLog(@"ticketCreated dept_id-%@, help_id-%@ ,sla_id-%@, pri_id-%@",dept_id,help_topic_id,sla_id,priority_id);
-        [self createTicket];
+        if ([_helpTopicTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]||[_priorityTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]) {
+            [RKDropdownAlert title:APP_NAME message:@"Please refresh the Inbox" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        }else  [self createTicket];
+
     }
     
 }
@@ -300,8 +322,11 @@
 //        NSLog(@"Dic %@",param);
         
        // NSString *url=[NSString stringWithFormat:@"%@helpdesk/create",[userDefaults objectForKey:@"companyURL"]];
-        
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&user_id=%@&subject=%@&body=%@&first_name=%@&last_name=%@&phone=%@&code=%@&email=%@&helptopic=%@&sla=%@&priority=%@&dept=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],[userDefaults objectForKey:@"user_id"],_subjectTextField.text,_msgTextField.text,_nameTextField.text,@"",_phoneTextField.text,[_codeTextField.text substringFromIndex:1],_emailTextField.text,help_topic_id,sla_id,priority_id,dept_id];
+        NSString *code=@"";
+        if(_codeTextField.text.length>0){
+            code=[_codeTextField.text substringFromIndex:1];
+        }
+        NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&helptopic=%@&priority=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_msgTextField.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id];
         
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -334,7 +359,7 @@
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"response"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                         [RKDropdownAlert title:APP_NAME message:@"Ticket created successfully!" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         //[utils showAlertWithMessage:@"Ticket created successfully!" sendViewController:self];
                         InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                         [self.navigationController pushViewController:inboxVC animated:YES];
@@ -380,6 +405,10 @@
     self.deptTextField.text = (_deptArray)[(NSUInteger) [selectedIndex intValue]];
 }
 - (void)priorityWasSelected:(NSNumber *)selectedIndex element:(id)element {
+    
+    //Dat *dat=(Dat *)[priDicc1 objectForKey:[NSString stringWithFormat:@"%@", selectedIndex]];
+   
+   // NSLog(@"id %@", dat.id1);
     priority_id=(pri_idArray)[(NSUInteger) [selectedIndex intValue]];
     // self.selectedIndex = [selectedIndex intValue];
     
@@ -389,14 +418,50 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
     
-    if (textField.tag==100) {
+   if (textField==_helpTopicTextField) {
+       [_helpTopicTextField resignFirstResponder];
+        //[self removeKeyboard];
         
-        return NO;
+        if (!_helptopicsArray||!_helptopicsArray.count) {
+            _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
+            help_topic_id=0;
+        }else{
+            [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
+        }
+        //return NO;
+    }else if (textField==_codeTextField) {
+        [_codeTextField resignFirstResponder];
+        //[self removeKeyboard];
+        
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
+         //return NO;
+    }else if (textField==_slaTextField) {
+        //[self removeKeyboard];
+        [_slaTextField resignFirstResponder];
+        if (!_slaPlansArray||!_slaPlansArray.count) {
+            _slaTextField.text=NSLocalizedString(@"Not Available",nil);
+            sla_id=0;
+        }else{
+            [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select SLA",nil) rows:_slaPlansArray initialSelection:0 target:self successAction:@selector(slaWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
+        }
+
+       // return NO;
+    }else if (textField.tag==97) {
+        //[self removeKeyboard];
+        [_priorityTextField resignFirstResponder];
+        if (!_priorityArray||![_priorityArray count]) {
+            _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
+            priority_id=0;
+            
+        }else{
+            [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Priority",nil) rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
+        }
+        //return NO;
     }else{
 
-        return YES;
+        //return YES;
     }
     
 }
@@ -407,6 +472,38 @@
     [textField resignFirstResponder];
     return YES;
 }
+
+//- (BOOL)textFieldShouldEndEditing:(UITextField *)aTextField
+//{
+//    
+//    if (aTextField.tag==4) {
+//        NSLog(@"number");
+//
+//       return  [self validateInputWithString:aTextField.text];
+//
+//    }else return YES;
+//    
+//}
+//
+//- (BOOL)validateInputWithString:(NSString *)aString
+//{
+//    NSString * const regularExpression = @"^(\\d{1,15})$";
+//    NSError *error = NULL;
+//    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regularExpression
+//                                                                           options:NSRegularExpressionCaseInsensitive
+//                                                                             error:&error];
+//    if (error) {
+//        NSLog(@"error %@", error);
+//    }
+//    
+//    NSUInteger numberOfMatches = [regex numberOfMatchesInString:aString
+//                                                        options:0
+//                                                          range:NSMakeRange(0, [aString length])];
+//    if (numberOfMatches > 0) {
+//    [RKDropdownAlert title:APP_NAME message:@"Phone number should be maximum 15 digits" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+//    }
+//    return numberOfMatches > 0 ;
+//} 
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu
 {

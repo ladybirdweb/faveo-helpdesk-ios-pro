@@ -36,14 +36,17 @@
     _activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     _activityIndicatorObject.center =CGPointMake(self.view.frame.size.width/2,(self.view.frame.size.height/2)-100);
     _activityIndicatorObject.color=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
-    [self.view addSubview:_activityIndicatorObject];
+    
+    //[self.view addSubview:_activityIndicatorObject];
     [self addUIRefresh];
     utils=[[Utils alloc]init];
     globalVariable=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
-    [_activityIndicatorObject startAnimating];
+    //[_activityIndicatorObject startAnimating];
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadd) name:@"reload_data" object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -52,7 +55,8 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [self.refreshControl endRefreshing];
-        [_activityIndicatorObject stopAnimating];
+        //[_activityIndicatorObject stopAnimating];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
@@ -64,7 +68,7 @@
             
             if (error || [msg containsString:@"Error"]) {
                 [self.refreshControl endRefreshing];
-                [_activityIndicatorObject stopAnimating];
+                //[_activityIndicatorObject stopAnimating];
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 if (msg) {
                     
@@ -95,7 +99,8 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         [self.refreshControl endRefreshing];
-                        [_activityIndicatorObject stopAnimating];
+                         [[AppDelegate sharedAppdelegate] hideProgressView];
+                        //[_activityIndicatorObject stopAnimating];
                         [self.tableView reloadData];
                     });
                 });
@@ -118,7 +123,7 @@
     if ([mutableArray count]==0)
     {
         self.noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        self.noDataLabel.text             = @"Empty!";
+        self.noDataLabel.text             = NSLocalizedString(@"Empty!!!",nil);
         self.noDataLabel.textColor        = [UIColor blackColor];
         self.noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = self.noDataLabel;
@@ -162,7 +167,7 @@
     }
     NSString *fName=[finaldic objectForKey:@"first_name"];
     if ([fName isEqualToString:@""]) {
-        fName=@"Not Available";
+        fName=NSLocalizedString(@"Not Available",nil);
     }else{
         fName=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
     }
@@ -253,7 +258,7 @@
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSAttributedString *refreshing = [[NSAttributedString alloc] initWithString:@"Refreshing" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSParagraphStyleAttributeName : paragraphStyle,NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    NSAttributedString *refreshing = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Refreshing",nil) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSParagraphStyleAttributeName : paragraphStyle,NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.tintColor=[UIColor whiteColor];
@@ -267,4 +272,6 @@
     [self reload];
     // [refreshControl endRefreshing];
 }
+
+
 @end

@@ -29,7 +29,7 @@
 //        }
 //    });
     
-   self.profilePicView.layer.borderWidth=1.25f;
+    self.profilePicView.layer.borderWidth=1.25f;
     self.profilePicView.layer.borderColor=[[UIColor hx_colorWithHexRGBAString:@"#0288D1"] CGColor];
     [self.profilePicView sd_setImageWithURL:[NSURL URLWithString:imageUrl]
                  placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
@@ -37,6 +37,19 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    UIBezierPath *maskPath = [UIBezierPath
+                              bezierPathWithRoundedRect:self.indicationView.bounds
+                              byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft)
+                              cornerRadii:CGSizeMake(10, 10)
+                              ];
+    
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    
+    maskLayer.frame = self.bounds;
+    maskLayer.path = maskPath.CGPath;
+    
+    self.indicationView.layer.mask = maskLayer;
     
     self.profilePicView.layer.cornerRadius = 25;
     self.profilePicView.clipsToBounds = YES;

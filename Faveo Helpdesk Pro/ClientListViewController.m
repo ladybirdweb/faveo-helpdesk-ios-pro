@@ -17,12 +17,13 @@
 #import "LoadingTableViewCell.h"
 #import "RKDropdownAlert.h"
 #import "HexColors.h"
+#import "GlobalVariables.h"
 @interface ClientListViewController (){
 
     Utils *utils;
     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
-
+GlobalVariables *globalVariables;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -38,12 +39,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setTitle:@"Client List"];
+    [self setTitle:NSLocalizedString(@"Client List",nil)];
     
     [self addUIRefresh];
     utils=[[Utils alloc]init];
     userDefaults=[NSUserDefaults standardUserDefaults];
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Getting Data"];
+    globalVariables=[GlobalVariables sharedInstance];
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
 
     // Do any additional setup after loading the view.
@@ -195,7 +197,7 @@
     if ([_mutableArray count]==0)
     {
         UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        noDataLabel.text             = @"Empty!!!";
+        noDataLabel.text             =  NSLocalizedString(@"Empty!!!",nil);
         noDataLabel.textColor        = [UIColor blackColor];
         noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = noDataLabel;
@@ -242,19 +244,23 @@
 
     NSString *email=[finaldic objectForKey:@"email"];
     NSString *phone=[finaldic objectForKey:@"phone_number"];
-    NSString *clientName=[finaldic objectForKey:@"first_name"];
-    if ([email isEqualToString:@""]) {
-        email=@"Not Available";
+        if ([email isEqualToString:@""]) {
+        email=NSLocalizedString(@"Not Available",nil);
     }
     if ([phone isEqualToString:@""]) {
-        phone=@"Not Available";
+        phone=NSLocalizedString(@"Not Available",nil);
     }
+    NSString *clientName=[finaldic objectForKey:@"first_name"];
+
     if ([clientName isEqualToString:@""]) {
-        clientName=@"Not Available";
+        clientName=[finaldic objectForKey:@"user_name"];
+    }else{
+        clientName=[NSString stringWithFormat:@"%@ %@",clientName,[finaldic objectForKey:@"last_name"]];
     }
+        
     cell.emailIdLabel.text=email;
     cell.phoneNumberLabel.text=phone;
-    cell.clientNameLabel.text=[NSString stringWithFormat:@"%@ %@",clientName,[finaldic objectForKey:@"last_name"]];
+    cell.clientNameLabel.text=clientName;
     [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         return cell;
     }
@@ -263,34 +269,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
-    NSString *isActive=[finaldic objectForKey:@"active"];
-    NSString *email=[finaldic objectForKey:@"email"];
-    NSString *phone=[finaldic objectForKey:@"phone_number"];
-    NSString *clientName=[finaldic objectForKey:@"first_name"];
     NSString *client_id=[finaldic objectForKey:@"id"];
-    if ([email isEqualToString:@""]) {
-        email=@"Not Available";
-    }
-    if ([phone isEqualToString:@""]) {
-        phone=@"Not Available";
-    }
-    if ([clientName isEqualToString:@""]) {
-        clientName=@"Not Available";
-    }
     
     ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
-    td.imageURL=[finaldic objectForKey:@"profile_pic"];
-    //[td setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-    
-    if ([isActive isEqualToString:@"1"]) {
-        isActive=@"ACTIVE";
-    }else isActive=@"INACTIVE";
-    
-    td.clientId=client_id;
-    td.isClientActive=isActive;
-    td.emailID=email;
-    td.phone=phone;
-    td.clientName=[NSString stringWithFormat:@"%@ %@",clientName,[finaldic objectForKey:@"last_name"]];
+    globalVariables.iD=@([client_id intValue]);
+
+//    td.clientName=[NSString stringWithFormat:@"%@ %@",clientName,[finaldic objectForKey:@"last_name"]];
     
     [self.navigationController pushViewController:td animated:YES];
 }
@@ -301,7 +285,7 @@
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSAttributedString *refreshing = [[NSAttributedString alloc] initWithString:@"Refreshing" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSParagraphStyleAttributeName : paragraphStyle,NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    NSAttributedString *refreshing = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Refreshing",nil) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSParagraphStyleAttributeName : paragraphStyle,NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     refresh=[[UIRefreshControl alloc] init];
     refresh.tintColor=[UIColor whiteColor];

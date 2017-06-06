@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,9 +23,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_pic" translatesAutoresizingMaskIntoConstraints="NO" id="Tao-A8-ngO">
-                                <rect key="frame" x="16" y="11" width="57" height="58"/>
+                                <rect key="frame" x="16" y="11.5" width="57" height="57"/>
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="8eE-Eq-hya"/>
                                     <constraint firstAttribute="width" constant="57" id="dvj-9c-wiB"/>
                                 </constraints>
                             </imageView>
@@ -74,7 +75,6 @@
                             <constraint firstItem="lsn-fo-koh" firstAttribute="leading" secondItem="Tao-A8-ngO" secondAttribute="trailing" constant="8" symbolic="YES" id="Use-rg-uV9"/>
                             <constraint firstItem="8wC-5v-j9h" firstAttribute="centerY" secondItem="hH2-UJ-QXg" secondAttribute="centerY" id="VJQ-s3-1or"/>
                             <constraint firstItem="8wC-5v-j9h" firstAttribute="top" secondItem="x83-b6-fXu" secondAttribute="bottom" constant="1" id="itb-GX-82n"/>
-                            <constraint firstItem="Tao-A8-ngO" firstAttribute="top" secondItem="n51-Gz-KNn" secondAttribute="top" constant="11" id="oWw-FY-lGD"/>
                             <constraint firstItem="hH2-UJ-QXg" firstAttribute="bottom" secondItem="n51-Gz-KNn" secondAttribute="bottomMargin" id="vZj-if-R4v"/>
                             <constraint firstItem="YEh-9k-nRs" firstAttribute="top" secondItem="lsn-fo-koh" secondAttribute="bottom" constant="6" id="ybz-QH-n15"/>
                         </constraints>

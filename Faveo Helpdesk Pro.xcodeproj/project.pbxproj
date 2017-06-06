@@ -9,11 +9,15 @@
 /* Begin PBXBuildFile section */
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
 		D9040CC31E12A0CF005E1B37 /* empty_data_set.png in Resources */ = {isa = PBXBuildFile; fileRef = D9040CC21E12A0CF005E1B37 /* empty_data_set.png */; };
+		D9532C131E9CE9090063B318 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9532C151E9CE9090063B318 /* Localizable.strings */; };
 		D97B13791E080BA8007F46DA /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B13781E080BA8007F46DA /* UserNotifications.framework */; };
 		D97B137B1E080BC3007F46DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137A1E080BC3007F46DA /* UIKit.framework */; };
 		D97B137D1E080BCA007F46DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137C1E080BCA007F46DA /* SystemConfiguration.framework */; };
 		D97B137F1E080BDB007F46DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137E1E080BDB007F46DA /* CoreGraphics.framework */; };
 		D97B13811E080BE3007F46DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B13801E080BE3007F46DA /* Foundation.framework */; };
+		D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */ = {isa = PBXBuildFile; fileRef = D985BAC71EDC5FAA001EB153 /* Dat.m */; };
+		D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */; };
+		D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */; };
 		D9B79EFF1E0E971100EFE2E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9B79EFE1E0E971100EFE2E6 /* GoogleService-Info.plist */; };
 		D9DBD3461E07ACFC00219F93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3451E07ACFC00219F93 /* main.m */; };
 		D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3481E07ACFC00219F93 /* AppDelegate.m */; };
@@ -33,11 +37,9 @@
 		D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F6C1E07C2F00001115F /* ClientTicketTableViewCell.m */; };
 		D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */; };
 		D9EB9F7D1E07C2F00001115F /* ConversationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F6F1E07C2F00001115F /* ConversationTableViewCell.m */; };
-		D9EB9F7E1E07C2F00001115F /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F701E07C2F00001115F /* ConversationTableViewCell.xib */; };
 		D9EB9F7F1E07C2F00001115F /* OpenCloseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F721E07C2F00001115F /* OpenCloseTableViewCell.m */; };
 		D9EB9F801E07C2F00001115F /* OpenCloseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F731E07C2F00001115F /* OpenCloseTableViewCell.xib */; };
 		D9EB9F811E07C2F00001115F /* LoadingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F751E07C2F00001115F /* LoadingTableViewCell.m */; };
-		D9EB9F821E07C2F00001115F /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F761E07C2F00001115F /* LoadingTableViewCell.xib */; };
 		D9EB9F9F1E07C3270001115F /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F841E07C3270001115F /* LeftMenuViewController.m */; };
 		D9EB9FA01E07C3270001115F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F861E07C3270001115F /* LoginViewController.m */; };
 		D9EB9FA11E07C3270001115F /* UnassignedTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F881E07C3270001115F /* UnassignedTicketsViewController.m */; };
@@ -59,6 +61,7 @@
 		D9EB9FC01E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9FB91E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.m */; };
 		D9EB9FC11E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9FBB1E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m */; };
 		D9EB9FC51E07C4610001115F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9FC41E07C4610001115F /* Reachability.m */; };
+		D9F954FB1E617BE500DA9B30 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = D9F954FA1E617BE500DA9B30 /* countries.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,13 +86,42 @@
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9040CC21E12A0CF005E1B37 /* empty_data_set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty_data_set.png; path = ../../../../Downloads/empty_data_set.png; sourceTree = "<group>"; };
+		D93D3D4F1EA0BACD00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
+		D93D3D501EA0BACE00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
+		D93D3D511EA0BACE00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
+		D93D3D531EA0BAF500C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D93D3D541EA0BB1000C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
+		D93D3D551EA0BB1000C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
+		D93D3D561EA0BB1000C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		D93D3D581EA0BB1800C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D9532C141E9CE9090063B318 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D9532C161E9CE90C0063B318 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D9532C171E9CE90E0063B318 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D9532C181E9CE90F0063B318 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D9532C191E9CE9110063B318 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Faveo Helpdesk Pro.entitlements"; sourceTree = "<group>"; };
 		D97B13781E080BA8007F46DA /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D97B137A1E080BC3007F46DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D97B137C1E080BCA007F46DA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D97B137E1E080BDB007F46DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D97B13801E080BE3007F46DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D985BAC61EDC5FAA001EB153 /* Dat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dat.h; sourceTree = "<group>"; };
+		D985BAC71EDC5FAA001EB153 /* Dat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dat.m; sourceTree = "<group>"; };
+		D9B6E2D71E9B8B1600AAB724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LoadingTableViewCell.xib; sourceTree = "<group>"; };
+		D9B6E2DA1E9B8B1A00AAB724 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
+		D9B6E2DC1E9B8B1C00AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
+		D9B6E2DE1E9B8B1D00AAB724 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
+		D9B6E2E01E9B8B2100AAB724 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
+		D9B6E2E81E9B8B9400AAB724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ConversationTableViewCell.xib; sourceTree = "<group>"; };
+		D9B6E2EB1E9B8B9600AAB724 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
+		D9B6E2ED1E9B8B9700AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
+		D9B6E2EF1E9B8B9900AAB724 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
+		D9B6E2F11E9B8B9B00AAB724 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9B79EFE1E0E971100EFE2E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D9D66BD41E97B14C000214FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		D9D66BD81E97CD0F000214FF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		D9D66BDA1E97CD1B000214FF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		D9D66BDC1E97CD26000214FF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
 		D9DBD3411E07ACFC00219F93 /* Faveo Helpdesk Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Faveo Helpdesk Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9DBD3451E07ACFC00219F93 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D9DBD3471E07ACFC00219F93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -124,13 +156,11 @@
 		D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientTicketTableViewCell.xib; sourceTree = "<group>"; };
 		D9EB9F6E1E07C2F00001115F /* ConversationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationTableViewCell.h; sourceTree = "<group>"; };
 		D9EB9F6F1E07C2F00001115F /* ConversationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationTableViewCell.m; sourceTree = "<group>"; };
-		D9EB9F701E07C2F00001115F /* ConversationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationTableViewCell.xib; sourceTree = "<group>"; };
 		D9EB9F711E07C2F00001115F /* OpenCloseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCloseTableViewCell.h; sourceTree = "<group>"; };
 		D9EB9F721E07C2F00001115F /* OpenCloseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenCloseTableViewCell.m; sourceTree = "<group>"; };
 		D9EB9F731E07C2F00001115F /* OpenCloseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenCloseTableViewCell.xib; sourceTree = "<group>"; };
 		D9EB9F741E07C2F00001115F /* LoadingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingTableViewCell.h; sourceTree = "<group>"; };
 		D9EB9F751E07C2F00001115F /* LoadingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingTableViewCell.m; sourceTree = "<group>"; };
-		D9EB9F761E07C2F00001115F /* LoadingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingTableViewCell.xib; sourceTree = "<group>"; };
 		D9EB9F831E07C3270001115F /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
 		D9EB9F841E07C3270001115F /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
 		D9EB9F851E07C3270001115F /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -174,6 +204,7 @@
 		D9EB9FBB1E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorSlideAndFade.m; sourceTree = "<group>"; };
 		D9EB9FC31E07C4610001115F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		D9EB9FC41E07C4610001115F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		D9F954FA1E617BE500DA9B30 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +295,7 @@
 		D9DBD3441E07ACFC00219F93 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D9F954FA1E617BE500DA9B30 /* countries.json */,
 				D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */,
 				D9040CC21E12A0CF005E1B37 /* empty_data_set.png */,
 				D9B79EFE1E0E971100EFE2E6 /* GoogleService-Info.plist */,
@@ -272,6 +304,7 @@
 				D9DBD3521E07ACFC00219F93 /* LaunchScreen.storyboard */,
 				D9DBD3551E07ACFC00219F93 /* Info.plist */,
 				D9DBD3451E07ACFC00219F93 /* main.m */,
+				D9532C151E9CE9090063B318 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -321,13 +354,13 @@
 				D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */,
 				D9EB9F6E1E07C2F00001115F /* ConversationTableViewCell.h */,
 				D9EB9F6F1E07C2F00001115F /* ConversationTableViewCell.m */,
-				D9EB9F701E07C2F00001115F /* ConversationTableViewCell.xib */,
+				D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */,
 				D9EB9F711E07C2F00001115F /* OpenCloseTableViewCell.h */,
 				D9EB9F721E07C2F00001115F /* OpenCloseTableViewCell.m */,
 				D9EB9F731E07C2F00001115F /* OpenCloseTableViewCell.xib */,
 				D9EB9F741E07C2F00001115F /* LoadingTableViewCell.h */,
 				D9EB9F751E07C2F00001115F /* LoadingTableViewCell.m */,
-				D9EB9F761E07C2F00001115F /* LoadingTableViewCell.xib */,
+				D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -374,6 +407,8 @@
 				D9EB9F601E07C2D00001115F /* Data.m */,
 				D9EB9F611E07C2D00001115F /* GlobalVariables.h */,
 				D9EB9F621E07C2D00001115F /* GlobalVariables.m */,
+				D985BAC61EDC5FAA001EB153 /* Dat.h */,
+				D985BAC71EDC5FAA001EB153 /* Dat.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -457,7 +492,6 @@
 				D9DBD33F1E07ACFC00219F93 /* Resources */,
 				E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */,
 				51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */,
-				D97B13761E07EF79007F46DA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -531,8 +565,7 @@
 					};
 					D9DBD3641E07ACFC00219F93 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 8VY8B59STG;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = D9DBD3401E07ACFC00219F93;
 					};
 				};
@@ -544,6 +577,12 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
+				fr,
+				es,
+				it,
+				nl,
+				ru,
 			);
 			mainGroup = D9DBD3381E07ACFC00219F93;
 			productRefGroup = D9DBD3421E07ACFC00219F93 /* Products */;
@@ -565,9 +604,11 @@
 				D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */,
 				D9EB9F7A1E07C2F00001115F /* ClientListTableViewCell.xib in Resources */,
 				D9040CC31E12A0CF005E1B37 /* empty_data_set.png in Resources */,
-				D9EB9F7E1E07C2F00001115F /* ConversationTableViewCell.xib in Resources */,
-				D9EB9F821E07C2F00001115F /* LoadingTableViewCell.xib in Resources */,
+				D9532C131E9CE9090063B318 /* Localizable.strings in Resources */,
+				D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */,
+				D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */,
 				D9DBD3511E07ACFC00219F93 /* Assets.xcassets in Resources */,
+				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
 				D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */,
 				D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */,
 				D9B79EFF1E0E971100EFE2E6 /* GoogleService-Info.plist in Resources */,
@@ -623,19 +664,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D97B13761E07EF79007F46DA /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 3d31c3fca25cb228d17bfa05856d933d97e90db1 67564a3dc39ee26711efe06322fa00b99e69a63e26e5d755afe7339b6f22ceb1";
-		};
 		E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -665,6 +693,7 @@
 				D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */,
 				D9EB9F641E07C2D00001115F /* GlobalVariables.m in Sources */,
 				D9EB9FA71E07C3270001115F /* InboxViewController.m in Sources */,
+				D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */,
 				D9EB9F811E07C2F00001115F /* LoadingTableViewCell.m in Sources */,
 				D9EB9FAA1E07C3270001115F /* ClientDetailViewController.m in Sources */,
 				D9EB9FA31E07C3270001115F /* TrashTicketsViewController.m in Sources */,
@@ -726,10 +755,58 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D9532C151E9CE9090063B318 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9532C141E9CE9090063B318 /* Base */,
+				D9532C161E9CE90C0063B318 /* de */,
+				D9532C171E9CE90E0063B318 /* fr */,
+				D9532C181E9CE90F0063B318 /* es */,
+				D9532C191E9CE9110063B318 /* it */,
+				D93D3D531EA0BAF500C1EE7E /* nl */,
+				D93D3D581EA0BB1800C1EE7E /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9B6E2D71E9B8B1600AAB724 /* Base */,
+				D9B6E2DA1E9B8B1A00AAB724 /* de */,
+				D9B6E2DC1E9B8B1C00AAB724 /* fr */,
+				D9B6E2DE1E9B8B1D00AAB724 /* es */,
+				D9B6E2E01E9B8B2100AAB724 /* it */,
+				D93D3D501EA0BACE00C1EE7E /* nl */,
+				D93D3D551EA0BB1000C1EE7E /* ru */,
+			);
+			name = LoadingTableViewCell.xib;
+			sourceTree = "<group>";
+		};
+		D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9B6E2E81E9B8B9400AAB724 /* Base */,
+				D9B6E2EB1E9B8B9600AAB724 /* de */,
+				D9B6E2ED1E9B8B9700AAB724 /* fr */,
+				D9B6E2EF1E9B8B9900AAB724 /* es */,
+				D9B6E2F11E9B8B9B00AAB724 /* it */,
+				D93D3D4F1EA0BACD00C1EE7E /* nl */,
+				D93D3D541EA0BB1000C1EE7E /* ru */,
+			);
+			name = ConversationTableViewCell.xib;
+			sourceTree = "<group>";
+		};
 		D9DBD34D1E07ACFC00219F93 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D9DBD34E1E07ACFC00219F93 /* Base */,
+				D9D66BD41E97B14C000214FF /* de */,
+				D9D66BD81E97CD0F000214FF /* fr */,
+				D9D66BDA1E97CD1B000214FF /* es */,
+				D9D66BDC1E97CD26000214FF /* it */,
+				D93D3D511EA0BACE00C1EE7E /* nl */,
+				D93D3D561EA0BB1000C1EE7E /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -749,6 +826,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -787,7 +865,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -798,6 +876,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -830,7 +909,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -844,14 +923,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Faveo Helpdesk Pro/Faveo Helpdesk Pro.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: narendra baratam (BCU77U4N5P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c97427a4-2a61-4c88-921c-42aa728f1e55";
-				PROVISIONING_PROFILE_SPECIFIER = "Faveo Helpdesk Pro Dev";
+				PROVISIONING_PROFILE = "008cee0d-eb74-49d5-bcb0-5a20d3207d46";
+				PROVISIONING_PROFILE_SPECIFIER = "Faveo Helpdesk Pro Dev All Phones";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -863,7 +943,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Faveo Helpdesk Pro/Faveo Helpdesk Pro.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ladybird Web Solution Private Limited (8VY8B59STG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ladybird Web Solution Private Limited (8VY8B59STG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -905,11 +985,12 @@
 		D9DBD3751E07ACFC00219F93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 8VY8B59STG;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Faveo Helpdesk ProUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ladybirdwebsolutions.Faveo-Helpdesk-ProUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_TARGET_NAME = "Faveo Helpdesk Pro";
 			};
 			name = Debug;
@@ -917,11 +998,12 @@
 		D9DBD3761E07ACFC00219F93 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 8VY8B59STG;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Faveo Helpdesk ProUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ladybirdwebsolutions.Faveo-Helpdesk-ProUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_TARGET_NAME = "Faveo Helpdesk Pro";
 			};
 			name = Release;

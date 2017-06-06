@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TicketDetailViewController : UIViewController
+@interface TicketDetailViewController : UIViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 - (IBAction)indexChanged:(id)sender;

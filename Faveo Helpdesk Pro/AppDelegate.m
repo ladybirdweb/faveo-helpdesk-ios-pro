@@ -13,8 +13,8 @@
 #import "AppConstanst.h"
 #import "GlobalVariables.h"
 #import "TicketDetailViewController.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+#import "MyWebservices.h"
+#import "ClientDetailViewController.h"
 
 @import Firebase;
 @import FirebaseInstanceID;
@@ -51,7 +51,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [Fabric with:@[[Crashlytics class]]];
+    //[Fabric with:@[[Crashlytics class]]];
     
     //firebase FCM
     // Register for remote notifications. This shows a permission dialog on first run, to
@@ -99,6 +99,11 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     // [START configure_firebase]
     [FIRApp configure];
     // [END configure_firebase]
+    
+    // [START set_messaging_delegate]
+    //[FIRMessaging messaging].delegate = self;
+    // [END set_messaging_delegate]
+    
     // Add observer for InstanceID token refresh callback.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tokenRefreshNotification:)
                                                  name:kFIRInstanceIDTokenRefreshNotification object:nil];
@@ -186,7 +191,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 
     NSString *token = [[deviceToken.description componentsSeparatedByCharactersInSet:[[NSCharacterSet alphanumericCharacterSet]invertedSet]]componentsJoinedByString:@""];
     NSLog(@"deviceToken : %@",deviceToken);
-    NSLog(@"token : %@",token);
+    NSLog(@"final token : %@",[[FIRInstanceID instanceID] token]);
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     [userDefaults setObject:token forKey:@"deviceToken"];
     [userDefaults synchronize];
@@ -206,16 +211,16 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     }
     
     // Print full message.
-    NSLog(@"userInfo  %@", userInfo);
+    NSLog(@"userInfo888  %@", userInfo);
     
-//    ***imp***
+////    ***imp***
 //        [self application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:^(UIBackgroundFetchResult result){
 //            TicketDetailViewController *td=[mainStoryboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
 //            // NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
 //            GlobalVariables *globalVariables=[GlobalVariables sharedInstance];
 //            globalVariables.iD=[userInfo objectForKey:@"id"];
-//            globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
-//            globalVariables.title=[userInfo objectForKey:@"title"];
+//            //globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
+//            //globalVariables.title=[userInfo objectForKey:@"title"];
 //    
 //            [(UINavigationController *)self.window.rootViewController pushViewController:td animated:YES];
 //    
@@ -245,16 +250,34 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     }
     
     // Print full message.
-    NSLog(@"%@", userInfo);
+    NSLog(@"data messages555 %@", userInfo);
+    
+    NSLog(@"%@",userInfo);
     completionHandler();
     
     TicketDetailViewController *td=[mainStoryboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
     GlobalVariables *globalVariables=[GlobalVariables sharedInstance];
-    globalVariables.iD=[userInfo objectForKey:@"ticket_id"];
-    globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
-    globalVariables.title=[userInfo objectForKey:@"ticket_subject"];
+   
+    NSString * scenario=[userInfo objectForKey:@"scenario"];
+    if ([scenario isEqualToString:@"tickets"])  {
+         globalVariables.iD=[userInfo objectForKey:@"id"];
+        globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
+         [(UINavigationController *)self.window.rootViewController pushViewController:td animated:YES];
+    }else {
     
-    [(UINavigationController *)self.window.rootViewController pushViewController:td animated:YES];
+        
+        ClientDetailViewController *cd=[mainStoryboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
+        NSError *error;
+        NSData *data = [[userInfo objectForKey:@"requester"] dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *requester = [NSJSONSerialization JSONObjectWithData:data
+                                                                     options:kNilOptions
+                                                                       error:&error];
+      
+        globalVariables.iD=[requester objectForKey:@"id"];
+        
+         [(UINavigationController *)self.window.rootViewController pushViewController:cd animated:YES];
+    }
+
 
 }
 #endif
@@ -282,7 +305,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     }
     
     // Print full message.
-    NSLog(@"%@", userInfo);
+    NSLog(@"userinfo %@", userInfo);
     
     completionHandler(UIBackgroundFetchResultNewData);
 }
@@ -292,7 +315,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 // Receive data message on iOS 10 devices while app is in the foreground.
 - (void)applicationReceivedRemoteMessage:(FIRMessagingRemoteMessage *)remoteMessage {
     // Print full message
-    NSLog(@"%@", remoteMessage.appData);
+    NSLog(@"remote messages123%@", remoteMessage.appData);
 }
 #endif
 // [END ios_10_data_message_handling]
@@ -302,15 +325,53 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     // Note that this callback will be fired everytime a new token is generated, including the first
     // time. So if you need to retrieve the token as soon as it is available this is where that
     // should be done.
-    NSString *refreshedToken = [[FIRInstanceID instanceID] token];
+    NSString *refreshedToken =  [[FIRInstanceID instanceID] token];
     NSLog(@"InstanceID token: %@", refreshedToken);
-    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:refreshedToken forKey:@"FCM_TOKEN"];
+    [userDefaults synchronize];
     // Connect to FCM since connection may have failed when attempted before having a token.
     [self connectToFcm];
-    
+    [self sendDeviceToken:refreshedToken];
     // TODO: If necessary send token to application server.
 }
 // [END refresh_token]
+
+- (void)messaging:(nonnull FIRMessaging *)messaging didRefreshRegistrationToken:(nonnull NSString *)fcmToken {
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:fcmToken forKey:@"FCM_TOKEN"];
+    [userDefaults synchronize];
+    // Connect to FCM since connection may have failed when attempted before having a token.
+   
+    [self sendDeviceToken:fcmToken];
+
+}
+
+-(void)sendDeviceToken:(NSString*)refreshedToken{
+    
+    NSLog(@"refreshed token  %@",refreshedToken);
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSString *url=[NSString stringWithFormat:@"%@fcmtoken?user_id=%@&fcm_token=%@&os=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"user_id"],[[FIRInstanceID instanceID] token],@"ios"];
+    MyWebservices *webservices=[MyWebservices sharedInstance];
+    [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
+        if (error || [msg containsString:@"Error"]) {
+            if (msg) {
+                
+                // [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
+            }else if(error)  {
+                //                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
+            }
+            return ;
+        }
+        if (json) {
+            
+            NSLog(@"Thread-sendAPNS-token-json-%@",json);
+        }
+        
+    }];
+}
 
 // [START connect_to_fcm]
 - (void)connectToFcm {
@@ -372,7 +433,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 - (void)showProgressView
 {
     MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:self.window animated:YES];
-    HUD.label.text = @"Please wait";
+    HUD.label.text = NSLocalizedString(@"Please wait",nil);
     HUD.dimBackground = YES;
     self.progressView = HUD;
 }
@@ -397,6 +458,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    NSLog(@"");
 }
 
 
