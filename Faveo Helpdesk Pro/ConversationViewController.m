@@ -123,7 +123,7 @@
     if ([mutableArray count]==0)
     {
         self.noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        self.noDataLabel.text             = NSLocalizedString(@"Empty!!!",nil);
+        //self.noDataLabel.text             = NSLocalizedString(@"Empty!!!",nil);
         self.noDataLabel.textColor        = [UIColor blackColor];
         self.noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = self.noDataLabel;
@@ -180,7 +180,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
-    [self showWebview:[finaldic objectForKey:@"title"] body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];
+    [self showWebview:@"" body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];
 }
 
 /*

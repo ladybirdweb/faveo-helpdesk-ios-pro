@@ -25,6 +25,8 @@
     UITextField *textFieldCc;
     UITextView *textViewInternalNote;
     UITextView *textViewReply;
+    UILabel *errorMessageReply;
+     UILabel *errorMessageNote;
     GlobalVariables *globalVariables;
 }
 
@@ -146,13 +148,20 @@
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
     NSAttributedString *title = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Internal Note",nil) attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:24], NSParagraphStyleAttributeName : paragraphStyle}];
+    
+    NSMutableAttributedString *lineTwo = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Message*",nil) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSForegroundColorAttributeName : [UIColor hx_colorWithHexRGBAString:@"#00aeef"]}];
+    [lineTwo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(7,1)];
     //    NSAttributedString *lineOne = [[NSAttributedString alloc] initWithString:@"Message" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSParagraphStyleAttributeName : paragraphStyle}];
     //    NSAttributedString *lineTwo = [[NSAttributedString alloc] initWithString:@"Message" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSForegroundColorAttributeName : [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0], NSParagraphStyleAttributeName : paragraphStyle}];
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.numberOfLines = 0;
     titleLabel.attributedText = title;
-    
+    errorMessageNote=[[UILabel alloc] initWithFrame:CGRectMake(10, 135, 250, 20)];
+    errorMessageNote.textColor=[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR];
+    errorMessageNote.text=@"Field is mandatory.";
+    [errorMessageNote setFont:[UIFont systemFontOfSize:12]];
+    errorMessageNote.hidden=YES;
     //    UILabel *lineOneLabel = [[UILabel alloc] init];
     //    lineOneLabel.numberOfLines = 0;
     //    lineOneLabel.attributedText = lineOne;
@@ -161,14 +170,14 @@
     
     UILabel *lineTwoLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 100, 20)];
     //    lineTwoLabel.numberOfLines = 0;
-    lineTwoLabel.textColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
-    lineTwoLabel.text = NSLocalizedString(@"Message",nil);
+    //lineTwoLabel.textColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    lineTwoLabel.attributedText = lineTwo;
     
     
-    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 270, 140)];
+    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, 140)];
     //customView.backgroundColor = [UIColor lightGrayColor];
     
-    textViewInternalNote = [[UITextView alloc] initWithFrame:CGRectMake(10, 30, 250, 100)];
+    textViewInternalNote = [[UITextView alloc] initWithFrame:CGRectMake(10, 35, 250, 100)];
     
     [ textViewInternalNote setReturnKeyType:UIReturnKeyDone];
     textViewInternalNote.layer.cornerRadius=4;
@@ -177,6 +186,7 @@
     
     [customView addSubview: textViewInternalNote];
     [customView addSubview:lineTwoLabel];
+    [customView addSubview:errorMessageNote];
     
     CNPPopupButton *button = [[CNPPopupButton alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -185,12 +195,13 @@
     button.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     button.layer.cornerRadius = 4;
     button.selectionHandler = ^(CNPPopupButton *button){
-        if ( textViewInternalNote.text.length > 0 || textViewInternalNote.text != nil || ![textViewInternalNote.text isEqual:@""]||[textViewInternalNote hasText]) {
+        if ( textViewInternalNote.text.length > 0 && textViewInternalNote.text != nil && ![textViewInternalNote.text isEqual:@""]) {
+            errorMessageNote.hidden=YES;
             [self postInternalNote];
             [self.popupController dismissPopupControllerAnimated:YES];
             NSLog(@"Message of InternalNote: %@",  textViewInternalNote.text);
         }else {
-           
+           errorMessageNote.hidden=NO;
         }
     };
     
@@ -237,6 +248,11 @@
     textFieldCc.layer.borderWidth=1.0F;
     textFieldCc.layer.borderColor=[[UIColor lightGrayColor] CGColor];
     
+    errorMessageReply=[[UILabel alloc] initWithFrame:CGRectMake(10, 130, 250, 20)];
+     errorMessageReply.textColor=[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR];
+    errorMessageReply.text=@"Field is mandatory.";
+    [errorMessageReply setFont:[UIFont systemFontOfSize:12]];
+     errorMessageReply.hidden=YES;
     
     UILabel *lineTwoLabe2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 100, 20)];
     //    lineTwoLabel.numberOfLines = 0;
@@ -254,6 +270,7 @@
     //[customView addSubview:textFieldCc];
    // [customView addSubview:lineTwoLabel];
     [customView addSubview:lineTwoLabe2];
+    [customView addSubview:errorMessageReply];
     
     
     CNPPopupButton *button = [[CNPPopupButton alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
@@ -265,13 +282,13 @@
     
     button.selectionHandler = ^(CNPPopupButton *button){
         
-        if (textViewReply.text.length > 0 || textViewReply.text != nil || ![textViewReply.text isEqual:@""]) {
+        if (textViewReply.text.length > 0 && textViewReply.text != nil && ![textViewReply.text isEqual:@""]) {
             [self postReply];
-            
+            errorMessageReply.hidden=YES;
             [self.popupController dismissPopupControllerAnimated:YES];
             NSLog(@"Reply Message: %@, Cc: %@", textViewReply.text,textFieldCc.text);
         }else {
-           
+           errorMessageReply.hidden=NO;
         }
     };
     
