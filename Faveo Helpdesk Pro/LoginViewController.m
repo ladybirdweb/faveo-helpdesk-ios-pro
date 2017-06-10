@@ -284,7 +284,8 @@
                         if (statusCode == 401) {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [utils showAlertWithMessage:@"Wrong Credentials!" sendViewController:self];
+                            //[utils showAlertWithMessage:@"Wrong Credentials!" sendViewController:self];
+                            [utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                             return;
                         }else{
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);

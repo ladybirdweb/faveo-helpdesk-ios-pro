@@ -1388,7 +1388,7 @@
                                 </constraints>
                                 <segments>
                                     <segment title="Conversation"/>
-                                    <segment title="Detail"/>
+                                    <segment title="Details"/>
                                 </segments>
                                 <connections>
                                     <action selector="indexChanged:" destination="9y6-ek-9MZ" eventType="valueChanged" id="Rzj-DQ-yZ0"/>

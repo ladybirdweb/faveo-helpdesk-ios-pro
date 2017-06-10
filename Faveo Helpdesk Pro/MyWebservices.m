@@ -51,7 +51,7 @@
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setTimeoutInterval:45.0];
     
-    [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:param options:nil error:nil]];
+    [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:param options:kNilOptions error:nil]];
     [request setHTTPMethod:@"POST"];
     
     //    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] ];
@@ -80,7 +80,7 @@
             if ([replyStr containsString:@"token"]) {
                 
                 NSError *error=nil;
-                NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:nil error:&error];
+                NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                 if (error) {
                     return;
                 }
@@ -187,7 +187,7 @@
             
             NSError *jsonerror = nil;
             
-            id responseData =  [NSJSONSerialization JSONObjectWithData:data options:nil error:&jsonerror];
+            id responseData =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonerror];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 block(jsonerror,responseData,nil);
