@@ -26,6 +26,7 @@
     transition.subtype =kCATransitionFromRight;
     // transition.delegate = self;
     [views.layer addAnimation:transition forKey:nil];
+    ///Hi
 }
 
 -(void)viewSlideInFromLeftToRight:(UIView *)views
