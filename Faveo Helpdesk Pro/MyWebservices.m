@@ -304,4 +304,17 @@
     
 }
 
+-(void)getNextPageURL:(NSString*)url user_id:(NSString*)uid callbackHandler:(callbackHandler)block{
+    _userDefaults=[NSUserDefaults standardUserDefaults];
+    NSString *urll=[NSString stringWithFormat:@"%@&api_key=%@&ip=%@&token=%@&user_id=%@",url,API_KEY,IP,[_userDefaults objectForKey:@"token"],uid];
+    
+    [self httpResponseGET:urll parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(error,json,msg);
+        });
+        
+    }];
+    
+}
+
 @end

@@ -195,6 +195,7 @@
     button.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     button.layer.cornerRadius = 4;
     button.selectionHandler = ^(CNPPopupButton *button){
+         textViewInternalNote.text=[self removeEndSpaceFrom:textViewReply.text];
         if ( textViewInternalNote.text.length > 0 && textViewInternalNote.text != nil && ![textViewInternalNote.text isEqual:@""]) {
             errorMessageNote.hidden=YES;
             [self postInternalNote];
@@ -281,6 +282,8 @@
     button.layer.cornerRadius = 4;
     
     button.selectionHandler = ^(CNPPopupButton *button){
+        
+        textViewReply.text=[self removeEndSpaceFrom:textViewReply.text];
         
         if (textViewReply.text.length > 0 && textViewReply.text != nil && ![textViewReply.text isEqual:@""]) {
             [self postReply];
@@ -419,22 +422,37 @@
     }
 }
 
+- (NSString *)removeEndSpaceFrom:(NSString *)strtoremove{
+    NSUInteger location = 0;
+    unichar charBuffer[[strtoremove length]];
+    [strtoremove getCharacters:charBuffer];
+    int i = 0;
+    for(i = [strtoremove length]; i >0; i--) {
+        NSCharacterSet* charSet = [NSCharacterSet whitespaceCharacterSet];
+        if(![charSet characterIsMember:charBuffer[i - 1]]) {
+            break;
+        }
+    }
+    return [strtoremove substringWithRange:NSMakeRange(location, i  - location)];
+}
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)aTextField
 {
     [aTextField resignFirstResponder];
     return YES;
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)aTextField
-{
-    return [self validate:aTextField.text];
-}
-
-- (BOOL) validate: (NSString *) candidate {
-    NSString *emailRegex = @"[a-zA-Z]*";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    
-    return [emailTest evaluateWithObject:candidate];
-}
+//- (BOOL)textFieldShouldEndEditing:(UITextField *)aTextField
+//{
+//    return [self validate:aTextField.text];
+//}
+//
+//- (BOOL) validate: (NSString *) candidate {
+//    NSString *emailRegex = @"[a-zA-Z]*";
+//    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+//    
+//    return [emailTest evaluateWithObject:candidate];
+//}
 
 @end

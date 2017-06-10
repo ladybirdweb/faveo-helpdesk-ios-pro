@@ -12,5 +12,4 @@ pod 'Firebase/Messaging'
 pod 'SDWebImage'
 pod 'RKDropdownAlert'
 pod 'XLForm', '~> 3.0'
-pod 'DZNEmptyDataSet'
 end

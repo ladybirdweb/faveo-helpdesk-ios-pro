@@ -30,5 +30,5 @@ typedef void (^ApiResponse)(NSError* , id);
 -(NSString*)refreshToken;
 
 -(void)getNextPageURL:(NSString*)url callbackHandler:(callbackHandler)block;
-
+-(void)getNextPageURL:(NSString*)url user_id:(NSString*)uid callbackHandler:(callbackHandler)block;
 @end

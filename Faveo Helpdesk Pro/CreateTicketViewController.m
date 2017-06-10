@@ -537,6 +537,12 @@
         
         if (textField==_firstNameTextField || textField==_lastNameTextField) {
             // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
+            
+            //        // in case you need to limit the max number of characters
+                    if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 15) {
+                        return NO;
+                    }
+            
             NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "];
             
             if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {

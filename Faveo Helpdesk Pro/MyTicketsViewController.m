@@ -210,12 +210,12 @@
     if (indexPath.row == [_mutableArray count] - 1 ) {
         NSLog(@"nextURL  %@",_nextPageUrl);
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
-            [self loadMore];
+            [self loadMore:[userDefaults objectForKey:@"user_id"]];
         }
     }
 }
 
--(void)loadMore{
+-(void)loadMore:(NSString*)user_id{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
@@ -225,7 +225,7 @@
     }else{
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
-        [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
+        [webservices getNextPageURL:_nextPageUrl user_id:user_id callbackHandler:^(NSError *error,id json,NSString* msg) {
             
             if (error || [msg containsString:@"Error"]) {
                 
@@ -242,7 +242,7 @@
             
             if ([msg isEqualToString:@"tokenRefreshed"]) {
                 
-                [self loadMore];
+                [self loadMore:[userDefaults objectForKey:@"user_id"]];
                 //NSLog(@"Thread--NO4-call-getInbox");
                 return;
             }

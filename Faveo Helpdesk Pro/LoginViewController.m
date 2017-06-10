@@ -246,7 +246,7 @@
 - (IBAction)btnLogin:(id)sender {
     
     if (self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0)
-        [utils showAlertWithMessage:NSLocalizedString(@"Please Enter Username & Password",nil) sendViewController:self];
+        [utils showAlertWithMessage:NSLocalizedString(@"Enter Valid Username & Password",nil) sendViewController:self];
     else {
         if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
         {
