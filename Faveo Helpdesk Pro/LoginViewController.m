@@ -246,7 +246,9 @@
 - (IBAction)btnLogin:(id)sender {
     
     if (self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0)
-        [utils showAlertWithMessage:NSLocalizedString(@"Enter Valid Username & Password",nil) sendViewController:self];
+        [utils showAlertWithMessage:NSLocalizedString(@"Please Enter Username & Password",nil) sendViewController:self];
+   
+
     else {
         if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
         {
@@ -284,8 +286,8 @@
                         if (statusCode == 401) {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            //[utils showAlertWithMessage:@"Wrong Credentials!" sendViewController:self];
-                            [utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
+                            [utils showAlertWithMessage:@"Wrong Credentials!" sendViewController:self];
+                           
                             return;
                         }else{
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);

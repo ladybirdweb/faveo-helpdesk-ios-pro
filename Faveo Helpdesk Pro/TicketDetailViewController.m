@@ -195,8 +195,13 @@
     button.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     button.layer.cornerRadius = 4;
     button.selectionHandler = ^(CNPPopupButton *button){
-         textViewInternalNote.text=[self removeEndSpaceFrom:textViewReply.text];
-        if ( textViewInternalNote.text.length > 0 && textViewInternalNote.text != nil && ![textViewInternalNote.text isEqual:@""]) {
+        NSString *rawString = [textViewInternalNote text];
+        NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        NSString *trimmed = [rawString stringByTrimmingCharactersInSet:whitespace];
+        if ([trimmed length] == 0) {
+             errorMessageNote.hidden=NO;
+            // Text was empty or only whitespace.
+        }else if ( textViewInternalNote.text.length > 0 && textViewInternalNote.text != nil && ![textViewInternalNote.text isEqual:@""]) {
             errorMessageNote.hidden=YES;
             [self postInternalNote];
             [self.popupController dismissPopupControllerAnimated:YES];
@@ -283,9 +288,13 @@
     
     button.selectionHandler = ^(CNPPopupButton *button){
         
-        textViewReply.text=[self removeEndSpaceFrom:textViewReply.text];
-        
-        if (textViewReply.text.length > 0 && textViewReply.text != nil && ![textViewReply.text isEqual:@""]) {
+        NSString *rawString = [textViewReply text];
+        NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        NSString *trimmed = [rawString stringByTrimmingCharactersInSet:whitespace];
+        if ([trimmed length] == 0) {
+            errorMessageReply.hidden=NO;
+            // Text was empty or only whitespace.
+        }else if (textViewReply.text.length > 0 && textViewReply.text != nil && ![textViewReply.text isEqual:@""]) {
             [self postReply];
             errorMessageReply.hidden=YES;
             [self.popupController dismissPopupControllerAnimated:YES];
@@ -422,19 +431,19 @@
     }
 }
 
-- (NSString *)removeEndSpaceFrom:(NSString *)strtoremove{
-    NSUInteger location = 0;
-    unichar charBuffer[[strtoremove length]];
-    [strtoremove getCharacters:charBuffer];
-    int i = 0;
-    for(i = [strtoremove length]; i >0; i--) {
-        NSCharacterSet* charSet = [NSCharacterSet whitespaceCharacterSet];
-        if(![charSet characterIsMember:charBuffer[i - 1]]) {
-            break;
-        }
-    }
-    return [strtoremove substringWithRange:NSMakeRange(location, i  - location)];
-}
+//- (NSString *)removeEndSpaceFrom:(NSString *)strtoremove{
+//    NSUInteger location = 0;
+//    unichar charBuffer[[strtoremove length]];
+//    [strtoremove getCharacters:charBuffer];
+//    int i = 0;
+//    for(i = [strtoremove length]; i >0; i--) {
+//        NSCharacterSet* charSet = [NSCharacterSet whitespaceCharacterSet];
+//        if(![charSet characterIsMember:charBuffer[i - 1]]) {
+//            break;
+//        }
+//    }
+//    return [strtoremove substringWithRange:NSMakeRange(location, i  - location)];
+//}
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)aTextField

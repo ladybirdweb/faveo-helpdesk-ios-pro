@@ -484,10 +484,11 @@
             return YES;
         }
         
-//        // in case you need to limit the max number of characters
-//        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 30) {
-//            return NO;
-//        }
+        ///NARENDRA-SUBJECT-100 char
+        // in case you need to limit the max number of characters
+        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 100) {
+            return NO;
+        }
         
         // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
         NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "];

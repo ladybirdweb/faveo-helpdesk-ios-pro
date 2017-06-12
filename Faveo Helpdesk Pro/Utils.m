@@ -67,11 +67,18 @@
 
 + (BOOL)validateUrl: (NSString *) url {
     
-    NSString *theURL =
-    @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", theURL];
+//    NSString *theURL =
+//    @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+//    
+//    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", theURL];
     
-    return [urlTest evaluateWithObject:url];
+    NSURL* urls = [NSURL URLWithString:url];
+    if (urls == nil) {
+       
+        NSLog(@"Nope %@ is not a proper URL", url);
+         return NO;
+    }
+   return YES;
 }
 
 -(void)showAlertWithMessage:(NSString*)message sendViewController:(UIViewController *)viewController
