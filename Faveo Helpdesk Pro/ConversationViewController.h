@@ -12,4 +12,6 @@
 
 @property (nonatomic,retain) UIActivityIndicatorView *activityIndicatorObject;
 
+
+
 @end

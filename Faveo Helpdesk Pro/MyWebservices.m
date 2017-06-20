@@ -110,6 +110,7 @@
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     
     [request addValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
@@ -121,13 +122,15 @@
     if ([parameter isKindOfClass:[NSString class]]) {
         postData = [((NSString *)parameter) dataUsingEncoding:NSUTF8StringEncoding];
     } else {
-        postData = [NSJSONSerialization dataWithJSONObject:parameter options:0 error:&err];
+       // postData = [NSJSONSerialization dataWithJSONObject:parameter options:0 error:&err];
+
+        postData = [NSJSONSerialization dataWithJSONObject:parameter options:kNilOptions error:&err];
     }
     [request setHTTPBody:postData];
     //[request setHTTPBody:[NSJSONSerialization dataWithJSONObject:parameter options:nil error:&err]];
     
     [request setHTTPMethod:@"POST"];
-    
+    //
     NSLog(@"Request body %@", [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding]);
     NSLog(@"Thread--httpResponsePOST--Request : %@", urlString);
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] ];

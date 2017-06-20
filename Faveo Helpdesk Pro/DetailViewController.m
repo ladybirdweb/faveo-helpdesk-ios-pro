@@ -446,7 +446,7 @@
         sla_id = [NSNumber numberWithInteger:1+[_slaPlansArray indexOfObject:_slaTextField.text]];
         source_id = [NSNumber numberWithInteger:1+[_sourceArray indexOfObject:_sourceTextField.text]];
         status_id = [NSNumber numberWithInteger:1+[_statusArray indexOfObject:_statusTextField.text]];
-        //change it later
+        
         sla_id=[NSNumber numberWithInt:1];
         [[AppDelegate sharedAppdelegate] showProgressView];
         

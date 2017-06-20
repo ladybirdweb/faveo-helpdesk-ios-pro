@@ -97,6 +97,8 @@
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
+            
+            
             if (error || [msg containsString:@"Error"]) {
                 [refresh endRefreshing];
                 [[AppDelegate sharedAppdelegate] hideProgressView];

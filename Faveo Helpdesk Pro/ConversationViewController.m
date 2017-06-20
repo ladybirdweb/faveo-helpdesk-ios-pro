@@ -32,6 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     NSLog(@"ConversationVC");
     _activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     _activityIndicatorObject.center =CGPointMake(self.view.frame.size.width/2,(self.view.frame.size.height/2)-100);
@@ -165,13 +166,74 @@
     if(i==1){
         [cell.internalNoteLabel setHidden:NO];
     }
-    NSString *fName=[finaldic objectForKey:@"first_name"];
-    if ([fName isEqualToString:@""]) {
+    
+    
+    
+  /*NSString *fName=[finaldic objectForKey:@"first_name"];
+    
+ 
+   if ([fName isEqualToString:@""]) {
         fName=NSLocalizedString(@"Not Available",nil);
-    }else{
+    }
+   else if (fName != [NSNull null])
+    {
+    
+        fName=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+    } */
+    
+   
+   
+   //NSString *system= @"System";
+   NSString *fName=[finaldic objectForKey:@"first_name"];
+   NSString *lName=[finaldic objectForKey:@"last_name"];
+    
+   NSString *userName=[finaldic objectForKey:@"user_name"];
+    
+    [Utils isEmpty:fName];
+   [Utils isEmpty:lName];
+   [Utils isEmpty:userName];
+   
+    
+        
+     if  ([Utils isEmpty:fName] && [Utils isEmpty:lName]){
+         if(![Utils isEmpty:userName]){
+        userName=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"user_name"]];
+             cell.clientNameLabel.text=userName;
+         }else cell.clientNameLabel.text=@"System";
+    }
+    else if ((![Utils isEmpty:fName] || ![Utils isEmpty:lName]) || (![Utils isEmpty:fName] && ![Utils isEmpty:lName]))
+    {
+        fName=[NSString stringWithFormat:@"%@ %@",fName,lName];
+        
+        cell.clientNameLabel.text=fName;
+        
+    }
+   
+   
+    
+    /*
+    if (fName == (id)[NSNull null] || fName.length == 0 ) {
+        fName=NSLocalizedString(@"Not Available",nil);
+     
+    }
+    
+    else if (fName != (id)[NSNull null])
+    {
         fName=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
     }
-    cell.clientNameLabel.text=fName;
+    else
+    {
+        fName=@"System";
+    }
+*/
+    
+    
+  // [Utils isEmpty:@"fName"];
+    
+   
+    //cell.clientNameLabel.text=fName;
+    
+
     [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
     
     return cell;
@@ -183,7 +245,7 @@
     [self showWebview:@"" body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];
 }
 
-/*
+/* paste there
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation

@@ -119,7 +119,7 @@
     //NSString *expression = @" ";
     
     //if([strUsername compare:expression])
-    if(strUsername.length >= 2){
+    if(strUsername.length >= 5){
         
         return YES;
     }
@@ -160,6 +160,14 @@
     return fg;
     
 }
+
++(BOOL)isEmpty:(NSString *)str{
+    if (str == nil || str == (id)[NSNull null] || [[NSString stringWithFormat:@"%@",str] length] == 0 || [[[NSString stringWithFormat:@"%@",str] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0){
+        
+        return YES;
+    }
+    return NO;
+} 
 
 
 

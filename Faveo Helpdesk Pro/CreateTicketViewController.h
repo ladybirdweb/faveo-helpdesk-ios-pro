@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SlideNavigationController.h"
 
-@interface CreateTicketViewController : UITableViewController<SlideNavigationControllerDelegate,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface CreateTicketViewController : UITableViewController<SlideNavigationControllerDelegate,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextView *textViewMsg;
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;

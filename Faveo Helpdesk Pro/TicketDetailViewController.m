@@ -54,6 +54,8 @@
        // Do any additional setup after loading the view.
 }
 
+
+
 - (void)addSubview:(UIView *)subView toView:(UIView*)parentView {
     [parentView addSubview:subView];
     
@@ -179,7 +181,7 @@
     
     textViewInternalNote = [[UITextView alloc] initWithFrame:CGRectMake(10, 35, 250, 100)];
     
-    [ textViewInternalNote setReturnKeyType:UIReturnKeyDone];
+    //[ textViewInternalNote setReturnKeyType:UIReturnKeyDone];
     textViewInternalNote.layer.cornerRadius=4;
      textViewInternalNote.layer.borderWidth=1.0F;
      textViewInternalNote.layer.borderColor=[[UIColor lightGrayColor] CGColor];
@@ -267,7 +269,7 @@
     
     textViewReply = [[UITextView alloc] initWithFrame:CGRectMake(10, 30, 250, 100)];
     //textViewReply.delegate=self;
-    [textViewReply setReturnKeyType:UIReturnKeyDone];
+   // [textViewReply setReturnKeyType:UIReturnKeyDone];
     textViewReply.layer.cornerRadius=4;
     textViewReply.layer.borderWidth=1.0F;
     textViewReply.layer.borderColor=[[UIColor grayColor] CGColor];
@@ -310,6 +312,8 @@
     self.popupController.delegate = self;
     [self.popupController presentPopupControllerAnimated:YES];
 }
+
+
 
 -(void)postInternalNote{
     

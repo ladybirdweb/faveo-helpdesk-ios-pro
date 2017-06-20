@@ -50,7 +50,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPH-C6-QOE">
                                                     <rect key="frame" x="8" y="0.0" width="240" height="43"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="create_ticket" translatesAutoresizingMaskIntoConstraints="NO" id="HBI-Cx-yQ1">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="createticket2" translatesAutoresizingMaskIntoConstraints="NO" id="HBI-Cx-yQ1">
                                                             <rect key="frame" x="10" y="8" width="30" height="27"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="HGx-9w-Qkn"/>
@@ -97,7 +97,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ln8-R3-Dj1">
                                                     <rect key="frame" x="8" y="0.0" width="240" height="43"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticket_list" translatesAutoresizingMaskIntoConstraints="NO" id="dxz-X3-Opv">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list2" translatesAutoresizingMaskIntoConstraints="NO" id="dxz-X3-Opv">
                                                             <rect key="frame" x="10" y="8" width="30" height="27"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="QZR-AZ-1JO"/>
@@ -143,7 +143,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJH-MK-dhN">
                                                     <rect key="frame" x="8" y="0.0" width="240" height="43"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inbox_tickets" translatesAutoresizingMaskIntoConstraints="NO" id="z4g-53-jcE">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inbox2" translatesAutoresizingMaskIntoConstraints="NO" id="z4g-53-jcE">
                                                             <rect key="frame" x="30" y="8" width="30" height="27"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="JmL-hg-uBm"/>
@@ -198,7 +198,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUy-ia-A4L">
                                                     <rect key="frame" x="8" y="0.0" width="240" height="43"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_ticket" translatesAutoresizingMaskIntoConstraints="NO" id="2PW-r8-QMP">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mytickets2" translatesAutoresizingMaskIntoConstraints="NO" id="2PW-r8-QMP">
                                                             <rect key="frame" x="30" y="8" width="30" height="27"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="tdu-vc-cHf"/>
@@ -253,7 +253,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5jW-hM-npg">
                                                     <rect key="frame" x="8" y="0.0" width="240" height="43"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unassigned_ticket" translatesAutoresizingMaskIntoConstraints="NO" id="zbX-k8-qDe">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unsignedticket2" translatesAutoresizingMaskIntoConstraints="NO" id="zbX-k8-qDe">
                                                             <rect key="frame" x="30" y="8" width="30" height="27"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="V5U-nh-giz"/>
@@ -317,7 +317,7 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="closed_ticket" translatesAutoresizingMaskIntoConstraints="NO" id="WkL-Yy-7ZO">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="closeticket2" translatesAutoresizingMaskIntoConstraints="NO" id="WkL-Yy-7ZO">
                                                             <rect key="frame" x="30" y="8" width="30" height="27"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="d78-F3-sOY"/>
@@ -372,7 +372,7 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash_ticket" translatesAutoresizingMaskIntoConstraints="NO" id="0zY-fx-lvV">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash2" translatesAutoresizingMaskIntoConstraints="NO" id="0zY-fx-lvV">
                                                             <rect key="frame" x="30" y="8" width="30" height="27"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="vZ1-LI-svr"/>
@@ -418,7 +418,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M0P-nO-Eem">
                                                     <rect key="frame" x="8" y="0.0" width="240" height="43"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticket_list" translatesAutoresizingMaskIntoConstraints="NO" id="WWq-Rq-f3G">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clientlist2" translatesAutoresizingMaskIntoConstraints="NO" id="WWq-Rq-f3G">
                                                             <rect key="frame" x="10" y="8" width="30" height="27"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="S0f-NF-Fkj"/>
@@ -510,7 +510,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fj0-8V-AvS">
                                                     <rect key="frame" x="8" y="0.0" width="240" height="43"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about" translatesAutoresizingMaskIntoConstraints="NO" id="zHr-Nk-ntO">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about2" translatesAutoresizingMaskIntoConstraints="NO" id="zHr-Nk-ntO">
                                                             <rect key="frame" x="10" y="8" width="30" height="27"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="e7t-ca-LcC"/>
@@ -556,7 +556,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbr-Fi-GB8">
                                                     <rect key="frame" x="8" y="0.0" width="240" height="43"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="organisation_list" translatesAutoresizingMaskIntoConstraints="NO" id="tms-gO-h9i">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logout2" translatesAutoresizingMaskIntoConstraints="NO" id="tms-gO-h9i">
                                                             <rect key="frame" x="10" y="8" width="30" height="27"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="BwF-9c-e6j"/>
@@ -1204,37 +1204,35 @@
                                                                 <constraint firstAttribute="height" constant="1" id="pFK-e0-zJn"/>
                                                             </constraints>
                                                         </view>
-                                                        <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8I3-cf-lee">
-                                                            <rect key="frame" x="8" y="8.6666666666666643" width="382" height="46"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="L5R-rp-YW9"/>
-                                                                <constraint firstAttribute="height" constant="46" id="ThY-eE-COq"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
-                                                            <connections>
-                                                                <outlet property="delegate" destination="Le1-ZY-MtZ" id="Jij-lz-CWS"/>
-                                                            </connections>
-                                                        </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="KL7-aF-noB" firstAttribute="leading" secondItem="3C4-Ui-2G3" secondAttribute="leading" id="BjL-2i-NaS"/>
                                                         <constraint firstItem="3C4-Ui-2G3" firstAttribute="leading" secondItem="FrH-RK-9iC" secondAttribute="leading" constant="8" id="CGA-ei-DmE"/>
-                                                        <constraint firstItem="8I3-cf-lee" firstAttribute="leading" secondItem="FrH-RK-9iC" secondAttribute="leading" constant="8" id="OoE-hi-ZM1"/>
                                                         <constraint firstAttribute="trailing" secondItem="3C4-Ui-2G3" secondAttribute="trailing" constant="8" id="dRb-eW-5VU"/>
                                                         <constraint firstAttribute="bottom" secondItem="3C4-Ui-2G3" secondAttribute="bottom" id="jjJ-UE-3u2"/>
-                                                        <constraint firstAttribute="bottom" secondItem="8I3-cf-lee" secondAttribute="bottom" id="kqP-dd-l4h"/>
                                                         <constraint firstItem="KL7-aF-noB" firstAttribute="top" secondItem="FrH-RK-9iC" secondAttribute="top" constant="5" id="p9j-2P-2a3"/>
-                                                        <constraint firstAttribute="trailing" secondItem="8I3-cf-lee" secondAttribute="trailing" constant="8" id="w3L-Mz-YKm"/>
                                                     </constraints>
                                                 </view>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LfU-pY-XP0">
+                                                    <rect key="frame" x="16" y="20" width="383" height="34"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="VU7-qn-nHI"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="FrH-RK-9iC" secondAttribute="bottom" id="21i-XW-lIm"/>
                                                 <constraint firstItem="FrH-RK-9iC" firstAttribute="top" secondItem="yv2-FO-tTA" secondAttribute="top" id="APd-W2-cfj"/>
+                                                <constraint firstItem="LfU-pY-XP0" firstAttribute="top" secondItem="yv2-FO-tTA" secondAttribute="top" constant="20" id="WrA-90-CYI"/>
+                                                <constraint firstAttribute="bottom" secondItem="LfU-pY-XP0" secondAttribute="bottom" constant="1" id="Y8y-UK-NDe"/>
                                                 <constraint firstItem="FrH-RK-9iC" firstAttribute="leading" secondItem="yv2-FO-tTA" secondAttribute="leadingMargin" id="Ybm-xQ-q0P"/>
+                                                <constraint firstItem="LfU-pY-XP0" firstAttribute="leading" secondItem="yv2-FO-tTA" secondAttribute="leadingMargin" constant="8" id="ZKg-hS-2L8"/>
                                                 <constraint firstItem="FrH-RK-9iC" firstAttribute="trailing" secondItem="yv2-FO-tTA" secondAttribute="trailingMargin" id="g4Y-Iq-gU1"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="LfU-pY-XP0" secondAttribute="trailing" constant="7" id="kQA-H5-Ka9"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1342,6 +1340,8 @@
                             <outlet property="delegate" destination="Le1-ZY-MtZ" id="J8Y-pz-sje"/>
                         </connections>
                     </tableView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="736"/>
                     <connections>
                         <outlet property="codeTextField" destination="ist-CM-MqC" id="7sv-DZ-hLR"/>
                         <outlet property="emailTextField" destination="wP3-2d-9CT" id="Jug-Za-QeT"/>
@@ -1349,15 +1349,15 @@
                         <outlet property="helpTopicTextField" destination="vCW-en-No4" id="vJf-oA-DGo"/>
                         <outlet property="lastNameTextField" destination="eBV-h8-7cQ" id="4ys-MG-zlr"/>
                         <outlet property="mobileTextField" destination="Gsy-RY-3zo" id="2SK-FE-ku5"/>
-                        <outlet property="msgTextField" destination="8I3-cf-lee" id="06g-NQ-c1g"/>
                         <outlet property="priorityTextField" destination="Fgz-Q4-nRj" id="gup-Xe-GSf"/>
                         <outlet property="subjectTextField" destination="cy4-c7-chr" id="Fi2-ED-Nja"/>
                         <outlet property="submitButton" destination="Unu-1C-zRF" id="slG-tx-SV0"/>
+                        <outlet property="textViewMsg" destination="LfU-pY-XP0" id="h7L-eF-8he"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2qn-3T-EO1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130.40000000000001" y="302.6986506746627"/>
+            <point key="canvasLocation" x="128.98550724637681" y="302.44565217391306"/>
         </scene>
         <!--Ticket Detail View Controller-->
         <scene sceneID="5LZ-jy-au0">
@@ -2860,20 +2860,21 @@
         </scene>
     </scenes>
     <resources>
-        <image name="about" width="32" height="32"/>
-        <image name="closed_ticket" width="32" height="32"/>
-        <image name="create_ticket" width="32" height="32"/>
+        <image name="about2" width="24" height="24"/>
+        <image name="clientlist2" width="24" height="24"/>
+        <image name="closeticket2" width="24" height="24"/>
+        <image name="createticket2" width="24" height="24"/>
         <image name="default_pic" width="96" height="96"/>
         <image name="email" width="16" height="16"/>
         <image name="ic_forward" width="24" height="24"/>
-        <image name="inbox_tickets" width="64" height="64"/>
-        <image name="my_ticket" width="32" height="32"/>
-        <image name="organisation_list" width="32" height="32"/>
+        <image name="inbox2" width="24" height="24"/>
+        <image name="list2" width="24" height="24"/>
+        <image name="logout2" width="24" height="24"/>
+        <image name="mytickets2" width="24" height="24"/>
         <image name="phone" width="16" height="16"/>
         <image name="pro" width="410" height="218"/>
         <image name="settings" width="32" height="32"/>
-        <image name="ticket_list" width="32" height="32"/>
-        <image name="trash_ticket" width="32" height="32"/>
-        <image name="unassigned_ticket" width="32" height="32"/>
+        <image name="trash2" width="24" height="24"/>
+        <image name="unsignedticket2" width="24" height="24"/>
     </resources>
 </document>

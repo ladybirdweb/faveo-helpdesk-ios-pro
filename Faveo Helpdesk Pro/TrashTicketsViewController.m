@@ -200,7 +200,6 @@
                 _totalPages=[[json objectForKey:@"last_page"] integerValue];
                 
                 _mutableArray= [_mutableArray mutableCopy];
-                
                 [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
                 
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
