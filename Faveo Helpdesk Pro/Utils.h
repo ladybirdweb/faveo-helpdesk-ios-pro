@@ -6,15 +6,6 @@
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
-/*!
- @header Utils.h
- @brief This is the header file where validation of super-code is contained.
-        This file contains the validation and their implementation code.
- @author Mallikarjun
- @copyright  2015 Ladybird Web Solution Pvt Ltd.
- @version  1.6
- */
-
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 

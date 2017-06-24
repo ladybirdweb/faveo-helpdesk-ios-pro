@@ -212,36 +212,6 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     
     // Print full message.
     NSLog(@"userInfo888  %@", userInfo);
-    
-    /////////arjun//////////
-//    [self application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:^(UIBackgroundFetchResult result){
-//        TicketDetailViewController *td=[mainStoryboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-//        GlobalVariables *globalVariables=[GlobalVariables sharedInstance];
-//        
-//        NSString * scenario=[userInfo objectForKey:@"scenario"];
-//        if ([scenario isEqualToString:@"tickets"])  {
-//            globalVariables.iD=[userInfo objectForKey:@"id"];
-//            globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
-//            [(UINavigationController *)self.window.rootViewController pushViewController:td animated:YES];
-//        }else {
-//            
-//            
-//            ClientDetailViewController *cd=[mainStoryboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
-//            NSError *error;
-//            NSData *data = [[userInfo objectForKey:@"requester"] dataUsingEncoding:NSUTF8StringEncoding];
-//            NSDictionary *requester = [NSJSONSerialization JSONObjectWithData:data
-//                                                                      options:kNilOptions
-//                                                                        error:&error];
-//            
-//            globalVariables.iD=[requester objectForKey:@"id"];
-//            
-//            [(UINavigationController *)self.window.rootViewController pushViewController:cd animated:YES];
-//        }
-    
-
-            
-              //  }];
-    ///////////arjun/////////
 
 ///////////////////////////////////
 ////    ***imp***
@@ -275,6 +245,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
 didReceiveNotificationResponse:(UNNotificationResponse *)response
          withCompletionHandler:(void (^)())completionHandler {
+    
     NSDictionary *userInfo = response.notification.request.content.userInfo;
     if (userInfo[kGCMMessageIDKey]) {
         NSLog(@"Message ID: %@", userInfo[kGCMMessageIDKey]);
@@ -294,6 +265,8 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
          globalVariables.iD=[userInfo objectForKey:@"id"];
         globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
          [(UINavigationController *)self.window.rootViewController pushViewController:td animated:YES];
+       ///////////////////////////
+        [[AppDelegate sharedAppdelegate] hideProgressView];
     }else {
     
         
@@ -307,6 +280,8 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
         globalVariables.iD=[requester objectForKey:@"id"];
         
          [(UINavigationController *)self.window.rootViewController pushViewController:cd animated:YES];
+        ////////////////////
+        [[AppDelegate sharedAppdelegate] hideProgressView];
     }
 
 
@@ -326,6 +301,9 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+ 
+    
     // If you are receiving a notification message while your app is in the background,
     // this callback will not be fired till the user taps on the notification launching the application.
     // TODO: Handle data of notification
@@ -339,6 +317,8 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     NSLog(@"userinfo %@", userInfo);
     
     completionHandler(UIBackgroundFetchResultNewData);
+  
+ 
 }
 
 // [START ios_10_data_message_handling]

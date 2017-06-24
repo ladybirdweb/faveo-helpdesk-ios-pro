@@ -53,11 +53,18 @@
     
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     
+    /*dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
+    */
     // Do any additional setup after loading the view from its nib.
        // Do any additional setup after loading the view from its nib.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    
 
 //    NSInteger open =  [globalVariables.OpenCount integerValue];
 //    NSInteger closed = [globalVariables.ClosedCount integerValue];

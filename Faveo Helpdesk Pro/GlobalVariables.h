@@ -6,13 +6,7 @@
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
-/*!
- @header GlobalVariables.h
- @brief This is the header file contain Global variable declaration.
- @author Mallikarjun
- @copyright 2015 Ladybird Web Solution Pvt Ltd.
- @version 1.6
- */
+
 
 #import <Foundation/Foundation.h>
 

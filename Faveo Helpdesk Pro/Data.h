@@ -6,13 +6,7 @@
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
-/*!
- @header Data.h
- @brief This is the header file contain common variable declaration.
- @author Mallikarjun
- @copyright  2015 Ladybird Web Solution Pvt Ltd.
- @version    1.6
- */
+
 #import <Foundation/Foundation.h>
 
 /**

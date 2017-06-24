@@ -23,7 +23,9 @@
 
 /**
  @property activityIndicatorObject
+ 
  @brief It is an property to show Loader.
+ 
  @discussion An activity indicator is a spinning wheel that indicates a task is being processed. if an action takes an unknown amount of time to process you should display an activity indicator to let the user know your app is not frozen
  */
 @property (nonatomic,retain) UIActivityIndicatorView *activityIndicatorObject;

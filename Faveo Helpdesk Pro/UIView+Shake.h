@@ -6,13 +6,7 @@
 //
 //
 
-/*!
- @header UIView+Shake.h
- @brief This is the header file contain variable declaration.
- @author Mallikarjun
- @copyright 2015 Ladybird Web Solution Pvt Ltd.
- @version 1.6
- */
+
 
 #import <UIKit/UIKit.h>
 
