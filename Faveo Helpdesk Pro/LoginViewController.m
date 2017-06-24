@@ -16,8 +16,8 @@
 #import "Utils.h"
 #import "HexColors.h"
 #import "RKDropdownAlert.h"
-
-
+#import "UIView+Shake.h"
+#import "UITextField+PasswordField.h"
 
 
 @import FirebaseInstanceID;
@@ -30,9 +30,8 @@
     NSUserDefaults *userdefaults;
     NSString *errorMsg;
     NSString *baseURL;
-   
+    
 }
-
 
 @property (nonatomic, strong) MBProgressHUD *progressView;
 @end
@@ -40,26 +39,31 @@
 @implementation LoginViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-// done button on keyboard was not working so here is solution
+    
+    // done button on keyboard was not working so here is solution
     [self.urlTextfield setDelegate:self];
     [self.urlTextfield setReturnKeyType:UIReturnKeyDone];
     [self.urlTextfield addTarget:self
-                       action:@selector(textFieldFinished:)
-             forControlEvents:UIControlEventEditingDidEndOnExit];
+                          action:@selector(textFieldFinished:)
+                forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.userNameTextField setDelegate:self];
     [self.userNameTextField setReturnKeyType:UIReturnKeyDone];
     [self.userNameTextField addTarget:self
-                          action:@selector(textFieldFinished:)
-                forControlEvents:UIControlEventEditingDidEndOnExit];
+                               action:@selector(textFieldFinished:)
+                     forControlEvents:UIControlEventEditingDidEndOnExit];
     
     [self.passcodeTextField setDelegate:self];
     [self.passcodeTextField setReturnKeyType:UIReturnKeyDone];
     [self.passcodeTextField addTarget:self
-                          action:@selector(textFieldFinished:)
-                forControlEvents:UIControlEventEditingDidEndOnExit];
+                               action:@selector(textFieldFinished:)
+                     forControlEvents:UIControlEventEditingDidEndOnExit];
     
-// end solution
+    // end solution
+    
+    //this for password eye icon
+    [self.passcodeTextField addPasswordField];
+    
+    
     
     
     _loginButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
@@ -68,6 +72,8 @@
     
     
 }
+
+
 - (IBAction)textFieldFinished:(id)sender
 {
     // [sender resignFirstResponder];
@@ -85,12 +91,7 @@
     
     
 }
-// This prevents vanishing an URL
--(void)viewDidAppear:(BOOL)animated{
-   
-    [self.urlTextfield becomeFirstResponder];
-       
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -100,14 +101,15 @@
 
 
 - (IBAction)urlButton:(id)sender {
-   [self.urlTextfield resignFirstResponder];
+    //[self.urlTextfield resignFirstResponder];
+
     
-   
     
     if (self.urlTextfield.text.length==0){
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please Enter the URL", "")  backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
         //[utils showAlertWithMessage:@"Please Enter the URL" sendViewController:self];
+        
     }
     else{
         if ([Utils validateUrl:self.urlTextfield.text]) {
@@ -237,13 +239,13 @@
 
 
 -(void)verifyBilling{
-      //[[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
+    //[[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
     //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     NSString *url=[NSString stringWithFormat:@"%@?url=%@",BILLING_API,baseURL];
     MyWebservices *webservices=[MyWebservices sharedInstance];
     [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
         if (error || [msg containsString:@"Error"]) {
-             [[AppDelegate sharedAppdelegate] hideProgressView];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             if (msg) {
                 
                 [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -257,24 +259,24 @@
         
         if (json) {
             NSLog(@"Thread-sendAPNS-token-json-%@",json);
-           // if([[json objectForKey:@"result"] isEqualToString:@"success"]){
-                NSLog(@"Billing successful!");
-                dispatch_async(dispatch_get_main_queue(), ^{
-                   
-                    [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Verified URL",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self.companyURLview setHidden:YES];
-                    [self.loginView setHidden:NO];
-                    [utils viewSlideInFromRightToLeft:self.loginView];
-                });
-                [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
-                [userdefaults synchronize];
-//            }else {
-//                
-//            [[AppDelegate sharedAppdelegate] hideProgressView];
-//            [utils showAlertWithMessage:NSLocalizedString(@"Access denied, to use pro version!",nil) sendViewController:self];
-//            
-//            }
+            // if([[json objectForKey:@"result"] isEqualToString:@"success"]){
+            NSLog(@"Billing successful!");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Verified URL",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                [self.companyURLview setHidden:YES];
+                [self.loginView setHidden:NO];
+                [utils viewSlideInFromRightToLeft:self.loginView];
+            });
+            [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
+            [userdefaults synchronize];
+            //            }else {
+            //
+            //            [[AppDelegate sharedAppdelegate] hideProgressView];
+            //            [utils showAlertWithMessage:NSLocalizedString(@"Access denied, to use pro version!",nil) sendViewController:self];
+            //
+            //            }
             
         }
         
@@ -289,9 +291,15 @@
 - (IBAction)btnLogin:(id)sender {
     
     
+    /* [_userNameTextField shakeWithCallback:^{
+     NSLog(@"Shaking has ended");
+     }];
+     
+     [_passcodeTextField shakeWithCallback:^{
+     NSLog(@"Shaking has ended");
+     }]; */
     
-    
-    if ((self.userNameTextField.text.length==0 || self.passcodeTextField.text.length==0) || (self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0))
+    if (((self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0) )|| ((self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0)))
         [utils showAlertWithMessage:NSLocalizedString(@"Please Enter Username & Password",nil) sendViewController:self];
     else {
         if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -349,10 +357,10 @@
                 
                 NSLog(@"Get your response == %@", replyStr);
                 
-               
+                
                 if ([replyStr containsString:@"token"]) {
                     
-                  @try{
+                    @try{
                         
                         NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                         
@@ -371,7 +379,7 @@
                             clientName=[NSString stringWithFormat:@"%@ %@",clientName,[jsonData1 objectForKey:@"last_name"]];
                         }
                         
-                      
+                        
                         
                         [userdefaults setObject:clientName forKey:@"profile_name"];
                         [userdefaults setObject:baseURL forKey:@"baseURL"];
@@ -392,7 +400,7 @@
                             //[self.navigationController popViewControllerAnimated:YES];
                             [[self navigationController] setNavigationBarHidden:NO];
                         });
-                   }
+                    }
                     @catch(NSException *ne) {
                         NSLog(@"exception %@",ne);
                     }

@@ -164,7 +164,7 @@
                         _subjectTextField.text=[dic objectForKey:@"title"];
                         _emailTextField.text=[dic objectForKey:@"email"];
                         _lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
-                        
+                      
                         
                         // _deptTextField.text= [dic objectForKey:@"dept_name"];
                         // _slaTextField.text=[dic objectForKey:@"sla_name"];

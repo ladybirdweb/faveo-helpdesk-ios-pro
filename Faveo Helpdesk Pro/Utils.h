@@ -6,9 +6,28 @@
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
+/*!
+ @header Utils.h
+ @brief This is the header file where validation of super-code is contained.
+        This file contains the validation and their implementation code.
+ @author Mallikarjun
+ @copyright  2015 Ladybird Web Solution Pvt Ltd.
+ @version  1.6
+ */
+
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+/**
+ @class AppDelegate
+ 
+ @brief This class contains validation methods.
+ 
+ @discussion This file contains the <b>validation</b>code used for this project.Like username validation, e-mail validation, phone number validation, URL validation of a company. Also it contains <b>sliding</b>or <b>Animating</b> code so that one view move to another direction i.e view will slide to right to left, left to right , top to bottom or bottom to top
+ 
+ @superclass NSObject
+ 
+ */
 @interface Utils : NSObject
 
 +(BOOL)userNameValidation:(NSString *)strUsername;

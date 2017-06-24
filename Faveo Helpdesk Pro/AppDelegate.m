@@ -213,6 +213,37 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     // Print full message.
     NSLog(@"userInfo888  %@", userInfo);
     
+    /////////arjun//////////
+//    [self application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:^(UIBackgroundFetchResult result){
+//        TicketDetailViewController *td=[mainStoryboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+//        GlobalVariables *globalVariables=[GlobalVariables sharedInstance];
+//        
+//        NSString * scenario=[userInfo objectForKey:@"scenario"];
+//        if ([scenario isEqualToString:@"tickets"])  {
+//            globalVariables.iD=[userInfo objectForKey:@"id"];
+//            globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
+//            [(UINavigationController *)self.window.rootViewController pushViewController:td animated:YES];
+//        }else {
+//            
+//            
+//            ClientDetailViewController *cd=[mainStoryboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
+//            NSError *error;
+//            NSData *data = [[userInfo objectForKey:@"requester"] dataUsingEncoding:NSUTF8StringEncoding];
+//            NSDictionary *requester = [NSJSONSerialization JSONObjectWithData:data
+//                                                                      options:kNilOptions
+//                                                                        error:&error];
+//            
+//            globalVariables.iD=[requester objectForKey:@"id"];
+//            
+//            [(UINavigationController *)self.window.rootViewController pushViewController:cd animated:YES];
+//        }
+    
+
+            
+              //  }];
+    ///////////arjun/////////
+
+///////////////////////////////////
 ////    ***imp***
 //        [self application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:^(UIBackgroundFetchResult result){
 //            TicketDetailViewController *td=[mainStoryboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
@@ -225,7 +256,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 //            [(UINavigationController *)self.window.rootViewController pushViewController:td animated:YES];
 //    
 //        }];
-    
+  //////////////////////////////////
 }
 
 // [START ios_10_message_handling]
@@ -434,7 +465,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 {
     MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:self.window animated:YES];
     HUD.label.text = NSLocalizedString(@"Please wait",nil);
-    HUD.dimBackground = YES;
+    //HUD.dimBackground = YES;
     self.progressView = HUD;
 }
 
@@ -442,7 +473,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 {
     MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:self.window animated:YES];
     HUD.label.text = text;
-    HUD.dimBackground = YES;
+   // HUD.dimBackground = YES;
     self.progressView = HUD;
 }
 

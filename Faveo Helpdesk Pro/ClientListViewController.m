@@ -18,6 +18,7 @@
 #import "RKDropdownAlert.h"
 #import "HexColors.h"
 #import "GlobalVariables.h"
+
 @interface ClientListViewController (){
 
     Utils *utils;

@@ -73,10 +73,15 @@
   
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
+  ////////
+    
     //static dispatch_once_t onceToken;
    // dispatch_once(&onceToken, ^{
         [self getDependencies];
-   // });
+   // }); 
+    
+    
+
     // Do any additional setup after loading the view.
 }
 
@@ -362,8 +367,13 @@
             cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
             cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+        
             cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
-
+        
+            //////////////////
+        
+       
+        
             [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         
         if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {

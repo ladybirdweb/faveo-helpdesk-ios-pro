@@ -224,7 +224,10 @@
     
     if (indexPath.row == [_mutableArray count]) {
         
-        LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:nil];
+        
+       // LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:nil];
+        LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"LoadingCellID"];
+
         if (cell == nil)
         {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingTableViewCell" owner:self options:nil];

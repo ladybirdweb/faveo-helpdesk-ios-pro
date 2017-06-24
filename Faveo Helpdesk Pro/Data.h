@@ -6,7 +6,25 @@
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
+/*!
+ @header Data.h
+ @brief This is the header file contain common variable declaration.
+ @author Mallikarjun
+ @copyright  2015 Ladybird Web Solution Pvt Ltd.
+ @version    1.6
+ */
 #import <Foundation/Foundation.h>
+
+/**
+ @class Data
+ 
+ @brief This class contains common variable declaration
+ 
+ @discussion It contains variable declaration that are commonly used throughout the app so that accessing and calling is very easy.
+ 
+ @superclass NSObject
+ 
+ */
 
 @interface Data : NSObject
 

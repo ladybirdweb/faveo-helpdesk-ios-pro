@@ -25,6 +25,8 @@
 		D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD3521E07ACFC00219F93 /* LaunchScreen.storyboard */; };
 		D9DBD35F1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD35E1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m */; };
 		D9DBD36A1E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3691E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m */; };
+		D9E57B401EFAA4C1002E4C19 /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E57B3D1EFAA4C1002E4C19 /* UIView+Shake.m */; };
+		D9E57B411EFAA4C1002E4C19 /* UITextField+PasswordField.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E57B3F1EFAA4C1002E4C19 /* UITextField+PasswordField.m */; };
 		D9EB9F5B1E07C2A80001115F /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F5A1E07C2A80001115F /* Utils.m */; };
 		D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F5D1E07C2B70001115F /* MyWebservices.m */; };
 		D9EB9F631E07C2D00001115F /* Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F601E07C2D00001115F /* Data.m */; };
@@ -134,6 +136,10 @@
 		D9DBD3651E07ACFC00219F93 /* Faveo Helpdesk ProUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Faveo Helpdesk ProUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9DBD3691E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Faveo_Helpdesk_ProUITests.m; sourceTree = "<group>"; };
 		D9DBD36B1E07ACFC00219F93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9E57B3C1EFAA4C1002E4C19 /* UIView+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shake.h"; sourceTree = "<group>"; };
+		D9E57B3D1EFAA4C1002E4C19 /* UIView+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shake.m"; sourceTree = "<group>"; };
+		D9E57B3E1EFAA4C1002E4C19 /* UITextField+PasswordField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+PasswordField.h"; sourceTree = "<group>"; };
+		D9E57B3F1EFAA4C1002E4C19 /* UITextField+PasswordField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+PasswordField.m"; sourceTree = "<group>"; };
 		D9EB9F571E07C2940001115F /* AppConstanst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstanst.h; sourceTree = "<group>"; };
 		D9EB9F591E07C2A80001115F /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		D9EB9F5A1E07C2A80001115F /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
@@ -406,6 +412,10 @@
 				D9EB9F621E07C2D00001115F /* GlobalVariables.m */,
 				D985BAC61EDC5FAA001EB153 /* Dat.h */,
 				D985BAC71EDC5FAA001EB153 /* Dat.m */,
+				D9E57B3C1EFAA4C1002E4C19 /* UIView+Shake.h */,
+				D9E57B3D1EFAA4C1002E4C19 /* UIView+Shake.m */,
+				D9E57B3E1EFAA4C1002E4C19 /* UITextField+PasswordField.h */,
+				D9E57B3F1EFAA4C1002E4C19 /* UITextField+PasswordField.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -689,7 +699,9 @@
 				D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */,
 				D9EB9F641E07C2D00001115F /* GlobalVariables.m in Sources */,
 				D9EB9FA71E07C3270001115F /* InboxViewController.m in Sources */,
+				D9E57B411EFAA4C1002E4C19 /* UITextField+PasswordField.m in Sources */,
 				D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */,
+				D9E57B401EFAA4C1002E4C19 /* UIView+Shake.m in Sources */,
 				D9EB9F811E07C2F00001115F /* LoadingTableViewCell.m in Sources */,
 				D9EB9FAA1E07C3270001115F /* ClientDetailViewController.m in Sources */,
 				D9EB9FA31E07C3270001115F /* TrashTicketsViewController.m in Sources */,
