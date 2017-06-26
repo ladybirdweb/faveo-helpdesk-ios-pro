@@ -43,9 +43,8 @@
     // done button on keyboard was not working so here is solution
     [self.urlTextfield setDelegate:self];
     [self.urlTextfield setReturnKeyType:UIReturnKeyDone];
-    [self.urlTextfield addTarget:self
-                          action:@selector(textFieldFinished:)
-                forControlEvents:UIControlEventEditingDidEndOnExit];
+    [self.urlTextfield addTarget:self action:@selector(textFieldFinished:)forControlEvents:UIControlEventEditingDidEndOnExit];
+    
     [self.userNameTextField setDelegate:self];
     [self.userNameTextField setReturnKeyType:UIReturnKeyDone];
     [self.userNameTextField addTarget:self
@@ -62,9 +61,7 @@
     
     //this for password eye icon
     [self.passcodeTextField addPasswordField];
-    
-    
-    
+    //end
     
     _loginButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     utils=[[Utils alloc]init];
@@ -101,10 +98,9 @@
 
 
 - (IBAction)urlButton:(id)sender {
-    //[self.urlTextfield resignFirstResponder];
+    // [self.urlTextfield resignFirstResponder];
 
-    
-    
+
     if (self.urlTextfield.text.length==0){
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please Enter the URL", "")  backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
@@ -237,7 +233,16 @@
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [self.urlTextfield becomeFirstResponder];
+    
+}
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+     [self.urlTextfield becomeFirstResponder];
+    return YES;
+}
 -(void)verifyBilling{
     //[[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
     //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];

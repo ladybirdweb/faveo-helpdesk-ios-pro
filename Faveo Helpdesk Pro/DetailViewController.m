@@ -653,7 +653,7 @@
         }
         
         // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "];
+        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"];
         
         if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
             return NO;

@@ -254,11 +254,14 @@
     return numOfSections;
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.currentPage == self.totalPages
         || self.totalTickets == _mutableArray.count) {
         return _mutableArray.count;
     }
+    
+    
     return _mutableArray.count + 1;
 }
 
@@ -267,6 +270,9 @@
         NSLog(@"nextURL  %@",_nextPageUrl);
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
             [self loadMore];
+        }
+        else{
+            [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         }
     }
 }
@@ -367,7 +373,7 @@
             cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
             cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
-        
+       
             cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
         
             //////////////////

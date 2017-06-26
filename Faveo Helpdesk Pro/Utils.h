@@ -42,6 +42,8 @@ if(strUsername.length >= 5){
  @see +(BOOL)emailValidation:
  
  @warning The username lenght must be greater than 2 characters.
+ 
+ @return user name.
  */
 +(BOOL)userNameValidation:(NSString *)strUsername;
 
@@ -60,6 +62,8 @@ if(strUsername.length >= 5){
  BOOL myStringMatchesRegEx=[emailTest evaluateWithObject:strEmail];
  return myStringMatchesRegEx;
  @endcode
+ 
+ @return email.
  */
 +(BOOL)emailValidation:(NSString *)strEmail;
 
@@ -105,6 +109,8 @@ if(strUsername.length >= 5){
  }
 
  @endcode
+ 
+ @return url.
  
  @see -(BOOL)compareDates:
  */
