@@ -24,7 +24,7 @@
 
 /**
  @property iD
- @brief It is used for defining is id of a user.
+ @brief It is used for defining is id of a ticket.
  */
 @property (strong, nonatomic) NSNumber *iD;
 

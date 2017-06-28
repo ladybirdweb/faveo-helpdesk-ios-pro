@@ -358,7 +358,7 @@
         }
        /* NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&helptopic=%@&priority=%@&phone=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_msgTextField.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,@""];
         */
-         NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&helptopic=%@&priority=%@&phone=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_textViewMsg.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,@""];
+         NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&phone=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_textViewMsg.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,@""];
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
         

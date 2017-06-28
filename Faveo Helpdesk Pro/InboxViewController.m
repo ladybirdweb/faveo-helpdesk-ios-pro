@@ -374,11 +374,13 @@
             cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
        
-            cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
+        cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
         
             //////////////////
         
-       
+     
+        
+        
         
             [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         
