@@ -135,10 +135,13 @@
                         _clientName=[requester objectForKey:@"user_name"];
                     }else{
                     _clientName=[NSString stringWithFormat:@"%@ %@",_clientName,[requester objectForKey:@"last_name"]];
+                    
                     }
-            
                 
-                    if ([_isClientActive isEqualToString:@"1"]) {
+                /////////// was crashing
+                _isClientActive= [NSString stringWithFormat:@"%@",[requester objectForKey:@"active"]];
+                /////solved
+                   if ([_isClientActive isEqualToString:@"1"]) {
                       _isClientActive=@"ACTIVE";
                     }else  _isClientActive=@"INACTIVE";
                 
