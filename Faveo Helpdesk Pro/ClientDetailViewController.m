@@ -138,9 +138,13 @@
                     
                     }
                 
-                /////////// was crashing
+               
+                  /////////// was crashing
+            
                 _isClientActive= [NSString stringWithFormat:@"%@",[requester objectForKey:@"active"]];
+                
                 /////solved
+                
                    if ([_isClientActive isEqualToString:@"1"]) {
                       _isClientActive=@"ACTIVE";
                     }else  _isClientActive=@"INACTIVE";

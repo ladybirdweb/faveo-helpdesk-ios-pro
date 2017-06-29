@@ -40,6 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+ 
     // done button on keyboard was not working so here is solution
     [self.urlTextfield setDelegate:self];
     [self.urlTextfield setReturnKeyType:UIReturnKeyDone];
@@ -82,6 +83,8 @@
     [super viewWillAppear:YES];
     [[self navigationController] setNavigationBarHidden:YES];
     
+    self.urlTextfield.text=@"http://";
+    
     [utils viewSlideInFromRightToLeft:self.companyURLview];
     [self.loginView setHidden:YES];
     [self.companyURLview setHidden:NO];
@@ -98,8 +101,8 @@
 
 
 - (IBAction)urlButton:(id)sender {
-    // [self.urlTextfield resignFirstResponder];
-
+     [self.urlTextfield resignFirstResponder];
+    
 
     if (self.urlTextfield.text.length==0){
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please Enter the URL", "")  backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
@@ -237,12 +240,15 @@
     [self.urlTextfield becomeFirstResponder];
     
 }
-
+/*
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
      [self.urlTextfield becomeFirstResponder];
     return YES;
-}
+}*/
+
+
+
 -(void)verifyBilling{
     //[[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
     //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
