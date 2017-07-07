@@ -18,13 +18,15 @@
 #import "RKDropdownAlert.h"
 #import "UIView+Shake.h"
 #import "UITextField+PasswordField.h"
+#import "RMessage.h"
+#import "RMessageView.h"
 
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
 @import Firebase;
 
-@interface LoginViewController () <UITextFieldDelegate>
+@interface LoginViewController () <UITextFieldDelegate,RMessageProtocol>
 {
     Utils *utils;
     NSUserDefaults *userdefaults;
@@ -105,9 +107,9 @@
     
 
     if (self.urlTextfield.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please Enter the URL", "")  backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+       // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please Enter the URL", "")  backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
-        //[utils showAlertWithMessage:@"Please Enter the URL" sendViewController:self];
+        [utils showAlertWithMessage:@"Please Enter the URL" sendViewController:self];
         
     }
     else{
@@ -126,7 +128,14 @@
                 //connection unavailable
                 // [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
                 
-                [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+              //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+                
+                [RMessage
+                 showNotificationWithTitle:NSLocalizedString(@"Something failed", nil)
+                 subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check it!", nil)
+                 type:RMessageTypeError
+                 customTypeName:nil
+                 callback:nil];
                 
             }else{
                 //connection available
@@ -275,6 +284,12 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Verified URL",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                
+              /*  [RMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)
+                                           subtitle:NSLocalizedString(@"URL Verified successfully !", nil)
+                                               type:RMessageTypeSuccess
+                                     customTypeName:nil
+                                           callback:nil]; */
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 [self.companyURLview setHidden:YES];
                 [self.loginView setHidden:NO];
@@ -311,7 +326,9 @@
      }]; */
     
     if (((self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0) )|| ((self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0)))
+    {
         [utils showAlertWithMessage:NSLocalizedString(@"Please Enter Username & Password",nil) sendViewController:self];
+    }
     else {
         if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
         {
@@ -403,7 +420,24 @@
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                           [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                           /* if (self.navigationController.navigationBarHidden) {
+                                [self.navigationController setNavigationBarHidden:NO];
+                            }
+                            
+                            [RMessage showNotificationInViewController:self.navigationController
+                                                                 title:NSLocalizedString(@"Success!", nil)
+                                                              subtitle:NSLocalizedString(@"You have logged in successfully...", nil)
+                                                             iconImage:nil
+                                                                  type:RMessageTypeSuccess
+                                                        customTypeName:nil
+                                                              duration:RMessageDurationAutomatic
+                                                              callback:nil
+                                                           buttonTitle:nil
+                                                        buttonCallback:nil
+                                                            atPosition:RMessagePositionNavBarOverlay
+                                                  canBeDismissedByUser:YES]; */
                             [self sendDeviceToken];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             InboxViewController *inboxVC=[self.storyboard  instantiateViewControllerWithIdentifier:@"InboxID"];

@@ -36,7 +36,7 @@
     
     
     
-    userDefaults=[NSUserDefaults standardUserDefaults];
+   /* userDefaults=[NSUserDefaults standardUserDefaults];
     globalVariables=[GlobalVariables sharedInstance];
   //  NSLog(@"Role : %@",[userDefaults objectForKey:@"role"]);
     //_user_role.text=[[userDefaults objectForKey:@"role"] uppercaseString];
@@ -50,7 +50,7 @@
     
     _user_profileImage.layer.cornerRadius = _user_profileImage.frame.size.height /2;
     _user_profileImage.layer.masksToBounds = YES;
-    _user_profileImage.layer.borderWidth = 0;
+    _user_profileImage.layer.borderWidth = 0; */
     
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     
@@ -62,7 +62,24 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     
-
+    userDefaults=[NSUserDefaults standardUserDefaults];
+    globalVariables=[GlobalVariables sharedInstance];
+     NSLog(@"Role : %@",[userDefaults objectForKey:@"role"]);
+    _user_role.text=[[userDefaults objectForKey:@"role"] uppercaseString];
+    
+    _user_nameLabel.text=[userDefaults objectForKey:@"profile_name"];
+    _url_label.text=[userDefaults objectForKey:@"baseURL"];
+    
+    [_user_profileImage sd_setImageWithURL:[NSURL URLWithString:[userDefaults objectForKey:@"profile_pic"]]
+                          placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
+    _user_profileImage.layer.borderColor=[[UIColor hx_colorWithHexRGBAString:@"#0288D1"] CGColor];
+    
+    _user_profileImage.layer.cornerRadius = _user_profileImage.frame.size.height /2;
+    _user_profileImage.layer.masksToBounds = YES;
+    _user_profileImage.layer.borderWidth = 0;
+    
+    
+    
 //    NSInteger open =  [globalVariables.OpenCount integerValue];
 //    NSInteger closed = [globalVariables.ClosedCount integerValue];
 //    NSInteger trash = [globalVariables.DeletedCount integerValue];

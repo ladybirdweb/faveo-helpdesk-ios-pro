@@ -35,7 +35,11 @@ PODS:
   - IQKeyboardManager (4.0.7)
   - MBProgressHUD (1.0.0)
   - NSDate-Time-Ago (1.0.1)
+  - PPTopMostController (0.0.1)
   - RKDropdownAlert (0.3.0)
+  - RMessage (2.1.0):
+    - HexColors (~> 4.0)
+    - PPTopMostController
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -51,6 +55,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.0.0)
   - NSDate-Time-Ago
   - RKDropdownAlert
+  - RMessage
   - SDWebImage
   - XLForm (~> 3.0)
 
@@ -69,10 +74,12 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 69002bb4fea60596b710e57d426abc00e5063630
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   NSDate-Time-Ago: e9de167d0659ebe465c273e833e7b582f061fc41
+  PPTopMostController: 4e6f1e5f8c645bdcc74cd837a20f607ff262c048
   RKDropdownAlert: f4b3364c251829ad439dc666836a1f2dad26f4c7
+  RMessage: 52acb5fcb2ccb6e76959dc1087070ae3e73b8f8c
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: 6f05d604640509a9b5792ec234c37d951153f9cd
+PODFILE CHECKSUM: d4be29f9aa8ad765c83e837f80453046a7969c1a
 
 COCOAPODS: 1.2.1

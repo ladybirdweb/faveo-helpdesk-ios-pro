@@ -42,6 +42,7 @@
  
  @discussion The role may be Agent, Admin or User. So that this property describe role.
  */
+
 @property (weak, nonatomic) IBOutlet UILabel *user_role;
 
 /**
@@ -51,6 +52,7 @@
  
  @discussion Each user have their own url so that, this property defined for url.
  */
+
 @property (weak, nonatomic) IBOutlet UILabel *url_label;
 
 /**

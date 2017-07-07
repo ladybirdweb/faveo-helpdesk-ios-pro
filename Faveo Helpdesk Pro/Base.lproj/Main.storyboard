@@ -29,11 +29,25 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H7n-UE-y8P">
-                                                    <rect key="frame" x="56" y="30" width="130" height="130"/>
+                                                    <rect key="frame" x="55" y="15" width="130" height="130"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="user_url" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghH-8G-sXb">
+                                                    <rect key="frame" x="16" y="166" width="211" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="user_role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eaU-wh-His">
+                                                    <rect key="frame" x="193" y="33" width="55" height="14.333333333333336"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="user_nameLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzc-oI-1TH">
-                                                    <rect key="frame" x="39" y="162" width="192" height="21"/>
+                                                    <rect key="frame" x="16" y="145" width="192" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -612,13 +626,15 @@
                         <outlet property="tableView" destination="83Y-z8-nD8" id="NCm-Sp-9gb"/>
                         <outlet property="trash_countLabel" destination="X0J-VR-9Kh" id="BIE-iu-atZ"/>
                         <outlet property="unassigned_countLabel" destination="qNr-rk-QiA" id="VIE-N3-522"/>
+                        <outlet property="url_label" destination="ghH-8G-sXb" id="iNE-se-YIt"/>
                         <outlet property="user_nameLabel" destination="Dzc-oI-1TH" id="HdM-LS-WC9"/>
                         <outlet property="user_profileImage" destination="H7n-UE-y8P" id="u73-FV-A5G"/>
+                        <outlet property="user_role" destination="eaU-wh-His" id="kZ1-TM-5VZ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byP-mN-Oqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-479.71014492753625" y="320.38043478260875"/>
+            <point key="canvasLocation" x="-487" y="310"/>
         </scene>
         <!--Client List View Controller-->
         <scene sceneID="Lia-CC-EFJ">
@@ -1493,7 +1509,7 @@
                                                 </constraints>
                                                 <attributedString key="attributedText">
                                                     <fragment>
-                                                        <mutableString key="content">Headquartered in Bangalore, Faveo HELPDESK provides Businesses with an automated Helpdesk system to manage customer support.The word Faveo comes from Latin which means to be favourable. Which truly highlights vision and the scope as well as the functionality of the product that Faveo is. It is specifically designed to cater the needs of startups and SME’s empowering them with state of art, ticket based support system. In today’s competitive startup scenario customer retention is one of the major challenges. Handling client query diligently is all the difference between retaining or losing a long lasting relationship. The company is driven with passion of providing tools for managing consumer queries for strategic insights and helping companies take those decisive decisions.</mutableString>
+                                                        <string key="content">Headquartered in Bangalore, Faveo HELPDESK provides Businesses with an automated Helpdesk system to manage customer support.The word Faveo comes from Latin which means to be favourable. Which truly highlights vision and the scope as well as the functionality of the product that Faveo is. It is specifically designed to cater the needs of startups and SME’s empowering them with state of art, ticket based support system. In today’s competitive startup scenario customer retention is one of the major challenges. Handling client query diligently is all the difference between retaining or losing a long lasting relationship. The company is driven with passion of providing tools for managing consumer queries for strategic insights and helping companies take those decisive decisions.</string>
                                                         <attributes>
                                                             <font key="NSFont" metaFont="system" size="15"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>

@@ -288,7 +288,7 @@
     // webview.scalesPageToFit = YES;
     webview.autoresizesSubviews = YES;
     //webview.delegate=self;
-    webview.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+webview.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
     
     NSRange range = [body rangeOfString:@"<body"];
     

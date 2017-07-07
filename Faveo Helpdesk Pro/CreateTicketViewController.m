@@ -19,8 +19,11 @@
 #import "RKDropdownAlert.h"
 #import "IQKeyboardManager.h"
 #import "Dat.h"
+#import "RMessage.h"
+#import "RMessageView.h"
 
-@interface CreateTicketViewController (){
+
+@interface CreateTicketViewController ()<RMessageProtocol>{
     
     Utils *utils;
     NSUserDefaults *userDefaults;
@@ -288,7 +291,21 @@
 //    }
     
     if (self.emailTextField.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter EMAIL-ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+       [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter EMAIL-ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+       /* [RMessage showNotificationInViewController:self.navigationController
+                                             title:nil
+                                          subtitle:NSLocalizedString(@"Please enter EMAIL-ID", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeWarning
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES]; */
+
+
         //[utils showAlertWithMessage:@"Please enter EMAIL-ID" sendViewController:self];
     }else if(![Utils emailValidation:self.emailTextField.text]){
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Invalid EMAIL_ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];

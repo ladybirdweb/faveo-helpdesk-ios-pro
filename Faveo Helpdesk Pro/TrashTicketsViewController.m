@@ -19,8 +19,10 @@
 #import "GlobalVariables.h"
 #import "RKDropdownAlert.h"
 #import "HexColors.h"
+#import "RMessage.h"
+#import "RMessageView.h"
 
-@interface TrashTicketsViewController (){
+@interface TrashTicketsViewController ()<RMessageProtocol>{
 
     Utils *utils;
     UIRefreshControl *refresh;
@@ -157,7 +159,19 @@
             [self loadMore];
         }
         else{
-            [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            //[RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            [RMessage showNotificationInViewController:self
+                                                 title:nil
+                                              subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
+                                             iconImage:nil
+                                                  type:RMessageTypeSuccess
+                                        customTypeName:nil
+                                              duration:RMessageDurationAutomatic
+                                              callback:nil
+                                           buttonTitle:nil
+                                        buttonCallback:nil
+                                            atPosition:RMessagePositionBottom
+                                  canBeDismissedByUser:YES];
         }
     }
 }
