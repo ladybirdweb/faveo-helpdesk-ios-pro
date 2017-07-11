@@ -16,7 +16,7 @@ typedef void (^callbackHandler) (NSError *, id,NSString*);
 typedef void (^routebackHandler) (NSError *, id, NSHTTPURLResponse*);
 typedef void (^ApiResponse)(NSError* , id);
 
-/**
+/*!
  @class MyWebservices
  
  @brief This class provide web-based APIs to support machine-to-machine communication over networks. Because these APIs are web-based, they inherently support interaction between devices running on different architectures and speaking different native languages
@@ -24,24 +24,26 @@ typedef void (^ApiResponse)(NSError* , id);
  @discussion A server with a database responds to remote queries for data, where the client specifies a particular city, stock symbol, or book title, for example. The client application sends queries to the server, parses the response, and processes the returned data.
  
      All web service schemes utilize a web-based transport mode, such as HTTP, HTTPS, or SMTP, and a method for packaging the queries and responses, typically some sort of XML schema.
- 
- @superclass NSObject
- 
- @helper AppDelegate,AppConstanst
+
  */
 @interface MyWebservices : NSObject
 
-/**
+/*!
  @property session
+ 
  @brief It defines a way to store information (in variables) to be used across multiple pages. Unlike a cookie, the information is not stored on the users computer
+ 
  @discussion You can use URL objects to construct URLs and access their parts. For URLs that represent local files, you can also manipulate properties of those files directly, such as changing the file’s last modification date. Finally, you can pass URL objects to other APIs to retrieve the contents of those URLs.
  */
 @property(nonatomic,strong)NSURLSession *session;
 
-/**
+/*!
  @method sharedInstance
+ 
  @brief It defines singleton object.
+ 
  @discussion A singleton object provides a global point of access to the resources of its class. Singletons are used in situations where this single point of control is desirable, such as with classes that offer some general service or resource. You obtain the global instance from a singleton class through a factory method.
+ 
  @code
  + (instancetype)sharedInstance
  {
@@ -53,11 +55,11 @@ typedef void (^ApiResponse)(NSError* , id);
  });
  return sharedInstance;
  }
- @endcode
+
  */
 + (instancetype)sharedInstance;
 
-/**
+/*!
  @method httpResponsePOST
  @param urlString This is url.
  @param parameter This is defines an id.
@@ -68,7 +70,8 @@ typedef void (^ApiResponse)(NSError* , id);
 -(void)httpResponsePOST:(NSString *)urlString
               parameter:(id)parameter
         callbackHandler:(callbackHandler)block;
-/**
+
+/*!
  @method httpResponseGET
  @param urlString dsknskd
  @param parameter dkdks
@@ -79,13 +82,15 @@ typedef void (^ApiResponse)(NSError* , id);
 -(void)httpResponseGET:(NSString *)urlString
              parameter:(id)parameter
        callbackHandler:(callbackHandler)block;
-/**
+
+/*!
  @method refreshToken
  @brief snsjkd
  @discussion sbdnjks
  */
 -(NSString*)refreshToken;
-/**
+
+/*!
  @method getNextPageURL
  @param url dsknskd
  @param block wskdnwskj
@@ -94,7 +99,7 @@ typedef void (^ApiResponse)(NSError* , id);
  */
 -(void)getNextPageURL:(NSString*)url callbackHandler:(callbackHandler)block;
 
-/**
+/*!
  @method getNextPageURL
  @param url dsknskd
  @param uid dkdks

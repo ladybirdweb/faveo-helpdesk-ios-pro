@@ -8,21 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-/**
+/*!
  @class TicketDetailViewController
  
  @brief This class contains details of a ticket.
  
  @discussion This contain details of a ticket like Subject, Priority, HelpTopic, Name, email, source, ticket type and sue date.
      Here agent can edit things like subject, ticket priority,HelpTopic and Source.
- 
- @superclass UIViewController
- 
- @helper AppDelegate,MyWebservices,GlobalVariables
- */
+*/
 @interface TicketDetailViewController : UIViewController<UITextFieldDelegate>
 
-/**
+/*!
  @property segmentedControl
  
  @brief This propert is an instance of a UISegmentedControl.
@@ -32,35 +28,35 @@
  */
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
-/**
+/*!
  @property lblTicketNumber
  
  @brief This is an string value used for showing a label for Ticket Number.
  */
 @property (weak, nonatomic) IBOutlet UILabel *lblTicketNumber;
 
-/**
+/*!
  @property containerView
  
  @brief At runtime, a view object handles the rendering of any content in its area and also handles any interactions with that content.
  */
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
-/**
+/*!
  @property currentViewController
  
  @brief A view controller manages a set of views that make up a portion of your app’s user interface. It is responsible for loading and disposing of those views, for managing interactions with those views, and for coordinating responses with any appropriate data objects. View controllers also coordinate their efforts with other controller objects—including other view controllers—and help manage your app’s overall interface.
  */
 @property (weak, nonatomic) UIViewController *currentViewController;
 
-/**
+/*!
  @property ticketNumber
  
  @brief This property used for dislaying ticket number.
  */
 @property(nonatomic,strong) NSString *ticketNumber;
 
-/**
+/*!
  @method addBtnPressed
  
  @brief This in an Button. After clicking perticluar ticket it redirect to redirect to Ticket Detail page.
@@ -69,7 +65,6 @@
  
  @code
  - (IBAction)indexChanged:(id)sender;
- @endcode
 
  */
 - (IBAction)indexChanged:(id)sender;

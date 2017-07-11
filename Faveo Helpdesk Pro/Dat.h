@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-/**
+/*!
  @class Dat
  
  @brief This class contains common variable declaration
@@ -18,15 +18,16 @@
  */
 @interface Dat : NSObject
 
-/**
+/*!
  @property name
  @brief It is used for defining is name of a user.
  */
 @property (nonatomic,strong) NSString *name;
 
-/**
+/*!
  @property id1
  @brief It is used for defining is id of a user.
  */
 @property (nonatomic,strong) NSString *id1;
+
 @end

@@ -8,20 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-/**
+/*!
  @class ConversationViewController
  
  @brief This class contains conversation details.
  
  @discussion Here we will get in detail of conversation between Agent and a Client.Here we can see what is the message and its contents and time. It may contain attachment, image or text. Here Agent can see this all details.
- 
- @superclass UITableViewController
- 
- @helper GlobalVariables,MyWebservices,Utils,AppDelegate
- */
+  */
 @interface ConversationViewController : UITableViewController
 
-/**
+/*!
  @property activityIndicatorObject
  
  @brief It is an property to show Loader.

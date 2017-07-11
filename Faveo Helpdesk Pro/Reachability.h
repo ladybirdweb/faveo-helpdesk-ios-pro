@@ -20,7 +20,12 @@ typedef enum : NSInteger {
 
 extern NSString *kReachabilityChangedNotification;
 
-
+/*!
+ @class Reachability
+ 
+ @discussion This class define reachability. It checks the reachability function like Internet connection is there or not, It checks the it reachable to Host, IT adress, Internet Connection, Local Wifi connection. If it is right then ok, if not then It will show reachability error depending upon the type of error.
+ 
+ */
 @interface Reachability : NSObject
 
 /*!

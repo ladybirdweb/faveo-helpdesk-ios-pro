@@ -9,19 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-/**
+/*!
  @class AppDelegate
  
  @brief This class contains validation methods.
  
- @discussion This file contains the <b>validation</b>code used for this project.Like username validation, e-mail validation, phone number validation, URL validation of a company. Also it contains <b>sliding</b>or <b>Animating</b> code so that one view move to another direction i.e view will slide to right to left, left to right , top to bottom or bottom to top
- 
- @superclass NSObject
+ @discussion This file contains the <b>validation</b>code used for this project.Like username validation, e-mail validation, phone number validation, URL validation of a company. Also it contains <b>sliding</b>or <b>Animating</b> code so that one view move to another direction i.e view will slide to right to left, left to right , top to bottom or bottom to top.
  
  */
 @interface Utils : NSObject
 
-/**
+/*!
  @method userNameValidation
  
  @brief This method validates an username.
@@ -38,7 +36,7 @@ if(strUsername.length >= 5){
  
  return NO;
 
- @endcode
+
  @see +(BOOL)emailValidation:
  
  @warning The username lenght must be greater than 2 characters.
@@ -47,7 +45,7 @@ if(strUsername.length >= 5){
  */
 +(BOOL)userNameValidation:(NSString *)strUsername;
 
-/**
+/*!
  @method emailValidation
  
  @brief This method validates an email of email.
@@ -67,7 +65,7 @@ if(strUsername.length >= 5){
  */
 +(BOOL)emailValidation:(NSString *)strEmail;
 
-/**
+/*!
  @method phoneNovalidation
  
  @brief This method validates the contact number.
@@ -91,7 +89,7 @@ if(strUsername.length >= 5){
 
 +(BOOL)phoneNovalidation:(NSString *)strPhonr;
 
-/**
+/*!
  @method validateUrl
  
  @brief This method validates URL.
@@ -108,7 +106,7 @@ if(strUsername.length >= 5){
  return NO;
  }
 
- @endcode
+
  
  @return url.
  
@@ -116,7 +114,7 @@ if(strUsername.length >= 5){
  */
 +(BOOL)validateUrl: (NSString *) url ;
 
-/**
+/*!
  @method compareDates
  
  @brief This method used for comparing dates.
@@ -127,14 +125,14 @@ if(strUsername.length >= 5){
  
  @code
  -(BOOL)compareDates:(NSString*)date1;
- @endcode
+
  
  @see +(BOOL)validateUrl:
  */
 -(BOOL)compareDates:(NSString*)date1;
 
 
-/**
+/*!
  @method isEmpty
  
  @brief This method checks whether textfiled is empty.
@@ -148,11 +146,11 @@ if(strUsername.length >= 5){
  
  return YES;
  }
- @endcode
+
  */
 +(BOOL)isEmpty:(NSString *)str;
 
-/**
+/*!
  @method viewSlideInFromRightToLeft
  
  @discussion This method used for sliding or moving a view from right to left direction. Here sliding duration and direction is provided, when this method is called it takes that values and excutes it.
@@ -170,11 +168,11 @@ if(strUsername.length >= 5){
  [views.layer addAnimation:transition forKey:nil];
  
  }
- @endcode
+
  */
 -(void)viewSlideInFromRightToLeft:(UIView *)views;
 
-/**
+/*!
  @method viewSlideInFromLeftToRight
  
  @discussion This method used for sliding or moving a view from left to right direction. Here sliding duration and direction is provided, when this method is called it takes that values and excutes it.
@@ -191,11 +189,11 @@ if(strUsername.length >= 5){
  //transition.delegate = self;
  [views.layer addAnimation:transition forKey:nil];
  }
- @endcode
+
  */
 -(void)viewSlideInFromLeftToRight:(UIView *)views;
 
-/**
+/*!
  @method viewSlideInFromTopToBottom
  
  @discussion This method used for sliding or moving a view from top to bottom direction. Here sliding duration and direction is provided, when this method is called it takes that values and excutes it.
@@ -213,10 +211,10 @@ if(strUsername.length >= 5){
  [views.layer addAnimation:transition forKey:nil];
  }
 
- @endcode
+ 
  */
 -(void)viewSlideInFromTopToBottom:(UIView *)views;
-/**
+/*!
  @method viewSlideInFromBottomToTop
  
  @discussion This method used for sliding or moving a view from bottom to top direction. Here sliding duration and direction is provided, when this method is called it takes that values and excutes it.
@@ -233,15 +231,19 @@ if(strUsername.length >= 5){
  // transition.delegate = self;
  [views.layer addAnimation:transition forKey:nil];
  }
- @endcode
+
  */
 -(void)viewSlideInFromBottomToTop:(UIView *)views;
 
-/**
+/*!
  @method showAlertWithMessage
+ 
  @param message This is string value.
+ 
  @brief An object that displays an alert message to the user.
+ 
  @discussion This method used for showing an alert messages. For example, in login page if u enter wrong username or password then it will display one alert message that "Invalid Credentials" or "Wrong Username or Password".
+ 
  @code
  UIAlertController *alertController = [UIAlertController   alertControllerWithTitle:APP_NAME message:message  preferredStyle:UIAlertControllerStyleAlert];
  UIAlertAction *cancelAction = [UIAlertAction  actionWithTitle:@"OK"
@@ -252,10 +254,10 @@ if(strUsername.length >= 5){
  }];
  [alertController addAction:cancelAction];
 
- @endcode
+
  */
 -(void)showAlertWithMessage:(NSString*)message sendViewController:(UIViewController *)viewController;
-/**
+/*!
  @method getLocalDateTimeFromUTC
  @param strDate It is an date.
  @brief Converts the value of the current DateTime object to local time.
@@ -263,7 +265,7 @@ if(strUsername.length >= 5){
  */
 -(NSString *)getLocalDateTimeFromUTC:(NSString *)strDate;
 
-/**
+/*!
  @method getLocalDateTimeFromUTCDueDate
  @param strDate It is an date.
  @brief Converts the value of the current DateTime object to local time.

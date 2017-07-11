@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 //#import "IQPreviousNextView.h"
 
-/**
+/*!
  @class LoginViewController
  
  @brief This class contains URL veryfying and user Login activities.
@@ -17,15 +17,11 @@
  @discussion This class contains login activities like URL,Username and Password.
              At First when app will launch after that URL view appear, So here User enters their company URL if that URL is valid then it goes to login activity page.
              Here user gives username/email and password to access profile. After Successfully login it will goes to Inbox page, and here user can see list of tickets, if not then It Will Show Error.
- 
- @superclass UIViewController
- 
- @helper InboxViewController,MyWebservices,UIView+Shake,AppConstanst,UITextField+PasswordField
  */
 
 @interface LoginViewController : UIViewController <UITextFieldDelegate>
 
-/**
+/*!
  @property companyURLview
  
  @brief This is an property used for declaring an view.
@@ -36,7 +32,7 @@
  */
 @property (weak, nonatomic) IBOutlet UIView *companyURLview;
 
-/**
+/*!
  @property loginView
  
  @brief This is an property used for declaring an view.
@@ -46,7 +42,7 @@
  */
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 
-/**
+/*!
  @property loginButton
  
  @brief When you tap a button, or select a button that has focus, the button performs any actions attached to it.
@@ -55,7 +51,7 @@
  */
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
-/**
+/*!
  @property userNameTextField
  
  @brief This textfiled allows a user to enter his name.
@@ -64,7 +60,7 @@
  */
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
 
-/**
+/*!
  @property passcodeTextField
  
  @brief This textfiled allows a user to enter his password.
@@ -73,7 +69,7 @@
  */
 @property (weak, nonatomic) IBOutlet UITextField *passcodeTextField;
 
-/**
+/*!
  @property urlTextfield
  
  @brief This textfiled allows a user to  enter his url.
@@ -82,7 +78,7 @@
  */
 @property (weak, nonatomic) IBOutlet UITextField *urlTextfield;
 
-/**
+/*!
  @method btnLogin
  
  @brief This is an button action. After clicking button it will check username and password entered by user.
@@ -91,12 +87,12 @@
  
  @code
  - (IBAction)btnLogin:(id)sender;
- @endcode
+
  */
 - (IBAction)btnLogin:(id)sender;
 
 
-/**
+/*!
  @method urlButton
  
  @brief After clicking this button it will check url which is eneterd by user.
@@ -105,7 +101,7 @@
  
  @code
  - (IBAction)urlButton:(id)sender;
- @endcode
+
  */
 - (IBAction)urlButton:(id)sender;
 @end

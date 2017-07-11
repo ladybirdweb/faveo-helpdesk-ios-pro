@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-/**
+/*!
  @class DetailViewController
  
  @brief This class contains details of a ticket.
@@ -16,21 +16,18 @@
  @discussion This contain details of a ticket like Subject, Priority, HelpTopic, Name, email, source, ticket type and sue date.
  Here agent can edit things like subject, ticket priority,HelpTopic and Source.
  
- @superclass UITableViewController
- 
- @helper AppDelegate,MyWebservices,GlobalVariables,Utils,
- */
+*/
 
 @interface DetailViewController : UITableViewController <UITextFieldDelegate>
 
-/**
+/*!
  @property emailTextField
  
  @brief This property defines a textfield that shows email of a user.
  */
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 
-/**
+/*!
  @property firstnameTextField
  
  @brief This property defines a textfield that shows name of a user.
@@ -38,35 +35,35 @@
 @property (weak, nonatomic) IBOutlet UITextField *firstnameTextField;
 //@property (weak, nonatomic) IBOutlet UITextField *lastnameTextField;
 
-/**
+/*!
  @property helpTopicTextField
  
  @brief This property defines a textfield that shows Help Topic name.
  */
 @property (weak, nonatomic) IBOutlet UITextField *helpTopicTextField;
 
-/**
+/*!
  @property slaTextField
  
  @brief This property defines a textfield that shows SLA.
  */
 @property (weak, nonatomic) IBOutlet UITextField *slaTextField;
 
-/**
+/*!
  @property deptTextField
  
  @brief This property defines a textfield that shows department.
  */
 @property (weak, nonatomic) IBOutlet UITextField *deptTextField;
 
-/**
+/*!
  @property subjectTextField
  
  @brief This property defines a textfield that shows subject.
  */
 @property (weak, nonatomic) IBOutlet UITextField *subjectTextField;
 
-/**
+/*!
  @property statusTextField
  
  @brief This property defines a textfield that shows status of ticket.
@@ -80,35 +77,35 @@
  */
 @property (weak, nonatomic) IBOutlet UITextField *typeTextField;
 
-/**
+/*!
  @property priorityTextField
  
  @brief This property defines a textfield that shows ticket priority.
  */
 @property (weak, nonatomic) IBOutlet UITextField *priorityTextField;
 
-/**
+/*!
  @property sourceTextField
  
  @brief This property defines a textfield that shows sorce of ticket.
  */
 @property (weak, nonatomic) IBOutlet UITextField *sourceTextField;
 
-/**
+/*!
  @property dueDateTextField
  
  @brief This property defines a textfield that shows due date of a ticket.
  */
 @property (weak, nonatomic) IBOutlet UITextField *dueDateTextField;
 
-/**
+/*!
  @property createdDateTextField
  
  @brief This property defines a textfield that shows date of ticket created.
  */
 @property (weak, nonatomic) IBOutlet UITextField *createdDateTextField;
 
-/**
+/*!
  @property lastResponseDateTextField
  
  @brief This property defines a textfield that shows date of last response of a tocket.
@@ -116,56 +113,56 @@
 @property (weak, nonatomic) IBOutlet UITextField *lastResponseDateTextField;
 
 
-/**
+/*!
  @property helptopicsArray
  
  @brief This property defines a array that shows list of Help Topics.
  */
 @property (nonatomic, strong) NSArray * helptopicsArray;
 
-/**
+/*!
  @property slaPlansArray
  
  @brief This property defines a array that shows list of SLA plans.
  */
 @property (nonatomic, strong) NSArray * slaPlansArray;
 
-/**
+/*!
  @property deptArray
  
  @brief This property defines a array that shows list of Departments.
  */
 @property (nonatomic, strong) NSArray * deptArray;
 
-/**
+/*!
  @property priorityArray
  
  @brief This property defines a array that shows list of Ticket Priority.
  */
 @property (nonatomic, strong) NSArray * priorityArray;
 
-/**
+/*!
  @property sourceArray
  
  @brief This property defines a array that shows list of Ticket Source.
  */
 @property (nonatomic, strong) NSArray * sourceArray;
 
-/**
+/*!
  @property statusArray
  
  @brief This property defines a array that shows list of Ticket Status.
  */
 @property (nonatomic, strong) NSArray * statusArray;
 
-/**
+/*!
  @property typeArray
  
  @brief This property defines a array that shows list of Ticket types.
  */
 @property (nonatomic, strong) NSArray * typeArray;
 
-/**
+/*!
  @property saveButton
  
  @brief This property defines button action.
@@ -175,14 +172,14 @@
  */
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 
-/**
+/*!
  @property selectedIndex
  
  @brief This property defines in index which is an Integer format.
  */
 @property (nonatomic, assign) NSInteger selectedIndex;
 
-/**
+/*!
  @method sourceClicked
  
  @brief This gives a list of Ticket source.
@@ -192,11 +189,11 @@
  
  @code
 - (IBAction)sourceClicked:(id)sender;
- @endcode
+
  */
 - (IBAction)sourceClicked:(id)sender;
 
-/**
+/*!
  @method typeClicked
  
  @brief This gives a list of Ticket Type.
@@ -205,11 +202,10 @@
  
  @code
  - (IBAction)typeClicked:(id)sender;
- @endcode
  */
 - (IBAction)typeClicked:(id)sender;
 
-/**
+/*!
  @method statusClicked
  
  @brief This gives a list of Ticket Status.
@@ -220,12 +216,12 @@
  
  @code
 - (IBAction)statusClicked:(id)sender;
- @endcode
+
  */
 - (IBAction)statusClicked:(id)sender;
 
 
-/**
+/*!
  @method helpTopicClicked
  
  @brief This gives a Help Topic List.
@@ -234,11 +230,10 @@
  
  @code
  - (IBAction)helpTopicClicked:(id)sender;
- @endcode
  */
 - (IBAction)helpTopicClicked:(id)sender;
 
-/**
+/*!
  @method slaClicked
  
  @brief This gives list of SLA Plan.
@@ -247,11 +242,11 @@
  
  @code
  - (IBAction)deptClicked:(id)sender;
- @endcode
+
  */
 - (IBAction)slaClicked:(id)sender;
 
-/**
+/*!
  @method deptClicked
  
  @brief This will gives List of Departments.
@@ -260,11 +255,10 @@
  
  @code
 - (IBAction)deptClicked:(id)sender;
- @endcode
  */
 - (IBAction)deptClicked:(id)sender;
 
-/**
+/*!
  @method priorityClicked
  
  @brief This will gives List of Ticket Priorities.
@@ -273,11 +267,11 @@
  
  @code
 - (IBAction)priorityClicked:(id)sender;
- @endcode
+
  */
 - (IBAction)priorityClicked:(id)sender;
 
-/**
+/*!
  @method saveClicked
  
  @brief This will save data.
@@ -286,7 +280,7 @@
  
  @code
 - (IBAction)saveClicked:(id)sender;
- @endcode
+
  */
 - (IBAction)saveClicked:(id)sender;
 

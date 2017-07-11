@@ -388,17 +388,21 @@
             cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
        
-        cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
+        NSString *title1= [finaldic objectForKey:@"title"];
+       // cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
+        [Utils isEmpty:title1];
         
-            //////////////////
-        
-     
-        
-        
+        if  ([Utils isEmpty:title1]){
+             cell.ticketSubLabel.text=@"No Title";
+        }
+        else
+        {
+            cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
+        }
         
             [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         
-        if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
+       if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
             
         if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
                 [cell.overDueLabel setHidden:NO];
@@ -406,6 +410,9 @@
         }else [cell.overDueLabel setHidden:YES];
         
         }
+        
+        
+        
         
        
             cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];

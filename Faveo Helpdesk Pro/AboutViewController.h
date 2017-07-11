@@ -8,21 +8,18 @@
 #import <UIKit/UIKit.h>
 #import "SlideNavigationController.h"
 
-/**
+/*!
  @class AboutViewController
  
  @brief This class display information about Company.
  
  @discussion This class contain a view where It will show information about Faveo Helpdesk.
- 
- @superclass UIViewController
- 
- @helper  SlideNavigationController
+
  */
 
 @interface AboutViewController :UIViewController<SlideNavigationControllerDelegate>
 
-/**
+/*!
  @property websiteButton
  
  @brief This is simple button property.
@@ -31,7 +28,7 @@
  */
 @property (weak, nonatomic) IBOutlet UIButton *websiteButton;
 
-/**
+/*!
  @method btnClicked
  
  @brief This in an Button.
@@ -39,7 +36,6 @@
  
  @code
 - (IBAction)btnClicked:(id)sender;
- @endcode
  
  @warning If internet is available then it will rediect to that url.
  */

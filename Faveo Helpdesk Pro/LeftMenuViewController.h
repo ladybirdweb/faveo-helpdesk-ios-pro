@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SlideNavigationController.h"
 
-/**
+/*!
  @class LeftMenuViewController
  
  @brief This class contain menu driven view i.e displayed in table view format.
@@ -17,25 +17,20 @@
  @discussion This class contains and defines slide out design pattern.
              This class defines a table view, and that table view contain a list of menus like Create Ticket, Ticket List, Inbox Tickets, My Tickets, Unassigned Tickets, Closed Tickets, Trash Tickets, Client List and Logout.
              After Clicking on perticular menu it will goes to next ViewController (page).
- 
- @superclass UITableViewController
- 
- @helps CreateTicketViewController
- 
- @helper SlideNavigationController,GlobalVariables,MyWebservices,AppConstanst
+
  */
 @interface LeftMenuViewController :UITableViewController
 
 @property (nonatomic, assign) BOOL slideOutAnimationEnabled;
 
-/**
+/*!
  @property user_profileImage
  
  @brief This is an property name for declaring user Profile Image.
  */
 @property (weak, nonatomic) IBOutlet UIImageView *user_profileImage;
 
-/**
+/*!
  @property user_role
  
  @brief This is an property name for declaring role of a user.
@@ -45,7 +40,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *user_role;
 
-/**
+/*!
  @property url_label
  
  @brief This is an property name for declaring url.
@@ -55,14 +50,14 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *url_label;
 
-/**
+/*!
  @property user_nameLabel
  
  @brief This is an property name for declaring user name.
  */
 @property (weak, nonatomic) IBOutlet UILabel *user_nameLabel;
 
-/**
+/*!
  @property inbox_countLabel
  
  @brief This is an property declared for showing count of Tickets.
@@ -73,7 +68,7 @@
  */
 @property (weak, nonatomic) IBOutlet UILabel *inbox_countLabel;
 
-/**
+/*!
 @property inbox_countLabel
  
 @brief This is an property declared for showing count of my tickets.
@@ -85,7 +80,7 @@
 */
 @property (weak, nonatomic) IBOutlet UILabel *myTickets_countLabel;
 
-/**
+/*!
 @property unassigned_countLabel
  
 @brief This is an property declared for showing count of unassigned tickets.
@@ -96,7 +91,7 @@
 */
 @property (weak, nonatomic) IBOutlet UILabel *unassigned_countLabel;
 
-/**
+/*!
  @property closed_countLabel
  
  @brief This is an property declared for showing count of closed tickets.
@@ -107,7 +102,7 @@
  */
 @property (weak, nonatomic) IBOutlet UILabel *closed_countLabel;
 
-/**
+/*!
  @property trash_countLabel
  
  @brief This is an property name  declared for showing count of trash tickets.
