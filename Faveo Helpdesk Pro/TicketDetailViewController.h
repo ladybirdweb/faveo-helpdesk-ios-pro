@@ -64,7 +64,10 @@
  @discussion Buttons use the Target-Action design pattern to notify your app when the user taps the button. Rather than handle touch events directly, you assign action methods to the button and designate which events trigger calls to your methods. At runtime, the button handles all incoming touch events and calls your methods in response.
  
  @code
+ 
  - (IBAction)indexChanged:(id)sender;
+ 
+ @endocde
 
  */
 - (IBAction)indexChanged:(id)sender;

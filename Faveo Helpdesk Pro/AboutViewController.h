@@ -35,7 +35,10 @@
  @discussion After clicking this button acton is performed i.e It will goto http://www.faveohelpdesk.com url. This link contains website of Faveo Helpdesk. Here we see details information of Faveo Helpdesk.
  
  @code
+ 
 - (IBAction)btnClicked:(id)sender;
+ 
+ @endocde
  
  @warning If internet is available then it will rediect to that url.
  */

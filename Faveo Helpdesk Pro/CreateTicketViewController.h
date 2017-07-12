@@ -192,7 +192,10 @@
  The help topics can be Support Query, Sales Query or Operational Query.
  
  @code
+ 
 - (IBAction)helpTopicClicked:(id)sender;
+ 
+ @endcode
 
  */
 - (IBAction)helpTopicClicked:(id)sender;
@@ -205,7 +208,10 @@
  @discussion After clicking this button it will shows list of SLA plans.The SLA plan can be Emergency, High, Low or normal.
  
  @code
+ 
 - (IBAction)slaClicked:(id)sender;
+ 
+ @endcode
 
  */
 - (IBAction)slaClicked:(id)sender;
@@ -218,7 +224,10 @@
  @discussion AFter clicking this button it will gives a list of all Departments.The department can be Operation, Sales, Support.
  
  @code
+ 
  - (IBAction)deptClicked:(id)sender;
+ 
+ @endcode
 
  */
 - (IBAction)deptClicked:(id)sender;
@@ -231,8 +240,10 @@
  @discussion After clicking this button whatever we done any chnages in ticket, it will save and updated in ticket details.
  
  @code
+ 
  - (IBAction)priorityClicked:(id)sender;
 
+ @endocde
  */
 - (IBAction)priorityClicked:(id)sender;
 
@@ -244,7 +255,10 @@
  @discussion  After cicking this submit button, the data enetered in textfiled while ticket creation will be saved.
  
  @code
+ 
  - (IBAction)submitClicked:(id)sender;
+ 
+ @endcode
 
  */
 - (IBAction)submitClicked:(id)sender;
@@ -255,8 +269,10 @@
  @brief This will gives List of all country codes.
  
  @code
+ 
  - (IBAction)countryCodeClicked:(id)sender;
 
+ @endocde
  */
 - (IBAction)countryCodeClicked:(id)sender;
 
