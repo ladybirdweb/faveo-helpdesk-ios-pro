@@ -2885,6 +2885,53 @@
             </objects>
             <point key="canvasLocation" x="-407" y="-481"/>
         </scene>
+        <!--Notification View Controller-->
+        <scene sceneID="hcd-tU-a13">
+            <objects>
+                <viewController storyboardIdentifier="Notify" id="2tG-Fa-29X" customClass="NotificationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="V5G-4X-bXW"/>
+                        <viewControllerLayoutGuide type="bottom" id="XwP-j8-XNb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Pm7-Xt-x5b">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M0P-1U-k9Q">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="80" id="wdg-4F-2IU">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wdg-4F-2IU" id="9YN-E5-UAl">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="2tG-Fa-29X" id="81l-Ep-BBk"/>
+                                    <outlet property="delegate" destination="2tG-Fa-29X" id="QdP-e6-OCy"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="M0P-1U-k9Q" firstAttribute="top" secondItem="Pm7-Xt-x5b" secondAttribute="top" id="RLZ-jU-L4K"/>
+                            <constraint firstAttribute="trailing" secondItem="M0P-1U-k9Q" secondAttribute="trailing" id="pbc-o9-gRK"/>
+                            <constraint firstItem="M0P-1U-k9Q" firstAttribute="leading" secondItem="Pm7-Xt-x5b" secondAttribute="leading" id="rZe-LZ-Hek"/>
+                            <constraint firstItem="XwP-j8-XNb" firstAttribute="top" secondItem="M0P-1U-k9Q" secondAttribute="bottom" id="w1t-tr-ue2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="M0P-1U-k9Q" id="RuO-cD-eqd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xwp-c8-XjY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-407" y="1079"/>
+        </scene>
     </scenes>
     <resources>
         <image name="about2" width="24" height="24"/>

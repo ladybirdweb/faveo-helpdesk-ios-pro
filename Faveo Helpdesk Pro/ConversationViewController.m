@@ -17,6 +17,8 @@
 #import "HexColors.h"
 #import "GlobalVariables.h"
 #import "RKDropdownAlert.h"
+#import "NotificationViewController.h"
+
 
 @interface ConversationViewController ()<CNPPopupControllerDelegate,UIWebViewDelegate>{
     Utils *utils;

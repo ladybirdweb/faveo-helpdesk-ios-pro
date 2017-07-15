@@ -1,149 +1,114 @@
 //
-//  MyTicketsViewController.m
-//  SideMEnuDemo
+//  NotificationViewController.m
+//  Faveo Helpdesk Pro
 //
-//  Created by Narendra on 01/09/16.
-//  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
+//  Created by Narendra on 14/07/17.
+//  Copyright © 2017 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
-#import "MyTicketsViewController.h"
-#import "TicketTableViewCell.h"
-#import "TicketDetailViewController.h"
-#import "CreateTicketViewController.h"
-#import "AppDelegate.h"
-#import "Utils.h"
+#import "NotificationViewController.h"
+#import "NotificationTableViewCell.h"
 #import "Reachability.h"
+#import "AppDelegate.h"
 #import "AppConstanst.h"
+#import "Utils.h"
 #import "MyWebservices.h"
 #import "GlobalVariables.h"
-#import "LoadingTableViewCell.h"
 #import "RKDropdownAlert.h"
 #import "HexColors.h"
-#import "RMessage.h"
-#import "RMessageView.h"
+#import "LoadingTableViewCell.h"
+#import "TicketDetailViewController.h"
+#import "ClientListViewController.h"
+#import "ClientDetailViewController.h"
 
-@interface MyTicketsViewController ()<RMessageProtocol>{
+@import FirebaseInstanceID;
+@import FirebaseMessaging;
 
+
+@interface NotificationViewController ()
+{
     Utils *utils;
     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
-    GlobalVariables *globalVariables;
+    GlobalVariables *globalVariables;    
 }
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (nonatomic, strong) NSMutableArray *mutableArray;
+@property (nonatomic, strong) NSArray *indexPaths;
 @property (nonatomic, assign) NSInteger totalPages;
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, assign) NSInteger totalTickets;
 @property (nonatomic, strong) NSString *nextPageUrl;
+
 @end
 
-@implementation MyTicketsViewController
-
-//- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
-//{
-//    return YES;
-//}
-//
-//- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
-//{
-//    return YES;
-//}
-//
-//- (BOOL) emptyDataSetShouldAllowImageViewAnimate:(UIScrollView *)scrollView
-//{
-//    return YES;
-//}
-//
-//- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//    return [UIImage imageNamed:@"empty_data_set.png"];
-//}
-//
-//- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//    return [UIColor whiteColor];
-//}
-//
-//- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"transform"];
-//    
-//    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
-//    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0.0, 0.0, 1.0)];
-//    
-//    animation.duration = 0.25;
-//    animation.cumulative = YES;
-//    animation.repeatCount = MAXFLOAT;
-//    
-//    return animation;
-//}
-
-//- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//    NSString *text = @"No records!";
-//    
-//    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
-//                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
-//    
-//    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
-//}
+@implementation NotificationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setTitle:NSLocalizedString(@"MyTickets",nil)];
+    NSLog(@"Naa-Inbox");
     
-    // A little trick for removing the cell separators
-    self.tableView.tableFooterView = [UIView new];
+    NSString *refreshedToken = [[FIRInstanceID instanceID] token];
+    NSLog(@"refreshed token  %@",refreshedToken);
     
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnPressed)]];
-    
+    [self setTitle:NSLocalizedString(@"Notifications",nil)];
     [self addUIRefresh];
+    NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
+    _mutableArray=[[NSMutableArray alloc]init];
+    
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
+    NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
+    
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
-    // Do any additional setup after loading the view.
+    
 }
 
--(void)reload{
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
     
+}
+
+-(void)reload
+{
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    { [refresh endRefreshing];
+    {
+        [refresh endRefreshing];
         //connection unavailable
         [[AppDelegate sharedAppdelegate] hideProgressView];
+        //[utils showAlertWithMessage:NO_INTERNET sendViewController:self];
         [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
     }else{
         
-        //        [[AppDelegate sharedAppdelegate] showProgressView];
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/my-tickets-agent?api_key=%@&ip=%@&token=%@&user_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],[userDefaults objectForKey:@"user_id"]];
         
-        NSLog(@"Mytickets URL-%@",url);
+        
+        NSString *url= [NSString stringWithFormat:@"%@helpdesk/notifications?api_key=%@&user_id=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"user_id"],[userDefaults objectForKey:@"token"]];
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
+            
+            
             if (error || [msg containsString:@"Error"]) {
                 [refresh endRefreshing];
                 [[AppDelegate sharedAppdelegate] hideProgressView];
-               
                 if (msg) {
-                   
+                    
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-
+                    
                 }else if(error)  {
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                     NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+                    NSLog(@"Thread-NO4-getNotificationViewController-Refresh-error == %@",error.localizedDescription);
                 }
-               
                 return ;
             }
             
             if ([msg isEqualToString:@"tokenRefreshed"]) {
                 
                 [self reload];
-                NSLog(@"Thread--NO4-call-getInbox");
+                NSLog(@"Thread--NO4-call-getNotificationViewController");
                 return;
             }
             
@@ -160,24 +125,20 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                         [refresh endRefreshing];
-//                        self.tableView.delegate=self;
-//                        self.tableView.dataSource=self;
-                        //self.tableView.emptyDataSetSource = self;
-                       // self.tableView.emptyDataSetDelegate = self;
                         [self.tableView reloadData];
                     });
                 });
-             }
-            NSLog(@"Thread-NO5-getInbox-closed");
+                
+            }
+            NSLog(@"Thread-NO5-getNotificationViewController-closed");
             
         }];
     }
-}
 
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    return 1;
     NSInteger numOfSections = 0;
     if ([_mutableArray count]==0)
     {
@@ -198,57 +159,43 @@
     return numOfSections;
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.currentPage == self.totalPages
         || self.totalTickets == _mutableArray.count) {
         return _mutableArray.count;
     }
+    
+    
     return _mutableArray.count + 1;
 }
 
- - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == [_mutableArray count] - 1 ) {
         NSLog(@"nextURL  %@",_nextPageUrl);
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
-            [self loadMore:[userDefaults objectForKey:@"user_id"]];
+           
+            [self loadMore];
+
         }
         else{
-           // [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-            [RMessage showNotificationInViewController:self
-                                                 title:nil
-                                              subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
-                                             iconImage:nil
-                                                  type:RMessageTypeSuccess
-                                        customTypeName:nil
-                                              duration:RMessageDurationAutomatic
-                                              callback:nil
-                                           buttonTitle:nil
-                                        buttonCallback:nil
-                                            atPosition:RMessagePositionBottom
-                                  canBeDismissedByUser:YES];
-        }
-       
-        /*if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
-            
             [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-        } */
+            
+        }
     }
 }
 
-
--(void)loadMore:(NSString*)user_id{
+-(void)loadMore{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-       [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
-        [webservices getNextPageURL:_nextPageUrl user_id:user_id callbackHandler:^(NSError *error,id json,NSString* msg) {
+        [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
             
             if (error || [msg containsString:@"Error"]) {
                 
@@ -265,39 +212,39 @@
             
             if ([msg isEqualToString:@"tokenRefreshed"]) {
                 
-                [self loadMore:[userDefaults objectForKey:@"user_id"]];
+                [self loadMore];
                 //NSLog(@"Thread--NO4-call-getInbox");
                 return;
             }
             
             if (json) {
-                NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-            
+                NSLog(@"Thread-NO4--getNotifictionAPI--%@",json);
+                //_indexPaths=[[NSArray alloc]init];
+                //_indexPaths = [json objectForKey:@"data"];
                 _nextPageUrl =[json objectForKey:@"next_page_url"];
                 _currentPage=[[json objectForKey:@"current_page"] integerValue];
                 _totalTickets=[[json objectForKey:@"total"] integerValue];
                 _totalPages=[[json objectForKey:@"last_page"] integerValue];
                 
+                
                 _mutableArray= [_mutableArray mutableCopy];
                 
                 [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
                 
+            
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.tableView reloadData];
-                      
-                    });
+                                            });
                 });
                 
             }
-            NSLog(@"Thread-NO5-getInbox-closed");
+            NSLog(@"Thread-NO5-getNotifictionViewController-closed");
             
         }];
     }
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -315,66 +262,73 @@
         return cell;
     }else{
         
-        TicketTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"TableViewCellID"];
+        NotificationTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"NotificationCellID"];
         
         if (cell == nil)
         {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TicketTableViewCell" owner:self options:nil];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"NotificationTableViewCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
+            
+            
         }
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
+
+        cell.msglbl.text=[finaldic objectForKey:@"message"];
+       
+
+        cell.timelbl.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]];
         
-        cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
-        cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
-        cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+        NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
         
-        cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
-        [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-              cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
-        if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
-            
-            if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
-                [cell.overDueLabel setHidden:NO];
-                
-            }else [cell.overDueLabel setHidden:YES];
-            
+        
+        if(( ![[finaldic objectForKey:@"requester"] isEqual:[NSNull null]] ) )
+        {
+            [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
+            cell.name.text=[NSString stringWithFormat:@"%@ %@",[profileDict objectForKey:@"changed_by_first_name"],[profileDict objectForKey:@"changed_by_last_name"]];
         }
+        else{
+            
+            [cell setUserProfileimage:@"default_pic.png"];
+        }
+     
         return cell;
     }
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
     TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-    NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
+
+    ClientDetailViewController *clientDetail=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
     
-    globalVariables.iD=[finaldic objectForKey:@"id"];
-    globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
+      NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
+    
+    NSString *sen=[finaldic objectForKey:@"senario"];
+    NSLog(@"Senario is : %@",sen);
+    
+    if([sen isEqualToString:@"tickets"])
+    {
+        [self.navigationController pushViewController:td animated:YES];
+    }
+    else if ([sen isEqualToString:@"users"]){
+        [self.navigationController pushViewController:clientDetail animated:YES];
+    }
+  
+    NSDictionary *dict1= [finaldic objectForKey:@"requester"];
+    
+     globalVariables.iD=[dict1 objectForKey:@"id"];
+    //globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
     // globalVariables.title=[finaldic objectForKey:@"title"];
-    [self.navigationController pushViewController:td animated:YES];
-}
-
-
-#pragma mark - SlideNavigationController Methods -
-
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
-{
-    return YES;
-}
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)addBtnPressed{
     
-    CreateTicketViewController *createTicket=[self.storyboard instantiateViewControllerWithIdentifier:@"CreateTicket"];
-    
-    [self.navigationController pushViewController:createTicket animated:YES];
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+  //  [[self navigationController] setNavigationBarHidden:NO];
     
 }
 
@@ -400,14 +354,6 @@
     //    [refresh endRefreshing];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -21,6 +21,7 @@
 #import "HexColors.h"
 #import "RMessage.h"
 #import "RMessageView.h"
+#import "NotificationViewController.h"
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
@@ -48,12 +49,6 @@
     [super viewDidLoad];
     
      NSLog(@"Naa-Inbox");
-//    POPSpringAnimation *basicAnimation = [POPSpringAnimation animation];
-//    basicAnimation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
-//    basicAnimation.toValue=[NSValue valueWithCGRect:CGRectMake(0, 0, 90, 190)];
-//    basicAnimation.name=@"SomeAnimationNameYouChoose";
-//    basicAnimation.delegate=self;
-//    [self.tableView pop_addAnimation:basicAnimation forKey:@"WhatEverNameYouWant"];
     
     NSString *refreshedToken = [[FIRInstanceID instanceID] token];
     NSLog(@"refreshed token  %@",refreshedToken);
@@ -63,18 +58,32 @@
     NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
     _mutableArray=[[NSMutableArray alloc]init];
 
-//    UINib *nib = [UINib nibWithNibName:@"TicketTableViewCell" bundle:nil];
-//    [[self tableView] registerNib:nib forCellReuseIdentifier:@"TableViewCellID"];
-//    [[self tableView] registerNib:nib  forCellReuseIdentifier:@"LoadingCellID"];
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnPressed)]];
     
-  
+    UIButton *addBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [addBtn setImage:[UIImage imageNamed:@"add1.png"] forState:UIControlStateNormal];
+    [addBtn addTarget:self action:@selector(addBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [addBtn setFrame:CGRectMake(0, 0, 32, 32)];
+    
+    UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
+    [NotificationBtn addTarget:self action:@selector(NotificationBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [NotificationBtn setFrame:CGRectMake(44, 0, 32, 32)];
+    
+    UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
+    [rightBarButtonItems addSubview:addBtn];
+    [rightBarButtonItems addSubview:NotificationBtn];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
+    
+    
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
+    
+    
   ////////
     
     //static dispatch_once_t onceToken;
@@ -86,6 +95,14 @@
 
     // Do any additional setup after loading the view.
 }
+
+/* -(void)SaveButtonClicked
+{
+    // Add save button code.
+} */
+
+
+
 
 -(void)reload{
     
@@ -385,7 +402,34 @@
             NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
             
             cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
-            cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+        
+        
+        NSString *fname= [finaldic objectForKey:@"first_name"];
+         NSString *lname= [finaldic objectForKey:@"last_name"];
+        NSString *userName= [finaldic objectForKey:@"user_name"];
+       
+        
+        [Utils isEmpty:fname];
+        [Utils isEmpty:lname];
+        
+       if  (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+       {
+            cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+        }
+        else
+        { if(![Utils isEmpty:userName])
+           {
+            cell.mailIdLabel.text=[finaldic objectForKey:@"user_name"];
+           }
+            else
+            {
+                cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+            }
+            
+        }
+        
+        
+        
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
        
         NSString *title1= [finaldic objectForKey:@"title"];
@@ -458,6 +502,16 @@
     [self.navigationController pushViewController:createTicket animated:YES];
     
 }
+
+-(void)NotificationBtnPressed
+{
+    NotificationViewController *not=[self.storyboard instantiateViewControllerWithIdentifier:@"Notify"];
+    
+    
+    [self.navigationController pushViewController:not animated:YES];
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[self navigationController] setNavigationBarHidden:NO];

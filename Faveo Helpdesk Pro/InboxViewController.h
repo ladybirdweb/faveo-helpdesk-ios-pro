@@ -47,7 +47,7 @@
  @remark If tickets are present in inbox then It will show tickets if not then it will show Empty.
  */
 -(void)addBtnPressed;
-
+-(void)NotificationBtnPressed;
 
 
 @end

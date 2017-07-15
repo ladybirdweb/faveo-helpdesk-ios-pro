@@ -17,6 +17,7 @@
 #import "GlobalVariables.h"
 #import "RKDropdownAlert.h"
 #import "IQKeyboardManager.h"
+#import "NotificationViewController.h"
 
 @interface DetailViewController (){
     
