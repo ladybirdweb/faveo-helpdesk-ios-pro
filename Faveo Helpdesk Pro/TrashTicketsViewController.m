@@ -21,6 +21,7 @@
 #import "HexColors.h"
 #import "RMessage.h"
 #import "RMessageView.h"
+#import "NotificationViewController.h"
 
 @interface TrashTicketsViewController ()<RMessageProtocol>{
 
@@ -50,7 +51,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      [self setTitle:NSLocalizedString(@"Trash Tickets",nil)];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnPressed)]];
+  /*  [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnPressed)]]; */
+    
+    UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
+    [NotificationBtn addTarget:self action:@selector(NotificationBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [NotificationBtn setFrame:CGRectMake(44, 0, 32, 32)];
+    
+    UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
+    // [rightBarButtonItems addSubview:addBtn];
+    [rightBarButtonItems addSubview:NotificationBtn];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
     
     [self addUIRefresh];
     utils=[[Utils alloc]init];
@@ -273,10 +285,20 @@
               cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
         if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
             
-            if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+           /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
                 [cell.overDueLabel setHidden:NO];
                 
             }else [cell.overDueLabel setHidden:YES];
+            
+        }*/
+            if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+                [cell.overDueLabel setHidden:NO];
+                [cell.today setHidden:YES];
+            }else
+            {
+                [cell.overDueLabel setHidden:YES];
+                [cell.today setHidden:NO];
+            }
             
         }
         return cell;
@@ -305,6 +327,15 @@
     CreateTicketViewController *createTicket=[self.storyboard instantiateViewControllerWithIdentifier:@"CreateTicket"];
     
     [self.navigationController pushViewController:createTicket animated:YES];
+    
+}
+
+-(void)NotificationBtnPressed
+{
+    NotificationViewController *not=[self.storyboard instantiateViewControllerWithIdentifier:@"Notify"];
+    
+    
+    [self.navigationController pushViewController:not animated:YES];
     
 }
 

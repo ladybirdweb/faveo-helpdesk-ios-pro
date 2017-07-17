@@ -29,14 +29,13 @@
  @param strUsername This in an string value i.e name of user.
  
  @code
- 
  if(strUsername.length >= 5){
  
  return YES;
  }
  
  return NO;
-
+ 
  @endocde
  
  @see +(BOOL)emailValidation:

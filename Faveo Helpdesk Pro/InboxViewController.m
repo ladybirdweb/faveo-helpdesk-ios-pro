@@ -63,10 +63,11 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
+  /* //added + button for ticket creation
     UIButton *addBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn setImage:[UIImage imageNamed:@"add1.png"] forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(addBtnPressed) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setFrame:CGRectMake(0, 0, 32, 32)];
+    [addBtn setFrame:CGRectMake(0, 0, 32, 32)]; */
     
     UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
@@ -74,7 +75,7 @@
     [NotificationBtn setFrame:CGRectMake(44, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    [rightBarButtonItems addSubview:addBtn];
+   // [rightBarButtonItems addSubview:addBtn];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
@@ -91,18 +92,8 @@
         [self getDependencies];
    // }); 
     
-    
-
-    // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.
 }
-
-/* -(void)SaveButtonClicked
-{
-    // Add save button code.
-} */
-
-
-
 
 -(void)reload{
     
@@ -448,12 +439,23 @@
         
        if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
             
-        if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+       /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
                 [cell.overDueLabel setHidden:NO];
         
         }else [cell.overDueLabel setHidden:YES];
         
-        }
+        } */
+       
+           if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+               [cell.overDueLabel setHidden:NO];
+               [cell.today setHidden:YES];
+           }else
+           {
+               [cell.overDueLabel setHidden:YES];
+               [cell.today setHidden:NO];
+           }
+           
+       }
         
         
         
@@ -501,7 +503,7 @@
     
     [self.navigationController pushViewController:createTicket animated:YES];
     
-}
+} 
 
 -(void)NotificationBtnPressed
 {

@@ -18,29 +18,30 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3k-02-clh">
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H3k-02-clh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zeq-ca-HPY">
                                 <rect key="frame" x="8" y="15" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yesterday at 1:28pm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIF-ez-nhO">
-                                <rect key="frame" x="175" y="12" width="137" height="19"/>
+                                <rect key="frame" x="175" y="11" width="137" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Labelwiosiniedwql;delow;ds;nlcsnckldsncxncknzxkcndkncksdncnkdsnckdsncwsdadadbajdbsajdbsjad" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHc-Zo-UO4">
-                                <rect key="frame" x="66" y="27" width="246" height="48"/>
+                                <rect key="frame" x="66" y="25" width="246" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJX-Pw-Gqr">
-                                <rect key="frame" x="66" y="12" width="109" height="19"/>
+                                <rect key="frame" x="66" y="11" width="109" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
@@ -50,12 +51,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
-                <constraints>
-                    <constraint firstItem="H3k-02-clh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Dpu-l3-Ed9"/>
-                    <constraint firstItem="H3k-02-clh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="hx1-rR-Cwx"/>
-                    <constraint firstItem="H3k-02-clh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jke-vL-3jS"/>
-                    <constraint firstAttribute="trailing" secondItem="H3k-02-clh" secondAttribute="trailing" id="wUX-W5-SSh"/>
-                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="msglbl" destination="GHc-Zo-UO4" id="gtI-3t-IO8"/>
