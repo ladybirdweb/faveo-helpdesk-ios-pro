@@ -85,7 +85,7 @@
     [super viewWillAppear:YES];
     [[self navigationController] setNavigationBarHidden:YES];
     
-    self.urlTextfield.text=@"http://";
+   // self.urlTextfield.text=@"http://";
     
     [utils viewSlideInFromRightToLeft:self.companyURLview];
     [self.loginView setHidden:YES];
@@ -142,7 +142,7 @@
                 
                 [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Verifying URL","")];
                 
-                NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/url?url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
+                NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/check-url?check-check-url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
                 NSLog(@"URL :%@",url);
                 NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
                 [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];

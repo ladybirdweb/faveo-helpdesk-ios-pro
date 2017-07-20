@@ -293,6 +293,8 @@ GlobalVariables *globalVariables;
     
     ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
     globalVariables.iD=@([client_id intValue]);
+    globalVariables.First_name=[finaldic objectForKey:@"first_name"];
+    globalVariables.Last_name=[finaldic objectForKey:@"last_name"];
 
 //    td.clientName=[NSString stringWithFormat:@"%@ %@",clientName,[finaldic objectForKey:@"last_name"]];
     

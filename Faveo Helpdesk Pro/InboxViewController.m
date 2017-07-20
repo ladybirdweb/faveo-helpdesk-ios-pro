@@ -423,9 +423,12 @@
         
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
        
-        NSString *title1= [finaldic objectForKey:@"title"];
+      //  NSString *title1= [finaldic objectForKey:@"title"];
        // cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
-        [Utils isEmpty:title1];
+        
+
+
+       /* [Utils isEmpty:title1];
         
         if  ([Utils isEmpty:title1]){
              cell.ticketSubLabel.text=@"No Title";
@@ -433,7 +436,91 @@
         else
         {
             cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
+            
+        } */
+        
+        
+        
+        ////////////////for UTF-8 data encoding ///////
+        //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
+        
+        
+        
+        // NSString *encodedString = @"=?UTF-8?Q?Re:_Robin_-_Implementing_Faveo_H?= =?UTF-8?Q?elp_Desk._Let=E2=80=99s_get_you_started.?=";
+        
+        
+        
+        
+        
+        NSString *encodedString =[finaldic objectForKey:@"title"];
+        
+        
+        [Utils isEmpty:encodedString];
+        
+        if  ([Utils isEmpty:encodedString]){
+            cell.ticketSubLabel.text=@"No Title";
         }
+        else
+        {
+        
+        NSMutableString *decodedString = [[NSMutableString alloc] init];
+        
+        if ([encodedString hasPrefix:@"=?UTF-8?Q?"] || [encodedString hasSuffix:@"?="])
+        {
+            NSScanner *scanner = [NSScanner scannerWithString:encodedString];
+            NSString *buf = nil;
+            //  NSMutableString *decodedString = [[NSMutableString alloc] init];
+            
+            while ([scanner scanString:@"=?UTF-8?Q?" intoString:NULL]
+                   || ([scanner scanUpToString:@"=?UTF-8?Q?" intoString:&buf] && [scanner scanString:@"=?UTF-8?Q?" intoString:NULL])) {
+                if (buf != nil) {
+                    [decodedString appendString:buf];
+                }
+                
+                buf = nil;
+                
+                NSString *encodedRange;
+                
+                if (![scanner scanUpToString:@"?=" intoString:&encodedRange]) {
+                    break; // Invalid encoding
+                }
+                
+                [scanner scanString:@"?=" intoString:NULL]; // Skip the terminating "?="
+                
+                // Decode the encoded portion (naively using UTF-8 and assuming it really is Q encoded)
+                // I'm doing this really naively, but it should work
+                
+                // Firstly I'm encoding % signs so I can cheat and turn this into a URL-encoded string, which NSString can decode
+                encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"%" withString:@"=25"];
+                
+                // Turn this into a URL-encoded string
+                encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"=" withString:@"%"];
+                
+                
+                // Remove the underscores
+                encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+                
+                [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            }
+            
+            NSLog(@"Decoded string = %@", decodedString);
+            
+            cell.ticketSubLabel.text= decodedString;
+        }
+        else{
+            
+            cell.ticketSubLabel.text= encodedString;
+            
+        }
+        
+        }
+        ///////////////////////////////////////////////////
+
+        
+        
+        
+        
+        
         
             [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         
@@ -475,6 +562,10 @@
     
     globalVariables.iD=[finaldic objectForKey:@"id"];
     globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
+    
+    globalVariables.First_name=[finaldic objectForKey:@"first_name"];
+    globalVariables.Last_name=[finaldic objectForKey:@"last_name"];
+    
     //globalVariables.title=[finaldic objectForKey:@"title"];
     //    globalVariables.first_name=[finaldic objectForKey:@"first_name"];
     //    globalVariables.last_name=[finaldic objectForKey:@"last_name"];

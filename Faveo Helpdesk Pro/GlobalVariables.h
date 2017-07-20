@@ -73,6 +73,9 @@
  */
 @property (strong, nonatomic) NSString *MyticketsCount;
 
+
+@property (strong, nonatomic) NSString *First_name;
+@property (strong, nonatomic) NSString *Last_name;
 /*!
  @method sharedInstance
  

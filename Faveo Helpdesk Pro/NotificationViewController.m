@@ -285,7 +285,32 @@
         if(( ![[finaldic objectForKey:@"requester"] isEqual:[NSNull null]] ) )
         {
             [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
-            cell.name.text=[NSString stringWithFormat:@"%@ %@",[profileDict objectForKey:@"changed_by_first_name"],[profileDict objectForKey:@"changed_by_last_name"]];
+           
+            
+            NSString *fname= [profileDict objectForKey:@"changed_by_first_name"];
+            NSString *lname= [profileDict objectForKey:@"changed_by_last_name"];
+            
+            [Utils isEmpty:fname];
+            [Utils isEmpty:lname];
+            
+            if (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+            {
+                  if(![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+                  {
+                      cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
+                  }
+                else if ((![Utils isEmpty:fname] && [Utils isEmpty:lname]) || ([Utils isEmpty:fname] && ![Utils isEmpty:lname]))
+                {
+                    cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
+                }
+            }
+            else
+            {
+               // cell.name.text=@"Not Availabel";
+                cell.name.text= NSLocalizedString(@"Not Available",nil);
+            }
+                
+         //   cell.name.text=[NSString stringWithFormat:@"%@ %@",[profileDict objectForKey:@"changed_by_first_name"],[profileDict objectForKey:@"changed_by_last_name"]];
         }
         else{
             
