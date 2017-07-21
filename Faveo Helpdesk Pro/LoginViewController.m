@@ -142,7 +142,7 @@
                 
                 [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Verifying URL","")];
                 
-                NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/check-url?check-check-url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
+                NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/check-url?check-url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
                 NSLog(@"URL :%@",url);
                 NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
                 [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];

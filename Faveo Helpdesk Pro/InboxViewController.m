@@ -500,7 +500,12 @@
                 // Remove the underscores
                 encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"_" withString:@" "];
                 
-                [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+               // [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                
+                NSString *str1= [encodedRange stringByRemovingPercentEncoding];
+                [decodedString appendString:str1];
+                
+
             }
             
             NSLog(@"Decoded string = %@", decodedString);

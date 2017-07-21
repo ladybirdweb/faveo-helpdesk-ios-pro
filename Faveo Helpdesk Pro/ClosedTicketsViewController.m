@@ -315,8 +315,16 @@
             
             // Remove the underscores
             encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+ 
+        
+          // [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
             
-            [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            // stringByReplacingPercentEscapesUsingEncoding is depreciated so I changed here,
+            // by replacing stringByRemovingPercentEncoding
+            
+             NSString *str1= [encodedRange stringByRemovingPercentEncoding];
+            [decodedString appendString:str1];
+            
         }
         
         NSLog(@"Decoded string = %@", decodedString);

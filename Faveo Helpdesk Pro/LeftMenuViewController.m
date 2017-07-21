@@ -106,7 +106,7 @@
 //        _myTickets_countLabel.text=@"999+";
 //    }else
 //        _myTickets_countLabel.text=@(my_tickets).stringValue;
-//    [self.tableView reloadData];
+  [self.tableView reloadData];
 
 }
 
