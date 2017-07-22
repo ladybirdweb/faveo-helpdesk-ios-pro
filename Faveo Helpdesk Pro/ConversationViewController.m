@@ -18,9 +18,12 @@
 #import "GlobalVariables.h"
 #import "RKDropdownAlert.h"
 #import "NotificationViewController.h"
+#import "RMessage.h"
+#import "RMessageView.h"
 
 
-@interface ConversationViewController ()<CNPPopupControllerDelegate,UIWebViewDelegate>{
+@interface ConversationViewController ()<CNPPopupControllerDelegate,UIWebViewDelegate,RMessageProtocol>{
+    
     Utils *utils;
     NSUserDefaults *userDefaults;
     NSMutableArray *mutableArray;

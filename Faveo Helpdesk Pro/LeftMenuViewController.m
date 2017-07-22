@@ -13,8 +13,12 @@
 #import "GlobalVariables.h"
 #import "MyWebservices.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "RMessage.h"
+#import "RMessageView.h"
+
+
 @import Firebase;
-@interface LeftMenuViewController (){
+@interface LeftMenuViewController ()<RMessageProtocol>{
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
 }
@@ -176,7 +180,12 @@
             //[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
             //[[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
             
-            [RKDropdownAlert title:@"Faveo Helpdesk" message:@"You've logged out, successfully." backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+           // [RKDropdownAlert title:@"Faveo Helpdesk" message:@"You've logged out, successfully." backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+            [RMessage showNotificationWithTitle:NSLocalizedString(@"Faveo Helpdesk", nil)
+                                       subtitle:NSLocalizedString(@"You've logged out, successfully...!", nil)
+                                           type:RMessageTypeSuccess
+                                 customTypeName:nil
+                                       callback:nil];
             vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"Login"];
             // (vc.view.window!.rootViewController?).dismissViewControllerAnimated(false, completion: nil);
             break;

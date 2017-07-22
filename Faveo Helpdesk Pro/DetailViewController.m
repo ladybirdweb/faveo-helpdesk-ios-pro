@@ -18,8 +18,10 @@
 #import "RKDropdownAlert.h"
 #import "IQKeyboardManager.h"
 #import "NotificationViewController.h"
+#import "RMessage.h"
+#import "RMessageView.h" 
 
-@interface DetailViewController (){
+@interface DetailViewController ()<RMessageProtocol>{
     
     Utils *utils;
     NSUserDefaults *userDefaults;

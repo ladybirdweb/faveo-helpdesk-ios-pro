@@ -16,11 +16,13 @@
 #import "MyWebservices.h"
 #import "GlobalVariables.h"
 #import "RKDropdownAlert.h"
+#import "RMessage.h"
+#import "RMessageView.h" 
 #import "NotificationViewController.h"
 
 //#import "ReplyViewController.h"
 
-@interface TicketDetailViewController () <CNPPopupControllerDelegate>{
+@interface TicketDetailViewController () <CNPPopupControllerDelegate,RMessageProtocol>{
     Utils *utils;
     NSUserDefaults *userDefaults;
     UITextField *textFieldCc;

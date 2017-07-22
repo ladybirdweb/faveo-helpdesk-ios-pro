@@ -18,8 +18,10 @@
 #import "GlobalVariables.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "RKDropdownAlert.h"
+#import "RMessage.h"
+#import "RMessageView.h"
 
-@interface ClientDetailViewController ()
+@interface ClientDetailViewController ()<RMessageProtocol>
 {
     Utils *utils;
     NSUserDefaults *userDefaults;
@@ -83,7 +85,25 @@
         [refresh endRefreshing];
         //connection unavailable
         [_activityIndicatorObject stopAnimating];
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        //[RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+
         
     }else{
         
