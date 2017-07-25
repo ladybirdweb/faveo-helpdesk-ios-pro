@@ -300,7 +300,7 @@ GlobalVariables *globalVariables;
     
     NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
 
-    NSString *email=[finaldic objectForKey:@"email"];
+  /*  NSString *email=[finaldic objectForKey:@"email"];
     NSString *phone=[finaldic objectForKey:@"phone_number"];
         if ([email isEqualToString:@""]) {
         email=NSLocalizedString(@"Not Available",nil);
@@ -317,7 +317,60 @@ GlobalVariables *globalVariables;
     }
         
     cell.emailIdLabel.text=email;
-    cell.phoneNumberLabel.text=phone;
+    cell.phoneNumberLabel.text=phone; */
+        
+        
+        NSString *email=[finaldic objectForKey:@"email"];
+        NSString *mobile=[finaldic objectForKey:@"mobile"];
+        NSString *phone=[finaldic objectForKey:@"phone_number"];
+        NSString *telephone=[finaldic objectForKey:@"telephone"];
+        
+        
+        
+        
+        
+        [Utils isEmpty:email];
+        [Utils isEmpty:mobile];
+        [Utils isEmpty:phone];
+        [Utils isEmpty:telephone];
+        
+        if(![Utils isEmpty:email])
+        {
+            cell.emailIdLabel.text=email;
+        }
+        else{
+            cell.emailIdLabel.text=NSLocalizedString(@"Not Available",nil);
+        }
+        
+        
+        if( ![Utils isEmpty:mobile])
+        {
+            cell.phoneNumberLabel.text=mobile;
+        }
+        else if(! [Utils isEmpty:phone])
+        {
+            cell.phoneNumberLabel.text=phone;
+        }
+        else if(![Utils isEmpty:telephone])
+        {
+            cell.phoneNumberLabel.text=telephone;
+        }
+        else
+        {
+            cell.phoneNumberLabel.text=NSLocalizedString(@"Not Available",nil);
+        }
+        
+        NSString *clientName=[finaldic objectForKey:@"first_name"];
+        
+        if ([clientName isEqualToString:@""]) {
+            clientName=[finaldic objectForKey:@"user_name"];
+        }else{
+            clientName=[NSString stringWithFormat:@"%@ %@",clientName,[finaldic objectForKey:@"last_name"]];
+        }
+
+        
+        
+        
     cell.clientNameLabel.text=clientName;
     [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         return cell;
