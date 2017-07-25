@@ -1391,16 +1391,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACZN-2015-0002015" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uyc-xp-Avp">
-                                <rect key="frame" x="98" y="31" width="219" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="219" id="GeP-Xi-poF"/>
-                                    <constraint firstAttribute="height" constant="21" id="ctj-eN-Me1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GzN-Yn-vAw">
                                 <rect key="frame" x="0.0" y="62" width="414" height="31"/>
                                 <constraints>
@@ -1417,29 +1407,70 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgk-NJ-hrK">
                                 <rect key="frame" x="0.0" y="93" width="414" height="635"/>
                             </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACZN-2015-0002015" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyQ-uW-FL5">
+                                <rect key="frame" x="0.0" y="35" width="131" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="dfa-uR-vM1"/>
+                                    <constraint firstAttribute="width" constant="131" id="miJ-wN-6Fa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ov5-ne-izY">
+                                <rect key="frame" x="301" y="36" width="108" height="20"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ClientName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uyc-xp-Avp">
+                                <rect key="frame" x="146" y="34" width="135" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="135" id="GeP-Xi-poF"/>
+                                    <constraint firstAttribute="height" constant="21" id="ctj-eN-Me1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3ky-ZN-q0e" firstAttribute="top" secondItem="cgk-NJ-hrK" secondAttribute="bottom" constant="8" id="21v-v6-7gs"/>
+                            <constraint firstItem="GzN-Yn-vAw" firstAttribute="top" secondItem="PyQ-uW-FL5" secondAttribute="bottom" constant="6" id="4TC-gS-Kab"/>
                             <constraint firstItem="cgk-NJ-hrK" firstAttribute="leading" secondItem="SYU-Ew-rzk" secondAttribute="leading" id="8WP-FS-gei"/>
+                            <constraint firstItem="3ky-ZN-q0e" firstAttribute="top" secondItem="cgk-NJ-hrK" secondAttribute="bottom" constant="8" id="9BZ-iz-eBX"/>
                             <constraint firstItem="cgk-NJ-hrK" firstAttribute="top" secondItem="GzN-Yn-vAw" secondAttribute="bottom" constant="1" id="9cK-h2-ynN"/>
+                            <constraint firstItem="ov5-ne-izY" firstAttribute="leading" secondItem="Uyc-xp-Avp" secondAttribute="trailing" constant="20" id="HaU-Bc-7Rx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ov5-ne-izY" secondAttribute="trailing" constant="-15" id="Py7-zv-p9g"/>
                             <constraint firstAttribute="trailing" secondItem="cgk-NJ-hrK" secondAttribute="trailing" id="V73-xk-cY6"/>
                             <constraint firstAttribute="trailing" secondItem="GzN-Yn-vAw" secondAttribute="trailing" id="Weg-6L-gAN"/>
-                            <constraint firstItem="GzN-Yn-vAw" firstAttribute="top" secondItem="Uyc-xp-Avp" secondAttribute="bottom" constant="10" id="Yb8-cY-7qg"/>
-                            <constraint firstItem="Uyc-xp-Avp" firstAttribute="top" secondItem="t9C-dd-W0m" secondAttribute="bottom" constant="11" id="bDA-sQ-80z"/>
-                            <constraint firstItem="Uyc-xp-Avp" firstAttribute="centerX" secondItem="SYU-Ew-rzk" secondAttribute="centerX" id="lt8-RE-rgL"/>
+                            <constraint firstItem="ov5-ne-izY" firstAttribute="baseline" secondItem="PyQ-uW-FL5" secondAttribute="baseline" id="Wu1-sg-Fmm"/>
+                            <constraint firstItem="ov5-ne-izY" firstAttribute="centerY" secondItem="PyQ-uW-FL5" secondAttribute="centerY" id="X2t-PG-drX"/>
+                            <constraint firstItem="GzN-Yn-vAw" firstAttribute="top" secondItem="Uyc-xp-Avp" secondAttribute="bottom" constant="7" id="Yb8-cY-7qg"/>
+                            <constraint firstItem="PyQ-uW-FL5" firstAttribute="leading" secondItem="SYU-Ew-rzk" secondAttribute="leadingMargin" constant="-20" id="k7N-hx-nmM"/>
+                            <constraint firstItem="Uyc-xp-Avp" firstAttribute="centerX" secondItem="SYU-Ew-rzk" secondAttribute="centerX" constant="6.5" id="lt8-RE-rgL"/>
                             <constraint firstItem="GzN-Yn-vAw" firstAttribute="leading" secondItem="SYU-Ew-rzk" secondAttribute="leading" id="sx1-9H-0TF"/>
+                            <constraint firstItem="Uyc-xp-Avp" firstAttribute="top" secondItem="t9C-dd-W0m" secondAttribute="bottom" constant="14" id="vHw-Jt-06t"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="cgk-NJ-hrK" id="Vhh-LF-uaz"/>
-                        <outlet property="lblTicketNumber" destination="Uyc-xp-Avp" id="WzO-HV-MnG"/>
+                        <outlet property="nameLabel" destination="Uyc-xp-Avp" id="50u-Ky-wFD"/>
                         <outlet property="segmentedControl" destination="GzN-Yn-vAw" id="MzJ-6X-5J8"/>
+                        <outlet property="statusLabel" destination="ov5-ne-izY" id="iU3-84-1uJ"/>
+                        <outlet property="ticketLabel" destination="PyQ-uW-FL5" id="v0y-tn-1up"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x0n-T3-Y5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1881" y="-482"/>
+            <point key="canvasLocation" x="1879.7101449275365" y="-482.60869565217394"/>
         </scene>
         <!--Conversation View Controller-->
         <scene sceneID="2pp-c5-khm">
