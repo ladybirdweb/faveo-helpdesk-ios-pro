@@ -626,6 +626,8 @@
     globalVariables.First_name=[finaldic objectForKey:@"first_name"];
     globalVariables.Last_name=[finaldic objectForKey:@"last_name"];
     
+    globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
+    
     //globalVariables.title=[finaldic objectForKey:@"title"];
     //    globalVariables.first_name=[finaldic objectForKey:@"first_name"];
     //    globalVariables.last_name=[finaldic objectForKey:@"last_name"];

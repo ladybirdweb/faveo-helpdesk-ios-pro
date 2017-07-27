@@ -56,6 +56,12 @@
  */
 @property(nonatomic,strong) NSString *ticketNumber;
 
+@property (weak, nonatomic) IBOutlet UILabel *ticketLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+
+
 /*!
  @method addBtnPressed
  

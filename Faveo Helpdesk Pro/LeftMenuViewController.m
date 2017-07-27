@@ -276,26 +276,5 @@
     return indexPath;
 }
 
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//    [cell setUserInteractionEnabled:NO];
-//
-//    if (indexPath.section == 1 && indexPath.row == 2)
-//    {
-//        [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-//        [cell setUserInteractionEnabled:YES];
-//    }
-//}
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
