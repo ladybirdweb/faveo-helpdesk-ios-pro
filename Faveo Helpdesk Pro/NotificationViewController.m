@@ -395,8 +395,8 @@
     NSDictionary *dict1= [finaldic objectForKey:@"requester"];
     
      globalVariables.iD=[dict1 objectForKey:@"id"];
-    //globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
-    // globalVariables.title=[finaldic objectForKey:@"title"];
+   // globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
+    //globalVariables.title=[finaldic objectForKey:@"title"];
     
 }
 
