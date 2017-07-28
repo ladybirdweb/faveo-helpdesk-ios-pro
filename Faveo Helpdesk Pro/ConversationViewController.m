@@ -181,6 +181,7 @@
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
     
     cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
+  
     NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
     if (i==0) {
         [cell.internalNoteLabel setHidden:YES];
@@ -189,22 +190,7 @@
         [cell.internalNoteLabel setHidden:NO];
     }
     
-    
-    
-  /*NSString *fName=[finaldic objectForKey:@"first_name"];
-    
- 
-   if ([fName isEqualToString:@""]) {
-        fName=NSLocalizedString(@"Not Available",nil);
-    }
-   else if (fName != [NSNull null])
-    {
-    
-        fName=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
-    } */
-    
-   
-   
+       
    //NSString *system= @"System";
    NSString *fName=[finaldic objectForKey:@"first_name"];
    NSString *lName=[finaldic objectForKey:@"last_name"];
@@ -232,31 +218,19 @@
     }
    
    
+
+   // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
     
-    /*
-    if (fName == (id)[NSNull null] || fName.length == 0 ) {
-        fName=NSLocalizedString(@"Not Available",nil);
-     
-    }
-    
-    else if (fName != (id)[NSNull null])
+    if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
     {
-        fName=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+        [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        
     }
     else
     {
-        fName=@"System";
+        [cell setUserProfileimage:@"default_pic.png"];
     }
-*/
     
-    
-  // [Utils isEmpty:@"fName"];
-    
-   
-    //cell.clientNameLabel.text=fName;
-    
-
-    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
     
     return cell;
 }

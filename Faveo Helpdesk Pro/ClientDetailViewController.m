@@ -221,8 +221,8 @@
     return [mutableArray count];
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -233,10 +233,32 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"OpenCloseTableViewCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
+ 
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
-    cell.ticketNumberLbl.text=[finaldic objectForKey:@"ticket_number"];
-    cell.ticketSubLbl.text=[finaldic objectForKey:@"title"];
+ 
+   // cell.ticketNumberLbl.text=[finaldic objectForKey:@"ticket_number"];
     
+    if ( ( ![[finaldic objectForKey:@"ticket_number"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"ticket_number"] length] != 0 ) )
+    {
+        cell.ticketNumberLbl.text=[finaldic objectForKey:@"ticket_number"];
+    }
+    else
+    {
+         cell.ticketNumberLbl.text= NSLocalizedString(@"Not Available",nil);
+    }
+    
+   // cell.ticketSubLbl.text=[finaldic objectForKey:@"title"];
+    
+    if ( ( ![[finaldic objectForKey:@"title"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"title"] length] != 0 ) )
+    {
+        cell.ticketSubLbl.text=[finaldic objectForKey:@"title"];
+    }
+    else
+    {
+        cell.ticketSubLbl.text= NSLocalizedString(@"Not Available",nil);
+    }
+    
+ 
     if ([[finaldic objectForKey:@"ticket_status_name"] isEqualToString:@"Open"]) {
         cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] CGColor];
     }else{
@@ -280,15 +302,8 @@
 }
 
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     //TODO: Calculate cell height

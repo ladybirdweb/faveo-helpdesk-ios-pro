@@ -447,29 +447,51 @@
         
             NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
             
-            cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+            //cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
         
+        
+        NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
+        
+        [Utils isEmpty:ticketNumber];
+        
+        if  (![Utils isEmpty:ticketNumber] && ![ticketNumber isEqualToString:@""])
+        {
+            cell.ticketIdLabel.text=ticketNumber;
+        }
+        else
+        {
+            cell.ticketIdLabel.text=NSLocalizedString(@"Not Available", nil);
+        }
         
         NSString *fname= [finaldic objectForKey:@"first_name"];
-         NSString *lname= [finaldic objectForKey:@"last_name"];
+        NSString *lname= [finaldic objectForKey:@"last_name"];
         NSString *userName= [finaldic objectForKey:@"user_name"];
-       
+        NSString*email1=[finaldic objectForKey:@"email"];
         
         [Utils isEmpty:fname];
         [Utils isEmpty:lname];
+        [Utils isEmpty:email1];
         
-       if  (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+       if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
        {
-            cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
-        }
+            if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+            {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+            }
+            else{
+                cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+            }
+       }
         else
         { if(![Utils isEmpty:userName])
            {
             cell.mailIdLabel.text=[finaldic objectForKey:@"user_name"];
            }
-            else
+            if(![Utils isEmpty:email1])
             {
                 cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+            }
+            else{
+                cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
             }
             
         }
@@ -478,24 +500,9 @@
         
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
        
-      //  NSString *title1= [finaldic objectForKey:@"title"];
-       // cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
-        
-
-
-       /* [Utils isEmpty:title1];
-        
-        if  ([Utils isEmpty:title1]){
-             cell.ticketSubLabel.text=@"No Title";
-        }
-        else
-        {
-            cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
-            
-        } */
         
         
-        
+// ______________________________________________________________________________________________________
         ////////////////for UTF-8 data encoding ///////
         //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
         
@@ -575,14 +582,25 @@
         
         }
         ///////////////////////////////////////////////////
-
+//____________________________________________________________________________________________________
         
         
         
         
         
         
+           // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        
+        if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+        {
             [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+            
+        }
+        else
+        {
+            [cell setUserProfileimage:@"default_pic.png"];
+        }
+        
         
        if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
             
@@ -604,9 +622,7 @@
            
        }
         
-        
-        
-        
+    
        
             cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
         

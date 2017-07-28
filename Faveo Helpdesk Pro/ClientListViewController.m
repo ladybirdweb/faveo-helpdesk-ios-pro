@@ -350,18 +350,39 @@ GlobalVariables *globalVariables;
             cell.phoneNumberLabel.text=NSLocalizedString(@"Not Available",nil);
         }
             
-    NSString *clientName=[finaldic objectForKey:@"first_name"];
-
-    if ([clientName isEqualToString:@""]) {
-        clientName=[finaldic objectForKey:@"user_name"];
-    }else{
-        clientName=[NSString stringWithFormat:@"%@ %@",clientName,[finaldic objectForKey:@"last_name"]];
-    }
+ 
+        NSString *clientFirstName=[finaldic objectForKey:@"first_name"];
+        NSString *clientLastName=[finaldic objectForKey:@"last_name"];
         
-    //cell.emailIdLabel.text=email;
-   // cell.phoneNumberLabel.text=phone;
-    cell.clientNameLabel.text=clientName;
-    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        [Utils isEmpty:clientFirstName];
+        [Utils isEmpty:clientLastName];
+        
+        if(![Utils isEmpty:clientFirstName] && ![Utils isEmpty:clientLastName])
+        {
+            cell.clientNameLabel.text=[NSString stringWithFormat:@"%@ %@",clientFirstName,clientLastName];
+        }
+        else if (![Utils isEmpty:clientFirstName] || ![Utils isEmpty:clientLastName])
+        {
+            cell.clientNameLabel.text=[NSString stringWithFormat:@"%@ %@",clientFirstName,clientLastName];
+        }
+        else
+        {
+            cell.clientNameLabel.text=NSLocalizedString(@"Not Available",nil);
+        }
+            
+        
+   // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        
+        if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+        {
+            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+            
+        }
+        else
+        {
+            [cell setUserProfileimage:@"default_pic.png"];
+        }
+        
         return cell;
     }
 }

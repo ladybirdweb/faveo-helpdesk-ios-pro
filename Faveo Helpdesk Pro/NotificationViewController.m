@@ -324,10 +324,29 @@
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
 
-        cell.msglbl.text=[finaldic objectForKey:@"message"];
+       // cell.msglbl.text=[finaldic objectForKey:@"message"];
+        
+        if ( ( ![[finaldic objectForKey:@"message"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"message"] length] != 0 ) )
+        {
+            cell.msglbl.text=[finaldic objectForKey:@"message"];
+        }
+        else
+        {
+            cell.msglbl.text= NSLocalizedString(@"Not Available",nil);
+        }
        
 
-        cell.timelbl.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]];
+       // cell.timelbl.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]];
+        
+        if ( ( ![[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]] isEqual:[NSNull null]] ) && ( [[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]] length] != 0 ) )
+        {
+            cell.timelbl.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]];
+        }
+        else
+        {
+            cell.timelbl.text= NSLocalizedString(@"Not Available",nil);
+        }
+      
         
         NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
         

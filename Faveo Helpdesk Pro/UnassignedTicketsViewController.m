@@ -303,13 +303,69 @@
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
         
-        cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
-        cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
-        cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
-       // cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
+//        cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+//        cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+//        cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+     
+        
+        // cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+        if ( ( ![[finaldic objectForKey:@"ticket_number"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"ticket_number"] length] != 0 ) )
+        {
+            cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+        }
+        else
+        {
+            cell.ticketIdLabel.text= NSLocalizedString(@"Not Available",nil);
+        }
+        
+        // cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+       
+        NSString *fname= [finaldic objectForKey:@"first_name"];
+        NSString *lname= [finaldic objectForKey:@"last_name"];
+        NSString *userName= [finaldic objectForKey:@"user_name"];
+        NSString*email1=[finaldic objectForKey:@"email"];
+        
+        [Utils isEmpty:fname];
+        [Utils isEmpty:lname];
+        [Utils isEmpty:email1];
+        
+        if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+        {
+            if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+            {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+            }
+            else{
+                cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+            }
+        }
+        else
+        { if(![Utils isEmpty:userName])
+        {
+            cell.mailIdLabel.text=[finaldic objectForKey:@"user_name"];
+        }
+            if(![Utils isEmpty:email1])
+            {
+                cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+            }
+            else{
+                cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
+            }
+            
+        }
+        
+        // cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+        
+        if ( ( ![[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]] isEqual:[NSNull null]] ) && ( [[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]] length] != 0 ) )
+        {
+            cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+        }
+        else
+        {
+            cell.timeStampLabel.text= NSLocalizedString(@"Not Available",nil);
+        }
         
         
-        
+//________________________________________________________________________________________________
         ////////////////for UTF-8 data encoding ///////
         //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
         
@@ -373,15 +429,27 @@
             
         }
         
-        ///////////////////////////////////////////////////
+//___________________________________________________________________________________________________
+        
+        
+        
+        
+        
+        //[cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        
+        if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+        {
+            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+            
+        }
+        else
+        {
+            [cell setUserProfileimage:@"default_pic.png"];
+        }
 
         
+      cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
         
-        
-        
-        
-        [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-              cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
         if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
             
           /*  if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
