@@ -419,12 +419,15 @@
 }
 
 
+
+
+        
 -(void)postReply{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-       // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -443,21 +446,27 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
         
+    }else{
         
         [[AppDelegate sharedAppdelegate] showProgressView];
         
-//        NSDictionary *param=[NSDictionary dictionaryWithObjectsAndKeys:API_KEY,@"api_key",IP,@"ip",[userDefaults objectForKey:@"token"],@"token",textViewReply.text,@"reply_content",textFieldCc.text,@"cc",globalVariables.iD,@"ticket_ID",nil];
-//        NSLog(@"Dic %@",param);
-//        
-//        NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply",[userDefaults objectForKey:@"companyURL"]];
         
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&token=%@&reply_content=%@&ticket_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],textViewReply.text,globalVariables.iD];
+        //   NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,textViewReply.text,[userDefaults objectForKey:@"token"]];
         
+        // NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,textViewReply.text,[userDefaults objectForKey:@"token"]];
+        
+         NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,textViewReply.text,[userDefaults objectForKey:@"token"]];
+        
+        
+        NSLog(@"URL is : %@",url);
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
-        
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            
+            
+            
             [[AppDelegate sharedAppdelegate] hideProgressView];
+            
             if (error || [msg containsString:@"Error"]) {
                 
                 if (msg) {
@@ -483,8 +492,8 @@
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"result"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        // [RKDropdownAlert title:APP_NAME message:@"Posted your reply!"backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                       
+                        // [RKDropdownAlert title:APP_NAME message:@"Posted your note!"backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        
                         if (self.navigationController.navigationBarHidden) {
                             [self.navigationController setNavigationBarHidden:NO];
                         }
@@ -501,18 +510,19 @@
                                                     buttonCallback:nil
                                                         atPosition:RMessagePositionNavBarOverlay
                                               canBeDismissedByUser:YES];
-
+                        
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
-
+                        // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
                     });
                 }
-                
             }
             NSLog(@"Thread-NO5-postCreateTicket-closed");
             
         }];
     }
+    
 }
+
 
 //- (NSString *)removeEndSpaceFrom:(NSString *)strtoremove{
 //    NSUInteger location = 0;

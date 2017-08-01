@@ -85,7 +85,7 @@
     [super viewWillAppear:YES];
     [[self navigationController] setNavigationBarHidden:YES];
     
-   // self.urlTextfield.text=@"http://";
+    self.urlTextfield.text=@"http://";
     
     [utils viewSlideInFromRightToLeft:self.companyURLview];
     [self.loginView setHidden:YES];
