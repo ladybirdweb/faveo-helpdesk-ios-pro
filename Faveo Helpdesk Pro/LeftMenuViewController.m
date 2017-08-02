@@ -139,6 +139,7 @@
     
     UIViewController *vc ;
     
+@try{
     switch (indexPath.row)
     {
         case 1:
@@ -199,7 +200,21 @@
         default:
             break;
     }
+}@catch (NSException *exception)
+    {
+        // Print exception information
+        NSLog( @"NSException caught in LeftMenu View Controller" );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        // Cleanup, in both success and fail cases
+        NSLog( @"In finally block");
     
+    }
+   
     [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc
                                                              withSlideOutAnimation:self.slideOutAnimationEnabled
                                                                      andCompletion:nil];
@@ -227,10 +242,25 @@
     // get the path to our Data/plist file
     NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
     NSError *error;
+  @try{
     if(![[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error])
     {
         NSLog(@"Error while removing the plist %@", error.localizedDescription);
         //TODO: Handle/Log error
+    }
+  }@catch (NSException *exception)
+    {
+        // Print exception information
+        NSLog( @"NSException caught in Logout Process in LeftMenu ViewController" );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        // Cleanup, in both success and fail cases
+        NSLog( @"In finally block");
+
     }
     
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -244,6 +274,7 @@
 
    // NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     NSString *url=[NSString stringWithFormat:@"%@fcmtoken?user_id=%@&fcm_token=%s&os=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"user_id"],"0",@"ios"];
+@try{
     MyWebservices *webservices=[MyWebservices sharedInstance];
     [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
         if (error || [msg containsString:@"Error"]) {
@@ -263,6 +294,20 @@
         }
         
     }];
+}@catch (NSException *exception)
+    {
+        // Print exception information
+        NSLog( @"NSException caught In sendDeviceToken method in LeftMenu ViewController" );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        // Cleanup, in both success and fail cases
+        NSLog( @"In finally block");
+    
+    }
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {

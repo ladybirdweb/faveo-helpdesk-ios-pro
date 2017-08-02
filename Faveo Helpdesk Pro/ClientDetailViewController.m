@@ -109,6 +109,7 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/my-tickets-user?api_key=%@&ip=%@&token=%@&user_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_clientId];
         
+ @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -187,6 +188,21 @@
             NSLog(@"Thread-NO5-getClientTickets-closed");
             
         }];
+ }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in reload method in Client ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return ;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 }
 
@@ -236,7 +252,8 @@
  
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
  
-   // cell.ticketNumberLbl.text=[finaldic objectForKey:@"ticket_number"];
+@try{
+    // cell.ticketNumberLbl.text=[finaldic objectForKey:@"ticket_number"];
     
     if ( ( ![[finaldic objectForKey:@"ticket_number"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"ticket_number"] length] != 0 ) )
     {
@@ -265,6 +282,21 @@
         cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] CGColor];
         
     }
+}@catch (NSException *exception)
+    {
+        // Print exception information
+        NSLog( @"NSException caught in CellForRowAtIndexPath method in Client-Detail ViewController\n" );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return cell;
+    }
+    @finally
+    {
+        // Cleanup, in both success and fail cases
+        NSLog( @"In finally block");
+        
+    }
+
     return cell;
 }
 

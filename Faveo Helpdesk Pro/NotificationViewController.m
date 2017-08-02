@@ -105,6 +105,7 @@
         
         NSString *url= [NSString stringWithFormat:@"%@helpdesk/notifications?api_key=%@&user_id=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"user_id"],[userDefaults objectForKey:@"token"]];
         
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -152,6 +153,21 @@
             NSLog(@"Thread-NO5-getNotificationViewController-closed");
             
         }];
+    }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in reload method in Notification ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return ;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 
 }
@@ -244,6 +260,7 @@
         
     }else{
         
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -292,6 +309,21 @@
             NSLog(@"Thread-NO5-getNotifictionViewController-closed");
             
         }];
+    }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in load-more methos in Notification ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return ;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 }
 
@@ -324,7 +356,8 @@
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
 
-       // cell.msglbl.text=[finaldic objectForKey:@"message"];
+    @try{
+        // cell.msglbl.text=[finaldic objectForKey:@"message"];
         
         if ( ( ![[finaldic objectForKey:@"message"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"message"] length] != 0 ) )
         {
@@ -385,7 +418,20 @@
             
             [cell setUserProfileimage:@"default_pic.png"];
         }
-     
+    }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in CellForRowATIndex method in Notification ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell ;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
         return cell;
     }
 }
@@ -400,6 +446,7 @@
     
       NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
     
+@try{
     NSString *sen=[finaldic objectForKey:@"senario"];
     NSLog(@"Senario is : %@",sen);
     
@@ -416,6 +463,20 @@
      globalVariables.iD=[dict1 objectForKey:@"id"];
    // globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
     //globalVariables.title=[finaldic objectForKey:@"title"];
+}@catch (NSException *exception)
+    {
+        // Print exception information
+        NSLog( @"NSException caught Notification ViewController\n" );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return ;
+    }
+    @finally
+    {
+        // Cleanup, in both success and fail cases
+        NSLog( @"In finally block");
+        
+    }
     
 }
 

@@ -95,6 +95,7 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/unassigned?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
         
+ @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -140,6 +141,20 @@
             NSLog(@"Thread-NO5-getUnnassigned-closed");
             
         }];
+ }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught reload in Unassigned ViewController" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
     }
 }
 
@@ -227,6 +242,7 @@
         
     }else{
         
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -273,6 +289,20 @@
             NSLog(@"Thread-NO5-getInbox-closed");
             
         }];
+    }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in LoadMore Method in Unassigned ViewController" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+        
+        }
     }
 }
 
@@ -309,6 +339,7 @@
      
         
         // cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+ @try{
         if ( ( ![[finaldic objectForKey:@"ticket_number"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"ticket_number"] length] != 0 ) )
         {
             cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
@@ -364,7 +395,20 @@
             cell.timeStampLabel.text= NSLocalizedString(@"Not Available",nil);
         }
         
+ }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in CellforRowAtIndexPath in Unassigned ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
         
+        }
 //________________________________________________________________________________________________
         ////////////////for UTF-8 data encoding ///////
         //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
@@ -437,6 +481,7 @@
         
         //[cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         
+@try{
         if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
         {
             [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
@@ -467,6 +512,20 @@
                 [cell.today setHidden:NO];
             }
             
+        }
+}@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in CellforRowAtIndexPath in Unassigned ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+        
         }
         return cell;
     }

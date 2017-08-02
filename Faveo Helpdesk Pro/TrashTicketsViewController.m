@@ -103,6 +103,7 @@
         //        [[AppDelegate sharedAppdelegate] showProgressView];
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/trash?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
         
+   @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -148,6 +149,17 @@
             NSLog(@"Thread-NO5-getUnnassigned-closed");
             
         }];
+   }@catch (NSException *exception)
+        {
+            NSLog( @"NSException caught in reload method in TrashTickets ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            NSLog(@"In Finally block");
+        }
     }
 }
 
@@ -235,6 +247,7 @@
         
     }else{
         
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -280,6 +293,21 @@
             NSLog(@"Thread-NO5-getInbox-closed");
             
         }];
+    }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in loadmore methos in TrashTickets ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 }
 
@@ -317,6 +345,7 @@
 //        cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
 //        cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
    
+    @try{
         // cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
         if ( ( ![[finaldic objectForKey:@"ticket_number"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"ticket_number"] length] != 0 ) )
         {
@@ -372,7 +401,21 @@
         {
             cell.timeStampLabel.text= NSLocalizedString(@"Not Available",nil);
         }
-        
+       
+    }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in CellForRowAtIndexPath methos in TrashTickets ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
 //______________________________________________________________________________________________________
         ////////////////for UTF-8 data encoding ///////
         //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
@@ -441,7 +484,7 @@
         
         
         
-        
+    @try{
       //  [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         
         if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
@@ -477,6 +520,21 @@
             }
             
         }
+    }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in CellForRowAtIndexPath methos in TrashTickets ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
         return cell;
     }
 }

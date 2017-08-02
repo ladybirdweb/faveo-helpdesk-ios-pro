@@ -86,6 +86,7 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/ticket-thread?api_key=%@&ip=%@&token=%@&id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariable.iD];
         
+  @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -132,6 +133,21 @@
             NSLog(@"Thread-NO5-getConversation-closed");
             
         }];
+  }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in reload method in Conversation ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return ;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 }
 
@@ -180,6 +196,7 @@
     }
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
     
+@try{
     cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
   
     NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
@@ -231,7 +248,21 @@
         [cell setUserProfileimage:@"default_pic.png"];
     }
     
-    
+}@catch (NSException *exception)
+    {
+        // Print exception information
+        NSLog( @"NSException caught in CellForRowAtIndexPath methos in Conversation ViewController\n" );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return cell;
+    }
+    @finally
+    {
+        // Cleanup, in both success and fail cases
+        NSLog( @"In finally block");
+        
+    }
+
     return cell;
 }
 

@@ -88,7 +88,7 @@ GlobalVariables *globalVariables;
         
         //        [[AppDelegate sharedAppdelegate] showProgressView];
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/customers-custom?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
-        
+@try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -136,6 +136,21 @@ GlobalVariables *globalVariables;
             NSLog(@"Thread-NO5-getClients-closed");
             
         }];
+}@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in reload method in ClientList ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 }
 
@@ -193,6 +208,7 @@ GlobalVariables *globalVariables;
         
     }else{
         
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -239,6 +255,21 @@ GlobalVariables *globalVariables;
             NSLog(@"Thread-NO5-getInbox-closed");
             
         }];
+    }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in loadmore methos in ClienList ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return ;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 }
 
@@ -310,6 +341,7 @@ GlobalVariables *globalVariables;
         phone=NSLocalizedString(@"Not Available",nil);
     } */
         
+ @try{
         NSString *email=[finaldic objectForKey:@"email"];
         NSString *mobile=[finaldic objectForKey:@"mobile"];
         NSString *phone=[finaldic objectForKey:@"phone_number"];
@@ -382,7 +414,21 @@ GlobalVariables *globalVariables;
         {
             [cell setUserProfileimage:@"default_pic.png"];
         }
-        
+ }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in CellForRowAtIndexPath method in ClintList ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
         return cell;
     }
 }

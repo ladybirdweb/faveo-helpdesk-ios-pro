@@ -128,7 +128,8 @@
         
         //        [[AppDelegate sharedAppdelegate] showProgressView];
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/inbox?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
-        
+     
+@try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -176,6 +177,20 @@
             NSLog(@"Thread-NO5-getInbox-closed");
             
         }];
+}@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in reload method in Inbox ViewController " );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
     }
 }
 
@@ -207,6 +222,8 @@
     }else{
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/dependency?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
+       
+  @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
             NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
@@ -274,6 +291,20 @@
             NSLog(@"Thread-NO5-getDependencies-closed");
         }
          ];
+  }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
     }
     NSLog(@"Thread-NO2-getDependencies()-closed");
 }
@@ -365,6 +396,7 @@
         
     }else{
         
+ @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -416,6 +448,20 @@
             NSLog(@"Thread-NO5-getInbox-closed");
             
         }];
+ }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in loadMore method in Inbox ViewController" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
     }
 }
 
@@ -449,7 +495,7 @@
             
             //cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
         
-        
+@try{
         NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
         
         [Utils isEmpty:ticketNumber];
@@ -501,7 +547,20 @@
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
        
         
-        
+} @catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
 // ______________________________________________________________________________________________________
         ////////////////for UTF-8 data encoding ///////
         //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
@@ -590,7 +649,8 @@
         
         
            // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-        
+@try{
+     
         if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
         {
             [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
@@ -625,8 +685,21 @@
     
        
             cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
+}@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
         
-            
+        }
+        
         return cell;
     }
 }

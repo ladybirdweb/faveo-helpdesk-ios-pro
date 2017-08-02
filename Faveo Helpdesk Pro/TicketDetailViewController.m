@@ -359,6 +359,7 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/internal-note?api_key=%@&ip=%@&token=%@&user_id=%@&body=%@&ticket_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],[userDefaults objectForKey:@"user_id"],textViewInternalNote.text,globalVariables.iD];
         
+ @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -415,6 +416,21 @@
             NSLog(@"Thread-NO5-postCreateTicket-closed");
             
         }];
+  }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in Post-Internal-Note method in TicketDetail ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 }
 
@@ -459,6 +475,7 @@
         
         
         NSLog(@"URL is : %@",url);
+  @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -519,6 +536,21 @@
             NSLog(@"Thread-NO5-postCreateTicket-closed");
             
         }];
+  }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in post-replay methos in TicketDetail ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
     
 }

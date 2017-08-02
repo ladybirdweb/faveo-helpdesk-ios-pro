@@ -99,6 +99,7 @@
         //        [[AppDelegate sharedAppdelegate] showProgressView];
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/closed?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
         
+  @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -144,6 +145,21 @@
             NSLog(@"Thread-NO5-getUnnassigned-closed");
             
         }];
+      
+  }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in reload method in Closed Tickets ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+        
+        }
     }
 }
 
@@ -228,6 +244,7 @@
         
     }else{
         
+ @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -274,6 +291,20 @@
             NSLog(@"Thread-NO5-getInbox-closed");
             
         }];
+ }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in loadMore method in Closed Ticket ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+        
+        }
     }
 }
 
@@ -307,6 +338,7 @@
 //        cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
 //        cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
      
+@try{
         // cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
         if ( ( ![[finaldic objectForKey:@"ticket_number"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"ticket_number"] length] != 0 ) )
         {
@@ -362,7 +394,22 @@
         {
             cell.timeStampLabel.text= NSLocalizedString(@"Not Available",nil);
         }
-        
+    
+    
+}@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in CellForRowAtIndexPath method in ClosedTicket View Controller\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
 //___________________________________________________________________________________________________
        ////////////////for UTF-8 data encoding ///////
      //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
@@ -431,8 +478,9 @@
         }
 //___________________________________________________________________________________________________
         
-        
-      //  [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+@try{
+     
+        //  [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         
         if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
         {
@@ -464,6 +512,20 @@
                 [cell.today setHidden:NO];
             }
             
+        }
+}@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in CellForRowAtIndexPath in ClosedTickets ViewController" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+        
         }
         return cell;
     }

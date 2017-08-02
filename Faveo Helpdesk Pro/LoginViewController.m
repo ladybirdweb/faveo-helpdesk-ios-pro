@@ -202,36 +202,30 @@
                     
                     NSLog(@"Get your response == %@", replyStr);
                     
-                    if ([replyStr containsString:@"success"]) {
+                    @try{
+                        if ([replyStr containsString:@"success"]) {
                         
-                        NSLog(@"Success");
-                        // [[AppDelegate sharedAppdelegate] hideProgressView];
-                        //                        if (!Utils.isDebug) {
-                        [self verifyBilling];
-                        //                        }else{
-                        //                            dispatch_async(dispatch_get_main_queue(), ^{
-                        //
-                        //                                [RKDropdownAlert title:APP_NAME message:@"Verified URL" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                        //                                [[AppDelegate sharedAppdelegate] hideProgressView];
-                        //                                [self.companyURLview setHidden:YES];
-                        //                                [self.loginView setHidden:NO];
-                        //                                [utils viewSlideInFromRightToLeft:self.loginView];
-                        //                            });
-                        //                            [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
-                        //                            [userdefaults synchronize];
-                        //                        }
+                            NSLog(@"Success");
+                           [self verifyBilling];
+                         
                         
-                        
-                        //                        dispatch_async(dispatch_get_main_queue(), ^{
-                        //
-                        //                        });
-                        
-                        // NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                        
-                    }else{
+                        }else{
                         
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                         [utils showAlertWithMessage:NSLocalizedString(@"Error verifying URL",nil)sendViewController:self];
+                          }
+                    }@catch (NSException *exception)
+                    {
+                        // Print exception information
+                        NSLog( @"NSException caught in Billing in Login ViewController" );
+                        NSLog( @"Name: %@", exception.name);
+                        NSLog( @"Reason: %@", exception.reason );
+                        return;
+                    }
+                    @finally 
+                    {
+                        // Cleanup, in both success and fail cases
+                        NSLog( @"In finally block");
                         
                     }
                     
@@ -335,7 +329,7 @@
                 
                 NSLog(@"Get your response == %@", replyStr);
                 
-                
+        
                 if ([replyStr containsString:@"token"]) {
                     
                     @try{
@@ -435,6 +429,8 @@
     //[[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
     //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     NSString *url=[NSString stringWithFormat:@"%@?url=%@",BILLING_API,baseURL];
+   
+@try{
     MyWebservices *webservices=[MyWebservices sharedInstance];
     [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
         if (error || [msg containsString:@"Error"]) {
@@ -481,6 +477,20 @@
         }
         
     }];
+}@catch (NSException *exception)
+    {
+        // Print exception information
+        NSLog( @"NSException caught in verifyBilling method in Login ViewController " );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        // Cleanup, in both success and fail cases
+        NSLog( @"In finally block");
+        
+    }
 }
 
 - (BOOL)prefersStatusBarHidden
