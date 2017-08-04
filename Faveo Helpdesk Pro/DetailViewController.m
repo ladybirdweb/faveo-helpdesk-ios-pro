@@ -523,6 +523,8 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&help_topic=%@&ticket_type=%@&ticket_priority=%@&ticket_source=%@&subject=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,help_topic_id,type_id,priority_id,source_id,_subjectTextField.text];
         
+        NSLog(@"URL is : %@",url);
+        
     @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
