@@ -396,16 +396,12 @@ GlobalVariables *globalVariables;
         
         if(![Utils isEmpty:clientFirstName] && ![Utils isEmpty:clientLastName])
         {
-            cell.clientNameLabel.text=[NSString stringWithFormat:@"%@ %@",clientFirstName,clientLastName];
+            cell.clientNameLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
         }
-        else if(! [Utils isEmpty:userName])
-        {
-            cell.clientNameLabel.text=userName;
-        }
-     
+    
         else if (![Utils isEmpty:clientFirstName] || ![Utils isEmpty:clientLastName])
         {
-            cell.clientNameLabel.text=[NSString stringWithFormat:@"%@ %@",clientFirstName,clientLastName];
+            cell.clientNameLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
         }
         else
         {
