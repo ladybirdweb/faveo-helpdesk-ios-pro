@@ -108,6 +108,7 @@
     }else{
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/my-tickets-user?api_key=%@&ip=%@&token=%@&user_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_clientId];
+        NSLog(@"URL is : %@",url);
         
  @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -132,43 +133,63 @@
                 mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
                 NSLog(@"Thread-NO4--getClientTickets--%@",json);
                 mutableArray = [[json objectForKey:@"tickets"] copy];
+                
                 NSDictionary *requester=[json objectForKey:@"requester"];
                 //[requester objectForKey:@"company"];
-               _emailID= [requester objectForKey:@"email"];
-                 _isClientActive=[requester objectForKey:@"active"];
-               _clientName= [requester objectForKey:@"first_name"];
-              
-                
+             
+                if(( ![[json objectForKey:@"requester"] isEqual:[NSNull null]] ) )
             
-                
-                 _phone= [requester objectForKey:@"phone_number"];
-                [requester objectForKey:@"profile_pic"];
-               
-                    if ([_emailID isEqualToString:@""]) {
-                        _emailID=NSLocalizedString(@"Not Available",nil);
+                { /////////
+            
+                    if (( ![[requester objectForKey:@"email"] isEqual:[NSNull null]] )) {
+                        
+                         _emailID= [requester objectForKey:@"email"];
                     }
-                
-                    if ([_phone isEqualToString:@""]) {
-                        _phone=NSLocalizedString(@"Not Available",nil);
+                    else
+                    {
+                         _emailID=NSLocalizedString(@"Not Available",nil);
                     }
-                
-                    if ([_clientName isEqualToString:@""]) {
-                        _clientName=[requester objectForKey:@"user_name"];
-                    }else{
-                    _clientName=[NSString stringWithFormat:@"%@ %@",_clientName,[requester objectForKey:@"last_name"]];
                     
+                    if (( ![[requester objectForKey:@"active"] isEqual:[NSNull null]] )) {
+                        // _isClientActive=[requester objectForKey:@"active"];
+                         _isClientActive= [NSString stringWithFormat:@"%@",[requester objectForKey:@"active"]];
+                        
+                        if ([_isClientActive isEqualToString:@"1"]) {
+                            _isClientActive=@"ACTIVE";
+                        }else  _isClientActive=@"INACTIVE";
                     }
-                
-               
-                  /////////// was crashing
+                    else
+                    {
+                        _isClientActive= NSLocalizedString(@"Not Available",nil);
+                    }
+                    
+                    if (( ![[requester objectForKey:@"first_name"] isEqual:[NSNull null]] )) {
+                        _clientName=[NSString stringWithFormat:@"%@ %@ ", [requester objectForKey:@"first_name"], [requester objectForKey:@"last_name"]];
+                    }
+                    else
+                    {
+                        _clientName=NSLocalizedString(@"Not Available",nil);
+                    }
+                    
+                   
+                    if (( ![[requester objectForKey:@"phone_number"] isEqual:[NSNull null]] ) && ![[requester objectForKey:@"phone_number"] isEqualToString:@""]) {
+                        _phone=[requester objectForKey:@"phone_number"];
+                    }
+                    else if(( ![[requester objectForKey:@"mobile"] isEqual:[NSNull null]] ))
+                    {
+                        _phone=[requester objectForKey:@"mobile"];
+                    }
+                    else
+                    {
+                        _phone= NSLocalizedString(@"Not Available",nil);
+                    }
+    
+                    
+                   [requester objectForKey:@"profile_pic"];
+
             
-                _isClientActive= [NSString stringWithFormat:@"%@",[requester objectForKey:@"active"]];
+                } ///////
                 
-                /////solved
-                
-                   if ([_isClientActive isEqualToString:@"1"]) {
-                      _isClientActive=@"ACTIVE";
-                    }else  _isClientActive=@"INACTIVE";
                 
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -251,6 +272,9 @@
     }
  
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
+    
+    NSLog(@"Dictionary is : %@",finaldic);
+    
  
 @try{
     // cell.ticketNumberLbl.text=[finaldic objectForKey:@"ticket_number"];
@@ -306,7 +330,11 @@
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
     globalVariables.iD=[finaldic objectForKey:@"id"];
     globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
-    //globalVariables.title=[finaldic objectForKey:@"title"];
+    //globalVariables.title=[finaldic objectForKey:@"title"];  // ticket_status_name  // Ticket_status
+    
+    globalVariables.Ticket_status= [finaldic objectForKey:@"ticket_status_name"];
+    
+    
     [self.navigationController pushViewController:td animated:YES];
     
 }
