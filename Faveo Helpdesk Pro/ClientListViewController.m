@@ -342,6 +342,10 @@ GlobalVariables *globalVariables;
     } */
         
  @try{
+     
+     
+     
+     
         NSString *email=[finaldic objectForKey:@"email"];
      
         NSString *mobile=[finaldic objectForKey:@"mobile"];
@@ -350,7 +354,7 @@ GlobalVariables *globalVariables;
 
 
         
-      
+     
         
         [Utils isEmpty:email];
         [Utils isEmpty:mobile];
@@ -384,8 +388,21 @@ GlobalVariables *globalVariables;
         {
             cell.phoneNumberLabel.text=NSLocalizedString(@"Not Available",nil);
         }
-            
- 
+     
+     
+         NSString *code= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile_code"]];
+         [Utils isEmpty:code];
+     
+        if( ![Utils isEmpty:code])
+        {
+         cell.codeLabel.text=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile_code"]];
+        }
+        else
+        {
+            cell.codeLabel.text=@"";
+        }
+     //cell.codeLabel.text= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile_code"]];
+     
         NSString *clientFirstName=[finaldic objectForKey:@"first_name"];
         NSString *clientLastName=[finaldic objectForKey:@"last_name"];
         NSString *userName= [finaldic objectForKey:@"user_name"];
@@ -448,6 +465,7 @@ GlobalVariables *globalVariables;
     globalVariables.iD=@([client_id intValue]);
     globalVariables.First_name=[finaldic objectForKey:@"first_name"];
     globalVariables.Last_name=[finaldic objectForKey:@"last_name"];
+    globalVariables.mobileCode1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile_code"]];
 
 //    td.clientName=[NSString stringWithFormat:@"%@ %@",clientName,[finaldic objectForKey:@"last_name"]];
     

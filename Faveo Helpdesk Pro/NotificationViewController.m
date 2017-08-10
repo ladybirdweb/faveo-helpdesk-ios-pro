@@ -463,7 +463,7 @@
     
     if([sen isEqualToString:@"tickets"])
     {
-       // _clientId=[NSString stringWithFormat:@"%@",globalVariables.iD];
+       
        
         globalVariables.iD= [finaldic objectForKey:@"row_id"];
         

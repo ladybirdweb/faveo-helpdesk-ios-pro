@@ -77,7 +77,9 @@
     _codeTextField.text=[self setDefaultCountryCode];
     
     [self readFromPlist];
+    
     [self setTitle:NSLocalizedString(@"CreateTicket",nil)];
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
      self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
@@ -593,10 +595,7 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
-                        if (self.navigationController.navigationBarHidden) {
-                            [self.navigationController setNavigationBarHidden:NO];
-                        }
-                        
+                                                
                         [RMessage showNotificationInViewController:self.navigationController
                                                              title:NSLocalizedString(@"Sucess", nil)
                                                           subtitle:NSLocalizedString(@"Ticket created successfully...!", nil)
@@ -607,7 +606,7 @@
                                                           callback:nil
                                                        buttonTitle:nil
                                                     buttonCallback:nil
-                                                        atPosition:RMessagePositionNavBarOverlay
+                                                        atPosition:RMessagePositionBottom
                                               canBeDismissedByUser:YES];
 
                         

@@ -29,6 +29,7 @@
     UIRefreshControl *refresh;
     GlobalVariables *globalVariables;
     NSDictionary *requesterTempDict;
+    NSString *code2;
     
 }
 
@@ -192,6 +193,17 @@
                         _phone= NSLocalizedString(@"Not Available",nil);
                     }
     
+                    NSString *code1= [requester objectForKey:@"country_code"];
+                    
+                    [Utils isEmpty:code1];
+                    if(![Utils isEmpty:code1])
+                    {
+                        code2=[NSString stringWithFormat:@"%@",[requester objectForKey:@"country_code"]];
+                    }
+                    else
+                    {
+                        code2=@"";
+                    }
                     
                    [requester objectForKey:@"profile_pic"];
 
@@ -203,11 +215,29 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [_activityIndicatorObject stopAnimating];
                         [refresh endRefreshing];
-                            self.testingLAbel.text=self.isClientActive;
+                            //self.testingLAbel.text=self.isClientActive;
                             self.emailLabel.text=self.emailID;
                             self.clientNameLabel.text=self.clientName;
-                            self.phoneLabel.text=self.phone;
+                           // self.phoneLabel.text=self.phone;
+                        
+                        self.phoneLabel.text=[NSString stringWithFormat:@"%@  %@",code2,self.phone];
+                        
                          [self setUserProfileimage:[requester objectForKey:@"profile_pic"]];
+                       // self.testingLAbel.text=self.isClientActive;
+                        
+                        if ([_isClientActive isEqualToString:@"ACTIVE"])
+                        {
+                            self.testingLAbel.textColor=[UIColor greenColor];
+                            self.testingLAbel.text=@"ACTIVE";
+                            
+                        }else
+                        {
+                    
+                            self.testingLAbel.textColor=[UIColor redColor];
+                            self.testingLAbel.text=@"INACTIVE";
+
+                        }
+                        
                         [self.tableView reloadData];
                     });
                 });
