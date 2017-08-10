@@ -28,6 +28,7 @@
     NSMutableArray *mutableArray;
     UIRefreshControl *refresh;
     GlobalVariables *globalVariables;
+    NSDictionary *requesterTempDict;
     
 }
 
@@ -54,9 +55,13 @@
     [self.view addSubview:_activityIndicatorObject];
     [self addUIRefresh];
     utils=[[Utils alloc]init];
+    
     globalVariables=[GlobalVariables sharedInstance];
     _clientId=[NSString stringWithFormat:@"%@",globalVariables.iD];
+    
     userDefaults=[NSUserDefaults standardUserDefaults];
+    
+    
     //    self.currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OpenClient"];
     //    self.currentViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
     //    [self addChildViewController:self.currentViewController];
@@ -135,6 +140,9 @@
                 mutableArray = [[json objectForKey:@"tickets"] copy];
                 
                 NSDictionary *requester=[json objectForKey:@"requester"];
+                
+                requesterTempDict= [json objectForKey:@"requester"];
+                
                 //[requester objectForKey:@"company"];
              
                 if(( ![[json objectForKey:@"requester"] isEqual:[NSNull null]] ) )
@@ -328,11 +336,19 @@
     
     TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
+    
+ 
+    
     globalVariables.iD=[finaldic objectForKey:@"id"];
     globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
+    
     //globalVariables.title=[finaldic objectForKey:@"title"];  // ticket_status_name  // Ticket_status
     
     globalVariables.Ticket_status= [finaldic objectForKey:@"ticket_status_name"];
+    
+       //requesterTempDict
+    globalVariables.First_name= [requesterTempDict objectForKey:@"first_name"];
+    globalVariables.Last_name= [requesterTempDict objectForKey:@"last_name"];
     
     
     [self.navigationController pushViewController:td animated:YES];

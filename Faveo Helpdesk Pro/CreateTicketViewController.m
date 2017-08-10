@@ -559,7 +559,7 @@
         }
        /* NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&helptopic=%@&priority=%@&phone=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_msgTextField.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,@""];
         */
-         NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&phone=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_textViewMsg.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,@""];
+         NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectTextField.text,_textViewMsg.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id];
 @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
@@ -820,10 +820,40 @@
     return YES;
 }
 
-//tap on return key to hide the keyboard
+
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+//    [_emailTextField becomeFirstResponder ];
+//    
+//    if (textField == _emailTextField) {
+//        [textField resignFirstResponder];
+//        [_firstNameTextField becomeFirstResponder];
+//    } else if (textField == _firstNameTextField) {
+//       
+//        [textField resignFirstResponder];
+//        [_lastNameTextField becomeFirstResponder];
+//    } else if (textField == _lastNameTextField) {
+//        
+//        [textField resignFirstResponder];
+//        [_mobileTextField becomeFirstResponder];
+//    } else if (textField == _mobileTextField) {
+//        
+//        [textField resignFirstResponder];
+//        [_subjectTextField becomeFirstResponder];
+//    } else if (textField == _subjectTextField) {
+//        
+//        [textField resignFirstResponder];
+//        [_textViewMsg becomeFirstResponder];
+//    }else if(textField == _subjectTextField)
+//    {
+//        [textField resignFirstResponder];
+//    }
+
+    
+    
+
     return YES;
 }
 

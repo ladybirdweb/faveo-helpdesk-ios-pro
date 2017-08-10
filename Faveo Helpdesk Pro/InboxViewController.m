@@ -33,6 +33,7 @@
     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
+    NSDictionary *tempDict;
 }
 @property (nonatomic, strong) NSMutableArray *mutableArray;
 @property (nonatomic, strong) NSArray *indexPaths;
@@ -492,7 +493,8 @@
         }
         
             NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
-            
+        
+            tempDict= [_mutableArray objectAtIndex:indexPath.row];
             //cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
         
 @try{
@@ -707,6 +709,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+    
     NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
     
     globalVariables.iD=[finaldic objectForKey:@"id"];
@@ -741,6 +744,7 @@
 
 -(void)addBtnPressed{
     
+    
     CreateTicketViewController *createTicket=[self.storyboard instantiateViewControllerWithIdentifier:@"CreateTicket"];
     
     [self.navigationController pushViewController:createTicket animated:YES];
@@ -748,7 +752,12 @@
 } 
 
 -(void)NotificationBtnPressed
+
 {
+    
+    globalVariables.ticket_number=[tempDict objectForKey:@"ticket_number"];
+    globalVariables.Ticket_status=[tempDict objectForKey:@"ticket_status_name"];
+    
     NotificationViewController *not=[self.storyboard instantiateViewControllerWithIdentifier:@"Notify"];
     
     

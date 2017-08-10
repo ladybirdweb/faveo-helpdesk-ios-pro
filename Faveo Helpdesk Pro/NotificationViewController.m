@@ -355,6 +355,9 @@
         }
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
+        NSLog(@"Dict is L %@", finaldic);
+        
+        NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
 
     @try{
         // cell.msglbl.text=[finaldic objectForKey:@"message"];
@@ -381,7 +384,7 @@
         }
       
         
-        NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
+      //  NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
         
         
         if(( ![[finaldic objectForKey:@"requester"] isEqual:[NSNull null]] ) )
@@ -440,43 +443,50 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+    
 
-    ClientDetailViewController *clientDetail=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
+    
     
       NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
+    NSLog(@"dict issssss : %@",finaldic);
     
-@try{
+     NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
+    
+    TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+    
+    ClientDetailViewController *clientDetail=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
+    
     NSString *sen=[finaldic objectForKey:@"senario"];
     NSLog(@"Senario is : %@",sen);
     
+  
+    
     if([sen isEqualToString:@"tickets"])
     {
+       // _clientId=[NSString stringWithFormat:@"%@",globalVariables.iD];
+       
+        globalVariables.iD= [finaldic objectForKey:@"row_id"];
+        
+        globalVariables.First_name=  [profileDict objectForKey:@"changed_by_first_name"];
+        globalVariables.Last_name= [profileDict objectForKey:@"changed_by_last_name"];
+
         [self.navigationController pushViewController:td animated:YES];
     }
     else if ([sen isEqualToString:@"users"]){
+    
+        globalVariables.iD=[profileDict objectForKey:@"id"];
+        globalVariables.First_name=  [profileDict objectForKey:@"changed_by_first_name"];
+        globalVariables.Last_name= [profileDict objectForKey:@"changed_by_last_name"];
+        
         [self.navigationController pushViewController:clientDetail animated:YES];
     }
   
-    NSDictionary *dict1= [finaldic objectForKey:@"requester"];
-    
-     globalVariables.iD=[dict1 objectForKey:@"id"];
-   // globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
+     // globalVariables.iD=[profileDict objectForKey:@"row_id"];
+      // globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
+    //globalVariables.First_name=  [profileDict objectForKey:@"changed_by_first_name"];
+    //globalVariables.Last_name= [profileDict objectForKey:@"changed_by_last_name"];
+ 
     //globalVariables.title=[finaldic objectForKey:@"title"];
-}@catch (NSException *exception)
-    {
-        // Print exception information
-        NSLog( @"NSException caught Notification ViewController\n" );
-        NSLog( @"Name: %@", exception.name);
-        NSLog( @"Reason: %@", exception.reason );
-        return ;
-    }
-    @finally
-    {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
-        
-    }
     
 }
 

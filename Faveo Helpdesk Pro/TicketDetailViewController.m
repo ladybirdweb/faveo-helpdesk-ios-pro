@@ -48,11 +48,29 @@
     [self addChildViewController:self.currentViewController];
     [self addSubview:self.currentViewController.view toView:self.containerView];
     utils=[[Utils alloc]init];
+    
     globalVariables=[GlobalVariables sharedInstance];
+    
     userDefaults=[NSUserDefaults standardUserDefaults];
+    
     self.segmentedControl.tintColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(replyBtnPressed)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(internalNotePressed)], nil] animated:YES];
     
+    NSLog(@"Ticket is isssss : %@",globalVariables.iD);
+//   _ticketLabel.text=globalVariables.ticket_number;
+    
+ //   _nameLabel.text=[NSString stringWithFormat:@"%@ %@",globalVariables.First_name,globalVariables.Last_name];
+    
+ //   _statusLabel.text=globalVariables.Ticket_status;
+    
+       // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    globalVariables=[GlobalVariables sharedInstance];
+    userDefaults=[NSUserDefaults standardUserDefaults];
     
     _ticketLabel.text=globalVariables.ticket_number;
     
@@ -60,10 +78,8 @@
     
     _statusLabel.text=globalVariables.Ticket_status;
     
-       // Do any additional setup after loading the view.
+
 }
-
-
 
 - (void)addSubview:(UIView *)subView toView:(UIView*)parentView {
     [parentView addSubview:subView];
