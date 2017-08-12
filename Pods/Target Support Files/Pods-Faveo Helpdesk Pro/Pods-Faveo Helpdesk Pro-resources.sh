@@ -18,6 +18,12 @@ case "${TARGETED_DEVICE_FAMILY}" in
   2)
     TARGET_DEVICE_ARGS="--target-device ipad"
     ;;
+  3)
+    TARGET_DEVICE_ARGS="--target-device tv"
+    ;;
+  4)
+    TARGET_DEVICE_ARGS="--target-device watch"
+    ;;
   *)
     TARGET_DEVICE_ARGS="--target-device mac"
     ;;
@@ -75,10 +81,30 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle"
+  install_resource "RMessage/RMessage/Resources/RMessageView.xib"
+  install_resource "RMessage/RMessage/Assets/NotificationBackgroundErrorIcon.png"
+  install_resource "RMessage/RMessage/Assets/NotificationBackgroundErrorIcon@2x.png"
+  install_resource "RMessage/RMessage/Assets/NotificationBackgroundSuccessIcon.png"
+  install_resource "RMessage/RMessage/Assets/NotificationBackgroundSuccessIcon@2x.png"
+  install_resource "RMessage/RMessage/Assets/NotificationBackgroundWarningIcon.png"
+  install_resource "RMessage/RMessage/Assets/NotificationBackgroundWarningIcon@2x.png"
+  install_resource "RMessage/RMessage/Assets/NotificationButtonBackground.png"
+  install_resource "RMessage/RMessage/Assets/NotificationButtonBackground@2x.png"
+  install_resource "RMessage/RMessage/Assets/RMessageDefaultDesign.json"
   install_resource "XLForm/XLForm/XLForm.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle"
+  install_resource "RMessage/RMessage/Resources/RMessageView.xib"
+  install_resource "RMessage/RMessage/Assets/NotificationBackgroundErrorIcon.png"
+  install_resource "RMessage/RMessage/Assets/NotificationBackgroundErrorIcon@2x.png"
+  install_resource "RMessage/RMessage/Assets/NotificationBackgroundSuccessIcon.png"
+  install_resource "RMessage/RMessage/Assets/NotificationBackgroundSuccessIcon@2x.png"
+  install_resource "RMessage/RMessage/Assets/NotificationBackgroundWarningIcon.png"
+  install_resource "RMessage/RMessage/Assets/NotificationBackgroundWarningIcon@2x.png"
+  install_resource "RMessage/RMessage/Assets/NotificationButtonBackground.png"
+  install_resource "RMessage/RMessage/Assets/NotificationButtonBackground@2x.png"
+  install_resource "RMessage/RMessage/Assets/RMessageDefaultDesign.json"
   install_resource "XLForm/XLForm/XLForm.bundle"
 fi
 

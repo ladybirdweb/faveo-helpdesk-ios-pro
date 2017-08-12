@@ -19,13 +19,15 @@
 #import "LoadingTableViewCell.h"
 #import "RKDropdownAlert.h"
 #import "HexColors.h"
+#import "RMessage.h"
+#import "RMessageView.h"
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
 
 
 
-@interface InboxViewController (){
+@interface InboxViewController ()<RMessageProtocol>{
     Utils *utils;
     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
@@ -73,10 +75,15 @@
   
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
+  ////////
+    
     //static dispatch_once_t onceToken;
    // dispatch_once(&onceToken, ^{
         [self getDependencies];
-   // });
+   // }); 
+    
+    
+
     // Do any additional setup after loading the view.
 }
 
@@ -96,6 +103,8 @@
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            
+            
             
             if (error || [msg containsString:@"Error"]) {
                 [refresh endRefreshing];
@@ -247,11 +256,14 @@
     return numOfSections;
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.currentPage == self.totalPages
         || self.totalTickets == _mutableArray.count) {
         return _mutableArray.count;
     }
+    
+    
     return _mutableArray.count + 1;
 }
 
@@ -260,6 +272,21 @@
         NSLog(@"nextURL  %@",_nextPageUrl);
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
             [self loadMore];
+        }
+        else{
+           // [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            [RMessage showNotificationInViewController:self
+                                                 title:nil
+                                              subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
+                                             iconImage:nil
+                                                  type:RMessageTypeSuccess
+                                        customTypeName:nil
+                                              duration:RMessageDurationAutomatic
+                                              callback:nil
+                                           buttonTitle:nil
+                                        buttonCallback:nil
+                                            atPosition:RMessagePositionBottom
+                                  canBeDismissedByUser:YES];
         }
     }
 }
@@ -360,11 +387,22 @@
             cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
             cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+       
+        NSString *title1= [finaldic objectForKey:@"title"];
+       // cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
+        [Utils isEmpty:title1];
+        
+        if  ([Utils isEmpty:title1]){
+             cell.ticketSubLabel.text=@"No Title";
+        }
+        else
+        {
             cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
-
+        }
+        
             [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         
-        if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
+       if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
             
         if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
                 [cell.overDueLabel setHidden:NO];
@@ -372,6 +410,9 @@
         }else [cell.overDueLabel setHidden:YES];
         
         }
+        
+        
+        
         
        
             cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];

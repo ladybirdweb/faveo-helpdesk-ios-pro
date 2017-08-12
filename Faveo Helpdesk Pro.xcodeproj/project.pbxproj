@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
-		D9040CC31E12A0CF005E1B37 /* empty_data_set.png in Resources */ = {isa = PBXBuildFile; fileRef = D9040CC21E12A0CF005E1B37 /* empty_data_set.png */; };
+		D92E2E981EEBFC0B00A0D456 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D92E2E971EEBFC0B00A0D456 /* GoogleService-Info.plist */; };
 		D9532C131E9CE9090063B318 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9532C151E9CE9090063B318 /* Localizable.strings */; };
 		D97B13791E080BA8007F46DA /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B13781E080BA8007F46DA /* UserNotifications.framework */; };
 		D97B137B1E080BC3007F46DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137A1E080BC3007F46DA /* UIKit.framework */; };
@@ -18,7 +18,6 @@
 		D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */ = {isa = PBXBuildFile; fileRef = D985BAC71EDC5FAA001EB153 /* Dat.m */; };
 		D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */; };
 		D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */; };
-		D9B79EFF1E0E971100EFE2E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9B79EFE1E0E971100EFE2E6 /* GoogleService-Info.plist */; };
 		D9DBD3461E07ACFC00219F93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3451E07ACFC00219F93 /* main.m */; };
 		D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3481E07ACFC00219F93 /* AppDelegate.m */; };
 		D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD34D1E07ACFC00219F93 /* Main.storyboard */; };
@@ -26,6 +25,8 @@
 		D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD3521E07ACFC00219F93 /* LaunchScreen.storyboard */; };
 		D9DBD35F1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD35E1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m */; };
 		D9DBD36A1E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3691E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m */; };
+		D9E57B401EFAA4C1002E4C19 /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E57B3D1EFAA4C1002E4C19 /* UIView+Shake.m */; };
+		D9E57B411EFAA4C1002E4C19 /* UITextField+PasswordField.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E57B3F1EFAA4C1002E4C19 /* UITextField+PasswordField.m */; };
 		D9EB9F5B1E07C2A80001115F /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F5A1E07C2A80001115F /* Utils.m */; };
 		D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F5D1E07C2B70001115F /* MyWebservices.m */; };
 		D9EB9F631E07C2D00001115F /* Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F601E07C2D00001115F /* Data.m */; };
@@ -85,7 +86,7 @@
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9040CC21E12A0CF005E1B37 /* empty_data_set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty_data_set.png; path = ../../../../Downloads/empty_data_set.png; sourceTree = "<group>"; };
+		D92E2E971EEBFC0B00A0D456 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D93D3D4F1EA0BACD00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D501EA0BACE00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D511EA0BACE00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
@@ -117,7 +118,6 @@
 		D9B6E2ED1E9B8B9700AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2EF1E9B8B9900AAB724 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2F11E9B8B9B00AAB724 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
-		D9B79EFE1E0E971100EFE2E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D9D66BD41E97B14C000214FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		D9D66BD81E97CD0F000214FF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		D9D66BDA1E97CD1B000214FF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
@@ -136,6 +136,10 @@
 		D9DBD3651E07ACFC00219F93 /* Faveo Helpdesk ProUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Faveo Helpdesk ProUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9DBD3691E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Faveo_Helpdesk_ProUITests.m; sourceTree = "<group>"; };
 		D9DBD36B1E07ACFC00219F93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9E57B3C1EFAA4C1002E4C19 /* UIView+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shake.h"; sourceTree = "<group>"; };
+		D9E57B3D1EFAA4C1002E4C19 /* UIView+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shake.m"; sourceTree = "<group>"; };
+		D9E57B3E1EFAA4C1002E4C19 /* UITextField+PasswordField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+PasswordField.h"; sourceTree = "<group>"; };
+		D9E57B3F1EFAA4C1002E4C19 /* UITextField+PasswordField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+PasswordField.m"; sourceTree = "<group>"; };
 		D9EB9F571E07C2940001115F /* AppConstanst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstanst.h; sourceTree = "<group>"; };
 		D9EB9F591E07C2A80001115F /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		D9EB9F5A1E07C2A80001115F /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
@@ -295,10 +299,9 @@
 		D9DBD3441E07ACFC00219F93 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D92E2E971EEBFC0B00A0D456 /* GoogleService-Info.plist */,
 				D9F954FA1E617BE500DA9B30 /* countries.json */,
 				D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */,
-				D9040CC21E12A0CF005E1B37 /* empty_data_set.png */,
-				D9B79EFE1E0E971100EFE2E6 /* GoogleService-Info.plist */,
 				D9DBD34D1E07ACFC00219F93 /* Main.storyboard */,
 				D9DBD3501E07ACFC00219F93 /* Assets.xcassets */,
 				D9DBD3521E07ACFC00219F93 /* LaunchScreen.storyboard */,
@@ -409,6 +412,10 @@
 				D9EB9F621E07C2D00001115F /* GlobalVariables.m */,
 				D985BAC61EDC5FAA001EB153 /* Dat.h */,
 				D985BAC71EDC5FAA001EB153 /* Dat.m */,
+				D9E57B3C1EFAA4C1002E4C19 /* UIView+Shake.h */,
+				D9E57B3D1EFAA4C1002E4C19 /* UIView+Shake.m */,
+				D9E57B3E1EFAA4C1002E4C19 /* UITextField+PasswordField.h */,
+				D9E57B3F1EFAA4C1002E4C19 /* UITextField+PasswordField.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -601,9 +608,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D92E2E981EEBFC0B00A0D456 /* GoogleService-Info.plist in Resources */,
 				D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */,
 				D9EB9F7A1E07C2F00001115F /* ClientListTableViewCell.xib in Resources */,
-				D9040CC31E12A0CF005E1B37 /* empty_data_set.png in Resources */,
 				D9532C131E9CE9090063B318 /* Localizable.strings in Resources */,
 				D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */,
 				D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */,
@@ -611,7 +618,6 @@
 				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
 				D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */,
 				D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */,
-				D9B79EFF1E0E971100EFE2E6 /* GoogleService-Info.plist in Resources */,
 				D9EB9F801E07C2F00001115F /* OpenCloseTableViewCell.xib in Resources */,
 				D9EB9F781E07C2F00001115F /* TicketTableViewCell.xib in Resources */,
 			);
@@ -661,7 +667,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */ = {
@@ -693,7 +699,9 @@
 				D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */,
 				D9EB9F641E07C2D00001115F /* GlobalVariables.m in Sources */,
 				D9EB9FA71E07C3270001115F /* InboxViewController.m in Sources */,
+				D9E57B411EFAA4C1002E4C19 /* UITextField+PasswordField.m in Sources */,
 				D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */,
+				D9E57B401EFAA4C1002E4C19 /* UIView+Shake.m in Sources */,
 				D9EB9F811E07C2F00001115F /* LoadingTableViewCell.m in Sources */,
 				D9EB9FAA1E07C3270001115F /* ClientDetailViewController.m in Sources */,
 				D9EB9FA31E07C3270001115F /* TrashTicketsViewController.m in Sources */,
@@ -924,6 +932,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Faveo Helpdesk Pro/Faveo Helpdesk Pro.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: narendra baratam (BCU77U4N5P)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMPRESS_PNG_FILES = YES;
 				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -944,6 +953,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Faveo Helpdesk Pro/Faveo Helpdesk Pro.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ladybird Web Solution Private Limited (8VY8B59STG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COMPRESS_PNG_FILES = YES;
 				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -985,6 +995,7 @@
 		D9DBD3751E07ACFC00219F93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Faveo Helpdesk ProUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -998,6 +1009,7 @@
 		D9DBD3761E07ACFC00219F93 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Faveo Helpdesk ProUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

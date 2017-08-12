@@ -164,7 +164,7 @@
                         _subjectTextField.text=[dic objectForKey:@"title"];
                         _emailTextField.text=[dic objectForKey:@"email"];
                         _lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
-                        
+                      
                         
                         // _deptTextField.text= [dic objectForKey:@"dept_name"];
                         // _slaTextField.text=[dic objectForKey:@"sla_name"];
@@ -446,7 +446,7 @@
         sla_id = [NSNumber numberWithInteger:1+[_slaPlansArray indexOfObject:_slaTextField.text]];
         source_id = [NSNumber numberWithInteger:1+[_sourceArray indexOfObject:_sourceTextField.text]];
         status_id = [NSNumber numberWithInteger:1+[_statusArray indexOfObject:_statusTextField.text]];
-        //change it later
+        
         sla_id=[NSNumber numberWithInt:1];
         [[AppDelegate sharedAppdelegate] showProgressView];
         
@@ -653,7 +653,7 @@
         }
         
         // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "];
+        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"];
         
         if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
             return NO;

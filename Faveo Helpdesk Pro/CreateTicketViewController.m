@@ -19,8 +19,11 @@
 #import "RKDropdownAlert.h"
 #import "IQKeyboardManager.h"
 #import "Dat.h"
+#import "RMessage.h"
+#import "RMessageView.h"
 
-@interface CreateTicketViewController (){
+
+@interface CreateTicketViewController ()<RMessageProtocol>{
     
     Utils *utils;
     NSUserDefaults *userDefaults;
@@ -51,6 +54,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self split];
+    
+    
+    UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
+    
+    UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
+    [self.textViewMsg setInputAccessoryView:toolBar];
+
+    
+    
+    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     sla_id=[[NSNumber alloc]init];
     dept_id=[[NSNumber alloc]init];
@@ -189,6 +205,21 @@
  }
  */
 
+
+-(void)removeKeyboard{
+    [_emailTextField resignFirstResponder];
+    [_mobileTextField resignFirstResponder];
+  //  [_msgTextField resignFirstResponder];
+    [_subjectTextField resignFirstResponder];
+    [_firstNameTextField resignFirstResponder];
+    
+    
+}
+-(void)removeKeyBoard
+{
+    
+    [self.textViewMsg resignFirstResponder];
+}
 - (IBAction)helpTopicClicked:(id)sender {
     [self removeKeyboard];
     
@@ -225,14 +256,7 @@
     
 }
 
--(void)removeKeyboard{
-    [_emailTextField resignFirstResponder];
-    [_mobileTextField resignFirstResponder];
-    [_msgTextField resignFirstResponder];
-    [_subjectTextField resignFirstResponder];
-    [_firstNameTextField resignFirstResponder];
-    
-}
+
 
 - (IBAction)priorityClicked:(id)sender {
     [self removeKeyboard];
@@ -267,12 +291,34 @@
 //    }
     
     if (self.emailTextField.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter EMAIL-ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+       [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter EMAIL-ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+       /* [RMessage showNotificationInViewController:self.navigationController
+                                             title:nil
+                                          subtitle:NSLocalizedString(@"Please enter EMAIL-ID", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeWarning
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES]; */
+
+
         //[utils showAlertWithMessage:@"Please enter EMAIL-ID" sendViewController:self];
-    }else if (self.firstNameTextField.text.length==0) {
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter First Name",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+    }else if(![Utils emailValidation:self.emailTextField.text]){
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Invalid EMAIL_ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Invalid EMAIL_ID" sendViewController:self];
+    }else if (self.firstNameTextField.text.length<2) {
+        
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"FirstName should have more than 2 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter First Name",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         //[utils showAlertWithMessage:@"Please enter NAME" sendViewController:self];
-    }else if (self.helpTopicTextField.text.length==0) {
+    }/*else if(![Utils userNameValidation:self.firstNameTextField.text]){
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"FirstName should have more than 2 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        //[utils showAlertWithMessage:@"Name should have more than 2 characters" sendViewController:self];
+    }*/else if (self.helpTopicTextField.text.length==0) {
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
        // [utils showAlertWithMessage:@"Please select HELP-TOPIC" sendViewController:self];
     }else  if (self.subjectTextField.text.length==0) {
@@ -281,21 +327,22 @@
     }else  if (self.subjectTextField.text.length<5) {
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"SUBJECT requires at least 5 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         // [utils showAlertWithMessage:@"Please enter SUBJECT" sendViewController:self];
-    }else if (self.msgTextField.text.length==0){
+    }else if (self.textViewMsg.text.length==0){
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter ticket MESSAGE" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        // [utils showAlertWithMessage:@"Please enter ticket MESSAGE" sendViewController:self];
+    }else if (self.textViewMsg.text.length<10){
+        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"MESSAGE requires at least 10 characters" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        // [utils showAlertWithMessage:@"Please enter ticket MESSAGE" sendViewController:self];
+    }
+    /*else if (self.msgTextField.text.length==0){
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter ticket MESSAGE" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
        // [utils showAlertWithMessage:@"Please enter ticket MESSAGE" sendViewController:self];
     }else if (self.msgTextField.text.length<10){
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"MESSAGE requires at least 10 characters" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         // [utils showAlertWithMessage:@"Please enter ticket MESSAGE" sendViewController:self];
-    }else if (self.priorityTextField.text.length==0){
+    }*/else if (self.priorityTextField.text.length==0){
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select PRIORITY" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         //[utils showAlertWithMessage:@"Please select PRIORITY" sendViewController:self];
-    }else if(![Utils emailValidation:self.emailTextField.text]){
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Invalid EMAIL_ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-        //[utils showAlertWithMessage:@"Invalid EMAIL_ID" sendViewController:self];
-    }else if(![Utils userNameValidation:self.firstNameTextField.text]){
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"FirstName should have more than 2 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-        //[utils showAlertWithMessage:@"Name should have more than 2 characters" sendViewController:self];
     }else {
         NSLog(@"ticketCreated dept_id-%@, help_id-%@ ,sla_id-%@, pri_id-%@",dept_id,help_topic_id,sla_id,priority_id);
         if ([_helpTopicTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]||[_priorityTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]) {
@@ -326,8 +373,9 @@
         if(_codeTextField.text.length>0){
             code=[_codeTextField.text substringFromIndex:1];
         }
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&helptopic=%@&priority=%@&phone=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_msgTextField.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,@""];
-        
+       /* NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&helptopic=%@&priority=%@&phone=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_msgTextField.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,@""];
+        */
+         NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&phone=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_textViewMsg.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,@""];
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
@@ -484,10 +532,11 @@
             return YES;
         }
         
-//        // in case you need to limit the max number of characters
-//        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 30) {
-//            return NO;
-//        }
+        ///NARENDRA-SUBJECT-100 char
+        // in case you need to limit the max number of characters
+        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 100) {
+            return NO;
+        }
         
         // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
         NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "];
@@ -522,8 +571,9 @@
             if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
                 return NO;
             }
-            
-    }else if(textField==_firstNameTextField || textField==_lastNameTextField || textField==_emailTextField||_msgTextField){
+        
+    }/*else if(textField==_firstNameTextField || textField==_lastNameTextField || textField==_emailTextField|| textField==_msgTextField){ */
+    else if(textField==_firstNameTextField || textField==_lastNameTextField || textField==_emailTextField){
     
         //do not allow the first character to be space | do not allow more than one space
         if ([string isEqualToString:@" "]) {
@@ -537,6 +587,12 @@
         
         if (textField==_firstNameTextField || textField==_lastNameTextField) {
             // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
+            
+            //        // in case you need to limit the max number of characters
+                    if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 15) {
+                        return NO;
+                    }
+            
             NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "];
             
             if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {

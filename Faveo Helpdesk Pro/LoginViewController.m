@@ -16,43 +16,84 @@
 #import "Utils.h"
 #import "HexColors.h"
 #import "RKDropdownAlert.h"
-
+#import "UIView+Shake.h"
+#import "UITextField+PasswordField.h"
+#import "RMessage.h"
+#import "RMessageView.h"
 
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
 @import Firebase;
 
-@interface LoginViewController (){
+@interface LoginViewController () <UITextFieldDelegate,RMessageProtocol>
+{
     Utils *utils;
     NSUserDefaults *userdefaults;
     NSString *errorMsg;
     NSString *baseURL;
-   
+    
 }
 
 @property (nonatomic, strong) MBProgressHUD *progressView;
 @end
 
 @implementation LoginViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+ 
+    // done button on keyboard was not working so here is solution
+    [self.urlTextfield setDelegate:self];
+    [self.urlTextfield setReturnKeyType:UIReturnKeyDone];
+    [self.urlTextfield addTarget:self action:@selector(textFieldFinished:)forControlEvents:UIControlEventEditingDidEndOnExit];
+    
+    [self.userNameTextField setDelegate:self];
+    [self.userNameTextField setReturnKeyType:UIReturnKeyDone];
+    [self.userNameTextField addTarget:self
+                               action:@selector(textFieldFinished:)
+                     forControlEvents:UIControlEventEditingDidEndOnExit];
+    
+    [self.passcodeTextField setDelegate:self];
+    [self.passcodeTextField setReturnKeyType:UIReturnKeyDone];
+    [self.passcodeTextField addTarget:self
+                               action:@selector(textFieldFinished:)
+                     forControlEvents:UIControlEventEditingDidEndOnExit];
+    
+    // end solution
+    
+    //this for password eye icon
+    [self.passcodeTextField addPasswordField];
+    //end
+    
     _loginButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     utils=[[Utils alloc]init];
     userdefaults=[NSUserDefaults standardUserDefaults];
     
+    
 }
+
+
+- (IBAction)textFieldFinished:(id)sender
+{
+    // [sender resignFirstResponder];
+}
+
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[self navigationController] setNavigationBarHidden:YES];
     
+    self.urlTextfield.text=@"http://";
+    
     [utils viewSlideInFromRightToLeft:self.companyURLview];
     [self.loginView setHidden:YES];
     [self.companyURLview setHidden:NO];
     
+    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -60,12 +101,16 @@
 }
 
 
+
 - (IBAction)urlButton:(id)sender {
-    [self.urlTextfield resignFirstResponder];
+     [self.urlTextfield resignFirstResponder];
+    
+
     if (self.urlTextfield.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please Enter the URL", "")  backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-      
-        //[utils showAlertWithMessage:@"Please Enter the URL" sendViewController:self];
+       // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please Enter the URL", "")  backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        
+        [utils showAlertWithMessage:@"Please Enter the URL" sendViewController:self];
+        
     }
     else{
         if ([Utils validateUrl:self.urlTextfield.text]) {
@@ -81,9 +126,16 @@
             if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
             {
                 //connection unavailable
-               // [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
-             
-                [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+                // [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+                
+              //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+                
+                [RMessage
+                 showNotificationWithTitle:NSLocalizedString(@"Something failed", nil)
+                 subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check it!", nil)
+                 type:RMessageTypeError
+                 customTypeName:nil
+                 callback:nil];
                 
             }else{
                 //connection available
@@ -153,26 +205,26 @@
                     if ([replyStr containsString:@"success"]) {
                         
                         NSLog(@"Success");
-                       // [[AppDelegate sharedAppdelegate] hideProgressView];
-//                        if (!Utils.isDebug) {
-                           [self verifyBilling];
-//                        }else{
-//                            dispatch_async(dispatch_get_main_queue(), ^{
-//                                
-//                                [RKDropdownAlert title:APP_NAME message:@"Verified URL" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-//                                [[AppDelegate sharedAppdelegate] hideProgressView];
-//                                [self.companyURLview setHidden:YES];
-//                                [self.loginView setHidden:NO];
-//                                [utils viewSlideInFromRightToLeft:self.loginView];
-//                            });
-//                            [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
-//                            [userdefaults synchronize];
-//                        }
+                        // [[AppDelegate sharedAppdelegate] hideProgressView];
+                        //                        if (!Utils.isDebug) {
+                        [self verifyBilling];
+                        //                        }else{
+                        //                            dispatch_async(dispatch_get_main_queue(), ^{
+                        //
+                        //                                [RKDropdownAlert title:APP_NAME message:@"Verified URL" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        //                                [[AppDelegate sharedAppdelegate] hideProgressView];
+                        //                                [self.companyURLview setHidden:YES];
+                        //                                [self.loginView setHidden:NO];
+                        //                                [utils viewSlideInFromRightToLeft:self.loginView];
+                        //                            });
+                        //                            [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
+                        //                            [userdefaults synchronize];
+                        //                        }
                         
                         
-//                        dispatch_async(dispatch_get_main_queue(), ^{
-//                            
-//                        });
+                        //                        dispatch_async(dispatch_get_main_queue(), ^{
+                        //
+                        //                        });
                         
                         // NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
                         
@@ -193,14 +245,27 @@
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [self.urlTextfield becomeFirstResponder];
+    
+}
+/*
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+     [self.urlTextfield becomeFirstResponder];
+    return YES;
+}*/
+
+
+
 -(void)verifyBilling{
-      //[[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
+    //[[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
     //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     NSString *url=[NSString stringWithFormat:@"%@?url=%@",BILLING_API,baseURL];
     MyWebservices *webservices=[MyWebservices sharedInstance];
     [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
         if (error || [msg containsString:@"Error"]) {
-             [[AppDelegate sharedAppdelegate] hideProgressView];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             if (msg) {
                 
                 [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -214,24 +279,30 @@
         
         if (json) {
             NSLog(@"Thread-sendAPNS-token-json-%@",json);
-           // if([[json objectForKey:@"result"] isEqualToString:@"success"]){
-                NSLog(@"Billing successful!");
-                dispatch_async(dispatch_get_main_queue(), ^{
-                   
-                    [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Verified URL",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self.companyURLview setHidden:YES];
-                    [self.loginView setHidden:NO];
-                    [utils viewSlideInFromRightToLeft:self.loginView];
-                });
-                [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
-                [userdefaults synchronize];
-//            }else {
-//                
-//            [[AppDelegate sharedAppdelegate] hideProgressView];
-//            [utils showAlertWithMessage:NSLocalizedString(@"Access denied, to use pro version!",nil) sendViewController:self];
-//            
-//            }
+            // if([[json objectForKey:@"result"] isEqualToString:@"success"]){
+            NSLog(@"Billing successful!");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Verified URL",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                
+              /*  [RMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)
+                                           subtitle:NSLocalizedString(@"URL Verified successfully !", nil)
+                                               type:RMessageTypeSuccess
+                                     customTypeName:nil
+                                           callback:nil]; */
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                [self.companyURLview setHidden:YES];
+                [self.loginView setHidden:NO];
+                [utils viewSlideInFromRightToLeft:self.loginView];
+            });
+            [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
+            [userdefaults synchronize];
+            //            }else {
+            //
+            //            [[AppDelegate sharedAppdelegate] hideProgressView];
+            //            [utils showAlertWithMessage:NSLocalizedString(@"Access denied, to use pro version!",nil) sendViewController:self];
+            //
+            //            }
             
         }
         
@@ -245,13 +316,24 @@
 
 - (IBAction)btnLogin:(id)sender {
     
-    if (self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0)
+    
+    /* [_userNameTextField shakeWithCallback:^{
+     NSLog(@"Shaking has ended");
+     }];
+     
+     [_passcodeTextField shakeWithCallback:^{
+     NSLog(@"Shaking has ended");
+     }]; */
+    
+    if (((self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0) )|| ((self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0)))
+    {
         [utils showAlertWithMessage:NSLocalizedString(@"Please Enter Username & Password",nil) sendViewController:self];
+    }
     else {
         if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
         {
             //connection unavailable
-             [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+            [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
             
         }else{
             
@@ -262,11 +344,13 @@
             NSDictionary *param=[NSDictionary dictionaryWithObjectsAndKeys:self.userNameTextField.text,@"username",self.passcodeTextField.text,@"password",API_KEY,@"api_key",IP,@"ip",nil];
             
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            
             [request setURL:[NSURL URLWithString:url]];
             [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
             [request setTimeoutInterval:60];
-            [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:param options:0 error:nil]];
+            
+            [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:param options:kNilOptions error:nil]];
             [request setHTTPMethod:@"POST"];
             
             NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] ];
@@ -285,6 +369,7 @@
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             [utils showAlertWithMessage:@"Wrong Credentials!" sendViewController:self];
+                            //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                             return;
                         }else{
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
@@ -300,18 +385,19 @@
                 
                 NSLog(@"Get your response == %@", replyStr);
                 
+                
                 if ([replyStr containsString:@"token"]) {
                     
                     @try{
-                       
-                        NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:nil error:&error];
+                        
+                        NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                         
                         [userdefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
                         NSDictionary *jsonData1=[jsonData objectForKey:@"user_id"];
-                         [userdefaults setObject:[jsonData1 objectForKey:@"id"] forKey:@"user_id"];
-                         [userdefaults setObject:[jsonData1 objectForKey:@"profile_pic"] forKey:@"profile_pic"];
+                        [userdefaults setObject:[jsonData1 objectForKey:@"id"] forKey:@"user_id"];
+                        [userdefaults setObject:[jsonData1 objectForKey:@"profile_pic"] forKey:@"profile_pic"];
                         NSLog(@"Role : %@",[jsonData1 objectForKey:@"role"]);
-                         [userdefaults setObject:[jsonData1 objectForKey:@"role"] forKey:@"role"];
+                        [userdefaults setObject:[jsonData1 objectForKey:@"role"] forKey:@"role"];
                         
                         NSString *clientName=[jsonData1 objectForKey:@"first_name"];
                         
@@ -320,7 +406,8 @@
                         }else{
                             clientName=[NSString stringWithFormat:@"%@ %@",clientName,[jsonData1 objectForKey:@"last_name"]];
                         }
-
+                        
+                        
                         
                         [userdefaults setObject:clientName forKey:@"profile_name"];
                         [userdefaults setObject:baseURL forKey:@"baseURL"];
@@ -328,10 +415,29 @@
                         [userdefaults setObject:self.passcodeTextField.text forKey:@"password"];
                         [userdefaults setBool:YES forKey:@"loginSuccess"];
                         [userdefaults synchronize];
+                        
                         NSLog(@"token--%@",[jsonData objectForKey:@"token"]);
+                        
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                           [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                           /* if (self.navigationController.navigationBarHidden) {
+                                [self.navigationController setNavigationBarHidden:NO];
+                            }
+                            
+                            [RMessage showNotificationInViewController:self.navigationController
+                                                                 title:NSLocalizedString(@"Success!", nil)
+                                                              subtitle:NSLocalizedString(@"You have logged in successfully...", nil)
+                                                             iconImage:nil
+                                                                  type:RMessageTypeSuccess
+                                                        customTypeName:nil
+                                                              duration:RMessageDurationAutomatic
+                                                              callback:nil
+                                                           buttonTitle:nil
+                                                        buttonCallback:nil
+                                                            atPosition:RMessagePositionNavBarOverlay
+                                                  canBeDismissedByUser:YES]; */
                             [self sendDeviceToken];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             InboxViewController *inboxVC=[self.storyboard  instantiateViewControllerWithIdentifier:@"InboxID"];
@@ -356,7 +462,6 @@
                     }
                 }
                 
-                //yuoyu
                 
                 NSLog(@"Got response %@ with error %@.\n", response, error);
             }] resume];
@@ -372,6 +477,8 @@
     // [[self navigationController] setNavigationBarHidden:NO];
     
 }
+
+
 
 -(void)sendDeviceToken{
     NSString *refreshedToken =  [[FIRInstanceID instanceID] token];

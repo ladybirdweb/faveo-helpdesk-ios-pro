@@ -41,9 +41,10 @@
 "Invalid EMAIL_ID" ="Invalid EMAIL_ID";
 "FirstName should have more than 2 characters"="Name should have more than 2 characters";
 "Ticket created successfully!"="Ticket created successfully!";
-"Internal Note"="Internal Note";
+"Internal Notes"="Internal Notes";
 "Message"="Message";
 "Done"="Done";
+"Details"="Details";
 "Ticket Reply"="Ticket Reply";
 "Message*"="Message*";
 "Empty!!!"="Empty!!!";

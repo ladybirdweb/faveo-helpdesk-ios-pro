@@ -116,6 +116,8 @@
                _emailID= [requester objectForKey:@"email"];
                  _isClientActive=[requester objectForKey:@"active"];
                _clientName= [requester objectForKey:@"first_name"];
+              
+                
             
                 
                  _phone= [requester objectForKey:@"phone_number"];
@@ -133,10 +135,17 @@
                         _clientName=[requester objectForKey:@"user_name"];
                     }else{
                     _clientName=[NSString stringWithFormat:@"%@ %@",_clientName,[requester objectForKey:@"last_name"]];
+                    
                     }
-            
                 
-                    if ([_isClientActive isEqualToString:@"1"]) {
+               
+                  /////////// was crashing
+            
+                _isClientActive= [NSString stringWithFormat:@"%@",[requester objectForKey:@"active"]];
+                
+                /////solved
+                
+                   if ([_isClientActive isEqualToString:@"1"]) {
                       _isClientActive=@"ACTIVE";
                     }else  _isClientActive=@"INACTIVE";
                 
@@ -170,7 +179,7 @@
     if ([mutableArray count]==0)
     {
         self.noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        self.noDataLabel.text             =  NSLocalizedString(@"Empty!!!",nil);
+        self.noDataLabel.text             =  @"";
         self.noDataLabel.textColor        = [UIColor blackColor];
         self.noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = self.noDataLabel;

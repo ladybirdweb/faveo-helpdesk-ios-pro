@@ -26,6 +26,7 @@
     transition.subtype =kCATransitionFromRight;
     // transition.delegate = self;
     [views.layer addAnimation:transition forKey:nil];
+   
 }
 
 -(void)viewSlideInFromLeftToRight:(UIView *)views
@@ -66,11 +67,18 @@
 
 + (BOOL)validateUrl: (NSString *) url {
     
-    NSString *theURL =
-    @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", theURL];
+//    NSString *theURL =
+//    @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+//    
+//    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", theURL];
     
-    return [urlTest evaluateWithObject:url];
+    NSURL* urls = [NSURL URLWithString:url];
+    if (urls == nil) {
+       
+        NSLog(@"Nope %@ is not a proper URL", url);
+         return NO;
+    }
+   return YES;
 }
 
 -(void)showAlertWithMessage:(NSString*)message sendViewController:(UIViewController *)viewController
@@ -90,7 +98,7 @@
 
 +(BOOL)emailValidation:(NSString *)strEmail;
 {
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSString *emailRegex = @"[A-Z0-9a-z._%+]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSPredicate *emailTest =[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     BOOL myStringMatchesRegEx=[emailTest evaluateWithObject:strEmail];
  
@@ -111,7 +119,7 @@
     //NSString *expression = @" ";
     
     //if([strUsername compare:expression])
-    if(strUsername.length >= 2){
+    if(strUsername.length >= 5){
         
         return YES;
     }
@@ -152,6 +160,14 @@
     return fg;
     
 }
+
++(BOOL)isEmpty:(NSString *)str{
+    if (str == nil || str == (id)[NSNull null] || [[NSString stringWithFormat:@"%@",str] length] == 0 || [[[NSString stringWithFormat:@"%@",str] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0){
+        
+        return YES;
+    }
+    return NO;
+} 
 
 
 

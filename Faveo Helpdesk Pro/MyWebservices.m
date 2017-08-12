@@ -51,7 +51,7 @@
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setTimeoutInterval:45.0];
     
-    [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:param options:nil error:nil]];
+    [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:param options:kNilOptions error:nil]];
     [request setHTTPMethod:@"POST"];
     
     //    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] ];
@@ -80,7 +80,7 @@
             if ([replyStr containsString:@"token"]) {
                 
                 NSError *error=nil;
-                NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:nil error:&error];
+                NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                 if (error) {
                     return;
                 }
@@ -107,8 +107,9 @@
               parameter:(id)parameter
         callbackHandler:(callbackHandler)block{
     NSError *err;
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    //urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
+    urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     
@@ -121,13 +122,15 @@
     if ([parameter isKindOfClass:[NSString class]]) {
         postData = [((NSString *)parameter) dataUsingEncoding:NSUTF8StringEncoding];
     } else {
-        postData = [NSJSONSerialization dataWithJSONObject:parameter options:0 error:&err];
+       // postData = [NSJSONSerialization dataWithJSONObject:parameter options:0 error:&err];
+
+        postData = [NSJSONSerialization dataWithJSONObject:parameter options:kNilOptions error:&err];
     }
     [request setHTTPBody:postData];
     //[request setHTTPBody:[NSJSONSerialization dataWithJSONObject:parameter options:nil error:&err]];
     
     [request setHTTPMethod:@"POST"];
-    
+    //
     NSLog(@"Request body %@", [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding]);
     NSLog(@"Thread--httpResponsePOST--Request : %@", urlString);
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] ];
@@ -187,7 +190,7 @@
             
             NSError *jsonerror = nil;
             
-            id responseData =  [NSJSONSerialization JSONObjectWithData:data options:nil error:&jsonerror];
+            id responseData =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonerror];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 block(jsonerror,responseData,nil);
@@ -294,6 +297,19 @@
 -(void)getNextPageURL:(NSString*)url callbackHandler:(callbackHandler)block{
     _userDefaults=[NSUserDefaults standardUserDefaults];
     NSString *urll=[NSString stringWithFormat:@"%@&api_key=%@&ip=%@&token=%@",url,API_KEY,IP,[_userDefaults objectForKey:@"token"]];
+    
+    [self httpResponseGET:urll parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(error,json,msg);
+        });
+        
+    }];
+    
+}
+
+-(void)getNextPageURL:(NSString*)url user_id:(NSString*)uid callbackHandler:(callbackHandler)block{
+    _userDefaults=[NSUserDefaults standardUserDefaults];
+    NSString *urll=[NSString stringWithFormat:@"%@&api_key=%@&ip=%@&token=%@&user_id=%@",url,API_KEY,IP,[_userDefaults objectForKey:@"token"],uid];
     
     [self httpResponseGET:urll parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
         dispatch_async(dispatch_get_main_queue(), ^{

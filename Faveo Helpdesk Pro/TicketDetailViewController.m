@@ -54,6 +54,8 @@
        // Do any additional setup after loading the view.
 }
 
+
+
 - (void)addSubview:(UIView *)subView toView:(UIView*)parentView {
     [parentView addSubview:subView];
     
@@ -147,7 +149,7 @@
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSAttributedString *title = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Internal Note",nil) attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:24], NSParagraphStyleAttributeName : paragraphStyle}];
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Internal Notes",nil) attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:24], NSParagraphStyleAttributeName : paragraphStyle}];
     
     NSMutableAttributedString *lineTwo = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Message*",nil) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18], NSForegroundColorAttributeName : [UIColor hx_colorWithHexRGBAString:@"#00aeef"]}];
     [lineTwo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(7,1)];
@@ -179,7 +181,7 @@
     
     textViewInternalNote = [[UITextView alloc] initWithFrame:CGRectMake(10, 35, 250, 100)];
     
-    [ textViewInternalNote setReturnKeyType:UIReturnKeyDone];
+    //[ textViewInternalNote setReturnKeyType:UIReturnKeyDone];
     textViewInternalNote.layer.cornerRadius=4;
      textViewInternalNote.layer.borderWidth=1.0F;
      textViewInternalNote.layer.borderColor=[[UIColor lightGrayColor] CGColor];
@@ -195,7 +197,13 @@
     button.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     button.layer.cornerRadius = 4;
     button.selectionHandler = ^(CNPPopupButton *button){
-        if ( textViewInternalNote.text.length > 0 && textViewInternalNote.text != nil && ![textViewInternalNote.text isEqual:@""]) {
+        NSString *rawString = [textViewInternalNote text];
+        NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        NSString *trimmed = [rawString stringByTrimmingCharactersInSet:whitespace];
+        if ([trimmed length] == 0) {
+             errorMessageNote.hidden=NO;
+            // Text was empty or only whitespace.
+        }else if ( textViewInternalNote.text.length > 0 && textViewInternalNote.text != nil && ![textViewInternalNote.text isEqual:@""]) {
             errorMessageNote.hidden=YES;
             [self postInternalNote];
             [self.popupController dismissPopupControllerAnimated:YES];
@@ -261,7 +269,7 @@
     
     textViewReply = [[UITextView alloc] initWithFrame:CGRectMake(10, 30, 250, 100)];
     //textViewReply.delegate=self;
-    [textViewReply setReturnKeyType:UIReturnKeyDone];
+   // [textViewReply setReturnKeyType:UIReturnKeyDone];
     textViewReply.layer.cornerRadius=4;
     textViewReply.layer.borderWidth=1.0F;
     textViewReply.layer.borderColor=[[UIColor grayColor] CGColor];
@@ -282,7 +290,13 @@
     
     button.selectionHandler = ^(CNPPopupButton *button){
         
-        if (textViewReply.text.length > 0 && textViewReply.text != nil && ![textViewReply.text isEqual:@""]) {
+        NSString *rawString = [textViewReply text];
+        NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        NSString *trimmed = [rawString stringByTrimmingCharactersInSet:whitespace];
+        if ([trimmed length] == 0) {
+            errorMessageReply.hidden=NO;
+            // Text was empty or only whitespace.
+        }else if (textViewReply.text.length > 0 && textViewReply.text != nil && ![textViewReply.text isEqual:@""]) {
             [self postReply];
             errorMessageReply.hidden=YES;
             [self.popupController dismissPopupControllerAnimated:YES];
@@ -298,6 +312,8 @@
     self.popupController.delegate = self;
     [self.popupController presentPopupControllerAnimated:YES];
 }
+
+
 
 -(void)postInternalNote{
     
@@ -315,7 +331,7 @@
 //        
 //        NSString *url=[NSString stringWithFormat:@"%@helpdesk/internal-note",[userDefaults objectForKey:@"companyURL"]];
         
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/internal-note?api_key=%@&ip=%@&token=%@&userid=%@&body=%@&ticketid=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],[userDefaults objectForKey:@"user_id"],textViewInternalNote.text,globalVariables.iD];
+        NSString *url=[NSString stringWithFormat:@"%@helpdesk/internal-note?api_key=%@&ip=%@&token=%@&user_id=%@&body=%@&ticket_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],[userDefaults objectForKey:@"user_id"],textViewInternalNote.text,globalVariables.iD];
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
@@ -374,7 +390,7 @@
 //        
 //        NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply",[userDefaults objectForKey:@"companyURL"]];
         
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&token=%@&reply_content=%@&ticket_ID=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],textViewReply.text,globalVariables.iD];
+        NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&token=%@&reply_content=%@&ticket_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],textViewReply.text,globalVariables.iD];
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
@@ -419,22 +435,37 @@
     }
 }
 
+//- (NSString *)removeEndSpaceFrom:(NSString *)strtoremove{
+//    NSUInteger location = 0;
+//    unichar charBuffer[[strtoremove length]];
+//    [strtoremove getCharacters:charBuffer];
+//    int i = 0;
+//    for(i = [strtoremove length]; i >0; i--) {
+//        NSCharacterSet* charSet = [NSCharacterSet whitespaceCharacterSet];
+//        if(![charSet characterIsMember:charBuffer[i - 1]]) {
+//            break;
+//        }
+//    }
+//    return [strtoremove substringWithRange:NSMakeRange(location, i  - location)];
+//}
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)aTextField
 {
     [aTextField resignFirstResponder];
     return YES;
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)aTextField
-{
-    return [self validate:aTextField.text];
-}
-
-- (BOOL) validate: (NSString *) candidate {
-    NSString *emailRegex = @"[a-zA-Z]*";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    
-    return [emailTest evaluateWithObject:candidate];
-}
+//- (BOOL)textFieldShouldEndEditing:(UITextField *)aTextField
+//{
+//    return [self validate:aTextField.text];
+//}
+//
+//- (BOOL) validate: (NSString *) candidate {
+//    NSString *emailRegex = @"[a-zA-Z]*";
+//    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+//    
+//    return [emailTest evaluateWithObject:candidate];
+//}
 
 @end

@@ -19,8 +19,10 @@
 #import "GlobalVariables.h"
 #import "RKDropdownAlert.h"
 #import "HexColors.h"
+#import "RMessage.h"
+#import "RMessageView.h"
 
-@interface TrashTicketsViewController (){
+@interface TrashTicketsViewController ()<RMessageProtocol>{
 
     Utils *utils;
     UIRefreshControl *refresh;
@@ -156,6 +158,21 @@
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
             [self loadMore];
         }
+        else{
+            //[RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            [RMessage showNotificationInViewController:self
+                                                 title:nil
+                                              subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
+                                             iconImage:nil
+                                                  type:RMessageTypeSuccess
+                                        customTypeName:nil
+                                              duration:RMessageDurationAutomatic
+                                              callback:nil
+                                           buttonTitle:nil
+                                        buttonCallback:nil
+                                            atPosition:RMessagePositionBottom
+                                  canBeDismissedByUser:YES];
+        }
     }
 }
 
@@ -200,7 +217,6 @@
                 _totalPages=[[json objectForKey:@"last_page"] integerValue];
                 
                 _mutableArray= [_mutableArray mutableCopy];
-                
                 [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
                 
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -225,7 +241,10 @@
     
     if (indexPath.row == [_mutableArray count]) {
         
-        LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:nil];
+        
+       // LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:nil];
+        LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"LoadingCellID"];
+
         if (cell == nil)
         {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingTableViewCell" owner:self options:nil];

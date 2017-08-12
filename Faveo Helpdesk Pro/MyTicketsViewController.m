@@ -19,8 +19,10 @@
 #import "LoadingTableViewCell.h"
 #import "RKDropdownAlert.h"
 #import "HexColors.h"
+#import "RMessage.h"
+#import "RMessageView.h"
 
-@interface MyTicketsViewController (){
+@interface MyTicketsViewController ()<RMessageProtocol>{
 
     Utils *utils;
     UIRefreshControl *refresh;
@@ -206,16 +208,37 @@
     return _mutableArray.count + 1;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+ - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == [_mutableArray count] - 1 ) {
         NSLog(@"nextURL  %@",_nextPageUrl);
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
-            [self loadMore];
+            [self loadMore:[userDefaults objectForKey:@"user_id"]];
         }
+        else{
+           // [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            [RMessage showNotificationInViewController:self
+                                                 title:nil
+                                              subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
+                                             iconImage:nil
+                                                  type:RMessageTypeSuccess
+                                        customTypeName:nil
+                                              duration:RMessageDurationAutomatic
+                                              callback:nil
+                                           buttonTitle:nil
+                                        buttonCallback:nil
+                                            atPosition:RMessagePositionBottom
+                                  canBeDismissedByUser:YES];
+        }
+       
+        /*if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
+            
+            [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        } */
     }
 }
 
--(void)loadMore{
+
+-(void)loadMore:(NSString*)user_id{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
@@ -225,7 +248,7 @@
     }else{
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
-        [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
+        [webservices getNextPageURL:_nextPageUrl user_id:user_id callbackHandler:^(NSError *error,id json,NSString* msg) {
             
             if (error || [msg containsString:@"Error"]) {
                 
@@ -242,7 +265,7 @@
             
             if ([msg isEqualToString:@"tokenRefreshed"]) {
                 
-                [self loadMore];
+                [self loadMore:[userDefaults objectForKey:@"user_id"]];
                 //NSLog(@"Thread--NO4-call-getInbox");
                 return;
             }

@@ -18,7 +18,11 @@
 #import "RKDropdownAlert.h"
 #import "HexColors.h"
 #import "GlobalVariables.h"
-@interface ClientListViewController (){
+#import "RMessage.h"
+#import "RMessageView.h"
+
+
+@interface ClientListViewController ()<RMessageProtocol>{
 
     Utils *utils;
     UIRefreshControl *refresh;
@@ -121,6 +125,22 @@ GlobalVariables *globalVariables;
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
             [self loadMore];
         }
+        else{
+           // [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            [RMessage showNotificationInViewController:self
+                                                 title:nil
+                                              subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
+                                             iconImage:nil
+                                                  type:RMessageTypeSuccess
+                                        customTypeName:nil
+                                              duration:RMessageDurationAutomatic
+                                              callback:nil
+                                           buttonTitle:nil
+                                        buttonCallback:nil
+                                            atPosition:RMessagePositionBottom
+                                  canBeDismissedByUser:YES];
+
+        }
     }
 }
 
@@ -197,7 +217,7 @@ GlobalVariables *globalVariables;
     if ([_mutableArray count]==0)
     {
         UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        noDataLabel.text             =  NSLocalizedString(@"Empty!!!",nil);
+        noDataLabel.text             =  NSLocalizedString(@"",nil);
         noDataLabel.textColor        = [UIColor blackColor];
         noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = noDataLabel;
