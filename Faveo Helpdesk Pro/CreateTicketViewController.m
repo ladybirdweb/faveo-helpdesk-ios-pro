@@ -74,7 +74,7 @@
     priority_id=[[NSNumber alloc]init];
     utils=[[Utils alloc]init];
     userDefaults=[NSUserDefaults standardUserDefaults];
-    _codeTextField.text=[self setDefaultCountryCode];
+    //_codeTextField.text=[self setDefaultCountryCode];
     
     [self readFromPlist];
     
@@ -308,7 +308,28 @@
 //    }
     
 @try{
-    if (self.emailTextField.text.length==0){
+    
+    if(self.emailTextField.text.length==0 && self.firstNameTextField.text.length==0 && self.helpTopicTextField.text.length==0 && self.subjectTextField.text.length==0 && self.priorityTextField.text.length==0 && self.textViewMsg.text.length==0)
+    {
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Warning !", nil)
+                                          subtitle:NSLocalizedString(@"Please fill all mandatory fields...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeWarning
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+
+        
+    }else if (self.emailTextField.text.length==0){
        //[RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter EMAIL-ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -348,7 +369,7 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
 
-    }else if (self.firstNameTextField.text.length<2) {
+    } else if (self.firstNameTextField.text.length<2) {
         
     //[RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"FirstName should have more than 2 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
 
@@ -369,8 +390,29 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
 
+     
+    }else /*if (self.mobileTextField.text.length==0) {
+        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
-    }else if (self.helpTopicTextField.text.length==0) {
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Warning !", nil)
+                                          subtitle:NSLocalizedString(@"Please enter Mobile...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeWarning
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
+        
+    }else */ if (self.helpTopicTextField.text.length==0) {
        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
@@ -391,7 +433,7 @@
                               canBeDismissedByUser:YES];
 
         
-    }else  if (self.subjectTextField.text.length==0) {
+    }else if (self.subjectTextField.text.length==0) {
        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter SUBJECT",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
@@ -411,7 +453,7 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
         
-    }else  if (self.subjectTextField.text.length<5) {
+    }else if (self.subjectTextField.text.length<5) {
        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"SUBJECT requires at least 5 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -477,7 +519,7 @@
     }else if (self.msgTextField.text.length<10){
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"MESSAGE requires at least 10 characters" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         // [utils showAlertWithMessage:@"Please enter ticket MESSAGE" sendViewController:self];
-    }*/else if (self.priorityTextField.text.length==0){
+    }*/ else if (self.priorityTextField.text.length==0){
        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select PRIORITY" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
@@ -497,7 +539,9 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
         
-    }else {
+    }
+
+    else {
         NSLog(@"ticketCreated dept_id-%@, help_id-%@ ,sla_id-%@, pri_id-%@",dept_id,help_topic_id,sla_id,priority_id);
         if ([_helpTopicTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]||[_priorityTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]) {
           //  [RKDropdownAlert title:APP_NAME message:@"Please refresh the Inbox" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
@@ -824,35 +868,39 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-//    [_emailTextField becomeFirstResponder ];
+   // [_emailTextField becomeFirstResponder ];
 //    
-//    if (textField == _emailTextField) {
-//        [textField resignFirstResponder];
-//        [_firstNameTextField becomeFirstResponder];
-//    } else if (textField == _firstNameTextField) {
-//       
-//        [textField resignFirstResponder];
-//        [_lastNameTextField becomeFirstResponder];
-//    } else if (textField == _lastNameTextField) {
-//        
-//        [textField resignFirstResponder];
-//        [_mobileTextField becomeFirstResponder];
-//    } else if (textField == _mobileTextField) {
-//        
-//        [textField resignFirstResponder];
-//        [_subjectTextField becomeFirstResponder];
-//    } else if (textField == _subjectTextField) {
-//        
-//        [textField resignFirstResponder];
-//        [_textViewMsg becomeFirstResponder];
-//    }else if(textField == _subjectTextField)
-//    {
-//        [textField resignFirstResponder];
-//    }
+    if (textField == _emailTextField) {
+        [textField resignFirstResponder];
+        [_firstNameTextField becomeFirstResponder];
+    } else if (textField == _firstNameTextField) {
+       
+        [textField resignFirstResponder];
+        [_lastNameTextField becomeFirstResponder];
+    } else if (textField == _lastNameTextField) {
+        
+        [textField resignFirstResponder];
+        [_codeTextField becomeFirstResponder];
+    } else if (textField == _codeTextField)
+    {
+        [textField resignFirstResponder];
+        [_mobileTextField becomeFirstResponder];
+    }else if(textField == _mobileTextField)
+    {
+        [textField resignFirstResponder];
+        [_helpTopicTextField becomeFirstResponder];
+    }
+    else if (textField == _helpTopicTextField) {
+        
+        [textField resignFirstResponder];
+        [_subjectTextField becomeFirstResponder];
+    } else if (textField == _subjectTextField) {
+        
+        [textField resignFirstResponder];
+        [_textViewMsg becomeFirstResponder];
+    }
 
     
-    
-
     return YES;
 }
 
@@ -893,12 +941,12 @@
     return YES;
 }
 
-#pragma mark - Custom Method
+/* #pragma mark - Custom Method
 -(NSString*)setDefaultCountryCode{
     NSString *countryIdentifier = [[NSLocale currentLocale] objectForKey: NSLocaleCountryCode];
     NSLog(@"%@",[NSString stringWithFormat:@"+%@",[[self getCountryCodeDictionary] objectForKey:countryIdentifier]]);
     return [NSString stringWithFormat:@"+%@",[[self getCountryCodeDictionary] objectForKey:countryIdentifier]];
-}
+} */
 
 -(void)split{
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
+		D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92CE70C1F3D706600D98708 /* ClientListTableViewCell.xib */; };
 		D92E2E981EEBFC0B00A0D456 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D92E2E971EEBFC0B00A0D456 /* GoogleService-Info.plist */; };
 		D9532C131E9CE9090063B318 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9532C151E9CE9090063B318 /* Localizable.strings */; };
 		D955A5511F2A05630045429F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D955A5501F2A05630045429F /* Assets.xcassets */; };
@@ -37,7 +38,6 @@
 		D9EB9F771E07C2F00001115F /* TicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F661E07C2F00001115F /* TicketTableViewCell.m */; };
 		D9EB9F781E07C2F00001115F /* TicketTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F671E07C2F00001115F /* TicketTableViewCell.xib */; };
 		D9EB9F791E07C2F00001115F /* ClientListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F691E07C2F00001115F /* ClientListTableViewCell.m */; };
-		D9EB9F7A1E07C2F00001115F /* ClientListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F6A1E07C2F00001115F /* ClientListTableViewCell.xib */; };
 		D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F6C1E07C2F00001115F /* ClientTicketTableViewCell.m */; };
 		D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */; };
 		D9EB9F7D1E07C2F00001115F /* ConversationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F6F1E07C2F00001115F /* ConversationTableViewCell.m */; };
@@ -89,6 +89,7 @@
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D92CE70C1F3D706600D98708 /* ClientListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientListTableViewCell.xib; sourceTree = "<group>"; };
 		D92E2E971EEBFC0B00A0D456 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D93D3D4F1EA0BACD00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D501EA0BACE00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
@@ -162,7 +163,6 @@
 		D9EB9F671E07C2F00001115F /* TicketTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketTableViewCell.xib; sourceTree = "<group>"; };
 		D9EB9F681E07C2F00001115F /* ClientListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientListTableViewCell.h; sourceTree = "<group>"; };
 		D9EB9F691E07C2F00001115F /* ClientListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientListTableViewCell.m; sourceTree = "<group>"; };
-		D9EB9F6A1E07C2F00001115F /* ClientListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientListTableViewCell.xib; sourceTree = "<group>"; };
 		D9EB9F6B1E07C2F00001115F /* ClientTicketTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientTicketTableViewCell.h; sourceTree = "<group>"; };
 		D9EB9F6C1E07C2F00001115F /* ClientTicketTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientTicketTableViewCell.m; sourceTree = "<group>"; };
 		D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientTicketTableViewCell.xib; sourceTree = "<group>"; };
@@ -362,7 +362,7 @@
 				D9EB9F671E07C2F00001115F /* TicketTableViewCell.xib */,
 				D9EB9F681E07C2F00001115F /* ClientListTableViewCell.h */,
 				D9EB9F691E07C2F00001115F /* ClientListTableViewCell.m */,
-				D9EB9F6A1E07C2F00001115F /* ClientListTableViewCell.xib */,
+				D92CE70C1F3D706600D98708 /* ClientListTableViewCell.xib */,
 				D9EB9F6B1E07C2F00001115F /* ClientTicketTableViewCell.h */,
 				D9EB9F6C1E07C2F00001115F /* ClientTicketTableViewCell.m */,
 				D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */,
@@ -623,7 +623,6 @@
 			files = (
 				D92E2E981EEBFC0B00A0D456 /* GoogleService-Info.plist in Resources */,
 				D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */,
-				D9EB9F7A1E07C2F00001115F /* ClientListTableViewCell.xib in Resources */,
 				D9532C131E9CE9090063B318 /* Localizable.strings in Resources */,
 				D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */,
 				D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */,
@@ -631,6 +630,7 @@
 				D9A2FCB51F18942800C829DD /* NotificationTableViewCell.xib in Resources */,
 				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
 				D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */,
+				D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */,
 				D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */,
 				D9EB9F801E07C2F00001115F /* OpenCloseTableViewCell.xib in Resources */,
 				D9EB9F781E07C2F00001115F /* TicketTableViewCell.xib in Resources */,

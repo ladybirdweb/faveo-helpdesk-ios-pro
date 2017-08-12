@@ -1241,7 +1241,7 @@
                                                         <constraint firstAttribute="height" constant="34" id="VU7-qn-nHI"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                                                 </textView>
                                             </subviews>
                                             <constraints>

@@ -31,7 +31,9 @@
     Utils *utils;
     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
-    GlobalVariables *globalVariables;    
+    GlobalVariables *globalVariables;
+    NSString *notifyID;
+    
 }
 
 @property (nonatomic, strong) NSMutableArray *mutableArray;
@@ -48,6 +50,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"Naa-Inbox");
+    
     
     NSString *refreshedToken = [[FIRInstanceID instanceID] token];
     NSLog(@"refreshed token  %@",refreshedToken);
@@ -354,12 +357,15 @@
             
         }
         
+      //  [self nofificationSeen];
+        
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
-        NSLog(@"Dict is L %@", finaldic);
+        NSLog(@"Dict is : %@", finaldic);
         
         NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
-
-    @try{
+        
+        
+        @try{
         // cell.msglbl.text=[finaldic objectForKey:@"message"];
         
         if ( ( ![[finaldic objectForKey:@"message"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"message"] length] != 0 ) )
@@ -435,6 +441,7 @@
             NSLog( @"In finally block");
             
         }
+        
         return cell;
     }
 }
@@ -444,11 +451,13 @@
     
     
     
-
-    
-    
       NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
     NSLog(@"dict issssss : %@",finaldic);
+    
+      //   notifyID= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"id"]];
+    
+   // [self nofificationSeen];
+    
     
      NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
     
@@ -459,11 +468,8 @@
     NSString *sen=[finaldic objectForKey:@"senario"];
     NSLog(@"Senario is : %@",sen);
     
-  
-    
     if([sen isEqualToString:@"tickets"])
     {
-       
        
         globalVariables.iD= [finaldic objectForKey:@"row_id"];
         
@@ -481,15 +487,105 @@
         [self.navigationController pushViewController:clientDetail animated:YES];
     }
   
-     // globalVariables.iD=[profileDict objectForKey:@"row_id"];
-      // globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
-    //globalVariables.First_name=  [profileDict objectForKey:@"changed_by_first_name"];
-    //globalVariables.Last_name= [profileDict objectForKey:@"changed_by_last_name"];
- 
-    //globalVariables.title=[finaldic objectForKey:@"title"];
+        // count=1;
     
 }
 
+/*-(void)nofificationSeen
+{
+    
+    //NSString *url2= [NSString stringWithFormat:@"%@helpdesk/notifications-seen?api_key=%@ip=%@&token=%@&notification_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],notifyID];
+    
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+                if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
+    }else{
+        
+       // [[AppDelegate sharedAppdelegate] showProgressView];
+        
+    
+        NSString *url2= [NSString stringWithFormat:@"%@helpdesk/notifications-seen?api_key=%@ip=%@&token=%@&notification_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],notifyID];
+        
+        
+        NSLog(@"URL is : %@",url2);
+        
+        
+        MyWebservices *webservices=[MyWebservices sharedInstance];
+            
+            [webservices httpResponsePOST:url2 parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                
+                
+                
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                
+                if (error || [msg containsString:@"Error"]) {
+                    
+                    if (msg) {
+                        
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        
+                    }else if(error)  {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4== %@",error.localizedDescription);
+                    }
+                    
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self nofificationSeen];
+                    NSLog(@"Thread--NO4-call-nofificationSeen-method");
+                    return;
+                }
+                
+                if (json) {
+                    NSLog(@"JSON-CreateTicket-%@",json);
+                    if ([json objectForKey:@"result"]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                           // NSLog(@"%@",json);
+                            
+                            NSDictionary *dict=[json objectForKey:@"result"];
+                            NSString *str1= [dict objectForKey:@"message"];
+                            
+                            if([str1 isEqualToString:@"Successfully Updated"])
+                            {
+                                count=1;
+                            }
+                            
+                            
+                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
+//                            "status": "success",
+//                            "message": "Successfully Updated"
+//
+                            
+                        });
+                    }
+                }
+                NSLog(@"Thread-NO5");
+                
+            }];
+            
+    }
+    
+}
+ */
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
