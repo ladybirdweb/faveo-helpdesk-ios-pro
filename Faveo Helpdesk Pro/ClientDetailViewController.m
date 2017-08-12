@@ -193,12 +193,22 @@
                         _phone= NSLocalizedString(@"Not Available",nil);
                     }
     
-                    NSString *code1= [requester objectForKey:@"country_code"];
+                    NSString *code1= [NSString stringWithFormat:@"%@",[requester objectForKey:@"country_code"]];
                     
+                    
+                   
                     [Utils isEmpty:code1];
                     if(![Utils isEmpty:code1])
                     {
+                        if([code1 isEqualToString:@"0"])
+                        {
+                            code2=@"";
+                            
+                        }
+                        else
+                        {
                         code2=[NSString stringWithFormat:@"+%@",[requester objectForKey:@"country_code"]];
+                        }
                     }
                     else
                     {

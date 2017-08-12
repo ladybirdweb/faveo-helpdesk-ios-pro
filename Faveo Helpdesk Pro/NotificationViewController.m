@@ -454,9 +454,9 @@
       NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
     NSLog(@"dict issssss : %@",finaldic);
     
-      //   notifyID= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"id"]];
+         notifyID= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"id"]];
     
-   // [self nofificationSeen];
+  //  [self nofificationSeen];
     
     
      NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
@@ -566,7 +566,7 @@
                             
                             if([str1 isEqualToString:@"Successfully Updated"])
                             {
-                                count=1;
+                               // count=1;
                             }
                             
                             
@@ -584,8 +584,8 @@
             
     }
     
-}
- */
+} */
+ 
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];

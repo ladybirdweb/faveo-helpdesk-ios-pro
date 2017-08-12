@@ -376,7 +376,15 @@ GlobalVariables *globalVariables;
      
      if( ![Utils isEmpty:code])
      {
+         if([code isEqualToString:@"0"])
+         {
+             codeTemp=@"";
+             
+         }
+         else
+         {
          codeTemp =[NSString stringWithFormat:@"+%@",[finaldic objectForKey:@"mobile_code"]];
+         }
      }
      else
      {
@@ -407,11 +415,11 @@ GlobalVariables *globalVariables;
      
         NSString *clientFirstName=[finaldic objectForKey:@"first_name"];
         NSString *clientLastName=[finaldic objectForKey:@"last_name"];
-       // NSString *userName= [finaldic objectForKey:@"user_name"];
+        NSString *userName= [finaldic objectForKey:@"user_name"];
         
         [Utils isEmpty:clientFirstName];
         [Utils isEmpty:clientLastName];
-      //  [Utils isEmpty:userName];
+       [Utils isEmpty:userName];
         
         if(![Utils isEmpty:clientFirstName] && ![Utils isEmpty:clientLastName])
         {
@@ -421,6 +429,10 @@ GlobalVariables *globalVariables;
         else if (![Utils isEmpty:clientFirstName] && [Utils isEmpty:clientLastName])
         {
             cell.clientNameLabel.text=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"first_name"]];
+        }
+        else if(![Utils isEmpty:userName])
+        {
+            cell.clientNameLabel.text= [finaldic objectForKey:@"user_name"];
         }
         else
         {

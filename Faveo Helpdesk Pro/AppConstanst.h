@@ -19,7 +19,9 @@
 #define NO_INTERNET @"There is no Internet Connection"
 #define IP @""
 #define APP_VERSION @"1.0"
+
 #define BILLING_API @"https://www.faveohelpdesk.com/billing/public/api/check-url"
+
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
