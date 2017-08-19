@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
+		D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92CE70C1F3D706600D98708 /* ClientListTableViewCell.xib */; };
 		D92E2E981EEBFC0B00A0D456 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D92E2E971EEBFC0B00A0D456 /* GoogleService-Info.plist */; };
 		D9532C131E9CE9090063B318 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9532C151E9CE9090063B318 /* Localizable.strings */; };
+		D955A5511F2A05630045429F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D955A5501F2A05630045429F /* Assets.xcassets */; };
 		D97B13791E080BA8007F46DA /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B13781E080BA8007F46DA /* UserNotifications.framework */; };
 		D97B137B1E080BC3007F46DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137A1E080BC3007F46DA /* UIKit.framework */; };
 		D97B137D1E080BCA007F46DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137C1E080BCA007F46DA /* SystemConfiguration.framework */; };
 		D97B137F1E080BDB007F46DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137E1E080BDB007F46DA /* CoreGraphics.framework */; };
 		D97B13811E080BE3007F46DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B13801E080BE3007F46DA /* Foundation.framework */; };
 		D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */ = {isa = PBXBuildFile; fileRef = D985BAC71EDC5FAA001EB153 /* Dat.m */; };
+		D9A2FCB01F18904000C829DD /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FCAF1F18904000C829DD /* NotificationViewController.m */; };
+		D9A2FCB41F18942800C829DD /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */; };
+		D9A2FCB51F18942800C829DD /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9A2FCB31F18942800C829DD /* NotificationTableViewCell.xib */; };
 		D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */; };
 		D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */; };
 		D9DBD3461E07ACFC00219F93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3451E07ACFC00219F93 /* main.m */; };
 		D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3481E07ACFC00219F93 /* AppDelegate.m */; };
 		D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD34D1E07ACFC00219F93 /* Main.storyboard */; };
-		D9DBD3511E07ACFC00219F93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD3501E07ACFC00219F93 /* Assets.xcassets */; };
 		D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD3521E07ACFC00219F93 /* LaunchScreen.storyboard */; };
 		D9DBD35F1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD35E1E07ACFC00219F93 /* Faveo_Helpdesk_ProTests.m */; };
 		D9DBD36A1E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3691E07ACFC00219F93 /* Faveo_Helpdesk_ProUITests.m */; };
@@ -34,7 +38,6 @@
 		D9EB9F771E07C2F00001115F /* TicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F661E07C2F00001115F /* TicketTableViewCell.m */; };
 		D9EB9F781E07C2F00001115F /* TicketTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F671E07C2F00001115F /* TicketTableViewCell.xib */; };
 		D9EB9F791E07C2F00001115F /* ClientListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F691E07C2F00001115F /* ClientListTableViewCell.m */; };
-		D9EB9F7A1E07C2F00001115F /* ClientListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F6A1E07C2F00001115F /* ClientListTableViewCell.xib */; };
 		D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F6C1E07C2F00001115F /* ClientTicketTableViewCell.m */; };
 		D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */; };
 		D9EB9F7D1E07C2F00001115F /* ConversationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F6F1E07C2F00001115F /* ConversationTableViewCell.m */; };
@@ -86,6 +89,7 @@
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D92CE70C1F3D706600D98708 /* ClientListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientListTableViewCell.xib; sourceTree = "<group>"; };
 		D92E2E971EEBFC0B00A0D456 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D93D3D4F1EA0BACD00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D501EA0BACE00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 		D9532C171E9CE90E0063B318 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D9532C181E9CE90F0063B318 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D9532C191E9CE9110063B318 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D955A5501F2A05630045429F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Faveo Helpdesk Pro.entitlements"; sourceTree = "<group>"; };
 		D97B13781E080BA8007F46DA /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D97B137A1E080BC3007F46DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -108,6 +113,11 @@
 		D97B13801E080BE3007F46DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D985BAC61EDC5FAA001EB153 /* Dat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dat.h; sourceTree = "<group>"; };
 		D985BAC71EDC5FAA001EB153 /* Dat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dat.m; sourceTree = "<group>"; };
+		D9A2FCAE1F18904000C829DD /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
+		D9A2FCAF1F18904000C829DD /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
+		D9A2FCB11F18942800C829DD /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
+		D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
+		D9A2FCB31F18942800C829DD /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		D9B6E2D71E9B8B1600AAB724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LoadingTableViewCell.xib; sourceTree = "<group>"; };
 		D9B6E2DA1E9B8B1A00AAB724 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2DC1E9B8B1C00AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
@@ -127,7 +137,6 @@
 		D9DBD3471E07ACFC00219F93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D9DBD3481E07ACFC00219F93 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D9DBD34E1E07ACFC00219F93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D9DBD3501E07ACFC00219F93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9DBD3531E07ACFC00219F93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9DBD3551E07ACFC00219F93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9DBD35A1E07ACFC00219F93 /* Faveo Helpdesk ProTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Faveo Helpdesk ProTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,7 +163,6 @@
 		D9EB9F671E07C2F00001115F /* TicketTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketTableViewCell.xib; sourceTree = "<group>"; };
 		D9EB9F681E07C2F00001115F /* ClientListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientListTableViewCell.h; sourceTree = "<group>"; };
 		D9EB9F691E07C2F00001115F /* ClientListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientListTableViewCell.m; sourceTree = "<group>"; };
-		D9EB9F6A1E07C2F00001115F /* ClientListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientListTableViewCell.xib; sourceTree = "<group>"; };
 		D9EB9F6B1E07C2F00001115F /* ClientTicketTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientTicketTableViewCell.h; sourceTree = "<group>"; };
 		D9EB9F6C1E07C2F00001115F /* ClientTicketTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientTicketTableViewCell.m; sourceTree = "<group>"; };
 		D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientTicketTableViewCell.xib; sourceTree = "<group>"; };
@@ -303,7 +311,7 @@
 				D9F954FA1E617BE500DA9B30 /* countries.json */,
 				D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */,
 				D9DBD34D1E07ACFC00219F93 /* Main.storyboard */,
-				D9DBD3501E07ACFC00219F93 /* Assets.xcassets */,
+				D955A5501F2A05630045429F /* Assets.xcassets */,
 				D9DBD3521E07ACFC00219F93 /* LaunchScreen.storyboard */,
 				D9DBD3551E07ACFC00219F93 /* Info.plist */,
 				D9DBD3451E07ACFC00219F93 /* main.m */,
@@ -346,12 +354,15 @@
 		D9EB9F4E1E07C20B0001115F /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
+				D9A2FCB11F18942800C829DD /* NotificationTableViewCell.h */,
+				D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */,
+				D9A2FCB31F18942800C829DD /* NotificationTableViewCell.xib */,
 				D9EB9F651E07C2F00001115F /* TicketTableViewCell.h */,
 				D9EB9F661E07C2F00001115F /* TicketTableViewCell.m */,
 				D9EB9F671E07C2F00001115F /* TicketTableViewCell.xib */,
 				D9EB9F681E07C2F00001115F /* ClientListTableViewCell.h */,
 				D9EB9F691E07C2F00001115F /* ClientListTableViewCell.m */,
-				D9EB9F6A1E07C2F00001115F /* ClientListTableViewCell.xib */,
+				D92CE70C1F3D706600D98708 /* ClientListTableViewCell.xib */,
 				D9EB9F6B1E07C2F00001115F /* ClientTicketTableViewCell.h */,
 				D9EB9F6C1E07C2F00001115F /* ClientTicketTableViewCell.m */,
 				D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */,
@@ -375,30 +386,32 @@
 				D9EB9F841E07C3270001115F /* LeftMenuViewController.m */,
 				D9EB9F851E07C3270001115F /* LoginViewController.h */,
 				D9EB9F861E07C3270001115F /* LoginViewController.m */,
-				D9EB9F871E07C3270001115F /* UnassignedTicketsViewController.h */,
-				D9EB9F881E07C3270001115F /* UnassignedTicketsViewController.m */,
-				D9EB9F891E07C3270001115F /* ClientListViewController.h */,
-				D9EB9F8A1E07C3270001115F /* ClientListViewController.m */,
-				D9EB9F8B1E07C3270001115F /* TrashTicketsViewController.h */,
-				D9EB9F8C1E07C3270001115F /* TrashTicketsViewController.m */,
-				D9EB9F8D1E07C3270001115F /* ClosedTicketsViewController.h */,
-				D9EB9F8E1E07C3270001115F /* ClosedTicketsViewController.m */,
-				D9EB9F8F1E07C3270001115F /* MyTicketsViewController.h */,
-				D9EB9F901E07C3270001115F /* MyTicketsViewController.m */,
 				D9EB9F911E07C3270001115F /* CreateTicketViewController.h */,
 				D9EB9F921E07C3270001115F /* CreateTicketViewController.m */,
 				D9EB9F931E07C3270001115F /* InboxViewController.h */,
 				D9EB9F941E07C3270001115F /* InboxViewController.m */,
-				D9EB9F951E07C3270001115F /* TicketDetailViewController.h */,
-				D9EB9F961E07C3270001115F /* TicketDetailViewController.m */,
+				D9EB9F8F1E07C3270001115F /* MyTicketsViewController.h */,
+				D9EB9F901E07C3270001115F /* MyTicketsViewController.m */,
+				D9EB9F871E07C3270001115F /* UnassignedTicketsViewController.h */,
+				D9EB9F881E07C3270001115F /* UnassignedTicketsViewController.m */,
+				D9EB9F8D1E07C3270001115F /* ClosedTicketsViewController.h */,
+				D9EB9F8E1E07C3270001115F /* ClosedTicketsViewController.m */,
+				D9EB9F8B1E07C3270001115F /* TrashTicketsViewController.h */,
+				D9EB9F8C1E07C3270001115F /* TrashTicketsViewController.m */,
+				D9EB9F891E07C3270001115F /* ClientListViewController.h */,
+				D9EB9F8A1E07C3270001115F /* ClientListViewController.m */,
 				D9EB9F971E07C3270001115F /* AboutViewController.h */,
 				D9EB9F981E07C3270001115F /* AboutViewController.m */,
+				D9EB9F951E07C3270001115F /* TicketDetailViewController.h */,
+				D9EB9F961E07C3270001115F /* TicketDetailViewController.m */,
 				D9EB9F991E07C3270001115F /* ClientDetailViewController.h */,
 				D9EB9F9A1E07C3270001115F /* ClientDetailViewController.m */,
 				D9EB9F9B1E07C3270001115F /* ConversationViewController.h */,
 				D9EB9F9C1E07C3270001115F /* ConversationViewController.m */,
 				D9EB9F9D1E07C3270001115F /* DetailViewController.h */,
 				D9EB9F9E1E07C3270001115F /* DetailViewController.m */,
+				D9A2FCAE1F18904000C829DD /* NotificationViewController.h */,
+				D9A2FCAF1F18904000C829DD /* NotificationViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -610,13 +623,14 @@
 			files = (
 				D92E2E981EEBFC0B00A0D456 /* GoogleService-Info.plist in Resources */,
 				D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */,
-				D9EB9F7A1E07C2F00001115F /* ClientListTableViewCell.xib in Resources */,
 				D9532C131E9CE9090063B318 /* Localizable.strings in Resources */,
 				D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */,
 				D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */,
-				D9DBD3511E07ACFC00219F93 /* Assets.xcassets in Resources */,
+				D955A5511F2A05630045429F /* Assets.xcassets in Resources */,
+				D9A2FCB51F18942800C829DD /* NotificationTableViewCell.xib in Resources */,
 				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
 				D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */,
+				D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */,
 				D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */,
 				D9EB9F801E07C2F00001115F /* OpenCloseTableViewCell.xib in Resources */,
 				D9EB9F781E07C2F00001115F /* TicketTableViewCell.xib in Resources */,
@@ -692,6 +706,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9A2FCB01F18904000C829DD /* NotificationViewController.m in Sources */,
 				D9EB9FBD1E07C4490001115F /* SlideNavigationContorllerAnimatorFade.m in Sources */,
 				D9EB9FA51E07C3270001115F /* MyTicketsViewController.m in Sources */,
 				D9EB9FA81E07C3270001115F /* TicketDetailViewController.m in Sources */,
@@ -709,6 +724,7 @@
 				D9EB9F9F1E07C3270001115F /* LeftMenuViewController.m in Sources */,
 				D9DBD3461E07ACFC00219F93 /* main.m in Sources */,
 				D9EB9F5B1E07C2A80001115F /* Utils.m in Sources */,
+				D9A2FCB41F18942800C829DD /* NotificationTableViewCell.m in Sources */,
 				D9EB9F7D1E07C2F00001115F /* ConversationTableViewCell.m in Sources */,
 				D9EB9FC51E07C4610001115F /* Reachability.m in Sources */,
 				D9EB9FBF1E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
