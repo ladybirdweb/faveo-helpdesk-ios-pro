@@ -21,6 +21,7 @@
 #import "HexColors.h"
 #import "RMessage.h"
 #import "RMessageView.h"
+#import "NotificationViewController.h"
 
 @interface TrashTicketsViewController ()<RMessageProtocol>{
 
@@ -50,7 +51,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      [self setTitle:NSLocalizedString(@"Trash Tickets",nil)];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnPressed)]];
+  /*  [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnPressed)]]; */
+    
+    UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
+    [NotificationBtn addTarget:self action:@selector(NotificationBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [NotificationBtn setFrame:CGRectMake(44, 0, 32, 32)];
+    
+    UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
+    // [rightBarButtonItems addSubview:addBtn];
+    [rightBarButtonItems addSubview:NotificationBtn];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
     
     [self addUIRefresh];
     utils=[[Utils alloc]init];
@@ -67,12 +79,31 @@
     { [refresh endRefreshing];
         //connection unavailable
         [[AppDelegate sharedAppdelegate] hideProgressView];
-       [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+      // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+
     }else{
         
         //        [[AppDelegate sharedAppdelegate] showProgressView];
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/trash?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
         
+   @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -118,6 +149,17 @@
             NSLog(@"Thread-NO5-getUnnassigned-closed");
             
         }];
+   }@catch (NSException *exception)
+        {
+            NSLog( @"NSException caught in reload method in TrashTickets ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            NSLog(@"In Finally block");
+        }
     }
 }
 
@@ -152,14 +194,19 @@
     return _mutableArray.count + 1;
 }
 
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+   
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    
     if (indexPath.row == [_mutableArray count] - 1 ) {
         NSLog(@"nextURL  %@",_nextPageUrl);
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
             [self loadMore];
         }
         else{
-            //[RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            // [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            
             [RMessage showNotificationInViewController:self
                                                  title:nil
                                               subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
@@ -176,15 +223,60 @@
     }
 }
 
+/*- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == [_mutableArray count] - 1 ) {
+        NSLog(@"nextURL  %@",_nextPageUrl);
+        if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
+            [self loadMore];
+        }
+        else{
+            //[RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            
+            [RMessage showNotificationInViewController:self
+                                                 title:nil
+                                              subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
+                                             iconImage:nil
+                                                  type:RMessageTypeSuccess
+                                        customTypeName:nil
+                                              duration:RMessageDurationAutomatic
+                                              callback:nil
+                                           buttonTitle:nil
+                                        buttonCallback:nil
+                                            atPosition:RMessagePositionBottom
+                                  canBeDismissedByUser:YES];
+        }
+    }
+}*/
+
 -(void)loadMore{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-       [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+      // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+
+        
         
     }else{
         
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -230,11 +322,24 @@
             NSLog(@"Thread-NO5-getInbox-closed");
             
         }];
+    }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in loadmore methos in TrashTickets ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -265,20 +370,200 @@
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
         
-        cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
-        cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
-        cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
-        cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
-        [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+//        cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+//        cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+//        cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+   
+    @try{
+        // cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+        if ( ( ![[finaldic objectForKey:@"ticket_number"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"ticket_number"] length] != 0 ) )
+        {
+            cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+        }
+        else
+        {
+            cell.ticketIdLabel.text= NSLocalizedString(@"Not Available",nil);
+        }
+        
+        // cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+        
+        NSString *fname= [finaldic objectForKey:@"first_name"];
+        NSString *lname= [finaldic objectForKey:@"last_name"];
+        NSString *userName= [finaldic objectForKey:@"user_name"];
+        NSString*email1=[finaldic objectForKey:@"email"];
+        
+        [Utils isEmpty:fname];
+        [Utils isEmpty:lname];
+        [Utils isEmpty:email1];
+        
+        if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+        {
+            if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+            {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+            }
+            else{
+                cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+            }
+        }
+        else
+        { if(![Utils isEmpty:userName])
+        {
+            cell.mailIdLabel.text=[finaldic objectForKey:@"user_name"];
+        }
+            if(![Utils isEmpty:email1])
+            {
+                cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+            }
+            else{
+                cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
+            }
+            
+        }
+        
+        // cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+        
+        if ( ( ![[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]] isEqual:[NSNull null]] ) && ( [[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]] length] != 0 ) )
+        {
+            cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+        }
+        else
+        {
+            cell.timeStampLabel.text= NSLocalizedString(@"Not Available",nil);
+        }
+       
+    }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in CellForRowAtIndexPath methos in TrashTickets ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+//______________________________________________________________________________________________________
+        ////////////////for UTF-8 data encoding ///////
+        //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
+        
+        
+        
+        // NSString *encodedString = @"=?UTF-8?Q?Re:_Robin_-_Implementing_Faveo_H?= =?UTF-8?Q?elp_Desk._Let=E2=80=99s_get_you_started.?=";
+        
+        NSString *encodedString =[finaldic objectForKey:@"title"];
+        NSMutableString *decodedString = [[NSMutableString alloc] init];
+        
+        if ([encodedString hasPrefix:@"=?UTF-8?Q?"] || [encodedString hasSuffix:@"?="])
+        {
+            NSScanner *scanner = [NSScanner scannerWithString:encodedString];
+            NSString *buf = nil;
+            //  NSMutableString *decodedString = [[NSMutableString alloc] init];
+            
+            while ([scanner scanString:@"=?UTF-8?Q?" intoString:NULL]
+                   || ([scanner scanUpToString:@"=?UTF-8?Q?" intoString:&buf] && [scanner scanString:@"=?UTF-8?Q?" intoString:NULL])) {
+                if (buf != nil) {
+                    [decodedString appendString:buf];
+                }
+                
+                buf = nil;
+                
+                NSString *encodedRange;
+                
+                if (![scanner scanUpToString:@"?=" intoString:&encodedRange]) {
+                    break; // Invalid encoding
+                }
+                
+                [scanner scanString:@"?=" intoString:NULL]; // Skip the terminating "?="
+                
+                // Decode the encoded portion (naively using UTF-8 and assuming it really is Q encoded)
+                // I'm doing this really naively, but it should work
+                
+                // Firstly I'm encoding % signs so I can cheat and turn this into a URL-encoded string, which NSString can decode
+                encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"%" withString:@"=25"];
+                
+                // Turn this into a URL-encoded string
+                encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"=" withString:@"%"];
+                
+                
+                // Remove the underscores
+                encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+                
+               // [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                
+                NSString *str1= [encodedRange stringByRemovingPercentEncoding];
+                [decodedString appendString:str1];
+                
+
+            }
+            
+            NSLog(@"Decoded string = %@", decodedString);
+            
+            cell.ticketSubLabel.text= decodedString;
+        }
+        else{
+            
+            cell.ticketSubLabel.text= encodedString;
+            
+        }
+ //___________________________________________________________________________________________________
+        
+        
+        
+        
+    @try{
+      //  [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        
+        if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+        {
+            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+            
+        }
+        else
+        {
+            [cell setUserProfileimage:@"default_pic.png"];
+        }
+
+        
+        
               cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
+        
+        
         if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
             
-            if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+           /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
                 [cell.overDueLabel setHidden:NO];
                 
             }else [cell.overDueLabel setHidden:YES];
             
+        }*/
+            if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+                [cell.overDueLabel setHidden:NO];
+                [cell.today setHidden:YES];
+            }else
+            {
+                [cell.overDueLabel setHidden:YES];
+                [cell.today setHidden:NO];
+            }
+            
         }
+    }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in CellForRowAtIndexPath methos in TrashTickets ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
         return cell;
     }
 }
@@ -290,6 +575,9 @@
     
     globalVariables.iD=[finaldic objectForKey:@"id"];
     globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
+    globalVariables.First_name=[finaldic objectForKey:@"first_name"];
+    globalVariables.Last_name=[finaldic objectForKey:@"last_name"];
+     globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
     // globalVariables.title=[finaldic objectForKey:@"title"];
     [self.navigationController pushViewController:td animated:YES];
 }
@@ -305,6 +593,15 @@
     CreateTicketViewController *createTicket=[self.storyboard instantiateViewControllerWithIdentifier:@"CreateTicket"];
     
     [self.navigationController pushViewController:createTicket animated:YES];
+    
+}
+
+-(void)NotificationBtnPressed
+{
+    NotificationViewController *not=[self.storyboard instantiateViewControllerWithIdentifier:@"Notify"];
+    
+    
+    [self.navigationController pushViewController:not animated:YES];
     
 }
 
@@ -331,14 +628,7 @@
     //    [refresh endRefreshing];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 @end

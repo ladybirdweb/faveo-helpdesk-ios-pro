@@ -142,7 +142,7 @@
                 
                 [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Verifying URL","")];
                 
-                NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/url?url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
+                NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/check-url?check-url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
                 NSLog(@"URL :%@",url);
                 NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
                 [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -202,36 +202,30 @@
                     
                     NSLog(@"Get your response == %@", replyStr);
                     
-                    if ([replyStr containsString:@"success"]) {
+                    @try{
+                        if ([replyStr containsString:@"success"]) {
                         
-                        NSLog(@"Success");
-                        // [[AppDelegate sharedAppdelegate] hideProgressView];
-                        //                        if (!Utils.isDebug) {
-                        [self verifyBilling];
-                        //                        }else{
-                        //                            dispatch_async(dispatch_get_main_queue(), ^{
-                        //
-                        //                                [RKDropdownAlert title:APP_NAME message:@"Verified URL" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                        //                                [[AppDelegate sharedAppdelegate] hideProgressView];
-                        //                                [self.companyURLview setHidden:YES];
-                        //                                [self.loginView setHidden:NO];
-                        //                                [utils viewSlideInFromRightToLeft:self.loginView];
-                        //                            });
-                        //                            [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
-                        //                            [userdefaults synchronize];
-                        //                        }
+                            NSLog(@"Success");
+                           [self verifyBilling];
+                         
                         
-                        
-                        //                        dispatch_async(dispatch_get_main_queue(), ^{
-                        //
-                        //                        });
-                        
-                        // NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                        
-                    }else{
+                        }else{
                         
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                         [utils showAlertWithMessage:NSLocalizedString(@"Error verifying URL",nil)sendViewController:self];
+                          }
+                    }@catch (NSException *exception)
+                    {
+                        // Print exception information
+                        NSLog( @"NSException caught in Billing in Login ViewController" );
+                        NSLog( @"Name: %@", exception.name);
+                        NSLog( @"Reason: %@", exception.reason );
+                        return;
+                    }
+                    @finally 
+                    {
+                        // Cleanup, in both success and fail cases
+                        NSLog( @"In finally block");
                         
                     }
                     
@@ -257,63 +251,6 @@
 }*/
 
 
-
--(void)verifyBilling{
-    //[[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
-    //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-    NSString *url=[NSString stringWithFormat:@"%@?url=%@",BILLING_API,baseURL];
-    MyWebservices *webservices=[MyWebservices sharedInstance];
-    [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-        if (error || [msg containsString:@"Error"]) {
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            if (msg) {
-                
-                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
-            }else if(error)  {
-                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
-            }
-            return ;
-        }
-        
-        if (json) {
-            NSLog(@"Thread-sendAPNS-token-json-%@",json);
-            // if([[json objectForKey:@"result"] isEqualToString:@"success"]){
-            NSLog(@"Billing successful!");
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Verified URL",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                
-              /*  [RMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)
-                                           subtitle:NSLocalizedString(@"URL Verified successfully !", nil)
-                                               type:RMessageTypeSuccess
-                                     customTypeName:nil
-                                           callback:nil]; */
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                [self.companyURLview setHidden:YES];
-                [self.loginView setHidden:NO];
-                [utils viewSlideInFromRightToLeft:self.loginView];
-            });
-            [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
-            [userdefaults synchronize];
-            //            }else {
-            //
-            //            [[AppDelegate sharedAppdelegate] hideProgressView];
-            //            [utils showAlertWithMessage:NSLocalizedString(@"Access denied, to use pro version!",nil) sendViewController:self];
-            //
-            //            }
-            
-        }
-        
-    }];
-}
-
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
-
 - (IBAction)btnLogin:(id)sender {
     
     
@@ -333,7 +270,14 @@
         if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
         {
             //connection unavailable
-            [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+           // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+            [RMessage
+             showNotificationWithTitle:NSLocalizedString(@"Something failed", nil)
+             subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check it!", nil)
+             type:RMessageTypeError
+             customTypeName:nil
+             callback:nil];
+
             
         }else{
             
@@ -385,7 +329,7 @@
                 
                 NSLog(@"Get your response == %@", replyStr);
                 
-                
+        
                 if ([replyStr containsString:@"token"]) {
                     
                     @try{
@@ -420,15 +364,15 @@
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                           [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                          // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
-                           /* if (self.navigationController.navigationBarHidden) {
+                            if (self.navigationController.navigationBarHidden) {
                                 [self.navigationController setNavigationBarHidden:NO];
                             }
                             
                             [RMessage showNotificationInViewController:self.navigationController
-                                                                 title:NSLocalizedString(@"Success!", nil)
-                                                              subtitle:NSLocalizedString(@"You have logged in successfully...", nil)
+                                                                 title:NSLocalizedString(@"Welcome!", nil)
+                                                              subtitle:NSLocalizedString(@"You have logged in successfully.!", nil)
                                                              iconImage:nil
                                                                   type:RMessageTypeSuccess
                                                         customTypeName:nil
@@ -437,7 +381,10 @@
                                                            buttonTitle:nil
                                                         buttonCallback:nil
                                                             atPosition:RMessagePositionNavBarOverlay
-                                                  canBeDismissedByUser:YES]; */
+                                                  canBeDismissedByUser:YES];
+
+        
+                            
                             [self sendDeviceToken];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             InboxViewController *inboxVC=[self.storyboard  instantiateViewControllerWithIdentifier:@"InboxID"];
@@ -478,6 +425,78 @@
     
 }
 
+-(void)verifyBilling{
+    //[[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
+    //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSString *url=[NSString stringWithFormat:@"%@?url=%@",BILLING_API,baseURL];
+   
+@try{
+    MyWebservices *webservices=[MyWebservices sharedInstance];
+    [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
+        if (error || [msg containsString:@"Error"]) {
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            if (msg) {
+                
+                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
+            }else if(error)  {
+                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
+            }
+            return ;
+        }
+        
+        if (json) {
+            NSLog(@"Thread-sendAPNS-token-json-%@",json);
+            // if([[json objectForKey:@"result"] isEqualToString:@"success"]){
+            NSLog(@"Billing successful!");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //  [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Verified URL",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                
+                [RMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)
+                                           subtitle:NSLocalizedString(@"URL Verified successfully !", nil)
+                                               type:RMessageTypeSuccess
+                                     customTypeName:nil
+                                           callback:nil];
+                
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                [self.companyURLview setHidden:YES];
+                [self.loginView setHidden:NO];
+                [utils viewSlideInFromRightToLeft:self.loginView];
+            });
+            [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
+            [userdefaults synchronize];
+            //            }else {
+            //
+            //            [[AppDelegate sharedAppdelegate] hideProgressView];
+            //            [utils showAlertWithMessage:NSLocalizedString(@"Access denied, to use pro version!",nil) sendViewController:self];
+            //
+            //            }
+            
+        }
+        
+    }];
+}@catch (NSException *exception)
+    {
+        // Print exception information
+        NSLog( @"NSException caught in verifyBilling method in Login ViewController " );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        // Cleanup, in both success and fail cases
+        NSLog( @"In finally block");
+        
+    }
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 
 
 -(void)sendDeviceToken{

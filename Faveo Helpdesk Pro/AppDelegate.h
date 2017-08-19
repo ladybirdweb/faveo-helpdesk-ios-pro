@@ -44,6 +44,7 @@
  @discussion An activity indicator spins while an unquantifiable task, such as loading or synchronizing complex data, is performed. It disappears when the task completes. Activity indicators are noninteractive.
  
  @code
+ 
  - (void)showProgressView
  {
  MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:self.window animated:YES];
@@ -52,6 +53,8 @@
  self.progressView = HUD;
  }
 
+  @endocde
+ 
  @see showProgressViewWithText:
  */
 - (void)showProgressView;
@@ -66,6 +69,7 @@
  @param text It show some text with Indicator.
  
  @code
+ 
  - (void)showProgressViewWithText:(NSString *)text
  {
  MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:self.window animated:YES];
@@ -73,6 +77,8 @@
  // HUD.dimBackground = YES;
  self.progressView = HUD;
  }
+ 
+  @endocde
 
  @see hideProgressView:
  */
@@ -86,6 +92,7 @@
  @discussion An activity indicator spins while an unquantifiable task, such as loading or synchronizing complex data, is performed. It disappears when the task completes. Activity indicators are noninteractive.
  
  @code
+ 
  - (void)hideProgressView
  {
  dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -94,7 +101,9 @@
  self.progressView = nil;
  }); });
  }
-
+ 
+ @endocde
+ 
  @see showProgressView:
  */
 - (void)hideProgressView;

@@ -86,9 +86,11 @@
  @param imageUrl This contains an url.
  
  @code
+ 
  [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]
  placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
 
+ @endcode
  */
 -(void)setUserProfileimage:(NSString*)imageUrl;
 

@@ -162,8 +162,24 @@
                         });
                         NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
                     }
-                }else
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                }else if (statusCode==401)
+                {
+                    if ([[self refreshToken] isEqualToString:@"tokenRefreshed"]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil,nil,@"tokenRefreshed");
+                        });
+                        NSLog(@"Thread--httpResponsePOST--tokenRefreshed");
+                    }else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil,nil,@"tokenNotRefreshed");
+                        });
+                        NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
+                    }
+
+                    
+                }
+                else
+                       dispatch_async(dispatch_get_main_queue(), ^{
                         block(nil, nil,[NSString stringWithFormat:@"Error-%ld",(long)statusCode]);
                     });
                 return ;
@@ -256,7 +272,20 @@
                         });
                         NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
                     }
-                }else
+                }else if (statusCode==401){
+                    
+                    if ([[self refreshToken] isEqualToString:@"tokenRefreshed"]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil,nil,@"tokenRefreshed");
+                        });
+                        NSLog(@"Thread--httpResponsePOST--tokenRefreshed");
+                    }else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil,nil,@"tokenNotRefreshed");
+                        });
+                        NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
+                    }
+                } else
                     dispatch_async(dispatch_get_main_queue(), ^{
                         block(nil, nil,[NSString stringWithFormat:@"Error-%ld",(long)statusCode]);
                     });

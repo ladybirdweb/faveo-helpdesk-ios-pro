@@ -16,10 +16,13 @@
 #import "MyWebservices.h"
 #import "GlobalVariables.h"
 #import "RKDropdownAlert.h"
+#import "RMessage.h"
+#import "RMessageView.h" 
+#import "NotificationViewController.h"
 
 //#import "ReplyViewController.h"
 
-@interface TicketDetailViewController () <CNPPopupControllerDelegate>{
+@interface TicketDetailViewController () <CNPPopupControllerDelegate,RMessageProtocol>{
     Utils *utils;
     NSUserDefaults *userDefaults;
     UITextField *textFieldCc;
@@ -45,16 +48,38 @@
     [self addChildViewController:self.currentViewController];
     [self addSubview:self.currentViewController.view toView:self.containerView];
     utils=[[Utils alloc]init];
+    
     globalVariables=[GlobalVariables sharedInstance];
+    
     userDefaults=[NSUserDefaults standardUserDefaults];
+    
     self.segmentedControl.tintColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(replyBtnPressed)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(internalNotePressed)], nil] animated:YES];
     
-    _lblTicketNumber.text=globalVariables.ticket_number;
+    NSLog(@"Ticket is isssss : %@",globalVariables.iD);
+//   _ticketLabel.text=globalVariables.ticket_number;
+    
+ //   _nameLabel.text=[NSString stringWithFormat:@"%@ %@",globalVariables.First_name,globalVariables.Last_name];
+    
+ //   _statusLabel.text=globalVariables.Ticket_status;
+    
        // Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    globalVariables=[GlobalVariables sharedInstance];
+    userDefaults=[NSUserDefaults standardUserDefaults];
+    
+    _ticketLabel.text=globalVariables.ticket_number;
+    
+    _nameLabel.text=[NSString stringWithFormat:@"%@ %@",globalVariables.First_name,globalVariables.Last_name];
+    
+    _statusLabel.text=globalVariables.Ticket_status;
+    
 
+}
 
 - (void)addSubview:(UIView *)subView toView:(UIView*)parentView {
     [parentView addSubview:subView];
@@ -320,7 +345,24 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+       // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
         
     }else{
         
@@ -333,6 +375,7 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/internal-note?api_key=%@&ip=%@&token=%@&user_id=%@&body=%@&ticket_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],[userDefaults objectForKey:@"user_id"],textViewInternalNote.text,globalVariables.iD];
         
+ @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -362,8 +405,21 @@
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"thread"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [RKDropdownAlert title:APP_NAME message:@"Posted your note!"backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
+                       // [RKDropdownAlert title:APP_NAME message:@"Posted your note!"backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        
+                        
+                        [RMessage showNotificationInViewController:self
+                                                             title:NSLocalizedString(@"Sucess", nil)
+                                                          subtitle:NSLocalizedString(@"Posted your note..!", nil)
+                                                         iconImage:nil
+                                                              type:RMessageTypeSuccess
+                                                    customTypeName:nil
+                                                          duration:RMessageDurationAutomatic
+                                                          callback:nil
+                                                       buttonTitle:nil
+                                                    buttonCallback:nil
+                                                        atPosition:RMessagePositionBottom
+                                              canBeDismissedByUser:YES];
                        // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
                     });
                 }
@@ -371,32 +427,74 @@
             NSLog(@"Thread-NO5-postCreateTicket-closed");
             
         }];
+  }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in Post-Internal-Note method in TicketDetail ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 }
 
 
+
+
+        
 -(void)postReply{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];        
+        // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
     }else{
         
         [[AppDelegate sharedAppdelegate] showProgressView];
         
-//        NSDictionary *param=[NSDictionary dictionaryWithObjectsAndKeys:API_KEY,@"api_key",IP,@"ip",[userDefaults objectForKey:@"token"],@"token",textViewReply.text,@"reply_content",textFieldCc.text,@"cc",globalVariables.iD,@"ticket_ID",nil];
-//        NSLog(@"Dic %@",param);
-//        
-//        NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply",[userDefaults objectForKey:@"companyURL"]];
         
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&token=%@&reply_content=%@&ticket_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],textViewReply.text,globalVariables.iD];
+        //   NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,textViewReply.text,[userDefaults objectForKey:@"token"]];
         
+        // NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,textViewReply.text,[userDefaults objectForKey:@"token"]];
+        
+         NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,textViewReply.text,[userDefaults objectForKey:@"token"]];
+        
+        
+        NSLog(@"URL is : %@",url);
+  @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
-        
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            
+            
+            
             [[AppDelegate sharedAppdelegate] hideProgressView];
+            
             if (error || [msg containsString:@"Error"]) {
                 
                 if (msg) {
@@ -422,18 +520,50 @@
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"result"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                         [RKDropdownAlert title:APP_NAME message:@"Posted your reply!"backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        // [RKDropdownAlert title:APP_NAME message:@"Posted your note!"backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+            
+                        
+                        [RMessage showNotificationInViewController:self
+                                                             title:NSLocalizedString(@"Sucess", nil)
+                                                          subtitle:NSLocalizedString(@"Posted your reply..!", nil)
+                                                         iconImage:nil
+                                                              type:RMessageTypeSuccess
+                                                    customTypeName:nil
+                                                          duration:RMessageDurationAutomatic
+                                                          callback:nil
+                                                       buttonTitle:nil
+                                                    buttonCallback:nil
+                                                        atPosition:RMessagePositionBottom
+                                              canBeDismissedByUser:YES];
+
+                        
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
-                       // [utils showAlertWithMessage:@"Kindly Refresh!" sendViewController:self];
+                        // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
                     });
                 }
-                
             }
             NSLog(@"Thread-NO5-postCreateTicket-closed");
             
         }];
+  }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in post-replay methos in TicketDetail ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
+    
 }
+
 
 //- (NSString *)removeEndSpaceFrom:(NSString *)strtoremove{
 //    NSUInteger location = 0;
@@ -456,11 +586,7 @@
     return YES;
 }
 
-//- (BOOL)textFieldShouldEndEditing:(UITextField *)aTextField
-//{
-//    return [self validate:aTextField.text];
-//}
-//
+
 //- (BOOL) validate: (NSString *) candidate {
 //    NSString *emailRegex = @"[a-zA-Z]*";
 //    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];

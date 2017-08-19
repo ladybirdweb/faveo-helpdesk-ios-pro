@@ -85,27 +85,36 @@ typedef void (^ApiResponse)(NSError* , id);
 
 /*!
  @method refreshToken
- @brief snsjkd
- @discussion sbdnjks
+ 
+ @brief It will refresh a token.
+ 
+ @discussion In this, after some particular time of period tokem expires, so that we need to refresh it again and agian, so this this method allows us to refresh a token. It is called everywhere, when call an API, send a request and getting data from server we use this method here for refreshing a token so our session well be continued without interrupting a session.
  */
 -(NSString*)refreshToken;
 
 /*!
  @method getNextPageURL
- @param url dsknskd
- @param block wskdnwskj
- @brief snsjkd
- @discussion sbdnjks
+ 
+ @param url It an url.
+ 
+ @param block It perform some action.
+ 
+ @brief It will call a next page using call handler block, each time when we scroll it will redirect to next page url and we get data.
+ 
  */
 -(void)getNextPageURL:(NSString*)url callbackHandler:(callbackHandler)block;
 
 /*!
  @method getNextPageURL
- @param url dsknskd
- @param uid dkdks
- @param block wskdnwskj
- @brief snsjkd
- @discussion sbdnjks
+ 
+ @param url Its as url i.e it will call new API for getting next data.
+ 
+ @param uid Its an id of a user.
+ 
+ @param block It perform some action.
+ 
+ @brief It passes user id to next page.So that, we can get data.
+
  */
 -(void)getNextPageURL:(NSString*)url user_id:(NSString*)uid callbackHandler:(callbackHandler)block;
 @end

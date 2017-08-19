@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_pic" translatesAutoresizingMaskIntoConstraints="NO" id="Tao-A8-ngO">
-                                <rect key="frame" x="16" y="11.5" width="57" height="57"/>
+                                <rect key="frame" x="16" y="12" width="57" height="57"/>
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="8eE-Eq-hya"/>
@@ -46,7 +46,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+91 9482189901" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hH2-UJ-QXg">
-                                <rect key="frame" x="105" y="54" width="211" height="18"/>
+                                <rect key="frame" x="100" y="54" width="145" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -61,11 +61,11 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lsn-fo-koh" firstAttribute="leading" secondItem="x83-b6-fXu" secondAttribute="leading" id="0QK-aM-Zxd"/>
-                            <constraint firstItem="YEh-9k-nRs" firstAttribute="leading" secondItem="hH2-UJ-QXg" secondAttribute="leading" id="5Uc-wM-wvW"/>
+                            <constraint firstItem="YEh-9k-nRs" firstAttribute="leading" secondItem="hH2-UJ-QXg" secondAttribute="leading" constant="5" id="5Uc-wM-wvW"/>
                             <constraint firstItem="x83-b6-fXu" firstAttribute="bottom" secondItem="YEh-9k-nRs" secondAttribute="bottom" id="6zl-k9-OWd"/>
                             <constraint firstItem="x83-b6-fXu" firstAttribute="leading" secondItem="8wC-5v-j9h" secondAttribute="leading" id="71d-Fw-nBP"/>
                             <constraint firstItem="x83-b6-fXu" firstAttribute="top" secondItem="lsn-fo-koh" secondAttribute="bottom" constant="8" symbolic="YES" id="COX-vb-ive"/>
-                            <constraint firstItem="YEh-9k-nRs" firstAttribute="trailing" secondItem="hH2-UJ-QXg" secondAttribute="trailing" id="GGV-dM-kWP"/>
+                            <constraint firstItem="YEh-9k-nRs" firstAttribute="trailing" secondItem="hH2-UJ-QXg" secondAttribute="trailing" constant="71" id="GGV-dM-kWP"/>
                             <constraint firstAttribute="trailing" secondItem="YEh-9k-nRs" secondAttribute="trailing" constant="4" id="HRx-EY-1nt"/>
                             <constraint firstItem="YEh-9k-nRs" firstAttribute="leading" secondItem="x83-b6-fXu" secondAttribute="trailing" constant="8" symbolic="YES" id="J4B-og-fUT"/>
                             <constraint firstItem="Tao-A8-ngO" firstAttribute="leading" secondItem="n51-Gz-KNn" secondAttribute="leading" constant="16" id="LaL-W9-NLT"/>

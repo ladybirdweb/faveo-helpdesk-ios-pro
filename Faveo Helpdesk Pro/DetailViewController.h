@@ -188,7 +188,10 @@
   Source can be Web, call, email or chat.
  
  @code
+ 
 - (IBAction)sourceClicked:(id)sender;
+ 
+ @endocde
 
  */
 - (IBAction)sourceClicked:(id)sender;
@@ -201,7 +204,10 @@
  @discussion After clicking this button it will show type of ticket.The ticket type can be Question, Incident, Problem or Feature Request.
  
  @code
+ 
  - (IBAction)typeClicked:(id)sender;
+ 
+  @endocde
  */
 - (IBAction)typeClicked:(id)sender;
 
@@ -215,8 +221,10 @@
  The status can be open,closed, request for close, archieved,resolved.
  
  @code
+ 
 - (IBAction)statusClicked:(id)sender;
 
+  @endocde
  */
 - (IBAction)statusClicked:(id)sender;
 
@@ -229,7 +237,10 @@
  @discussion After clicking this button it will show list of help topics. The help topics can be Support Query, Sales Query or Operational Query.
  
  @code
+ 
  - (IBAction)helpTopicClicked:(id)sender;
+ 
+  @endocde
  */
 - (IBAction)helpTopicClicked:(id)sender;
 
@@ -241,7 +252,10 @@
  @discussion After clicking this button it will shows list of SLA plans.The SLA plan can be Emergency, High, Low or normal.
  
  @code
+ 
  - (IBAction)deptClicked:(id)sender;
+ 
+  @endocde
 
  */
 - (IBAction)slaClicked:(id)sender;
@@ -254,7 +268,10 @@
  @discussion AFter clicking this button it will gives a list of all Departments.The department can be Operation, Sales, Support.
  
  @code
+ 
 - (IBAction)deptClicked:(id)sender;
+ 
+  @endocde
  */
 - (IBAction)deptClicked:(id)sender;
 
@@ -266,7 +283,10 @@
  @discussion After clicking this button it will gives list of ticket priority.The ticket priority can be Emergency, High, Low or Normal.
  
  @code
+ 
 - (IBAction)priorityClicked:(id)sender;
+ 
+  @endocde
 
  */
 - (IBAction)priorityClicked:(id)sender;
@@ -279,7 +299,10 @@
  @discussion After clicking this button whatever we done any chnages in ticket, it will save and updated in ticket details.
  
  @code
+ 
 - (IBAction)saveClicked:(id)sender;
+ 
+  @endocde
 
  */
 - (IBAction)saveClicked:(id)sender;

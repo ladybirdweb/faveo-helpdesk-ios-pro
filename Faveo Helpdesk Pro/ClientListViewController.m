@@ -62,13 +62,33 @@ GlobalVariables *globalVariables;
     { [refresh endRefreshing];
         //connection unavailable
         [[AppDelegate sharedAppdelegate] hideProgressView];
-       [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+     //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+
+        
+    
         
     }else{
         
         //        [[AppDelegate sharedAppdelegate] showProgressView];
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/customers-custom?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
-        
+@try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -116,10 +136,29 @@ GlobalVariables *globalVariables;
             NSLog(@"Thread-NO5-getClients-closed");
             
         }];
+}@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in reload method in ClientList ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+   
+    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    
     if (indexPath.row == [_mutableArray count] - 1 ) {
         NSLog(@"nextURL  %@",_nextPageUrl);
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
@@ -127,6 +166,7 @@ GlobalVariables *globalVariables;
         }
         else{
            // [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            
             [RMessage showNotificationInViewController:self
                                                  title:nil
                                               subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
@@ -149,10 +189,30 @@ GlobalVariables *globalVariables;
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-      [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+     // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+
+        
         
     }else{
         
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -199,6 +259,21 @@ GlobalVariables *globalVariables;
             NSLog(@"Thread-NO5-getInbox-closed");
             
         }];
+    }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in loadmore methos in ClienList ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return ;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 }
 
@@ -233,8 +308,6 @@ GlobalVariables *globalVariables;
     return numOfSections;
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -262,26 +335,141 @@ GlobalVariables *globalVariables;
     
     NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
 
-    NSString *email=[finaldic objectForKey:@"email"];
-    NSString *phone=[finaldic objectForKey:@"phone_number"];
+   // NSString *email=[finaldic objectForKey:@"email"];
+        
+   /* NSString *phone=[finaldic objectForKey:@"phone_number"];
         if ([email isEqualToString:@""]) {
         email=NSLocalizedString(@"Not Available",nil);
     }
     if ([phone isEqualToString:@""]) {
         phone=NSLocalizedString(@"Not Available",nil);
-    }
-    NSString *clientName=[finaldic objectForKey:@"first_name"];
-
-    if ([clientName isEqualToString:@""]) {
-        clientName=[finaldic objectForKey:@"user_name"];
-    }else{
-        clientName=[NSString stringWithFormat:@"%@ %@",clientName,[finaldic objectForKey:@"last_name"]];
-    }
+    } */
         
-    cell.emailIdLabel.text=email;
-    cell.phoneNumberLabel.text=phone;
-    cell.clientNameLabel.text=clientName;
-    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+ @try{
+     
+     
+     
+     
+        NSString *email=[finaldic objectForKey:@"email"];
+     
+        NSString *mobile=[finaldic objectForKey:@"mobile"];
+        NSString *phone=[finaldic objectForKey:@"phone_number"];
+        NSString *telephone=[finaldic objectForKey:@"telephone"];
+
+
+        
+     
+        
+        [Utils isEmpty:email];
+        [Utils isEmpty:mobile];
+        [Utils isEmpty:phone];
+        [Utils isEmpty:telephone];
+        
+        if(![Utils isEmpty:email])
+        {
+            cell.emailIdLabel.text=email;
+        }
+        else{
+            cell.emailIdLabel.text=NSLocalizedString(@"Not Available",nil);
+        }
+        
+     NSString *code= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile_code"]];
+     [Utils isEmpty:code];
+     
+     NSString *codeTemp;
+     
+     if( ![Utils isEmpty:code])
+     {
+         if([code isEqualToString:@"0"])
+         {
+             codeTemp=@"";
+             
+         }
+         else
+         {
+         codeTemp =[NSString stringWithFormat:@"+%@",[finaldic objectForKey:@"mobile_code"]];
+         }
+     }
+     else
+     {
+         codeTemp =@"";
+     }
+     //cell.codeLabel.text= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile_code"]];
+
+     
+         if(! [Utils isEmpty:phone])
+        {
+            cell.phoneNumberLabel.text= [NSString stringWithFormat:@"%@ %@",codeTemp,phone];
+        }
+        else if(![Utils isEmpty:telephone])
+        {
+            cell.phoneNumberLabel.text= [NSString stringWithFormat:@"%@ %@",codeTemp,telephone];
+        }
+       else if( ![Utils isEmpty:mobile])
+        {
+            cell.phoneNumberLabel.text=[NSString stringWithFormat:@"%@ %@",codeTemp,mobile];
+        }
+     
+        else
+        {
+            cell.phoneNumberLabel.text=NSLocalizedString(@"Not Available",nil);
+        }
+     
+     
+     
+        NSString *clientFirstName=[finaldic objectForKey:@"first_name"];
+        NSString *clientLastName=[finaldic objectForKey:@"last_name"];
+        NSString *userName= [finaldic objectForKey:@"user_name"];
+        
+        [Utils isEmpty:clientFirstName];
+        [Utils isEmpty:clientLastName];
+       [Utils isEmpty:userName];
+        
+        if(![Utils isEmpty:clientFirstName] && ![Utils isEmpty:clientLastName])
+        {
+            cell.clientNameLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+        }
+    
+        else if (![Utils isEmpty:clientFirstName] && [Utils isEmpty:clientLastName])
+        {
+            cell.clientNameLabel.text=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"first_name"]];
+        }
+        else if(![Utils isEmpty:userName])
+        {
+            cell.clientNameLabel.text= [finaldic objectForKey:@"user_name"];
+        }
+        else
+        {
+            cell.clientNameLabel.text=NSLocalizedString(@"Not Available",nil);
+        }
+            
+        
+   // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        
+        if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+        {
+            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+            
+        }
+        else
+        {
+            [cell setUserProfileimage:@"default_pic.png"];
+        }
+ }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in CellForRowAtIndexPath method in ClintList ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
         return cell;
     }
 }
@@ -293,6 +481,9 @@ GlobalVariables *globalVariables;
     
     ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
     globalVariables.iD=@([client_id intValue]);
+    globalVariables.First_name=[finaldic objectForKey:@"first_name"];
+    globalVariables.Last_name=[finaldic objectForKey:@"last_name"];
+    globalVariables.mobileCode1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile_code"]];
 
 //    td.clientName=[NSString stringWithFormat:@"%@ %@",clientName,[finaldic objectForKey:@"last_name"]];
     
@@ -335,14 +526,6 @@ GlobalVariables *globalVariables;
     return YES;
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

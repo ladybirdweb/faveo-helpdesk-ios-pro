@@ -80,4 +80,6 @@
  placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
  */
 -(void)setUserProfileimage:(NSString*)imageUrl;
+@property (weak, nonatomic) IBOutlet UILabel *today;
+
 @end

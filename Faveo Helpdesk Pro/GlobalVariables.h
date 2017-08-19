@@ -25,12 +25,14 @@
 
 /*!
  @property iD
+ 
  @brief It is used for defining is id of a ticket.
  */
 @property (strong, nonatomic) NSNumber *iD;
 
 /*!
  @property ticket_number
+ 
  @brief It is used for defining is ticket_number created by user.
  */
 @property (strong, nonatomic) NSString *ticket_number;
@@ -38,36 +40,48 @@
 
 /*!
  @property OpenCount
+ 
  @brief It shows a count of tickets which are in Open Tickets.
  */
 @property (strong, nonatomic) NSString *OpenCount;
 
 /*!
  @property DeletedCount
+ 
  @brief It shows a count of tickets which are in deleted/trash Tickets.
  */
 @property (strong, nonatomic) NSString *DeletedCount;
 
 /*!
  @property ClosedCount
+ 
  @brief It shows a count of tickets which are in closed Tickets.
  */
 @property (strong, nonatomic) NSString *ClosedCount;
 
 /*!
  @property UnassignedCount
+ 
  @brief It shows a count of tickets which are in Unassigned Tickets.
  */
 @property (strong, nonatomic) NSString *UnassignedCount;
 
 /*!
  @property MyticketsCount
+ 
  @brief It shows a count of tickets which are in my Tickets Tickets i.e the ticket counts those are assigned to Agent.
  */
 @property (strong, nonatomic) NSString *MyticketsCount;
 
+
+@property (strong, nonatomic) NSString *First_name;
+@property (strong, nonatomic) NSString *Last_name;
+@property (strong, nonatomic) NSString *Ticket_status;
+@property (strong, nonatomic) NSString *mobileCode1;
+
 /*!
  @method sharedInstance
+ 
  @discussion A singleton object provides a global point of access to the resources of its class. Singletons are used in situations where this single point of control is desirable, such as with classes that offer some general service or resource. You obtain the global instance from a singleton class through a factory method.
  */
 + (instancetype)sharedInstance;

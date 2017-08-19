@@ -17,8 +17,13 @@
 #import "HexColors.h"
 #import "GlobalVariables.h"
 #import "RKDropdownAlert.h"
+#import "NotificationViewController.h"
+#import "RMessage.h"
+#import "RMessageView.h"
 
-@interface ConversationViewController ()<CNPPopupControllerDelegate,UIWebViewDelegate>{
+
+@interface ConversationViewController ()<CNPPopupControllerDelegate,UIWebViewDelegate,RMessageProtocol>{
+    
     Utils *utils;
     NSUserDefaults *userDefaults;
     NSMutableArray *mutableArray;
@@ -58,12 +63,30 @@
         [self.refreshControl endRefreshing];
         //[_activityIndicatorObject stopAnimating];
         [[AppDelegate sharedAppdelegate] hideProgressView];
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+       // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
         
     }else{
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/ticket-thread?api_key=%@&ip=%@&token=%@&id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariable.iD];
         
+  @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -110,6 +133,21 @@
             NSLog(@"Thread-NO5-getConversation-closed");
             
         }];
+  }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in reload method in Conversation ViewController\n" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return ;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+
     }
 }
 
@@ -158,7 +196,10 @@
     }
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
     
+@try{
     cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
+    
+  
     NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
     if (i==0) {
         [cell.internalNoteLabel setHidden:YES];
@@ -167,22 +208,7 @@
         [cell.internalNoteLabel setHidden:NO];
     }
     
-    
-    
-  /*NSString *fName=[finaldic objectForKey:@"first_name"];
-    
- 
-   if ([fName isEqualToString:@""]) {
-        fName=NSLocalizedString(@"Not Available",nil);
-    }
-   else if (fName != [NSNull null])
-    {
-    
-        fName=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
-    } */
-    
-   
-   
+       
    //NSString *system= @"System";
    NSString *fName=[finaldic objectForKey:@"first_name"];
    NSString *lName=[finaldic objectForKey:@"last_name"];
@@ -210,32 +236,34 @@
     }
    
    
+
+   // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
     
-    /*
-    if (fName == (id)[NSNull null] || fName.length == 0 ) {
-        fName=NSLocalizedString(@"Not Available",nil);
-     
-    }
-    
-    else if (fName != (id)[NSNull null])
+    if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
     {
-        fName=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+        [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        
     }
     else
     {
-        fName=@"System";
+        [cell setUserProfileimage:@"default_pic.png"];
     }
-*/
     
-    
-  // [Utils isEmpty:@"fName"];
-    
-   
-    //cell.clientNameLabel.text=fName;
-    
+}@catch (NSException *exception)
+    {
+        // Print exception information
+        NSLog( @"NSException caught in CellForRowAtIndexPath methos in Conversation ViewController\n" );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return cell;
+    }
+    @finally
+    {
+        // Cleanup, in both success and fail cases
+        NSLog( @"In finally block");
+        
+    }
 
-    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-    
     return cell;
 }
 
@@ -243,17 +271,10 @@
     
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
     [self showWebview:@"" body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];
+    
 }
 
-/* paste there
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
 
 //- (void)webViewDidFinishLoad:(UIWebView *)theWebView
 //{
