@@ -56,10 +56,13 @@
     [self split];
     
     
-    UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-    UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
+   // UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0,50, 30)];
+   // UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
+    UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone  target:self action:@selector(removeKeyBoard)];
+
     
-    UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+   UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
     [self.textViewMsg setInputAccessoryView:toolBar];
@@ -880,10 +883,6 @@
     } else if (textField == _lastNameTextField) {
         
         [textField resignFirstResponder];
-        [_codeTextField becomeFirstResponder];
-    } else if (textField == _codeTextField)
-    {
-        [textField resignFirstResponder];
         [_mobileTextField becomeFirstResponder];
     }else if(textField == _mobileTextField)
     {
@@ -903,6 +902,8 @@
     
     return YES;
 }
+
+
 
 //- (BOOL)textFieldShouldEndEditing:(UITextField *)aTextField
 //{

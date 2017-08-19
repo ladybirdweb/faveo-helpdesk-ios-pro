@@ -407,11 +407,8 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                        // [RKDropdownAlert title:APP_NAME message:@"Posted your note!"backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
-                        if (self.navigationController.navigationBarHidden) {
-                            [self.navigationController setNavigationBarHidden:NO];
-                        }
                         
-                        [RMessage showNotificationInViewController:self.navigationController
+                        [RMessage showNotificationInViewController:self
                                                              title:NSLocalizedString(@"Sucess", nil)
                                                           subtitle:NSLocalizedString(@"Posted your note..!", nil)
                                                          iconImage:nil
@@ -421,10 +418,8 @@
                                                           callback:nil
                                                        buttonTitle:nil
                                                     buttonCallback:nil
-                                                        atPosition:RMessagePositionNavBarOverlay
+                                                        atPosition:RMessagePositionBottom
                                               canBeDismissedByUser:YES];
-                        
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
                        // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
                     });
                 }
@@ -526,12 +521,9 @@
                 if ([json objectForKey:@"result"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // [RKDropdownAlert title:APP_NAME message:@"Posted your note!"backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+            
                         
-                        if (self.navigationController.navigationBarHidden) {
-                            [self.navigationController setNavigationBarHidden:NO];
-                        }
-                        
-                        [RMessage showNotificationInViewController:self.navigationController
+                        [RMessage showNotificationInViewController:self
                                                              title:NSLocalizedString(@"Sucess", nil)
                                                           subtitle:NSLocalizedString(@"Posted your reply..!", nil)
                                                          iconImage:nil
@@ -541,8 +533,9 @@
                                                           callback:nil
                                                        buttonTitle:nil
                                                     buttonCallback:nil
-                                                        atPosition:RMessagePositionNavBarOverlay
+                                                        atPosition:RMessagePositionBottom
                                               canBeDismissedByUser:YES];
+
                         
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
                         // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];

@@ -171,6 +171,8 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         //                        _clientNameTextField.text=[NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"first_name"],[dic objectForKey:@"last_name"]];
+                      
+                        
                         _createdDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"created_at"]];
                         
                         if (([[dic objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"first_name"] length] == 0 )) {
@@ -185,9 +187,14 @@
                         //globalVariables.title=[dic objectForKey:@"title"];
                         _subjectTextField.text=[dic objectForKey:@"title"];
                         _emailTextField.text=[dic objectForKey:@"email"];
+                       
+                       
                         _lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
-                      
                         
+                        
+                       
+                        
+                                            // created_at
                         // _deptTextField.text= [dic objectForKey:@"dept_name"];
                         // _slaTextField.text=[dic objectForKey:@"sla_name"];
                         

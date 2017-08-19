@@ -345,6 +345,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+   
+    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    
     if (indexPath.row == [_mutableArray count] - 1 ) {
         NSLog(@"nextURL  %@",_nextPageUrl);
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
