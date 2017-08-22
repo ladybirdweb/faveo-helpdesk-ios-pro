@@ -16,10 +16,6 @@ Faveo Helpdesk Pro
 Join Faveo discussion group and stay tuned to latest updates. 
 <a href="https://www.linkedin.com/groups/8429668" target="_blank">Join here</a>
 
-Help
---------------------------
-Visit the <a href="https://github.com/ladybirdweb/faveo-helpdesk-ios-app/issues">issue</a> page. And if you'd like professional help commercial support is available, email us through the <a href="http://www.faveohelpdesk.com/contact-us/">contact form</a>.
-
 Download Faveo iOS app
 --------------------------
 <a href="https://itunes.apple.com/us/app/faveo-helpdesk-pro/id1187837653?ls=1&mt=8" target="_blank"><img src="http://www.faveohelpdesk.com/wp-content/uploads/2016/12/apple.png"  width="200px"/></a>
