@@ -1,4 +1,4 @@
-Faveo Helpdesk Community iOS app
+Faveo Helpdesk Pro iOS app
 ========
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba4bf68997b64bd580fc0be564b082b1)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ladybirdweb/faveo-helpdesk-ios-pro&amp;utm_campaign=Badge_Grade)
