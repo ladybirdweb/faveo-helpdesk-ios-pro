@@ -1,7 +1,7 @@
 Faveo Helpdesk Pro iOS app
 ========
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba4bf68997b64bd580fc0be564b082b1)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ladybirdweb/faveo-helpdesk-ios-pro&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bd7645d3e23f484db29a07599ca1ecf6)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ladybirdweb/faveo-helpdesk-ios-pro&amp;utm_campaign=Badge_Grade)
 
 Faveo iOS app works along with Faveo Helpdesk Pro edition web application. This app will also be available on Apple store and can be installed directly from there. To use this app on your phone/tablet you must have Faveo Helpdesk Pro web application installed on your server.
 
