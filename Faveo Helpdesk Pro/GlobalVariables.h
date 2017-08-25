@@ -78,12 +78,15 @@
 @property (strong, nonatomic) NSString *Last_name;
 @property (strong, nonatomic) NSString *Ticket_status;
 @property (strong, nonatomic) NSString *mobileCode1;
-
 /*!
  @method sharedInstance
  
  @discussion A singleton object provides a global point of access to the resources of its class. Singletons are used in situations where this single point of control is desirable, such as with classes that offer some general service or resource. You obtain the global instance from a singleton class through a factory method.
  */
 + (instancetype)sharedInstance;
+
+@property (strong, nonatomic) NSString *count1;
+@property (strong, nonatomic) NSString *count2;
+
 
 @end

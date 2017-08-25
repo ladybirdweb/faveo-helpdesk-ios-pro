@@ -10,8 +10,12 @@
 #import "HexColors.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+#import "GlobalVariables.h"
+
 
 @implementation NotificationTableViewCell
+
+GlobalVariables *globalVariables;
 
 -(void)setUserProfileimage:(NSString*)imageUrl
 {

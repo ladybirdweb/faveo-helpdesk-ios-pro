@@ -345,7 +345,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-   
+    
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
@@ -713,7 +713,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-    
+   
     NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
     
     globalVariables.iD=[finaldic objectForKey:@"id"];

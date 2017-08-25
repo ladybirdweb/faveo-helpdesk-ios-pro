@@ -26,6 +26,7 @@
  
  @discussion UITextView supports the display of text using custom style information and also supports text editing. You typically use a text view to display multiple lines of text, such as when displaying the body of a large text document.
  */
+
 @property (weak, nonatomic) IBOutlet UITextView *textViewMsg;
 
 /*!
@@ -101,6 +102,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *priorityTextField;
 
+@property (weak, nonatomic) IBOutlet UITextField *assignTextField;
+
 /*!
  @property submitButton
  
@@ -164,6 +167,8 @@
  @discussion An object representing a static ordered collection, for use instead of an Array constant in cases that require reference semantics.
  */
 @property (nonatomic, strong) NSArray * codeArray;
+
+@property (nonatomic, strong) NSArray * staffArray;
 
 /*!
  @property countryDic
@@ -275,5 +280,7 @@
  @endocde
  */
 - (IBAction)countryCodeClicked:(id)sender;
+
+- (IBAction)staffClicked:(id)sender;
 
 @end

@@ -27,18 +27,33 @@
 
 #import "SlideNavigationController.h"
 #import "SlideNavigationContorllerAnimator.h"
+#import "GlobalVariables.h"
+#import "LeftMenuViewController.h"
+#import "Reachability.h"
+#import "MyWebservices.h"
+#import "GlobalVariables.h"
+#import "AppConstanst.h"
+#import "RMessage.h"
+#import "RMessageView.h"
+#import "AppDelegate.h"
+
 
 typedef enum {
 	PopTypeAll,
 	PopTypeRoot
 } PopType;
 
-@interface SlideNavigationController() <UIGestureRecognizerDelegate>
+@interface SlideNavigationController() <UIGestureRecognizerDelegate,RMessageProtocol>
+{
+    NSUserDefaults *userDefaults;
+    GlobalVariables *globalVariables;
+}
 @property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer *panRecognizer;
 @property (nonatomic, assign) CGPoint draggingPoint;
 @property (nonatomic, assign) Menu lastRevealedMenu;
 @property (nonatomic, assign) BOOL menuNeedsLayout;
+
 @end
 
 @implementation SlideNavigationController
@@ -306,6 +321,14 @@ static SlideNavigationController *singletonInstance;
 - (void)openMenu:(Menu)menu withCompletion:(void (^)())completion
 {
 	[self openMenu:menu withDuration:self.menuRevealAnimationDuration andCompletion:completion];
+    
+    [self getDependencies];
+    
+    LeftMenuViewController *left=[[LeftMenuViewController alloc]init];
+    
+    [left update];
+    [left addUIRefresh];
+    
 }
 
 - (void)toggleLeftMenu
@@ -427,7 +450,10 @@ static SlideNavigationController *singletonInstance;
 - (void)toggleMenu:(Menu)menu withCompletion:(void (^)())completion
 {
 	if ([self isMenuOpen])
+    {
+        
 		[self closeMenuWithCompletion:completion];
+    }
 	else
 		[self openMenu:menu withCompletion:completion];
 }
@@ -475,10 +501,12 @@ static SlideNavigationController *singletonInstance;
 
 - (void)openMenu:(Menu)menu withDuration:(float)duration andCompletion:(void (^)())completion
 {
-	[self enableTapGestureToCloseMenu:YES];
+    
+    [self enableTapGestureToCloseMenu:YES];
 
 	[self prepareMenuForReveal:menu];
 	
+    
 	[UIView animateWithDuration:duration
 						  delay:0
 						options:self.menuRevealAnimationOption
@@ -502,6 +530,8 @@ static SlideNavigationController *singletonInstance;
     
      Menu menu = (self.horizontalLocation > 0) ? MenuLeft : MenuRight;
 	
+    
+    
 	[UIView animateWithDuration:duration
 						  delay:0
 						options:self.menuRevealAnimationOption
@@ -552,11 +582,15 @@ static SlideNavigationController *singletonInstance;
 }
 
 - (void)updateMenuAnimation:(Menu)menu
+
+
 {
 	CGFloat progress = (menu == MenuLeft)
 		? (self.horizontalLocation / (self.horizontalSize - self.slideOffset))
 		: (self.horizontalLocation / ((self.horizontalSize - self.slideOffset) * -1));
 	
+   
+    
 	[self.menuRevealAnimator animateMenu:menu withProgress:progress];
 }
 
@@ -595,11 +629,17 @@ static SlideNavigationController *singletonInstance;
     if (self.lastRevealedMenu && menu == self.lastRevealedMenu)
         return;
     
+ //  [self getDependencies];
+    
+    LeftMenuViewController *lmenu=[[LeftMenuViewController alloc]init];
+    [lmenu reloadd];
+    
+    
     UIViewController *menuViewController = (menu == MenuLeft) ? self.leftMenu : self.rightMenu;
 	UIViewController *removingMenuViewController = (menu == MenuLeft) ? self.rightMenu : self.leftMenu;
 
     self.lastRevealedMenu = menu;
-	
+  
 	[removingMenuViewController.view removeFromSuperview];
 	[self.view.window insertSubview:menuViewController.view atIndex:0];
 
@@ -659,6 +699,8 @@ static SlideNavigationController *singletonInstance;
 - (void)postNotificationWithName:(NSString *)name forMenu:(Menu)menu
 {
     NSString *menuString = (menu == MenuLeft) ? NOTIFICATION_USER_INFO_MENU_LEFT : NOTIFICATION_USER_INFO_MENU_RIGHT;
+    
+    
     NSDictionary *userInfo = @{ NOTIFICATION_USER_INFO_MENU : menuString };
     [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:userInfo];
 }
@@ -688,10 +730,148 @@ static SlideNavigationController *singletonInstance;
 - (void)leftMenuSelected:(id)sender
 {
 	if ([self isMenuOpen])
+    {   [self getDependencies];
+        
+       // LeftMenuViewController *left=[[LeftMenuViewController alloc]init];
+        
+       // [left update];
+       // [left addUIRefresh];
 		[self closeMenuWithCompletion:nil];
+    }
 	else
+    {
+        
 		[self openMenu:MenuLeft withCompletion:nil];
+        
+    }
 }
+
+-(void)getDependencies{
+    
+    NSLog(@"Thread-NO1-getDependencies()-start");
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
+        
+        
+    }else{
+        
+        NSString *url=[NSString stringWithFormat:@"%@helpdesk/dependency?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
+        
+        @try{
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
+                NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+                if (error || [msg containsString:@"Error"]) {
+                    
+                    NSLog(@"Thread-NO4-postCreateTicket-Refresh-error == %@",error.localizedDescription);
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    //               dispatch_async(dispatch_get_main_queue(), ^{
+                    //                  [self getDependencies];
+                    //               });
+                    
+                    [self getDependencies];
+                    
+                    NSLog(@"Thread--NO4-call-getDependecies");
+                    return;
+                }
+                
+                if (json) {
+                    
+                    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    NSDictionary *resultDic = [json objectForKey:@"result"];
+                    NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
+                    
+                    for (int i = 0; i < ticketCountArray.count; i++) {
+                        NSString *name = [[ticketCountArray objectAtIndex:i]objectForKey:@"name"];
+                        NSString *count = [[ticketCountArray objectAtIndex:i]objectForKey:@"count"];
+                        if ([name isEqualToString:@"Open"]) {
+                            globalVariables.OpenCount=count;
+                        }else if ([name isEqualToString:@"Closed"]) {
+                            globalVariables.ClosedCount=count;
+                        }else if ([name isEqualToString:@"Deleted"]) {
+                            globalVariables.DeletedCount=count;
+                        }else if ([name isEqualToString:@"unassigned"]) {
+                            globalVariables.UnassignedCount=count;
+                        }else if ([name isEqualToString:@"mytickets"]) {
+                            globalVariables.MyticketsCount=count;
+                        }
+                    }
+                    
+                    
+                    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
+                        });
+                    });
+
+                    
+                    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+                    
+                    // get documents path
+                    NSString *documentsPath = [paths objectAtIndex:0];
+                    
+                    // get the path to our Data/plist file
+                    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
+                    NSError *writeError = nil;
+                    
+                    NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:resultDic format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&writeError];
+                    
+                    if(plistData)
+                    {
+                        [plistData writeToFile:plistPath atomically:YES];
+                        NSLog(@"Data saved sucessfully");
+                    }
+                    else
+                    {
+                        NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
+                    
+                }
+                NSLog(@"Thread-NO5-getDependencies-closed");
+                
+            }
+             ];
+        }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+    }
+    NSLog(@"Thread-NO2-getDependencies()-closed");
+    [[AppDelegate sharedAppdelegate] hideProgressView];
+}
+
+
 
 - (void)righttMenuSelected:(id)sender
 {

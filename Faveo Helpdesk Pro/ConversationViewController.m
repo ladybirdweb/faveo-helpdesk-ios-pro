@@ -198,7 +198,6 @@
     
 @try{
     cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
-    
   
     NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
     if (i==0) {
@@ -271,7 +270,6 @@
     
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
     [self showWebview:@"" body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];
-    
 }
 
 

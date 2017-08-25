@@ -20,9 +20,9 @@
 		D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */ = {isa = PBXBuildFile; fileRef = D985BAC71EDC5FAA001EB153 /* Dat.m */; };
 		D9A2FCB01F18904000C829DD /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FCAF1F18904000C829DD /* NotificationViewController.m */; };
 		D9A2FCB41F18942800C829DD /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */; };
-		D9A2FCB51F18942800C829DD /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9A2FCB31F18942800C829DD /* NotificationTableViewCell.xib */; };
 		D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */; };
 		D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */; };
+		D9CF41AD1F4C15320087BBFA /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */; };
 		D9DBD3461E07ACFC00219F93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3451E07ACFC00219F93 /* main.m */; };
 		D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3481E07ACFC00219F93 /* AppDelegate.m */; };
 		D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD34D1E07ACFC00219F93 /* Main.storyboard */; };
@@ -117,7 +117,6 @@
 		D9A2FCAF1F18904000C829DD /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
 		D9A2FCB11F18942800C829DD /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
 		D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
-		D9A2FCB31F18942800C829DD /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		D9B6E2D71E9B8B1600AAB724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LoadingTableViewCell.xib; sourceTree = "<group>"; };
 		D9B6E2DA1E9B8B1A00AAB724 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2DC1E9B8B1C00AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
@@ -128,6 +127,7 @@
 		D9B6E2ED1E9B8B9700AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2EF1E9B8B9900AAB724 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2F11E9B8B9B00AAB724 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
+		D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		D9D66BD41E97B14C000214FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		D9D66BD81E97CD0F000214FF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		D9D66BDA1E97CD1B000214FF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
@@ -356,7 +356,7 @@
 			children = (
 				D9A2FCB11F18942800C829DD /* NotificationTableViewCell.h */,
 				D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */,
-				D9A2FCB31F18942800C829DD /* NotificationTableViewCell.xib */,
+				D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */,
 				D9EB9F651E07C2F00001115F /* TicketTableViewCell.h */,
 				D9EB9F661E07C2F00001115F /* TicketTableViewCell.m */,
 				D9EB9F671E07C2F00001115F /* TicketTableViewCell.xib */,
@@ -621,13 +621,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9CF41AD1F4C15320087BBFA /* NotificationTableViewCell.xib in Resources */,
 				D92E2E981EEBFC0B00A0D456 /* GoogleService-Info.plist in Resources */,
 				D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */,
 				D9532C131E9CE9090063B318 /* Localizable.strings in Resources */,
 				D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */,
 				D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */,
 				D955A5511F2A05630045429F /* Assets.xcassets in Resources */,
-				D9A2FCB51F18942800C829DD /* NotificationTableViewCell.xib in Resources */,
 				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
 				D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */,
 				D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */,

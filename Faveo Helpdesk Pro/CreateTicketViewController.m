@@ -31,11 +31,13 @@
     NSNumber *help_topic_id;
     NSNumber *dept_id;
     NSNumber *priority_id;
+    NSNumber *staff_id;
     
     NSMutableArray * sla_idArray;
     NSMutableArray * dept_idArray;
     NSMutableArray * pri_idArray;
     NSMutableArray * helpTopic_idArray;
+    NSMutableArray * staff_idArray;
     
     NSDictionary *priDicc1;
 }
@@ -45,6 +47,7 @@
 - (void)deptWasSelected:(NSNumber *)selectedIndex element:(id)element;
 - (void)priorityWasSelected:(NSNumber *)selectedIndex element:(id)element;
 - (void)countryCodeWasSelected:(NSNumber *)selectedIndex element:(id)element;
+- (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element;
 - (void)actionPickerCancelled:(id)sender;
 
 @end
@@ -56,16 +59,14 @@
     [self split];
     
     
-   // UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-    UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0,50, 30)];
-   // UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
-    UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone  target:self action:@selector(removeKeyBoard)];
-
+    UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
     
-   UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
     [self.textViewMsg setInputAccessoryView:toolBar];
+    [self.mobileTextField setInputAccessoryView:toolBar];
 
     
     
@@ -75,7 +76,10 @@
     dept_id=[[NSNumber alloc]init];
     help_topic_id=[[NSNumber alloc]init];
     priority_id=[[NSNumber alloc]init];
+    staff_id =[[NSNumber alloc]init];
+    
     utils=[[Utils alloc]init];
+    
     userDefaults=[NSUserDefaults standardUserDefaults];
     //_codeTextField.text=[self setDefaultCountryCode];
     
@@ -121,11 +125,24 @@
     NSMutableArray *slaMU=[[NSMutableArray alloc]init];
     NSMutableArray *helptopicMU=[[NSMutableArray alloc]init];
     NSMutableArray *priMU=[[NSMutableArray alloc]init];
+    NSMutableArray *staffMU=[[NSMutableArray alloc]init];
     
     dept_idArray=[[NSMutableArray alloc]init];
     sla_idArray=[[NSMutableArray alloc]init];
     helpTopic_idArray=[[NSMutableArray alloc]init];
     pri_idArray=[[NSMutableArray alloc]init];
+    staff_idArray=[[NSMutableArray alloc]init];
+    
+    
+    for (NSDictionary *dicc in staffsArray) {
+        if ([dicc objectForKey:@"email"]) {
+            
+            [staffMU addObject:[dicc objectForKey:@"email"]];
+            [staff_idArray addObject:[dicc objectForKey:@"id"]];
+        }
+        
+    }
+    
     
     for (NSDictionary *dicc in deptArray) {
         if ([dicc objectForKey:@"name"]) {
@@ -168,6 +185,8 @@
     _helptopicsArray=[helptopicMU copy];
     _slaPlansArray=[slaMU copy];
     _priorityArray=[priMU copy];
+    _staffArray=[staffMU copy];
+    
 }@catch (NSException *exception)
     {
         // Print exception information
@@ -184,16 +203,6 @@
     }
     
 }
-
-//-(NSMutableArray*)loop:(NSArray*)arr{
-//
-//    NSMutableArray *resARR=[[NSMutableArray alloc]init];
-//    for (NSDictionary *dicc in arr) {
-//
-//        [resARR addObject:[dicc objectForKey:@"name"]];
-//    }
-//    return resARR;
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -228,7 +237,7 @@
 
 -(void)removeKeyboard{
     [_emailTextField resignFirstResponder];
-    [_mobileTextField resignFirstResponder];
+   // [_mobileTextField resignFirstResponder];
   //  [_msgTextField resignFirstResponder];
     [_subjectTextField resignFirstResponder];
     [_firstNameTextField resignFirstResponder];
@@ -239,7 +248,24 @@
 {
     
     [self.textViewMsg resignFirstResponder];
+    [_mobileTextField resignFirstResponder];
 }
+
+
+- (IBAction)staffClicked:(id)sender
+{
+    [self removeKeyboard];
+    
+    if (!_staffArray||!_staffArray.count) {
+        _assignTextField.text=NSLocalizedString(@"Not Available",nil);
+        staff_id=0;
+    }else{
+        [ActionSheetStringPicker showPickerWithTitle:@"Select Assignee" rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+    }
+    
+}
+
+
 - (IBAction)helpTopicClicked:(id)sender {
     [self removeKeyboard];
     
@@ -251,6 +277,7 @@
     }
     
 }
+
 
 - (IBAction)slaClicked:(id)sender {
     [self removeKeyboard];
@@ -542,11 +569,31 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
         
+    }else if (self.assignTextField.text.length==0){
+        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select PRIORITY" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Warning !", nil)
+                                          subtitle:NSLocalizedString(@"Please select Assignee...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeWarning
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
     }
-
     else {
-        NSLog(@"ticketCreated dept_id-%@, help_id-%@ ,sla_id-%@, pri_id-%@",dept_id,help_topic_id,sla_id,priority_id);
-        if ([_helpTopicTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]||[_priorityTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]) {
+        NSLog(@"ticketCreated dept_id-%@, help_id-%@ ,sla_id-%@, pri_id-%@, staff_id-%@",dept_id,help_topic_id,sla_id,priority_id,staff_id);
+        
+        if ([_helpTopicTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]||[_priorityTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)] || [_assignTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]) {
           //  [RKDropdownAlert title:APP_NAME message:@"Please refresh the Inbox" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
             
             if (self.navigationController.navigationBarHidden) {
@@ -608,7 +655,7 @@
         }
        /* NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&helptopic=%@&priority=%@&phone=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_msgTextField.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,@""];
         */
-         NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectTextField.text,_textViewMsg.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id];
+         NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectTextField.text,_textViewMsg.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,staff_id];
 @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
@@ -686,6 +733,15 @@
     NSLog(@"Delegate has been informed that ActionSheetPicker was cancelled");
 }
 
+
+- (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
+{
+    staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
+    
+    self.assignTextField.text = (_staffArray)[(NSUInteger) [selectedIndex intValue]];
+}
+
+
 - (void)countryCodeWasSelected:(NSNumber *)selectedIndex element:(id)element{
     // self.selectedIndex = [selectedIndex intValue];
     
@@ -747,6 +803,17 @@
         
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
          //return NO;
+    }else if (textField==_assignTextField) {
+        //[self removeKeyboard];
+        [_assignTextField resignFirstResponder];
+        if (!_staffArray||!_staffArray.count) {
+            _assignTextField.text=NSLocalizedString(@"Not Available",nil);
+            staff_id=0;
+        }else{
+            [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
+        }
+
+       // return NO;
     }else if (textField==_slaTextField) {
         //[self removeKeyboard];
         [_slaTextField resignFirstResponder];
@@ -756,8 +823,8 @@
         }else{
             [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select SLA",nil) rows:_slaPlansArray initialSelection:0 target:self successAction:@selector(slaWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
         }
-
-       // return NO;
+        
+        // return NO;
     }else if (textField.tag==97) {
         //[self removeKeyboard];
         [_priorityTextField resignFirstResponder];
@@ -883,6 +950,10 @@
     } else if (textField == _lastNameTextField) {
         
         [textField resignFirstResponder];
+        [_codeTextField becomeFirstResponder];
+    } else if (textField == _codeTextField)
+    {
+        [textField resignFirstResponder];
         [_mobileTextField becomeFirstResponder];
     }else if(textField == _mobileTextField)
     {
@@ -902,8 +973,6 @@
     
     return YES;
 }
-
-
 
 //- (BOOL)textFieldShouldEndEditing:(UITextField *)aTextField
 //{
