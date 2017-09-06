@@ -266,6 +266,26 @@
                     }
                 }
                 
+                NSArray *ticketStatusArray=[resultDic objectForKey:@"status"];
+                
+                for (int i = 0; i < ticketStatusArray.count; i++) {
+                    NSString *statusName = [[ticketStatusArray objectAtIndex:i]objectForKey:@"name"];
+                    NSString *statusId = [[ticketStatusArray objectAtIndex:i]objectForKey:@"id"];
+                    
+                    if ([statusName isEqualToString:@"Open"]) {
+                        globalVariables.OpenStausId=statusId;
+                    }else if ([statusName isEqualToString:@"Resolved"]) {
+                        globalVariables.ResolvedStausId=statusId;
+                    }else if ([statusName isEqualToString:@"Closed"]) {
+                        globalVariables.ClosedStausId=statusId;
+                    }else if ([statusName isEqualToString:@"Deleted"]) {
+                        globalVariables.DeletedStausId=statusId;
+                    }else if ([statusName isEqualToString:@"Request for close"]) {
+                        globalVariables.RequestCloseStausId=statusId;
+                    }else if ([statusName isEqualToString:@"Spam"]) {
+                        globalVariables.SpamStausId=statusId;
+                    }
+                }
 
                 
                 NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);

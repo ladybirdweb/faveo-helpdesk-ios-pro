@@ -20,6 +20,7 @@
 #import "UITextField+PasswordField.h"
 #import "RMessage.h"
 #import "RMessageView.h"
+#import "GlobalVariables.h"
 
 
 @import FirebaseInstanceID;
@@ -32,6 +33,8 @@
     NSUserDefaults *userdefaults;
     NSString *errorMsg;
     NSString *baseURL;
+    GlobalVariables *globalVariables;
+
     
 }
 
@@ -144,6 +147,9 @@
                 
                 NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/check-url?check-url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
                 NSLog(@"URL :%@",url);
+                
+                globalVariables.urlDemo=baseURL;
+                
                 NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
                 [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
                 [request addValue:@"application/json" forHTTPHeaderField:@"Offer-type"];
@@ -206,6 +212,7 @@
                         if ([replyStr containsString:@"success"]) {
                         
                             NSLog(@"Success");
+                            
                            [self verifyBilling];
                          
                         

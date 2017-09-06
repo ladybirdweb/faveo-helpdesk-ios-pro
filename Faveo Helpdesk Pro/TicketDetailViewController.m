@@ -19,6 +19,8 @@
 #import "RMessage.h"
 #import "RMessageView.h" 
 #import "NotificationViewController.h"
+#import "FTPopOverMenu.h"
+#import "InboxViewController.h"
 
 //#import "ReplyViewController.h"
 
@@ -43,8 +45,10 @@
 
 - (void)viewDidLoad {
      [super viewDidLoad];
+    
     self.currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ConversationVC"];
     self.currentViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    
     [self addChildViewController:self.currentViewController];
     [self addSubview:self.currentViewController.view toView:self.containerView];
     utils=[[Utils alloc]init];
@@ -54,16 +58,16 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     
     self.segmentedControl.tintColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(replyBtnPressed)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(internalNotePressed)], nil] animated:YES];
+    
+   // [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleDone target:self action:@selector(onNavButtonTapped:event:)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(replyBtnPressed)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(internalNotePressed)], nil] animated:YES];
+    
+     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"verticle"] style:UIBarButtonItemStyleDone target:self action:@selector(onNavButtonTapped:event:)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(replyBtnPressed)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(internalNotePressed)], nil] animated:YES];
+
     
     NSLog(@"Ticket is isssss : %@",globalVariables.iD);
-//   _ticketLabel.text=globalVariables.ticket_number;
     
- //   _nameLabel.text=[NSString stringWithFormat:@"%@ %@",globalVariables.First_name,globalVariables.Last_name];
+    [self getDependencies];
     
- //   _statusLabel.text=globalVariables.Ticket_status;
-    
-       // Do any additional setup after loading the view.
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -78,7 +82,7 @@
     
     _statusLabel.text=globalVariables.Ticket_status;
     
-
+    
 }
 
 - (void)addSubview:(UIView *)subView toView:(UIView*)parentView {
@@ -116,6 +120,535 @@
                          [newViewController didMoveToParentViewController:self];
                      }];
 }
+
+-(void)getDependencies{
+    
+    NSLog(@"Thread-NO1-getDependencies()-start");
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
+        
+        
+    }else{
+        
+        NSString *url=[NSString stringWithFormat:@"%@helpdesk/dependency?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
+        
+        @try{
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
+                NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+                if (error || [msg containsString:@"Error"]) {
+                    
+                    NSLog(@"Thread-NO4-postCreateTicket-Refresh-error == %@",error.localizedDescription);
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    //               dispatch_async(dispatch_get_main_queue(), ^{
+                    //                  [self getDependencies];
+                    //               });
+                    
+                    [self getDependencies];
+                    NSLog(@"Thread--NO4-call-getDependecies");
+                    return;
+                }
+                
+                if (json) {
+                    
+                    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    NSDictionary *resultDic = [json objectForKey:@"result"];
+                    
+                    
+                    NSArray *ticketStatusArray=[resultDic objectForKey:@"status"];
+                    
+                     for (int i = 0; i < ticketStatusArray.count; i++) {
+                         NSString *statusName = [[ticketStatusArray objectAtIndex:i]objectForKey:@"name"];
+                         NSString *statusId = [[ticketStatusArray objectAtIndex:i]objectForKey:@"id"];
+                         
+                         if ([statusName isEqualToString:@"Open"]) {
+                             globalVariables.OpenStausId=statusId;
+                             globalVariables.OpenStausLabel=statusName;
+                         }else if ([statusName isEqualToString:@"Resolved"]) {
+                             globalVariables.ResolvedStausId=statusId;
+                             globalVariables.ResolvedStausLabel=statusName;
+                         }else if ([statusName isEqualToString:@"Closed"]) {
+                             globalVariables.ClosedStausId=statusId;
+                             globalVariables.ClosedStausLabel=statusName;
+                         }else if ([statusName isEqualToString:@"Deleted"]) {
+                             globalVariables.DeletedStausId=statusId;
+                             globalVariables.DeletedStausLabel=statusName;
+                         }else if ([statusName isEqualToString:@"Request for close"]) {
+                             globalVariables.RequestCloseStausId=statusId;
+                             globalVariables.RequestCloseStausLabel=statusName;
+                         }else if ([statusName isEqualToString:@"Spam"]) {
+                             globalVariables.SpamStausId=statusId;
+                             globalVariables.SpamStausLabel=statusName;
+                         }
+                     }
+                    
+                    
+                    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+                    
+                    // get documents path
+                    NSString *documentsPath = [paths objectAtIndex:0];
+                    
+                    // get the path to our Data/plist file
+                    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
+                    NSError *writeError = nil;
+                    
+                    NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:resultDic format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&writeError];
+                    
+                    if(plistData)
+                    {
+                        [plistData writeToFile:plistPath atomically:YES];
+                        NSLog(@"Data saved sucessfully");
+                    }
+                    else
+                    {
+                        NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
+                    
+                }
+                NSLog(@"Thread-NO5-getDependencies-closed");
+            }
+             ];
+        }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+    }
+    NSLog(@"Thread-NO2-getDependencies()-closed");
+}
+
+
+-(void)onNavButtonTapped:(UIBarButtonItem *)sender event:(UIEvent *)event
+{
+    
+    // provide two methods to deal with the barbuttonitems
+    // comment this fowowing line and see how the other way of dealing with barbuttonitems
+    
+    //#define IfMethodOne
+    
+    
+#ifdef IfMethodOne
+    CGRect rect = [self.navigationController.navigationBar convertRect:[event.allTouches.anyObject view].frame toView:[[UIApplication sharedApplication] keyWindow]];
+    
+    [FTPopOverMenu showFromSenderFrame:rect
+                         withMenuArray:@[@"MenuOne",@"MenuTwo",@"MenuThree",@"MenuFour"]
+                            imageArray:@[@"Pokemon_Go_01",@"Pokemon_Go_02",@"Pokemon_Go_03",@"Pokemon_Go_04",]
+                             doneBlock:^(NSInteger selectedIndex) {
+                                 NSLog(@"done");
+                             } dismissBlock:^{
+                                 NSLog(@"cancel");
+                             }];
+    
+    
+#else
+    
+//    [FTPopOverMenu showFromEvent:event
+//                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
+    
+    [FTPopOverMenu showFromEvent:event
+                   withMenuArray:@[@"Change Ticket Status",globalVariables.OpenStausLabel,globalVariables.ClosedStausLabel,globalVariables.ResolvedStausLabel,globalVariables.DeletedStausLabel]
+                      imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"folderIcon"],[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
+                       doneBlock:^(NSInteger selectedIndex) {
+                           
+                           if(selectedIndex==0)
+                           {
+                               NSLog(@"Index 0 clicked");
+                              
+                           }else if(selectedIndex==1)
+                           {
+                               NSLog(@"Clicked on Open");
+                               
+                                [self changeStaus1];
+                           }else if(selectedIndex==2)
+                           {
+                               NSLog(@"Clicked on Closed");
+                                [self changeStaus2];
+                           }else if(selectedIndex==3)
+                           {
+                               NSLog(@"Clicked on Resolved");
+                                [self changeStaus3];
+                           } else if(selectedIndex==4)
+                           {
+                               NSLog(@"Clicked on Deleted");
+                                [self changeStaus4];
+                           }
+                
+
+                       } dismissBlock:^{
+                           
+                       }];
+    
+#endif
+    
+    
+}
+
+-(void)changeStaus1
+{
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        
+           [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        
+    }else{
+        
+        [[AppDelegate sharedAppdelegate] showProgressView];
+        
+        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],globalVariables.iD,globalVariables.OpenStausId];
+        
+       
+        if([globalVariables.Ticket_status isEqualToString:@"Open"])
+        {
+            [utils showAlertWithMessage:@"Ticket is Already Open" sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+        }
+        else{
+      //   NSLog(@"URL is : %@",url);
+        
+        MyWebservices *webservices=[MyWebservices sharedInstance];
+        
+        [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+            if (error || [msg containsString:@"Error"]) {
+                
+                if (msg) {
+                    
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    
+                }else if(error)  {
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                }
+                
+                return ;
+            }
+            
+            if ([msg isEqualToString:@"tokenRefreshed"]) {
+                
+                [self changeStaus1];
+                NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                return;
+            }
+
+            // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
+            
+            // message = "Status changed to Open";
+            
+            
+            if (json) {
+                NSLog(@"JSON-CreateTicket-%@",json);
+                if ([json objectForKey:@"response"]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        
+                        
+                        [RMessage showNotificationInViewController:self.navigationController
+                                                             title:NSLocalizedString(@"Sucess", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket Staus Changed...!", nil)
+                                                         iconImage:nil
+                                                              type:RMessageTypeSuccess
+                                                    customTypeName:nil
+                                                          duration:RMessageDurationAutomatic
+                                                          callback:nil
+                                                       buttonTitle:nil
+                                                    buttonCallback:nil
+                                                        atPosition:RMessagePositionBottom
+                                              canBeDismissedByUser:YES];
+                        
+                        
+                        InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                        [self.navigationController pushViewController:inboxVC animated:YES];
+                    });
+                }
+            }
+            NSLog(@"Thread-NO5-postCreateTicket-closed");
+            
+        }];
+        }
+    }
+    
+}
+
+-(void)changeStaus2
+{
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        
+    }else{
+        
+        [[AppDelegate sharedAppdelegate] showProgressView];
+        
+        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],globalVariables.iD,globalVariables.ClosedStausId];
+        
+        if([globalVariables.Ticket_status isEqualToString:@"Closed"])
+        {
+            [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+        }else{
+        
+        
+        MyWebservices *webservices=[MyWebservices sharedInstance];
+        
+        [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+            if (error || [msg containsString:@"Error"]) {
+                
+                if (msg) {
+                    
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    
+                }else if(error)  {
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                }
+                
+                return ;
+            }
+            
+            if ([msg isEqualToString:@"tokenRefreshed"]) {
+                
+                [self changeStaus2];
+                NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                return;
+            }
+            
+            if (json) {
+                NSLog(@"JSON-CreateTicket-%@",json);
+                if ([json objectForKey:@"response"]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        
+                        
+                        [RMessage showNotificationInViewController:self.navigationController
+                                                             title:NSLocalizedString(@"Sucess", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket Staus Changed...!", nil)
+                                                         iconImage:nil
+                                                              type:RMessageTypeSuccess
+                                                    customTypeName:nil
+                                                          duration:RMessageDurationAutomatic
+                                                          callback:nil
+                                                       buttonTitle:nil
+                                                    buttonCallback:nil
+                                                        atPosition:RMessagePositionBottom
+                                              canBeDismissedByUser:YES];
+                        
+                        
+                        InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                        [self.navigationController pushViewController:inboxVC animated:YES];
+                    });
+                }
+            }
+            NSLog(@"Thread-NO5-postCreateTicket-closed");
+            
+        }];
+    }
+    }
+}
+
+-(void)changeStaus3
+{
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        
+    }else{
+        
+        [[AppDelegate sharedAppdelegate] showProgressView];
+        
+        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],globalVariables.iD,globalVariables.ResolvedStausId];
+        
+        
+        if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
+        {
+            [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+        }else{
+        
+        MyWebservices *webservices=[MyWebservices sharedInstance];
+        
+        [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+            if (error || [msg containsString:@"Error"]) {
+                
+                if (msg) {
+                    
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    
+                }else if(error)  {
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                }
+                
+                return ;
+            }
+            
+            if ([msg isEqualToString:@"tokenRefreshed"]) {
+                
+                [self changeStaus3];
+                NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                return;
+            }
+            
+            if (json) {
+                NSLog(@"JSON-CreateTicket-%@",json);
+                if ([json objectForKey:@"response"]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        
+                        
+                        [RMessage showNotificationInViewController:self.navigationController
+                                                             title:NSLocalizedString(@"Sucess", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket Staus Changed...!", nil)
+                                                         iconImage:nil
+                                                              type:RMessageTypeSuccess
+                                                    customTypeName:nil
+                                                          duration:RMessageDurationAutomatic
+                                                          callback:nil
+                                                       buttonTitle:nil
+                                                    buttonCallback:nil
+                                                        atPosition:RMessagePositionBottom
+                                              canBeDismissedByUser:YES];
+                        
+                        
+                        InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                        [self.navigationController pushViewController:inboxVC animated:YES];
+                    });
+                }
+            }
+            NSLog(@"Thread-NO5-postCreateTicket-closed");
+            
+        }];
+    }
+    }
+}
+
+-(void)changeStaus4
+{
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        
+    }else{
+        
+        [[AppDelegate sharedAppdelegate] showProgressView];
+        
+        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],globalVariables.iD,globalVariables.DeletedStausId];
+        
+        if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
+        {
+            [utils showAlertWithMessage:@"Ticket is Already Deleted" sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+        }else{
+        
+        MyWebservices *webservices=[MyWebservices sharedInstance];
+        
+        [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+            if (error || [msg containsString:@"Error"]) {
+                
+                if (msg) {
+                    
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    
+                }else if(error)  {
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                }
+                
+                return ;
+            }
+            
+            if ([msg isEqualToString:@"tokenRefreshed"]) {
+                
+                [self changeStaus4];
+                NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                return;
+            }
+            
+            if (json) {
+                NSLog(@"JSON-CreateTicket-%@",json);
+                if ([json objectForKey:@"response"]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        
+                        
+                        [RMessage showNotificationInViewController:self.navigationController
+                                                             title:NSLocalizedString(@"Sucess", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket Staus Changed...!", nil)
+                                                         iconImage:nil
+                                                              type:RMessageTypeSuccess
+                                                    customTypeName:nil
+                                                          duration:RMessageDurationAutomatic
+                                                          callback:nil
+                                                       buttonTitle:nil
+                                                    buttonCallback:nil
+                                                        atPosition:RMessagePositionBottom
+                                              canBeDismissedByUser:YES];
+                        
+                        
+                        InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                        [self.navigationController pushViewController:inboxVC animated:YES];
+                    });
+                }
+            }
+            NSLog(@"Thread-NO5-postCreateTicket-closed");
+            
+        }];
+    }
+    }
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

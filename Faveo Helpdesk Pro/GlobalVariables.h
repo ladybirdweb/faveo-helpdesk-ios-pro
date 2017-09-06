@@ -88,5 +88,22 @@
 @property (strong, nonatomic) NSString *count1;
 @property (strong, nonatomic) NSString *count2;
 
+@property (strong, nonatomic) NSString *urlDemo;
+
+@property (strong, nonatomic) NSString *OpenStausId;
+@property (strong, nonatomic) NSString *ResolvedStausId;
+@property (strong, nonatomic) NSString *ClosedStausId;
+@property (strong, nonatomic) NSString *DeletedStausId;
+@property (strong, nonatomic) NSString *RequestCloseStausId;
+@property (strong, nonatomic) NSString *SpamStausId;
+
+@property (strong, nonatomic) NSString *OpenStausLabel;
+@property (strong, nonatomic) NSString *ResolvedStausLabel;
+@property (strong, nonatomic) NSString *ClosedStausLabel;
+@property (strong, nonatomic) NSString *DeletedStausLabel;
+@property (strong, nonatomic) NSString *RequestCloseStausLabel;
+@property (strong, nonatomic) NSString *SpamStausLabel;
+
+
 
 @end

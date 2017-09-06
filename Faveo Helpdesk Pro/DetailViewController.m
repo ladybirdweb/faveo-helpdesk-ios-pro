@@ -217,7 +217,11 @@
                         }else _priorityTextField.text=[dic objectForKey:@"priority_name"];
                         
                        
-                     
+                        if (([[dic objectForKey:@"assignee_email"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"assignee_email"] length] == 0 )) {
+                             _assinTextField.text=NSLocalizedString(@"Not Available",nil);
+                        }else{
+                         _assinTextField.text= [dic objectForKey:@"assignee_email"];
+                        }
                         
                        // _statusTextField.text= [dic objectForKey:@"status_name"];
                         

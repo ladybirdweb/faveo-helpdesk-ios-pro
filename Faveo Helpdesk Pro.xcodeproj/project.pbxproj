@@ -20,6 +20,7 @@
 		D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */ = {isa = PBXBuildFile; fileRef = D985BAC71EDC5FAA001EB153 /* Dat.m */; };
 		D9A2FCB01F18904000C829DD /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FCAF1F18904000C829DD /* NotificationViewController.m */; };
 		D9A2FCB41F18942800C829DD /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */; };
+		D9AAFAB91F5D475400891CA5 /* FTPopOverMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AAFAB81F5D475400891CA5 /* FTPopOverMenu.m */; };
 		D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */; };
 		D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */; };
 		D9CF41AD1F4C15320087BBFA /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */; };
@@ -117,6 +118,8 @@
 		D9A2FCAF1F18904000C829DD /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
 		D9A2FCB11F18942800C829DD /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
 		D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
+		D9AAFAB71F5D475400891CA5 /* FTPopOverMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPopOverMenu.h; sourceTree = "<group>"; };
+		D9AAFAB81F5D475400891CA5 /* FTPopOverMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPopOverMenu.m; sourceTree = "<group>"; };
 		D9B6E2D71E9B8B1600AAB724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LoadingTableViewCell.xib; sourceTree = "<group>"; };
 		D9B6E2DA1E9B8B1A00AAB724 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2DC1E9B8B1C00AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
@@ -272,6 +275,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D9AAFABA1F5D480E00891CA5 /* Pop Over */ = {
+			isa = PBXGroup;
+			children = (
+				D9AAFAB71F5D475400891CA5 /* FTPopOverMenu.h */,
+				D9AAFAB81F5D475400891CA5 /* FTPopOverMenu.m */,
+			);
+			name = "Pop Over";
+			sourceTree = "<group>";
+		};
 		D9DBD3381E07ACFC00219F93 = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +355,7 @@
 			children = (
 				D9EB9F4F1E07C2130001115F /* ViewControllers */,
 				D9EB9F511E07C22B0001115F /* WebServices */,
+				D9AAFABA1F5D480E00891CA5 /* Pop Over */,
 				D9EB9F541E07C2500001115F /* OtherClasses */,
 				D9EB9F521E07C2320001115F /* Utils */,
 				D9EB9F501E07C21E0001115F /* Model */,
@@ -732,6 +745,7 @@
 				D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */,
 				D9EB9FA61E07C3270001115F /* CreateTicketViewController.m in Sources */,
 				D9EB9FC01E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
+				D9AAFAB91F5D475400891CA5 /* FTPopOverMenu.m in Sources */,
 				D9EB9F631E07C2D00001115F /* Data.m in Sources */,
 				D9EB9F771E07C2F00001115F /* TicketTableViewCell.m in Sources */,
 				D9EB9FA91E07C3270001115F /* AboutViewController.m in Sources */,

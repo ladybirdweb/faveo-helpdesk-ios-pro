@@ -569,7 +569,7 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
         
-    }else if (self.assignTextField.text.length==0){
+    }/*else if (self.assignTextField.text.length==0){
         // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select PRIORITY" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
@@ -589,7 +589,7 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
         
-    }
+    }*/
     else {
         NSLog(@"ticketCreated dept_id-%@, help_id-%@ ,sla_id-%@, pri_id-%@, staff_id-%@",dept_id,help_topic_id,sla_id,priority_id,staff_id);
         
@@ -974,49 +974,12 @@
     return YES;
 }
 
-//- (BOOL)textFieldShouldEndEditing:(UITextField *)aTextField
-//{
-//    
-//    if (aTextField.tag==4) {
-//        NSLog(@"number");
-//
-//       return  [self validateInputWithString:aTextField.text];
-//
-//    }else return YES;
-//    
-//}
-//
-//- (BOOL)validateInputWithString:(NSString *)aString
-//{
-//    NSString * const regularExpression = @"^(\\d{1,15})$";
-//    NSError *error = NULL;
-//    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regularExpression
-//                                                                           options:NSRegularExpressionCaseInsensitive
-//                                                                             error:&error];
-//    if (error) {
-//        NSLog(@"error %@", error);
-//    }
-//    
-//    NSUInteger numberOfMatches = [regex numberOfMatchesInString:aString
-//                                                        options:0
-//                                                          range:NSMakeRange(0, [aString length])];
-//    if (numberOfMatches > 0) {
-//    [RKDropdownAlert title:APP_NAME message:@"Phone number should be maximum 15 digits" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-//    }
-//    return numberOfMatches > 0 ;
-//} 
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu
 {
     return YES;
 }
 
-/* #pragma mark - Custom Method
--(NSString*)setDefaultCountryCode{
-    NSString *countryIdentifier = [[NSLocale currentLocale] objectForKey: NSLocaleCountryCode];
-    NSLog(@"%@",[NSString stringWithFormat:@"+%@",[[self getCountryCodeDictionary] objectForKey:countryIdentifier]]);
-    return [NSString stringWithFormat:@"+%@",[[self getCountryCodeDictionary] objectForKey:countryIdentifier]];
-} */
 
 -(void)split{
     

@@ -464,7 +464,7 @@
                   {
                       cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
                   }
-                else if ((![Utils isEmpty:fname] && [Utils isEmpty:lname]) || ([Utils isEmpty:fname] && ![Utils isEmpty:lname]))
+                else
                 {
                     cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
                 }
@@ -483,7 +483,7 @@
         else{
             
             [cell setUserProfileimage:@"default_pic.png"];
-            cell.name.text= [finaldic objectForKey:@"by"];
+            cell.name.text= NSLocalizedString(@"Not Available",nil);
         }
             
             //[[self.tableView didSelectRowAtIndexPath] ];
@@ -537,10 +537,24 @@
        
         globalVariables.iD= [finaldic objectForKey:@"row_id"];
         
+        
+        
+        
+        if(( ![[finaldic objectForKey:@"requester"] isEqual:[NSNull null]] ) )
+        {
         globalVariables.First_name=  [profileDict objectForKey:@"changed_by_first_name"];
         globalVariables.Last_name= [profileDict objectForKey:@"changed_by_last_name"];
 
         [self.navigationController pushViewController:td animated:YES];
+        }
+        else
+        {
+            globalVariables.First_name= @"";
+            globalVariables.Last_name=@"";
+            
+            [self.navigationController pushViewController:td animated:YES];
+            
+        }
     }
     else if ([sen isEqualToString:@"users"]){
     
