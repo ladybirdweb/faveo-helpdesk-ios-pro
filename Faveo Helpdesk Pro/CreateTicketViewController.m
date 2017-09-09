@@ -137,8 +137,10 @@
     for (NSDictionary *dicc in staffsArray) {
         if ([dicc objectForKey:@"email"]) {
             
+          // [staffMU insertObject:@"" atIndex:0];
             [staffMU addObject:[dicc objectForKey:@"email"]];
             [staff_idArray addObject:[dicc objectForKey:@"id"]];
+            
         }
         
     }
@@ -241,7 +243,7 @@
   //  [_msgTextField resignFirstResponder];
     [_subjectTextField resignFirstResponder];
     [_firstNameTextField resignFirstResponder];
-    
+
     
 }
 -(void)removeKeyBoard
@@ -256,15 +258,23 @@
 {
     [self removeKeyboard];
     
+    
+    
     if (!_staffArray||!_staffArray.count) {
         _assignTextField.text=NSLocalizedString(@"Not Available",nil);
         staff_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Assignee" rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
     
 }
 
+- (IBAction)countryCodeClicked:(id)sender {
+    [self removeKeyboard];
+    
+    [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+}
 
 - (IBAction)helpTopicClicked:(id)sender {
     [self removeKeyboard];
@@ -317,11 +327,7 @@
     
 }
 
-- (IBAction)countryCodeClicked:(id)sender {
-    [self removeKeyboard];
-    
-    [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
-}
+
 
 - (IBAction)submitClicked:(id)sender {
 //    
@@ -744,6 +750,7 @@
 
 - (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
 {
+   
     staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
     
     self.assignTextField.text = (_staffArray)[(NSUInteger) [selectedIndex intValue]];

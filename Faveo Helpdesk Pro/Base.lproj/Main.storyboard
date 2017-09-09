@@ -60,7 +60,7 @@
                                         <rect key="frame" x="0.0" y="200" width="256" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JIe-gx-hNQ" id="dlB-NA-xXx">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPH-C6-QOE">
@@ -107,7 +107,7 @@
                                         <rect key="frame" x="0.0" y="244" width="256" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7or-nl-uPx" id="yu4-BU-xUM">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ln8-R3-Dj1">
@@ -153,7 +153,7 @@
                                         <rect key="frame" x="0.0" y="288" width="256" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XKA-r6-2Vt" id="1Lm-8U-VTu">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJH-MK-dhN">
@@ -222,7 +222,7 @@
                                         <rect key="frame" x="0.0" y="332" width="256" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5e3-eo-WhP" id="cZI-f7-4Qx">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUy-ia-A4L">
@@ -291,7 +291,7 @@
                                         <rect key="frame" x="0.0" y="376" width="256" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dxD-yD-NL0" id="jer-WI-PMk">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5jW-hM-npg">
@@ -360,7 +360,7 @@
                                         <rect key="frame" x="0.0" y="420" width="256" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PUQ-68-6Yw" id="xVZ-2J-gO2">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uoA-F1-T3T">
@@ -429,7 +429,7 @@
                                         <rect key="frame" x="0.0" y="464" width="256" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GcJ-yA-7oS" id="FCj-sr-APq">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xft-KI-lej">
@@ -498,7 +498,7 @@
                                         <rect key="frame" x="0.0" y="508" width="256" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M2J-n5-SeI" id="dDL-YH-yB1">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M0P-nO-Eem">
@@ -544,7 +544,7 @@
                                         <rect key="frame" x="0.0" y="552" width="256" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uiG-nP-N6c" id="Mp0-Va-UzJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Xj-f8-KVb">
@@ -590,7 +590,7 @@
                                         <rect key="frame" x="0.0" y="596" width="256" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pWq-rD-pVt" id="dvs-Tj-L7W">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fj0-8V-AvS">
@@ -636,7 +636,7 @@
                                         <rect key="frame" x="0.0" y="640" width="256" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q8J-eL-E3L" id="ofk-F3-wLf">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbr-Fi-GB8">
@@ -1055,7 +1055,7 @@
                                         <rect key="frame" x="0.0" y="165" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8eL-48-To9" id="2YD-CO-tji">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="54.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KOW-ER-v7w">
@@ -1159,7 +1159,7 @@
                                         <rect key="frame" x="0.0" y="220" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="adz-uo-HeW" id="7eC-cy-b2J">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="54.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lvu-PS-EEi">
@@ -1220,7 +1220,7 @@
                                         <rect key="frame" x="0.0" y="275" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XD1-2w-omA" id="aSp-MN-iHw">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="54.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VDM-wZ-3iV">
@@ -1281,7 +1281,7 @@
                                         <rect key="frame" x="0.0" y="330" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hvP-vX-VRr" id="3Xe-st-GUF">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="69.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2c-gQ-AsY">
@@ -1340,7 +1340,7 @@
                                         <rect key="frame" x="0.0" y="400" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0ML-g8-7I6" id="2o4-up-AbH">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="54.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wot-YM-cYw">
@@ -1401,7 +1401,7 @@
                                         <rect key="frame" x="0.0" y="455" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PKS-BV-uIF" id="G1b-va-Jmd">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="54.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2tv-Gm-Aij">
@@ -1462,7 +1462,7 @@
                                         <rect key="frame" x="0.0" y="510" width="414" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hzd-xa-Jvv" id="g2B-Nd-Bkj">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="89.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Unu-1C-zRF">
@@ -1668,8 +1668,8 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version: 1.8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkk-3v-jiw">
-                                                <rect key="frame" x="129" y="61" width="63" height="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version: 1.7.3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkk-3v-jiw">
+                                                <rect key="frame" x="124.66666666666666" y="61" width="71.666666666666657" height="15"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>

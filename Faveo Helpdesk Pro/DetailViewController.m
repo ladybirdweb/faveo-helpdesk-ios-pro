@@ -80,6 +80,7 @@
     _imgViewLoading.center=CGPointMake(self.view.frame.size.width/2,(self.view.frame.size.height/2)-100);
     [self.view addSubview:_imgViewLoading];
     [self.imgViewLoading.layer addAnimation:[self imageAnimationForEmptyDataSet] forKey:@"transform"];
+    
     //_activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     //_activityIndicatorObject.center =CGPointMake(self.view.frame.size.width/2,(self.view.frame.size.height/2)-100);
     // _activityIndicatorObject.color=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
@@ -549,7 +550,8 @@
         source_id = [NSNumber numberWithInteger:1+[_sourceArray indexOfObject:_sourceTextField.text]];
         status_id = [NSNumber numberWithInteger:1+[_statusArray indexOfObject:_statusTextField.text]];
         
-        staff_id = [NSNumber numberWithInteger:1+[_assignArray indexOfObject:_assinTextField.text]];
+        //staff_id = [NSNumber numberWithInteger:1+[_assignArray indexOfObject:_assinTextField.text]];
+        
         
         sla_id=[NSNumber numberWithInt:1];
         [[AppDelegate sharedAppdelegate] showProgressView];
