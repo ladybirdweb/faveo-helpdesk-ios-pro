@@ -292,7 +292,7 @@ GlobalVariables *globalVariables;
     if ([_mutableArray count]==0)
     {
         UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        noDataLabel.text             =  NSLocalizedString(@"",nil);
+        noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
         noDataLabel.textColor        = [UIColor blackColor];
         noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = noDataLabel;

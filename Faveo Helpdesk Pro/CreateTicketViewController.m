@@ -653,9 +653,17 @@
         if(_codeTextField.text.length>0){
             code=[_codeTextField.text substringFromIndex:1];
         }
+        
+        NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
+        
+        if([staffID isEqualToString:@"(null)"])
+        {
+            
+            staffID=@"";
+        }
        /* NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&helptopic=%@&priority=%@&phone=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_msgTextField.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,@""];
         */
-         NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectTextField.text,_textViewMsg.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,staff_id];
+         NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectTextField.text,_textViewMsg.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,staffID];
 @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
@@ -843,6 +851,45 @@
     
 }
 
+
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    
+    if(textView == _textViewMsg)
+    {
+        
+        if([text isEqualToString:@" "])
+            {
+                if(!textView.text.length)
+                {
+                    return NO;
+                }
+            }
+        
+        if([textView.text stringByReplacingCharactersInRange:range withString:text].length < textView.text.length)
+        {
+            
+            return  YES;
+        }
+        
+        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >100)
+           {
+               return NO;
+           }
+        
+        NSCharacterSet *set=[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "];
+        
+        
+        if([text rangeOfCharacterFromSet:set].location == NSNotFound)
+        {
+            return NO;
+        }
+    }
+
+    return YES;
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     // verify the text field you wanna validate
@@ -900,6 +947,33 @@
             if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
                 return NO;
             }
+        
+    } else  if (textField == _emailTextField) {
+        
+        //do not allow the first character to be space | do not allow more than one space
+        if ([string isEqualToString:@" "]) {
+            if (!textField.text.length)
+                return NO;
+            //                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
+            //                            return NO;
+        }
+        
+        // allow backspace
+        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
+            return YES;
+        }
+        
+        // in case you need to limit the max number of characters
+        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 40) {
+            return NO;
+        }
+        
+        // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
+        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@. "];
+        
+        if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
+            return NO;
+        }
         
     }/*else if(textField==_firstNameTextField || textField==_lastNameTextField || textField==_emailTextField|| textField==_msgTextField){ */
     else if(textField==_firstNameTextField || textField==_lastNameTextField || textField==_emailTextField){

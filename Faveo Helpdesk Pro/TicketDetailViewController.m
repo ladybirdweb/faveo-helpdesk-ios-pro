@@ -394,7 +394,7 @@
                     });
                 }
             }
-            NSLog(@"Thread-NO5-postCreateTicket-closed");
+            NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
         }];
         }
@@ -434,11 +434,18 @@
                 
                 if (msg) {
                     
+                    if([msg isEqualToString:@"Error-403"])
+                        {
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied", nil) sendViewController:self];
+                        }
+                        else{
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        }
+                  //  NSLog(@"Message is : %@",msg);
                     
                 }else if(error)  {
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                    NSLog(@"Thread-NO4-getTicketStausChange-Refresh-error == %@",error.localizedDescription);
                 }
                 
                 return ;
@@ -453,10 +460,25 @@
             
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
+              
+               // NSDictionary *dict=[json objectForKey:@"response"];
+                
+               // NSString *msg1= [NSString stringWithFormat:@"%@",[json objectForKey:@"status"]];
+               // NSString *msg2= [dict objectForKey:@"message"];
+                
+                
+                
                 if ([json objectForKey:@"response"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
+//                        if( [msg2 isEqualToString:@"permission denied"] || [msg1 isEqualToString:@"403"] )
+//                        {
+//                            
+//                            [utils showAlertWithMessage:msg2 sendViewController:self];
+//                            
+//                        }else{
+                       
                         
                         [RMessage showNotificationInViewController:self.navigationController
                                                              title:NSLocalizedString(@"Sucess", nil)
@@ -472,12 +494,13 @@
                                               canBeDismissedByUser:YES];
                         
                         
-                        InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                        [self.navigationController pushViewController:inboxVC animated:YES];
+                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                            [self.navigationController pushViewController:inboxVC animated:YES];
+                      //  }
                     });
                 }
             }
-            NSLog(@"Thread-NO5-postCreateTicket-closed");
+            NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
         }];
     }
@@ -559,7 +582,7 @@
                     });
                 }
             }
-            NSLog(@"Thread-NO5-postCreateTicket-closed");
+            NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
         }];
     }
@@ -640,7 +663,7 @@
                     });
                 }
             }
-            NSLog(@"Thread-NO5-postCreateTicket-closed");
+            NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
         }];
     }
