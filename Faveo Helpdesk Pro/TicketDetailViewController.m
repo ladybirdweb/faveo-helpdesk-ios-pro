@@ -346,7 +346,14 @@
                 
                 if (msg) {
                     
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    if([msg isEqualToString:@"Error-403"])
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Open a ticket", nil) sendViewController:self];
+                    }
+                    else{
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    }
+                    //  NSLog(@"Message is : %@",msg);
                     
                 }else if(error)  {
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
@@ -436,7 +443,7 @@
                     
                     if([msg isEqualToString:@"Error-403"])
                         {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied", nil) sendViewController:self];
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to close a ticket", nil) sendViewController:self];
                         }
                         else{
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -539,7 +546,14 @@
                 
                 if (msg) {
                     
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    if([msg isEqualToString:@"Error-403"])
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Reslove a ticket", nil) sendViewController:self];
+                    }
+                    else{
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    }
+                    //  NSLog(@"Message is : %@",msg);
                     
                 }else if(error)  {
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
@@ -620,7 +634,14 @@
                 
                 if (msg) {
                     
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    if([msg isEqualToString:@"Error-403"])
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to delete a ticket", nil) sendViewController:self];
+                    }
+                    else{
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    }
+                    //  NSLog(@"Message is : %@",msg);
                     
                 }else if(error)  {
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];

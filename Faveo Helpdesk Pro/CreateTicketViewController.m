@@ -116,7 +116,7 @@
     NSArray *prioritiesArray=[resultDic objectForKey:@"priorities"];
     NSArray *slaArray=[resultDic objectForKey:@"sla"];
     NSArray *sourcesArray=[resultDic objectForKey:@"sources"];
-    NSArray *staffsArray=[resultDic objectForKey:@"staffs"];
+    NSMutableArray *staffsArray=[resultDic objectForKey:@"staffs"];
     NSArray *statusArray=[resultDic objectForKey:@"status"];
     NSArray *teamArray=[resultDic objectForKey:@"teams"];
     NSLog(@"resultDic2--%@,%@,%@,%@,%@,%@,%@,%@",deptArray,helpTopicArray,prioritiesArray,slaArray,sourcesArray,staffsArray,statusArray,teamArray);
@@ -134,7 +134,12 @@
     staff_idArray=[[NSMutableArray alloc]init];
     
     
-    for (NSDictionary *dicc in staffsArray) {
+    
+    [staffMU insertObject:@" " atIndex:0];
+    [staff_idArray insertObject:@"" atIndex:0];
+    
+    
+    for (NSMutableDictionary *dicc in staffsArray) {
         if ([dicc objectForKey:@"email"]) {
             
           // [staffMU insertObject:@"" atIndex:0];
@@ -517,7 +522,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Please enter ticket MESSAGE...!", nil)
+                                          subtitle:NSLocalizedString(@"Please enter MESSAGE...!", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -679,8 +684,13 @@
             if (error || [msg containsString:@"Error"]) {
               
                 if (msg) {
-                    
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    if([msg isEqualToString:@"Error-403"])
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - Yo don't have permission to assign a ticket", nil) sendViewController:self];
+                    }else{
+                   [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    NSLog(@"Error is : %@",msg);
+                    }
                     
                 }else if(error)  {
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];

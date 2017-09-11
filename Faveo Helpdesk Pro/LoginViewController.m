@@ -319,7 +319,7 @@
                         if (statusCode == 401) {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [utils showAlertWithMessage:@"Wrong Credentials!" sendViewController:self];
+                            [utils showAlertWithMessage:@"Incorrect Username or Password!" sendViewController:self];
                             //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                             return;
                         }else{
@@ -368,6 +368,7 @@
                         [userdefaults synchronize];
                         
                         NSLog(@"token--%@",[jsonData objectForKey:@"token"]);
+                        NSLog(@"JSON is  ::::: %@",jsonData);
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
@@ -409,7 +410,7 @@
                     
                     if ([replyStr containsString:@"invalid_credentials"]) {
                         
-                        [utils showAlertWithMessage:@"Wrong Credentials" sendViewController:self];
+                        [utils showAlertWithMessage:@"Wrong Password" sendViewController:self];
                     }else{
                         
                         [utils showAlertWithMessage:@"Error" sendViewController:self];

@@ -302,6 +302,10 @@
     type_idArray=[[NSMutableArray alloc]init];
      staff_idArray=[[NSMutableArray alloc]init];
     
+    
+    [staffMU insertObject:@" " atIndex:0];
+    [staff_idArray insertObject:@"" atIndex:0];
+    
     for (NSDictionary *dicc in staffsArray) {
         if ([dicc objectForKey:@"email"]) {
             [staffMU addObject:[dicc objectForKey:@"email"]];
@@ -556,6 +560,15 @@
         sla_id=[NSNumber numberWithInt:1];
         [[AppDelegate sharedAppdelegate] showProgressView];
         
+        NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
+        
+        if([staffID isEqualToString:@"(null)"])
+        {
+            
+            staffID=@"";
+        }
+
+        
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&help_topic=%@&ticket_type=%@&ticket_priority=%@&ticket_source=%@&subject=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,help_topic_id,type_id,priority_id,source_id,_subjectTextField.text,staff_id];
         
         NSLog(@"URL is : %@",url);
@@ -570,7 +583,14 @@
                 
                 if (msg) {
                     
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    if([msg isEqualToString:@"Error-403"])
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Edit a ticket", nil) sendViewController:self];
+                    }
+                    else{
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    }
+                    //  NSLog(@"Message is : %@",msg);
                     
                 }else if(error)  {
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];

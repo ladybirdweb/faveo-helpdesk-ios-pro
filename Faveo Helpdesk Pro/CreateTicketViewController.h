@@ -168,7 +168,7 @@
  */
 @property (nonatomic, strong) NSArray * codeArray;
 
-@property (nonatomic, strong) NSArray * staffArray;
+@property (nonatomic, strong) NSMutableArray * staffArray;
 
 /*!
  @property countryDic
