@@ -269,9 +269,18 @@
      NSLog(@"Shaking has ended");
      }]; */
     
-    if (((self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0) )|| ((self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0)))
+    //[utils ];
+    if (((self.userNameTextField.text.length==0 || self.passcodeTextField.text.length==0)))
     {
-        [utils showAlertWithMessage:NSLocalizedString(@"Please Enter Username & Password",nil) sendViewController:self];
+        if (self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0){
+        [utils showAlertWithMessage:@"Please Enter Username & Password..!" sendViewController:self];
+        }else if(self.userNameTextField.text.length==0 && self.passcodeTextField.text.length!=0)
+        {
+             [utils showAlertWithMessage:@"Please Enter Username..!" sendViewController:self];
+        }else if(self.userNameTextField.text.length!=0 && self.passcodeTextField.text.length==0)
+        {
+            [utils showAlertWithMessage:@"Please Enter Password..!" sendViewController:self];
+        }
     }
     else {
         if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -410,7 +419,7 @@
                     
                     if ([replyStr containsString:@"invalid_credentials"]) {
                         
-                        [utils showAlertWithMessage:@"Wrong Password" sendViewController:self];
+                        [utils showAlertWithMessage:@"Enter valid Username or Password..!" sendViewController:self];
                     }else{
                         
                         [utils showAlertWithMessage:@"Error" sendViewController:self];

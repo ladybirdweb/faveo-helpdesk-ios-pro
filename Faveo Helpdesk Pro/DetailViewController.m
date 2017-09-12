@@ -277,7 +277,7 @@
     NSArray *prioritiesArray=[resultDic objectForKey:@"priorities"];
     NSArray *slaArray=[resultDic objectForKey:@"sla"];
     NSArray *sourcesArray=[resultDic objectForKey:@"sources"];
-    NSArray *staffsArray=[resultDic objectForKey:@"staffs"];
+    NSMutableArray *staffsArray=[resultDic objectForKey:@"staffs"];
     NSArray *statusArray=[resultDic objectForKey:@"status"];
     NSArray *typeArray=[resultDic objectForKey:@"type"];
     
@@ -306,7 +306,7 @@
     [staffMU insertObject:@" " atIndex:0];
     [staff_idArray insertObject:@"" atIndex:0];
     
-    for (NSDictionary *dicc in staffsArray) {
+    for (NSMutableDictionary *dicc in staffsArray) {
         if ([dicc objectForKey:@"email"]) {
             [staffMU addObject:[dicc objectForKey:@"email"]];
             [staff_idArray addObject:[dicc objectForKey:@"id"]];
@@ -562,7 +562,7 @@
         
         NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
         
-        if([staffID isEqualToString:@"(null)"])
+        if([staffID isEqualToString:@"(null)"] )
         {
             
             staffID=@"";
@@ -585,7 +585,8 @@
                     
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Edit a ticket", nil) sendViewController:self];
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Edit a ticket or You don't have permission to assign a ticket.", nil) sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else{
                         [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];

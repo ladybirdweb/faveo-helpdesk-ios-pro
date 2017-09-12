@@ -686,7 +686,7 @@
                 if (msg) {
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - Yo don't have permission to assign a ticket", nil) sendViewController:self];
+                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - Yo don't have permission to assign a ticket or You don't have permisiion to Edit a ticket.", nil) sendViewController:self];
                     }else{
                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                     NSLog(@"Error is : %@",msg);
