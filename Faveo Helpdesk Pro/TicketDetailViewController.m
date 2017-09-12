@@ -384,7 +384,7 @@
                         
                         [RMessage showNotificationInViewController:self.navigationController
                                                              title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket Staus Changed...!", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket Status Changed...!", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
                                                     customTypeName:nil
@@ -467,29 +467,14 @@
             
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
-              
-               // NSDictionary *dict=[json objectForKey:@"response"];
-                
-               // NSString *msg1= [NSString stringWithFormat:@"%@",[json objectForKey:@"status"]];
-               // NSString *msg2= [dict objectForKey:@"message"];
-                
-                
-                
                 if ([json objectForKey:@"response"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
-//                        if( [msg2 isEqualToString:@"permission denied"] || [msg1 isEqualToString:@"403"] )
-//                        {
-//                            
-//                            [utils showAlertWithMessage:msg2 sendViewController:self];
-//                            
-//                        }else{
-                       
                         
                         [RMessage showNotificationInViewController:self.navigationController
                                                              title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket Staus Changed...!", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket Status Changed...!", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
                                                     customTypeName:nil
@@ -501,9 +486,8 @@
                                               canBeDismissedByUser:YES];
                         
                         
-                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                            [self.navigationController pushViewController:inboxVC animated:YES];
-                      //  }
+                        InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                        [self.navigationController pushViewController:inboxVC animated:YES];
                     });
                 }
             }
@@ -579,7 +563,7 @@
                         
                         [RMessage showNotificationInViewController:self.navigationController
                                                              title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket Staus Changed...!", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket Status Changed...!", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
                                                     customTypeName:nil
@@ -667,7 +651,7 @@
                         
                         [RMessage showNotificationInViewController:self.navigationController
                                                              title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket Staus Changed...!", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket Status Changed...!", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
                                                     customTypeName:nil

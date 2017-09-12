@@ -399,7 +399,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Error !", nil)
-                                          subtitle:NSLocalizedString(@"Invalid Email...!", nil)
+                                          subtitle:NSLocalizedString(@"Please enter valid email id...!", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
