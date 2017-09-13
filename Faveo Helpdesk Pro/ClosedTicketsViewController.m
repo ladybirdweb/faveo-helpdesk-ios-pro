@@ -176,7 +176,7 @@
     if ([_mutableArray count]==0)
     {
         UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
+        noDataLabel.text             =  NSLocalizedString(@"No Records..!!",nil);
         noDataLabel.textColor        = [UIColor blackColor];
         noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = noDataLabel;
@@ -207,7 +207,7 @@
            
             [RMessage showNotificationInViewController:self
                                                  title:nil
-                                              subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
+                                              subtitle:NSLocalizedString(@"All Caught Up.)", nil)
                                              iconImage:nil
                                                   type:RMessageTypeSuccess
                                         customTypeName:nil

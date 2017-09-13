@@ -49,6 +49,7 @@ GlobalVariables *globalVariables;
     utils=[[Utils alloc]init];
     userDefaults=[NSUserDefaults standardUserDefaults];
     globalVariables=[GlobalVariables sharedInstance];
+    
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
 
@@ -169,7 +170,7 @@ GlobalVariables *globalVariables;
             
             [RMessage showNotificationInViewController:self
                                                  title:nil
-                                              subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
+                                              subtitle:NSLocalizedString(@"All Caught Up)", nil)
                                              iconImage:nil
                                                   type:RMessageTypeSuccess
                                         customTypeName:nil

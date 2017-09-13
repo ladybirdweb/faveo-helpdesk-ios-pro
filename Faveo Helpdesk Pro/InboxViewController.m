@@ -379,7 +379,7 @@
             
             [RMessage showNotificationInViewController:self
                                                  title:nil
-                                              subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
+                                              subtitle:NSLocalizedString(@"All Caught Up)", nil)
                                              iconImage:nil
                                                   type:RMessageTypeSuccess
                                         customTypeName:nil
@@ -525,7 +525,8 @@
         NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
         
         [Utils isEmpty:ticketNumber];
-        
+    
+          
         if  (![Utils isEmpty:ticketNumber] && ![ticketNumber isEqualToString:@""])
         {
             cell.ticketIdLabel.text=ticketNumber;
@@ -543,7 +544,9 @@
         [Utils isEmpty:fname];
         [Utils isEmpty:lname];
         [Utils isEmpty:email1];
-        
+    
+
+    
        if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
        {
             if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])

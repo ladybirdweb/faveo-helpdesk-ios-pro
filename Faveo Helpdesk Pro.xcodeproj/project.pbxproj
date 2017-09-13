@@ -23,6 +23,7 @@
 		D9AAFAB91F5D475400891CA5 /* FTPopOverMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AAFAB81F5D475400891CA5 /* FTPopOverMenu.m */; };
 		D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */; };
 		D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */; };
+		D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */; };
 		D9CF41AD1F4C15320087BBFA /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */; };
 		D9DBD3461E07ACFC00219F93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3451E07ACFC00219F93 /* main.m */; };
 		D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3481E07ACFC00219F93 /* AppDelegate.m */; };
@@ -53,7 +54,6 @@
 		D9EB9FA41E07C3270001115F /* ClosedTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F8E1E07C3270001115F /* ClosedTicketsViewController.m */; };
 		D9EB9FA51E07C3270001115F /* MyTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F901E07C3270001115F /* MyTicketsViewController.m */; };
 		D9EB9FA61E07C3270001115F /* CreateTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F921E07C3270001115F /* CreateTicketViewController.m */; };
-		D9EB9FA71E07C3270001115F /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F941E07C3270001115F /* InboxViewController.m */; };
 		D9EB9FA81E07C3270001115F /* TicketDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F961E07C3270001115F /* TicketDetailViewController.m */; };
 		D9EB9FA91E07C3270001115F /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F981E07C3270001115F /* AboutViewController.m */; };
 		D9EB9FAA1E07C3270001115F /* ClientDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9F9A1E07C3270001115F /* ClientDetailViewController.m */; };
@@ -130,6 +130,7 @@
 		D9B6E2ED1E9B8B9700AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2EF1E9B8B9900AAB724 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2F11E9B8B9B00AAB724 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
+		D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxViewController.m; sourceTree = "<group>"; };
 		D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		D9D66BD41E97B14C000214FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		D9D66BD81E97CD0F000214FF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
@@ -193,7 +194,6 @@
 		D9EB9F911E07C3270001115F /* CreateTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateTicketViewController.h; sourceTree = "<group>"; };
 		D9EB9F921E07C3270001115F /* CreateTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateTicketViewController.m; sourceTree = "<group>"; };
 		D9EB9F931E07C3270001115F /* InboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxViewController.h; sourceTree = "<group>"; };
-		D9EB9F941E07C3270001115F /* InboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxViewController.m; sourceTree = "<group>"; };
 		D9EB9F951E07C3270001115F /* TicketDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketDetailViewController.h; sourceTree = "<group>"; };
 		D9EB9F961E07C3270001115F /* TicketDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketDetailViewController.m; sourceTree = "<group>"; };
 		D9EB9F971E07C3270001115F /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -402,7 +402,7 @@
 				D9EB9F911E07C3270001115F /* CreateTicketViewController.h */,
 				D9EB9F921E07C3270001115F /* CreateTicketViewController.m */,
 				D9EB9F931E07C3270001115F /* InboxViewController.h */,
-				D9EB9F941E07C3270001115F /* InboxViewController.m */,
+				D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */,
 				D9EB9F8F1E07C3270001115F /* MyTicketsViewController.h */,
 				D9EB9F901E07C3270001115F /* MyTicketsViewController.m */,
 				D9EB9F871E07C3270001115F /* UnassignedTicketsViewController.h */,
@@ -726,8 +726,8 @@
 				D9EB9FAC1E07C3270001115F /* DetailViewController.m in Sources */,
 				D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */,
 				D9EB9F641E07C2D00001115F /* GlobalVariables.m in Sources */,
-				D9EB9FA71E07C3270001115F /* InboxViewController.m in Sources */,
 				D9E57B411EFAA4C1002E4C19 /* UITextField+PasswordField.m in Sources */,
+				D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */,
 				D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */,
 				D9E57B401EFAA4C1002E4C19 /* UIView+Shake.m in Sources */,
 				D9EB9F811E07C2F00001115F /* LoadingTableViewCell.m in Sources */,

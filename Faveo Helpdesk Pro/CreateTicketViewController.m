@@ -358,7 +358,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Please fill all mandatory fields...!", nil)
+                                          subtitle:NSLocalizedString(@"Please fill all mandatory fields.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -378,7 +378,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Please enter Email...!", nil)
+                                          subtitle:NSLocalizedString(@"Please enter Email.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -399,7 +399,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Error !", nil)
-                                          subtitle:NSLocalizedString(@"Please enter valid email id...!", nil)
+                                          subtitle:NSLocalizedString(@"Please enter valid email id.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -420,7 +420,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"FirstName should have more than 2 characters...!", nil)
+                                          subtitle:NSLocalizedString(@"FirstName should have more than 2 characters.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -462,7 +462,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Please select HELP-TOPIC...!", nil)
+                                          subtitle:NSLocalizedString(@"Please select HELP-TOPIC.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -483,7 +483,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Please enter SUBJECT...!", nil)
+                                          subtitle:NSLocalizedString(@"Please enter SUBJECT.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -502,7 +502,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"SUBJECT requires at least 5 characters...!", nil)
+                                          subtitle:NSLocalizedString(@"SUBJECT requires at least 5 characters.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -522,7 +522,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Please enter MESSAGE...!", nil)
+                                          subtitle:NSLocalizedString(@"Please enter MESSAGE.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -542,7 +542,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"MESSAGE requires at least 10 characters...!", nil)
+                                          subtitle:NSLocalizedString(@"MESSAGE requires at least 10 characters.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -569,7 +569,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Please select PRIORITY...!", nil)
+                                          subtitle:NSLocalizedString(@"Please select PRIORITY.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -613,7 +613,7 @@
             
             [RMessage showNotificationInViewController:self.navigationController
                                                  title:NSLocalizedString(@"Warning !", nil)
-                                              subtitle:NSLocalizedString(@"Please refresh the Inbox...!", nil)
+                                              subtitle:NSLocalizedString(@"Please refresh the Inbox.", nil)
                                              iconImage:nil
                                                   type:RMessageTypeWarning
                                         customTypeName:nil
@@ -656,10 +656,7 @@
         
         [[AppDelegate sharedAppdelegate] showProgressView];
         
-//        NSDictionary *param=[NSDictionary dictionaryWithObjectsAndKeys:API_KEY,@"api_key",IP,@"ip",[userDefaults objectForKey:@"token"],@"token",[userDefaults objectForKey:@"user_id"],@"user_id",_subjectTextField.text,@"subject",_msgTextField.text,@"body",_nameTextField.text,@"first_name",@"nx",@"last_name",_phoneTextField.text,@"phone",[_codeTextField.text substringFromIndex:1],@"code",_emailTextField.text,@"email",help_topic_id,@"helptopic",sla_id,@"sla",priority_id,@"priority",dept_id,@"dept",nil];
-//        NSLog(@"Dic %@",param);
         
-       // NSString *url=[NSString stringWithFormat:@"%@helpdesk/create",[userDefaults objectForKey:@"companyURL"]];
         NSString *code=@"";
         if(_codeTextField.text.length>0){
             code=[_codeTextField.text substringFromIndex:1];
@@ -686,7 +683,7 @@
                 if (msg) {
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - Yo don't have permission to assign a ticket or You don't have permisiion to Edit a ticket.", nil) sendViewController:self];
+                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                     }else{
                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                     NSLog(@"Error is : %@",msg);
@@ -716,7 +713,7 @@
                                                 
                         [RMessage showNotificationInViewController:self.navigationController
                                                              title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket created successfully...!", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket created successfully.", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
                                                     customTypeName:nil
@@ -738,6 +735,7 @@
         }];
 }@catch (NSException *exception)
         {
+            //[utils showAlertWithMessage:@"APP IS STOPPED WORKING" sendViewController:self];
             // Print exception information
             NSLog( @"NSException caught in createTicket in CrateTicket ViewController" );
             NSLog( @"Name: %@", exception.name);

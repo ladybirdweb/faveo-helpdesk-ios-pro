@@ -348,7 +348,7 @@
                     
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Open a ticket", nil) sendViewController:self];
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Open a ticket", nil) sendViewController:self];
                     }
                     else{
                         [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -382,9 +382,13 @@
                         // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
                         
+                        if (self.navigationController.navigationBarHidden) {
+                            [self.navigationController setNavigationBarHidden:NO];
+                        }
+                        
                         [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket Status Changed...!", nil)
+                                                             title:NSLocalizedString(@"Sucess.", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
                                                     customTypeName:nil
@@ -392,7 +396,7 @@
                                                           callback:nil
                                                        buttonTitle:nil
                                                     buttonCallback:nil
-                                                        atPosition:RMessagePositionBottom
+                                                        atPosition:RMessagePositionNavBarOverlay
                                               canBeDismissedByUser:YES];
                         
                         
@@ -443,7 +447,7 @@
                     
                     if([msg isEqualToString:@"Error-403"])
                         {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to close a ticket", nil) sendViewController:self];
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
                         }
                         else{
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -472,9 +476,13 @@
                         // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
                         
+                        if (self.navigationController.navigationBarHidden) {
+                            [self.navigationController setNavigationBarHidden:NO];
+                        }
+                        
                         [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket Status Changed...!", nil)
+                                                             title:NSLocalizedString(@"Sucess.", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
                                                     customTypeName:nil
@@ -482,9 +490,8 @@
                                                           callback:nil
                                                        buttonTitle:nil
                                                     buttonCallback:nil
-                                                        atPosition:RMessagePositionBottom
+                                                        atPosition:RMessagePositionNavBarOverlay
                                               canBeDismissedByUser:YES];
-                        
                         
                         InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                         [self.navigationController pushViewController:inboxVC animated:YES];
@@ -532,7 +539,7 @@
                     
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Reslove a ticket", nil) sendViewController:self];
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Resolve a ticket", nil) sendViewController:self];
                     }
                     else{
                         [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -561,9 +568,13 @@
                         // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
                         
+                        if (self.navigationController.navigationBarHidden) {
+                            [self.navigationController setNavigationBarHidden:NO];
+                        }
+                        
                         [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket Status Changed...!", nil)
+                                                             title:NSLocalizedString(@"Sucess.", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
                                                     customTypeName:nil
@@ -571,9 +582,8 @@
                                                           callback:nil
                                                        buttonTitle:nil
                                                     buttonCallback:nil
-                                                        atPosition:RMessagePositionBottom
+                                                        atPosition:RMessagePositionNavBarOverlay
                                               canBeDismissedByUser:YES];
-                        
                         
                         InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                         [self.navigationController pushViewController:inboxVC animated:YES];
@@ -620,7 +630,7 @@
                     
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to delete a ticket", nil) sendViewController:self];
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Delete a ticket", nil) sendViewController:self];
                     }
                     else{
                         [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -642,16 +652,24 @@
                 return;
             }
             
+        
+            
+            
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"response"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
+            
+                        
+                        if (self.navigationController.navigationBarHidden) {
+                            [self.navigationController setNavigationBarHidden:NO];
+                        }
                         
                         [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket Status Changed...!", nil)
+                                                             title:NSLocalizedString(@"Sucess.", nil)
+                                                          subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
                                                     customTypeName:nil
@@ -659,9 +677,9 @@
                                                           callback:nil
                                                        buttonTitle:nil
                                                     buttonCallback:nil
-                                                        atPosition:RMessagePositionBottom
+                                                        atPosition:RMessagePositionNavBarOverlay
                                               canBeDismissedByUser:YES];
-                        
+
                         
                         InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                         [self.navigationController pushViewController:inboxVC animated:YES];
@@ -974,7 +992,7 @@
                         
                         [RMessage showNotificationInViewController:self.navigationController
                                                              title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Posted your note..!", nil)
+                                                          subtitle:NSLocalizedString(@"Posted your note.", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
                                                     customTypeName:nil
@@ -1094,7 +1112,7 @@
                         
                         [RMessage showNotificationInViewController:self.navigationController
                                                              title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Posted your reply..!", nil)
+                                                          subtitle:NSLocalizedString(@"Posted your reply.", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
                                                     customTypeName:nil

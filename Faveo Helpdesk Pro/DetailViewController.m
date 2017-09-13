@@ -219,7 +219,8 @@
                         
                        
                         if (([[dic objectForKey:@"assignee_email"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"assignee_email"] length] == 0 )) {
-                             _assinTextField.text=NSLocalizedString(@"Not Available",nil);
+                            // _assinTextField.text=NSLocalizedString(@"Not Available",nil);
+                            _assinTextField.text=NSLocalizedString(@"Select Assignee",nil);
                         }else{
                          _assinTextField.text= [dic objectForKey:@"assignee_email"];
                         }
@@ -569,7 +570,7 @@
         }
 
         
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&help_topic=%@&ticket_type=%@&ticket_priority=%@&ticket_source=%@&subject=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,help_topic_id,type_id,priority_id,source_id,_subjectTextField.text,staff_id];
+        NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&help_topic=%@&ticket_type=%@&ticket_priority=%@&ticket_source=%@&subject=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,help_topic_id,type_id,priority_id,source_id,_subjectTextField.text,staffID];
         
         NSLog(@"URL is : %@",url);
         
@@ -585,7 +586,7 @@
                     
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Edit a ticket or You don't have permission to assign a ticket.", nil) sendViewController:self];
+                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else{

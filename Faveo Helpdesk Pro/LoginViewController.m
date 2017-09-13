@@ -135,7 +135,7 @@
                 
                 [RMessage
                  showNotificationWithTitle:NSLocalizedString(@"Something failed", nil)
-                 subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check it!", nil)
+                 subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check it.", nil)
                  type:RMessageTypeError
                  customTypeName:nil
                  callback:nil];
@@ -192,7 +192,7 @@
                             if (statusCode == 404) {
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                                [utils showAlertWithMessage:@"Invalid URL!" sendViewController:self];
+                                [utils showAlertWithMessage:@"Invalid URL..!" sendViewController:self];
                                 return;
                             }else{
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
@@ -273,13 +273,13 @@
     if (((self.userNameTextField.text.length==0 || self.passcodeTextField.text.length==0)))
     {
         if (self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0){
-        [utils showAlertWithMessage:@"Please Enter Username & Password..!" sendViewController:self];
+        [utils showAlertWithMessage:  NSLocalizedString(@"Please insert username & password", nil) sendViewController:self];
         }else if(self.userNameTextField.text.length==0 && self.passcodeTextField.text.length!=0)
         {
-             [utils showAlertWithMessage:@"Please Enter Username..!" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Please insert username", nil) sendViewController:self];
         }else if(self.userNameTextField.text.length!=0 && self.passcodeTextField.text.length==0)
         {
-            [utils showAlertWithMessage:@"Please Enter Password..!" sendViewController:self];
+            [utils showAlertWithMessage: NSLocalizedString(@"Please insert password", nil)sendViewController:self];
         }
     }
     else {
@@ -328,13 +328,13 @@
                         if (statusCode == 401) {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [utils showAlertWithMessage:@"Incorrect Username or Password!" sendViewController:self];
+                            [utils showAlertWithMessage: NSLocalizedString(@"Incorrect Username or Password!", nil) sendViewController:self];
                             //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                             return;
                         }else{
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [utils showAlertWithMessage:@"Unknown Error!" sendViewController:self];
+                            [utils showAlertWithMessage:NSLocalizedString(@"Unknown Error !", nil)sendViewController:self];
                             return;
                         }
                     }
@@ -388,8 +388,8 @@
                             }
                             
                             [RMessage showNotificationInViewController:self.navigationController
-                                                                 title:NSLocalizedString(@"Welcome!", nil)
-                                                              subtitle:NSLocalizedString(@"You have logged in successfully.!", nil)
+                                                                 title:NSLocalizedString(@"Welcome", nil)
+                                                              subtitle:NSLocalizedString(@"You have logged in successfully.", nil)
                                                              iconImage:nil
                                                                   type:RMessageTypeSuccess
                                                         customTypeName:nil
@@ -419,10 +419,10 @@
                     
                     if ([replyStr containsString:@"invalid_credentials"]) {
                         
-                        [utils showAlertWithMessage:@"Enter valid Username or Password..!" sendViewController:self];
+                        [utils showAlertWithMessage:@"Enter valid username or password" sendViewController:self];
                     }else{
                         
-                        [utils showAlertWithMessage:@"Error" sendViewController:self];
+                        [utils showAlertWithMessage:@"invalid_credentials" sendViewController:self];
                     }
                 }
                 
