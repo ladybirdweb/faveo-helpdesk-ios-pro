@@ -52,6 +52,7 @@
     NSLog(@"Naa-Inbox");
     
     
+       
     NSString *refreshedToken = [[FIRInstanceID instanceID] token];
     NSLog(@"refreshed token  %@",refreshedToken);
     
@@ -208,9 +209,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-   
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    
     
     if (indexPath.row == [_mutableArray count] - 1 ) {
         NSLog(@"nextURL  %@",_nextPageUrl);
@@ -335,10 +336,40 @@
 }
 
 
+/*
+- (NSString *)getKeyForIndex:(int)index
+{
+    return [NSString stringWithFormat:@"KEY%d",index];
+}
+
+- (BOOL) getCheckedForIndex:(int)index
+{
+    if([[[NSUserDefaults standardUserDefaults] valueForKey:[self getKeyForIndex:index]] boolValue]==YES)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+- (void) checkedCellAtIndex:(int)index
+{
+    BOOL boolChecked = [self getCheckedForIndex:index];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:!boolChecked] forKey:[self getKeyForIndex:index]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+*/
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
     if (indexPath.row == [_mutableArray count]) {
+        
+        
         
         LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"LoadingCellID"];
         if (cell == nil)
@@ -348,8 +379,12 @@
         }
         UIActivityIndicatorView *activityIndicator = (UIActivityIndicatorView *)[cell.contentView viewWithTag:1];
         [activityIndicator startAnimating];
+        
+        
         return cell;
     }else{
+        
+        
         
         NotificationTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"NotificationCellID"];
         
@@ -357,19 +392,32 @@
         {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"NotificationTableViewCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
-            
+        
+        }
+        
+
+        
+     /*   if([self getCheckedForIndex:(int)indexPath.row]==YES)
+        {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
             
         }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        } */
+        
         
       //  [self nofificationSeen];
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
         NSLog(@"Dict is : %@", finaldic);
         
+    
         NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
         
         
-        @try{
+        
         // cell.msglbl.text=[finaldic objectForKey:@"message"];
         
         if ( ( ![[finaldic objectForKey:@"message"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"message"] length] != 0 ) )
@@ -401,12 +449,14 @@
         {
             [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
            
-            
+            // changed_by_user_name
             NSString *fname= [profileDict objectForKey:@"changed_by_first_name"];
             NSString *lname= [profileDict objectForKey:@"changed_by_last_name"];
+            NSString *userName= [profileDict objectForKey:@"changed_by_user_name"];
             
             [Utils isEmpty:fname];
             [Utils isEmpty:lname];
+            [Utils isEmpty:userName];
             
             if (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
             {
@@ -414,10 +464,13 @@
                   {
                       cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
                   }
-                else if ((![Utils isEmpty:fname] && [Utils isEmpty:lname]) || ([Utils isEmpty:fname] && ![Utils isEmpty:lname]))
+                else
                 {
                     cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
                 }
+            }else if(![Utils isEmpty:userName])
+            {
+                cell.name.text= [profileDict objectForKey:@"changed_by_user_name"];
             }
             else
             {
@@ -430,21 +483,10 @@
         else{
             
             [cell setUserProfileimage:@"default_pic.png"];
+            cell.name.text= NSLocalizedString(@"Not Available",nil);
         }
-    }@catch (NSException *exception)
-        {
-            // Print exception information
-            NSLog( @"NSException caught in CellForRowATIndex method in Notification ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
-            return cell ;
-        }
-        @finally
-        {
-            // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
             
-        }
+            //[[self.tableView didSelectRowAtIndexPath] ];
         
         return cell;
     }
@@ -454,13 +496,31 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
+  /*
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    //Use checkedCellAtIndex for check or uncheck cell
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    [self checkedCellAtIndex:(int)indexPath.row];
+    
+    if([self getCheckedForIndex:(int)indexPath.row]==YES)
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+        
+    }
+    else
+    {
+        //cell.accessoryType = UITableViewCellAccessoryNone;
+    } */
     
       NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
     NSLog(@"dict issssss : %@",finaldic);
     
          notifyID= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"id"]];
     
-  //  [self nofificationSeen];
+   // [self nofificationSeen];
     
     
      NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
@@ -477,10 +537,24 @@
        
         globalVariables.iD= [finaldic objectForKey:@"row_id"];
         
+        
+        
+        
+        if(( ![[finaldic objectForKey:@"requester"] isEqual:[NSNull null]] ) )
+        {
         globalVariables.First_name=  [profileDict objectForKey:@"changed_by_first_name"];
         globalVariables.Last_name= [profileDict objectForKey:@"changed_by_last_name"];
 
         [self.navigationController pushViewController:td animated:YES];
+        }
+        else
+        {
+            globalVariables.First_name= @"";
+            globalVariables.Last_name=@"";
+            
+            [self.navigationController pushViewController:td animated:YES];
+            
+        }
     }
     else if ([sen isEqualToString:@"users"]){
     
@@ -490,8 +564,14 @@
         
         [self.navigationController pushViewController:clientDetail animated:YES];
     }
-  
-        // count=1;
+    
+   // NotificationTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"NotificationCellID"];
+   
+    //[cell stringID:@"1"];
+    
+    //globalVariables.count1=@"1";
+    
+    // count=1;
     
 }
 
@@ -588,8 +668,8 @@
             
     }
     
-} */
- 
+} 
+ */
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];

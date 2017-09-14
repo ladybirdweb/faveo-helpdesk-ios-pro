@@ -266,6 +266,26 @@
                     }
                 }
                 
+                NSArray *ticketStatusArray=[resultDic objectForKey:@"status"];
+                
+                for (int i = 0; i < ticketStatusArray.count; i++) {
+                    NSString *statusName = [[ticketStatusArray objectAtIndex:i]objectForKey:@"name"];
+                    NSString *statusId = [[ticketStatusArray objectAtIndex:i]objectForKey:@"id"];
+                    
+                    if ([statusName isEqualToString:@"Open"]) {
+                        globalVariables.OpenStausId=statusId;
+                    }else if ([statusName isEqualToString:@"Resolved"]) {
+                        globalVariables.ResolvedStausId=statusId;
+                    }else if ([statusName isEqualToString:@"Closed"]) {
+                        globalVariables.ClosedStausId=statusId;
+                    }else if ([statusName isEqualToString:@"Deleted"]) {
+                        globalVariables.DeletedStausId=statusId;
+                    }else if ([statusName isEqualToString:@"Request for close"]) {
+                        globalVariables.RequestCloseStausId=statusId;
+                    }else if ([statusName isEqualToString:@"Spam"]) {
+                        globalVariables.SpamStausId=statusId;
+                    }
+                }
 
                 
                 NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
@@ -317,7 +337,7 @@
     if ([_mutableArray count]==0)
     {
         UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        noDataLabel.text             =  NSLocalizedString(@"Empty!!!",nil);
+        noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
         noDataLabel.textColor        = [UIColor blackColor];
         noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = noDataLabel;
@@ -345,7 +365,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-   
+    
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
@@ -359,7 +379,7 @@
             
             [RMessage showNotificationInViewController:self
                                                  title:nil
-                                              subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
+                                              subtitle:NSLocalizedString(@"All Caught Up)", nil)
                                              iconImage:nil
                                                   type:RMessageTypeSuccess
                                         customTypeName:nil
@@ -505,7 +525,8 @@
         NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
         
         [Utils isEmpty:ticketNumber];
-        
+    
+          
         if  (![Utils isEmpty:ticketNumber] && ![ticketNumber isEqualToString:@""])
         {
             cell.ticketIdLabel.text=ticketNumber;
@@ -523,7 +544,10 @@
         [Utils isEmpty:fname];
         [Utils isEmpty:lname];
         [Utils isEmpty:email1];
-        
+    
+
+    
+    
        if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
        {
             if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
@@ -713,7 +737,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-    
+   
     NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
     
     globalVariables.iD=[finaldic objectForKey:@"id"];

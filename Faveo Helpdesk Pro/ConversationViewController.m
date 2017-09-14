@@ -179,6 +179,12 @@
 }
 
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return [mutableArray count];
@@ -198,7 +204,6 @@
     
 @try{
     cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
-    
   
     NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
     if (i==0) {
@@ -271,7 +276,6 @@
     
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
     [self showWebview:@"" body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];
-    
 }
 
 

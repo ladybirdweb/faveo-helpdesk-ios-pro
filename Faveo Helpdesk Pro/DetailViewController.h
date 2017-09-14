@@ -307,4 +307,11 @@
  */
 - (IBAction)saveClicked:(id)sender;
 
+
+@property (nonatomic, strong) NSMutableArray * assignArray;
+- (IBAction)assignClicked:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UITextField *assinTextField;
+
+
 @end

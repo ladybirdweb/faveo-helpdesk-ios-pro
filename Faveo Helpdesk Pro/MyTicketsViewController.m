@@ -182,7 +182,7 @@
     if ([_mutableArray count]==0)
     {
         UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        noDataLabel.text             =  NSLocalizedString(@"Empty!!!",nil);
+        noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
         noDataLabel.textColor        = [UIColor blackColor];
         noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = noDataLabel;
@@ -208,10 +208,11 @@
 }
 
  - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-   
+     
      cell.selectionStyle=UITableViewCellSelectionStyleNone;
      
-     if (indexPath.row == [_mutableArray count] - 1 ) {
+     
+    if (indexPath.row == [_mutableArray count] - 1 ) {
         NSLog(@"nextURL  %@",_nextPageUrl);
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
             [self loadMore:[userDefaults objectForKey:@"user_id"]];
@@ -221,7 +222,7 @@
            
             [RMessage showNotificationInViewController:self
                                                  title:nil
-                                              subtitle:NSLocalizedString(@"All Caught Up...!)", nil)
+                                              subtitle:NSLocalizedString(@"All Caught Up)", nil)
                                              iconImage:nil
                                                   type:RMessageTypeSuccess
                                         customTypeName:nil
