@@ -381,26 +381,26 @@
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                          // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                           [RKDropdownAlert title:NSLocalizedString(@"Welcome.",nil) message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
-                            if (self.navigationController.navigationBarHidden) {
-                                [self.navigationController setNavigationBarHidden:NO];
-                            }
                             
-                            [RMessage showNotificationInViewController:self.navigationController
-                                                                 title:NSLocalizedString(@"Welcome", nil)
-                                                              subtitle:NSLocalizedString(@"You have logged in successfully.", nil)
-                                                             iconImage:nil
-                                                                  type:RMessageTypeSuccess
-                                                        customTypeName:nil
-                                                              duration:RMessageDurationAutomatic
-                                                              callback:nil
-                                                           buttonTitle:nil
-                                                        buttonCallback:nil
-                                                            atPosition:RMessagePositionNavBarOverlay
-                                                  canBeDismissedByUser:YES];
+//                            if (self.navigationController.navigationBarHidden) {
+//                                [self.navigationController setNavigationBarHidden:NO];
+//                            }
+//                            
+//                            [RMessage showNotificationInViewController:self.navigationController
+//                                                                 title:NSLocalizedString(@"Welcome", nil)
+//                                                              subtitle:NSLocalizedString(@"You have logged in successfully.", nil)
+//                                                             iconImage:nil
+//                                                                  type:RMessageTypeSuccess
+//                                                        customTypeName:nil
+//                                                              duration:RMessageDurationAutomatic
+//                                                              callback:nil
+//                                                           buttonTitle:nil
+//                                                        buttonCallback:nil
+//                                                            atPosition:RMessagePositionNavBarOverlay
+//                                                  canBeDismissedByUser:YES];
 
-        
                             
                             [self sendDeviceToken];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
