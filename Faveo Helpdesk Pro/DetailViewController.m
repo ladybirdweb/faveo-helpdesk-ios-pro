@@ -304,7 +304,7 @@
      staff_idArray=[[NSMutableArray alloc]init];
     
     
-    [staffMU insertObject:@" " atIndex:0];
+    [staffMU insertObject:@"Select Assignee" atIndex:0];
     [staff_idArray insertObject:@"" atIndex:0];
     
     for (NSMutableDictionary *dicc in staffsArray) {
@@ -821,6 +821,28 @@
  */
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    
+    if(textField==_helpTopicTextField)
+    {
+        return NO;
+    }
+    
+    if(textField==_typeTextField)
+    {
+        return NO;
+    }
+    
+    if(textField==_priorityTextField)
+    {
+        return NO;
+    }
+    
+    if(textField==_assinTextField)
+    {
+        return NO;
+    }
+    
     
     // verify the text field you wanna validate
     if (textField == _subjectTextField) {

@@ -346,11 +346,30 @@
             //[[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
             
            // [RKDropdownAlert title:@"Faveo Helpdesk" message:@"You've logged out, successfully." backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-            [RMessage showNotificationWithTitle:NSLocalizedString(@"Faveo Helpdesk", nil)
+            
+            if (self.navigationController.navigationBarHidden) {
+                [self.navigationController setNavigationBarHidden:NO];
+            }
+            
+            [RMessage showNotificationInViewController:self.navigationController
+                                                 title:NSLocalizedString(@" Faveo Helpdesk ", nil)
+                                              subtitle:NSLocalizedString(@"You've logged out, successfully...!", nil)
+                                             iconImage:nil
+                                                  type:RMessageTypeSuccess
+                                        customTypeName:nil
+                                              duration:RMessageDurationAutomatic
+                                              callback:nil
+                                           buttonTitle:nil
+                                        buttonCallback:nil
+                                            atPosition:RMessagePositionNavBarOverlay
+                                  canBeDismissedByUser:YES];
+
+            
+            /*[RMessage showNotificationWithTitle:NSLocalizedString(@"Faveo Helpdesk", nil)
                                        subtitle:NSLocalizedString(@"You've logged out, successfully...!", nil)
                                            type:RMessageTypeSuccess
                                  customTypeName:nil
-                                       callback:nil];
+                                       callback:nil]; */
             vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"Login"];
             // (vc.view.window!.rootViewController?).dismissViewControllerAnimated(false, completion: nil);
             break;
