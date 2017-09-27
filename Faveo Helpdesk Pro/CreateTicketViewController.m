@@ -58,7 +58,7 @@
     [super viewDidLoad];
     [self split];
     
-    
+
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
     
@@ -67,6 +67,8 @@
     [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
     [self.textViewMsg setInputAccessoryView:toolBar];
     [self.mobileTextField setInputAccessoryView:toolBar];
+     [self.subjectTextField setInputAccessoryView:toolBar];
+    
 
     
     
@@ -95,6 +97,8 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
+   // _submitButton.userInteractionEnabled = false;
+    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
 
 }
@@ -256,6 +260,15 @@
     
     [self.textViewMsg resignFirstResponder];
     [_mobileTextField resignFirstResponder];
+     [_emailTextField resignFirstResponder];
+     [_firstNameTextField resignFirstResponder];
+     [_lastNameTextField resignFirstResponder];
+     [_subjectTextField resignFirstResponder];
+     [_codeTextField resignFirstResponder];
+     [_helpTopicTextField resignFirstResponder];
+     [_priorityTextField resignFirstResponder];
+     [_assignTextField resignFirstResponder];
+
 }
 
 
@@ -868,6 +881,7 @@
 
 
 
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     
@@ -902,31 +916,13 @@
         }
     }
 
+    
     return YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-    
-    if (textField == _helpTopicTextField) {
-    
-        return NO;
-    }
-    if (textField == _priorityTextField) {
+
         
-        return NO; // _assignTextField
-    }
-    
-    if (textField == _assignTextField) {
-        
-        return NO; // _assignTextField
-    }
-    
-    if (textField == _codeTextField) {
-        
-        return NO;
-    }
-    
     // verify the text field you wanna validate
     if (textField == _subjectTextField) {
         
@@ -1039,14 +1035,14 @@
         }
         
     }
+    
     return YES;
 }
 
 
-
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+   // [textField resignFirstResponder];
    // [_emailTextField becomeFirstResponder ];
 //    
     if (textField == _emailTextField) {

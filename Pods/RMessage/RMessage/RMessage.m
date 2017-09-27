@@ -37,7 +37,7 @@ static UIViewController *_defaultViewController;
 + (void)showNotificationWithTitle:(NSString *)title
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
-                         callback:(void (^)())callback
+                         callback:(void (^)(void))callback
 {
     [self showNotificationWithTitle:title
                            subtitle:nil
@@ -50,7 +50,7 @@ static UIViewController *_defaultViewController;
                          subtitle:(NSString *)subtitle
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
-                         callback:(void (^)())callback
+                         callback:(void (^)(void))callback
 {
     [self showNotificationInViewController:_defaultViewController
                                      title:title
@@ -65,7 +65,7 @@ static UIViewController *_defaultViewController;
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
-                         callback:(void (^)())callback
+                         callback:(void (^)(void))callback
 {
     [self showNotificationInViewController:_defaultViewController
                                      title:title
@@ -81,7 +81,7 @@ static UIViewController *_defaultViewController;
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
-                         callback:(void (^)())callback
+                         callback:(void (^)(void))callback
              canBeDismissedByUser:(BOOL)dismissingEnabled
 {
     [self showNotificationInViewController:_defaultViewController
@@ -100,9 +100,9 @@ static UIViewController *_defaultViewController;
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
-                         callback:(void (^)())callback
+                         callback:(void (^)(void))callback
                       buttonTitle:(NSString *)buttonTitle
-                   buttonCallback:(void (^)())buttonCallback
+                   buttonCallback:(void (^)(void))buttonCallback
                        atPosition:(RMessagePosition)messagePosition
              canBeDismissedByUser:(BOOL)dismissingEnabled
 {
@@ -126,7 +126,7 @@ static UIViewController *_defaultViewController;
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
+                                callback:(void (^)(void))callback
 {
     [self showNotificationInViewController:viewController
                                      title:title
@@ -148,7 +148,7 @@ static UIViewController *_defaultViewController;
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
+                                callback:(void (^)(void))callback
                     canBeDismissedByUser:(BOOL)dismissingEnabled
 {
     [self showNotificationInViewController:viewController
@@ -170,7 +170,7 @@ static UIViewController *_defaultViewController;
                                 subtitle:(NSString *)subtitle
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
-                                callback:(void (^)())callback
+                                callback:(void (^)(void))callback
 {
     [self showNotificationInViewController:viewController
                                      title:title
@@ -194,9 +194,9 @@ static UIViewController *_defaultViewController;
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
+                                callback:(void (^)(void))callback
                              buttonTitle:(NSString *)buttonTitle
-                          buttonCallback:(void (^)())buttonCallback
+                          buttonCallback:(void (^)(void))buttonCallback
                               atPosition:(RMessagePosition)messagePosition
                     canBeDismissedByUser:(BOOL)dismissingEnabled
 {

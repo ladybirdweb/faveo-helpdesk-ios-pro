@@ -358,7 +358,7 @@
 		28C488B9294065C3999BF52733C25D85 /* IQUIViewController+Additions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "IQUIViewController+Additions.h"; path = "IQKeyboardManager/Categories/IQUIViewController+Additions.h"; sourceTree = "<group>"; };
 		29EDF77F351334F49789280F67462C47 /* XLFormRowDescriptor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = XLFormRowDescriptor.h; path = XLForm/XL/Descriptors/XLFormRowDescriptor.h; sourceTree = "<group>"; };
 		2BA61287F32A9BC986D8D6CA5F3C0DA2 /* XLFormSelectorCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = XLFormSelectorCell.h; path = XLForm/XL/Cell/XLFormSelectorCell.h; sourceTree = "<group>"; };
-		2D72FC15D785D365FA4692E706FE4226 /* libIQKeyboardManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libIQKeyboardManager.a; path = libIQKeyboardManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D72FC15D785D365FA4692E706FE4226 /* libIQKeyboardManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIQKeyboardManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E0FFCB3F2EB86C47F528647CD679C9C /* SDWebImageDownloader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloader.m; path = SDWebImage/SDWebImageDownloader.m; sourceTree = "<group>"; };
 		2FC5B9C5CE5400B599856EF0585E7721 /* SDWebImagePrefetcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImagePrefetcher.h; path = SDWebImage/SDWebImagePrefetcher.h; sourceTree = "<group>"; };
 		3127B0FF2CE74AB90AACFC8736B3D511 /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseMessaging.framework; path = Frameworks/frameworks/FirebaseMessaging.framework; sourceTree = "<group>"; };
@@ -381,7 +381,7 @@
 		423FA505A212D0065227FE65B092A76C /* XLFormDateCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = XLFormDateCell.m; path = XLForm/XL/Cell/XLFormDateCell.m; sourceTree = "<group>"; };
 		465BFF0B74B14CA42CD25C9E29ADB735 /* DistancePickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DistancePickerView.h; path = Pickers/DistancePickerView.h; sourceTree = "<group>"; };
 		49ECCDE11DB766CD7215C3B6A751BFEC /* NSString+XLFormAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+XLFormAdditions.h"; path = "XLForm/XL/Helpers/NSString+XLFormAdditions.h"; sourceTree = "<group>"; };
-		4A3A6C1242FFEFCBBD03B0DAE26BF7BA /* libRKDropdownAlert.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libRKDropdownAlert.a; path = libRKDropdownAlert.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A3A6C1242FFEFCBBD03B0DAE26BF7BA /* libRKDropdownAlert.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRKDropdownAlert.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A49486F61212E0E6FCADE3EE2F6C462 /* IQUITextFieldView+Additions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "IQUITextFieldView+Additions.m"; path = "IQKeyboardManager/Categories/IQUITextFieldView+Additions.m"; sourceTree = "<group>"; };
 		4CAB9724BEB6061B006EB9650E40BCB8 /* XLFormTextView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = XLFormTextView.h; path = XLForm/XL/Helpers/Views/XLFormTextView.h; sourceTree = "<group>"; };
 		4DA73491CB294FB6155550061F05B780 /* RMessageView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = RMessageView.xib; path = RMessage/Resources/RMessageView.xib; sourceTree = "<group>"; };
@@ -398,7 +398,7 @@
 		54B861E146940C6EED0D4C08138E01EA /* MBProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		54F0E82C4F7EC863A81759145E82033A /* XLFormBaseCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = XLFormBaseCell.h; path = XLForm/XL/Cell/XLFormBaseCell.h; sourceTree = "<group>"; };
 		566C096BBEFACDA5E714558B70C76163 /* NSDate-Time-Ago-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDate-Time-Ago-prefix.pch"; sourceTree = "<group>"; };
-		5754B6D72EA6DCFE9B04E27574A034BA /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; name = RMessageDefaultDesign.json; path = RMessage/Assets/RMessageDefaultDesign.json; sourceTree = "<group>"; };
+		5754B6D72EA6DCFE9B04E27574A034BA /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = RMessageDefaultDesign.json; path = RMessage/Assets/RMessageDefaultDesign.json; sourceTree = "<group>"; };
 		5927CAEAC22C877BB1BDF05A802ABA28 /* RMessage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RMessage.xcconfig; sourceTree = "<group>"; };
 		5AAE7187114C10BF4C4219F6FC5CAF32 /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ActionSheetDatePicker.m; path = Pickers/ActionSheetDatePicker.m; sourceTree = "<group>"; };
 		5B5575F93998BDD65A202444A7F12EE5 /* UIView+XLFormAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+XLFormAdditions.m"; path = "XLForm/XL/Helpers/UIView+XLFormAdditions.m"; sourceTree = "<group>"; };
@@ -437,7 +437,7 @@
 		7535DA453866F99B400D5C9922FBA86E /* IQUIViewController+Additions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "IQUIViewController+Additions.m"; path = "IQKeyboardManager/Categories/IQUIViewController+Additions.m"; sourceTree = "<group>"; };
 		75A18779D335AD7B5CFF6FB524212E5E /* IQToolbar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IQToolbar.h; path = IQKeyboardManager/IQToolbar/IQToolbar.h; sourceTree = "<group>"; };
 		76149F992122FFBEECFEF2DC9BC095B0 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Frameworks/frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
-		76554010D66D1C47E1D9E4441C3537F0 /* libGoogleToolboxForMac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libGoogleToolboxForMac.a; path = libGoogleToolboxForMac.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		76554010D66D1C47E1D9E4441C3537F0 /* libGoogleToolboxForMac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGoogleToolboxForMac.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		77AC44E7FC97A82B03DED47406F9DFE6 /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundErrorIcon@2x.png"; path = "RMessage/Assets/NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
 		782721B8192D24CF8C14E791D5775379 /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AbstractActionSheetPicker.h; path = Pickers/AbstractActionSheetPicker.h; sourceTree = "<group>"; };
 		784BFD17CB82900DFE2490F97993CA74 /* IQUIView+IQKeyboardToolbar.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "IQUIView+IQKeyboardToolbar.m"; path = "IQKeyboardManager/IQToolbar/IQUIView+IQKeyboardToolbar.m"; sourceTree = "<group>"; };
@@ -463,10 +463,10 @@
 		909679221B26D2BDF6041E9D5E7B4426 /* XLFormTextView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = XLFormTextView.m; path = XLForm/XL/Helpers/Views/XLFormTextView.m; sourceTree = "<group>"; };
 		916CEC14E7E0C08BDCF00F27E656F8F9 /* XLForm-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "XLForm-dummy.m"; sourceTree = "<group>"; };
 		93A246CA44DFC8E7992C251595C899F3 /* UIImageView+HighlightedWebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+HighlightedWebCache.m"; path = "SDWebImage/UIImageView+HighlightedWebCache.m"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		96A150F2C8F285964F719E6A6BE77FC6 /* UIButton+WebCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+WebCache.h"; path = "SDWebImage/UIButton+WebCache.h"; sourceTree = "<group>"; };
-		96A964C3C0A70ACA85FCCF3A483DEDB1 /* libPPTopMostController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPPTopMostController.a; path = libPPTopMostController.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		97807C09BB7F607E38121AC3CFF7E358 /* libSDWebImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libSDWebImage.a; path = libSDWebImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		96A964C3C0A70ACA85FCCF3A483DEDB1 /* libPPTopMostController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPPTopMostController.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		97807C09BB7F607E38121AC3CFF7E358 /* libSDWebImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSDWebImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		98041976F4F22B83B380405E94AA6A11 /* XLFormRightImageButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = XLFormRightImageButton.m; path = XLForm/XL/Helpers/Views/XLFormRightImageButton.m; sourceTree = "<group>"; };
 		987C6A192F478769D840638B64649A27 /* XLFormButtonCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = XLFormButtonCell.m; path = XLForm/XL/Cell/XLFormButtonCell.m; sourceTree = "<group>"; };
 		98B4F5E9BDF261E145FF1B2B4013E8E3 /* ActionSheetMultipleStringPicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ActionSheetMultipleStringPicker.m; path = Pickers/ActionSheetMultipleStringPicker.m; sourceTree = "<group>"; };
@@ -518,7 +518,7 @@
 		BAB8AD269776AB35F576A3AC92821002 /* IQUITextFieldView+Additions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "IQUITextFieldView+Additions.h"; path = "IQKeyboardManager/Categories/IQUITextFieldView+Additions.h"; sourceTree = "<group>"; };
 		BAEB5893F9F4B3C4A21DDD8A838BC0A4 /* XLFormValidationStatus.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = XLFormValidationStatus.h; path = XLForm/XL/Validation/XLFormValidationStatus.h; sourceTree = "<group>"; };
 		BB211C6299357530BD2993BED6B4C064 /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundWarningIcon@2x.png"; path = "RMessage/Assets/NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
-		BF9C2932278616C0F57E5F65E5ECF517 /* libMBProgressHUD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libMBProgressHUD.a; path = libMBProgressHUD.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF9C2932278616C0F57E5F65E5ECF517 /* libMBProgressHUD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMBProgressHUD.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFFB5A0CD545C770B0D500C9AE4EFB5F /* CNPPopupController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CNPPopupController.m; path = CNPPopupController/CNPPopupController.m; sourceTree = "<group>"; };
 		C1E6BEF17FE937B4D79A5E542D93F5F0 /* IQKeyboardManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IQKeyboardManager.m; path = IQKeyboardManager/IQKeyboardManager.m; sourceTree = "<group>"; };
 		C2079011F3B0DB07ACA9F7C96B07D120 /* XLForm.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = XLForm.m; path = XLForm/XL/XLForm.m; sourceTree = "<group>"; };
@@ -528,14 +528,14 @@
 		C6866A753D649C9F653593A00391199C /* IQTitleBarButtonItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IQTitleBarButtonItem.h; path = IQKeyboardManager/IQToolbar/IQTitleBarButtonItem.h; sourceTree = "<group>"; };
 		C6DCD3B2D07028E9A3B5F1E3D97DB674 /* IQBarButtonItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IQBarButtonItem.m; path = IQKeyboardManager/IQToolbar/IQBarButtonItem.m; sourceTree = "<group>"; };
 		C773B035455F1F0A9BB8FAB64D1F054D /* XLFormOptionsObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = XLFormOptionsObject.m; path = XLForm/XL/Controllers/XLFormOptionsObject.m; sourceTree = "<group>"; };
-		C7B4A915CBCE2C513CAB4DAEB36D94D5 /* libRMessage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libRMessage.a; path = libRMessage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7B4A915CBCE2C513CAB4DAEB36D94D5 /* libRMessage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRMessage.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8F0B97CB2EAB5D865463395F997E81B /* MBProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		CA2CEB9A0B0CB977CE96316D49AECE5F /* RKDropdownAlert.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RKDropdownAlert.xcconfig; sourceTree = "<group>"; };
 		CA493AB7E1A4605F1764314C7169E6B4 /* RMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RMessage.m; path = RMessage/RMessage.m; sourceTree = "<group>"; };
 		CB68E5E861BC6C281EE6486D6B21861F /* XLFormInlineSelectorCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = XLFormInlineSelectorCell.m; path = XLForm/XL/Cell/XLFormInlineSelectorCell.m; sourceTree = "<group>"; };
 		CCCB9C270295394A8DCAD6763BA85BE0 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInterchangeUtilities.framework; path = Frameworks/frameworks/GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
-		CCFEAEA2D581853E3D4FA6CA2402F96D /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Faveo Helpdesk Pro.a"; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CDA69D6835221B7AF4429C84F16AA860 /* libHexColors.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libHexColors.a; path = libHexColors.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCFEAEA2D581853E3D4FA6CA2402F96D /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDA69D6835221B7AF4429C84F16AA860 /* libHexColors.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHexColors.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF7E18591DDDBFCF084A5355757FB24F /* XLFormDescriptor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = XLFormDescriptor.m; path = XLForm/XL/Descriptors/XLFormDescriptor.m; sourceTree = "<group>"; };
 		D0F0D1543D5EDA8918D5F49278154B7A /* IQTitleBarButtonItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IQTitleBarButtonItem.m; path = IQKeyboardManager/IQToolbar/IQTitleBarButtonItem.m; sourceTree = "<group>"; };
 		D1F21F9F1FA5645E5B5079B8D14EEFAB /* SDWebImageCompat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageCompat.h; path = SDWebImage/SDWebImageCompat.h; sourceTree = "<group>"; };
@@ -543,13 +543,13 @@
 		D3AD54888194AAFBA2E7017B41F24BEB /* XLForm.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = XLForm.xcconfig; sourceTree = "<group>"; };
 		D508C3CF2C7C0E22B91873B6AD0603FE /* CNPPopupController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CNPPopupController-dummy.m"; sourceTree = "<group>"; };
 		D56B2351F585AE349DE3B035EBA61431 /* SDWebImageDecoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDecoder.m; path = SDWebImage/SDWebImageDecoder.m; sourceTree = "<group>"; };
-		D6DE1DDA12E9D8074296C0CDBF277C95 /* libNSDate-Time-Ago.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libNSDate-Time-Ago.a"; path = "libNSDate-Time-Ago.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6DE1DDA12E9D8074296C0CDBF277C95 /* libNSDate-Time-Ago.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libNSDate-Time-Ago.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D753CA9FF979C95369569DA44328B0DB /* GTMLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTMLogger.m; path = Foundation/GTMLogger.m; sourceTree = "<group>"; };
 		D8B408D2BD278B9F835048ECCE16230B /* SDWebImageDecoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDecoder.h; path = SDWebImage/SDWebImageDecoder.h; sourceTree = "<group>"; };
 		D9F0FD9BCF9B8F2D2D4164583FC8304F /* ActionSheetPicker-3.0.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "ActionSheetPicker-3.0.xcconfig"; sourceTree = "<group>"; };
 		DDAA5BAB15E9B362EB701EAC104D3D93 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = IQKeyboardManager.bundle; path = IQKeyboardManager/Resources/IQKeyboardManager.bundle; sourceTree = "<group>"; };
 		DEE9320AB0D1CBE8C2A07BEBB29C1B47 /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ActionSheetCustomPicker.h; path = Pickers/ActionSheetCustomPicker.h; sourceTree = "<group>"; };
-		DF292A0D2882BCBB09D91DE0E9EA0DAE /* libActionSheetPicker-3.0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libActionSheetPicker-3.0.a"; path = "libActionSheetPicker-3.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF292A0D2882BCBB09D91DE0E9EA0DAE /* libActionSheetPicker-3.0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libActionSheetPicker-3.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF61E387744525711F947169DA64126E /* XLFormButtonCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = XLFormButtonCell.h; path = XLForm/XL/Cell/XLFormButtonCell.h; sourceTree = "<group>"; };
 		DF65E5E742D3C1F03A910B9603AE7DFF /* NSObject+XLFormAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+XLFormAdditions.h"; path = "XLForm/XL/Helpers/NSObject+XLFormAdditions.h"; sourceTree = "<group>"; };
 		DFA3E76E7E621F028A30F31A8DB1C5CA /* NSDate-Time-Ago.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "NSDate-Time-Ago.xcconfig"; sourceTree = "<group>"; };
@@ -565,7 +565,7 @@
 		E838ACC0670E597D6CA15E74D8720DF5 /* SDWebImageManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageManager.m; path = SDWebImage/SDWebImageManager.m; sourceTree = "<group>"; };
 		E935E346985167C577E714EB4918BA30 /* GoogleToolboxForMac-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GoogleToolboxForMac-dummy.m"; sourceTree = "<group>"; };
 		E98C32FAD9938EC091802CC24B2304FF /* XLFormSegmentedCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = XLFormSegmentedCell.m; path = XLForm/XL/Cell/XLFormSegmentedCell.m; sourceTree = "<group>"; };
-		EAE8CF3904AE6702EA92348331666597 /* libXLForm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libXLForm.a; path = libXLForm.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAE8CF3904AE6702EA92348331666597 /* libXLForm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libXLForm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB521F509F80B3883F4423794D97D0F3 /* NSArray+XLFormAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+XLFormAdditions.m"; path = "XLForm/XL/Helpers/NSArray+XLFormAdditions.m"; sourceTree = "<group>"; };
 		EB9D45FF85CE4044604588F99C855416 /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ActionSheetStringPicker.h; path = Pickers/ActionSheetStringPicker.h; sourceTree = "<group>"; };
 		ED62AAC7B8E577AD9DAFC1B9D7AB68CD /* XLFormTextFieldCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = XLFormTextFieldCell.h; path = XLForm/XL/Cell/XLFormTextFieldCell.h; sourceTree = "<group>"; };
@@ -581,7 +581,7 @@
 		F2451085858547BE9054D128CCA4401E /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ActionSheetDistancePicker.h; path = Pickers/ActionSheetDistancePicker.h; sourceTree = "<group>"; };
 		F24B1904EACFBC4A97A4B20F2304A349 /* IQKeyboardReturnKeyHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IQKeyboardReturnKeyHandler.h; path = IQKeyboardManager/IQKeyboardReturnKeyHandler.h; sourceTree = "<group>"; };
 		F3720F5E22B879744F75A9367F016C95 /* NSDate-Time-Ago-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Time-Ago-dummy.m"; sourceTree = "<group>"; };
-		F4D7E831E9C77696FECF4F4198E4647F /* libCNPPopupController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libCNPPopupController.a; path = libCNPPopupController.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4D7E831E9C77696FECF4F4198E4647F /* libCNPPopupController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCNPPopupController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F58759A00062335F940AA3F2CBCBCC1A /* NSPredicate+XLFormAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSPredicate+XLFormAdditions.h"; path = "XLForm/XL/Helpers/NSPredicate+XLFormAdditions.h"; sourceTree = "<group>"; };
 		F7C4A647A642DB1F4C6947610BC2CC0F /* UIImageView+WebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+WebCache.m"; path = "SDWebImage/UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		F992CFB6175FF9C6F4F503ABDC94FB09 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSData+ImageContentType.h"; path = "SDWebImage/NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -717,7 +717,6 @@
 			children = (
 				A355FBA7C04D00F52D88461A8DB2E095 /* Frameworks */,
 			);
-			name = FirebaseCore;
 			path = FirebaseCore;
 			sourceTree = "<group>";
 		};
@@ -766,7 +765,6 @@
 				62C7C40147BAE5FFA12E9B4F35317AA1 /* Core */,
 				747517F4FAE55DD6459986C5422549A4 /* Support Files */,
 			);
-			name = SDWebImage;
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
@@ -809,7 +807,6 @@
 				5C22AD43B7F0EB5A6C2C63A8FDE6D613 /* NSDate+NVTimeAgo.m */,
 				D68F8A4C538D3DC6907DDD2609201C8E /* Support Files */,
 			);
-			name = "NSDate-Time-Ago";
 			path = "NSDate-Time-Ago";
 			sourceTree = "<group>";
 		};
@@ -845,7 +842,6 @@
 				0BE39DB1999208051F77B941F35EDB3E /* UIViewController+PPTopMostController.m */,
 				FC91FEB99703358080DA99BDC7EB8175 /* Support Files */,
 			);
-			name = PPTopMostController;
 			path = PPTopMostController;
 			sourceTree = "<group>";
 		};
@@ -856,7 +852,6 @@
 				810185202967037FDB088259DA6E54F1 /* RKDropdownAlert.m */,
 				63F5DE99814BA628A5F7960C389638F1 /* Support Files */,
 			);
-			name = RKDropdownAlert;
 			path = RKDropdownAlert;
 			sourceTree = "<group>";
 		};
@@ -965,7 +960,6 @@
 			children = (
 				6386327A2A6F5A5687BCD29788E859E5 /* Frameworks */,
 			);
-			name = GoogleInterchangeUtilities;
 			path = GoogleInterchangeUtilities;
 			sourceTree = "<group>";
 		};
@@ -1052,7 +1046,6 @@
 				268E22A5B9D907E0F2822D5DEFFAD117 /* Resources */,
 				E3564244727ACE053F0625E5F5F70826 /* Support Files */,
 			);
-			name = XLForm;
 			path = XLForm;
 			sourceTree = "<group>";
 		};
@@ -1061,7 +1054,6 @@
 			children = (
 				0525872E6B3661E93BD23008C4093D52 /* Frameworks */,
 			);
-			name = GoogleSymbolUtilities;
 			path = GoogleSymbolUtilities;
 			sourceTree = "<group>";
 		};
@@ -1080,7 +1072,6 @@
 				C8F0B97CB2EAB5D865463395F997E81B /* MBProgressHUD.m */,
 				FE128E0959B8A7E14F11C3C739420596 /* Support Files */,
 			);
-			name = MBProgressHUD;
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
@@ -1091,7 +1082,6 @@
 				A522CF2B656EC2C20ADBBC513E1E7153 /* HexColors.m */,
 				0ED4BFC7AD64B340EEE9704747F49A45 /* Support Files */,
 			);
-			name = HexColors;
 			path = HexColors;
 			sourceTree = "<group>";
 		};
@@ -1105,7 +1095,6 @@
 				A4300CFBB106548023D121D1BD7D9025 /* Resources */,
 				C39A44EBAA724620C24483FCC6BC42E2 /* Support Files */,
 			);
-			name = RMessage;
 			path = RMessage;
 			sourceTree = "<group>";
 		};
@@ -1159,7 +1148,6 @@
 				E40FF7B4A9EBA33A1293F171221DBE10 /* SWActionSheet.m */,
 				E03448E66B6A61858CDD6DB81B5FC130 /* Support Files */,
 			);
-			name = "ActionSheetPicker-3.0";
 			path = "ActionSheetPicker-3.0";
 			sourceTree = "<group>";
 		};
@@ -1177,7 +1165,6 @@
 			children = (
 				FD9755F7EB28EF86D0720BE5E96553E3 /* Frameworks */,
 			);
-			name = FirebaseAnalytics;
 			path = FirebaseAnalytics;
 			sourceTree = "<group>";
 		};
@@ -1186,7 +1173,6 @@
 			children = (
 				7C511D854D94B7E9D35DC55054D80F68 /* Core */,
 			);
-			name = Firebase;
 			path = Firebase;
 			sourceTree = "<group>";
 		};
@@ -1226,7 +1212,6 @@
 				41484F3719C4627A485E55C477DF6CB4 /* Resources */,
 				B9D93173B60BA7A7B048D43C8F4E4EEA /* Support Files */,
 			);
-			name = IQKeyboardManager;
 			path = IQKeyboardManager;
 			sourceTree = "<group>";
 		};
@@ -1247,7 +1232,6 @@
 				F165927098A21AEC50E8DDB5EA9641F9 /* FIRInstanceID.h */,
 				95A7284627ECFB9F78B3D61671EB44EB /* Frameworks */,
 			);
-			name = FirebaseInstanceID;
 			path = FirebaseInstanceID;
 			sourceTree = "<group>";
 		};
@@ -1257,7 +1241,6 @@
 				54301659ED5E82FD81ED982830197FFC /* FIRMessaging.h */,
 				2541E8EC85E8D124028BB822025DE2CB /* Frameworks */,
 			);
-			name = FirebaseMessaging;
 			path = FirebaseMessaging;
 			sourceTree = "<group>";
 		};
@@ -1341,7 +1324,6 @@
 				C850E596DACA5D2A2A76C5CC026375C4 /* NSData+zlib */,
 				C4731D7AD3AAFCDBDC6409F48E7B69E0 /* Support Files */,
 			);
-			name = GoogleToolboxForMac;
 			path = GoogleToolboxForMac;
 			sourceTree = "<group>";
 		};
@@ -1378,7 +1360,6 @@
 				BFFB5A0CD545C770B0D500C9AE4EFB5F /* CNPPopupController.m */,
 				FFB5C927CE80E0D8F96BD5214ADCCB55 /* Support Files */,
 			);
-			name = CNPPopupController;
 			path = CNPPopupController;
 			sourceTree = "<group>";
 		};
@@ -1851,7 +1832,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0900;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2173,7 +2154,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2195,7 +2176,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -2203,14 +2186,20 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
@@ -2240,7 +2229,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/XLForm/XLForm-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2263,7 +2252,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2286,7 +2275,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2332,7 +2321,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/CNPPopupController/CNPPopupController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2355,7 +2344,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/RMessage/RMessage-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2378,7 +2367,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/CNPPopupController/CNPPopupController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2401,7 +2390,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/PPTopMostController/PPTopMostController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2424,7 +2413,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/RKDropdownAlert/RKDropdownAlert-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2447,7 +2436,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2470,7 +2459,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/RMessage/RMessage-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2493,7 +2482,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/XLForm/XLForm-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2516,7 +2505,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2539,7 +2528,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2562,7 +2551,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/NSDate-Time-Ago/NSDate-Time-Ago-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2585,7 +2574,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2608,7 +2597,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2631,7 +2620,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2654,7 +2643,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2676,7 +2665,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -2684,15 +2675,21 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEBUG=1",
@@ -2748,7 +2745,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/RKDropdownAlert/RKDropdownAlert-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2794,7 +2791,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/PPTopMostController/PPTopMostController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2840,7 +2837,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/NSDate-Time-Ago/NSDate-Time-Ago-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";

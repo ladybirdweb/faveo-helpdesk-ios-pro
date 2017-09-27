@@ -28,6 +28,8 @@
     
       [self setTitle:NSLocalizedString(@"About",nil)];
     _websiteButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    // textView1.editable = NO;
+   // _textview.editable=NO;
     // Do any additional setup after loading the view.
 }
 

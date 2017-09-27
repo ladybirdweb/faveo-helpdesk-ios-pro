@@ -13,7 +13,7 @@ typedef void (^FTPopOverMenuDoneBlock)(NSInteger selectedIndex);
 /**
  *  FTPopOverMenuDismissBlock
  */
-typedef void (^FTPopOverMenuDismissBlock)();
+typedef void (^FTPopOverMenuDismissBlock)(void);
 
 /**
  *  -----------------------FTPopOverMenuConfiguration-----------------------

@@ -64,6 +64,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     sla_id=[[NSNumber alloc]init];
     dept_id=[[NSNumber alloc]init];
@@ -189,7 +191,83 @@
                         
                         globalVariables.ticket_number=[dic objectForKey:@"ticket_number"];
                         //globalVariables.title=[dic objectForKey:@"title"];
-                        _subjectTextField.text=[dic objectForKey:@"title"];
+                      
+                        //_subjectTextField.text=[dic objectForKey:@"title"];
+                        
+                //______________________________________________________________________________________________________
+                        ////////////////for UTF-8 data encoding ///////
+        
+                        NSString *encodedString =[dic objectForKey:@"title"];
+                        
+                        
+                        [Utils isEmpty:encodedString];
+                        
+                        if  ([Utils isEmpty:encodedString]){
+                            _subjectTextField.text =@"No Title";
+                        }
+                        else
+                        {
+                            
+                            NSMutableString *decodedString = [[NSMutableString alloc] init];
+                            
+                            if ([encodedString hasPrefix:@"=?UTF-8?Q?"] || [encodedString hasSuffix:@"?="])
+                            {
+                                NSScanner *scanner = [NSScanner scannerWithString:encodedString];
+                                NSString *buf = nil;
+                                //  NSMutableString *decodedString = [[NSMutableString alloc] init];
+                                
+                                while ([scanner scanString:@"=?UTF-8?Q?" intoString:NULL]
+                                       || ([scanner scanUpToString:@"=?UTF-8?Q?" intoString:&buf] && [scanner scanString:@"=?UTF-8?Q?" intoString:NULL])) {
+                                    if (buf != nil) {
+                                        [decodedString appendString:buf];
+                                    }
+                                    
+                                    buf = nil;
+                                    
+                                    NSString *encodedRange;
+                                    
+                                    if (![scanner scanUpToString:@"?=" intoString:&encodedRange]) {
+                                        break; // Invalid encoding
+                                    }
+                                    
+                                    [scanner scanString:@"?=" intoString:NULL]; // Skip the terminating "?="
+                                    
+                                    // Decode the encoded portion (naively using UTF-8 and assuming it really is Q encoded)
+                                    // I'm doing this really naively, but it should work
+                                    
+                                    // Firstly I'm encoding % signs so I can cheat and turn this into a URL-encoded string, which NSString can decode
+                                    encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"%" withString:@"=25"];
+                                    
+                                    // Turn this into a URL-encoded string
+                                    encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"=" withString:@"%"];
+                                    
+                                    
+                                    // Remove the underscores
+                                    encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+                                    
+                                    // [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                                    
+                                    NSString *str1= [encodedRange stringByRemovingPercentEncoding];
+                                    [decodedString appendString:str1];
+                                    
+                                    
+                                }
+                                
+                                NSLog(@"Decoded string = %@", decodedString);
+                                
+                                 _subjectTextField.text= decodedString;
+                            }
+                            else{
+                                
+                                 _subjectTextField.text= encodedString;
+                                
+                            }
+                            
+                        }
+                        ///////////////////////////////////////////////////
+                        //____________________________________________________________________________________________________
+                        
+                        
                         _emailTextField.text=[dic objectForKey:@"email"];
                         _lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
                       
@@ -728,6 +806,10 @@
 
 #pragma mark - UITextFieldDelegate
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    return NO;
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
     if (textField.tag==2) {
@@ -820,6 +902,7 @@
  }
  */
 
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     
@@ -859,7 +942,7 @@
         }
         
         // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"];
+        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"];
         
         if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
             return NO;

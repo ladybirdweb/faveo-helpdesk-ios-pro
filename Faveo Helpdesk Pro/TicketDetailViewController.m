@@ -21,6 +21,12 @@
 #import "NotificationViewController.h"
 #import "FTPopOverMenu.h"
 #import "InboxViewController.h"
+#import "LGPlusButtonsView.h"
+#import "ConversationViewController.h"
+#import "EditDetailTableViewController.h"
+
+
+
 
 //#import "ReplyViewController.h"
 
@@ -35,9 +41,11 @@
     GlobalVariables *globalVariables;
 }
 
--(void)replyBtnPressed;
--(void)internalNotePressed;
+//-(void)replyBtnPressed;
+//-(void)internalNotePressed;
 @property (nonatomic, strong) CNPPopupController *popupController;
+@property (strong, nonatomic) LGPlusButtonsView *plusButtonsViewMain;
+
 
 @end
 
@@ -61,7 +69,27 @@
     
    // [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleDone target:self action:@selector(onNavButtonTapped:event:)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(replyBtnPressed)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(internalNotePressed)], nil] animated:YES];
     
-     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"verticle"] style:UIBarButtonItemStyleDone target:self action:@selector(onNavButtonTapped:event:)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(replyBtnPressed)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(internalNotePressed)], nil] animated:YES];
+    // [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"verticle"] style:UIBarButtonItemStyleDone target:self action:@selector(onNavButtonTapped:event:)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(replyBtnPressed)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(internalNotePressed)], nil] animated:YES];
+    
+   // [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"verticle"] style:UIBarButtonItemStyleDone target:self action:@selector(onNavButtonTapped:event:)],[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"editTicket"] style:UIBarButtonItemStyleDone target:self action:@selector(editTicketTapped)], nil] animated:YES];
+
+    
+    
+        UIButton *editTicket =  [UIButton buttonWithType:UIButtonTypeCustom]; // editTicket
+        [editTicket setImage:[UIImage imageNamed:@"editTicket"] forState:UIControlStateNormal];
+        [editTicket addTarget:self action:@selector(editTicketTapped) forControlEvents:UIControlEventTouchUpInside];
+        [editTicket setFrame:CGRectMake(0, 0, 32, 32)];
+    
+    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [moreButton setImage:[UIImage imageNamed:@"verticle"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(onNavButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+    [moreButton setFrame:CGRectMake(44, 0, 32, 32)];
+    
+    UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
+    [rightBarButtonItems addSubview:moreButton];
+    [rightBarButtonItems addSubview:editTicket];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
 
     
     NSLog(@"Ticket is isssss : %@",globalVariables.iD);
@@ -83,8 +111,104 @@
     _statusLabel.text=globalVariables.Ticket_status;
     
     
+    [super viewWillAppear:animated];
+    
+    [self floatingButton];
 }
 
+-(void)floatingButton
+{
+    
+    _plusButtonsViewMain = [LGPlusButtonsView plusButtonsViewWithNumberOfButtons:3
+                                                         firstButtonIsPlusButton:YES
+                                                                   showAfterInit:YES
+                                                                   actionHandler:^(LGPlusButtonsView *plusButtonView, NSString *title, NSString *description, NSUInteger index)
+                            {
+                                if(index==1)
+                                {
+                                    NSLog(@"One Index : Reply Pressed");
+                                    [self showPopupReply:CNPPopupStyleCentered];
+                                    
+                                    plusButtonView.hidden=YES;
+                                }
+                                if(index==2)
+                                {
+                                    NSLog(@"Two Index : Internal Pressed");
+                                    [self showPopupInternalNote:CNPPopupStyleCentered];
+                                    plusButtonView.hidden=YES;
+                                }
+                                
+                                
+                                
+                            }];
+    
+    
+    _plusButtonsViewMain.coverColor = [UIColor colorWithWhite:1.f alpha:0.7];
+    // _plusButtonsViewMain.coverColor = [UIColor clearColor];
+    _plusButtonsViewMain.position = LGPlusButtonsViewPositionBottomRight;
+    _plusButtonsViewMain.plusButtonAnimationType = LGPlusButtonAnimationTypeRotate;
+    
+    [_plusButtonsViewMain setButtonsTitles:@[@"+", @"", @""] forState:UIControlStateNormal];
+    [_plusButtonsViewMain setDescriptionsTexts:@[@"", @"Ticket Replay", @"Internal Notes"]];
+    [_plusButtonsViewMain setButtonsImages:@[[NSNull new], [UIImage imageNamed:@"reply1"], [UIImage imageNamed:@"note3"]]
+                                  forState:UIControlStateNormal
+                            forOrientation:LGPlusButtonsViewOrientationAll];
+    
+    [_plusButtonsViewMain setButtonsAdjustsImageWhenHighlighted:NO];
+   
+    [_plusButtonsViewMain setButtonsBackgroundColor:[UIColor colorWithRed:0.f green:0.5 blue:1.f alpha:1.f] forState:UIControlStateNormal];
+   [_plusButtonsViewMain setButtonsBackgroundColor:[UIColor colorWithRed:0.2 green:0.6 blue:1.f alpha:1.f] forState:UIControlStateHighlighted];
+    [_plusButtonsViewMain setButtonsBackgroundColor:[UIColor colorWithRed:0.2 green:0.6 blue:1.f alpha:1.f] forState:UIControlStateHighlighted|UIControlStateSelected];
+   
+    [_plusButtonsViewMain setButtonsSize:CGSizeMake(44.f, 44.f) forOrientation:LGPlusButtonsViewOrientationAll];
+    [_plusButtonsViewMain setButtonsLayerCornerRadius:44.f/2.f forOrientation:LGPlusButtonsViewOrientationAll];
+    [_plusButtonsViewMain setButtonsTitleFont:[UIFont boldSystemFontOfSize:24.f] forOrientation:LGPlusButtonsViewOrientationAll];
+    [_plusButtonsViewMain setButtonsLayerShadowColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.f]];
+    [_plusButtonsViewMain setButtonsLayerShadowOpacity:0.5];
+    [_plusButtonsViewMain setButtonsLayerShadowRadius:3.f];
+    [_plusButtonsViewMain setButtonsLayerShadowOffset:CGSizeMake(0.f, 2.f)];
+    
+    [_plusButtonsViewMain setButtonAtIndex:0 size:CGSizeMake(56.f, 56.f)
+                            forOrientation:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? LGPlusButtonsViewOrientationPortrait : LGPlusButtonsViewOrientationAll)];
+    [_plusButtonsViewMain setButtonAtIndex:0 layerCornerRadius:56.f/2.f
+                            forOrientation:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? LGPlusButtonsViewOrientationPortrait : LGPlusButtonsViewOrientationAll)];
+    [_plusButtonsViewMain setButtonAtIndex:0 titleFont:[UIFont systemFontOfSize:40.f]
+                            forOrientation:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? LGPlusButtonsViewOrientationPortrait : LGPlusButtonsViewOrientationAll)];
+    [_plusButtonsViewMain setButtonAtIndex:0 titleOffset:CGPointMake(0.f, -3.f) forOrientation:LGPlusButtonsViewOrientationAll];
+    
+  //  [_plusButtonsViewMain setButtonAtIndex:1 backgroundColor:[UIColor colorWithRed:1.f green:0.f blue:0.5 alpha:1.f] forState:UIControlStateNormal];
+    [_plusButtonsViewMain setButtonAtIndex:1 backgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_plusButtonsViewMain setButtonAtIndex:1 backgroundColor:[UIColor colorWithRed:1.f green:0.2 blue:0.6 alpha:1.f] forState:UIControlStateHighlighted];
+  //  [_plusButtonsViewMain setButtonAtIndex:2 backgroundColor:[UIColor colorWithRed:1.f green:0.5 blue:0.f alpha:1.f] forState:UIControlStateNormal];
+    [_plusButtonsViewMain setButtonAtIndex:2 backgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
+  [_plusButtonsViewMain setButtonAtIndex:2 backgroundColor:[UIColor colorWithRed:1.f green:0.6 blue:0.2 alpha:1.f] forState:UIControlStateHighlighted];
+   
+    [_plusButtonsViewMain setDescriptionsBackgroundColor:[UIColor whiteColor]];
+    [_plusButtonsViewMain setDescriptionsTextColor:[UIColor blackColor]];
+    [_plusButtonsViewMain setDescriptionsLayerShadowColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.f]];
+    [_plusButtonsViewMain setDescriptionsLayerShadowOpacity:0.25];
+    [_plusButtonsViewMain setDescriptionsLayerShadowRadius:1.f];
+    [_plusButtonsViewMain setDescriptionsLayerShadowOffset:CGSizeMake(0.f, 1.f)];
+    [_plusButtonsViewMain setDescriptionsLayerCornerRadius:6.f forOrientation:LGPlusButtonsViewOrientationAll];
+    [_plusButtonsViewMain setDescriptionsContentEdgeInsets:UIEdgeInsetsMake(4.f, 8.f, 4.f, 8.f) forOrientation:LGPlusButtonsViewOrientationAll];
+    
+    for (NSUInteger i=1; i<=2; i++)
+        [_plusButtonsViewMain setButtonAtIndex:i offset:CGPointMake(-6.f, 0.f)
+                                forOrientation:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? LGPlusButtonsViewOrientationPortrait : LGPlusButtonsViewOrientationAll)];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+    {
+        [_plusButtonsViewMain setButtonAtIndex:0 titleOffset:CGPointMake(0.f, -2.f) forOrientation:LGPlusButtonsViewOrientationLandscape];
+        [_plusButtonsViewMain setButtonAtIndex:0 titleFont:[UIFont systemFontOfSize:32.f] forOrientation:LGPlusButtonsViewOrientationLandscape];
+    }
+    
+    [self.view addSubview:_plusButtonsViewMain];
+    
+    
+    
+
+    
+}
 - (void)addSubview:(UIView *)subView toView:(UIView*)parentView {
     [parentView addSubview:subView];
     
@@ -712,7 +836,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)replyBtnPressed{
+/*-(void)replyBtnPressed{
 
     NSLog(@"Reply Pressed");
 
@@ -721,28 +845,21 @@
     
 }
 
-//- (void)dismissPopup {
-//if (self.popupViewController != nil) {
- //       [self dismissPopupViewControllerAnimated:YES completion:^{
- //           NSLog(@"popup view dismissed");
- //       }];
- //   }
-//}
 
 -(void)internalNotePressed{
      [self showPopupInternalNote:CNPPopupStyleCentered];
     NSLog(@"Internal Pressed");
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
 */
 
+-(void)editTicketTapped
+{
+    NSLog(@"EditTicket Tapped"); // EditDetailTableViewController.h
+   
+    EditDetailTableViewController *edit= [self.storyboard instantiateViewControllerWithIdentifier:@"editDetailVC"];
+     [self.navigationController pushViewController:edit animated:YES];
+    
+}
 - (IBAction)indexChanged:(id)sender {
     
     if (self.segmentedControl.selectedSegmentIndex == 0) {
@@ -823,6 +940,7 @@
             [self postInternalNote];
             [self.popupController dismissPopupControllerAnimated:YES];
             NSLog(@"Message of InternalNote: %@",  textViewInternalNote.text);
+            
         }else {
            errorMessageNote.hidden=NO;
         }
@@ -833,6 +951,7 @@
     self.popupController.theme.popupStyle = popupStyle;
     self.popupController.delegate = self;
     [self.popupController presentPopupControllerAnimated:YES];
+    //[self floatingButton];
 }
 
 - (void)showPopupReply:(CNPPopupStyle)popupStyle {
@@ -916,6 +1035,7 @@
             errorMessageReply.hidden=YES;
             [self.popupController dismissPopupControllerAnimated:YES];
             NSLog(@"Reply Message: %@, Cc: %@", textViewReply.text,textFieldCc.text);
+            
         }else {
            errorMessageReply.hidden=NO;
         }
@@ -926,6 +1046,7 @@
     self.popupController.theme.popupStyle = popupStyle;
     self.popupController.delegate = self;
     [self.popupController presentPopupControllerAnimated:YES];
+   // [self floatingButton];
 }
 
 
@@ -958,10 +1079,6 @@
         
         [[AppDelegate sharedAppdelegate] showProgressView];
         
-//        NSDictionary *param=[NSDictionary dictionaryWithObjectsAndKeys:API_KEY,@"api_key",IP,@"ip",[userDefaults objectForKey:@"token"],@"token",[userDefaults objectForKey:@"user_id"],@"userid",textViewInternalNote.text,@"body",globalVariables.iD,@"ticketid",nil];
-//        NSLog(@"Dic %@",param);
-//        
-//        NSString *url=[NSString stringWithFormat:@"%@helpdesk/internal-note",[userDefaults objectForKey:@"companyURL"]];
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/internal-note?api_key=%@&ip=%@&token=%@&user_id=%@&body=%@&ticket_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],[userDefaults objectForKey:@"user_id"],textViewInternalNote.text,globalVariables.iD];
         
@@ -995,26 +1112,12 @@
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"thread"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                       // [RKDropdownAlert title:APP_NAME message:@"Posted your note!"backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                        
-                        if (self.navigationController.navigationBarHidden) {
-                            [self.navigationController setNavigationBarHidden:NO];
-                        }
-                        
-                        [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Posted your note.", nil)
-                                                         iconImage:nil
-                                                              type:RMessageTypeSuccess
-                                                    customTypeName:nil
-                                                          duration:RMessageDurationAutomatic
-                                                          callback:nil
-                                                       buttonTitle:nil
-                                                    buttonCallback:nil
-                                                        atPosition:RMessagePositionNavBarOverlay
-                                              canBeDismissedByUser:YES];
+                        [RKDropdownAlert title:NSLocalizedString(@"Sucess", nil) message:NSLocalizedString(@"Posted your note.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
+                        TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+                        [self.navigationController pushViewController:td animated:YES];
+
                        // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
                     });
                 }
@@ -1115,26 +1218,13 @@
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"result"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        // [RKDropdownAlert title:APP_NAME message:@"Posted your note!"backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                         [RKDropdownAlert title:NSLocalizedString(@"Sucess", nil) message:NSLocalizedString(@"Posted your reply.", nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
-                        if (self.navigationController.navigationBarHidden) {
-                            [self.navigationController setNavigationBarHidden:NO];
-                        }
-                        
-                        [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess", nil)
-                                                          subtitle:NSLocalizedString(@"Posted your reply.", nil)
-                                                         iconImage:nil
-                                                              type:RMessageTypeSuccess
-                                                    customTypeName:nil
-                                                          duration:RMessageDurationAutomatic
-                                                          callback:nil
-                                                       buttonTitle:nil
-                                                    buttonCallback:nil
-                                                        atPosition:RMessagePositionNavBarOverlay
-                                              canBeDismissedByUser:YES];
                         
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
+                        
+                        TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+                        [self.navigationController pushViewController:td animated:YES];
                         // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
                     });
                 }

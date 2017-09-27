@@ -26,6 +26,6 @@
  */
 @property (nonatomic,retain) UIActivityIndicatorView *activityIndicatorObject;
 
-
+-(void)reload;
 
 @end

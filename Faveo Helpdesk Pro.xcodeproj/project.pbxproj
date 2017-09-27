@@ -3,11 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
+		D92C35D11F750FDE001DD67D /* LGPlusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D92C35CA1F750FDE001DD67D /* LGPlusButton.m */; };
+		D92C35D21F750FDE001DD67D /* LGPlusButtonDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = D92C35CC1F750FDE001DD67D /* LGPlusButtonDescription.m */; };
+		D92C35D31F750FDE001DD67D /* LGPlusButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D92C35CE1F750FDE001DD67D /* LGPlusButtonsView.m */; };
+		D92C35D41F750FDE001DD67D /* LGPlusButtonsViewShared.m in Sources */ = {isa = PBXBuildFile; fileRef = D92C35D01F750FDE001DD67D /* LGPlusButtonsViewShared.m */; };
+		D92C35D71F7682B5001DD67D /* EditDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92C35D61F7682B5001DD67D /* EditDetailTableViewController.m */; };
 		D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92CE70C1F3D706600D98708 /* ClientListTableViewCell.xib */; };
 		D92E2E981EEBFC0B00A0D456 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D92E2E971EEBFC0B00A0D456 /* GoogleService-Info.plist */; };
 		D9532C131E9CE9090063B318 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9532C151E9CE9090063B318 /* Localizable.strings */; };
@@ -90,6 +95,16 @@
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D92C35C91F750FDE001DD67D /* LGPlusButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPlusButton.h; sourceTree = "<group>"; };
+		D92C35CA1F750FDE001DD67D /* LGPlusButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGPlusButton.m; sourceTree = "<group>"; };
+		D92C35CB1F750FDE001DD67D /* LGPlusButtonDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPlusButtonDescription.h; sourceTree = "<group>"; };
+		D92C35CC1F750FDE001DD67D /* LGPlusButtonDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGPlusButtonDescription.m; sourceTree = "<group>"; };
+		D92C35CD1F750FDE001DD67D /* LGPlusButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPlusButtonsView.h; sourceTree = "<group>"; };
+		D92C35CE1F750FDE001DD67D /* LGPlusButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGPlusButtonsView.m; sourceTree = "<group>"; };
+		D92C35CF1F750FDE001DD67D /* LGPlusButtonsViewShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPlusButtonsViewShared.h; sourceTree = "<group>"; };
+		D92C35D01F750FDE001DD67D /* LGPlusButtonsViewShared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGPlusButtonsViewShared.m; sourceTree = "<group>"; };
+		D92C35D51F7682B5001DD67D /* EditDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDetailTableViewController.h; sourceTree = "<group>"; };
+		D92C35D61F7682B5001DD67D /* EditDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDetailTableViewController.m; sourceTree = "<group>"; };
 		D92CE70C1F3D706600D98708 /* ClientListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientListTableViewCell.xib; sourceTree = "<group>"; };
 		D92E2E971EEBFC0B00A0D456 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D93D3D4F1EA0BACD00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
@@ -275,6 +290,30 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D92C35C71F750F83001DD67D /* Helper Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D92C35C81F750FDE001DD67D /* LGPlusButtonsView */,
+				D9AAFABA1F5D480E00891CA5 /* Pop Over */,
+			);
+			name = "Helper Classes";
+			sourceTree = "<group>";
+		};
+		D92C35C81F750FDE001DD67D /* LGPlusButtonsView */ = {
+			isa = PBXGroup;
+			children = (
+				D92C35C91F750FDE001DD67D /* LGPlusButton.h */,
+				D92C35CA1F750FDE001DD67D /* LGPlusButton.m */,
+				D92C35CB1F750FDE001DD67D /* LGPlusButtonDescription.h */,
+				D92C35CC1F750FDE001DD67D /* LGPlusButtonDescription.m */,
+				D92C35CD1F750FDE001DD67D /* LGPlusButtonsView.h */,
+				D92C35CE1F750FDE001DD67D /* LGPlusButtonsView.m */,
+				D92C35CF1F750FDE001DD67D /* LGPlusButtonsViewShared.h */,
+				D92C35D01F750FDE001DD67D /* LGPlusButtonsViewShared.m */,
+			);
+			path = LGPlusButtonsView;
+			sourceTree = "<group>";
+		};
 		D9AAFABA1F5D480E00891CA5 /* Pop Over */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,7 +394,7 @@
 			children = (
 				D9EB9F4F1E07C2130001115F /* ViewControllers */,
 				D9EB9F511E07C22B0001115F /* WebServices */,
-				D9AAFABA1F5D480E00891CA5 /* Pop Over */,
+				D92C35C71F750F83001DD67D /* Helper Classes */,
 				D9EB9F541E07C2500001115F /* OtherClasses */,
 				D9EB9F521E07C2320001115F /* Utils */,
 				D9EB9F501E07C21E0001115F /* Model */,
@@ -423,6 +462,8 @@
 				D9EB9F9C1E07C3270001115F /* ConversationViewController.m */,
 				D9EB9F9D1E07C3270001115F /* DetailViewController.h */,
 				D9EB9F9E1E07C3270001115F /* DetailViewController.m */,
+				D92C35D51F7682B5001DD67D /* EditDetailTableViewController.h */,
+				D92C35D61F7682B5001DD67D /* EditDetailTableViewController.m */,
 				D9A2FCAE1F18904000C829DD /* NotificationViewController.h */,
 				D9A2FCAF1F18904000C829DD /* NotificationViewController.m */,
 			);
@@ -577,7 +618,7 @@
 		D9DBD3391E07ACFC00219F93 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Ladybird websolutions pvt ltd";
 				TargetAttributes = {
 					D9DBD3401E07ACFC00219F93 = {
@@ -604,7 +645,7 @@
 				};
 			};
 			buildConfigurationList = D9DBD33C1E07ACFC00219F93 /* Build configuration list for PBXProject "Faveo Helpdesk Pro" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -726,6 +767,7 @@
 				D9EB9FAC1E07C3270001115F /* DetailViewController.m in Sources */,
 				D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */,
 				D9EB9F641E07C2D00001115F /* GlobalVariables.m in Sources */,
+				D92C35D41F750FDE001DD67D /* LGPlusButtonsViewShared.m in Sources */,
 				D9E57B411EFAA4C1002E4C19 /* UITextField+PasswordField.m in Sources */,
 				D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */,
 				D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */,
@@ -736,17 +778,21 @@
 				D9EB9F7F1E07C2F00001115F /* OpenCloseTableViewCell.m in Sources */,
 				D9EB9F9F1E07C3270001115F /* LeftMenuViewController.m in Sources */,
 				D9DBD3461E07ACFC00219F93 /* main.m in Sources */,
+				D92C35D71F7682B5001DD67D /* EditDetailTableViewController.m in Sources */,
 				D9EB9F5B1E07C2A80001115F /* Utils.m in Sources */,
 				D9A2FCB41F18942800C829DD /* NotificationTableViewCell.m in Sources */,
 				D9EB9F7D1E07C2F00001115F /* ConversationTableViewCell.m in Sources */,
 				D9EB9FC51E07C4610001115F /* Reachability.m in Sources */,
 				D9EB9FBF1E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
+				D92C35D21F750FDE001DD67D /* LGPlusButtonDescription.m in Sources */,
 				D9EB9FA11E07C3270001115F /* UnassignedTicketsViewController.m in Sources */,
 				D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */,
+				D92C35D31F750FDE001DD67D /* LGPlusButtonsView.m in Sources */,
 				D9EB9FA61E07C3270001115F /* CreateTicketViewController.m in Sources */,
 				D9EB9FC01E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
 				D9AAFAB91F5D475400891CA5 /* FTPopOverMenu.m in Sources */,
 				D9EB9F631E07C2D00001115F /* Data.m in Sources */,
+				D92C35D11F750FDE001DD67D /* LGPlusButton.m in Sources */,
 				D9EB9F771E07C2F00001115F /* TicketTableViewCell.m in Sources */,
 				D9EB9FA91E07C3270001115F /* AboutViewController.m in Sources */,
 				D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */,
@@ -870,7 +916,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -878,7 +926,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -903,7 +955,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -920,7 +972,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -928,7 +982,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -947,7 +1005,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -965,7 +1023,7 @@
 				COMPRESS_PNG_FILES = YES;
 				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -986,7 +1044,7 @@
 				COMPRESS_PNG_FILES = YES;
 				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";

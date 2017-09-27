@@ -44,6 +44,7 @@
  */
 
 - (IBAction)btnClicked:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextView *textview;
 
 
 @end
