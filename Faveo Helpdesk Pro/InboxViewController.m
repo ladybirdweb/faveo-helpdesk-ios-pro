@@ -715,6 +715,9 @@
     
        
             cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
+    
+    
+    
 }@catch (NSException *exception)
         {
             // Print exception information

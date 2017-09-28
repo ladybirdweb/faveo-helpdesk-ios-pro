@@ -304,6 +304,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *assinTextField;
 
+@property (weak, nonatomic) IBOutlet UITextView *subjectTextView;
 
 
 @end

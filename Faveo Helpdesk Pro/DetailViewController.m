@@ -203,7 +203,8 @@
                         [Utils isEmpty:encodedString];
                         
                         if  ([Utils isEmpty:encodedString]){
-                            _subjectTextField.text =@"No Title";
+                           // _subjectTextField.text =@"No Title";
+                            _subjectTextView.text= NSLocalizedString(@"Not Available",nil);
                         }
                         else
                         {
@@ -255,11 +256,11 @@
                                 
                                 NSLog(@"Decoded string = %@", decodedString);
                                 
-                                 _subjectTextField.text= decodedString;
+                                 _subjectTextView.text= decodedString;
                             }
                             else{
                                 
-                                 _subjectTextField.text= encodedString;
+                                 _subjectTextView.text= encodedString;
                                 
                             }
                             

@@ -81,6 +81,15 @@
     type_id=[[NSNumber alloc]init];
     staff_id=[[NSNumber alloc]init];
     
+    
+    UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
+    
+    UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
+    [self.subjectTextView setInputAccessoryView:toolBar];
+    
     _saveButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     _imgViewLoading = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 78, 78)];
     _imgViewLoading.image=[UIImage imageNamed:@"loading_imgBlue_78x78"];
@@ -108,6 +117,11 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
+}
+
+-(void)removeKeyBoard
+{
+    [self.subjectTextView resignFirstResponder];
 }
 
 -(void)reload{
@@ -209,7 +223,8 @@
                             [Utils isEmpty:encodedString];
                             
                             if  ([Utils isEmpty:encodedString]){
-                                _subjectTextField.text =@"No Title";
+                                //_subjectTextField.text =@"No Title";
+                                _subjectTextView.text= NSLocalizedString(@"Not Available",nil);
                             }
                             else
                             {
@@ -261,11 +276,11 @@
                                     
                                     NSLog(@"Decoded string = %@", decodedString);
                                     
-                                    _subjectTextField.text= decodedString;
+                                    _subjectTextView.text= decodedString;
                                 }
                                 else{
                                     
-                                    _subjectTextField.text= encodedString;
+                                    _subjectTextView.text= encodedString;
                                     
                                 }
                                 
@@ -589,7 +604,7 @@
     //    if (self.typeTextField.text.length==0){
     //        [RKDropdownAlert title:APP_NAME message:@"Please enter TICKET TYPE" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
     //    }else
-    if (self.subjectTextField.text.length==0) {
+    if (self.subjectTextView.text.length==0) {
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter SUBJECT",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         // [utils showAlertWithMessage:@"Please enter SUBJECT" sendViewController:self];
     }else if (self.helpTopicTextField.text.length==0) {
@@ -656,7 +671,7 @@
         }
         
         
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&help_topic=%@&ticket_type=%@&ticket_priority=%@&ticket_source=%@&subject=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,help_topic_id,type_id,priority_id,source_id,_subjectTextField.text,staffID];
+        NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&help_topic=%@&ticket_type=%@&ticket_priority=%@&ticket_source=%@&subject=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,help_topic_id,type_id,priority_id,source_id,_subjectTextView.text,staffID];
         
         NSLog(@"URL is : %@",url);
         
@@ -911,6 +926,46 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    
+    if(textView == _subjectTextView)
+    {
+        
+        if([text isEqualToString:@" "])
+        {
+            if(!textView.text.length)
+            {
+                return NO;
+            }
+        }
+        
+        if([textView.text stringByReplacingCharactersInRange:range withString:text].length < textView.text.length)
+        {
+            
+            return  YES;
+        }
+        
+        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >100)
+        {
+            return NO;
+        }
+        
+        NSCharacterSet *set=[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "];
+        
+        
+        if([text rangeOfCharacterFromSet:set].location == NSNotFound)
+        {
+            return NO;
+        }
+    }
+    
+    
+    return YES;
+}
+
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
