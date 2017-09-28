@@ -1,5 +1,11 @@
-language: objective-c
+os: osx
 osx_image: xcode9
+
+language: objective-c
 xcode_workspace: Faveo Helpdesk Pro.xcworkspace
 xcode_scheme: Faveo Helpdesk Pro
 xcode_sdk: iphonesimulator11.0
+
+before_install:
+  - brew update
+  - brew outdated xctool || brew upgrade xctool
