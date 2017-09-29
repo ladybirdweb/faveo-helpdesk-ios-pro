@@ -922,12 +922,23 @@
     [customView addSubview:lineTwoLabel];
     [customView addSubview:errorMessageNote];
     
-    CNPPopupButton *button = [[CNPPopupButton alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    CNPPopupButton *button = [[CNPPopupButton alloc] initWithFrame:CGRectMake(0, 0,200
+                                                                              
+                                                                              , 40)];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont boldSystemFontOfSize:18];
     [button setTitle:NSLocalizedString(@"Done",nil) forState:UIControlStateNormal];
     button.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     button.layer.cornerRadius = 4;
+    
+    CNPPopupButton *button2 = [[CNPPopupButton alloc] initWithFrame:CGRectMake(0, 0,200, 40)];
+    [button2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button2.titleLabel.font = [UIFont boldSystemFontOfSize:18];
+    [button2 setTitle:NSLocalizedString(@"Back",nil) forState:UIControlStateNormal];
+    button2.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    button2.layer.cornerRadius = 4;
+    
+    
     button.selectionHandler = ^(CNPPopupButton *button){
         NSString *rawString = [textViewInternalNote text];
         NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
@@ -946,12 +957,24 @@
         }
     };
     
-    self.popupController = [[CNPPopupController alloc] initWithContents:@[titleLabel, customView, button]];
+    button2.selectionHandler = ^(CNPPopupButton *button2)
+    {
+        
+         [self.popupController dismissPopupControllerAnimated:YES];
+        
+        TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+        [self.navigationController pushViewController:td animated:YES];
+    };
+    
+    
+    self.popupController = [[CNPPopupController alloc] initWithContents:@[titleLabel, customView, button,button2]];
+    //self.popupController = [[CNPPopupController alloc] initWithContents:@[titleLabel, customView, button2]];
     self.popupController.theme = [CNPPopupTheme defaultTheme];
     self.popupController.theme.popupStyle = popupStyle;
     self.popupController.delegate = self;
     [self.popupController presentPopupControllerAnimated:YES];
-    //[self floatingButton];
+    [self floatingButton];
+    
 }
 
 - (void)showPopupReply:(CNPPopupStyle)popupStyle {
@@ -1022,6 +1045,14 @@
     button.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     button.layer.cornerRadius = 4;
     
+    CNPPopupButton *button2 = [[CNPPopupButton alloc] initWithFrame:CGRectMake(0, 0,200, 40)];
+    [button2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button2.titleLabel.font = [UIFont boldSystemFontOfSize:18];
+    [button2 setTitle:NSLocalizedString(@"Back",nil) forState:UIControlStateNormal];
+    button2.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    button2.layer.cornerRadius = 4;
+    
+    
     button.selectionHandler = ^(CNPPopupButton *button){
         
         NSString *rawString = [textViewReply text];
@@ -1041,12 +1072,22 @@
         }
     };
     
-    self.popupController = [[CNPPopupController alloc] initWithContents:@[titleLabel, customView, button]];
+    button2.selectionHandler = ^(CNPPopupButton *button2)
+    {
+        
+        [self.popupController dismissPopupControllerAnimated:YES];
+        
+        TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+        [self.navigationController pushViewController:td animated:YES];
+    };
+    
+    self.popupController = [[CNPPopupController alloc] initWithContents:@[titleLabel, customView, button,button2]];
     self.popupController.theme = [CNPPopupTheme defaultTheme];
     self.popupController.theme.popupStyle = popupStyle;
     self.popupController.delegate = self;
     [self.popupController presentPopupControllerAnimated:YES];
-   // [self floatingButton];
+    [self floatingButton];
+    
 }
 
 

@@ -277,29 +277,29 @@
                         // _slaTextField.text=[dic objectForKey:@"sla_name"];
                         
                         if (([[dic objectForKey:@"type_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"type_name"] length] == 0 )) {
-                            
+                            _typeTextField.text= NSLocalizedString(@"Not Available",nil);
                         }else _typeTextField.text=[dic objectForKey:@"type_name"];
                         
                         if (([[dic objectForKey:@"helptopic_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"helptopic_name"] length] == 0 )) {
-                            _helpTopicTextField.text=@"Nil";
+                            _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
                             
                         }else _helpTopicTextField.text=[dic objectForKey:@"helptopic_name"];
                         
                         
                         if (([[dic objectForKey:@"source_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"source_name"] length] == 0 )) {
-                           _sourceTextField.text=@"Nil";
+                           _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
                             
                         }else _sourceTextField.text=[dic objectForKey:@"source_name"];
                         
                         if (([[dic objectForKey:@"priority_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"priority_name"] length] == 0 )) {
-                           _priorityTextField.text=@"Nil";
+                           _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
                             
                         }else _priorityTextField.text=[dic objectForKey:@"priority_name"];
                         
                        
                         if (([[dic objectForKey:@"assignee_email"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"assignee_email"] length] == 0 )) {
                             // _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-                            _assinTextField.text=NSLocalizedString(@"Select Assignee",nil);
+                            _assinTextField.text=NSLocalizedString(@"Not Available",nil);
                         }else{
                          _assinTextField.text= [dic objectForKey:@"assignee_email"];
                         }

@@ -58,7 +58,6 @@
     [super viewDidLoad];
     [self split];
     
-
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
     
@@ -68,6 +67,8 @@
     [self.textViewMsg setInputAccessoryView:toolBar];
     [self.mobileTextField setInputAccessoryView:toolBar];
      [self.subjectTextField setInputAccessoryView:toolBar];
+    [self.firstNameTextField setInputAccessoryView:toolBar];
+    [self.lastNameTextField setInputAccessoryView:toolBar];
     
 
     
@@ -220,31 +221,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-//// returns the number of 'columns' to display.
-//- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-//    return 1;
-//}
-//
-//// returns the # of rows in each component..
-//- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-//    return _helptopicsArray.count;
-//}
-
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//
-//    return NO;
-//}
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
 
 -(void)removeKeyboard{
     [_emailTextField resignFirstResponder];
@@ -275,8 +251,6 @@
 - (IBAction)staffClicked:(id)sender
 {
     [self removeKeyboard];
-    
-    
     
     if (!_staffArray||!_staffArray.count) {
         _assignTextField.text=NSLocalizedString(@"Not Available",nil);
@@ -348,20 +322,8 @@
 
 
 - (IBAction)submitClicked:(id)sender {
-//    
-//    if (self.slaTextField.text.length==0){
-//        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select SLA",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-//        //[utils showAlertWithMessage:@"Please select SLA" sendViewController:self];
-    //    }else if (self.deptTextField.text.length==0) {
-//    [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select DEPARTMENT",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-//    // [utils showAlertWithMessage:@"Please select DEPARTMENT" sendViewController:self];
-//}else
-//    if (self.phoneTextField.text.length!=0){
-//        if(self.phoneTextField.text.length>=15)
-//            [RKDropdownAlert title:APP_NAME message:@"Phone number should be maximum 15 digits" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-//    }
-    
-@try{
+
+    @try{
     
     if(self.emailTextField.text.length==0 && self.firstNameTextField.text.length==0 && self.helpTopicTextField.text.length==0 && self.subjectTextField.text.length==0 && self.priorityTextField.text.length==0 && self.textViewMsg.text.length==0)
     {
@@ -771,9 +733,7 @@
 
 - (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
 {
-   
     staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
-    
     self.assignTextField.text = (_staffArray)[(NSUInteger) [selectedIndex intValue]];
 }
 
@@ -787,34 +747,27 @@
 - (void)helpTopicWasSelected:(NSNumber *)selectedIndex element:(id)element {
     help_topic_id=(helpTopic_idArray)[(NSUInteger) [selectedIndex intValue]];
     // self.selectedIndex = [selectedIndex intValue];
-    
-    //may have originated from textField or barButtonItem, use an IBOutlet instead of element
     self.helpTopicTextField.text = (_helptopicsArray)[(NSUInteger) [selectedIndex intValue]];
 }
 
 - (void)slaWasSelected:(NSNumber *)selectedIndex element:(id)element {
     sla_id=(sla_idArray)[(NSUInteger) [selectedIndex intValue]];
     // self.selectedIndex = [selectedIndex intValue];
-    
     //may have originated from textField or barButtonItem, use an IBOutlet instead of element
     self.slaTextField.text = (_slaPlansArray)[(NSUInteger) [selectedIndex intValue]];
 }
 - (void)deptWasSelected:(NSNumber *)selectedIndex element:(id)element {
     dept_id=(dept_idArray)[(NSUInteger) [selectedIndex intValue]];
     // self.selectedIndex = [selectedIndex intValue];
-    
     //may have originated from textField or barButtonItem, use an IBOutlet instead of element
     self.deptTextField.text = (_deptArray)[(NSUInteger) [selectedIndex intValue]];
 }
 - (void)priorityWasSelected:(NSNumber *)selectedIndex element:(id)element {
     
     //Dat *dat=(Dat *)[priDicc1 objectForKey:[NSString stringWithFormat:@"%@", selectedIndex]];
-   
    // NSLog(@"id %@", dat.id1);
     priority_id=(pri_idArray)[(NSUInteger) [selectedIndex intValue]];
     // self.selectedIndex = [selectedIndex intValue];
-    
-    //may have originated from textField or barButtonItem, use an IBOutlet instead of element
     self.priorityTextField.text = (_priorityArray)[(NSUInteger) [selectedIndex intValue]];
 }
 
@@ -824,6 +777,8 @@
     
    if (textField==_helpTopicTextField) {
        [_helpTopicTextField resignFirstResponder];
+       _helpTopicTextField.tintColor = [UIColor clearColor];
+       
         //[self removeKeyboard];
         
         if (!_helptopicsArray||!_helptopicsArray.count) {
@@ -835,6 +790,7 @@
         //return NO;
     }else if (textField==_codeTextField) {
         [_codeTextField resignFirstResponder];
+         _codeTextField.tintColor = [UIColor clearColor];
         //[self removeKeyboard];
         
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
@@ -842,6 +798,8 @@
     }else if (textField==_assignTextField) {
         //[self removeKeyboard];
         [_assignTextField resignFirstResponder];
+         _assignTextField.tintColor = [UIColor clearColor];
+        
         if (!_staffArray||!_staffArray.count) {
             _assignTextField.text=NSLocalizedString(@"Not Available",nil);
             staff_id=0;
@@ -864,6 +822,8 @@
     }else if (textField.tag==97) {
         //[self removeKeyboard];
         [_priorityTextField resignFirstResponder];
+         _priorityTextField.tintColor = [UIColor clearColor];
+        
         if (!_priorityArray||![_priorityArray count]) {
             _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
             priority_id=0;
@@ -907,7 +867,7 @@
                return NO;
            }
         
-        NSCharacterSet *set=[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "];
+        NSCharacterSet *set=[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.';;:?()*&%, "];
         
         
         if([text rangeOfCharacterFromSet:set].location == NSNotFound)
@@ -946,7 +906,7 @@
         }
         
         // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "];
+        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.&?,()*&:;' "];
         
         if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
             return NO;
@@ -1040,6 +1000,7 @@
 }
 
 
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
    // [textField resignFirstResponder];
@@ -1078,6 +1039,7 @@
     
     return YES;
 }
+
 
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu

@@ -592,30 +592,15 @@
 
 - (IBAction)saveClicked:(id)sender {
     
-    //    if (self.statusTextField.text.length==0){
-    //        [RKDropdownAlert title:APP_NAME message:@"Please enter STATUS" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-    //        //[utils showAlertWithMessage:@"Please select STATUS" sendViewController:self];
-    //    }else
-    //    if (self.slaTextField.text.length==0){
-    //        [RKDropdownAlert title:APP_NAME message:@"Please enter SLA" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-    //        //[utils showAlertWithMessage:@"Please select SLA" sendViewController:self];
-    //    }else
-    //
-    //    if (self.typeTextField.text.length==0){
-    //        [RKDropdownAlert title:APP_NAME message:@"Please enter TICKET TYPE" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-    //    }else
+    
     if (self.subjectTextView.text.length==0) {
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter SUBJECT",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-        // [utils showAlertWithMessage:@"Please enter SUBJECT" sendViewController:self];
     }else if (self.helpTopicTextField.text.length==0) {
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-        // [utils showAlertWithMessage:@"Please select HELP-TOPIC" sendViewController:self];
     }else if (self.priorityTextField.text.length==0){
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select PRIORITY" ,nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-        //[utils showAlertWithMessage:@"Please select PRIORITY" sendViewController:self];
     }else  if (self.sourceTextField.text.length==0){
         [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select SOURCE" ,@"Please select SOURCE") backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-        //[utils showAlertWithMessage:@"Please select SOURCE" sendViewController:self];
     }else  {
         [self save];
     }
@@ -625,8 +610,6 @@
 -(void)save{
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
-        //connection unavailable
-        // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -840,6 +823,8 @@
     if (textField.tag==2) {
         
         [_priorityTextField resignFirstResponder];
+         _priorityTextField.tintColor = [UIColor clearColor];
+        
         if (!_priorityArray||![_priorityArray count]) {
             _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
             priority_id=0;
@@ -852,6 +837,8 @@
     }else if(textField.tag==3){
         //[_subjectTextField resignFirstResponder];
         [_helpTopicTextField resignFirstResponder];
+         _helpTopicTextField.tintColor = [UIColor clearColor];
+        
         if (!_helptopicsArray||!_helptopicsArray.count) {
             _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
             help_topic_id=0;
@@ -861,6 +848,8 @@
         // return NO;
     }else if(textField.tag==4){
         [_sourceTextField resignFirstResponder];
+         _sourceTextField.tintColor = [UIColor clearColor];
+        
         //[_subjectTextField resignFirstResponder];
         if (!_sourceArray||!_sourceArray.count) {
             _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
@@ -871,6 +860,8 @@
         // return  NO;
     }else if(textField.tag==5){
         [_typeTextField resignFirstResponder];
+         _typeTextField.tintColor = [UIColor clearColor];
+        
         
         if (!_typeArray||!_typeArray.count) {
             _typeTextField.text=NSLocalizedString(@"Not Available",nil);
@@ -881,6 +872,8 @@
         // return  NO;
     }else if(textField.tag==7){
         [_assinTextField resignFirstResponder];
+         _assinTextField.tintColor = [UIColor clearColor];
+        
         //[_subjectTextField resignFirstResponder];
         if (!_assignArray||!_assignArray.count) {
             _assinTextField.text=NSLocalizedString(@"Not Available",nil);
