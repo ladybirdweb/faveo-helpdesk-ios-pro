@@ -1,11 +1,32 @@
+
+#branches:
+ # only:
+ #   - master
+   # - develop
+language: objective-c
+#xcode_workspace: Faveo Helpdesk Pro.xcworkspace
+#xcode_scheme: Faveo Helpdesk Pro
+#xcode_sdk: iphonesimulator11.0
 os: osx
 osx_image: xcode9
+#cache:
+#  - cocoapods
+podfile: Faveo Helpdesk Pro/Podfile
 
-language: objective-c
-xcode_workspace: Faveo Helpdesk Pro.xcworkspace
-xcode_scheme: Faveo Helpdesk Pro
-xcode_sdk: iphonesimulator11.0
+#script:
 
-before_install:
-  - brew update
-  - brew outdated xctool || brew upgrade xctool
+#  xctool
+#  -workspace Faveo Helpdesk Pro/Faveo Helpdesk Pro.xcworkspace
+ # -scheme Faveo Helpdesk ProTests
+ # -sdk iphonesimulator
+#  -destination 'platform=iOS Simulator,name=iPhone 8 Plus'
+#  build 
+#  test
+#  ONLY_ACTIVE_ARCH=NO
+ # CODE_SIGN_IDENTITY=""
+#  CODE_SIGNING_REQUIRED=NO
+
+#before_install:
+#  - brew update
+#  - brew uninstall xctool && brew install --HEAD xctool
+
