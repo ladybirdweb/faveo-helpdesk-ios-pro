@@ -200,9 +200,9 @@
                             //                        _clientNameTextField.text=[NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"first_name"],[dic objectForKey:@"last_name"]];
                             _createdDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"created_at"]];
                             
-                            if (([[dic objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"first_name"] length] == 0 )) {
-                                _firstnameTextField.text=NSLocalizedString(@"Not Available",nil);
-                            }else _firstnameTextField.text=[dic objectForKey:@"first_name"];
+//                            if (([[dic objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"first_name"] length] == 0 )) {
+//                                _firstnameTextField.text=NSLocalizedString(@"Not Available",nil);
+//                            }else _firstnameTextField.text=[dic objectForKey:@"first_name"];
                             
                             //                        if (([[dic objectForKey:@"last_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"last_name"] length] == 0 )) {
                             //                            _lastnameTextField.text=NSLocalizedString(@"Not Available",nil);
@@ -291,7 +291,7 @@
 
                             
                             
-                            _emailTextField.text=[dic objectForKey:@"email"];
+                           // _emailTextField.text=[dic objectForKey:@"email"];
                             _lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
                             
                             
@@ -408,13 +408,43 @@
         [staffMU insertObject:@"Select Assignee" atIndex:0];
         [staff_idArray insertObject:@"" atIndex:0];
         
+//        for (NSMutableDictionary *dicc in staffsArray) {
+//            if ([dicc objectForKey:@"email"]) {
+//                [staffMU addObject:[dicc objectForKey:@"email"]];
+//                [staff_idArray addObject:[dicc objectForKey:@"id"]];
+//            }
+//
+//        }
+        
+        
         for (NSMutableDictionary *dicc in staffsArray) {
             if ([dicc objectForKey:@"email"]) {
-                [staffMU addObject:[dicc objectForKey:@"email"]];
+                
+                NSString * name= [NSString stringWithFormat:@"%@ %@",[dicc objectForKey:@"first_name"],[dicc objectForKey:@"last_name"]];
+                
+                // [staffMU insertObject:@"" atIndex:0]; // user_name
+                //  [staffMU addObject:[dicc objectForKey:@"email"]];
+                [Utils isEmpty:name];
+                
+                
+                if  (![Utils isEmpty:name] )
+                {
+                    
+                    [staffMU addObject:name];
+                }
+                else
+                {
+                    NSString * userName= [NSString stringWithFormat:@"%@",[dicc objectForKey:@"user_name"]];
+                    [staffMU addObject:userName];
+                }
+                
+                //  [staffMU addObject:name];
                 [staff_idArray addObject:[dicc objectForKey:@"id"]];
+                
             }
             
         }
+        
         
         for (NSDictionary *dicc in deptArray) {
             if ([dicc objectForKey:@"name"]) {
@@ -495,31 +525,9 @@
 }
 
 
-- (IBAction)assignClicked:(id)sender; {
-    [_assinTextField resignFirstResponder];
-    if (!_assignArray||!_assignArray.count) {
-        _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-        source_id=0;
-    }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Source" rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
-    }
-}
-
-
-- (IBAction)sourceClicked:(id)sender {
-    [_subjectTextField resignFirstResponder];
-    if (!_sourceArray||!_sourceArray.count) {
-        _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
-        source_id=0;
-    }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Source" rows:_sourceArray initialSelection:0 target:self successAction:@selector(sourceWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
-    }
-}
-
-
 
 - (IBAction)statusClicked:(id)sender {
-    [_subjectTextField resignFirstResponder];
+   // [_subjectTextField resignFirstResponder];
     if (!_statusArray||!_statusArray.count) {
         _statusTextField.text=NSLocalizedString(@"Not Available",nil);
         status_id=0;
@@ -528,21 +536,8 @@
     }
 }
 
-
-- (IBAction)helpTopicClicked:(id)sender {
-    [_subjectTextField resignFirstResponder];
-    
-    if (!_helptopicsArray||!_helptopicsArray.count) {
-        _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
-        help_topic_id=0;
-    }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
-    }
-    
-}
-
 - (IBAction)slaClicked:(id)sender {
-    [_subjectTextField resignFirstResponder];
+   // [_subjectTextField resignFirstResponder];
     
     if (!_slaPlansArray||!_slaPlansArray.count) {
         _slaTextField.text=NSLocalizedString(@"Not Available",nil);
@@ -555,7 +550,7 @@
 }
 
 - (IBAction)deptClicked:(id)sender {
-    [_subjectTextField resignFirstResponder];
+   // [_subjectTextField resignFirstResponder];
     
     if (!_deptArray||!_deptArray.count) {
         _deptTextField.text=NSLocalizedString(@"Not Available",nil);
@@ -566,20 +561,13 @@
     
 }
 
-- (IBAction)typeClicked:(id)sender{
-    [_subjectTextField resignFirstResponder];
-    if (!_typeArray||![_typeArray count]) {
-        _typeTextField.text=NSLocalizedString(@"Not Available",nil);
-        type_id=0;
-        
-    }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Ticket Type" rows:_typeArray initialSelection:0 target:self successAction:@selector(typeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
-    }
-    
-}
+
 
 - (IBAction)priorityClicked:(id)sender {
-    [_subjectTextField resignFirstResponder];
+    
+    [self.view endEditing:YES];
+    [_priorityTextField resignFirstResponder];
+    //[_subjectTextField resignFirstResponder];
     if (!_priorityArray||![_priorityArray count]) {
         _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
         priority_id=0;
@@ -587,7 +575,55 @@
     }else{
         [ActionSheetStringPicker showPickerWithTitle:@"Select Priority" rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
+}
+
+- (IBAction)helpTopicClicked:(id)sender
+{
+    [self.view endEditing:YES];
+    //[_subjectTextField resignFirstResponder];
+    [_helpTopicTextField resignFirstResponder];
+    if (!_helptopicsArray||!_helptopicsArray.count) {
+        _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
+        help_topic_id=0;
+    }else{
+        [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+    }
+}
+- (IBAction)sourceClicked:(id)sender
+{
+    [self.view endEditing:YES];
+   // [_subjectTextField resignFirstResponder];
+    [_sourceTextField resignFirstResponder];
+    if (!_sourceArray||!_sourceArray.count) {
+        _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
+        source_id=0;
+    }else{
+        [ActionSheetStringPicker showPickerWithTitle:@"Select Source" rows:_sourceArray initialSelection:0 target:self successAction:@selector(sourceWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+    }
+}
+- (IBAction)typeClicked:(id)sender {
     
+    [self.view endEditing:YES];
+    [_typeTextField resignFirstResponder];
+    if (!_typeArray||![_typeArray count]) {
+        _typeTextField.text=NSLocalizedString(@"Not Available",nil);
+        type_id=0;
+        
+    }else{
+        [ActionSheetStringPicker showPickerWithTitle:@"Select Ticket Type" rows:_typeArray initialSelection:0 target:self successAction:@selector(typeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+    }
+}
+
+- (IBAction)assignClicked:(id)sender
+{
+    [self.view endEditing:YES];
+    [_assinTextField resignFirstResponder];
+    if (!_assignArray||!_assignArray.count) {
+        _assinTextField.text=NSLocalizedString(@"Not Available",nil);
+        source_id=0;
+    }else{
+        [ActionSheetStringPicker showPickerWithTitle:@"Select Source" rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+}
 }
 
 - (IBAction)saveClicked:(id)sender {
@@ -606,6 +642,9 @@
     }
     
 }
+
+
+
 
 -(void)save{
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -816,7 +855,7 @@
     self.priorityTextField.text = (_priorityArray)[(NSUInteger) [selectedIndex intValue]];
 }
 
-#pragma mark - UITextFieldDelegate
+/*#pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
@@ -887,18 +926,7 @@
     }
     // return YES;
 }
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
+*/
 - (CAAnimation *)imageAnimationForEmptyDataSet{
     
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform"];
@@ -910,17 +938,19 @@
     
     return animation;
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    return NO;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     
@@ -959,57 +989,6 @@
     return YES;
 }
 
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-    
-    if(textField==_helpTopicTextField)
-    {
-        return NO;
-    }
-    
-    if(textField==_typeTextField)
-    {
-        return NO;
-    }
-    
-    if(textField==_priorityTextField)
-    {
-        return NO;
-    }
-    
-    if(textField==_assinTextField)
-    {
-        return NO;
-    }
-    
-    
-    // verify the text field you wanna validate
-    if (textField == _subjectTextField) {
-        
-        // do not allow the first character to be space | do not allow more than one space
-        if ([string isEqualToString:@" "]) {
-            if (!textField.text.length)
-                return NO;
-        }
-        
-        // allow backspace
-        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
-            return YES;
-        }
-        
-        // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"];
-        
-        if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
-            return NO;
-        }
-        
-    }
-    
-    return YES;
-}
-
-
+ 
 
 @end

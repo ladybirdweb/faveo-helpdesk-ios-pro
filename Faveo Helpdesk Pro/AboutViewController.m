@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _textview.editable=NO;
       [self setTitle:NSLocalizedString(@"About",nil)];
     _websiteButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     // textView1.editable = NO;

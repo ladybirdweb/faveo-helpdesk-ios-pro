@@ -914,6 +914,22 @@
     textViewInternalNote = [[UITextView alloc] initWithFrame:CGRectMake(10, 35, 250, 100)];
     
     //[ textViewInternalNote setReturnKeyType:UIReturnKeyDone];
+    
+   // textViewInternalNote.inputAccessoryView.hidden =YES;
+    textViewInternalNote.autocorrectionType = NO;
+    textViewInternalNote.textContentType = UITextContentTypeName;
+    textViewInternalNote.autocapitalizationType=NO;
+    textViewInternalNote.autocorrectionType = UITextAutocorrectionTypeNo;
+
+    UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
+    
+    UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
+    [textViewInternalNote setInputAccessoryView:toolBar];
+    
+    
     textViewInternalNote.layer.cornerRadius=4;
      textViewInternalNote.layer.borderWidth=1.0F;
      textViewInternalNote.layer.borderColor=[[UIColor lightGrayColor] CGColor];
@@ -977,6 +993,12 @@
     
 }
 
+-(void)removeKeyBoard
+{
+    
+    [textViewInternalNote resignFirstResponder]; //textViewReply
+     [textViewReply resignFirstResponder];
+}
 - (void)showPopupReply:(CNPPopupStyle)popupStyle {
     
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
@@ -1025,8 +1047,27 @@
     lineTwoLabe2.attributedText = lineTwo;
     
     textViewReply = [[UITextView alloc] initWithFrame:CGRectMake(10, 30, 250, 100)];
-    //textViewReply.delegate=self;
-   // [textViewReply setReturnKeyType:UIReturnKeyDone];
+   
+//    textViewReply.delegate=self;
+//    [textViewReply setReturnKeyType:UIReturnKeyDone];
+//
+    
+    UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
+    
+    UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
+    [textViewReply setInputAccessoryView:toolBar];
+    
+    
+   // textViewReply.inputAccessoryView.hidden =YES;
+    textViewReply.autocorrectionType = NO;
+    textViewReply.textContentType = UITextContentTypeName;
+    textViewReply.autocapitalizationType=NO;
+    textViewReply.autocorrectionType = UITextAutocorrectionTypeNo;
+
+    
     textViewReply.layer.cornerRadius=4;
     textViewReply.layer.borderWidth=1.0F;
     textViewReply.layer.borderColor=[[UIColor grayColor] CGColor];
@@ -1156,8 +1197,10 @@
                         [RKDropdownAlert title:NSLocalizedString(@"Sucess", nil) message:NSLocalizedString(@"Posted your note.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
+                       
                         TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
                         [self.navigationController pushViewController:td animated:YES];
+                        
 
                        // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
                     });

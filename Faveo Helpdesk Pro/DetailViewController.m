@@ -301,7 +301,10 @@
                             // _assinTextField.text=NSLocalizedString(@"Not Available",nil);
                             _assinTextField.text=NSLocalizedString(@"Not Available",nil);
                         }else{
-                         _assinTextField.text= [dic objectForKey:@"assignee_email"];
+                            NSString * name= [NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"assignee_first_name"],[dic objectForKey:@"assignee_last_name"]];
+                            
+                            _assinTextField.text=name;
+                        // _assinTextField.text= [dic objectForKey:@"assignee_email"];
                         }
                         
                        // _statusTextField.text= [dic objectForKey:@"status_name"];
