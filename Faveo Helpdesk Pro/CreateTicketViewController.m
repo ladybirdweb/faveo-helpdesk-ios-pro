@@ -58,7 +58,6 @@
     [super viewDidLoad];
     [self split];
     
-    
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
     
@@ -66,7 +65,12 @@
     
     [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
     [self.textViewMsg setInputAccessoryView:toolBar];
-    [self.mobileTextField setInputAccessoryView:toolBar];
+    [self.mobileView setInputAccessoryView:toolBar];
+     [self.subjectView setInputAccessoryView:toolBar];
+    [self.firstNameView setInputAccessoryView:toolBar];
+    [self.lastNameView setInputAccessoryView:toolBar];
+    [self.emailTextView setInputAccessoryView:toolBar];
+    
 
     
     
@@ -95,6 +99,8 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
+   // _submitButton.userInteractionEnabled = false;
+    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
 
 }
@@ -142,8 +148,25 @@
     for (NSMutableDictionary *dicc in staffsArray) {
         if ([dicc objectForKey:@"email"]) {
             
-          // [staffMU insertObject:@"" atIndex:0];
-            [staffMU addObject:[dicc objectForKey:@"email"]];
+           NSString * name= [NSString stringWithFormat:@"%@ %@",[dicc objectForKey:@"first_name"],[dicc objectForKey:@"last_name"]];
+            
+          // [staffMU insertObject:@"" atIndex:0]; // user_name
+          //  [staffMU addObject:[dicc objectForKey:@"email"]];
+               [Utils isEmpty:name];
+         
+            
+            if  (![Utils isEmpty:name] )
+            {
+                
+               [staffMU addObject:name];
+            }
+            else
+            {
+                NSString * userName= [NSString stringWithFormat:@"%@",[dicc objectForKey:@"user_name"]];
+                [staffMU addObject:userName];
+            }
+     
+          //  [staffMU addObject:name];
             [staff_idArray addObject:[dicc objectForKey:@"id"]];
             
         }
@@ -216,38 +239,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-//// returns the number of 'columns' to display.
-//- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-//    return 1;
-//}
-//
-//// returns the # of rows in each component..
-//- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-//    return _helptopicsArray.count;
-//}
-
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//
-//    return NO;
-//}
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
 
 -(void)removeKeyboard{
-    [_emailTextField resignFirstResponder];
+    [_emailTextView resignFirstResponder];
    // [_mobileTextField resignFirstResponder];
   //  [_msgTextField resignFirstResponder];
-    [_subjectTextField resignFirstResponder];
-    [_firstNameTextField resignFirstResponder];
+    [_subjectView resignFirstResponder];
+    [_firstNameView resignFirstResponder];
 
     
 }
@@ -255,16 +253,35 @@
 {
     
     [self.textViewMsg resignFirstResponder];
-    [_mobileTextField resignFirstResponder];
+    [_mobileView resignFirstResponder];
+     [_emailTextView resignFirstResponder];
+     [_firstNameView resignFirstResponder];
+     [_lastNameView resignFirstResponder];
+     [_subjectView resignFirstResponder];
+     [_codeTextField resignFirstResponder];
+     [_helpTopicTextField resignFirstResponder];
+     [_priorityTextField resignFirstResponder];
+     [_assignTextField resignFirstResponder];
+
 }
 
 
-- (IBAction)staffClicked:(id)sender
-{
-    [self removeKeyboard];
-    
-    
-    
+//- (IBAction)staffClicked:(id)sender
+//{
+//    [self removeKeyboard];
+//
+//    if (!_staffArray||!_staffArray.count) {
+//        _assignTextField.text=NSLocalizedString(@"Not Available",nil);
+//        staff_id=0;
+//    }else{
+//
+//        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+//    }
+//
+//}
+
+- (IBAction)staffClicked:(id)sender {
+    [self.view endEditing:YES];
     if (!_staffArray||!_staffArray.count) {
         _assignTextField.text=NSLocalizedString(@"Not Available",nil);
         staff_id=0;
@@ -272,26 +289,58 @@
         
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
-    
 }
 
 - (IBAction)countryCodeClicked:(id)sender {
-    [self removeKeyboard];
-    
+      [self.view endEditing:YES];
     [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
 }
 
+//- (IBAction)countryCodeClicked:(id)sender {
+//    [self removeKeyboard];
+//
+//    [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+//}
+
 - (IBAction)helpTopicClicked:(id)sender {
-    [self removeKeyboard];
-    
+      [self.view endEditing:YES];
     if (!_helptopicsArray||!_helptopicsArray.count) {
         _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
         help_topic_id=0;
     }else{
         [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
-    
 }
+- (IBAction)priorityClicked:(id)sender {
+      [self.view endEditing:YES];
+    if (!_priorityArray||![_priorityArray count]) {
+        _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
+        priority_id=0;
+        
+    }else{
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Priority",nil) rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+    }
+}
+
+
+//- (IBAction)countryCodeClicked:(id)sender {
+//    [self removeKeyboard];
+//
+//    [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+//}
+
+
+//- (IBAction)helpTopicClicked:(id)sender {
+//    [self removeKeyboard];
+//
+//    if (!_helptopicsArray||!_helptopicsArray.count) {
+//        _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
+//        help_topic_id=0;
+//    }else{
+//        [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+//    }
+//
+//}
 
 
 - (IBAction)slaClicked:(id)sender {
@@ -319,38 +368,27 @@
 }
 
 
+//
+//- (IBAction)priorityClicked:(id)sender {
+//    [self removeKeyboard];
+//    if (!_priorityArray||![_priorityArray count]) {
+//        _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
+//        priority_id=0;
+//
+//    }else{
+//        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Priority",nil) rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+//    }
+//
+//}
 
-- (IBAction)priorityClicked:(id)sender {
-    [self removeKeyboard];
-    if (!_priorityArray||![_priorityArray count]) {
-        _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
-        priority_id=0;
-        
-    }else{
-        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Priority",nil) rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
-    }
-    
-}
 
 
 
 - (IBAction)submitClicked:(id)sender {
-//    
-//    if (self.slaTextField.text.length==0){
-//        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select SLA",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-//        //[utils showAlertWithMessage:@"Please select SLA" sendViewController:self];
-    //    }else if (self.deptTextField.text.length==0) {
-//    [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select DEPARTMENT",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-//    // [utils showAlertWithMessage:@"Please select DEPARTMENT" sendViewController:self];
-//}else
-//    if (self.phoneTextField.text.length!=0){
-//        if(self.phoneTextField.text.length>=15)
-//            [RKDropdownAlert title:APP_NAME message:@"Phone number should be maximum 15 digits" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-//    }
+
+    @try{
     
-@try{
-    
-    if(self.emailTextField.text.length==0 && self.firstNameTextField.text.length==0 && self.helpTopicTextField.text.length==0 && self.subjectTextField.text.length==0 && self.priorityTextField.text.length==0 && self.textViewMsg.text.length==0)
+    if(self.emailTextView.text.length==0 && self.firstNameView.text.length==0 && self.helpTopicTextField.text.length==0 && self.subjectView.text.length==0 && self.priorityTextField.text.length==0 && self.textViewMsg.text.length==0)
     {
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -370,7 +408,7 @@
                               canBeDismissedByUser:YES];
 
         
-    }else if (self.emailTextField.text.length==0){
+    }else if (self.emailTextView.text.length==0){
        //[RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter EMAIL-ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -390,7 +428,7 @@
                               canBeDismissedByUser:YES];
 
        
-    }else if(![Utils emailValidation:self.emailTextField.text]){
+    }else if(![Utils emailValidation:self.emailTextView.text]){
        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Invalid EMAIL_ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
@@ -410,7 +448,7 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
 
-    } else if (self.firstNameTextField.text.length<2) {
+    } else if (self.emailTextView.text.length<2) {
         
     //[RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"FirstName should have more than 2 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
 
@@ -474,7 +512,7 @@
                               canBeDismissedByUser:YES];
 
         
-    }else if (self.subjectTextField.text.length==0) {
+    }else if (self.subjectView.text.length==0) {
        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter SUBJECT",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
@@ -494,7 +532,7 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
         
-    }else if (self.subjectTextField.text.length<5) {
+    }else if (self.subjectView.text.length<5) {
        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"SUBJECT requires at least 5 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -671,7 +709,7 @@
         }
        /* NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&helptopic=%@&priority=%@&phone=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_msgTextField.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,@""];
         */
-         NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectTextField.text,_textViewMsg.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,staffID];
+         NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID];
 @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
@@ -758,9 +796,7 @@
 
 - (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
 {
-   
     staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
-    
     self.assignTextField.text = (_staffArray)[(NSUInteger) [selectedIndex intValue]];
 }
 
@@ -774,104 +810,218 @@
 - (void)helpTopicWasSelected:(NSNumber *)selectedIndex element:(id)element {
     help_topic_id=(helpTopic_idArray)[(NSUInteger) [selectedIndex intValue]];
     // self.selectedIndex = [selectedIndex intValue];
-    
-    //may have originated from textField or barButtonItem, use an IBOutlet instead of element
     self.helpTopicTextField.text = (_helptopicsArray)[(NSUInteger) [selectedIndex intValue]];
 }
 
 - (void)slaWasSelected:(NSNumber *)selectedIndex element:(id)element {
     sla_id=(sla_idArray)[(NSUInteger) [selectedIndex intValue]];
     // self.selectedIndex = [selectedIndex intValue];
-    
     //may have originated from textField or barButtonItem, use an IBOutlet instead of element
     self.slaTextField.text = (_slaPlansArray)[(NSUInteger) [selectedIndex intValue]];
 }
 - (void)deptWasSelected:(NSNumber *)selectedIndex element:(id)element {
     dept_id=(dept_idArray)[(NSUInteger) [selectedIndex intValue]];
     // self.selectedIndex = [selectedIndex intValue];
-    
     //may have originated from textField or barButtonItem, use an IBOutlet instead of element
     self.deptTextField.text = (_deptArray)[(NSUInteger) [selectedIndex intValue]];
 }
 - (void)priorityWasSelected:(NSNumber *)selectedIndex element:(id)element {
     
     //Dat *dat=(Dat *)[priDicc1 objectForKey:[NSString stringWithFormat:@"%@", selectedIndex]];
-   
    // NSLog(@"id %@", dat.id1);
     priority_id=(pri_idArray)[(NSUInteger) [selectedIndex intValue]];
     // self.selectedIndex = [selectedIndex intValue];
-    
-    //may have originated from textField or barButtonItem, use an IBOutlet instead of element
     self.priorityTextField.text = (_priorityArray)[(NSUInteger) [selectedIndex intValue]];
 }
 
-#pragma mark - UITextFieldDelegate
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    
-   if (textField==_helpTopicTextField) {
-       [_helpTopicTextField resignFirstResponder];
-        //[self removeKeyboard];
-        
-        if (!_helptopicsArray||!_helptopicsArray.count) {
-            _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
-            help_topic_id=0;
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        //return NO;
-    }else if (textField==_codeTextField) {
-        [_codeTextField resignFirstResponder];
-        //[self removeKeyboard];
-        
-        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-         //return NO;
-    }else if (textField==_assignTextField) {
-        //[self removeKeyboard];
-        [_assignTextField resignFirstResponder];
-        if (!_staffArray||!_staffArray.count) {
-            _assignTextField.text=NSLocalizedString(@"Not Available",nil);
-            staff_id=0;
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-
-       // return NO;
-    }else if (textField==_slaTextField) {
-        //[self removeKeyboard];
-        [_slaTextField resignFirstResponder];
-        if (!_slaPlansArray||!_slaPlansArray.count) {
-            _slaTextField.text=NSLocalizedString(@"Not Available",nil);
-            sla_id=0;
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select SLA",nil) rows:_slaPlansArray initialSelection:0 target:self successAction:@selector(slaWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        
-        // return NO;
-    }else if (textField.tag==97) {
-        //[self removeKeyboard];
-        [_priorityTextField resignFirstResponder];
-        if (!_priorityArray||![_priorityArray count]) {
-            _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
-            priority_id=0;
-            
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Priority",nil) rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        //return NO;
-    }else{
-
-        //return YES;
-    }
-    
-}
+//#pragma mark - UITextFieldDelegate
+//
+//- (void)textFieldDidBeginEditing:(UITextField *)textField {
+//
+//   if (textField==_helpTopicTextField) {
+//       [_helpTopicTextField resignFirstResponder];
+//       _helpTopicTextField.tintColor = [UIColor clearColor];
+//
+//        //[self removeKeyboard];
+//
+//        if (!_helptopicsArray||!_helptopicsArray.count) {
+//            _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
+//            help_topic_id=0;
+//        }else{
+//            [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
+//        }
+//        //return NO;
+//    }else if (textField==_codeTextField) {
+//        [_codeTextField resignFirstResponder];
+//         _codeTextField.tintColor = [UIColor clearColor];
+//        //[self removeKeyboard];
+//
+//        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
+//         //return NO;
+//    }else if (textField==_assignTextField) {
+//        //[self removeKeyboard];
+//        [_assignTextField resignFirstResponder];
+//         _assignTextField.tintColor = [UIColor clearColor];
+//
+//        if (!_staffArray||!_staffArray.count) {
+//            _assignTextField.text=NSLocalizedString(@"Not Available",nil);
+//            staff_id=0;
+//        }else{
+//            [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
+//        }
+//
+//       // return NO;
+//    }else if (textField==_slaTextField) {
+//        //[self removeKeyboard];
+//        [_slaTextField resignFirstResponder];
+//        if (!_slaPlansArray||!_slaPlansArray.count) {
+//            _slaTextField.text=NSLocalizedString(@"Not Available",nil);
+//            sla_id=0;
+//        }else{
+//            [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select SLA",nil) rows:_slaPlansArray initialSelection:0 target:self successAction:@selector(slaWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
+//        }
+//
+//        // return NO;
+//    }else if (textField.tag==97) {
+//        //[self removeKeyboard];
+//        [_priorityTextField resignFirstResponder];
+//         _priorityTextField.tintColor = [UIColor clearColor];
+//
+//        if (!_priorityArray||![_priorityArray count]) {
+//            _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
+//            priority_id=0;
+//
+//        }else{
+//            [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Priority",nil) rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
+//        }
+//        //return NO;
+//    }else{
+//
+//        //return YES;
+//    }
+//
+//}
+//
 
 
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     
-    if(textView == _textViewMsg)
+    if (textView == _emailTextView)
+    {
+        
+                //do not allow the first character to be space | do not allow more than one space
+                if ([text isEqualToString:@" "]) {
+                    if (!textView.text.length)
+                        return NO;
+                    //                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
+                    //                            return NO;
+                }
+        
+                // allow backspace
+                if ([textView.text stringByReplacingCharactersInRange:range withString:text].length < textView.text.length) {
+                    return YES;
+                }
+        
+                // in case you need to limit the max number of characters
+                if ([textView.text stringByReplacingCharactersInRange:range withString:text].length > 40) {
+                    return NO;
+                }
+        
+                // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
+                NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@. "];
+        
+                if ([text rangeOfCharacterFromSet:set].location == NSNotFound) {
+                    return NO;
+                }
+        
+    }else if(textView==_firstNameView || textView==_lastNameView){
+        
+                //do not allow the first character to be space | do not allow more than one space
+                if ([text isEqualToString:@" "]) {
+                    if (!textView.text.length)
+                        return NO;
+                }
+                // allow backspace
+                if ([textView.text stringByReplacingCharactersInRange:range withString:text].length < textView.text.length) {
+                    return YES;
+                }
+        
+                if (textView==_firstNameView || textView==_lastNameView) {
+                    // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
+        
+                    //        // in case you need to limit the max number of characters
+                            if ([textView.text stringByReplacingCharactersInRange:range withString:text].length > 15) {
+                                return NO;
+                            }
+        
+                    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+        
+                    if ([text rangeOfCharacterFromSet:set].location == NSNotFound) {
+                        return NO;
+                    }
+                }
+        
+    } else  if (textView == _mobileView) {
+        
+                     //do not allow the first character to be space | do not allow more than one space
+                            if ([text isEqualToString:@" "]) {
+                                if (!textView.text.length)
+                                    return NO;
+        //                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
+        //                            return NO;
+                            }
+        
+                    // allow backspace
+                    if ([textView.text stringByReplacingCharactersInRange:range withString:text].length < textView.text.length) {
+                        return YES;
+                    }
+        
+                    // in case you need to limit the max number of characters
+                     if ([textView.text stringByReplacingCharactersInRange:range withString:text].length > 15) {
+                         return NO;
+                    }
+        
+                    // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
+                    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"1234567890"];
+        
+                    if ([text rangeOfCharacterFromSet:set].location == NSNotFound) {
+                        return NO;
+                    }
+        
+    } else if(textView == _subjectView)
+    {
+        
+        if([text isEqualToString:@" "])
+        {
+            if(!textView.text.length)
+            {
+                return NO;
+            }
+        }
+        
+        if([textView.text stringByReplacingCharactersInRange:range withString:text].length < textView.text.length)
+        {
+            
+            return  YES;
+        }
+        
+        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >100)
+        {
+            return NO;
+        }
+        
+        NSCharacterSet *set=[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.';;:?()*&%, "];
+        
+        
+        if([text rangeOfCharacterFromSet:set].location == NSNotFound)
+        {
+            return NO;
+        }
+    }
+    
+    else if(textView == _textViewMsg)
     {
         
         if([text isEqualToString:@" "])
@@ -893,7 +1043,7 @@
                return NO;
            }
         
-        NSCharacterSet *set=[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "];
+        NSCharacterSet *set=[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.';;:?()*&%, "];
         
         
         if([text rangeOfCharacterFromSet:set].location == NSNotFound)
@@ -902,144 +1052,132 @@
         }
     }
 
+    
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-    
-    if (textField == _helpTopicTextField) {
-    
-        return NO;
-    }
-    if (textField == _priorityTextField) {
-        
-        return NO; // _assignTextField
-    }
-    
-    if (textField == _assignTextField) {
-        
-        return NO; // _assignTextField
-    }
-    
-    if (textField == _codeTextField) {
-        
-        return NO;
-    }
-    
-    // verify the text field you wanna validate
-    if (textField == _subjectTextField) {
-        
-        // do not allow the first character to be space | do not allow more than one space
-        if ([string isEqualToString:@" "]) {
-            if (!textField.text.length)
-                return NO;
-//            if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//
+//
+//    // verify the text field you wanna validate
+//    if (textField == _subjectTextField) {
+//
+//        // do not allow the first character to be space | do not allow more than one space
+//        if ([string isEqualToString:@" "]) {
+//            if (!textField.text.length)
 //                return NO;
-        }
-        
-        // allow backspace
-        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
-            return YES;
-        }
-        
-        ///NARENDRA-SUBJECT-100 char
-        // in case you need to limit the max number of characters
-        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 100) {
-            return NO;
-        }
-        
-        // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "];
-        
-        if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
-            return NO;
-        }
-        
-    }else  if (textField == _mobileTextField) {
-            
-             //do not allow the first character to be space | do not allow more than one space
-                    if ([string isEqualToString:@" "]) {
-                        if (!textField.text.length)
-                            return NO;
-//                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
+////            if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
+////                return NO;
+//        }
+//
+//        // allow backspace
+//        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
+//            return YES;
+//        }
+//
+//        ///NARENDRA-SUBJECT-100 char
+//        // in case you need to limit the max number of characters
+//        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 100) {
+//            return NO;
+//        }
+//
+//        // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
+//        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.&?,()*&:;' "];
+//
+//        if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
+//            return NO;
+//        }
+//
+//    }else  if (textField == _mobileTextField) {
+//
+//             //do not allow the first character to be space | do not allow more than one space
+//                    if ([string isEqualToString:@" "]) {
+//                        if (!textField.text.length)
 //                            return NO;
-                    }
-        
-            // allow backspace
-            if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
-                return YES;
-            }
-            
-            // in case you need to limit the max number of characters
-             if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 15) {
-                 return NO;
-            }
-        
-            // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-            NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"1234567890"];
-            
-            if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
-                return NO;
-            }
-        
-    } else  if (textField == _emailTextField) {
-        
-        //do not allow the first character to be space | do not allow more than one space
-        if ([string isEqualToString:@" "]) {
-            if (!textField.text.length)
-                return NO;
-            //                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
-            //                            return NO;
-        }
-        
-        // allow backspace
-        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
-            return YES;
-        }
-        
-        // in case you need to limit the max number of characters
-        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 40) {
-            return NO;
-        }
-        
-        // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@. "];
-        
-        if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
-            return NO;
-        }
-        
-    }/*else if(textField==_firstNameTextField || textField==_lastNameTextField || textField==_emailTextField|| textField==_msgTextField){ */
-    else if(textField==_firstNameTextField || textField==_lastNameTextField || textField==_emailTextField){
-    
-        //do not allow the first character to be space | do not allow more than one space
-        if ([string isEqualToString:@" "]) {
-            if (!textField.text.length)
-                return NO;
-        }
-        // allow backspace
-        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
-            return YES;
-        }
-        
-        if (textField==_firstNameTextField || textField==_lastNameTextField) {
-            // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-            
-            //        // in case you need to limit the max number of characters
-                    if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 15) {
-                        return NO;
-                    }
-            
-            NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "];
-            
-            if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
-                return NO;
-            }
-        }
-        
-    }
-    return YES;
+////                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
+////                            return NO;
+//                    }
+//
+//            // allow backspace
+//            if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
+//                return YES;
+//            }
+//
+//            // in case you need to limit the max number of characters
+//             if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 15) {
+//                 return NO;
+//            }
+//
+//            // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
+//            NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"1234567890"];
+//
+//            if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
+//                return NO;
+//            }
+//
+//    } else  if (textField == _emailTextField) {
+//
+//        //do not allow the first character to be space | do not allow more than one space
+//        if ([string isEqualToString:@" "]) {
+//            if (!textField.text.length)
+//                return NO;
+//            //                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
+//            //                            return NO;
+//        }
+//
+//        // allow backspace
+//        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
+//            return YES;
+//        }
+//
+//        // in case you need to limit the max number of characters
+//        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 40) {
+//            return NO;
+//        }
+//
+//        // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
+//        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@. "];
+//
+//        if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
+//            return NO;
+//        }
+//
+//    }/*else if(textField==_firstNameTextField || textField==_lastNameTextField || textField==_emailTextField|| textField==_msgTextField){ */
+//    else if(textField==_firstNameTextField || textField==_lastNameTextField || textField==_emailTextField){
+//
+//        //do not allow the first character to be space | do not allow more than one space
+//        if ([string isEqualToString:@" "]) {
+//            if (!textField.text.length)
+//                return NO;
+//        }
+//        // allow backspace
+//        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
+//            return YES;
+//        }
+//
+//        if (textField==_firstNameTextField || textField==_lastNameTextField) {
+//            // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
+//
+//            //        // in case you need to limit the max number of characters
+//                    if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 15) {
+//                        return NO;
+//                    }
+//
+//            NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "];
+//
+//            if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
+//                return NO;
+//            }
+//        }
+//
+//    }
+//
+//    return YES;
+//}
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    return NO;
 }
 
 
@@ -1047,41 +1185,42 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-   // [_emailTextField becomeFirstResponder ];
+//   // [_emailTextField becomeFirstResponder ];
+////    
+//    if (textField == _emailTextField) {
+//        [textField resignFirstResponder];
+//        [_firstNameTextField becomeFirstResponder];
+//    } else if (textField == _firstNameTextField) {
+//       
+//        [textField resignFirstResponder];
+//        [_lastNameTextField becomeFirstResponder];
+//    } else if (textField == _lastNameTextField) {
+//        
+//        [textField resignFirstResponder];
+//        [_codeTextField becomeFirstResponder];
+//    } else if (textField == _codeTextField)
+//    {
+//        [textField resignFirstResponder];
+//        [_mobileTextField becomeFirstResponder];
+//    }else if(textField == _mobileTextField)
+//    {
+//        [textField resignFirstResponder];
+//        [_helpTopicTextField becomeFirstResponder];
+//    }
+//    else if (textField == _helpTopicTextField) {
+//        
+//        [textField resignFirstResponder];
+//        [_subjectTextField becomeFirstResponder];
+//    } else if (textField == _subjectTextField) {
+//        
+//        [textField resignFirstResponder];
+//        [_textViewMsg becomeFirstResponder];
+//    }
+//
 //    
-    if (textField == _emailTextField) {
-        [textField resignFirstResponder];
-        [_firstNameTextField becomeFirstResponder];
-    } else if (textField == _firstNameTextField) {
-       
-        [textField resignFirstResponder];
-        [_lastNameTextField becomeFirstResponder];
-    } else if (textField == _lastNameTextField) {
-        
-        [textField resignFirstResponder];
-        [_codeTextField becomeFirstResponder];
-    } else if (textField == _codeTextField)
-    {
-        [textField resignFirstResponder];
-        [_mobileTextField becomeFirstResponder];
-    }else if(textField == _mobileTextField)
-    {
-        [textField resignFirstResponder];
-        [_helpTopicTextField becomeFirstResponder];
-    }
-    else if (textField == _helpTopicTextField) {
-        
-        [textField resignFirstResponder];
-        [_subjectTextField becomeFirstResponder];
-    } else if (textField == _subjectTextField) {
-        
-        [textField resignFirstResponder];
-        [_textViewMsg becomeFirstResponder];
-    }
-
-    
     return YES;
 }
+
 
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu

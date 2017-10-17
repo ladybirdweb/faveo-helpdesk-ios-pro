@@ -35,6 +35,7 @@
  @brief It is textfiled that allows a user to enter his email address.
  */
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextView *emailTextView;
 
 /*!
  @property firstNameTextField
@@ -42,6 +43,7 @@
  @brief It is textfiled that allows a user to enter his first name.
  */
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
+@property (weak, nonatomic) IBOutlet UITextView *firstNameView;
 
 /*!
  @property lastNameTextField
@@ -49,6 +51,7 @@
  @brief It is textfiled that allows a user to enter his last name.
  */
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
+@property (weak, nonatomic) IBOutlet UITextView *lastNameView;
 
 /*!
  @property codeTextField
@@ -63,6 +66,7 @@
  @brief It is textfiled that allows a user to enter his mobile number.
  */
 @property (weak, nonatomic) IBOutlet UITextField *mobileTextField;
+@property (weak, nonatomic) IBOutlet UITextView *mobileView;
 
 /*!
  @property helpTopicTextField
@@ -93,6 +97,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *subjectTextField;
 //@property (weak, nonatomic) IBOutlet UITextField *msgTextField;
+@property (weak, nonatomic) IBOutlet UITextView *subjectView;
 
 /*!
  @property priorityTextField
@@ -203,6 +208,7 @@
  @endcode
 
  */
+
 - (IBAction)helpTopicClicked:(id)sender;
 
 /*!
@@ -250,6 +256,7 @@
 
  @endocde
  */
+
 - (IBAction)priorityClicked:(id)sender;
 
 /*!
@@ -279,8 +286,11 @@
 
  @endocde
  */
-- (IBAction)countryCodeClicked:(id)sender;
+
 
 - (IBAction)staffClicked:(id)sender;
+
+- (IBAction)countryCodeClicked:(id)sender;
+
 
 @end

@@ -50,7 +50,14 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+   
+    // it is deprecated
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+//    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+//    [center removeAllDeliveredNotifications];
+//    [center removeAllPendingNotificationRequests];  // added 3 lines
+
     //[Fabric with:@[[Crashlytics class]]];
     
     //firebase FCM
@@ -244,7 +251,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 // Handle notification messages after display notification is tapped by the user.
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
 didReceiveNotificationResponse:(UNNotificationResponse *)response
-         withCompletionHandler:(void (^)())completionHandler {
+         withCompletionHandler:(void(^)(void))completionHandler {
     
     NSDictionary *userInfo = response.notification.request.content.userInfo;
     if (userInfo[kGCMMessageIDKey]) {

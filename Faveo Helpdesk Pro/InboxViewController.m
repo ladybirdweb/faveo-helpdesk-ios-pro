@@ -715,6 +715,9 @@
     
        
             cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
+    
+    
+    
 }@catch (NSException *exception)
         {
             // Print exception information
@@ -760,6 +763,7 @@
     //    globalVariables.priotity_name=[finaldic objectForKey:@"priotity_name"];
     //    globalVariables.department_name=[finaldic objectForKey:@"department_name"];
     
+
     [self.navigationController pushViewController:td animated:YES];
 }
 
