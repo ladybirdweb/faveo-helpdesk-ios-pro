@@ -59,5 +59,6 @@
 
  */
 -(void)setUserProfileimage:(NSString*)imageUrl;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

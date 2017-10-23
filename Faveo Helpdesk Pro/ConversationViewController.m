@@ -28,6 +28,8 @@
     NSUserDefaults *userDefaults;
     NSMutableArray *mutableArray;
     GlobalVariables *globalVariable;
+    int selectedIndex;
+    
 }
 @property(nonatomic,strong) UILabel *noDataLabel;
 @property (nonatomic, strong) CNPPopupController *popupController;
@@ -37,6 +39,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+     selectedIndex = -1;
     
     NSLog(@"ConversationVC");
     _activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -213,6 +217,30 @@
         [cell.internalNoteLabel setHidden:NO];
     }
     
+//         NSURL *url = [NSURL URLWithString:@"http://www.amazon.com"];
+//        [cell.webView loadRequest:[NSURLRequest requestWithURL:url]];
+    
+    
+    NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
+    //    [self showWebview:@"" body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];/
+    
+    
+    NSString *body= [finaldic objectForKey:@"body"];  //@"Mallikarjun";
+    NSRange range = [body rangeOfString:@"<body"];
+    
+    if(range.location != NSNotFound) {
+        // Adjust style for mobile
+        float inset = 40;
+        NSString *style = [NSString stringWithFormat:@"<style>div {max-width: %fpx;}</style>", self.view.bounds.size.width - inset];
+        body = [NSString stringWithFormat:@"%@%@%@", [body substringToIndex:range.location], style, [body substringFromIndex:range.location]];
+    }
+    [cell.webView loadHTMLString:body baseURL:nil];
+    
+    
+    
+    
+    
+    
        
    //NSString *system= @"System";
    NSString *fName=[finaldic objectForKey:@"first_name"];
@@ -272,10 +300,53 @@
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if(selectedIndex == indexPath.row)
+    {
+        // return  200;
+        
+        UITableViewCell   *cell = [self tableView: tableView cellForRowAtIndexPath: indexPath];
+        return cell.bounds.size.height;
+    }
+    else
+    {
+        return  90;
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
-    [self showWebview:@"" body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];
+   // NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
+//    [self showWebview:@"" body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];
+    
+    
+    //user taps expnmade view
+    
+    if(selectedIndex == indexPath.row)
+    {
+        
+        selectedIndex =-1;
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil]  withRowAnimation:UITableViewRowAnimationFade ];
+        return;
+    }
+    
+    //user taps diff row
+    if(selectedIndex != -1)
+    {
+        
+        NSIndexPath *prevPath= [NSIndexPath indexPathForRow:selectedIndex inSection:0];
+        selectedIndex=(int)indexPath.row;
+        
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:prevPath, nil]  withRowAnimation:UITableViewRowAnimationFade ];
+    }
+    
+    
+    //uiser taps new row with none expanded
+    selectedIndex =(int)indexPath.row;
+    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil]  withRowAnimation:UITableViewRowAnimationFade ];
+    
 }
 
 
