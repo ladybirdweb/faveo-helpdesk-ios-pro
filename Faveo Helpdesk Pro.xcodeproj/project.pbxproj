@@ -30,6 +30,10 @@
 		D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */; };
 		D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */; };
 		D9CF41AD1F4C15320087BBFA /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */; };
+		D9D2F3591F9E131E00BC5456 /* CFLabelOnLeftButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D2F3511F9E131E00BC5456 /* CFLabelOnLeftButton.m */; };
+		D9D2F35A1F9E131E00BC5456 /* CFMultistageConditionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D2F3541F9E131E00BC5456 /* CFMultistageConditionTableView.m */; };
+		D9D2F35B1F9E131E00BC5456 /* CFMultistageDropdownMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D2F3561F9E131E00BC5456 /* CFMultistageDropdownMenuView.m */; };
+		D9D2F35C1F9E131E00BC5456 /* UIView+CFFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D2F3581F9E131E00BC5456 /* UIView+CFFrame.m */; };
 		D9DBD3461E07ACFC00219F93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3451E07ACFC00219F93 /* main.m */; };
 		D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3481E07ACFC00219F93 /* AppDelegate.m */; };
 		D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DBD34D1E07ACFC00219F93 /* Main.storyboard */; };
@@ -147,6 +151,15 @@
 		D9B6E2F11E9B8B9B00AAB724 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxViewController.m; sourceTree = "<group>"; };
 		D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
+		D9D2F3501F9E131E00BC5456 /* CFLabelOnLeftButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFLabelOnLeftButton.h; sourceTree = "<group>"; };
+		D9D2F3511F9E131E00BC5456 /* CFLabelOnLeftButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFLabelOnLeftButton.m; sourceTree = "<group>"; };
+		D9D2F3521F9E131E00BC5456 /* CFMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFMacro.h; sourceTree = "<group>"; };
+		D9D2F3531F9E131E00BC5456 /* CFMultistageConditionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFMultistageConditionTableView.h; sourceTree = "<group>"; };
+		D9D2F3541F9E131E00BC5456 /* CFMultistageConditionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFMultistageConditionTableView.m; sourceTree = "<group>"; };
+		D9D2F3551F9E131E00BC5456 /* CFMultistageDropdownMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFMultistageDropdownMenuView.h; sourceTree = "<group>"; };
+		D9D2F3561F9E131E00BC5456 /* CFMultistageDropdownMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFMultistageDropdownMenuView.m; sourceTree = "<group>"; };
+		D9D2F3571F9E131E00BC5456 /* UIView+CFFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CFFrame.h"; sourceTree = "<group>"; };
+		D9D2F3581F9E131E00BC5456 /* UIView+CFFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CFFrame.m"; sourceTree = "<group>"; };
 		D9D66BD41E97B14C000214FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		D9D66BD81E97CD0F000214FF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		D9D66BDA1E97CD1B000214FF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
@@ -293,6 +306,7 @@
 		D92C35C71F750F83001DD67D /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D9D2F34F1F9E131E00BC5456 /* MultiStageDropDown */,
 				D92C35C81F750FDE001DD67D /* LGPlusButtonsView */,
 				D9AAFABA1F5D480E00891CA5 /* Pop Over */,
 			);
@@ -321,6 +335,23 @@
 				D9AAFAB81F5D475400891CA5 /* FTPopOverMenu.m */,
 			);
 			name = "Pop Over";
+			sourceTree = "<group>";
+		};
+		D9D2F34F1F9E131E00BC5456 /* MultiStageDropDown */ = {
+			isa = PBXGroup;
+			children = (
+				D9D2F3501F9E131E00BC5456 /* CFLabelOnLeftButton.h */,
+				D9D2F3511F9E131E00BC5456 /* CFLabelOnLeftButton.m */,
+				D9D2F3521F9E131E00BC5456 /* CFMacro.h */,
+				D9D2F3531F9E131E00BC5456 /* CFMultistageConditionTableView.h */,
+				D9D2F3541F9E131E00BC5456 /* CFMultistageConditionTableView.m */,
+				D9D2F3551F9E131E00BC5456 /* CFMultistageDropdownMenuView.h */,
+				D9D2F3561F9E131E00BC5456 /* CFMultistageDropdownMenuView.m */,
+				D9D2F3571F9E131E00BC5456 /* UIView+CFFrame.h */,
+				D9D2F3581F9E131E00BC5456 /* UIView+CFFrame.m */,
+			);
+			name = MultiStageDropDown;
+			path = ../../../MultiStageDropDown;
 			sourceTree = "<group>";
 		};
 		D9DBD3381E07ACFC00219F93 = {
@@ -763,6 +794,7 @@
 				D9A2FCB01F18904000C829DD /* NotificationViewController.m in Sources */,
 				D9EB9FBD1E07C4490001115F /* SlideNavigationContorllerAnimatorFade.m in Sources */,
 				D9EB9FA51E07C3270001115F /* MyTicketsViewController.m in Sources */,
+				D9D2F3591F9E131E00BC5456 /* CFLabelOnLeftButton.m in Sources */,
 				D9EB9FA81E07C3270001115F /* TicketDetailViewController.m in Sources */,
 				D9EB9FAC1E07C3270001115F /* DetailViewController.m in Sources */,
 				D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */,
@@ -776,7 +808,9 @@
 				D9EB9FAA1E07C3270001115F /* ClientDetailViewController.m in Sources */,
 				D9EB9FA31E07C3270001115F /* TrashTicketsViewController.m in Sources */,
 				D9EB9F7F1E07C2F00001115F /* OpenCloseTableViewCell.m in Sources */,
+				D9D2F35B1F9E131E00BC5456 /* CFMultistageDropdownMenuView.m in Sources */,
 				D9EB9F9F1E07C3270001115F /* LeftMenuViewController.m in Sources */,
+				D9D2F35C1F9E131E00BC5456 /* UIView+CFFrame.m in Sources */,
 				D9DBD3461E07ACFC00219F93 /* main.m in Sources */,
 				D92C35D71F7682B5001DD67D /* EditDetailTableViewController.m in Sources */,
 				D9EB9F5B1E07C2A80001115F /* Utils.m in Sources */,
@@ -797,6 +831,7 @@
 				D9EB9FA91E07C3270001115F /* AboutViewController.m in Sources */,
 				D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */,
 				D9EB9FA41E07C3270001115F /* ClosedTicketsViewController.m in Sources */,
+				D9D2F35A1F9E131E00BC5456 /* CFMultistageConditionTableView.m in Sources */,
 				D9EB9FC11E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
 				D9EB9F791E07C2F00001115F /* ClientListTableViewCell.m in Sources */,
 				D9EB9FBE1E07C4490001115F /* SlideNavigationContorllerAnimatorScale.m in Sources */,
