@@ -714,7 +714,7 @@
                                                         atPosition:RMessagePositionNavBarOverlay
                                               canBeDismissedByUser:YES];
 
-                        
+                      //   [ self.navigationController popViewControllerAnimated:YES];
                         
                     });
                 }

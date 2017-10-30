@@ -105,5 +105,10 @@
 @property (strong, nonatomic) NSString *SpamStausLabel;
 
 
+@property (strong, nonatomic) NSString *emailAddRequester;
+@property (strong, nonatomic) NSString *firstNameAddRequester;
+@property (strong, nonatomic) NSString *lastAddRequester;
+@property (strong, nonatomic) NSString *mobileAddRequester;
+
 
 @end

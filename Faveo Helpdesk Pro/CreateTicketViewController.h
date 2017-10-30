@@ -292,5 +292,10 @@
 
 - (IBAction)countryCodeClicked:(id)sender;
 
+- (IBAction)addRequesterClicked:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIImageView *addReqImg;
+
+
 
 @end

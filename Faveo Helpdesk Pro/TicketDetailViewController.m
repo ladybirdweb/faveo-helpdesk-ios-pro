@@ -1201,6 +1201,8 @@
                         TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
                         [self.navigationController pushViewController:td animated:YES];
                         
+                      
+
 
                        // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
                     });

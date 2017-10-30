@@ -16,6 +16,7 @@
 		D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92CE70C1F3D706600D98708 /* ClientListTableViewCell.xib */; };
 		D92E2E981EEBFC0B00A0D456 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D92E2E971EEBFC0B00A0D456 /* GoogleService-Info.plist */; };
 		D9532C131E9CE9090063B318 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9532C151E9CE9090063B318 /* Localizable.strings */; };
+		D953D53E1FA321420077D519 /* AddRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = D953D53D1FA321420077D519 /* AddRequester.m */; };
 		D955A5511F2A05630045429F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D955A5501F2A05630045429F /* Assets.xcassets */; };
 		D97B13791E080BA8007F46DA /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B13781E080BA8007F46DA /* UserNotifications.framework */; };
 		D97B137B1E080BC3007F46DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137A1E080BC3007F46DA /* UIKit.framework */; };
@@ -124,6 +125,8 @@
 		D9532C171E9CE90E0063B318 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D9532C181E9CE90F0063B318 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D9532C191E9CE9110063B318 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D953D53C1FA321420077D519 /* AddRequester.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRequester.h; sourceTree = "<group>"; };
+		D953D53D1FA321420077D519 /* AddRequester.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRequester.m; sourceTree = "<group>"; };
 		D955A5501F2A05630045429F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Faveo Helpdesk Pro.entitlements"; sourceTree = "<group>"; };
 		D97B13781E080BA8007F46DA /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
@@ -497,6 +500,8 @@
 				D92C35D61F7682B5001DD67D /* EditDetailTableViewController.m */,
 				D9A2FCAE1F18904000C829DD /* NotificationViewController.h */,
 				D9A2FCAF1F18904000C829DD /* NotificationViewController.m */,
+				D953D53C1FA321420077D519 /* AddRequester.h */,
+				D953D53D1FA321420077D519 /* AddRequester.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -829,6 +834,7 @@
 				D92C35D11F750FDE001DD67D /* LGPlusButton.m in Sources */,
 				D9EB9F771E07C2F00001115F /* TicketTableViewCell.m in Sources */,
 				D9EB9FA91E07C3270001115F /* AboutViewController.m in Sources */,
+				D953D53E1FA321420077D519 /* AddRequester.m in Sources */,
 				D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */,
 				D9EB9FA41E07C3270001115F /* ClosedTicketsViewController.m in Sources */,
 				D9D2F35A1F9E131E00BC5456 /* CFMultistageConditionTableView.m in Sources */,

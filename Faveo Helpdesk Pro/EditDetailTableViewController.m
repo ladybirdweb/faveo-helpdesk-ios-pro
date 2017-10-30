@@ -109,10 +109,13 @@
     //[_activityIndicatorObject startAnimating];
     [self reload];
     
+
+   
     [self readFromPlist];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
 }
+
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
@@ -321,9 +324,12 @@
                             
                             if (([[dic objectForKey:@"assignee_email"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"assignee_email"] length] == 0 )) {
                                 // _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-                                _assinTextField.text=NSLocalizedString(@"Select Assignee",nil);
+                                _assinTextField.text=NSLocalizedString(@"Not Available",nil);
                             }else{
-                                _assinTextField.text= [dic objectForKey:@"assignee_email"];
+                                NSString * name= [NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"assignee_first_name"],[dic objectForKey:@"assignee_last_name"]];
+                                
+                                _assinTextField.text=name;
+                                // _assinTextField.text= [dic objectForKey:@"assignee_email"];
                             }
                             
                             // _statusTextField.text= [dic objectForKey:@"status_name"];

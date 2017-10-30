@@ -21,6 +21,8 @@
 #import "Dat.h"
 #import "RMessage.h"
 #import "RMessageView.h"
+#import "AddRequester.h"
+#import "GlobalVariables.h"
 
 
 @interface CreateTicketViewController ()<RMessageProtocol>{
@@ -39,6 +41,7 @@
     NSMutableArray * helpTopic_idArray;
     NSMutableArray * staff_idArray;
     
+    GlobalVariables *globalVariables;
     NSDictionary *priDicc1;
 }
 
@@ -63,6 +66,8 @@
     
     UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
+    globalVariables=[GlobalVariables sharedInstance];
+    
     [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
     [self.textViewMsg setInputAccessoryView:toolBar];
     [self.mobileView setInputAccessoryView:toolBar];
@@ -84,6 +89,8 @@
     
     utils=[[Utils alloc]init];
     
+   
+    
     userDefaults=[NSUserDefaults standardUserDefaults];
     //_codeTextField.text=[self setDefaultCountryCode];
     
@@ -91,12 +98,65 @@
     
     [self setTitle:NSLocalizedString(@"CreateTicket",nil)];
     
+    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
+                                    initWithTitle:@"Clear"
+                                    style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(flipView)];
+    self.navigationItem.rightBarButtonItem = clearButton;
+    
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTaped:)];
+    singleTap.numberOfTapsRequired = 1;
+    singleTap.numberOfTouchesRequired = 1;
+    [_addReqImg addGestureRecognizer:singleTap];
+    [_addReqImg setUserInteractionEnabled:YES];
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
      self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
 }
 
+- (void)imageTaped:(UIGestureRecognizer *)gestureRecognizer {
+    NSLog(@"Image Button Tapped");
+    
+    AddRequester *wc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]
+                        instantiateViewControllerWithIdentifier:@"addRequest"];
+    [self.navigationController pushViewController:wc animated:YES];
+
+}
+
+
+
+-(IBAction)flipView
+{
+    NSLog(@"Clciked");
+    _emailTextView.text=@"";
+    _firstNameView.text=@"";
+    _lastNameView.text=@"";
+    _mobileView.text=@"";
+    _codeTextField.text=@"";
+    _helpTopicTextField.text=@"";
+    _subjectView.text=@"";
+    _priorityTextField.text=@"";
+    _assignTextField.text=@"";
+    _textViewMsg.text=@"";
+    
+    globalVariables.emailAddRequester=@"";
+    globalVariables.firstNameAddRequester=@"";
+    globalVariables.lastAddRequester=@"";
+    globalVariables.mobileAddRequester=@"";
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    _emailTextView.text=globalVariables.emailAddRequester;
+    _firstNameView.text=globalVariables.firstNameAddRequester;
+    _lastNameView.text=globalVariables.lastAddRequester;
+    _mobileView.text=globalVariables.mobileAddRequester;
+}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
    // _submitButton.userInteractionEnabled = false;
@@ -104,6 +164,10 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
 
 }
+
+
+
+
 -(void)readFromPlist{
     // Read plist from bundle and get Root Dictionary out of it
     NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
@@ -295,6 +359,22 @@
       [self.view endEditing:YES];
     [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
 }
+
+- (IBAction)addRequesterClicked:(id)sender {
+    
+    
+    AddRequester *wc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]
+                                    instantiateViewControllerWithIdentifier:@"addRequest"];
+    [self.navigationController pushViewController:wc animated:YES];
+    
+   // AddRequester *req=[self.storyboard instantiateViewControllerWithIdentifier:@"addRequest"];
+    
+    
+    //[self.navigationController pushViewController:req animated:YES];
+}
+
+
+
 
 //- (IBAction)countryCodeClicked:(id)sender {
 //    [self removeKeyboard];
@@ -1174,6 +1254,9 @@
 //
 //    return YES;
 //}
+
+
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {

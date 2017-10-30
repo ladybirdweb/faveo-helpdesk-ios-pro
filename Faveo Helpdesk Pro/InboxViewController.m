@@ -28,8 +28,9 @@
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
 
+// CFMultistageConditionTableView
 
-
+//CFMultistageDropdownMenuView
 @interface InboxViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
     Utils *utils;
     UIRefreshControl *refresh;
@@ -53,6 +54,8 @@
     [super viewDidLoad];
     
      NSLog(@"Naa-Inbox");
+    
+    _multistageDropdownMenuView.tag=99;
     
     self.view.backgroundColor=[UIColor grayColor];
     [self.view addSubview:self.multistageDropdownMenuView];
@@ -102,6 +105,7 @@
     
         // Do any additional setup after loading the view.
 }
+
 
 -(void)reload{
     
