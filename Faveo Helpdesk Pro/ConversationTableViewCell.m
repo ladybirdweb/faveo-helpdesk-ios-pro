@@ -14,6 +14,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+//        NSURL *url = [NSURL URLWithString:@"http://www.amazon.com"];
+//        [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

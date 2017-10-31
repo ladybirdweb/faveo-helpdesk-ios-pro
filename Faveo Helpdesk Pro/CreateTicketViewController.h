@@ -203,10 +203,10 @@
  
  @code
  
-- (IBAction)helpTopicClicked:(id)sender;
+ - (IBAction)helpTopicClicked:(id)sender;
  
  @endcode
-
+ 
  */
 
 - (IBAction)helpTopicClicked:(id)sender;
@@ -220,10 +220,10 @@
  
  @code
  
-- (IBAction)slaClicked:(id)sender;
+ - (IBAction)slaClicked:(id)sender;
  
  @endcode
-
+ 
  */
 - (IBAction)slaClicked:(id)sender;
 
@@ -239,7 +239,7 @@
  - (IBAction)deptClicked:(id)sender;
  
  @endcode
-
+ 
  */
 - (IBAction)deptClicked:(id)sender;
 
@@ -253,7 +253,7 @@
  @code
  
  - (IBAction)priorityClicked:(id)sender;
-
+ 
  @endocde
  */
 
@@ -271,7 +271,7 @@
  - (IBAction)submitClicked:(id)sender;
  
  @endcode
-
+ 
  */
 - (IBAction)submitClicked:(id)sender;
 
@@ -283,7 +283,7 @@
  @code
  
  - (IBAction)countryCodeClicked:(id)sender;
-
+ 
  @endocde
  */
 
@@ -292,5 +292,11 @@
 
 - (IBAction)countryCodeClicked:(id)sender;
 
+- (IBAction)addRequesterClicked:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIImageView *addReqImg;
+
+
 
 @end
+

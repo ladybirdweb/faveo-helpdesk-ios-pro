@@ -91,12 +91,13 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
 
-    
+   
     NSLog(@"Ticket is isssss : %@",globalVariables.iD);
     
     [self getDependencies];
     
 }
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -1198,6 +1199,7 @@
                         
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
                        
+                        
                         TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
                         [self.navigationController pushViewController:td animated:YES];
                         

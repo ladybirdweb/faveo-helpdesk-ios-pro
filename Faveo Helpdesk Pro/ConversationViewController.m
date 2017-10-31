@@ -28,6 +28,8 @@
     NSUserDefaults *userDefaults;
     NSMutableArray *mutableArray;
     GlobalVariables *globalVariable;
+    int selectedIndex;
+    
 }
 @property(nonatomic,strong) UILabel *noDataLabel;
 @property (nonatomic, strong) CNPPopupController *popupController;
@@ -37,6 +39,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    selectedIndex = -1;
     
     NSLog(@"ConversationVC");
     _activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -63,7 +67,7 @@
         [self.refreshControl endRefreshing];
         //[_activityIndicatorObject stopAnimating];
         [[AppDelegate sharedAppdelegate] hideProgressView];
-       // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -86,54 +90,54 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/ticket-thread?api_key=%@&ip=%@&token=%@&id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariable.iD];
         
-  @try{
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
-            if (error || [msg containsString:@"Error"]) {
-                [self.refreshControl endRefreshing];
-                //[_activityIndicatorObject stopAnimating];
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                if (msg) {
+        @try{
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                
+                if (error || [msg containsString:@"Error"]) {
+                    [self.refreshControl endRefreshing];
+                    //[_activityIndicatorObject stopAnimating];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    if (msg) {
+                        
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        
+                    }else if(error)  {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+                    }
                     
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    
-                }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+                    return ;
                 }
                 
-                return ;
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self reload];
+                    NSLog(@"Thread--NO4-call-getConversation");
+                    return;
+                }
                 
-                [self reload];
-                NSLog(@"Thread--NO4-call-getConversation");
-                return;
-            }
-            
-            if (json) {
-                //NSError *error;
-                mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
-                NSLog(@"Thread-NO4--getConversationAPI--%@",json);
-                mutableArray=[json copy];
-                NSLog(@"Thread-NO4.1getConversation-dic--%@", mutableArray);
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [self.refreshControl endRefreshing];
-                         [[AppDelegate sharedAppdelegate] hideProgressView];
-                        //[_activityIndicatorObject stopAnimating];
-                        [self.tableView reloadData];
+                if (json) {
+                    //NSError *error;
+                    mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
+                    NSLog(@"Thread-NO4--getConversationAPI--%@",json);
+                    mutableArray=[json copy];
+                    NSLog(@"Thread-NO4.1getConversation-dic--%@", mutableArray);
+                    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [self.refreshControl endRefreshing];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            //[_activityIndicatorObject stopAnimating];
+                            [self.tableView reloadData];
+                        });
                     });
-                });
-            }
-            
-            NSLog(@"Thread-NO5-getConversation-closed");
-            
-        }];
-  }@catch (NSException *exception)
+                }
+                
+                NSLog(@"Thread-NO5-getConversation-closed");
+                
+            }];
+        }@catch (NSException *exception)
         {
             // Print exception information
             NSLog( @"NSException caught in reload method in Conversation ViewController\n" );
@@ -147,7 +151,7 @@
             NSLog( @"In finally block");
             
         }
-
+        
     }
 }
 
@@ -202,59 +206,83 @@
     }
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
     
-@try{
-    cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
-  
-    NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
-    if (i==0) {
-        [cell.internalNoteLabel setHidden:YES];
-    }
-    if(i==1){
-        [cell.internalNoteLabel setHidden:NO];
-    }
-    
-       
-   //NSString *system= @"System";
-   NSString *fName=[finaldic objectForKey:@"first_name"];
-   NSString *lName=[finaldic objectForKey:@"last_name"];
-    
-   NSString *userName=[finaldic objectForKey:@"user_name"];
-    
-    [Utils isEmpty:fName];
-   [Utils isEmpty:lName];
-   [Utils isEmpty:userName];
-   
-    
+    @try{
+        cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
         
-     if  ([Utils isEmpty:fName] && [Utils isEmpty:lName]){
-         if(![Utils isEmpty:userName]){
-        userName=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"user_name"]];
-             cell.clientNameLabel.text=userName;
-         }else cell.clientNameLabel.text=@"System";
-    }
-    else if ((![Utils isEmpty:fName] || ![Utils isEmpty:lName]) || (![Utils isEmpty:fName] && ![Utils isEmpty:lName]))
-    {
-        fName=[NSString stringWithFormat:@"%@ %@",fName,lName];
+        NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
+        if (i==0) {
+            [cell.internalNoteLabel setHidden:YES];
+        }
+        if(i==1){
+            [cell.internalNoteLabel setHidden:NO];
+        }
         
-        cell.clientNameLabel.text=fName;
+        //         NSURL *url = [NSURL URLWithString:@"http://www.amazon.com"];
+        //        [cell.webView loadRequest:[NSURLRequest requestWithURL:url]];
         
-    }
-   
-   
-
-   // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-    
-    if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-    {
-        [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         
-    }
-    else
-    {
-        [cell setUserProfileimage:@"default_pic.png"];
-    }
-    
-}@catch (NSException *exception)
+        NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
+        //    [self showWebview:@"" body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];/
+        
+        
+        NSString *body= [finaldic objectForKey:@"body"];  //@"Mallikarjun";
+        NSRange range = [body rangeOfString:@"<body"];
+        
+        if(range.location != NSNotFound) {
+            // Adjust style for mobile
+            float inset = 40;
+            NSString *style = [NSString stringWithFormat:@"<style>div {max-width: %fpx;}</style>", self.view.bounds.size.width - inset];
+            body = [NSString stringWithFormat:@"%@%@%@", [body substringToIndex:range.location], style, [body substringFromIndex:range.location]];
+        }
+        [cell.webView loadHTMLString:body baseURL:nil];
+        
+        
+        
+        
+        
+        
+        
+        //NSString *system= @"System";
+        NSString *fName=[finaldic objectForKey:@"first_name"];
+        NSString *lName=[finaldic objectForKey:@"last_name"];
+        
+        NSString *userName=[finaldic objectForKey:@"user_name"];
+        
+        [Utils isEmpty:fName];
+        [Utils isEmpty:lName];
+        [Utils isEmpty:userName];
+        
+        
+        
+        if  ([Utils isEmpty:fName] && [Utils isEmpty:lName]){
+            if(![Utils isEmpty:userName]){
+                userName=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"user_name"]];
+                cell.clientNameLabel.text=userName;
+            }else cell.clientNameLabel.text=@"System";
+        }
+        else if ((![Utils isEmpty:fName] || ![Utils isEmpty:lName]) || (![Utils isEmpty:fName] && ![Utils isEmpty:lName]))
+        {
+            fName=[NSString stringWithFormat:@"%@ %@",fName,lName];
+            
+            cell.clientNameLabel.text=fName;
+            
+        }
+        
+        
+        
+        // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        
+        if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+        {
+            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+            
+        }
+        else
+        {
+            [cell setUserProfileimage:@"default_pic.png"];
+        }
+        
+    }@catch (NSException *exception)
     {
         // Print exception information
         NSLog( @"NSException caught in CellForRowAtIndexPath methos in Conversation ViewController\n" );
@@ -268,14 +296,57 @@
         NSLog( @"In finally block");
         
     }
-
+    
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if(selectedIndex == indexPath.row)
+    {
+        // return  200;
+        
+        UITableViewCell   *cell = [self tableView: tableView cellForRowAtIndexPath: indexPath];
+        return cell.bounds.size.height;
+    }
+    else
+    {
+        return  90;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
-    [self showWebview:@"" body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];
+    // NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
+    //    [self showWebview:@"" body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];
+    
+    
+    //user taps expnmade view
+    
+    if(selectedIndex == indexPath.row)
+    {
+        
+        selectedIndex =-1;
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil]  withRowAnimation:UITableViewRowAnimationFade ];
+        return;
+    }
+    
+    //user taps diff row
+    if(selectedIndex != -1)
+    {
+        
+        NSIndexPath *prevPath= [NSIndexPath indexPathForRow:selectedIndex inSection:0];
+        selectedIndex=(int)indexPath.row;
+        
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:prevPath, nil]  withRowAnimation:UITableViewRowAnimationFade ];
+    }
+    
+    
+    //uiser taps new row with none expanded
+    selectedIndex =(int)indexPath.row;
+    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil]  withRowAnimation:UITableViewRowAnimationFade ];
+    
 }
 
 
@@ -313,7 +384,7 @@
     // webview.scalesPageToFit = YES;
     webview.autoresizesSubviews = YES;
     //webview.delegate=self;
-webview.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+    webview.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
     
     NSRange range = [body rangeOfString:@"<body"];
     
@@ -362,3 +433,4 @@ webview.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingF
 
 
 @end
+

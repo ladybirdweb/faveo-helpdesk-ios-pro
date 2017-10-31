@@ -25,7 +25,7 @@
 #import "InboxViewController.h"
 
 
-@interface EditDetailTableViewController ()<RMessageProtocol>{
+@interface EditDetailTableViewController ()<RMessageProtocol,UITextViewDelegate,UITextFieldDelegate>{
     
     Utils *utils;
     NSUserDefaults *userDefaults;
@@ -82,6 +82,14 @@
     staff_id=[[NSNumber alloc]init];
     
     
+    _subjectTextView.delegate=self;
+    _priorityTextField.delegate=self;
+    _helpTopicTextField.delegate=self;
+    _sourceTextField.delegate=self;
+    _typeTextField.delegate=self;
+    _assinTextField.delegate=self;
+    
+    
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
     
@@ -91,6 +99,7 @@
     [self.subjectTextView setInputAccessoryView:toolBar];
     
     _saveButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+  //  _saveButton.hidden=YES;
     _imgViewLoading = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 78, 78)];
     _imgViewLoading.image=[UIImage imageNamed:@"loading_imgBlue_78x78"];
     _imgViewLoading.center=CGPointMake(self.view.frame.size.width/2,(self.view.frame.size.height/2)-100);
