@@ -17,9 +17,10 @@
 #import "RMessageView.h"
 #import "AddRequester.h"
 #import "GlobalVariables.h"
+#import "BDCustomAlertView.h"
 
 
-@interface AddRequester ()<RMessageProtocol>{
+@interface AddRequester ()<RMessageProtocol,UITextViewDelegate>{
     
     Utils *utils;
     NSUserDefaults *userDefaults;
@@ -51,7 +52,13 @@
     [self.emailTextView setInputAccessoryView:toolBar];
     [self.companyName setInputAccessoryView:toolBar];
     
+    _emailTextView.delegate=self;
+    _firstNameView.delegate=self;
+    _lastNameView.delegate=self;
+    _mobileView.delegate=self;
+    _companyName.delegate=self;
     
+ 
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
     
@@ -71,11 +78,17 @@
                                    action:@selector(flipView)];
     self.navigationItem.rightBarButtonItem = clearButton;
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style: UIBarButtonItemStylePlain target:self action:@selector(Back)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style: UIBarButtonItemStylePlain target:self action:@selector(Back)];
     self.navigationItem.leftBarButtonItem = backButton;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    _submitButton.hidden=YES;
+    
+    //  _titleBar.backgroundColor =  [UIColor hx_colorWithHexRGBAString:@"#F9E9E6"];
+    
+    self.headerTitleView.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F9E9E6"];
+    
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
 }
@@ -499,11 +512,47 @@
     _companyName.text=@"";
     _mobileView.text=@"";
 }
+
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    _submitButton.hidden = NO;
+}
+
 - (IBAction)Back
 {
+    BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
     
-    CreateTicketViewController *create=[self.storyboard instantiateViewControllerWithIdentifier:@"CreateTicket"];
-    [self.navigationController pushViewController:create animated:YES];
+    [customAlert showAlertWithTitle:@"Alert" message:@" Discard Changes ?" cancelButtonTitle:@"No" successButtonTitle:@"Yes" withSuccessBlock:^{
+        
+         [self.navigationController popViewControllerAnimated:YES];
+    } cancelBlock:^{
+        
+    }];
+    
+
+    
+//    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Attention"
+//                                                                   message:@"Are you sure want to discard this message."
+//                                                            preferredStyle:UIAlertControllerStyleAlert];
+//
+//    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+//                                                          handler:^(UIAlertAction * action) {
+//                                                            //  self.textview.text = nil;
+//                                                              self.emailTextView.text=nil;
+//                                                              self.firstNameView.text=nil;
+//                                                              self.lastNameView.text=nil;
+//                                                              self.companyName.text=nil;
+//                                                              self.mobileView.text=nil;
+//
+//                                                              [self.navigationController popViewControllerAnimated:YES];
+//                                                          }];
+//
+//    [alert addAction:defaultAction];
+//    [self presentViewController:alert animated:YES completion:nil];
+//    NSLog(@"sandip");
+//    [self.navigationController popViewControllerAnimated:YES];
+    
+//    CreateTicketViewController *create=[self.storyboard instantiateViewControllerWithIdentifier:@"CreateTicket"];
+//    [self.navigationController pushViewController:create animated:YES];
     // [self dismissViewControllerAnimated:YES completion:nil]; // ios 6
 }
 

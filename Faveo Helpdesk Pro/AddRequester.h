@@ -31,17 +31,9 @@
 
 @property (nonatomic, strong) NSArray * codeArray;
 
-
-
-
-
-
-
-
-
-
-
 @property (weak, nonatomic) IBOutlet UITextView *companyName;
+
+@property (weak, nonatomic) IBOutlet UIView *headerTitleView;
 
 
 @end
