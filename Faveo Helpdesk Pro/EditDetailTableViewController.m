@@ -25,7 +25,7 @@
 #import "InboxViewController.h"
 
 
-@interface EditDetailTableViewController ()<RMessageProtocol,UITextViewDelegate,UITextFieldDelegate>{
+@interface EditDetailTableViewController ()<RMessageProtocol>{
     
     Utils *utils;
     NSUserDefaults *userDefaults;
@@ -82,14 +82,6 @@
     staff_id=[[NSNumber alloc]init];
     
     
-    _subjectTextView.delegate=self;
-    _priorityTextField.delegate=self;
-    _helpTopicTextField.delegate=self;
-    _sourceTextField.delegate=self;
-    _typeTextField.delegate=self;
-    _assinTextField.delegate=self;
-    
-    
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
     
@@ -99,7 +91,6 @@
     [self.subjectTextView setInputAccessoryView:toolBar];
     
     _saveButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
-  //  _saveButton.hidden=YES;
     _imgViewLoading = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 78, 78)];
     _imgViewLoading.image=[UIImage imageNamed:@"loading_imgBlue_78x78"];
     _imgViewLoading.center=CGPointMake(self.view.frame.size.width/2,(self.view.frame.size.height/2)-100);
@@ -118,10 +109,13 @@
     //[_activityIndicatorObject startAnimating];
     [self reload];
     
+
+   
     [self readFromPlist];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
 }
+
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
@@ -330,9 +324,12 @@
                             
                             if (([[dic objectForKey:@"assignee_email"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"assignee_email"] length] == 0 )) {
                                 // _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-                                _assinTextField.text=NSLocalizedString(@"Select Assignee",nil);
+                                _assinTextField.text=NSLocalizedString(@"Not Available",nil);
                             }else{
-                                _assinTextField.text= [dic objectForKey:@"assignee_email"];
+                                NSString * name= [NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"assignee_first_name"],[dic objectForKey:@"assignee_last_name"]];
+                                
+                                _assinTextField.text=name;
+                                // _assinTextField.text= [dic objectForKey:@"assignee_email"];
                             }
                             
                             // _statusTextField.text= [dic objectForKey:@"status_name"];
@@ -687,20 +684,28 @@
         source_id = [NSNumber numberWithInteger:1+[_sourceArray indexOfObject:_sourceTextField.text]];
         status_id = [NSNumber numberWithInteger:1+[_statusArray indexOfObject:_statusTextField.text]];
         
-        //staff_id = [NSNumber numberWithInteger:1+[_assignArray indexOfObject:_assinTextField.text]];
-        
+//        staff_id = [NSNumber numberWithInteger:1+[_assignArray indexOfObject:_assinTextField.text]];
+//
+//           NSLog(@"stffId111111 is : %@",staff_id);
+//          NSLog(@"stffId22222 is : %@",staff_id);
         
         sla_id=[NSNumber numberWithInt:1];
         [[AppDelegate sharedAppdelegate] showProgressView];
         
         NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
-        
-        if([staffID isEqualToString:@"(null)"] )
+       
+       
+        NSLog(@"stffId is : %@",staffID);
+        NSLog(@"stffId is : %@",staffID);
+        //int number = [string integerValue];
+        if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
         {
             
-            staffID=@"";
+            staffID=@"0";
+           
         }
         
+       
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&help_topic=%@&ticket_type=%@&ticket_priority=%@&ticket_source=%@&subject=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,help_topic_id,type_id,priority_id,source_id,_subjectTextView.text,staffID];
         

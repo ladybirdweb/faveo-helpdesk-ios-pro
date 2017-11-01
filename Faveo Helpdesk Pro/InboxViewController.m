@@ -22,13 +22,18 @@
 #import "RMessage.h"
 #import "RMessageView.h" 
 #import "NotificationViewController.h"
+#import "CFMacro.h"
+#import "CFMultistageDropdownMenuView.h"
+#import "CFMultistageConditionTableView.h"
+
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
 
+// CFMultistageConditionTableView
 
-
-@interface InboxViewController ()<RMessageProtocol>{
+//CFMultistageDropdownMenuView
+@interface InboxViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
     Utils *utils;
     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
@@ -41,6 +46,8 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, assign) NSInteger totalTickets;
 @property (nonatomic, strong) NSString *nextPageUrl;
+@property (nonatomic, strong) CFMultistageDropdownMenuView *multistageDropdownMenuView;
+@property (nonatomic, strong) CFMultistageConditionTableView *multistageConditionTableView;
 
 @end
 
@@ -50,6 +57,12 @@
     [super viewDidLoad];
     
      NSLog(@"Naa-Inbox");
+    
+    _multistageDropdownMenuView.tag=99;
+    
+    self.view.backgroundColor=[UIColor grayColor];
+    [self.view addSubview:self.multistageDropdownMenuView];
+    
     
     NSString *refreshedToken = [[FIRInstanceID instanceID] token];
     NSLog(@"refreshed token  %@",refreshedToken);
@@ -95,6 +108,7 @@
     
         // Do any additional setup after loading the view.
 }
+
 
 -(void)reload{
     
@@ -181,15 +195,15 @@
 }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in reload method in Inbox ViewController " );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+           // NSLog( @"NSException caught in reload method in Inbox ViewController " );
+           // NSLog( @"Name: %@", exception.name);
+           // NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
     }
@@ -820,6 +834,8 @@
     
 }
 
+
+
 -(void)reloadd{
     [self reload];
     //    [refresh endRefreshing];
@@ -830,6 +846,344 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - lazy
 
+- (CFMultistageDropdownMenuView *)multistageDropdownMenuView
+{
+    // DEMO
+    _multistageDropdownMenuView = [[CFMultistageDropdownMenuView alloc] initWithFrame:CGRectMake(0, -5, CFScreenWidth, 45)];
+    
+  
+//
+    // main top menu 2 menu aahet aata
+    _multistageDropdownMenuView.defaulTitleArray = [NSArray arrayWithObjects:@"Filter",@"Sort by", nil];
+    
+    NSArray *leftArr = @[
+                         // Filter - left array
+                         @[@"Departments", @"Helptopic", @"SLA Plans", @"Priorities", @"Assigned", @"Source",@"Ticket Type",@"clear"],
+                         // sort - left array
+                         @[@"ticket id", @"ticket title", @"ticket number", @"priority", @"updated at", @"created at",@"due on"],
+                         //
+                         @[]
+                         ];
+    NSArray *rightArr = @[
+                          // 对应dataSourceLeftArray
+                          @[
+                              
+                              @[@"All",@"Operation",@"Sales",@"Support"],
+                              
+                              @[@"Sales Query", @"Support Query", @"Operational Query"],
+                              
+                              @[@"Emergency", @"High", @"Low", @"Normal"],
+                              
+                              @[@"Emergency", @"High", @"Low",@"Normal"],
+                              
+                              @[@"No", @"Yes"],
+                              
+                              @[@"agent", @"call", @"chat", @"email",@"facebook",@"twitter",@"web"],
+                              
+                              @[@"Feature Request", @"Incident", @"Problem",@"Question"],
+                              
+                              ],
+                          @[
+                              // 一级菜单
+                              // 金额
+                              @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"],@[@"ASC", @"DES"],@[@"ASC", @"DES"]
+                              ],
+                          //                          @[
+                          //                              // 一级菜单
+                          //                              // 排序
+                          //                              @[@"全部", @"人气最高", @"最新加入", @"金额从低到高", @"金额从高到低"]
+                          //                              ]
+                          //
+                          ];
+    
+    [_multistageDropdownMenuView setupDataSourceLeftArray:leftArr rightArray:rightArr];
+    
+    _multistageDropdownMenuView.delegate = self;
+    
+    // 下拉列表 起始y
+    _multistageDropdownMenuView.startY = CGRectGetMaxY(_multistageDropdownMenuView.frame);
+    
+    //    _multistageDropdownMenuView.maxRowCount = 3;
+    _multistageDropdownMenuView.stateConfigDict = @{
+                                                                                             @"selected" : @[[UIColor purpleColor], @"测试紫箭头"],
+                                                                                             @"normal" : @[[UIColor redColor], @"测试红箭头"]
+                                                    };
+    
+    
+    
+    
+    return _multistageDropdownMenuView;
+    
+}
+
+#pragma mark - CFMultistageDropdownMenuViewDelegate
+- (void)multistageDropdownMenuView:(CFMultistageDropdownMenuView *)multistageDropdownMenuView selecteTitleButtonIndex:(NSInteger)titleButtonIndex conditionLeftIndex:(NSInteger)leftIndex conditionRightIndex:(NSInteger)rightIndex
+{
+    
+
+    //pop 1
+    NSString *str = [NSString stringWithFormat:@"Filter\n TiltleButton Index is %zd, leftIndex is %zd, rightIndex %zd",titleButtonIndex, leftIndex, rightIndex];
+    
+    //    if(titleButtonIndex==0 && leftIndex==0 && rightIndex==0 )
+    //    {
+    //        NSLog(@"***********************Sucess1234567889 ************");
+    //
+    //    }
+    
+    // sort by - ticket id
+    if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
+    {
+        NSLog(@"Ticket id - ASC");
+        
+      //  [self sortTicketIdASC];
+        
+    }
+    if(titleButtonIndex==1 && leftIndex==0 && rightIndex==1 )
+    {
+        NSLog(@"Ticket id  - DSC");
+       // [self sortTicketIdDSC];
+    }
+    //sort by - ticket title
+    if(titleButtonIndex==1 && leftIndex==1 && rightIndex==0 )
+    {
+        NSLog(@" Ticket Title - ASC");
+        
+    }
+    if(titleButtonIndex==1 && leftIndex==1 && rightIndex==1 )
+    {
+        NSLog(@" Ticket Title - DSC");
+        
+    }
+    
+    //ticket number
+    if(titleButtonIndex==1 && leftIndex==2 && rightIndex==0 )
+    {
+        NSLog(@" Ticket Number - ASC");
+        
+    }
+    if(titleButtonIndex==1 && leftIndex==2 && rightIndex==1 )
+    {
+        NSLog(@" Ticket NUmber - DSC");
+        
+    }
+    // priotity
+    if(titleButtonIndex==1 && leftIndex==3 && rightIndex==0 )
+    {
+        NSLog(@" Priotity - ASC");
+        
+    }
+    if(titleButtonIndex==1 && leftIndex==3 && rightIndex==1 )
+    {
+        NSLog(@" Priotity - DSC");
+        
+    }
+    
+    // updated at
+    if(titleButtonIndex==1 && leftIndex==4 && rightIndex==0 )
+    {
+        NSLog(@" updated At - ASC");
+        
+    }
+    if(titleButtonIndex==1 && leftIndex==4 && rightIndex==1 )
+    {
+        NSLog(@" updated At - DSC");
+        
+    }
+    
+    // created at
+    if(titleButtonIndex==1 && leftIndex==5 && rightIndex==0 )
+    {
+        NSLog(@" created at - ASC");
+        
+    }
+    if(titleButtonIndex==1 && leftIndex==5 && rightIndex==1 )
+    {
+        NSLog(@" created at - DSC");
+        
+    }
+    
+
+    
+    // due on
+    if(titleButtonIndex==1 && leftIndex==6 && rightIndex==0 )
+    {
+        NSLog(@" due on - ASC");
+        
+    }
+    if(titleButtonIndex==1 && leftIndex==6 && rightIndex==1 )
+    {
+        NSLog(@" due on - DSC");
+        
+    }
+    
+   
+    
+    NSString *titleStr = [multistageDropdownMenuView.defaulTitleArray objectAtIndex:titleButtonIndex];
+    NSArray *leftArr = [multistageDropdownMenuView.dataSourceLeftArray objectAtIndex:titleButtonIndex];
+    NSArray *rightArr = [multistageDropdownMenuView.dataSourceRightArray objectAtIndex:titleButtonIndex];
+    NSString *leftStr = @"";
+    NSString *rightStr = @"";
+    NSString *str2 = @"";
+    if (leftArr.count>0) { // 二级菜单
+        leftStr = [leftArr objectAtIndex:leftIndex];
+        NSArray *arr = [rightArr objectAtIndex:leftIndex];
+        rightStr = [arr objectAtIndex:rightIndex];
+        //imp pop 2
+        str2 = [NSString stringWithFormat:@"titleStr \"%@\" 分类下的 \"%@\"-\"%@\"", titleStr, leftStr, rightStr];
+    } else {
+        rightStr = [rightArr[0] objectAtIndex:rightIndex];
+        str2 = [NSString stringWithFormat:@"titleStr \"%@\" rightStr \"%@\"", titleStr, rightStr];
+    }
+    
+    NSMutableString *mStr22 = [NSMutableString stringWithFormat:@" "];
+    NSArray *btnArr = multistageDropdownMenuView.titleButtonArray;
+    for (UIButton *btn in btnArr) {
+        [mStr22 appendString:[NSString stringWithFormat:@"\"%@\"", btn.titleLabel.text]];
+        [mStr22 appendString:@" "];
+    }
+    NSString *str22 = [NSString stringWithFormat:@"2nd Pop up:\n (%@)", mStr22];
+    
+    //  NSString *str = [NSString stringWithFormat:@"Filter\n TiltleButton Index is %zd, leftIndex is %zd, rightIndex %zd",titleButtonIndex, leftIndex, rightIndex];
+    
+    
+    
+    
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"1st popUp" message:str preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController animated:NO completion:^{
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            UIAlertController *alertController2 = [UIAlertController alertControllerWithTitle:str22 message:str2 preferredStyle:UIAlertControllerStyleAlert];
+            [self presentViewController:alertController2 animated:NO completion:^{
+                UIAlertAction *alertAction2 = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                [alertController2 addAction:alertAction2];
+            }];
+            
+        }];
+        [alertController addAction:alertAction];
+    }];
+    
+    
+}
+
+- (void)multistageDropdownMenuView:(CFMultistageDropdownMenuView *)multistageDropdownMenuView selectTitleButtonWithCurrentTitle:(NSString *)currentTitle currentTitleArray:(NSArray *)currentTitleArray
+{
+    NSMutableString *mStr = [NSMutableString stringWithFormat:@" "];
+    
+    for (NSString *str in currentTitleArray) {
+        [mStr appendString:[NSString stringWithFormat:@"\"%@\"", str]];
+        [mStr appendString:@" "];
+    }
+    NSString *str = [NSString stringWithFormat:@"当前选中的是 \"%@\" \n 当前展示的所有条件是:\n (%@)",currentTitle, mStr];
+    
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"第二个代理方法" message:str preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController animated:NO completion:^{
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+        }];
+        [alertController addAction:alertAction];
+    }];
+}
+
+
+//-(void)sortTicketIdASC
+//{
+//    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+//    {
+//        //connection unavailable
+//
+//        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+//
+//
+//    }else{
+//
+//        [[AppDelegate sharedAppdelegate] showProgressView];
+//
+//        // http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets
+//       // ?token=&api=&show=&departments=&sort-by=&order=
+//
+//          NSString * apiValue=[NSString stringWithFormat:@"%i",1];
+//          NSString * showInbox = @"inbox";
+//          NSString * Alldeparatments=@"All";
+//          NSString * sortBy=@"id";
+//          NSString * order =@"ASC";
+//
+//
+//        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,sortBy,order];
+//
+//
+//               NSLog(@"URL is : %@",url);
+//
+//            MyWebservices *webservices=[MyWebservices sharedInstance];
+//
+//           [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+//                [[AppDelegate sharedAppdelegate] hideProgressView];
+//
+//                if (error || [msg containsString:@"Error"]) {
+//
+//                    if (msg) {
+//
+//                        if([msg isEqualToString:@"Error-403"])
+//                        {
+//                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Open a ticket", nil) sendViewController:self];
+//                        }
+//                        else{
+//                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+//                        }
+//                        //  NSLog(@"Message is : %@",msg);
+//
+//                    }else if(error)  {
+//                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+//                        NSLog(@"Thread-sorting-Refresh-error == %@",error.localizedDescription);
+//                    }
+//
+//                    return ;
+//                }
+//
+//                if ([msg isEqualToString:@"tokenRefreshed"]) {
+//
+//                    [self sortTicketIdASC];
+//                    NSLog(@"Thread--sorting-called");
+//                    return;
+//                }
+//
+//                // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
+//
+//                // message = "Status changed to Open";
+//
+//
+//                if (json) {
+//                    NSLog(@"JSON-Sorting-%@",json);
+//                    // this is mitabne
+//                    NSMutableArray * arr1= [json objectForKey:@"data"];
+//                    NSLog(@"JSON is %@",arr1);
+//
+//                 //   NSDictionary *finaldic2=[_mutableArray objectAtIndex:indexPath.row];
+//
+//                    if ([json objectForKey:@"response"]) {
+//                        dispatch_async(dispatch_get_main_queue(), ^{
+//
+//                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+//
+//
+//
+//                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+//                            [self.navigationController pushViewController:inboxVC animated:YES];
+//                        });
+//                    }
+//                }
+//                NSLog(@"Thread-sorting-closed");
+//
+//            }];
+//        }
+//
+//
+//}
 
 @end
