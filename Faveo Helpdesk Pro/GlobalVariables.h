@@ -111,4 +111,26 @@
 @property (strong, nonatomic) NSString *mobileAddRequester;
 
 
+//sorting global variables
+@property (strong, nonatomic) NSString *ticketSortByIdASC;//100
+@property (strong, nonatomic) NSString *ticketSortByIdDSC; //101
+@property (strong, nonatomic) NSString *ticketSortByTicketTitleASC; //110
+@property (strong, nonatomic) NSString *ticketSortByTicketTitleDSC; //111
+@property (strong, nonatomic) NSString *ticketSortByTicketNumberASC; //120
+@property (strong, nonatomic) NSString *ticketSortByTicketNumberDSC; //121
+@property (strong, nonatomic) NSString *ticketSortByPriorityASC; //130
+@property (strong, nonatomic) NSString *ticketSortByPriorityDSC;  //131
+@property (strong, nonatomic) NSString *ticketSortByUpdatedAtASC; //140
+@property (strong, nonatomic) NSString *ticketSortByUpdatedAtDSC; //141
+@property (strong, nonatomic) NSString *ticketSortByCreatedAtASC; //150
+@property (strong, nonatomic) NSString *ticketSortByCreatedAtDSC; //151
+@property (strong, nonatomic) NSString *ticketSortByDueASC;  //160
+@property (strong, nonatomic) NSString *ticketSortByDueDSC;  //161
+
+@property (strong, nonatomic) NSString *check;  
+
+//filter globalvaribales
+
+
+
 @end

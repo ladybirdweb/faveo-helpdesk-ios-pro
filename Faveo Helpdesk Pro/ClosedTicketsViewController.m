@@ -32,12 +32,14 @@
     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
+      NSDictionary *tempDict;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *mutableArray;
 @property (nonatomic, assign) NSInteger totalPages;
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, assign) NSInteger totalTickets;
+@property (nonatomic, strong) NSString *path1;
 @property (nonatomic, strong) NSString *nextPageUrl;
 @property (nonatomic, strong) CFMultistageDropdownMenuView *multistageDropdownMenuView;
 @end
@@ -103,8 +105,16 @@
         
     }else{
         
-        //        [[AppDelegate sharedAppdelegate] showProgressView];
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/closed?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
+        
+        //NSString *url=[NSString stringWithFormat:@"%@helpdesk/closed?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
+        
+        NSString * apiValue=[NSString stringWithFormat:@"%i",1];
+        NSString * showClosedTickets = @"closed";
+        NSString * Alldeparatments=@"All";
+        
+        NSString * url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments];
+        NSLog(@"URL is : %@",url);
+        
         
   @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -134,13 +144,17 @@
             
             if (json) {
                 //NSError *error;
-                NSLog(@"Thread-NO4--getUnnassignedAPI--%@",json);
+                NSLog(@"Thread-NO4--getClosedTicketsAPI--%@",json);
                 _mutableArray = [json objectForKey:@"data"];
                 _nextPageUrl =[json objectForKey:@"next_page_url"];
+                NSLog(@"bexr page url is : %@",_nextPageUrl);
+                
+                _path1=[json objectForKey:@"path"];
+                
                 _currentPage=[[json objectForKey:@"current_page"] integerValue];
                 _totalTickets=[[json objectForKey:@"total"] integerValue];
                 _totalPages=[[json objectForKey:@"last_page"] integerValue];
-                NSLog(@"Thread-NO4.1getUnnassigned-dic--%@", _mutableArray);
+                NSLog(@"Thread-getClosedTickets-dic--%@", _mutableArray);
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -148,8 +162,9 @@
                         [self.tableView reloadData];
                     });
                 });
+                
             }
-            NSLog(@"Thread-NO5-getUnnassigned-closed");
+            NSLog(@"Thread-NO5-getClosedTicketsAPI-closed");
             
         }];
       
@@ -232,8 +247,6 @@
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
-        //connection unavailable
-     //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -256,9 +269,27 @@
     }else{
         
  @try{
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
+//        MyWebservices *webservices=[MyWebservices sharedInstance];
+//        [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
+     
+     
+     self.page = _page + 1;
+     // NSLog(@"Page is : %ld",(long)_page);
+     
+     NSString *str=_nextPageUrl;
+     
+     // NSString *szHaystack= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=2";
+     NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
+     NSRange range = [str rangeOfString:szNeedle];
+     NSInteger idx = range.location + range.length;
+     NSString *szResult = [str substringFromIndex:idx];
+     NSString *Page = [str substringFromIndex:idx];
+     
+     NSLog(@"String is : %@",szResult);
+     NSLog(@"Page is : %@",Page);
+     
+     MyWebservices *webservices=[MyWebservices sharedInstance];
+     [webservices getNextPageURLClosed:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
             if (error || [msg containsString:@"Error"]) {
                 
                 if (msg) {
@@ -319,6 +350,229 @@
     }
 }
 
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//
+//
+//    if (indexPath.row == [_mutableArray count]) {
+//
+//        LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"LoadingCellID"];
+//        if (cell == nil)
+//        {
+//            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingTableViewCell" owner:self options:nil];
+//            cell = [nib objectAtIndex:0];
+//        }
+//        UIActivityIndicatorView *activityIndicator = (UIActivityIndicatorView *)[cell.contentView viewWithTag:1];
+//        [activityIndicator startAnimating];
+//        return cell;
+//    }else{
+//
+//        TicketTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"TableViewCellID"];
+//
+//        if (cell == nil)
+//        {
+//            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TicketTableViewCell" owner:self options:nil];
+//            cell = [nib objectAtIndex:0];
+//        }
+//
+//        NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
+//
+////        cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+////        cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+////        cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+//
+//@try{
+//        // cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+//        if ( ( ![[finaldic objectForKey:@"ticket_number"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"ticket_number"] length] != 0 ) )
+//        {
+//            cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+//        }
+//        else
+//        {
+//            cell.ticketIdLabel.text= NSLocalizedString(@"Not Available",nil);
+//        }
+//
+//        // cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+//
+//        NSString *fname= [finaldic objectForKey:@"first_name"];
+//        NSString *lname= [finaldic objectForKey:@"last_name"];
+//        NSString *userName= [finaldic objectForKey:@"user_name"];
+//        NSString*email1=[finaldic objectForKey:@"email"];
+//
+//        [Utils isEmpty:fname];
+//        [Utils isEmpty:lname];
+//        [Utils isEmpty:email1];
+//
+//        if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+//        {
+//            if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+//            {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+//            }
+//            else{
+//                cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+//            }
+//        }
+//        else
+//        { if(![Utils isEmpty:userName])
+//        {
+//            cell.mailIdLabel.text=[finaldic objectForKey:@"user_name"];
+//        }
+//            if(![Utils isEmpty:email1])
+//            {
+//                cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+//            }
+//            else{
+//                cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
+//            }
+//
+//        }
+//
+//        // cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+//
+//        if ( ( ![[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]] isEqual:[NSNull null]] ) && ( [[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]] length] != 0 ) )
+//        {
+//            cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+//        }
+//        else
+//        {
+//            cell.timeStampLabel.text= NSLocalizedString(@"Not Available",nil);
+//        }
+//
+//
+//}@catch (NSException *exception)
+//        {
+//            // Print exception information
+//            NSLog( @"NSException caught in CellForRowAtIndexPath method in ClosedTicket View Controller\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
+//            return cell;
+//        }
+//        @finally
+//        {
+//            // Cleanup, in both success and fail cases
+//            NSLog( @"In finally block");
+//
+//        }
+////___________________________________________________________________________________________________
+//       ////////////////for UTF-8 data encoding ///////
+//     //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
+//
+//
+//
+//       // NSString *encodedString = @"=?UTF-8?Q?Re:_Robin_-_Implementing_Faveo_H?= =?UTF-8?Q?elp_Desk._Let=E2=80=99s_get_you_started.?=";
+//
+//        NSString *encodedString =[finaldic objectForKey:@"title"];
+//        NSMutableString *decodedString = [[NSMutableString alloc] init];
+//
+//        if ([encodedString hasPrefix:@"=?UTF-8?Q?"] || [encodedString hasSuffix:@"?="])
+//        {
+//        NSScanner *scanner = [NSScanner scannerWithString:encodedString];
+//        NSString *buf = nil;
+//      //  NSMutableString *decodedString = [[NSMutableString alloc] init];
+//
+//        while ([scanner scanString:@"=?UTF-8?Q?" intoString:NULL]
+//               || ([scanner scanUpToString:@"=?UTF-8?Q?" intoString:&buf] && [scanner scanString:@"=?UTF-8?Q?" intoString:NULL])) {
+//            if (buf != nil) {
+//                [decodedString appendString:buf];
+//            }
+//
+//            buf = nil;
+//
+//            NSString *encodedRange;
+//
+//            if (![scanner scanUpToString:@"?=" intoString:&encodedRange]) {
+//                break; // Invalid encoding
+//            }
+//
+//            [scanner scanString:@"?=" intoString:NULL]; // Skip the terminating "?="
+//
+//            // Decode the encoded portion (naively using UTF-8 and assuming it really is Q encoded)
+//            // I'm doing this really naively, but it should work
+//
+//            // Firstly I'm encoding % signs so I can cheat and turn this into a URL-encoded string, which NSString can decode
+//            encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"%" withString:@"=25"];
+//
+//            // Turn this into a URL-encoded string
+//            encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"=" withString:@"%"];
+//
+//
+//            // Remove the underscores
+//            encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+//
+//
+//          // [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//
+//            // stringByReplacingPercentEscapesUsingEncoding is depreciated so I changed here,
+//            // by replacing stringByRemovingPercentEncoding
+//
+//             NSString *str1= [encodedRange stringByRemovingPercentEncoding];
+//            [decodedString appendString:str1];
+//
+//        }
+//
+//        NSLog(@"Decoded string = %@", decodedString);
+//
+//         cell.ticketSubLabel.text= decodedString;
+//        }
+//        else{
+//
+//           cell.ticketSubLabel.text= encodedString;
+//
+//        }
+////___________________________________________________________________________________________________
+//
+//@try{
+//
+//        //  [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+//
+//        if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+//        {
+//            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+//
+//        }
+//        else
+//        {
+//            [cell setUserProfileimage:@"default_pic.png"];
+//        }
+//
+//
+//        cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
+//
+//        if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
+//
+//           /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+//                [cell.overDueLabel setHidden:NO];
+//
+//            }else [cell.overDueLabel setHidden:YES];
+//
+//        }*/
+//            if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+//                [cell.overDueLabel setHidden:NO];
+//                [cell.today setHidden:YES];
+//            }else
+//            {
+//                [cell.overDueLabel setHidden:YES];
+//                [cell.today setHidden:NO];
+//            }
+//
+//        }
+//}@catch (NSException *exception)
+//        {
+//            // Print exception information
+//            NSLog( @"NSException caught in CellForRowAtIndexPath in ClosedTickets ViewController" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
+//            return cell;
+//        }
+//        @finally
+//        {
+//            // Cleanup, in both success and fail cases
+//            NSLog( @"In finally block");
+//
+//        }
+//        return cell;
+//    }
+//}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
@@ -345,189 +599,71 @@
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
         
-//        cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
-//        cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
-//        cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
-     
-@try{
-        // cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
-        if ( ( ![[finaldic objectForKey:@"ticket_number"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"ticket_number"] length] != 0 ) )
-        {
-            cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
-        }
-        else
-        {
-            cell.ticketIdLabel.text= NSLocalizedString(@"Not Available",nil);
-        }
+        tempDict= [_mutableArray objectAtIndex:indexPath.row];
+        //cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
         
-        // cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
-        
-        NSString *fname= [finaldic objectForKey:@"first_name"];
-        NSString *lname= [finaldic objectForKey:@"last_name"];
-        NSString *userName= [finaldic objectForKey:@"user_name"];
-        NSString*email1=[finaldic objectForKey:@"email"];
-        
-        [Utils isEmpty:fname];
-        [Utils isEmpty:lname];
-        [Utils isEmpty:email1];
-        
-        if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
-        {
-            if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
-            {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
-            }
-            else{
-                cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
-            }
-        }
-        else
-        { if(![Utils isEmpty:userName])
-        {
-            cell.mailIdLabel.text=[finaldic objectForKey:@"user_name"];
-        }
-            if(![Utils isEmpty:email1])
+        @try{
+            NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
+            
+            [Utils isEmpty:ticketNumber];
+            
+            
+            if  (![Utils isEmpty:ticketNumber] && ![ticketNumber isEqualToString:@""])
             {
-                cell.mailIdLabel.text=[finaldic objectForKey:@"email"];
+                cell.ticketIdLabel.text=ticketNumber;
             }
-            else{
-                cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
-            }
-            
-        }
-        
-        // cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
-        
-        if ( ( ![[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]] isEqual:[NSNull null]] ) && ( [[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]] length] != 0 ) )
-        {
-            cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
-        }
-        else
-        {
-            cell.timeStampLabel.text= NSLocalizedString(@"Not Available",nil);
-        }
-    
-    
-}@catch (NSException *exception)
-        {
-            // Print exception information
-            NSLog( @"NSException caught in CellForRowAtIndexPath method in ClosedTicket View Controller\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
-            return cell;
-        }
-        @finally
-        {
-            // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
-            
-        }
-//___________________________________________________________________________________________________
-       ////////////////for UTF-8 data encoding ///////
-     //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
-        
-        
-        
-       // NSString *encodedString = @"=?UTF-8?Q?Re:_Robin_-_Implementing_Faveo_H?= =?UTF-8?Q?elp_Desk._Let=E2=80=99s_get_you_started.?=";
-        
-        NSString *encodedString =[finaldic objectForKey:@"title"];
-        NSMutableString *decodedString = [[NSMutableString alloc] init];
-
-        if ([encodedString hasPrefix:@"=?UTF-8?Q?"] || [encodedString hasSuffix:@"?="])
-        {
-        NSScanner *scanner = [NSScanner scannerWithString:encodedString];
-        NSString *buf = nil;
-      //  NSMutableString *decodedString = [[NSMutableString alloc] init];
-        
-        while ([scanner scanString:@"=?UTF-8?Q?" intoString:NULL]
-               || ([scanner scanUpToString:@"=?UTF-8?Q?" intoString:&buf] && [scanner scanString:@"=?UTF-8?Q?" intoString:NULL])) {
-            if (buf != nil) {
-                [decodedString appendString:buf];
+            else
+            {
+                cell.ticketIdLabel.text=NSLocalizedString(@"Not Available", nil);
             }
             
-            buf = nil;
+            NSString *fname= [finaldic objectForKey:@"c_fname"];
+            NSString *lname= [finaldic objectForKey:@"c_lname"];
+            //  NSString *userName= [finaldic objectForKey:@"c_uname"];
+            NSString*email1=[finaldic objectForKey:@"c_uname"];
             
-            NSString *encodedRange;
+            [Utils isEmpty:fname];
+            [Utils isEmpty:lname];
+            [Utils isEmpty:email1];
             
-            if (![scanner scanUpToString:@"?=" intoString:&encodedRange]) {
-                break; // Invalid encoding
+            
+            
+            
+            if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+            {
+                if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+                {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"c_fname"],[finaldic objectForKey:@"c_lname"]];
+                }
+                else{
+                    cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"c_fname"],[finaldic objectForKey:@"c_lname"]];
+                }
             }
-            
-            [scanner scanString:@"?=" intoString:NULL]; // Skip the terminating "?="
-            
-            // Decode the encoded portion (naively using UTF-8 and assuming it really is Q encoded)
-            // I'm doing this really naively, but it should work
-            
-            // Firstly I'm encoding % signs so I can cheat and turn this into a URL-encoded string, which NSString can decode
-            encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"%" withString:@"=25"];
-            
-            // Turn this into a URL-encoded string
-            encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"=" withString:@"%"];
-            
-            
-            // Remove the underscores
-            encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"_" withString:@" "];
- 
-        
-          // [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            // stringByReplacingPercentEscapesUsingEncoding is depreciated so I changed here,
-            // by replacing stringByRemovingPercentEncoding
-            
-             NSString *str1= [encodedRange stringByRemovingPercentEncoding];
-            [decodedString appendString:str1];
-            
-        }
-        
-        NSLog(@"Decoded string = %@", decodedString);
-            
-         cell.ticketSubLabel.text= decodedString;
-        }
-        else{
-    
-           cell.ticketSubLabel.text= encodedString;
-            
-        }
-//___________________________________________________________________________________________________
-        
-@try{
-     
-        //  [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-        
-        if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-        {
-            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-            
-        }
-        else
-        {
-            [cell setUserProfileimage:@"default_pic.png"];
-        }
-        
-        
-        cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"priority_color"]] CGColor];
-        
-        if ( ( ![[finaldic objectForKey:@"overdue_date"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"overdue_date"] length] != 0 ) ) {
-            
-           /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
-                [cell.overDueLabel setHidden:NO];
+            else
+            {
+                //                if(![Utils isEmpty:userName])
+                //               {
+                //                cell.mailIdLabel.text=[finaldic objectForKey:@"user_name"];
+                //               }
                 
-            }else [cell.overDueLabel setHidden:YES];
-            
-        }*/
-            if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
-                [cell.overDueLabel setHidden:NO];
-                [cell.today setHidden:YES];
-            }else
-            {
-                [cell.overDueLabel setHidden:YES];
-                [cell.today setHidden:NO];
+                if(![Utils isEmpty:email1])
+                {
+                    cell.mailIdLabel.text=[finaldic objectForKey:@"c_uname"];
+                }
+                else{
+                    cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
+                }
+                
             }
             
-        }
-}@catch (NSException *exception)
+            
+            
+            cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+            
+            
+        } @catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in CellForRowAtIndexPath in ClosedTickets ViewController" );
+            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
             return cell;
@@ -536,11 +672,154 @@
         {
             // Cleanup, in both success and fail cases
             NSLog( @"In finally block");
-        
+            
         }
+        // ______________________________________________________________________________________________________
+        ////////////////for UTF-8 data encoding ///////
+        //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
+        
+        
+        
+        // NSString *encodedString = @"=?UTF-8?Q?Re:_Robin_-_Implementing_Faveo_H?= =?UTF-8?Q?elp_Desk._Let=E2=80=99s_get_you_started.?=";
+        
+        
+        
+        
+        
+        NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
+        
+        
+        [Utils isEmpty:encodedString];
+        
+        if  ([Utils isEmpty:encodedString]){
+            cell.ticketSubLabel.text=@"No Title";
+        }
+        else
+        {
+            
+            NSMutableString *decodedString = [[NSMutableString alloc] init];
+            
+            if ([encodedString hasPrefix:@"=?UTF-8?Q?"] || [encodedString hasSuffix:@"?="])
+            {
+                NSScanner *scanner = [NSScanner scannerWithString:encodedString];
+                NSString *buf = nil;
+                //  NSMutableString *decodedString = [[NSMutableString alloc] init];
+                
+                while ([scanner scanString:@"=?UTF-8?Q?" intoString:NULL]
+                       || ([scanner scanUpToString:@"=?UTF-8?Q?" intoString:&buf] && [scanner scanString:@"=?UTF-8?Q?" intoString:NULL])) {
+                    if (buf != nil) {
+                        [decodedString appendString:buf];
+                    }
+                    
+                    buf = nil;
+                    
+                    NSString *encodedRange;
+                    
+                    if (![scanner scanUpToString:@"?=" intoString:&encodedRange]) {
+                        break; // Invalid encoding
+                    }
+                    
+                    [scanner scanString:@"?=" intoString:NULL]; // Skip the terminating "?="
+                    
+                    // Decode the encoded portion (naively using UTF-8 and assuming it really is Q encoded)
+                    // I'm doing this really naively, but it should work
+                    
+                    // Firstly I'm encoding % signs so I can cheat and turn this into a URL-encoded string, which NSString can decode
+                    encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"%" withString:@"=25"];
+                    
+                    // Turn this into a URL-encoded string
+                    encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"=" withString:@"%"];
+                    
+                    
+                    // Remove the underscores
+                    encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+                    
+                    // [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                    
+                    NSString *str1= [encodedRange stringByRemovingPercentEncoding];
+                    [decodedString appendString:str1];
+                    
+                    
+                }
+                
+                NSLog(@"Decoded string = %@", decodedString);
+                
+                cell.ticketSubLabel.text= decodedString;
+            }
+            else{
+                
+                cell.ticketSubLabel.text= encodedString;
+                
+            }
+            
+        }
+        ///////////////////////////////////////////////////
+        //____________________________________________________________________________________________________
+        
+        
+        
+        
+        
+        
+        // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        @try{
+            
+            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+            {
+                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+                
+            }
+            else
+            {
+                [cell setUserProfileimage:@"default_pic.png"];
+            }
+            
+            
+            if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
+                
+                /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+                 [cell.overDueLabel setHidden:NO];
+                 
+                 }else [cell.overDueLabel setHidden:YES];
+                 
+                 } */
+                
+                if([utils compareDates:[finaldic objectForKey:@"duedate"]]){
+                    [cell.overDueLabel setHidden:NO];
+                    [cell.today setHidden:YES];
+                }else
+                {
+                    [cell.overDueLabel setHidden:YES];
+                    [cell.today setHidden:NO];
+                }
+                
+            }
+            
+            
+            
+            cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"color"]] CGColor];
+            
+            
+            
+        }@catch (NSException *exception)
+        {
+            // Print exception information
+            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return cell;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            NSLog( @"In finally block");
+            
+        }
+        
         return cell;
     }
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -549,8 +828,12 @@
     
     globalVariables.iD=[finaldic objectForKey:@"id"];
     globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
-    globalVariables.First_name=[finaldic objectForKey:@"first_name"];
-    globalVariables.Last_name=[finaldic objectForKey:@"last_name"];
+//    globalVariables.First_name=[finaldic objectForKey:@"first_name"];
+//    globalVariables.Last_name=[finaldic objectForKey:@"last_name"];
+    
+    globalVariables.First_name=[finaldic objectForKey:@"c_fname"];
+    globalVariables.Last_name=[finaldic objectForKey:@"c_lname"];
+    
      globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
     // globalVariables.title=[finaldic objectForKey:@"title"];
     [self.navigationController pushViewController:td animated:YES];

@@ -15,6 +15,7 @@
 		D92C35D71F7682B5001DD67D /* EditDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92C35D61F7682B5001DD67D /* EditDetailTableViewController.m */; };
 		D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92CE70C1F3D706600D98708 /* ClientListTableViewCell.xib */; };
 		D92E2E981EEBFC0B00A0D456 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D92E2E971EEBFC0B00A0D456 /* GoogleService-Info.plist */; };
+		D946D6981FA9F519005E5BF1 /* SortingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D946D6971FA9F519005E5BF1 /* SortingViewController.m */; };
 		D9532C131E9CE9090063B318 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9532C151E9CE9090063B318 /* Localizable.strings */; };
 		D953D53E1FA321420077D519 /* AddRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = D953D53D1FA321420077D519 /* AddRequester.m */; };
 		D955A5511F2A05630045429F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D955A5501F2A05630045429F /* Assets.xcassets */; };
@@ -122,6 +123,8 @@
 		D93D3D551EA0BB1000C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D561EA0BB1000C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		D93D3D581EA0BB1800C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D946D6961FA9F519005E5BF1 /* SortingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SortingViewController.h; sourceTree = "<group>"; };
+		D946D6971FA9F519005E5BF1 /* SortingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SortingViewController.m; sourceTree = "<group>"; };
 		D9532C141E9CE9090063B318 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D9532C161E9CE90C0063B318 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D9532C171E9CE90E0063B318 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -492,6 +495,8 @@
 				D9EB9F921E07C3270001115F /* CreateTicketViewController.m */,
 				D9EB9F931E07C3270001115F /* InboxViewController.h */,
 				D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */,
+				D946D6961FA9F519005E5BF1 /* SortingViewController.h */,
+				D946D6971FA9F519005E5BF1 /* SortingViewController.m */,
 				D9EB9F8F1E07C3270001115F /* MyTicketsViewController.h */,
 				D9EB9F901E07C3270001115F /* MyTicketsViewController.m */,
 				D9EB9F871E07C3270001115F /* UnassignedTicketsViewController.h */,
@@ -847,6 +852,7 @@
 				D92C35D31F750FDE001DD67D /* LGPlusButtonsView.m in Sources */,
 				D9EB9FA61E07C3270001115F /* CreateTicketViewController.m in Sources */,
 				D9EB9FC01E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
+				D946D6981FA9F519005E5BF1 /* SortingViewController.m in Sources */,
 				D9AAFAB91F5D475400891CA5 /* FTPopOverMenu.m in Sources */,
 				D9EB9F631E07C2D00001115F /* Data.m in Sources */,
 				D92C35D11F750FDE001DD67D /* LGPlusButton.m in Sources */,

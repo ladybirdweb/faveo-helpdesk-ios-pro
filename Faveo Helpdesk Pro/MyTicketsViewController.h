@@ -34,4 +34,6 @@
 @remark If tickets are present in my ticket inbox then It will show tickets if not then it will show Empty.
 */
 -(void)addBtnPressed;
+
+@property (nonatomic) NSInteger page;
 @end

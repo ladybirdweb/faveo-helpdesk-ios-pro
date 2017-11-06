@@ -325,9 +325,52 @@
 
 -(void)getNextPageURL:(NSString*)url callbackHandler:(callbackHandler)block{
     _userDefaults=[NSUserDefaults standardUserDefaults];
-    NSString *urll=[NSString stringWithFormat:@"%@&api_key=%@&ip=%@&token=%@",url,API_KEY,IP,[_userDefaults objectForKey:@"token"]];
     
+    NSLog(@"URL from inbox : %@",url);
+    
+    NSString *urll=[NSString stringWithFormat:@"%@&api_key=%@&ip=%@&token=%@",url,API_KEY,IP,[_userDefaults objectForKey:@"token"]];
+   
+    NSLog(@"URL 11111 is : %@",urll);
+
     [self httpResponseGET:urll parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(error,json,msg);
+        });
+
+    }];
+
+}
+
+//-(void)getNextPageURL:(NSString*)url callbackHandler:(callbackHandler)block{
+//    _userDefaults=[NSUserDefaults standardUserDefaults];
+//   // NSString *urll=[NSString stringWithFormat:@"%@&api_key=%@&ip=%@&token=%@",url,API_KEY,IP,[_userDefaults objectForKey:@"token"]];
+//    NSString * urll=url;
+//    NSLog(@"url12345 : %@",urll);
+//    [self httpResponseGET:urll parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            block(error,json,msg);
+//        });
+//
+//    }];
+//
+//}
+
+
+-(void)getNextPageURLInbox:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
+    _userDefaults=[NSUserDefaults standardUserDefaults];
+    
+    NSLog(@"page isssss : %@",pageInt);
+  
+    NSString * apiValue=[NSString stringWithFormat:@"%i",1];
+    NSString * showInbox = @"inbox";
+    NSString * Alldeparatments=@"All";
+    
+     NSString *url222= [NSString stringWithFormat:@"%@?token=%@&api=%@&show=%@&departments=%@&page=%@",url,[_userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,pageInt];
+    
+    NSLog(@"urlssss i sssss : %@",url222);
+    
+    
+    [self httpResponseGET:url222 parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
         dispatch_async(dispatch_get_main_queue(), ^{
             block(error,json,msg);
         });
@@ -335,6 +378,79 @@
     }];
     
 }
+
+-(void)getNextPageURLMyTickets:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
+    _userDefaults=[NSUserDefaults standardUserDefaults];
+    
+    NSLog(@"page isssss : %@",pageInt);
+    
+    NSString * apiValue=[NSString stringWithFormat:@"%i",1];
+    NSString * MyTickets = @"mytickets";
+    NSString * Alldeparatments=@"All";
+    
+    NSString *url222= [NSString stringWithFormat:@"%@?token=%@&api=%@&show=%@&departments=%@&page=%@",url,[_userDefaults objectForKey:@"token"],apiValue,MyTickets,Alldeparatments,pageInt];
+    
+    NSLog(@"urlssss i sssss : %@",url222);
+    
+    
+    [self httpResponseGET:url222 parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(error,json,msg);
+        });
+        
+    }];
+    
+}
+
+-(void)getNextPageURLClosed:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
+    _userDefaults=[NSUserDefaults standardUserDefaults];
+    
+    NSLog(@"page isssss : %@",pageInt);
+    
+    NSString * apiValue=[NSString stringWithFormat:@"%i",1];
+    NSString * closedTickets = @"closed";
+    NSString * Alldeparatments=@"All";
+    
+    NSString *url222= [NSString stringWithFormat:@"%@?token=%@&api=%@&show=%@&departments=%@&page=%@",url,[_userDefaults objectForKey:@"token"],apiValue,closedTickets,Alldeparatments,pageInt];
+    
+    NSLog(@"urlssss i sssss : %@",url222);
+    
+    
+    [self httpResponseGET:url222 parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(error,json,msg);
+        });
+        
+    }];
+    
+}
+
+
+-(void)getNextPageURLTrash:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
+    _userDefaults=[NSUserDefaults standardUserDefaults];
+    
+    NSLog(@"page isssss : %@",pageInt);
+    
+    NSString * apiValue=[NSString stringWithFormat:@"%i",1];
+    NSString * TrashTickets = @"trash";
+    NSString * Alldeparatments=@"All";
+    
+    NSString *url222= [NSString stringWithFormat:@"%@?token=%@&api=%@&show=%@&departments=%@&page=%@",url,[_userDefaults objectForKey:@"token"],apiValue,TrashTickets,Alldeparatments,pageInt];
+    
+    NSLog(@"urlssss i sssss : %@",url222);
+    
+    
+    [self httpResponseGET:url222 parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(error,json,msg);
+        });
+        
+    }];
+    
+} // getNextPageURLTrash
+
+
+
 
 -(void)getNextPageURL:(NSString*)url user_id:(NSString*)uid callbackHandler:(callbackHandler)block{
     _userDefaults=[NSUserDefaults standardUserDefaults];
