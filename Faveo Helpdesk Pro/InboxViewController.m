@@ -48,6 +48,7 @@
 @property (nonatomic, assign) NSInteger totalTickets; //
 @property (nonatomic, strong) NSString *nextPageUrl;
 @property (nonatomic, strong) NSString *path1;
+
 @property (nonatomic, strong) CFMultistageDropdownMenuView *multistageDropdownMenuView;
 @property (nonatomic, strong) CFMultistageConditionTableView *multistageConditionTableView;
 @property (nonatomic) int pageInt;
@@ -335,15 +336,15 @@
   }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+        //    NSLog( @"In finally block");
             
         }
     }
@@ -515,15 +516,15 @@
  }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in loadMore method in Inbox ViewController" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in loadMore method in Inbox ViewController" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
     }
@@ -621,15 +622,15 @@
         } @catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return cell;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+         //   NSLog( @"In finally block");
             
         }
         // ______________________________________________________________________________________________________
@@ -762,15 +763,15 @@
         }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return cell;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+       //     NSLog( @"In finally block");
             
         }
         
@@ -792,20 +793,7 @@
     globalVariables.Last_name=[finaldic objectForKey:@"c_lname"];
     
     globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
-    
-    //globalVariables.title=[finaldic objectForKey:@"title"];
-    //    globalVariables.first_name=[finaldic objectForKey:@"first_name"];
-    //    globalVariables.last_name=[finaldic objectForKey:@"last_name"];
-    //    globalVariables.email=[finaldic objectForKey:@"email"];
-    //    globalVariables.created_at=[finaldic objectForKey:@"created_at"];
-    //    globalVariables.updated_at=[finaldic objectForKey:@"updated_at"];
-    //
-    //    globalVariables.help_topic_name=[finaldic objectForKey:@"help_topic_name"];
-    //    globalVariables.sla_plan_name=[finaldic objectForKey:@"sla_plan_name"];
-    //    globalVariables.priotity_name=[finaldic objectForKey:@"priotity_name"];
-    //    globalVariables.department_name=[finaldic objectForKey:@"department_name"];
-    
-    
+ 
     [self.navigationController pushViewController:td animated:YES];
 }
 
@@ -890,7 +878,7 @@
                          // Filter - left array
                          @[@"Departments", @"Helptopic", @"SLA Plans", @"Priorities", @"Assigned", @"Source",@"Ticket Type",@"clear"],
                          // sort - left array
-                         @[@"ticket id", @"ticket title", @"ticket number", @"priority", @"updated at", @"created at",@"due on"],
+                         @[@"ticket title", @"ticket number", @"priority", @"updated at", @"created at",@"due on"],
                          //
                          @[]
                          ];
@@ -916,7 +904,7 @@
                           @[
                               // 一级菜单
                               // 金额
-                              @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"],@[@"ASC", @"DES"],@[@"ASC", @"DES"]
+                              @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"],@[@"ASC", @"DES"],@[@"ASC", @"DES"]
                               ],
                           //                          @[
                           //                              // 一级菜单
@@ -952,363 +940,152 @@
     
 
     
-    // sort by - ticket id
+    // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
     {
-        NSLog(@"Ticket id - ASC");
+        NSLog(@"Ticket title - ASC");
         
-         globalVariables.ticketSortByIdASC=@"100";
-         globalVariables.ticketSortByIdDSC=@"101";
-         globalVariables.ticketSortByTicketTitleASC=@"110";
-         globalVariables.ticketSortByTicketTitleDSC=@"111";
-         globalVariables.ticketSortByTicketNumberASC=@"120";
-         globalVariables.ticketSortByTicketNumberDSC=@"121";
-         globalVariables.ticketSortByPriorityASC=@"130";
-         globalVariables.ticketSortByPriorityDSC=@"131";
-         globalVariables.ticketSortByUpdatedAtASC=@"140";
-         globalVariables.ticketSortByUpdatedAtDSC=@"141";
-         globalVariables.ticketSortByCreatedAtASC=@"150";
-         globalVariables.ticketSortByCreatedAtDSC=@"151";
-         globalVariables.ticketSortByDueASC=@"160";
-         globalVariables.ticketSortByDueDSC=@"161";
+        globalVariables.sortingValueId=@"sortTitleAsc";
+         globalVariables.sortCondition=@"INBOX";
         
        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+       [self.navigationController pushViewController:sort animated:YES];
+
+    }
+    else if (titleButtonIndex==1 && leftIndex==0 && rightIndex==1 )
+    {
+        NSLog(@"Ticket Title  - DSC");
+        globalVariables.sortingValueId=@"sortTitleDsc";
+        globalVariables.sortCondition=@"INBOX";
         
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+       
+   
+    }
+    
+    
+    //sort by - ticket number
+   else  if(titleButtonIndex==1 && leftIndex==1 && rightIndex==0 )
+    {
+        NSLog(@" Ticket number - ASC");
+        globalVariables.sortingValueId=@"sortNumberAsc";
+         globalVariables.sortCondition=@"INBOX";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
+        
+    }
+    else if(titleButtonIndex==1 && leftIndex==1 && rightIndex==1 )
+    {
+        NSLog(@" Ticket number - DSC");
+        globalVariables.sortingValueId=@"sortNumberDsc";
+        globalVariables.sortCondition=@"INBOX";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
+        
+   
+    }
+    
+    //ticket priority
+   else if(titleButtonIndex==1 && leftIndex==2 && rightIndex==0 )
+    {
+        NSLog(@" Ticket priority - ASC");
+        globalVariables.sortingValueId=@"sortPriorityAsc";
+        globalVariables.sortCondition=@"INBOX";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
+  
+    }
+   else if(titleButtonIndex==1 && leftIndex==2 && rightIndex==1 )
+    {
+        NSLog(@" Ticket priority - DSC");
+        globalVariables.sortingValueId=@"sortPriorityDsc";
+         globalVariables.sortCondition=@"INBOX";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
       
         
     }
-    if(titleButtonIndex==1 && leftIndex==0 && rightIndex==1 )
+    // upated at
+   else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==0 )
     {
-        NSLog(@"Ticket id  - DSC");
-       
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
+        NSLog(@" upated at - ASC");
+        globalVariables.sortingValueId=@"sortUpdatedAsc";
+         globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
         
+      
+    }
+   else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==1 )
+    {
+        NSLog(@" upated at - DSC");
+        globalVariables.sortingValueId=@"sortUpdatedDsc";
+         globalVariables.sortCondition=@"INBOX";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
        
-    }
-    
-    
-    
-    
-    //sort by - ticket title
-    if(titleButtonIndex==1 && leftIndex==1 && rightIndex==0 )
-    {
-        NSLog(@" Ticket Title - ASC");
-        
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
-        
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        
-        [self.navigationController pushViewController:sort animated:YES];
-        
-    }
-    if(titleButtonIndex==1 && leftIndex==1 && rightIndex==1 )
-    {
-        NSLog(@" Ticket Title - DSC");
-        
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
-        
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        
-        [self.navigationController pushViewController:sort animated:YES];
-        
-    }
-    
-    //ticket number
-    if(titleButtonIndex==1 && leftIndex==2 && rightIndex==0 )
-    {
-        NSLog(@" Ticket Number - ASC");
-        
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
-        
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        
-        [self.navigationController pushViewController:sort animated:YES];
-        
-    }
-    if(titleButtonIndex==1 && leftIndex==2 && rightIndex==1 )
-    {
-        NSLog(@" Ticket NUmber - DSC");
-        
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
-        
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        
-        [self.navigationController pushViewController:sort animated:YES];
-        
-    }
-    // priotity
-    if(titleButtonIndex==1 && leftIndex==3 && rightIndex==0 )
-    {
-        NSLog(@" Priotity - ASC");
-        
-        
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
-        
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        
-        [self.navigationController pushViewController:sort animated:YES];
-        
-    }
-    if(titleButtonIndex==1 && leftIndex==3 && rightIndex==1 )
-    {
-        NSLog(@" Priotity - DSC");
-       
-        
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
-        
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        
-        [self.navigationController pushViewController:sort animated:YES];
-        
-    }
-    
-    // updated at
-    if(titleButtonIndex==1 && leftIndex==4 && rightIndex==0 )
-    {
-        NSLog(@" updated At - ASC");
-        
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
-        
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        
-        [self.navigationController pushViewController:sort animated:YES];
-        
-    }
-    if(titleButtonIndex==1 && leftIndex==4 && rightIndex==1 )
-    {
-        NSLog(@" updated At - DSC");
-        
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
-        
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        
-        [self.navigationController pushViewController:sort animated:YES];
-        
+      
     }
     
     // created at
-    if(titleButtonIndex==1 && leftIndex==5 && rightIndex==0 )
+   else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==0 )
     {
-        NSLog(@" created at - ASC");
-        
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
+        NSLog(@" created At - ASC");
+        globalVariables.sortingValueId=@"sortCreatedAsc";
+         globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        
         [self.navigationController pushViewController:sort animated:YES];
         
     }
-    if(titleButtonIndex==1 && leftIndex==5 && rightIndex==1 )
+   else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==1 )
     {
-        NSLog(@" created at - DSC");
-        
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
+        NSLog(@" created At - DSC");
+        globalVariables.sortingValueId=@"sortCreatedDsc";
+         globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        
         [self.navigationController pushViewController:sort animated:YES];
         
+ 
     }
-    
-
     
     // due on
-    if(titleButtonIndex==1 && leftIndex==6 && rightIndex==0 )
+   else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==0 )
     {
         NSLog(@" due on - ASC");
-        
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
+        globalVariables.sortingValueId=@"sortDueAsc";
+        globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        
         [self.navigationController pushViewController:sort animated:YES];
         
     }
-    if(titleButtonIndex==1 && leftIndex==6 && rightIndex==1 )
+   else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==1 )
     {
         NSLog(@" due on - DSC");
-        
-        globalVariables.ticketSortByIdASC=@"100";
-        globalVariables.ticketSortByIdDSC=@"101";
-        globalVariables.ticketSortByTicketTitleASC=@"110";
-        globalVariables.ticketSortByTicketTitleDSC=@"111";
-        globalVariables.ticketSortByTicketNumberASC=@"120";
-        globalVariables.ticketSortByTicketNumberDSC=@"121";
-        globalVariables.ticketSortByPriorityASC=@"130";
-        globalVariables.ticketSortByPriorityDSC=@"131";
-        globalVariables.ticketSortByUpdatedAtASC=@"140";
-        globalVariables.ticketSortByUpdatedAtDSC=@"141";
-        globalVariables.ticketSortByCreatedAtASC=@"150";
-        globalVariables.ticketSortByCreatedAtDSC=@"151";
-        globalVariables.ticketSortByDueASC=@"160";
-        globalVariables.ticketSortByDueDSC=@"161";
+        globalVariables.sortingValueId=@"sortDueDsc";
+         globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        
         [self.navigationController pushViewController:sort animated:YES];
         
+     
     }
     
+  else
+  {
+  }
    
     
     NSString *titleStr = [multistageDropdownMenuView.defaulTitleArray objectAtIndex:titleButtonIndex];
@@ -1334,7 +1111,8 @@
         [mStr22 appendString:[NSString stringWithFormat:@"\"%@\"", btn.titleLabel.text]];
         [mStr22 appendString:@" "];
     }
-  //  NSString *str22 = [NSString stringWithFormat:@"2nd Pop up:\n (%@)", mStr22];
+    NSString *str22 = [NSString stringWithFormat:@"2nd Pop up:\n (%@)", mStr22];
+    NSLog(@"%@",str22);
     
     //  NSString *str = [NSString stringWithFormat:@"Filter\n TiltleButton Index is %zd, leftIndex is %zd, rightIndex %zd",titleButtonIndex, leftIndex, rightIndex];
     
@@ -1342,8 +1120,23 @@
     
     
     
-   
-    
+    //    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"1st popUp" message:str preferredStyle:UIAlertControllerStyleAlert];
+    //    [self presentViewController:alertController animated:NO completion:^{
+    //        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    //
+    //            UIAlertController *alertController2 = [UIAlertController alertControllerWithTitle:str22 message:str2 preferredStyle:UIAlertControllerStyleAlert];
+    //            [self presentViewController:alertController2 animated:NO completion:^{
+    //                UIAlertAction *alertAction2 = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    //
+    //                }];
+    //                [alertController2 addAction:alertAction2];
+    //            }];
+    //
+    //        }];
+    //        [alertController addAction:alertAction];
+    //    }];
+    //
+
     
 }
 
@@ -1355,104 +1148,18 @@
         [mStr appendString:[NSString stringWithFormat:@"\"%@\"", str]];
         [mStr appendString:@" "];
     }
-   // NSString *str = [NSString stringWithFormat:@"当前选中的是 \"%@\" \n 当前展示的所有条件是:\n (%@)",currentTitle, mStr];
+    NSString *str = [NSString stringWithFormat:@"当前选中的是 \"%@\" \n 当前展示的所有条件是:\n (%@)",currentTitle, mStr];
+    NSLog(@"%@",str);
     
-
+    
+    //    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"第二个代理方法" message:str preferredStyle:UIAlertControllerStyleAlert];
+    //    [self presentViewController:alertController animated:NO completion:^{
+    //        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    //
+    //
+    //        }];
+    //        [alertController addAction:alertAction];
+    //    }];
 }
-
-
-//-(void)sortTicketIdASC
-//{
-//    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-//    {
-//        //connection unavailable
-//
-//        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-//
-//
-//    }else{
-//
-//        [[AppDelegate sharedAppdelegate] showProgressView];
-//
-//        // http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets
-//       // ?token=&api=&show=&departments=&sort-by=&order=
-//
-//          NSString * apiValue=[NSString stringWithFormat:@"%i",1];
-//          NSString * showInbox = @"inbox";
-//          NSString * Alldeparatments=@"All";
-//          NSString * sortBy=@"id";
-//          NSString * order =@"ASC";
-//
-//
-//        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,sortBy,order];
-//
-//
-//               NSLog(@"URL is : %@",url);
-//
-//            MyWebservices *webservices=[MyWebservices sharedInstance];
-//
-//           [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-//                [[AppDelegate sharedAppdelegate] hideProgressView];
-//
-//                if (error || [msg containsString:@"Error"]) {
-//
-//                    if (msg) {
-//
-//                        if([msg isEqualToString:@"Error-403"])
-//                        {
-//                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Open a ticket", nil) sendViewController:self];
-//                        }
-//                        else{
-//                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-//                        }
-//                        //  NSLog(@"Message is : %@",msg);
-//
-//                    }else if(error)  {
-//                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-//                        NSLog(@"Thread-sorting-Refresh-error == %@",error.localizedDescription);
-//                    }
-//
-//                    return ;
-//                }
-//
-//                if ([msg isEqualToString:@"tokenRefreshed"]) {
-//
-//                    [self sortTicketIdASC];
-//                    NSLog(@"Thread--sorting-called");
-//                    return;
-//                }
-//
-//                // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
-//
-//                // message = "Status changed to Open";
-//
-//
-//                if (json) {
-//                    NSLog(@"JSON-Sorting-%@",json);
-//                    // this is mitabne
-//                    NSMutableArray * arr1= [json objectForKey:@"data"];
-//                    NSLog(@"JSON is %@",arr1);
-//
-//                 //   NSDictionary *finaldic2=[_mutableArray objectAtIndex:indexPath.row];
-//
-//                    if ([json objectForKey:@"response"]) {
-//                        dispatch_async(dispatch_get_main_queue(), ^{
-//
-//                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-//
-//
-//
-//                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-//                            [self.navigationController pushViewController:inboxVC animated:YES];
-//                        });
-//                    }
-//                }
-//                NSLog(@"Thread-sorting-closed");
-//
-//            }];
-//        }
-//
-//
-//}
 
 @end

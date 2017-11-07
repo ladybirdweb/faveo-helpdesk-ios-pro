@@ -351,15 +351,15 @@
         }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in reload method in Detail ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in reload method in Detail ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return ;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
         
@@ -786,15 +786,15 @@
         }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in save method in Detail ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in save method in Detail ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return ;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
         

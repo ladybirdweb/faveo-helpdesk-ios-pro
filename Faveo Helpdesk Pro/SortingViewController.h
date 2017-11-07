@@ -16,4 +16,6 @@
 -(void)NotificationBtnPressed;
 
 
+@property (nonatomic) NSInteger page;
+
 @end

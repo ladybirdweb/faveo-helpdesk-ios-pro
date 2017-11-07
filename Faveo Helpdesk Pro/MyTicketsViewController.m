@@ -24,6 +24,7 @@
 #import "NotificationViewController.h"
 #import "CFMacro.h"
 #import "CFMultistageDropdownMenuView.h"
+#import "SortingViewController.h"
 
 @interface MyTicketsViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
 
@@ -180,15 +181,15 @@
 }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in reload method in My-Tickets ViewController" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in reload method in My-Tickets ViewController" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
         }
     }
 }
@@ -362,15 +363,15 @@
     }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in loadMore method in My-Tickets ViewController" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in loadMore method in My-Tickets ViewController" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+         //   NSLog( @"In finally block");
         
         }
     }
@@ -832,15 +833,15 @@
         }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return cell;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+       //     NSLog( @"In finally block");
             
         }
         
@@ -861,13 +862,6 @@
     globalVariables.Last_name=[finaldic objectForKey:@"c_lname"];
     
     globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
-    
-//    globalVariables.iD=[finaldic objectForKey:@"id"];
-//    globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
-//    globalVariables.First_name=[finaldic objectForKey:@"first_name"];
-//    globalVariables.Last_name=[finaldic objectForKey:@"last_name"];
-//     globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
-//    // globalVariables.title=[finaldic objectForKey:@"title"];
     
     [self.navigationController pushViewController:td animated:YES];
 }
@@ -941,7 +935,7 @@
                          // Filter - left array
                          @[@"Departments", @"Helptopic", @"SLA Plans", @"Priorities", @"Assigned", @"Source",@"Ticket Type",@"clear"],
                          // sort - left array
-                         @[@"ticket id", @"ticket title", @"ticket number", @"priority", @"updated at", @"created at",@"due on", @"clear"],
+                         @[@"ticket title", @"ticket number", @"priority", @"updated at", @"created at",@"due on"],
                          //
                          @[]
                          ];
@@ -967,7 +961,7 @@
                           @[
                               // 一级菜单
                               // 金额
-                              @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"],@[@"ASC", @"DES"],@[@"ASC", @"DES"]
+                              @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"],@[@"ASC", @"DES"],@[@"ASC", @"DES"]
                               ],
                           //                          @[
                           //                              // 一级菜单
@@ -1002,84 +996,153 @@
 {
     
     
-    //pop 1
-    NSString *str = [NSString stringWithFormat:@"Filter\n TiltleButton Index is %zd, leftIndex is %zd, rightIndex %zd",titleButtonIndex, leftIndex, rightIndex];
-    
-    //    if(titleButtonIndex==0 && leftIndex==0 && rightIndex==0 )
-    //    {
-    //        NSLog(@"***********************Sucess1234567889 ************");
-    //
-    //    }
-    
-    // sort by -Last modified
+    // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
     {
-        NSLog(@"Last Modified - ASC");
+        NSLog(@"Ticket title - ASC");
+        
+        globalVariables.sortingValueId=@"sortTitleAsc";
+        globalVariables.sortCondition=@"MYTICKETS";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
         
     }
-    if(titleButtonIndex==1 && leftIndex==0 && rightIndex==1 )
+    else if (titleButtonIndex==1 && leftIndex==0 && rightIndex==1 )
     {
-        NSLog(@"Last Modified - DSC");
+        NSLog(@"Ticket Title  - DSC");
+        globalVariables.sortingValueId=@"sortTitleDsc";
+        globalVariables.sortCondition=@"MYTICKETS";
         
-    }
-    //sort by - Priorities
-    if(titleButtonIndex==1 && leftIndex==1 && rightIndex==0 )
-    {
-        NSLog(@" Priorities - ASC");
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
         
-    }
-    if(titleButtonIndex==1 && leftIndex==1 && rightIndex==1 )
-    {
-        NSLog(@" Priorities - DSC");
         
     }
     
-    //ticket title
-    if(titleButtonIndex==1 && leftIndex==2 && rightIndex==0 )
-    {
-        NSLog(@" Ticket title - ASC");
-        
-    }
-    if(titleButtonIndex==1 && leftIndex==2 && rightIndex==1 )
-    {
-        NSLog(@" Ticket title - DSC");
-        
-    }
-    // ticket number
-    if(titleButtonIndex==1 && leftIndex==3 && rightIndex==0 )
+    
+    //sort by - ticket number
+    else  if(titleButtonIndex==1 && leftIndex==1 && rightIndex==0 )
     {
         NSLog(@" Ticket number - ASC");
+        globalVariables.sortingValueId=@"sortNumberAsc";
+        globalVariables.sortCondition=@"MYTICKETS";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
         
     }
-    if(titleButtonIndex==1 && leftIndex==3 && rightIndex==1 )
+    else if(titleButtonIndex==1 && leftIndex==1 && rightIndex==1 )
     {
         NSLog(@" Ticket number - DSC");
+        globalVariables.sortingValueId=@"sortNumberDsc";
+        globalVariables.sortCondition=@"MYTICKETS";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
+        
+        
+    }
+    
+    //ticket priority
+    else if(titleButtonIndex==1 && leftIndex==2 && rightIndex==0 )
+    {
+        NSLog(@" Ticket priority - ASC");
+        globalVariables.sortingValueId=@"sortPriorityAsc";
+         globalVariables.sortCondition=@"MYTICKETS";
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
+        
+    }
+    else if(titleButtonIndex==1 && leftIndex==2 && rightIndex==1 )
+    {
+        NSLog(@" Ticket priority - DSC");
+        globalVariables.sortingValueId=@"sortPriorityDsc";
+        globalVariables.sortCondition=@"MYTICKETS";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
+        
+    }
+    // upated at
+    else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==0 )
+    {
+        NSLog(@" upated at - ASC");
+        globalVariables.sortingValueId=@"sortUpdatedAsc";
+         globalVariables.sortCondition=@"MYTICKETS";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
+        
+    }
+    else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==1 )
+    {
+        NSLog(@" upated at - DSC");
+        globalVariables.sortingValueId=@"sortUpdatedDsc";
+         globalVariables.sortCondition=@"MYTICKETS";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
         
     }
     
     // created at
-    if(titleButtonIndex==1 && leftIndex==4 && rightIndex==0 )
+    else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==0 )
     {
-        NSLog(@" Created At - ASC");
+        NSLog(@" created At - ASC");
+        globalVariables.sortingValueId=@"sortCreatedAsc";
+        globalVariables.sortCondition=@"MYTICKETS";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
         
     }
-    if(titleButtonIndex==1 && leftIndex==4 && rightIndex==1 )
+    else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==1 )
     {
-        NSLog(@" Created At - DSC");
+        NSLog(@" created At - DSC");
+        globalVariables.sortingValueId=@"sortCreatedDsc";
+         globalVariables.sortCondition=@"MYTICKETS";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
         
     }
     
     // due on
-    if(titleButtonIndex==1 && leftIndex==5 && rightIndex==0 )
+    else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==0 )
     {
         NSLog(@" due on - ASC");
+        globalVariables.sortingValueId=@"sortDueAsc";
+         globalVariables.sortCondition=@"MYTICKETS";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
         
     }
-    if(titleButtonIndex==1 && leftIndex==5 && rightIndex==1 )
+    else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==1 )
     {
         NSLog(@" due on - DSC");
+        globalVariables.sortingValueId=@"sortDueDsc";
+         globalVariables.sortCondition=@"MYTICKETS";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
         
     }
+    
+    else
+    {
+    }
+    
+    
     
     NSString *titleStr = [multistageDropdownMenuView.defaulTitleArray objectAtIndex:titleButtonIndex];
     NSArray *leftArr = [multistageDropdownMenuView.dataSourceLeftArray objectAtIndex:titleButtonIndex];
@@ -1104,7 +1167,7 @@
         [mStr22 appendString:[NSString stringWithFormat:@"\"%@\"", btn.titleLabel.text]];
         [mStr22 appendString:@" "];
     }
-    NSString *str22 = [NSString stringWithFormat:@"2nd Pop up:\n (%@)", mStr22];
+   // NSString *str22 = [NSString stringWithFormat:@"2nd Pop up:\n (%@)", mStr22];
     
     //  NSString *str = [NSString stringWithFormat:@"Filter\n TiltleButton Index is %zd, leftIndex is %zd, rightIndex %zd",titleButtonIndex, leftIndex, rightIndex];
     
@@ -1112,23 +1175,23 @@
     
     
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"1st popUp" message:str preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:alertController animated:NO completion:^{
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            UIAlertController *alertController2 = [UIAlertController alertControllerWithTitle:str22 message:str2 preferredStyle:UIAlertControllerStyleAlert];
-            [self presentViewController:alertController2 animated:NO completion:^{
-                UIAlertAction *alertAction2 = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                [alertController2 addAction:alertAction2];
-            }];
-            
-        }];
-        [alertController addAction:alertAction];
-    }];
-    
-    
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"1st popUp" message:str preferredStyle:UIAlertControllerStyleAlert];
+//    [self presentViewController:alertController animated:NO completion:^{
+//        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//            UIAlertController *alertController2 = [UIAlertController alertControllerWithTitle:str22 message:str2 preferredStyle:UIAlertControllerStyleAlert];
+//            [self presentViewController:alertController2 animated:NO completion:^{
+//                UIAlertAction *alertAction2 = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//                }];
+//                [alertController2 addAction:alertAction2];
+//            }];
+//
+//        }];
+//        [alertController addAction:alertAction];
+//    }];
+//
+//
 }
 
 - (void)multistageDropdownMenuView:(CFMultistageDropdownMenuView *)multistageDropdownMenuView selectTitleButtonWithCurrentTitle:(NSString *)currentTitle currentTitleArray:(NSArray *)currentTitleArray
@@ -1139,17 +1202,19 @@
         [mStr appendString:[NSString stringWithFormat:@"\"%@\"", str]];
         [mStr appendString:@" "];
     }
+    
     NSString *str = [NSString stringWithFormat:@"当前选中的是 \"%@\" \n 当前展示的所有条件是:\n (%@)",currentTitle, mStr];
+    NSLog(@"%@",str);
     
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"第二个代理方法" message:str preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:alertController animated:NO completion:^{
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            
-        }];
-        [alertController addAction:alertAction];
-    }];
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"第二个代理方法" message:str preferredStyle:UIAlertControllerStyleAlert];
+//    [self presentViewController:alertController animated:NO completion:^{
+//        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//
+//        }];
+//        [alertController addAction:alertAction];
+//    }];
+
 }
 
 

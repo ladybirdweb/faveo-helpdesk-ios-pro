@@ -355,15 +355,15 @@
         }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
     }
@@ -1214,15 +1214,15 @@
   }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in Post-Internal-Note method in TicketDetail ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in Post-Internal-Note method in TicketDetail ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
 
@@ -1321,15 +1321,15 @@
   }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in post-replay methos in TicketDetail ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in post-replay methos in TicketDetail ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
 
@@ -1337,20 +1337,6 @@
     
 }
 
-
-//- (NSString *)removeEndSpaceFrom:(NSString *)strtoremove{
-//    NSUInteger location = 0;
-//    unichar charBuffer[[strtoremove length]];
-//    [strtoremove getCharacters:charBuffer];
-//    int i = 0;
-//    for(i = [strtoremove length]; i >0; i--) {
-//        NSCharacterSet* charSet = [NSCharacterSet whitespaceCharacterSet];
-//        if(![charSet characterIsMember:charBuffer[i - 1]]) {
-//            break;
-//        }
-//    }
-//    return [strtoremove substringWithRange:NSMakeRange(location, i  - location)];
-//}
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)aTextField
@@ -1360,11 +1346,6 @@
 }
 
 
-//- (BOOL) validate: (NSString *) candidate {
-//    NSString *emailRegex = @"[a-zA-Z]*";
-//    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-//    
-//    return [emailTest evaluateWithObject:candidate];
-//}
+
 
 @end

@@ -140,15 +140,15 @@ GlobalVariables *globalVariables;
 }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in reload method in ClientList ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in reload method in ClientList ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+           // NSLog( @"In finally block");
             
         }
 
@@ -263,15 +263,15 @@ GlobalVariables *globalVariables;
     }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in loadmore methos in ClienList ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in loadmore methos in ClienList ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return ;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
 
@@ -459,15 +459,15 @@ GlobalVariables *globalVariables;
  }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in CellForRowAtIndexPath method in ClintList ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in CellForRowAtIndexPath method in ClintList ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return cell;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
 

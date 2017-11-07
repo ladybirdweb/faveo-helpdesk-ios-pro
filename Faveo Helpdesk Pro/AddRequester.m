@@ -528,32 +528,6 @@
         
     }];
     
-    
-    
-    //    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Attention"
-    //                                                                   message:@"Are you sure want to discard this message."
-    //                                                            preferredStyle:UIAlertControllerStyleAlert];
-    //
-    //    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-    //                                                          handler:^(UIAlertAction * action) {
-    //                                                            //  self.textview.text = nil;
-    //                                                              self.emailTextView.text=nil;
-    //                                                              self.firstNameView.text=nil;
-    //                                                              self.lastNameView.text=nil;
-    //                                                              self.companyName.text=nil;
-    //                                                              self.mobileView.text=nil;
-    //
-    //                                                              [self.navigationController popViewControllerAnimated:YES];
-    //                                                          }];
-    //
-    //    [alert addAction:defaultAction];
-    //    [self presentViewController:alert animated:YES completion:nil];
-    //    NSLog(@"sandip");
-    //    [self.navigationController popViewControllerAnimated:YES];
-    
-    //    CreateTicketViewController *create=[self.storyboard instantiateViewControllerWithIdentifier:@"CreateTicket"];
-    //    [self.navigationController pushViewController:create animated:YES];
-    // [self dismissViewControllerAnimated:YES completion:nil]; // ios 6
 }
 
 

@@ -17,7 +17,7 @@
  @discussion This class contains a table view and it gives a list of Clients. After clicking a particular ticket we can see name of client, email id, profile picture, contact number.
  Also it will show client is active and inactive.
  It contains a list of messages that he was created.
-
+ 
  */
 
 @interface InboxViewController : UIViewController<SlideNavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate>
@@ -54,3 +54,4 @@
 
 
 @end
+

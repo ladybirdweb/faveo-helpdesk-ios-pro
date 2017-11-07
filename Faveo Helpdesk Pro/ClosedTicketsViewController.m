@@ -24,6 +24,7 @@
 #import "NotificationViewController.h"
 #import "CFMacro.h"
 #import "CFMultistageDropdownMenuView.h"
+#import "SortingViewController.h"
 
 
 @interface ClosedTicketsViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
@@ -72,7 +73,9 @@
       globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+    
     [self reload];
+    [self getDependencies];
 
     // Do any additional setup after loading the view.
 }
@@ -171,19 +174,155 @@
   }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in reload method in Closed Tickets ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in reload method in Closed Tickets ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
         
         }
     }
 }
+
+-(void)getDependencies{
+    
+    NSLog(@"Thread-NO1-getDependencies()-start");
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
+        
+        
+    }else{
+        
+        NSString *url=[NSString stringWithFormat:@"%@helpdesk/dependency?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
+        
+        @try{
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
+                NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+                if (error || [msg containsString:@"Error"]) {
+                    
+                    NSLog(@"Thread-NO4-postCreateTicket-Refresh-error == %@",error.localizedDescription);
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    //               dispatch_async(dispatch_get_main_queue(), ^{
+                    //                  [self getDependencies];
+                    //               });
+                    
+                    [self getDependencies];
+                    NSLog(@"Thread--NO4-call-getDependecies");
+                    return;
+                }
+                
+                if (json) {
+                    
+                    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    NSDictionary *resultDic = [json objectForKey:@"result"];
+                    NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
+                    
+                    for (int i = 0; i < ticketCountArray.count; i++) {
+                        NSString *name = [[ticketCountArray objectAtIndex:i]objectForKey:@"name"];
+                        NSString *count = [[ticketCountArray objectAtIndex:i]objectForKey:@"count"];
+                        if ([name isEqualToString:@"Open"]) {
+                            globalVariables.OpenCount=count;
+                        }else if ([name isEqualToString:@"Closed"]) {
+                            globalVariables.ClosedCount=count;
+                        }else if ([name isEqualToString:@"Deleted"]) {
+                            globalVariables.DeletedCount=count;
+                        }else if ([name isEqualToString:@"unassigned"]) {
+                            globalVariables.UnassignedCount=count;
+                        }else if ([name isEqualToString:@"mytickets"]) {
+                            globalVariables.MyticketsCount=count;
+                        }
+                    }
+                    
+                    NSArray *ticketStatusArray=[resultDic objectForKey:@"status"];
+                    
+                    for (int i = 0; i < ticketStatusArray.count; i++) {
+                        NSString *statusName = [[ticketStatusArray objectAtIndex:i]objectForKey:@"name"];
+                        NSString *statusId = [[ticketStatusArray objectAtIndex:i]objectForKey:@"id"];
+                        
+                        if ([statusName isEqualToString:@"Open"]) {
+                            globalVariables.OpenStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Resolved"]) {
+                            globalVariables.ResolvedStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Closed"]) {
+                            globalVariables.ClosedStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Deleted"]) {
+                            globalVariables.DeletedStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Request for close"]) {
+                            globalVariables.RequestCloseStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Spam"]) {
+                            globalVariables.SpamStausId=statusId;
+                        }
+                    }
+                    
+                    
+                    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+                    
+                    // get documents path
+                    NSString *documentsPath = [paths objectAtIndex:0];
+                    
+                    // get the path to our Data/plist file
+                    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
+                    NSError *writeError = nil;
+                    
+                    NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:resultDic format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&writeError];
+                    
+                    if(plistData)
+                    {
+                        [plistData writeToFile:plistPath atomically:YES];
+                        NSLog(@"Data saved sucessfully");
+                    }
+                    else
+                    {
+                        NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
+                    
+                }
+                NSLog(@"Thread-NO5-getDependencies-closed");
+            }
+             ];
+        }@catch (NSException *exception)
+        {
+            // Print exception information
+            //            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
+            //            NSLog( @"Name: %@", exception.name);
+            //            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            //    NSLog( @"In finally block");
+            
+        }
+    }
+    NSLog(@"Thread-NO2-getDependencies()-closed");
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.currentPage == self.totalPages
@@ -663,15 +802,15 @@
         } @catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return cell;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+        //    NSLog( @"In finally block");
             
         }
         // ______________________________________________________________________________________________________
@@ -804,15 +943,15 @@
         }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return cell;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
         
@@ -908,7 +1047,7 @@
                          // Filter - left array
                          @[@"Departments", @"Helptopic", @"SLA Plans", @"Priorities", @"Assigned", @"Source",@"Ticket Type",@"clear"],
                          // sort - left array
-                         @[@"ticket id", @"ticket title", @"ticket number", @"priority", @"updated at", @"created at",@"due on", @"clear"],
+                         @[@"ticket title", @"ticket number", @"priority", @"updated at", @"created at",@"due on"],
                          //
                          @[]
                          ];
@@ -934,7 +1073,7 @@
                           @[
                               // 一级菜单
                               // 金额
-                              @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"],@[@"ASC", @"DES"],@[@"ASC", @"DES"]
+                              @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"],@[@"ASC", @"DES"],@[@"ASC", @"DES"]
                               ],
                           //                          @[
                           //                              // 一级菜单
@@ -964,89 +1103,158 @@
     
 }
 
+
 #pragma mark - CFMultistageDropdownMenuViewDelegate
 - (void)multistageDropdownMenuView:(CFMultistageDropdownMenuView *)multistageDropdownMenuView selecteTitleButtonIndex:(NSInteger)titleButtonIndex conditionLeftIndex:(NSInteger)leftIndex conditionRightIndex:(NSInteger)rightIndex
 {
     
     
-    //pop 1
-    NSString *str = [NSString stringWithFormat:@"Filter\n TiltleButton Index is %zd, leftIndex is %zd, rightIndex %zd",titleButtonIndex, leftIndex, rightIndex];
-    
-    //    if(titleButtonIndex==0 && leftIndex==0 && rightIndex==0 )
-    //    {
-    //        NSLog(@"***********************Sucess1234567889 ************");
-    //
-    //    }
-    
-    // sort by -Last modified
+    // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
     {
-        NSLog(@"Last Modified - ASC");
+        NSLog(@"Ticket title - ASC");
+        
+        globalVariables.sortingValueId=@"sortTitleAsc";
+        globalVariables.sortCondition=@"CLOSED";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
         
     }
-    if(titleButtonIndex==1 && leftIndex==0 && rightIndex==1 )
+    else if (titleButtonIndex==1 && leftIndex==0 && rightIndex==1 )
     {
-        NSLog(@"Last Modified - DSC");
+        NSLog(@"Ticket Title  - DSC");
+        globalVariables.sortingValueId=@"sortTitleDsc";
+        globalVariables.sortCondition=@"CLOSED";
         
-    }
-    //sort by - Priorities
-    if(titleButtonIndex==1 && leftIndex==1 && rightIndex==0 )
-    {
-        NSLog(@" Priorities - ASC");
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
         
-    }
-    if(titleButtonIndex==1 && leftIndex==1 && rightIndex==1 )
-    {
-        NSLog(@" Priorities - DSC");
         
     }
     
-    //ticket title
-    if(titleButtonIndex==1 && leftIndex==2 && rightIndex==0 )
-    {
-        NSLog(@" Ticket title - ASC");
-        
-    }
-    if(titleButtonIndex==1 && leftIndex==2 && rightIndex==1 )
-    {
-        NSLog(@" Ticket title - DSC");
-        
-    }
-    // ticket number
-    if(titleButtonIndex==1 && leftIndex==3 && rightIndex==0 )
+    
+    //sort by - ticket number
+    else  if(titleButtonIndex==1 && leftIndex==1 && rightIndex==0 )
     {
         NSLog(@" Ticket number - ASC");
+        globalVariables.sortingValueId=@"sortNumberAsc";
+        globalVariables.sortCondition=@"CLOSED";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
         
     }
-    if(titleButtonIndex==1 && leftIndex==3 && rightIndex==1 )
+    else if(titleButtonIndex==1 && leftIndex==1 && rightIndex==1 )
     {
         NSLog(@" Ticket number - DSC");
+        globalVariables.sortingValueId=@"sortNumberDsc";
+        globalVariables.sortCondition=@"CLOSED";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
+        
+        
+    }
+    
+    //ticket priority
+    else if(titleButtonIndex==1 && leftIndex==2 && rightIndex==0 )
+    {
+        NSLog(@" Ticket priority - ASC");
+        globalVariables.sortingValueId=@"sortPriorityAsc";
+        globalVariables.sortCondition=@"CLOSED";
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
+        
+    }
+    else if(titleButtonIndex==1 && leftIndex==2 && rightIndex==1 )
+    {
+        NSLog(@" Ticket priority - DSC");
+        globalVariables.sortingValueId=@"sortPriorityDsc";
+        globalVariables.sortCondition=@"CLOSED";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
+        
+    }
+    // upated at
+    else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==0 )
+    {
+        NSLog(@" upated at - ASC");
+        globalVariables.sortingValueId=@"sortUpdatedAsc";
+        globalVariables.sortCondition=@"CLOSED";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
+        
+    }
+    else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==1 )
+    {
+        NSLog(@" upated at - DSC");
+        globalVariables.sortingValueId=@"sortUpdatedDsc";
+        globalVariables.sortCondition=@"CLOSED";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
         
     }
     
     // created at
-    if(titleButtonIndex==1 && leftIndex==4 && rightIndex==0 )
+    else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==0 )
     {
-        NSLog(@" Created At - ASC");
+        NSLog(@" created At - ASC");
+        globalVariables.sortingValueId=@"sortCreatedAsc";
+        globalVariables.sortCondition=@"CLOSED";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
         
     }
-    if(titleButtonIndex==1 && leftIndex==4 && rightIndex==1 )
+    else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==1 )
     {
-        NSLog(@" Created At - DSC");
+        NSLog(@" created At - DSC");
+        globalVariables.sortingValueId=@"sortCreatedDsc";
+        globalVariables.sortCondition=@"CLOSED";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
         
     }
     
     // due on
-    if(titleButtonIndex==1 && leftIndex==5 && rightIndex==0 )
+    else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==0 )
     {
         NSLog(@" due on - ASC");
+        globalVariables.sortingValueId=@"sortDueAsc";
+        globalVariables.sortCondition=@"CLOSED";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
         
     }
-    if(titleButtonIndex==1 && leftIndex==5 && rightIndex==1 )
+    else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==1 )
     {
         NSLog(@" due on - DSC");
+        globalVariables.sortingValueId=@"sortDueDsc";
+        globalVariables.sortCondition=@"CLOSED";
+        
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
         
     }
+    
+    else
+    {
+    }
+    
     
     NSString *titleStr = [multistageDropdownMenuView.defaulTitleArray objectAtIndex:titleButtonIndex];
     NSArray *leftArr = [multistageDropdownMenuView.dataSourceLeftArray objectAtIndex:titleButtonIndex];
@@ -1072,28 +1280,28 @@
         [mStr22 appendString:@" "];
     }
     NSString *str22 = [NSString stringWithFormat:@"2nd Pop up:\n (%@)", mStr22];
-    
+     NSLog(@"%@",str22);
     //  NSString *str = [NSString stringWithFormat:@"Filter\n TiltleButton Index is %zd, leftIndex is %zd, rightIndex %zd",titleButtonIndex, leftIndex, rightIndex];
     
     
     
     
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"1st popUp" message:str preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:alertController animated:NO completion:^{
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            UIAlertController *alertController2 = [UIAlertController alertControllerWithTitle:str22 message:str2 preferredStyle:UIAlertControllerStyleAlert];
-            [self presentViewController:alertController2 animated:NO completion:^{
-                UIAlertAction *alertAction2 = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                [alertController2 addAction:alertAction2];
-            }];
-            
-        }];
-        [alertController addAction:alertAction];
-    }];
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"1st popUp" message:str preferredStyle:UIAlertControllerStyleAlert];
+//    [self presentViewController:alertController animated:NO completion:^{
+//        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//            UIAlertController *alertController2 = [UIAlertController alertControllerWithTitle:str22 message:str2 preferredStyle:UIAlertControllerStyleAlert];
+//            [self presentViewController:alertController2 animated:NO completion:^{
+//                UIAlertAction *alertAction2 = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//                }];
+//                [alertController2 addAction:alertAction2];
+//            }];
+//
+//        }];
+//        [alertController addAction:alertAction];
+//    }];
     
     
 }
@@ -1108,15 +1316,15 @@
     }
     NSString *str = [NSString stringWithFormat:@"当前选中的是 \"%@\" \n 当前展示的所有条件是:\n (%@)",currentTitle, mStr];
     
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"第二个代理方法" message:str preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:alertController animated:NO completion:^{
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            
-        }];
-        [alertController addAction:alertAction];
-    }];
+    NSLog(@"%@",str);
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"第二个代理方法" message:str preferredStyle:UIAlertControllerStyleAlert];
+//    [self presentViewController:alertController animated:NO completion:^{
+//        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//
+//        }];
+//        [alertController addAction:alertAction];
+//    }];
 }
 
 

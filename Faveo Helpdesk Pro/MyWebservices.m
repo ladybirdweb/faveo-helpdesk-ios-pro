@@ -379,6 +379,32 @@
     
 }
 
+
+-(void)getNextPageURLUnassigned:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
+    _userDefaults=[NSUserDefaults standardUserDefaults];
+    
+    NSLog(@"page isssss : %@",pageInt);
+    
+    NSString * apiValue=[NSString stringWithFormat:@"%i",1];
+    NSString * showInbox = @"inbox";
+    NSString * Alldeparatments=@"All";
+    NSString * assigned = [NSString stringWithFormat:@"%i",0];
+    
+    NSString *url222= [NSString stringWithFormat:@"%@?token=%@&api=%@&show=%@&departments=%@&page=%@&assigned=%@",url,[_userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,pageInt,assigned];
+    
+    NSLog(@"urlssss i sssss : %@",url222);
+    
+    
+    [self httpResponseGET:url222 parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(error,json,msg);
+        });
+        
+    }];
+    
+}
+
+
 -(void)getNextPageURLMyTickets:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
     _userDefaults=[NSUserDefaults standardUserDefaults];
     
