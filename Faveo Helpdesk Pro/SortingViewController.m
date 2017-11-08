@@ -26,6 +26,7 @@
 #import "CFMacro.h"
 #import "CFMultistageDropdownMenuView.h"
 #import "CFMultistageConditionTableView.h"
+#import "BDCustomAlertView.h"
 
 
 @import FirebaseInstanceID;
@@ -40,6 +41,7 @@
     GlobalVariables *globalVariables;
     NSDictionary *tempDict;
     NSString *url;
+    BDCustomAlertView *customAlert ;
 }
 
 @property (nonatomic, strong) NSMutableArray *mutableArray;
@@ -61,6 +63,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    customAlert = [[BDCustomAlertView alloc] init];
     _multistageDropdownMenuView.tag=99;
    
     globalVariables=[GlobalVariables sharedInstance];
@@ -1725,129 +1728,248 @@
     
     
     
-    // sort by - Tciket title
+    // sort by - Tciket title// UNASSIGNED
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
     {
+        
         NSLog(@"Ticket title - ASC");
         
-        globalVariables.sortingValueId=@"sortTitleAsc";
+//        if(([globalVariables.sortAlert isEqualToString:@"sortTitleAscAlert"] && [globalVariables.sortCondition isEqualToString:@"INBOX"] ) || ([globalVariables.sortAlert isEqualToString:@"sortTitleAscAlert"] && [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] ) || ([globalVariables.sortAlert isEqualToString:@"sortTitleAscAlert"] && [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] )|| ([globalVariables.sortAlert isEqualToString:@"sortTitleDscAlert"] && [globalVariables.sortCondition isEqualToString:@"CLOSED"] ) || ([globalVariables.sortAlert isEqualToString:@"sortTitleDscAlert"] && [globalVariables.sortCondition isEqualToString:@"TRASH"] ))
+    if([globalVariables.sortAlert isEqualToString:@"sortTitleAscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
+        {
+         [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+           
+        }
+        else
+        {
+            if([globalVariables.sortingValueId isEqualToString:@"sortTitleAsc"])
+            {
+                 [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+            }else{
+            globalVariables.sortingValueId=@"sortTitleAsc";
         
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
-        
+             SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+            [self.navigationController pushViewController:sort animated:YES];
+            }
+        }
     }
     else if(titleButtonIndex==1 && leftIndex==0 && rightIndex==1 )
     {
         NSLog(@"Ticket Title  - DSC");
-        globalVariables.sortingValueId=@"sortTitleDsc";
         
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
+        if([globalVariables.sortAlert isEqualToString:@"sortTitleDscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
+        {
+            [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+        }else{
+            if([globalVariables.sortingValueId isEqualToString:@"sortTitleDsc"])
+            {
+                [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+            }else{
+                  globalVariables.sortingValueId=@"sortTitleDsc";
         
-        
+                  SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+                 [self.navigationController pushViewController:sort animated:YES];
+            }
+        }
     }
     
-    //sort by - ticket number
+    //sort by - ticket number // globalVariables.sortAlert=@"sortNumberAscAlert";
     else  if(titleButtonIndex==1 && leftIndex==1 && rightIndex==0 )
     {
         NSLog(@" Ticket number - ASC");
-        globalVariables.sortingValueId=@"sortNumberAsc";
         
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
+        if([globalVariables.sortAlert isEqualToString:@"sortNumberAscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
+        {
+            [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+        }else{
+            if([globalVariables.sortingValueId isEqualToString:@"sortNumberAsc"])
+            {
+                 [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+            }else{
+                 globalVariables.sortingValueId=@"sortNumberAsc";
         
-        
+                SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+               [self.navigationController pushViewController:sort animated:YES];
+            }
+        }
     }
     else if(titleButtonIndex==1 && leftIndex==1 && rightIndex==1 )
     {
         NSLog(@" Ticket number - DSC");
-        globalVariables.sortingValueId=@"sortNumberDsc";
         
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
+        if([globalVariables.sortAlert isEqualToString:@"sortNumberDscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
+        {
+            [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+        }else{
+            if([globalVariables.sortingValueId isEqualToString:@"sortNumberDsc"])
+            {
+                 [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+            }else{
+                   globalVariables.sortingValueId=@"sortNumberDsc";
         
+                   SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+                [self.navigationController pushViewController:sort animated:YES];
+            }
         
+        }
     }
-    
+    // sortPriorityDscAlert
     else if(titleButtonIndex==1 && leftIndex==2 && rightIndex==0 )
     {
         NSLog(@" Ticket priority - ASC");
-        globalVariables.sortingValueId=@"sortPriorityAsc";
         
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
+        if([globalVariables.sortAlert isEqualToString:@"sortPriorityAscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
+        {
+            [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+        }else{
+            if([globalVariables.sortingValueId isEqualToString:@"sortPriorityAsc"])
+            {
+                [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+            }else{
+                  globalVariables.sortingValueId=@"sortPriorityAsc";
         
-        
+                  SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+                [self.navigationController pushViewController:sort animated:YES];
+            }
+        }
     }
     else if(titleButtonIndex==1 && leftIndex==2 && rightIndex==1 )
     {
         NSLog(@" Ticket priority - DSC");
-        globalVariables.sortingValueId=@"sortPriorityDsc";
         
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
+        if([globalVariables.sortAlert isEqualToString:@"sortPriorityDscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
+        {
+            [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+        }else{
+            if([globalVariables.sortingValueId isEqualToString:@"sortPriorityDsc"])
+            {
+                [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+            }else{
+                  globalVariables.sortingValueId=@"sortPriorityDsc";
         
-        
+                 SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+               [self.navigationController pushViewController:sort animated:YES];
+            }
+        }
     }
-    
+    //sortUpdatedDscAlert
     else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==0 )
     {
         NSLog(@" upated at - ASC");
-        globalVariables.sortingValueId=@"sortUpdatedAsc";
         
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
+        if([globalVariables.sortAlert isEqualToString:@"sortUpdatedAscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
+        {
+             [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+        }else{
+            if([globalVariables.sortingValueId isEqualToString:@"sortUpdatedAsc"])
+            {
+                [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+            }else{
+                   globalVariables.sortingValueId=@"sortUpdatedAsc";
         
+                  SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+                [self.navigationController pushViewController:sort animated:YES];
+            }
         
+        }
     }
     else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==1 )
     {
         NSLog(@" upated at - DSC");
-        globalVariables.sortingValueId=@"sortUpdatedDsc";
         
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
+        if([globalVariables.sortAlert isEqualToString:@"sortUpdatedDscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
+        {
+            [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+        }else{
+            if([globalVariables.sortingValueId isEqualToString:@"sortUpdatedDsc"])
+            {
+                [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+            }else{
+                  globalVariables.sortingValueId=@"sortUpdatedDsc";
         
+                  SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+                 [self.navigationController pushViewController:sort animated:YES];
+            }
         
+        }
     }
-    
+    //sortCreatedAscAlert
     else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==0 )
     {
         NSLog(@" created At - ASC");
-        globalVariables.sortingValueId=@"sortCreatedAsc";
         
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
+        if([globalVariables.sortAlert isEqualToString:@"sortCreatedAscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
+        {
+            [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+        }else{
+            if([globalVariables.sortingValueId isEqualToString:@"sortCreatedAsc"])
+            {
+                 [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+            }else{
+                     globalVariables.sortingValueId=@"sortCreatedAsc";
         
+                     SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+                   [self.navigationController pushViewController:sort animated:YES];
+            }
+        }
     }
     else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==1 )
     {
         NSLog(@" created At - DSC");
-        globalVariables.sortingValueId=@"sortCreatedDsc";
         
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
+        if([globalVariables.sortAlert isEqualToString:@"sortCreatedDscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
+        {
+             [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+        }else{
+            if([globalVariables.sortingValueId isEqualToString:@"sortCreatedDsc"])
+            {
+                [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+            }else{
+                globalVariables.sortingValueId=@"sortCreatedDsc";
         
-        
+                SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+              [self.navigationController pushViewController:sort animated:YES];
+            }
+        }
     }
-    // due on
+    // due on // sortDueAscAlert
     else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==0 )
     {
         NSLog(@" due on - ASC");
-        globalVariables.sortingValueId=@"sortDueAsc";
         
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
+        if([globalVariables.sortAlert isEqualToString:@"sortDueAscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
+        {
+           [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+        }else{
+            if([globalVariables.sortingValueId isEqualToString:@"sortDueAsc"])
+            {
+                [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+            }else{
+                  globalVariables.sortingValueId=@"sortDueAsc";
         
+                  SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+               [self.navigationController pushViewController:sort animated:YES];
+            }
+        }
     }
     else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==1 )
     {
         NSLog(@" due on - DSC");
-        globalVariables.sortingValueId=@"sortDueDsc";
         
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
-    
+        if([globalVariables.sortAlert isEqualToString:@"sortDueDscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
+        {
+            [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+        }else{
+            if([globalVariables.sortingValueId isEqualToString:@"sortDueDsc"])
+            {
+                [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+            }else{
+                    globalVariables.sortingValueId=@"sortDueDsc";
+        
+                   SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+                  [self.navigationController pushViewController:sort animated:YES];
+            }
+        }
     }
     else
     {

@@ -1000,8 +1000,9 @@
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
     {
         NSLog(@"Ticket title - ASC");
-        
+        //sortAlert
         globalVariables.sortingValueId=@"sortTitleAsc";
+        globalVariables.sortAlert=@"sortTitleAscAlert";
         globalVariables.sortCondition=@"MYTICKETS";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -1012,6 +1013,7 @@
     {
         NSLog(@"Ticket Title  - DSC");
         globalVariables.sortingValueId=@"sortTitleDsc";
+        globalVariables.sortAlert=@"sortTitleDscAlert";
         globalVariables.sortCondition=@"MYTICKETS";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -1026,6 +1028,7 @@
     {
         NSLog(@" Ticket number - ASC");
         globalVariables.sortingValueId=@"sortNumberAsc";
+        globalVariables.sortAlert=@"sortNumberAscAlert";
         globalVariables.sortCondition=@"MYTICKETS";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -1037,6 +1040,7 @@
     {
         NSLog(@" Ticket number - DSC");
         globalVariables.sortingValueId=@"sortNumberDsc";
+        globalVariables.sortAlert=@"sortNumberDscAlert";
         globalVariables.sortCondition=@"MYTICKETS";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -1051,7 +1055,9 @@
     {
         NSLog(@" Ticket priority - ASC");
         globalVariables.sortingValueId=@"sortPriorityAsc";
-         globalVariables.sortCondition=@"MYTICKETS";
+        globalVariables.sortAlert=@"sortPriorityAscAlert";
+        globalVariables.sortCondition=@"MYTICKETS";
+        
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
         
@@ -1061,6 +1067,7 @@
     {
         NSLog(@" Ticket priority - DSC");
         globalVariables.sortingValueId=@"sortPriorityDsc";
+        globalVariables.sortAlert=@"sortPriorityDscAlert";
         globalVariables.sortCondition=@"MYTICKETS";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -1073,7 +1080,8 @@
     {
         NSLog(@" upated at - ASC");
         globalVariables.sortingValueId=@"sortUpdatedAsc";
-         globalVariables.sortCondition=@"MYTICKETS";
+        globalVariables.sortAlert=@"sortUpdatedAscAlert";
+        globalVariables.sortCondition=@"MYTICKETS";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -1084,7 +1092,8 @@
     {
         NSLog(@" upated at - DSC");
         globalVariables.sortingValueId=@"sortUpdatedDsc";
-         globalVariables.sortCondition=@"MYTICKETS";
+        globalVariables.sortAlert=@"sortUpdatedDscAlert";
+        globalVariables.sortCondition=@"MYTICKETS";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -1097,6 +1106,7 @@
     {
         NSLog(@" created At - ASC");
         globalVariables.sortingValueId=@"sortCreatedAsc";
+        globalVariables.sortAlert=@"sortCreatedAscAlert";
         globalVariables.sortCondition=@"MYTICKETS";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -1107,7 +1117,8 @@
     {
         NSLog(@" created At - DSC");
         globalVariables.sortingValueId=@"sortCreatedDsc";
-         globalVariables.sortCondition=@"MYTICKETS";
+        globalVariables.sortAlert=@"sortCreatedDscAlert";
+        globalVariables.sortCondition=@"MYTICKETS";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -1120,7 +1131,8 @@
     {
         NSLog(@" due on - ASC");
         globalVariables.sortingValueId=@"sortDueAsc";
-         globalVariables.sortCondition=@"MYTICKETS";
+        globalVariables.sortAlert=@"sortDueAscAlert";
+        globalVariables.sortCondition=@"MYTICKETS";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -1130,7 +1142,8 @@
     {
         NSLog(@" due on - DSC");
         globalVariables.sortingValueId=@"sortDueDsc";
-         globalVariables.sortCondition=@"MYTICKETS";
+        globalVariables.sortAlert=@"sortDueDscAlert";
+        globalVariables.sortCondition=@"MYTICKETS";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -1141,7 +1154,6 @@
     else
     {
     }
-    
     
     
     NSString *titleStr = [multistageDropdownMenuView.defaulTitleArray objectAtIndex:titleButtonIndex];

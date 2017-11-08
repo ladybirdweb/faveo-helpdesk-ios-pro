@@ -757,8 +757,9 @@
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
     {
         NSLog(@"Ticket title - ASC");
-        
+        //sortAlert
         globalVariables.sortingValueId=@"sortTitleAsc";
+        globalVariables.sortAlert=@"sortTitleAscAlert";
         globalVariables.sortCondition=@"UNASSIGNED";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -769,6 +770,7 @@
     {
         NSLog(@"Ticket Title  - DSC");
         globalVariables.sortingValueId=@"sortTitleDsc";
+        globalVariables.sortAlert=@"sortTitleDscAlert";
         globalVariables.sortCondition=@"UNASSIGNED";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -783,6 +785,7 @@
     {
         NSLog(@" Ticket number - ASC");
         globalVariables.sortingValueId=@"sortNumberAsc";
+        globalVariables.sortAlert=@"sortNumberAscAlert";
         globalVariables.sortCondition=@"UNASSIGNED";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -794,6 +797,7 @@
     {
         NSLog(@" Ticket number - DSC");
         globalVariables.sortingValueId=@"sortNumberDsc";
+        globalVariables.sortAlert=@"sortNumberDscAlert";
         globalVariables.sortCondition=@"UNASSIGNED";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -808,6 +812,7 @@
     {
         NSLog(@" Ticket priority - ASC");
         globalVariables.sortingValueId=@"sortPriorityAsc";
+        globalVariables.sortAlert=@"sortPriorityAscAlert";
         globalVariables.sortCondition=@"UNASSIGNED";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -819,6 +824,7 @@
     {
         NSLog(@" Ticket priority - DSC");
         globalVariables.sortingValueId=@"sortPriorityDsc";
+        globalVariables.sortAlert=@"sortPriorityDscAlert";
         globalVariables.sortCondition=@"UNASSIGNED";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -831,6 +837,7 @@
     {
         NSLog(@" upated at - ASC");
         globalVariables.sortingValueId=@"sortUpdatedAsc";
+        globalVariables.sortAlert=@"sortUpdatedAscAlert";
         globalVariables.sortCondition=@"UNASSIGNED";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -842,6 +849,7 @@
     {
         NSLog(@" upated at - DSC");
         globalVariables.sortingValueId=@"sortUpdatedDsc";
+        globalVariables.sortAlert=@"sortUpdatedDscAlert";
         globalVariables.sortCondition=@"UNASSIGNED";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -855,6 +863,7 @@
     {
         NSLog(@" created At - ASC");
         globalVariables.sortingValueId=@"sortCreatedAsc";
+        globalVariables.sortAlert=@"sortCreatedAscAlert";
         globalVariables.sortCondition=@"UNASSIGNED";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -865,6 +874,7 @@
     {
         NSLog(@" created At - DSC");
         globalVariables.sortingValueId=@"sortCreatedDsc";
+        globalVariables.sortAlert=@"sortCreatedDscAlert";
         globalVariables.sortCondition=@"UNASSIGNED";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -878,6 +888,7 @@
     {
         NSLog(@" due on - ASC");
         globalVariables.sortingValueId=@"sortDueAsc";
+        globalVariables.sortAlert=@"sortDueAscAlert";
         globalVariables.sortCondition=@"UNASSIGNED";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -888,6 +899,7 @@
     {
         NSLog(@" due on - DSC");
         globalVariables.sortingValueId=@"sortDueDsc";
+        globalVariables.sortAlert=@"sortDueDscAlert";
         globalVariables.sortCondition=@"UNASSIGNED";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];

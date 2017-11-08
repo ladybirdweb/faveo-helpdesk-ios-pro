@@ -117,6 +117,8 @@
 
 @property (strong, nonatomic) NSString *sortCondition;
 
+@property (strong, nonatomic) NSString *sortAlert;
+
 
 //filter globalvaribales
 
