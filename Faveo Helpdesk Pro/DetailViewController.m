@@ -179,6 +179,7 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         //                        _clientNameTextField.text=[NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"first_name"],[dic objectForKey:@"last_name"]];
+                      
                         _createdDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"created_at"]];
                         
                         if (([[dic objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"first_name"] length] == 0 )) {
@@ -270,6 +271,9 @@
                         
                         
                         _emailTextField.text=[dic objectForKey:@"email"];
+                       
+                        // cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+                        
                         _lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
                       
                         
@@ -309,7 +313,9 @@
                         
                        // _statusTextField.text= [dic objectForKey:@"status_name"];
                         
-                        _dueDateTextField.text= [utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
+                     //   cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+                        
+                        _dueDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"duedate"]];
                         
                         [self.refreshControl endRefreshing];
                         [_imgViewLoading setHidden:YES];

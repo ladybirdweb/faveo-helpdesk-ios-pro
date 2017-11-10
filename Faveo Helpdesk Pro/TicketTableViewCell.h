@@ -82,4 +82,11 @@
 -(void)setUserProfileimage:(NSString*)imageUrl;
 @property (weak, nonatomic) IBOutlet UILabel *today;
 
+@property (weak, nonatomic) IBOutlet UIImageView *sourceImgView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *ccImgView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *attachImgView;
+@property (weak, nonatomic) IBOutlet UIImageView *img;
+
 @end
