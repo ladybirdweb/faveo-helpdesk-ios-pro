@@ -910,7 +910,7 @@
 - (CFMultistageDropdownMenuView *)multistageDropdownMenuView
 {
     // DEMO
-    _multistageDropdownMenuView = [[CFMultistageDropdownMenuView alloc] initWithFrame:CGRectMake(0, -5, CFScreenWidth, 45)];
+    _multistageDropdownMenuView = [[CFMultistageDropdownMenuView alloc] initWithFrame:CGRectMake(0, -5, CFScreenWidth, 30)];
     
   
 //
