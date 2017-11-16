@@ -80,6 +80,13 @@
 		D9EB9FC11E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9FBB1E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m */; };
 		D9EB9FC51E07C4610001115F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9FC41E07C4610001115F /* Reachability.m */; };
 		D9F954FB1E617BE500DA9B30 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = D9F954FA1E617BE500DA9B30 /* countries.json */; };
+		D9F9F11A1FB977B40044DA27 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F9F1191FB977B40044DA27 /* FilterViewController.m */; };
+		D9F9F13B1FB9B2530044DA27 /* DropDownListView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F9F1341FB9B24F0044DA27 /* DropDownListView.m */; };
+		D9F9F13C1FB9B2530044DA27 /* check_mark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9F9F1351FB9B2500044DA27 /* check_mark@2x.png */; };
+		D9F9F13D1FB9B2530044DA27 /* DropDownViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F9F1371FB9B2510044DA27 /* DropDownViewCell.m */; };
+		D9F9F13E1FB9B2530044DA27 /* drop_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9F9F1381FB9B2520044DA27 /* drop_down@2x.png */; };
+		D9F9F13F1FB9B2530044DA27 /* done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9F9F13A1FB9B2530044DA27 /* done@2x.png */; };
+		D9F9F1421FBAE8CC0044DA27 /* FilterLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F9F1411FBAE8CB0044DA27 /* FilterLogic.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -259,6 +266,17 @@
 		D9EB9FC31E07C4610001115F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		D9EB9FC41E07C4610001115F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		D9F954FA1E617BE500DA9B30 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
+		D9F9F1181FB977B40044DA27 /* FilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		D9F9F1191FB977B40044DA27 /* FilterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		D9F9F1341FB9B24F0044DA27 /* DropDownListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownListView.m; sourceTree = "<group>"; };
+		D9F9F1351FB9B2500044DA27 /* check_mark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_mark@2x.png"; sourceTree = "<group>"; };
+		D9F9F1361FB9B2510044DA27 /* DropDownViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownViewCell.h; sourceTree = "<group>"; };
+		D9F9F1371FB9B2510044DA27 /* DropDownViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownViewCell.m; sourceTree = "<group>"; };
+		D9F9F1381FB9B2520044DA27 /* drop_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drop_down@2x.png"; sourceTree = "<group>"; };
+		D9F9F1391FB9B2530044DA27 /* DropDownListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownListView.h; sourceTree = "<group>"; };
+		D9F9F13A1FB9B2530044DA27 /* done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done@2x.png"; sourceTree = "<group>"; };
+		D9F9F1401FBAE8CB0044DA27 /* FilterLogic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterLogic.h; sourceTree = "<group>"; };
+		D9F9F1411FBAE8CB0044DA27 /* FilterLogic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterLogic.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +335,7 @@
 		D92C35C71F750F83001DD67D /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D9F9F11B1FB9A4D10044DA27 /* kDropDown */,
 				D9AA44421FA890AC00938081 /* BDCustomeAlert */,
 				D9D2F34F1F9E131E00BC5456 /* MultiStageDropDown */,
 				D92C35C81F750FDE001DD67D /* LGPlusButtonsView */,
@@ -495,6 +514,10 @@
 				D9EB9F921E07C3270001115F /* CreateTicketViewController.m */,
 				D9EB9F931E07C3270001115F /* InboxViewController.h */,
 				D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */,
+				D9F9F1181FB977B40044DA27 /* FilterViewController.h */,
+				D9F9F1191FB977B40044DA27 /* FilterViewController.m */,
+				D9F9F1401FBAE8CB0044DA27 /* FilterLogic.h */,
+				D9F9F1411FBAE8CB0044DA27 /* FilterLogic.m */,
 				D946D6961FA9F519005E5BF1 /* SortingViewController.h */,
 				D946D6971FA9F519005E5BF1 /* SortingViewController.m */,
 				D9EB9F8F1E07C3270001115F /* MyTicketsViewController.h */,
@@ -608,6 +631,20 @@
 				D9EB9FC41E07C4610001115F /* Reachability.m */,
 			);
 			name = Reachability;
+			sourceTree = "<group>";
+		};
+		D9F9F11B1FB9A4D10044DA27 /* kDropDown */ = {
+			isa = PBXGroup;
+			children = (
+				D9F9F1351FB9B2500044DA27 /* check_mark@2x.png */,
+				D9F9F13A1FB9B2530044DA27 /* done@2x.png */,
+				D9F9F1381FB9B2520044DA27 /* drop_down@2x.png */,
+				D9F9F1391FB9B2530044DA27 /* DropDownListView.h */,
+				D9F9F1341FB9B24F0044DA27 /* DropDownListView.m */,
+				D9F9F1361FB9B2510044DA27 /* DropDownViewCell.h */,
+				D9F9F1371FB9B2510044DA27 /* DropDownViewCell.m */,
+			);
+			path = kDropDown;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -739,11 +776,14 @@
 				D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */,
 				D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */,
 				D955A5511F2A05630045429F /* Assets.xcassets in Resources */,
+				D9F9F13C1FB9B2530044DA27 /* check_mark@2x.png in Resources */,
 				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
+				D9F9F13E1FB9B2530044DA27 /* drop_down@2x.png in Resources */,
 				D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */,
 				D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */,
 				D9AA44471FA890AC00938081 /* BDCustomAlertView.xib in Resources */,
 				D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */,
+				D9F9F13F1FB9B2530044DA27 /* done@2x.png in Resources */,
 				D9EB9F801E07C2F00001115F /* OpenCloseTableViewCell.xib in Resources */,
 				D9EB9F781E07C2F00001115F /* TicketTableViewCell.xib in Resources */,
 			);
@@ -828,6 +868,7 @@
 				D9EB9F641E07C2D00001115F /* GlobalVariables.m in Sources */,
 				D92C35D41F750FDE001DD67D /* LGPlusButtonsViewShared.m in Sources */,
 				D9E57B411EFAA4C1002E4C19 /* UITextField+PasswordField.m in Sources */,
+				D9F9F13B1FB9B2530044DA27 /* DropDownListView.m in Sources */,
 				D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */,
 				D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */,
 				D9E57B401EFAA4C1002E4C19 /* UIView+Shake.m in Sources */,
@@ -860,6 +901,9 @@
 				D9EB9FA91E07C3270001115F /* AboutViewController.m in Sources */,
 				D953D53E1FA321420077D519 /* AddRequester.m in Sources */,
 				D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */,
+				D9F9F13D1FB9B2530044DA27 /* DropDownViewCell.m in Sources */,
+				D9F9F11A1FB977B40044DA27 /* FilterViewController.m in Sources */,
+				D9F9F1421FBAE8CC0044DA27 /* FilterLogic.m in Sources */,
 				D9EB9FA41E07C3270001115F /* ClosedTicketsViewController.m in Sources */,
 				D9D2F35A1F9E131E00BC5456 /* CFMultistageConditionTableView.m in Sources */,
 				D9EB9FC11E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,

@@ -25,6 +25,7 @@
 #import "CFMacro.h"
 #import "CFMultistageDropdownMenuView.h"
 #import "SortingViewController.h"
+#import "FilterViewController.h"
 
 
 @interface ClosedTicketsViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
@@ -934,6 +935,49 @@
                 
             }
             
+            NSString * source1=[finaldic objectForKey:@"source"];
+            
+            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countcollaborator"]];
+            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countattachment"]];
+            
+            
+            if([source1 isEqualToString:@"web"])
+            {
+                cell.sourceImgView.image=[UIImage imageNamed:@"internert"];
+            }else  if([source1 isEqualToString:@"email"])
+            {
+                cell.sourceImgView.image=[UIImage imageNamed:@"agentORmail"];
+            }else  if([source1 isEqualToString:@"agent"])
+            {
+                cell.sourceImgView.image=[UIImage imageNamed:@"agentORmail"];
+            }else  if([source1 isEqualToString:@"facebook"])
+            {
+                cell.sourceImgView.image=[UIImage imageNamed:@"fb"];
+            }else  if([source1 isEqualToString:@"twitter"])
+            {
+                cell.sourceImgView.image=[UIImage imageNamed:@"twitter"];
+            }else  if([source1 isEqualToString:@"call"])
+            {
+                cell.sourceImgView.image=[UIImage imageNamed:@"call"];
+            }else if([source1 isEqualToString:@"chat"])
+            {
+                cell.sourceImgView.image=[UIImage imageNamed:@"chat"];
+            }
+            
+            if(![cc isEqualToString:@"0"])
+            {
+                cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
+            }
+            
+            if([cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+            {
+                cell.ccImgView.image=[UIImage imageNamed:@"attach"];
+            }
+            else if(![cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+            {
+                cell.attachImgView.image=[UIImage imageNamed:@"attach"];
+            }
+            
             
             
             cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"color"]] CGColor];
@@ -1036,7 +1080,7 @@
 - (CFMultistageDropdownMenuView *)multistageDropdownMenuView
 {
     // DEMO
-    _multistageDropdownMenuView = [[CFMultistageDropdownMenuView alloc] initWithFrame:CGRectMake(0, -5, CFScreenWidth, 45)];
+    _multistageDropdownMenuView = [[CFMultistageDropdownMenuView alloc] initWithFrame:CGRectMake(0, -5, CFScreenWidth, 30)];
     
     
     //
@@ -1045,7 +1089,7 @@
     
     NSArray *leftArr = @[
                          // Filter - left array
-                         @[@"Departments", @"Helptopic", @"SLA Plans", @"Priorities", @"Assigned", @"Source",@"Ticket Type",@"clear"],
+                         @[],
                          // sort - left array
                          @[@"ticket title", @"ticket number", @"priority", @"updated at", @"created at",@"due on"],
                          //
@@ -1055,19 +1099,9 @@
                           // 对应dataSourceLeftArray
                           @[
                               
-                              @[@"All",@"Operation",@"Sales",@"Support"],
+                              // @[]
+                              @[@"show"]
                               
-                              @[@"Sales Query", @"Support Query", @"Operational Query"],
-                              
-                              @[@"Emergency", @"High", @"Low", @"Normal"],
-                              
-                              @[@"Emergency", @"High", @"Low",@"Normal"],
-                              
-                              @[@"No", @"Yes"],
-                              
-                              @[@"agent", @"call", @"chat", @"email",@"facebook",@"twitter",@"web"],
-                              
-                              @[@"Feature Request", @"Incident", @"Problem",@"Question"],
                               
                               ],
                           @[
@@ -1082,6 +1116,7 @@
                           //                              ]
                           //
                           ];
+    
     
     [_multistageDropdownMenuView setupDataSourceLeftArray:leftArr rightArray:rightArr];
     
@@ -1108,6 +1143,15 @@
 - (void)multistageDropdownMenuView:(CFMultistageDropdownMenuView *)multistageDropdownMenuView selecteTitleButtonIndex:(NSInteger)titleButtonIndex conditionLeftIndex:(NSInteger)leftIndex conditionRightIndex:(NSInteger)rightIndex
 {
     
+    if(titleButtonIndex==0 && rightIndex==0)
+    {
+        NSLog(@"*************show********");
+        
+        globalVariables.filterCondition=@"CLOSED";
+        FilterViewController * filter=[self.storyboard instantiateViewControllerWithIdentifier:@"filterID1"];
+        [self.navigationController pushViewController:filter animated:YES];
+        
+    }
     
     // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )

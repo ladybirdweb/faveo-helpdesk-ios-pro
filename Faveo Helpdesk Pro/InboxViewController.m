@@ -26,6 +26,7 @@
 #import "CFMultistageDropdownMenuView.h"
 #import "CFMultistageConditionTableView.h"
 #import "SortingViewController.h"
+#import "FilterViewController.h"
 
 
 @import FirebaseInstanceID;
@@ -82,6 +83,7 @@
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
+
     
    //added + button for ticket creation
 //    UIButton *addBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
@@ -137,8 +139,7 @@
         
         
     }else{
-        
-      //  NSString *url=[NSString stringWithFormat:@"%@helpdesk/inbox?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
+        //  NSString *url=[NSString stringWithFormat:@"%@helpdesk/inbox?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
         
         NSString * apiValue=[NSString stringWithFormat:@"%i",1];
         NSString * showInbox = @"inbox";
@@ -147,7 +148,7 @@
         NSString * url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments];
           NSLog(@"URL is : %@",url);
      
-@try{
+       @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -214,6 +215,7 @@
             
         }
     }
+    
 }
 
 -(void)getDependencies{
@@ -976,9 +978,10 @@
     if(titleButtonIndex==0 && rightIndex==0)
     {
         NSLog(@"*************show********");
-        NSLog(@"*************show********");
-        NSLog(@"*************show********");
-        NSLog(@"*************show********");
+        
+        globalVariables.filterCondition=@"INBOX";
+        FilterViewController * filter=[self.storyboard instantiateViewControllerWithIdentifier:@"filterID1"];
+        [self.navigationController pushViewController:filter animated:YES];
         
     }
     // sort by - Tciket title

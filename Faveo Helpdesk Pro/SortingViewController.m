@@ -27,6 +27,7 @@
 #import "CFMultistageDropdownMenuView.h"
 #import "CFMultistageConditionTableView.h"
 #import "BDCustomAlertView.h"
+#import "FilterViewController.h"
 
 
 @import FirebaseInstanceID;
@@ -97,7 +98,7 @@
     
    // [self addUIRefresh];
     
-    NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
+  //  NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
     _mutableArray=[[NSMutableArray alloc]init];
     
     utils=[[Utils alloc]init];
@@ -154,10 +155,12 @@
         
         
     }else{
+        // if([globalVariables.sortCondition isEqualToString:@"INBOX"] || ([globalVariables.sortCondition isEqualToString:@"INBOX"] && [globalVariables.filterCondition isEqualToString:@"INBOX"]))
         
          if([globalVariables.sortCondition isEqualToString:@"INBOX"])
          {
-                  NSString * apiValue=[NSString stringWithFormat:@"%i",1];
+          
+                 NSString * apiValue=[NSString stringWithFormat:@"%i",1];
                   NSString * showInbox = @"inbox";
                   NSString * Alldeparatments=@"All";
         
@@ -257,7 +260,8 @@
         else
         { //
         }
-//
+          
+              //   }
 //
          }else  if([globalVariables.sortCondition isEqualToString:@"UNASSIGNED"])
          {
@@ -689,6 +693,8 @@
         
         
         @try{
+            
+      
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
@@ -1655,7 +1661,7 @@
 - (CFMultistageDropdownMenuView *)multistageDropdownMenuView
 {
     // DEMO
-    _multistageDropdownMenuView = [[CFMultistageDropdownMenuView alloc] initWithFrame:CGRectMake(0, -5, CFScreenWidth, 45)];
+    _multistageDropdownMenuView = [[CFMultistageDropdownMenuView alloc] initWithFrame:CGRectMake(0, -5, CFScreenWidth, 30)];
     
     
     //
@@ -1664,7 +1670,7 @@
     
     NSArray *leftArr = @[
                          // Filter - left array
-                         @[@"Departments", @"Helptopic", @"SLA Plans", @"Priorities", @"Assigned", @"Source",@"Ticket Type",@"clear"],
+                         @[],
                          // sort - left array
                          @[@"ticket title", @"ticket number", @"priority", @"updated at", @"created at",@"due on"],
                          //
@@ -1674,19 +1680,9 @@
                           // 对应dataSourceLeftArray
                           @[
                               
-                              @[@"All",@"Operation",@"Sales",@"Support"],
+                              // @[]
+                              @[@"show"]
                               
-                              @[@"Sales Query", @"Support Query", @"Operational Query"],
-                              
-                              @[@"Emergency", @"High", @"Low", @"Normal"],
-                              
-                              @[@"Emergency", @"High", @"Low",@"Normal"],
-                              
-                              @[@"No", @"Yes"],
-                              
-                              @[@"agent", @"call", @"chat", @"email",@"facebook",@"twitter",@"web"],
-                              
-                              @[@"Feature Request", @"Incident", @"Problem",@"Question"],
                               
                               ],
                           @[
@@ -1726,7 +1722,31 @@
 - (void)multistageDropdownMenuView:(CFMultistageDropdownMenuView *)multistageDropdownMenuView selecteTitleButtonIndex:(NSInteger)titleButtonIndex conditionLeftIndex:(NSInteger)leftIndex conditionRightIndex:(NSInteger)rightIndex
 {
     
+    if(titleButtonIndex==0 && rightIndex==0)
+    {
+        NSLog(@"*************show********");
+        
+        if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
+            globalVariables.filterCondition=@"INBOX";
+        }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
+            globalVariables.filterCondition=@"MYTICKETS";
+        }
+        else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
+            globalVariables.filterCondition=@"UNASSIGNED";
+        }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
+            globalVariables.filterCondition=@"CLOSED";
+        }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
+            globalVariables.filterCondition=@"TRASH";
+        }else{
+            
+            NSLog(@"I am in FilterLogic View Controller");
+            NSLog(@"I am in slese condoton");
+        }
+        
+        FilterViewController * filter=[self.storyboard instantiateViewControllerWithIdentifier:@"filterID1"];
+        [self.navigationController pushViewController:filter animated:YES];
     
+    }
     
     // sort by - Tciket title// UNASSIGNED
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
@@ -1735,16 +1755,19 @@
         NSLog(@"Ticket title - ASC");
         
 //        if(([globalVariables.sortAlert isEqualToString:@"sortTitleAscAlert"] && [globalVariables.sortCondition isEqualToString:@"INBOX"] ) || ([globalVariables.sortAlert isEqualToString:@"sortTitleAscAlert"] && [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] ) || ([globalVariables.sortAlert isEqualToString:@"sortTitleAscAlert"] && [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] )|| ([globalVariables.sortAlert isEqualToString:@"sortTitleDscAlert"] && [globalVariables.sortCondition isEqualToString:@"CLOSED"] ) || ([globalVariables.sortAlert isEqualToString:@"sortTitleDscAlert"] && [globalVariables.sortCondition isEqualToString:@"TRASH"] ))
+        
     if([globalVariables.sortAlert isEqualToString:@"sortTitleAscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
         {
          [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
            
+           
         }
         else
         {
-            if([globalVariables.sortingValueId isEqualToString:@"sortTitleAsc"])
+            if([globalVariables.sortingValueId isEqualToString:@"sortTitleAsc"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
             {
                  [utils showAlertWithMessage:@"Sorted Already in Ascending order " sendViewController:self];
+                
             }else{
             globalVariables.sortingValueId=@"sortTitleAsc";
         
@@ -1760,10 +1783,12 @@
         if([globalVariables.sortAlert isEqualToString:@"sortTitleDscAlert"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
         {
             [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+           
         }else{
-            if([globalVariables.sortingValueId isEqualToString:@"sortTitleDsc"])
+            if([globalVariables.sortingValueId isEqualToString:@"sortTitleDsc"] && ([globalVariables.sortCondition isEqualToString:@"INBOX"] || [globalVariables.sortCondition isEqualToString:@"MYTICKETS"] || [globalVariables.sortCondition isEqualToString:@"UNASSIGNED"] || [globalVariables.sortCondition isEqualToString:@"CLOSED"] || [globalVariables.sortCondition isEqualToString:@"TRASH"]) )
             {
                 [utils showAlertWithMessage:@"Sorted Already in Descending order " sendViewController:self];
+                
             }else{
                   globalVariables.sortingValueId=@"sortTitleDsc";
         

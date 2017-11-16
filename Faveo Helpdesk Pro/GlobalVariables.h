@@ -120,8 +120,29 @@
 @property (strong, nonatomic) NSString *sortAlert;
 
 
+
 //filter globalvaribales
 
+@property (strong, nonatomic) NSString *filterCondition;
 
+@property (strong, nonatomic) NSString *deptt1;
+@property (strong, nonatomic) NSString *prioo1;
+@property (strong, nonatomic) NSString *typee1;
+@property (strong, nonatomic) NSString *sourcee1;
+@property (strong, nonatomic) NSString *statuss1;
+@property (strong, nonatomic) NSString *assignn1;
+
+@property (strong, nonatomic) NSString *filterId;
+
+@property (strong, nonatomic) NSString *urlFromFilterLogicView;
+
+
+/// filter form global variables
+@property (strong, nonatomic) NSString *departmentTextFiled1;
+@property (strong, nonatomic) NSString *priorityTextFiled1;
+@property (strong, nonatomic) NSString *typeTextFiled1;
+@property (strong, nonatomic) NSString *sourceTextFiled1;
+@property (strong, nonatomic) NSString *statusTextField;
+@property (strong, nonatomic) NSString *assignedTextFiled1;
 
 @end
