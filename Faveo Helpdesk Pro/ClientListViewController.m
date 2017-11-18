@@ -501,7 +501,8 @@ GlobalVariables *globalVariables;
     
     refresh=[[UIRefreshControl alloc] init];
     refresh.tintColor=[UIColor whiteColor];
-    refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+   // refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+     refresh.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
     refresh.attributedTitle =refreshing;
     [refresh addTarget:self action:@selector(reloadd) forControlEvents:UIControlEventValueChanged];
     [_tableView insertSubview:refresh atIndex:0];

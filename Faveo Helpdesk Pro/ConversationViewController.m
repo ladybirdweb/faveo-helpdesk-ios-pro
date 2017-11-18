@@ -420,7 +420,9 @@ webview.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingF
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.tintColor=[UIColor whiteColor];
-    self.refreshControl.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+  //  self.refreshControl.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+   self.refreshControl.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
+   
     self.refreshControl.attributedTitle =refreshing;
     [self.refreshControl addTarget:self action:@selector(reloadd) forControlEvents:UIControlEventValueChanged];
     

@@ -56,6 +56,8 @@
     
     self.selectionStyle=UITableViewCellSelectionStyleDefault;
     
+   // _viewMain.backgroundColor= [UIColor hx_colorWithHexRGBAString:@"#FAFAFA"];
+    
     // Initialization code
 }
 

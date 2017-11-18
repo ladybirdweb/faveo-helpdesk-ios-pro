@@ -35,6 +35,7 @@
 @interface FilterViewController ()<RMessageProtocol,UITextViewDelegate,kDropDownListViewDelegate>{
     
     Utils *utils;
+     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
     NSMutableArray *array1;
     NSDictionary *priDicc1;

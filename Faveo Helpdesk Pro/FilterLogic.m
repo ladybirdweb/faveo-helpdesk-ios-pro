@@ -77,7 +77,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+    [self addUIRefresh];
     
     customAlert = [[BDCustomAlertView alloc] init];
     _multistageDropdownMenuView.tag=99;
@@ -1336,6 +1336,32 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
             
             
+            NSString *assigneeFirstName= [finaldic objectForKey:@"a_fname"];
+            NSString *assigneeLaststName= [finaldic objectForKey:@"a_lname"];
+            NSString *assigneeUserName= [finaldic objectForKey:@"a_uname"];
+            
+            [Utils isEmpty:assigneeFirstName];
+            [Utils isEmpty:assigneeLaststName];
+            [Utils isEmpty:assigneeUserName];
+            
+            if (![Utils isEmpty:assigneeFirstName] || ![Utils isEmpty:assigneeLaststName])
+            {
+                if  (![Utils isEmpty:assigneeFirstName] && ![Utils isEmpty:assigneeLaststName])
+                {
+                    cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"a_fname"],[finaldic objectForKey:@"a_lname"]];
+                }
+                else
+                {
+                    cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"a_fname"],[finaldic objectForKey:@"a_lname"]];
+                }
+            }  else if(![Utils isEmpty:assigneeUserName])
+            {
+                cell.agentLabel.text= [finaldic objectForKey:@"a_uname"];
+            }else
+            {
+                cell.agentLabel.text= NSLocalizedString(@"No Agent", nil);
+            }
+            
         } @catch (NSException *exception)
         {
             // Print exception information
@@ -1603,7 +1629,8 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     
     refresh=[[UIRefreshControl alloc] init];
     refresh.tintColor=[UIColor whiteColor];
-    refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+  //  refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+     refresh.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
     refresh.attributedTitle =refreshing;
     [refresh addTarget:self action:@selector(reloadd) forControlEvents:UIControlEventValueChanged];
     [_tableView insertSubview:refresh atIndex:0];
@@ -1719,19 +1746,28 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
             globalVariables.filterCondition=@"INBOX";
             globalVariables.sortCondition=@"INBOX";
+            globalVariables.filterId=@"INBOXFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
             globalVariables.filterCondition=@"MYTICKETS";
             globalVariables.sortCondition=@"MYTICKETS";
+            globalVariables.filterId=@"MYTICKETSFilter";
+            
         }
         else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
             globalVariables.filterCondition=@"UNASSIGNED";
             globalVariables.sortCondition=@"UNASSIGNED";
+            globalVariables.filterId=@"UNASSIGNEDFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
             globalVariables.filterCondition=@"CLOSED";
             globalVariables.sortCondition=@"CLOSED";
+            globalVariables.filterId=@"CLOSEDFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
             globalVariables.filterCondition=@"TRASH";
             globalVariables.sortCondition=@"TRASH";
+            globalVariables.filterId=@"TRASHFilter";
         }else{
             
         }
@@ -1754,25 +1790,35 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
             globalVariables.filterCondition=@"INBOX";
             globalVariables.sortCondition=@"INBOX";
+            globalVariables.filterId=@"INBOXFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
             globalVariables.filterCondition=@"MYTICKETS";
             globalVariables.sortCondition=@"MYTICKETS";
+            globalVariables.filterId=@"MYTICKETSFilter";
+            
         }
         else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
             globalVariables.filterCondition=@"UNASSIGNED";
             globalVariables.sortCondition=@"UNASSIGNED";
+            globalVariables.filterId=@"UNASSIGNEDFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
             globalVariables.filterCondition=@"CLOSED";
             globalVariables.sortCondition=@"CLOSED";
+            globalVariables.filterId=@"CLOSEDFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
             globalVariables.filterCondition=@"TRASH";
             globalVariables.sortCondition=@"TRASH";
+            globalVariables.filterId=@"TRASHFilter";
         }else{
             
         }
         
         globalVariables.sortingValueId=@"sortTitleDsc";
         globalVariables.sortAlert=@"sortTitleDscAlert";
+        globalVariables.urlFromFilterLogicView=url;
       //  globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -1790,24 +1836,34 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
             globalVariables.filterCondition=@"INBOX";
             globalVariables.sortCondition=@"INBOX";
+            globalVariables.filterId=@"INBOXFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
             globalVariables.filterCondition=@"MYTICKETS";
             globalVariables.sortCondition=@"MYTICKETS";
+            globalVariables.filterId=@"MYTICKETSFilter";
+            
         }
         else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
             globalVariables.filterCondition=@"UNASSIGNED";
             globalVariables.sortCondition=@"UNASSIGNED";
+            globalVariables.filterId=@"UNASSIGNEDFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
             globalVariables.filterCondition=@"CLOSED";
             globalVariables.sortCondition=@"CLOSED";
+            globalVariables.filterId=@"CLOSEDFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
             globalVariables.filterCondition=@"TRASH";
             globalVariables.sortCondition=@"TRASH";
+            globalVariables.filterId=@"TRASHFilter";
         }else{
             
         }
         globalVariables.sortingValueId=@"sortNumberAsc";
         globalVariables.sortAlert=@"sortNumberAscAlert";
+        globalVariables.urlFromFilterLogicView=url;
       //  globalVariables.sortCondition=@"INBOX";
         
         NSLog(@"Filter Condtion is : %@", globalVariables.filterCondition);
@@ -1828,25 +1884,34 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
             globalVariables.filterCondition=@"INBOX";
             globalVariables.sortCondition=@"INBOX";
+            globalVariables.filterId=@"INBOXFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
             globalVariables.filterCondition=@"MYTICKETS";
             globalVariables.sortCondition=@"MYTICKETS";
+            globalVariables.filterId=@"MYTICKETSFilter";
+            
         }
         else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
             globalVariables.filterCondition=@"UNASSIGNED";
             globalVariables.sortCondition=@"UNASSIGNED";
+            globalVariables.filterId=@"UNASSIGNEDFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
             globalVariables.filterCondition=@"CLOSED";
             globalVariables.sortCondition=@"CLOSED";
+            globalVariables.filterId=@"CLOSEDFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
             globalVariables.filterCondition=@"TRASH";
             globalVariables.sortCondition=@"TRASH";
+            globalVariables.filterId=@"TRASHFilter";
         }else{
             
         }
-        
         globalVariables.sortingValueId=@"sortNumberDsc";
         globalVariables.sortAlert=@"sortNumberDscAlert";
+        globalVariables.urlFromFilterLogicView=url;
      //   globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -1862,27 +1927,39 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         NSLog(@" Ticket priority - ASC");
         
         
+        
         if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
             globalVariables.filterCondition=@"INBOX";
             globalVariables.sortCondition=@"INBOX";
+            globalVariables.filterId=@"INBOXFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
             globalVariables.filterCondition=@"MYTICKETS";
             globalVariables.sortCondition=@"MYTICKETS";
+            globalVariables.filterId=@"MYTICKETSFilter";
+            
         }
         else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
             globalVariables.filterCondition=@"UNASSIGNED";
             globalVariables.sortCondition=@"UNASSIGNED";
+            globalVariables.filterId=@"UNASSIGNEDFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
             globalVariables.filterCondition=@"CLOSED";
             globalVariables.sortCondition=@"CLOSED";
+            globalVariables.filterId=@"CLOSEDFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
             globalVariables.filterCondition=@"TRASH";
             globalVariables.sortCondition=@"TRASH";
+            globalVariables.filterId=@"TRASHFilter";
         }else{
             
         }
+        
         globalVariables.sortingValueId=@"sortPriorityAsc";
         globalVariables.sortAlert=@"sortPriorityAscAlert";
+        globalVariables.urlFromFilterLogicView=url;
       //  globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -1897,24 +1974,34 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
             globalVariables.filterCondition=@"INBOX";
             globalVariables.sortCondition=@"INBOX";
+            globalVariables.filterId=@"INBOXFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
             globalVariables.filterCondition=@"MYTICKETS";
             globalVariables.sortCondition=@"MYTICKETS";
+            globalVariables.filterId=@"MYTICKETSFilter";
+            
         }
         else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
             globalVariables.filterCondition=@"UNASSIGNED";
             globalVariables.sortCondition=@"UNASSIGNED";
+            globalVariables.filterId=@"UNASSIGNEDFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
             globalVariables.filterCondition=@"CLOSED";
             globalVariables.sortCondition=@"CLOSED";
+            globalVariables.filterId=@"CLOSEDFilter";
+            
         }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
             globalVariables.filterCondition=@"TRASH";
             globalVariables.sortCondition=@"TRASH";
+            globalVariables.filterId=@"TRASHFilter";
         }else{
             
         }
         globalVariables.sortingValueId=@"sortPriorityDsc";
         globalVariables.sortAlert=@"sortPriorityDscAlert";
+        globalVariables.urlFromFilterLogicView=url;
        // globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
@@ -1926,9 +2013,40 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==0 )
     {
         NSLog(@" upated at - ASC");
+        
+        if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
+            globalVariables.filterCondition=@"INBOX";
+            globalVariables.sortCondition=@"INBOX";
+            globalVariables.filterId=@"INBOXFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
+            globalVariables.filterCondition=@"MYTICKETS";
+            globalVariables.sortCondition=@"MYTICKETS";
+            globalVariables.filterId=@"MYTICKETSFilter";
+            
+        }
+        else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
+            globalVariables.filterCondition=@"UNASSIGNED";
+            globalVariables.sortCondition=@"UNASSIGNED";
+            globalVariables.filterId=@"UNASSIGNEDFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
+            globalVariables.filterCondition=@"CLOSED";
+            globalVariables.sortCondition=@"CLOSED";
+            globalVariables.filterId=@"CLOSEDFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
+            globalVariables.filterCondition=@"TRASH";
+            globalVariables.sortCondition=@"TRASH";
+            globalVariables.filterId=@"TRASHFilter";
+        }else{
+            
+        }
+        
         globalVariables.sortingValueId=@"sortUpdatedAsc";
         globalVariables.sortAlert=@"sortUpdatedAscAlert";
-        globalVariables.sortCondition=@"INBOX";
+        globalVariables.urlFromFilterLogicView=url;
+       // globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -1938,9 +2056,40 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==1 )
     {
         NSLog(@" upated at - DSC");
+        
+        if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
+            globalVariables.filterCondition=@"INBOX";
+            globalVariables.sortCondition=@"INBOX";
+            globalVariables.filterId=@"INBOXFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
+            globalVariables.filterCondition=@"MYTICKETS";
+            globalVariables.sortCondition=@"MYTICKETS";
+            globalVariables.filterId=@"MYTICKETSFilter";
+            
+        }
+        else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
+            globalVariables.filterCondition=@"UNASSIGNED";
+            globalVariables.sortCondition=@"UNASSIGNED";
+            globalVariables.filterId=@"UNASSIGNEDFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
+            globalVariables.filterCondition=@"CLOSED";
+            globalVariables.sortCondition=@"CLOSED";
+            globalVariables.filterId=@"CLOSEDFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
+            globalVariables.filterCondition=@"TRASH";
+            globalVariables.sortCondition=@"TRASH";
+            globalVariables.filterId=@"TRASHFilter";
+        }else{
+            
+        }
+        
         globalVariables.sortingValueId=@"sortUpdatedDsc";
         globalVariables.sortAlert=@"sortUpdatedDscAlert";
-        globalVariables.sortCondition=@"INBOX";
+        globalVariables.urlFromFilterLogicView=url;
+        //globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -1952,9 +2101,39 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==0 )
     {
         NSLog(@" created At - ASC");
+        
+        if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
+            globalVariables.filterCondition=@"INBOX";
+            globalVariables.sortCondition=@"INBOX";
+            globalVariables.filterId=@"INBOXFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
+            globalVariables.filterCondition=@"MYTICKETS";
+            globalVariables.sortCondition=@"MYTICKETS";
+            globalVariables.filterId=@"MYTICKETSFilter";
+            
+        }
+        else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
+            globalVariables.filterCondition=@"UNASSIGNED";
+            globalVariables.sortCondition=@"UNASSIGNED";
+            globalVariables.filterId=@"UNASSIGNEDFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
+            globalVariables.filterCondition=@"CLOSED";
+            globalVariables.sortCondition=@"CLOSED";
+            globalVariables.filterId=@"CLOSEDFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
+            globalVariables.filterCondition=@"TRASH";
+            globalVariables.sortCondition=@"TRASH";
+            globalVariables.filterId=@"TRASHFilter";
+        }else{
+            
+        }
         globalVariables.sortingValueId=@"sortCreatedAsc";
         globalVariables.sortAlert=@"sortCreatedAscAlert";
-        globalVariables.sortCondition=@"INBOX";
+        globalVariables.urlFromFilterLogicView=url;
+        //globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -1963,9 +2142,40 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==1 )
     {
         NSLog(@" created At - DSC");
+        
+        if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
+            globalVariables.filterCondition=@"INBOX";
+            globalVariables.sortCondition=@"INBOX";
+            globalVariables.filterId=@"INBOXFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
+            globalVariables.filterCondition=@"MYTICKETS";
+            globalVariables.sortCondition=@"MYTICKETS";
+            globalVariables.filterId=@"MYTICKETSFilter";
+            
+        }
+        else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
+            globalVariables.filterCondition=@"UNASSIGNED";
+            globalVariables.sortCondition=@"UNASSIGNED";
+            globalVariables.filterId=@"UNASSIGNEDFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
+            globalVariables.filterCondition=@"CLOSED";
+            globalVariables.sortCondition=@"CLOSED";
+            globalVariables.filterId=@"CLOSEDFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
+            globalVariables.filterCondition=@"TRASH";
+            globalVariables.sortCondition=@"TRASH";
+            globalVariables.filterId=@"TRASHFilter";
+        }else{
+            
+        }
+        
         globalVariables.sortingValueId=@"sortCreatedDsc";
         globalVariables.sortAlert=@"sortCreatedDscAlert";
-        globalVariables.sortCondition=@"INBOX";
+        globalVariables.urlFromFilterLogicView=url;
+       // globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -1977,9 +2187,39 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==0 )
     {
         NSLog(@" due on - ASC");
+        if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
+            globalVariables.filterCondition=@"INBOX";
+            globalVariables.sortCondition=@"INBOX";
+            globalVariables.filterId=@"INBOXFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
+            globalVariables.filterCondition=@"MYTICKETS";
+            globalVariables.sortCondition=@"MYTICKETS";
+            globalVariables.filterId=@"MYTICKETSFilter";
+            
+        }
+        else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
+            globalVariables.filterCondition=@"UNASSIGNED";
+            globalVariables.sortCondition=@"UNASSIGNED";
+            globalVariables.filterId=@"UNASSIGNEDFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
+            globalVariables.filterCondition=@"CLOSED";
+            globalVariables.sortCondition=@"CLOSED";
+            globalVariables.filterId=@"CLOSEDFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
+            globalVariables.filterCondition=@"TRASH";
+            globalVariables.sortCondition=@"TRASH";
+            globalVariables.filterId=@"TRASHFilter";
+        }else{
+            
+        }
+        
         globalVariables.sortingValueId=@"sortDueAsc";
         globalVariables.sortAlert=@"sortDueAscAlert";
-        globalVariables.sortCondition=@"INBOX";
+        globalVariables.urlFromFilterLogicView=url;
+       // globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -1988,9 +2228,40 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==1 )
     {
         NSLog(@" due on - DSC");
+        
+        if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
+            globalVariables.filterCondition=@"INBOX";
+            globalVariables.sortCondition=@"INBOX";
+            globalVariables.filterId=@"INBOXFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
+            globalVariables.filterCondition=@"MYTICKETS";
+            globalVariables.sortCondition=@"MYTICKETS";
+            globalVariables.filterId=@"MYTICKETSFilter";
+            
+        }
+        else if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){
+            globalVariables.filterCondition=@"UNASSIGNED";
+            globalVariables.sortCondition=@"UNASSIGNED";
+            globalVariables.filterId=@"UNASSIGNEDFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"]){
+            globalVariables.filterCondition=@"CLOSED";
+            globalVariables.sortCondition=@"CLOSED";
+            globalVariables.filterId=@"CLOSEDFilter";
+            
+        }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
+            globalVariables.filterCondition=@"TRASH";
+            globalVariables.sortCondition=@"TRASH";
+            globalVariables.filterId=@"TRASHFilter";
+        }else{
+            
+        }
+        
         globalVariables.sortingValueId=@"sortDueDsc";
         globalVariables.sortAlert=@"sortDueDscAlert";
-        globalVariables.sortCondition=@"INBOX";
+        globalVariables.urlFromFilterLogicView=url;
+     //   globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];

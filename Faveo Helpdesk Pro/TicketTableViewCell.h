@@ -88,5 +88,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *attachImgView;
 @property (weak, nonatomic) IBOutlet UIImageView *img;
+@property (weak, nonatomic) IBOutlet UIView *viewMain;
+@property (weak, nonatomic) IBOutlet UILabel *agentLabel;
 
 @end

@@ -578,7 +578,39 @@
                 cell.ticketIdLabel.text=NSLocalizedString(@"Not Available", nil);
             }
             
+            NSString *assigneeFirstName= [finaldic objectForKey:@"a_fname"];
+            NSString *assigneeLaststName= [finaldic objectForKey:@"a_lname"];
+             NSString *assigneeUserName= [finaldic objectForKey:@"a_uname"];
+            
+            [Utils isEmpty:assigneeFirstName];
+            [Utils isEmpty:assigneeLaststName];
+            [Utils isEmpty:assigneeUserName];
+            
+         if (![Utils isEmpty:assigneeFirstName] || ![Utils isEmpty:assigneeLaststName])
+            {
+                if  (![Utils isEmpty:assigneeFirstName] && ![Utils isEmpty:assigneeLaststName])
+                {
+                    cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"a_fname"],[finaldic objectForKey:@"a_lname"]];
+                }
+                else
+                {
+                    cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"a_fname"],[finaldic objectForKey:@"a_lname"]];
+                }
+            }  else if(![Utils isEmpty:assigneeUserName])
+               {
+                    cell.agentLabel.text= [finaldic objectForKey:@"a_uname"];
+               }else
+                  {
+                    cell.agentLabel.text= NSLocalizedString(@"No Agent", nil);
+                   }
+            
+            
             NSString *fname= [finaldic objectForKey:@"c_fname"];
+        
+            
+            
+            
+            
             NSString *lname= [finaldic objectForKey:@"c_lname"];
             //  NSString *userName= [finaldic objectForKey:@"c_uname"];
             NSString*email1=[finaldic objectForKey:@"c_uname"];
@@ -888,7 +920,8 @@
     
     refresh=[[UIRefreshControl alloc] init];
     refresh.tintColor=[UIColor whiteColor];
-    refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+   // refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+     refresh.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
     refresh.attributedTitle =refreshing;
     [refresh addTarget:self action:@selector(reloadd) forControlEvents:UIControlEventValueChanged];
     [_tableView insertSubview:refresh atIndex:0];
@@ -958,8 +991,8 @@
     
     //    _multistageDropdownMenuView.maxRowCount = 3;
     _multistageDropdownMenuView.stateConfigDict = @{
-                                                                                             @"selected" : @[[UIColor purpleColor], @"测试紫箭头"],
-                                                                                             @"normal" : @[[UIColor redColor], @"测试红箭头"]
+                                                                                             @"selected" : @[[UIColor blackColor], @"sort1"],
+                                                                                             @"normal" : @[[UIColor blackColor], @"sort1"]
                                                     };
     
     
