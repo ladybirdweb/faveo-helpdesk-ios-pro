@@ -20,14 +20,18 @@
 #import "GlobalVariables.h"
 #import "RMessage.h"
 #import "RMessageView.h"
+#import "AWNavigationMenuItem.h"
 
 
-@interface ClientListViewController ()<RMessageProtocol>{
+@interface ClientListViewController ()<RMessageProtocol,AWNavigationMenuItemDataSource, AWNavigationMenuItemDelegate>{
 
     Utils *utils;
     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
-GlobalVariables *globalVariables;
+    GlobalVariables *globalVariables;
+    NSString *url;
+    NSString *tempString;
+    NSMutableAttributedString *attributedMenu;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -36,19 +40,36 @@ GlobalVariables *globalVariables;
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, assign) NSInteger totalTickets;
 @property (nonatomic, strong) NSString *nextPageUrl;
+
+@property (nonatomic, strong) AWNavigationMenuItem *menuItem;
+@property (nonatomic, strong) NSArray<NSString *> *titles;
+
+
 @end
 
 @implementation ClientListViewController
 
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad]; // userFilterId
+    
     [self setTitle:NSLocalizedString(@"Client List",nil)];
+    
     
     [self addUIRefresh];
     utils=[[Utils alloc]init];
     userDefaults=[NSUserDefaults standardUserDefaults];
     globalVariables=[GlobalVariables sharedInstance];
+
+    
+    self.titles = @[@"All users", @"Agent users", @"Active users", @"Client users", @"Banned users",@"Inactive users",@"Deactivated users"];
+    
+    self.menuItem = [[AWNavigationMenuItem alloc] init];
+    self.menuItem.dataSource = self;
+    self.menuItem.delegate = self;
+    
+    
+    
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
@@ -86,9 +107,51 @@ GlobalVariables *globalVariables;
     
         
     }else{
+        // http://jamboreebliss.com/sayar/public/api/v2/helpdesk/user/filter?api_key=&token=&role=
+      if([globalVariables.userFilterId isEqualToString:@"AGENTUSERS"])
+        {
+            tempString=@"agent";
+            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&role=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString];
+            
+        }else  if([globalVariables.userFilterId isEqualToString:@"ACTIVEUSERS"])
+        {
+            // api_key=&token=&active=1
+            tempString=[NSString stringWithFormat:@"%i",1];
+            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&active=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString];
+            
+        }else  if([globalVariables.userFilterId isEqualToString:@"CLIENTUSERS"])
+        {
+            tempString=@"user";
+            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&role=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString];
+            
+        }else  if([globalVariables.userFilterId isEqualToString:@"BANNEDUSERS"])
+        {
+            tempString=[NSString stringWithFormat:@"%i",1];
+            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&ban=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString];
+            
+        }else  if([globalVariables.userFilterId isEqualToString:@"INACTIVEUSERS"])
+        {
+            tempString=[NSString stringWithFormat:@"%i",0];
+            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&active=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString];
+        }else  if([globalVariables.userFilterId isEqualToString:@"DEACTIVEUSERS"])
+        {
+            //deleted users
+            tempString=[NSString stringWithFormat:@"%i",1];
+            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&deleted=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString];
+            
+        }else if([globalVariables.userFilterId isEqualToString:@"ALLUSERS"])
+        {
+            
+            url=[NSString stringWithFormat:@"%@helpdesk/customers-custom?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
+            
+        }else
+        {
+          
+            url=[NSString stringWithFormat:@"%@helpdesk/customers-custom?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
+        }
         
         //        [[AppDelegate sharedAppdelegate] showProgressView];
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/customers-custom?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
+        
 @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -481,9 +544,15 @@ GlobalVariables *globalVariables;
     NSString *client_id=[finaldic objectForKey:@"id"];
     
     ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
+   
     globalVariables.iD=@([client_id intValue]);
     globalVariables.First_name=[finaldic objectForKey:@"first_name"];
     globalVariables.Last_name=[finaldic objectForKey:@"last_name"];
+    globalVariables.userNameInUserList= [finaldic objectForKey:@"user_name"];
+     globalVariables.emailInUserList= [finaldic objectForKey:@"email"];
+    globalVariables.phoneNumberInUserList= [finaldic objectForKey:@"phone_number"];
+    globalVariables.mobileNumberInUserList= [finaldic objectForKey:@"mobile"]; // UserState
+    globalVariables.UserState= [finaldic objectForKey:@"active"];
     globalVariables.mobileCode1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile_code"]];
 
 //    td.clientName=[NSString stringWithFormat:@"%@ %@",clientName,[finaldic objectForKey:@"last_name"]];
@@ -528,6 +597,115 @@ GlobalVariables *globalVariables;
     return YES;
 }
 
+#pragma mark - AWNavigationMenuItemDataSource
+
+- (NSUInteger)numberOfRowsInNavigationMenuItem:(AWNavigationMenuItem *)inMenuItem
+{
+    return self.titles.count;
+}
+
+//- (NSString *)navigationMenuItem:(AWNavigationMenuItem *)inMenuItem menuTitleAtIndex:(NSUInteger)inIndex
+//{
+//
+//    return (inIndex % 1) == 1 ? self.titles[inIndex] : nil;
+//}
+
+- (NSAttributedString *)navigationMenuItem:(AWNavigationMenuItem *)inMenuItem attributedMenuTitleAtIndex:(NSUInteger)inIndex
+{
+    
+  attributedMenu = [[NSMutableAttributedString alloc] initWithString:self.titles[inIndex] attributes:@{NSForegroundColorAttributeName: [UIColor blackColor], NSFontAttributeName: [UIFont systemFontOfSize:16.f]}];
+
+    globalVariables.nameInCilent=[NSString stringWithFormat:@"%@",attributedMenu];
+    
+    return (inIndex % 1) == 0 ? attributedMenu : nil;
+}
+
+- (CGRect)maskViewFrameInNavigationMenuItem:(AWNavigationMenuItem *)inMenuItem
+{
+    return self.view.frame;
+}
+
+#pragma mark - AWNavigationMenuItemDelegate
+
+- (void)navigationMenuItem:(AWNavigationMenuItem *)inMenuItem selectionDidChange:(NSUInteger)inIndex
+{
+    if(inIndex==0)
+    {
+        NSLog(@"All users");
+        globalVariables.userFilterId=@"ALLUSERS";
+        // ViewController *controller = [[ViewController alloc] init];
+        ClientListViewController *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientListID"];
+        
+        [self.navigationController pushViewController:view1 animated:YES];
+    }
+    if(inIndex==1)
+    {
+        NSLog(@"Agent Users");
+         globalVariables.userFilterId=@"AGENTUSERS";
+       
+        ClientListViewController *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientListID"];
+        
+       [self.navigationController pushViewController:view1 animated:YES];
+    }
+    if(inIndex==2)
+    {
+        NSLog(@"Active users");
+        globalVariables.userFilterId=@"ACTIVEUSERS";
+        
+        [self.tableView reloadData];
+//        ClientListViewController *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientListID"];
+//
+//        [self.navigationController pushViewController:view1 animated:YES];
+    }
+    if(inIndex==3)
+    {
+        NSLog(@"Client users");
+        globalVariables.userFilterId=@"CLIENTUSERS";
+        
+        ClientListViewController *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientListID"];
+        
+        [self.navigationController pushViewController:view1 animated:YES];
+    }
+    if(inIndex==4)
+    {
+        NSLog(@"Banned users");
+         globalVariables.userFilterId=@"BANNEDUSERS";
+        
+        ClientListViewController *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientListID"];
+        
+        [self.navigationController pushViewController:view1 animated:YES];
+    }
+    if(inIndex==5)
+    {
+        NSLog(@"Inactive users");
+         globalVariables.userFilterId=@"INACTIVEUSERS";
+        
+        ClientListViewController *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientListID"];
+        
+        [self.navigationController pushViewController:view1 animated:YES];
+    }
+    if(inIndex==6)
+    {
+        NSLog(@"Deactivated users");
+         globalVariables.userFilterId=@"DEACTIVEUSERS";
+        
+        ClientListViewController *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientListID"];
+        
+        [self.navigationController pushViewController:view1 animated:YES];
+    }
+    
+   // self.contentLabel.text = self.titles[inIndex];
+}
+
+//- (void)navigationMenuItemWillUnfold:(AWNavigationMenuItem *)inMenuItem
+//{
+//    //NSLog(@"%s", __PRETTY_FUNCTION__);
+//}
+//
+//- (void)navigationMenuItemWillFold:(AWNavigationMenuItem *)inMenuItem
+//{
+//    //NSLog(@"%s", __PRETTY_FUNCTION__);
+//}
 
 
 @end

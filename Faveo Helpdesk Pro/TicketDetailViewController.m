@@ -76,9 +76,10 @@
     
     
         UIButton *editTicket =  [UIButton buttonWithType:UIButtonTypeCustom]; // editTicket
-        [editTicket setImage:[UIImage imageNamed:@"editTicket"] forState:UIControlStateNormal];
+        [editTicket setImage:[UIImage imageNamed:@"pencileEdit"] forState:UIControlStateNormal];
         [editTicket addTarget:self action:@selector(editTicketTapped) forControlEvents:UIControlEventTouchUpInside];
-        [editTicket setFrame:CGRectMake(0, 0, 32, 32)];
+       // [editTicket setFrame:CGRectMake(0, 0, 32, 32)];
+    [editTicket setFrame:CGRectMake(15, 7, 20, 20)];
     
     UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [moreButton setImage:[UIImage imageNamed:@"verticle"] forState:UIControlStateNormal];

@@ -86,7 +86,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DueToday" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="poj-f2-dFs">
-                                <rect key="frame" x="279" y="70" width="58" height="21"/>
+                                <rect key="frame" x="279" y="70" width="57.5" height="21"/>
                                 <color key="backgroundColor" red="1" green="0.95077534707453004" blue="0.58851132072213463" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="TfH-Ob-jIP"/>
@@ -101,22 +101,22 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0nx-fm-MEX">
-                                <rect key="frame" x="148" y="12" width="12" height="12"/>
+                                <rect key="frame" x="148" y="12" width="11" height="11"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R81-PE-3kV">
-                                <rect key="frame" x="164" y="12" width="12" height="12"/>
+                                <rect key="frame" x="164" y="12" width="11" height="11"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d7e-u6-deE">
-                                <rect key="frame" x="180" y="12" width="12" height="12"/>
+                                <rect key="frame" x="180" y="12" width="11" height="11"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="owner" translatesAutoresizingMaskIntoConstraints="NO" id="siu-XN-GBs">
                                 <rect key="frame" x="49" y="79" width="13" height="12"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headfone" translatesAutoresizingMaskIntoConstraints="NO" id="uFH-Uu-d7J">
-                                <rect key="frame" x="174" y="80" width="11" height="11"/>
+                                <rect key="frame" x="174" y="81" width="11" height="11"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="11" id="7ab-pe-dew"/>
                                 </constraints>
@@ -132,7 +132,7 @@
                         <constraints>
                             <constraint firstItem="Ckd-Id-tc5" firstAttribute="firstBaseline" secondItem="XGS-gO-zvq" secondAttribute="firstBaseline" id="1iy-mG-GKc"/>
                             <constraint firstAttribute="bottom" secondItem="poj-f2-dFs" secondAttribute="bottom" constant="3" id="2nM-6j-Ael"/>
-                            <constraint firstItem="uFH-Uu-d7J" firstAttribute="bottom" secondItem="siu-XN-GBs" secondAttribute="bottom" id="31o-ob-9na"/>
+                            <constraint firstItem="uFH-Uu-d7J" firstAttribute="bottom" secondItem="siu-XN-GBs" secondAttribute="bottom" constant="1" id="31o-ob-9na"/>
                             <constraint firstItem="XGS-gO-zvq" firstAttribute="trailing" secondItem="1m9-rL-BBc" secondAttribute="trailing" constant="165" id="5bO-e8-4wx"/>
                             <constraint firstItem="LPv-Px-QNx" firstAttribute="leading" secondItem="1m9-rL-BBc" secondAttribute="leading" id="6FF-wJ-eFc"/>
                             <constraint firstItem="53O-dF-h8M" firstAttribute="centerY" secondItem="LPv-Px-QNx" secondAttribute="centerY" constant="-2" id="8Ts-4q-Ye9"/>
@@ -154,7 +154,7 @@
                             <constraint firstItem="1m9-rL-BBc" firstAttribute="bottom" secondItem="hCG-1y-fMS" secondAttribute="bottomMargin" constant="9" id="g0y-3C-i8j"/>
                             <constraint firstItem="fsr-d5-eO6" firstAttribute="leading" secondItem="1m9-rL-BBc" secondAttribute="trailing" constant="106" id="gyW-av-zIG"/>
                             <constraint firstAttribute="bottom" secondItem="vGf-8H-ojp" secondAttribute="bottom" id="hDL-Fh-hR9"/>
-                            <constraint firstItem="uFH-Uu-d7J" firstAttribute="centerY" secondItem="1m9-rL-BBc" secondAttribute="centerY" constant="-1" id="i9i-AK-twv"/>
+                            <constraint firstItem="uFH-Uu-d7J" firstAttribute="centerY" secondItem="1m9-rL-BBc" secondAttribute="centerY" constant="0.5" id="i9i-AK-twv"/>
                             <constraint firstItem="Ckd-Id-tc5" firstAttribute="top" secondItem="hCG-1y-fMS" secondAttribute="topMargin" id="lsp-c0-o7d"/>
                             <constraint firstItem="vGf-8H-ojp" firstAttribute="leading" secondItem="fsr-d5-eO6" secondAttribute="trailing" constant="8" id="mba-p1-19I"/>
                             <constraint firstItem="Ckd-Id-tc5" firstAttribute="leading" secondItem="LPv-Px-QNx" secondAttribute="leading" id="ntY-Oq-wxl"/>

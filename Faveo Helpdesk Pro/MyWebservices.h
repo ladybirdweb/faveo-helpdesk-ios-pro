@@ -129,4 +129,11 @@ typedef void (^ApiResponse)(NSError* , id);
 -(void)getNextPageURLClosed:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block; // getNextPageURLTrash
 
 -(void)getNextPageURLTrash:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;
+
+
+//+(NSURLSessionTask *)callPATCHAPIWithAPIName:(NSString *)apiName andCompletionHandler:(void(^)(id result, NSInteger responseCode, NSError *error))completionHandler;
+
+-(void)callPATCHAPIWithAPIName:(NSString *)urlString
+                     parameter:(id)parameter
+               callbackHandler:(callbackHandler)block;
 @end

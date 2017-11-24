@@ -20,6 +20,7 @@
 #import "RKDropdownAlert.h"
 #import "RMessage.h"
 #import "RMessageView.h"
+#import "EditClientDetail.h"
 
 @interface ClientDetailViewController ()<RMessageProtocol>
 {
@@ -43,6 +44,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title=@"Client Details";
+    
     self.profileImageView.clipsToBounds = YES;
     self.profileImageView.layer.borderWidth=1.3f;
     self.profileImageView.layer.borderColor=[[UIColor hx_colorWithHexRGBAString:@"#0288D1"] CGColor];
@@ -62,27 +65,28 @@
     
     userDefaults=[NSUserDefaults standardUserDefaults];
     
+    UIButton *edit =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [edit setImage:[UIImage imageNamed:@"pencileEdit"] forState:UIControlStateNormal];
+    [edit addTarget:self action:@selector(NotificationBtnPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    //    self.currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OpenClient"];
-    //    self.currentViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-    //    [self addChildViewController:self.currentViewController];
-    //    [self addSubview:self.currentViewController.view toView:self.containerView];
-    //    self.testingLAbel.text=@"Open Ticket";
-    //    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
-    //    self.profileImageView.clipsToBounds = YES;
-    //    self.segmentedControl.tintColor=[UIColor hx_colorWithHexString:@"#00aeef"];
+    [edit setFrame:CGRectMake(50, 6, 20, 20)];
     
+    UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
+    [rightBarButtonItems addSubview:edit];
     
-//    self.testingLAbel.text=self.isClientActive;
-//    self.emailLabel.text=self.emailID;
-//    self.clientNameLabel.text=self.clientName;
-//    self.phoneLabel.text=self.phone;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
+   
+    _testingLAbel.backgroundColor=[UIColor purpleColor];
+    _testingLAbel.layer.cornerRadius=8;
+    _testingLAbel.layer.masksToBounds=true;
+    _testingLAbel.userInteractionEnabled=YES;
     
     [_activityIndicatorObject startAnimating];
     [self reload];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
 }
+
 
 -(void)reload{
     
@@ -181,22 +185,83 @@
                     }
                     
                    
+                    
+                    
                     if (( ![[requester objectForKey:@"phone_number"] isEqual:[NSNull null]] ) && ![[requester objectForKey:@"phone_number"] isEqualToString:@""]) {
-                        _phone=[requester objectForKey:@"phone_number"];
-                    }
-                    else if(( ![[requester objectForKey:@"mobile"] isEqual:[NSNull null]] ))
+                       
+                         _phone=[requester objectForKey:@"phone_number"];
+                    }else
                     {
-                        _phone=[requester objectForKey:@"mobile"];
+                        _phone=NSLocalizedString(@"Not Available",nil);
+                    }
+                    
+                    if( ![[requester objectForKey:@"mobile"] isEqual:[NSNull null]] && ![[requester objectForKey:@"phone_number"] isEqualToString:@""])
+                    {
+                        _mobileLabel.text=[requester objectForKey:@"mobile"];
                     }
                     else
                     {
-                        _phone= NSLocalizedString(@"Not Available",nil);
+                        _mobileLabel.text=NSLocalizedString(@"Not Available",nil);
                     }
-    
+                  
+                 
+                     NSString *Company1= [NSString stringWithFormat:@"%@",[requester objectForKey:@"company"]];
+                    [Utils isEmpty:Company1];
+                    
+                    if(![Utils isEmpty:Company1])
+                    {
+                        
+                        if([Company1 isEqualToString:@"<null>"])
+                        {
+                            _companyLabel.text= NSLocalizedString(@"Not Available",nil);
+                        }
+                        else
+                        {
+                            _companyLabel.text=Company1;
+                        }
+                    }
+                    else
+                    {
+                         _companyLabel.text= NSLocalizedString(@"Not Available",nil);
+                    }
+                    
+                    
+                    
+//                    if( ![[requester objectForKey:@"company"] isEqual:[NSNull null]] || ![[requester objectForKey:@"company"] isEqualToString:@""])
+//                    {
+//                        _companyLabel=[requester objectForKey:@"company"];
+//                    }
+//                    else
+//                    {
+//                        _companyLabel.text=@"";
+//                    }
+//
+                    
+                     NSString *isDelete= [NSString stringWithFormat:@"%@",[requester objectForKey:@"is_delete"]];
+                    
+                    [Utils isEmpty:isDelete];
+                    if(![Utils isEmpty:isDelete])
+                    {
+                        
+                        if([isDelete isEqualToString:@"1"])
+                        {
+                            globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
+                        }
+                        
+                        if([isDelete isEqualToString:@"0"])
+                        {
+                            globalVariables.ActiveDeactiveStateOfUser1=@"Active";
+                        }
+                    }
+                    else
+                    {
+                        NSLog(@"is_delete parameter is empty");
+                    }
+                    
+                    
+                    
                     NSString *code1= [NSString stringWithFormat:@"%@",[requester objectForKey:@"country_code"]];
-                    
-                    
-                   
+        
                     [Utils isEmpty:code1];
                     if(![Utils isEmpty:code1])
                     {
@@ -243,7 +308,7 @@
                         }else
                         {
                     
-                            self.testingLAbel.textColor=[UIColor redColor];
+                            self.testingLAbel.textColor=[UIColor greenColor];
                             self.testingLAbel.text=@"INACTIVE";
 
                         }
@@ -275,6 +340,7 @@
     }
 }
 
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -284,7 +350,8 @@
     if ([mutableArray count]==0)
     {
         self.noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        self.noDataLabel.text             =  @"";
+        self.noDataLabel.text             =  @"User is Inactive or Deactivated.";
+        
         self.noDataLabel.textColor        = [UIColor blackColor];
         self.noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = self.noDataLabel;
@@ -376,6 +443,16 @@
     }
 
     return cell;
+}
+
+-(void)NotificationBtnPressed
+{
+    
+    EditClientDetail *edit=[self.storyboard instantiateViewControllerWithIdentifier:@"editClientID"];
+    
+    [self.navigationController pushViewController:edit animated:YES];
+    
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

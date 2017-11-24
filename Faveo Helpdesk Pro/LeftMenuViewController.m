@@ -332,6 +332,7 @@
             
         case 8:
             vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"ClientListID"];
+             globalVariables.userFilterId=@"ALLUSERS";
             break;
             
         case 10:

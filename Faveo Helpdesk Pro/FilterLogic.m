@@ -29,9 +29,7 @@
 #import "CFMultistageConditionTableView.h"
 #import "BDCustomAlertView.h"
 #import "FilterViewController.h"
-
-@import FirebaseInstanceID;
-@import FirebaseMessaging;
+#import "FTPopOverMenu.h"
 
 @interface FilterLogic ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>
 {
@@ -53,8 +51,13 @@
      NSString * showUnassignedTickets;
      NSString * showClosedTickets;
      NSString * showTashTickets;
+    
+    NSMutableArray *selectedArray;
+    int count1;
+    NSString *selectedIDs;
 }
 
+@property (strong,nonatomic) NSIndexPath *selectedPath;
 
 @property (nonatomic, strong) NSMutableArray *mutableArray;
 @property (nonatomic, strong) NSArray *indexPaths;
@@ -106,9 +109,6 @@
     [self.view addSubview:self.multistageDropdownMenuView];
     
     
-    NSString *refreshedToken = [[FIRInstanceID instanceID] token];
-    NSLog(@"refreshed token  %@",refreshedToken);
-    
     _mutableArray=[[NSMutableArray alloc]init];
     
     utils=[[Utils alloc]init];
@@ -117,16 +117,30 @@
     
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
+    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [moreButton setImage:[UIImage imageNamed:@"verticle"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(onNavButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+    [moreButton setFrame:CGRectMake(56, 0, 32, 32)];
+    
     UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
     [NotificationBtn addTarget:self action:@selector(NotificationBtnPressed) forControlEvents:UIControlEventTouchUpInside];
-    [NotificationBtn setFrame:CGRectMake(44, 0, 32, 32)];
+    // [NotificationBtn setFrame:CGRectMake(44, 0, 32, 32)];
+    [NotificationBtn setFrame:CGRectMake(20, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    //[rightBarButtonItems addSubview:addBtn];
+    [rightBarButtonItems addSubview:moreButton];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
+    
+    //To set Gesture on Tableview for multiselection
+    count1=0;
+    selectedArray = [[NSMutableArray alloc] init];
+    self.tableView.allowsMultipleSelectionDuringEditing = true;
+    UILongPressGestureRecognizer *lpGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(EditTableView:)];
+    [lpGesture setMinimumPressDuration:1];
+    [self.tableView addGestureRecognizer:lpGesture];
     
     
     
@@ -697,6 +711,11 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     NSLog(@"Thread-NO2-getDependencies()-closed");
 }
 
+
+-(void)EditTableView:(UIGestureRecognizer*)gesture{
+    [self.tableView setEditing:YES animated:YES];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger numOfSections = 0;
@@ -732,7 +751,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+   // cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
     if (indexPath.row == [_mutableArray count] - 1 ) {
         NSLog(@"nextURL  %@",_nextPageUrl);
@@ -1446,11 +1465,13 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                 
                 NSLog(@"Decoded string = %@", decodedString);
                 
-                cell.ticketSubLabel.text= decodedString;
+                //   cell.ticketSubLabel.text= decodedString; //countthread
+                cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",decodedString,[finaldic objectForKey:@"countthread"]];
             }
             else{
                 
-                cell.ticketSubLabel.text= encodedString;
+                // cell.ticketSubLabel.text= encodedString;
+                cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",encodedString,[finaldic objectForKey:@"countthread"]];
                 
             }
             
@@ -1565,9 +1586,32 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     }
 }
 
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 3;
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    self.selectedPath = indexPath;
+    
+    if ([tableView isEditing]) {
+        
+        //  [selectedArray addObject:[_mutableArray objectAtIndex:indexPath.row]];
+        
+        [selectedArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
+        
+        count1=(int)[selectedArray count];
+        NSLog(@"Selected count is :%i",count1);
+        NSLog(@"Slected Array Id : %@",selectedArray);
+        
+        selectedIDs = [selectedArray componentsJoinedByString:@","];
+        NSLog(@"Slected Ticket Id are : %@",selectedIDs);
+        
+    }else{
     TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
     
     NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
@@ -1581,7 +1625,32 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
     
     [self.navigationController pushViewController:td animated:YES];
+    }
 }
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    self.selectedPath = indexPath;
+    
+    
+    //   [selectedArray removeObject:[_mutableArray objectAtIndex:indexPath.row]];
+    [selectedArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
+    
+    count1=(int)[selectedArray count];
+    NSLog(@"Selected count is :%i",count1);
+    NSLog(@"Slected Id : %@",selectedArray);
+    
+    selectedIDs = [selectedArray componentsJoinedByString:@","];
+    NSLog(@"Slected Ticket Id are : %@",selectedIDs);
+    
+    
+    
+    if (!selectedArray.count) {
+        [self.tableView setEditing:NO animated:YES];
+    }
+    
+}
+
 
 #pragma mark - SlideNavigationController Methods -
 
@@ -1644,6 +1713,658 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     //    [refresh endRefreshing];
 }
 
+
+
+-(void)onNavButtonTapped:(UIBarButtonItem *)sender event:(UIEvent *)event
+{
+    
+    // provide two methods to deal with the barbuttonitems
+    // comment this fowowing line and see how the other way of dealing with barbuttonitems
+    
+    //#define IfMethodOne
+    
+    if([globalVariables.filterId isEqualToString:@"INBOXFilter"] ||[globalVariables.filterId isEqualToString:@"MYTICKETSFilter"] || [globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"] )
+    {
+        
+#ifdef IfMethodOne
+        CGRect rect = [self.navigationController.navigationBar convertRect:[event.allTouches.anyObject view].frame toView:[[UIApplication sharedApplication] keyWindow]];
+        
+        [FTPopOverMenu showFromSenderFrame:rect
+                             withMenuArray:@[@"MenuOne",@"MenuTwo",@"MenuThree",@"MenuFour"]
+                                imageArray:@[@"Pokemon_Go_01",@"Pokemon_Go_02",@"Pokemon_Go_03",@"Pokemon_Go_04",]
+                                 doneBlock:^(NSInteger selectedIndex) {
+                                     NSLog(@"done");
+                                 } dismissBlock:^{
+                                     NSLog(@"cancel");
+                                 }];
+        
+        
+#else
+        
+        //    [FTPopOverMenu showFromEvent:event
+        //                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
+        
+        [FTPopOverMenu showFromEvent:event
+                       withMenuArray:@[@"Change Ticket Status",@"Closed",@"Resolved",@"Deleted"]
+                          imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
+                           doneBlock:^(NSInteger selectedIndex) {
+                               
+                               if(selectedIndex==0)
+                               {
+                                   NSLog(@"Index 0 clicked");
+                                   
+                               }else if(selectedIndex==1)
+                               {
+                                   NSLog(@"Clicked on Closed");
+                                   
+                                   [self changeStaus2];
+                               }else if(selectedIndex==2)
+                               {
+                                   NSLog(@"Clicked on Resolved");
+                                   [self changeStaus3];
+                               }else if(selectedIndex==3)
+                               {
+                                   NSLog(@"Clicked on Deleted");
+                                   [self changeStaus4];
+                               }
+                               
+                           } dismissBlock:^{
+                               
+                           }];
+        
+#endif
+        
+        
+    }else if([globalVariables.filterId isEqualToString:@"CLOSEDFilter"])
+    {
+        
+#ifdef IfMethodOne
+        CGRect rect = [self.navigationController.navigationBar convertRect:[event.allTouches.anyObject view].frame toView:[[UIApplication sharedApplication] keyWindow]];
+        
+        [FTPopOverMenu showFromSenderFrame:rect
+                             withMenuArray:@[@"MenuOne",@"MenuTwo",@"MenuThree",@"MenuFour"]
+                                imageArray:@[@"Pokemon_Go_01",@"Pokemon_Go_02",@"Pokemon_Go_03",@"Pokemon_Go_04",]
+                                 doneBlock:^(NSInteger selectedIndex) {
+                                     NSLog(@"done");
+                                 } dismissBlock:^{
+                                     NSLog(@"cancel");
+                                 }];
+        
+        
+#else
+        
+        //    [FTPopOverMenu showFromEvent:event
+        //                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
+        
+        [FTPopOverMenu showFromEvent:event
+                       withMenuArray:@[@"Change Ticket Status",@"Open",@"Resolved",@"Deleted"]
+                          imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"folderIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
+                           doneBlock:^(NSInteger selectedIndex) {
+                               
+                               if(selectedIndex==0)
+                               {
+                                   NSLog(@"Index 0 clicked");
+                                   
+                               }else if(selectedIndex==1)
+                               {
+                                   NSLog(@"Clicked on Open");
+                                   
+                                   [self changeStaus1];
+                               }else if(selectedIndex==2)
+                               {
+                                   NSLog(@"Clicked on Resolved");
+                                   [self changeStaus3];
+                               }else if(selectedIndex==3)
+                               {
+                                   NSLog(@"Clicked on Deleted");
+                                   [self changeStaus4];
+                               }
+                               
+                               
+                           } dismissBlock:^{
+                               
+                           }];
+        
+#endif
+        
+        
+    }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"])
+    {
+        
+        
+#ifdef IfMethodOne
+        CGRect rect = [self.navigationController.navigationBar convertRect:[event.allTouches.anyObject view].frame toView:[[UIApplication sharedApplication] keyWindow]];
+        
+        [FTPopOverMenu showFromSenderFrame:rect
+                             withMenuArray:@[@"MenuOne",@"MenuTwo",@"MenuThree",@"MenuFour"]
+                                imageArray:@[@"Pokemon_Go_01",@"Pokemon_Go_02",@"Pokemon_Go_03",@"Pokemon_Go_04",]
+                                 doneBlock:^(NSInteger selectedIndex) {
+                                     NSLog(@"done");
+                                 } dismissBlock:^{
+                                     NSLog(@"cancel");
+                                 }];
+        
+        
+#else
+        
+        //    [FTPopOverMenu showFromEvent:event
+        //                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
+        
+        [FTPopOverMenu showFromEvent:event
+                       withMenuArray:@[@"Change Ticket Status",@"Open",@"Closed",@"Resolved"]
+                          imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"folderIcon"],[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"]]
+                           doneBlock:^(NSInteger selectedIndex) {
+                               
+                               if(selectedIndex==0)
+                               {
+                                   NSLog(@"Index 0 clicked");
+                                   
+                               }else if(selectedIndex==1)
+                               {
+                                   NSLog(@"Clicked on Open");
+                                   
+                                   [self changeStaus1];
+                               }else if(selectedIndex==2)
+                               {
+                                   NSLog(@"Clicked on Closed");
+                                   [self changeStaus2];
+                               }else if(selectedIndex==3)
+                               {
+                                   NSLog(@"Clicked on Resolved");
+                                   [self changeStaus3];
+                               }
+                               
+                               
+                           } dismissBlock:^{
+                               
+                           }];
+        
+#endif
+        
+    }
+    
+    
+    else
+    {
+        
+        NSLog(@"No Condtion is Executed..!");
+        
+    }
+    
+    
+    
+    //#ifdef IfMethodOne
+    //    CGRect rect = [self.navigationController.navigationBar convertRect:[event.allTouches.anyObject view].frame toView:[[UIApplication sharedApplication] keyWindow]];
+    //
+    //    [FTPopOverMenu showFromSenderFrame:rect
+    //                         withMenuArray:@[@"MenuOne",@"MenuTwo",@"MenuThree",@"MenuFour"]
+    //                            imageArray:@[@"Pokemon_Go_01",@"Pokemon_Go_02",@"Pokemon_Go_03",@"Pokemon_Go_04",]
+    //                             doneBlock:^(NSInteger selectedIndex) {
+    //                                 NSLog(@"done");
+    //                             } dismissBlock:^{
+    //                                 NSLog(@"cancel");
+    //                             }];
+    //
+    //
+    //#else
+    //
+    //    //    [FTPopOverMenu showFromEvent:event
+    //    //                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
+    //
+    //    [FTPopOverMenu showFromEvent:event
+    //                   withMenuArray:@[@"Change Ticket Status",globalVariables.OpenStausLabel,globalVariables.ClosedStausLabel,globalVariables.ResolvedStausLabel,globalVariables.DeletedStausLabel]
+    //                      imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"folderIcon"],[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
+    //                       doneBlock:^(NSInteger selectedIndex) {
+    //
+    //                           if(selectedIndex==0)
+    //                           {
+    //                               NSLog(@"Index 0 clicked");
+    //
+    //                           }else if(selectedIndex==1)
+    //                           {
+    //                               NSLog(@"Clicked on Open");
+    //
+    //                               [self changeStaus1];
+    //                           }else if(selectedIndex==2)
+    //                           {
+    //                               NSLog(@"Clicked on Closed");
+    //                               [self changeStaus2];
+    //                           }else if(selectedIndex==3)
+    //                           {
+    //                               NSLog(@"Clicked on Resolved");
+    //                               [self changeStaus3];
+    //                           } else if(selectedIndex==4)
+    //                           {
+    //                               NSLog(@"Clicked on Deleted");
+    //                               [self changeStaus4];
+    //                           }
+    //
+    //
+    //                       } dismissBlock:^{
+    //
+    //                       }];
+    //
+    //#endif
+    //
+    
+}
+
+-(void)changeStaus1
+{
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        
+    }else{
+        
+        [[AppDelegate sharedAppdelegate] showProgressView];
+        
+        if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
+        {
+            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+        }
+        else {
+        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.OpenStausId];
+        
+        
+        if([globalVariables.Ticket_status isEqualToString:@"Open"])
+        {
+            [utils showAlertWithMessage:@"Ticket is Already Open" sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+        }
+        else{
+            //   NSLog(@"URL is : %@",url);
+            
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            
+            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                
+                if (error || [msg containsString:@"Error"]) {
+                    
+                    if (msg) {
+                        
+                        if([msg isEqualToString:@"Error-403"])
+                        {
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Open a ticket", nil) sendViewController:self];
+                        }
+                        else{
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        }
+                        //  NSLog(@"Message is : %@",msg);
+                        
+                    }else if(error)  {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                    }
+                    
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self changeStaus1];
+                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                    return;
+                }
+                
+                // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
+                
+                // message = "Status changed to Open";
+                
+                
+                if (json) {
+                    NSLog(@"JSON-CreateTicket-%@",json);
+                    if ([json objectForKey:@"response"]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                            
+                            
+                            
+                            /*if (self.navigationController.navigationBarHidden) {
+                             [self.navigationController setNavigationBarHidden:NO];
+                             }
+                             
+                             [RMessage showNotificationInViewController:self.navigationController
+                             title:NSLocalizedString(@"Sucess.", nil)
+                             subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                             iconImage:nil
+                             type:RMessageTypeSuccess
+                             customTypeName:nil
+                             duration:RMessageDurationAutomatic
+                             callback:nil
+                             buttonTitle:nil
+                             buttonCallback:nil
+                             atPosition:RMessagePositionNavBarOverlay
+                             canBeDismissedByUser:YES]; */
+                            
+                            
+                            FilterLogic *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
+                            [self.navigationController pushViewController:sort animated:YES];
+                        });
+                    }
+                }
+                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                
+            }];
+        }
+        } }
+    
+}
+
+-(void)changeStaus2
+{
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        
+    }else{
+        
+        [[AppDelegate sharedAppdelegate] showProgressView];
+        
+        if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
+        {
+            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+        }else{
+        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ClosedStausId];
+        
+        if([globalVariables.Ticket_status isEqualToString:@"Closed"])
+        {
+            [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+        }else{
+            
+            
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            
+            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                
+                if (error || [msg containsString:@"Error"]) {
+                    
+                    if (msg) {
+                        
+                        if([msg isEqualToString:@"Error-403"])
+                        {
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                        }
+                        else{
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        }
+                        //  NSLog(@"Message is : %@",msg);
+                        
+                    }else if(error)  {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getTicketStausChange-Refresh-error == %@",error.localizedDescription);
+                    }
+                    
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self changeStaus2];
+                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                    return;
+                }
+                
+                if (json) {
+                    NSLog(@"JSON-CreateTicket-%@",json);
+                    if ([json objectForKey:@"response"]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                            
+                            
+                            
+                            /* if (self.navigationController.navigationBarHidden) {
+                             [self.navigationController setNavigationBarHidden:NO];
+                             }
+                             
+                             [RMessage showNotificationInViewController:self.navigationController
+                             title:NSLocalizedString(@"Sucess.", nil)
+                             subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                             iconImage:nil
+                             type:RMessageTypeSuccess
+                             customTypeName:nil
+                             duration:RMessageDurationAutomatic
+                             callback:nil
+                             buttonTitle:nil
+                             buttonCallback:nil
+                             atPosition:RMessagePositionNavBarOverlay
+                             canBeDismissedByUser:YES]; */
+                            
+                            FilterLogic *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
+                            [self.navigationController pushViewController:sort animated:YES];
+                        });
+                    }
+                }
+                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                
+            }];
+        }
+        } }
+}
+
+-(void)changeStaus3
+{
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        
+    }else{
+        
+        [[AppDelegate sharedAppdelegate] showProgressView];
+        
+        if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
+        {
+            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+        }else
+        
+        {  NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ResolvedStausId];
+        
+        
+        if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
+        {
+            [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+        }else{
+            
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            
+            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                
+                if (error || [msg containsString:@"Error"]) {
+                    
+                    if (msg) {
+                        
+                        if([msg isEqualToString:@"Error-403"])
+                        {
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Resolve a ticket", nil) sendViewController:self];
+                        }
+                        else{
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        }
+                        //  NSLog(@"Message is : %@",msg);
+                        
+                    }else if(error)  {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                    }
+                    
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self changeStaus3];
+                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                    return;
+                }
+                
+                if (json) {
+                    NSLog(@"JSON-CreateTicket-%@",json);
+                    if ([json objectForKey:@"response"]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                            
+                            
+                            
+                            /*  if (self.navigationController.navigationBarHidden) {
+                             [self.navigationController setNavigationBarHidden:NO];
+                             }
+                             
+                             [RMessage showNotificationInViewController:self.navigationController
+                             title:NSLocalizedString(@"Sucess.", nil)
+                             subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                             iconImage:nil
+                             type:RMessageTypeSuccess
+                             customTypeName:nil
+                             duration:RMessageDurationAutomatic
+                             callback:nil
+                             buttonTitle:nil
+                             buttonCallback:nil
+                             atPosition:RMessagePositionNavBarOverlay
+                             canBeDismissedByUser:YES]; */
+                            
+                            FilterLogic *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
+                            [self.navigationController pushViewController:sort animated:YES];
+                        });
+                    }
+                }
+                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                
+            }];
+        }
+        } }
+}
+
+-(void)changeStaus4
+{
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+        
+    }else{
+        
+        [[AppDelegate sharedAppdelegate] showProgressView];
+        
+        
+        if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
+        {
+            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+        }
+        else {
+        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.DeletedStausId];
+        
+        if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
+        {
+            [utils showAlertWithMessage:@"Ticket is Already Deleted" sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+        }else{
+            
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            
+            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                
+                if (error || [msg containsString:@"Error"]) {
+                    
+                    if (msg) {
+                        
+                        if([msg isEqualToString:@"Error-403"])
+                        {
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Delete a ticket", nil) sendViewController:self];
+                        }
+                        else{
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        }
+                        //  NSLog(@"Message is : %@",msg);
+                        
+                    }else if(error)  {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                    }
+                    
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self changeStaus4];
+                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                    return;
+                }
+                
+                
+                
+                
+                if (json) {
+                    NSLog(@"JSON-CreateTicket-%@",json);
+                    if ([json objectForKey:@"response"]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                            
+                            
+                            
+                            /*   if (self.navigationController.navigationBarHidden) {
+                             [self.navigationController setNavigationBarHidden:NO];
+                             }
+                             
+                             [RMessage showNotificationInViewController:self.navigationController
+                             title:NSLocalizedString(@"Sucess.", nil)
+                             subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                             iconImage:nil
+                             type:RMessageTypeSuccess
+                             customTypeName:nil
+                             duration:RMessageDurationAutomatic
+                             callback:nil
+                             buttonTitle:nil
+                             buttonCallback:nil
+                             atPosition:RMessagePositionNavBarOverlay
+                             canBeDismissedByUser:YES]; */
+                            
+                            
+                            FilterLogic *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
+                            [self.navigationController pushViewController:sort animated:YES];
+                        });
+                    }
+                }
+                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                
+            }];
+        }
+        } }
+}
+
 #pragma mark - lazy
 
 - (CFMultistageDropdownMenuView *)multistageDropdownMenuView
@@ -1660,7 +2381,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                          // Filter - left array
                          @[],
                          // sort - left array
-                         @[@"ticket title", @"ticket number", @"priority", @"updated at", @"created at",@"due on"],
+                         @[@"Ticket Title", @"Ticket Number", @"Priority", @"Updated at", @"Created at",@"Due on"],
                          //
                          @[]
                          ];
@@ -1669,14 +2390,14 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                           @[
                               
                               // @[]
-                              @[@"show"]
+                              @[@"Show Filter",@"Clear All",@"Exit"]
                               
                               
                               ],
                           @[
                               // 一级菜单
                               // 金额
-                              @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"], @[@"ASC", @"DES"],@[@"ASC", @"DES"],@[@"ASC", @"DES"]
+                              @[@"ASC", @"DES",@"None"], @[@"ASC", @"DES",@"None"], @[@"ASC", @"DES",@"None"], @[@"ASC", @"DES",@"None"],@[@"ASC", @"DES",@"None"],@[@"ASC", @"DES",@"None"]
                               ],
                           //                          @[
                           //                              // 一级菜单
@@ -1695,8 +2416,8 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     
     //    _multistageDropdownMenuView.maxRowCount = 3;
     _multistageDropdownMenuView.stateConfigDict = @{
-                                                    @"selected" : @[[UIColor purpleColor], @"测试紫箭头"],
-                                                    @"normal" : @[[UIColor redColor], @"测试红箭头"]
+                                                    @"selected" : @[[UIColor blackColor], @"测试紫箭头"],
+                                                    @"normal" : @[[UIColor blackColor], @"测试红箭头"]
                                                     };
     
     
@@ -1737,6 +2458,16 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         [self.navigationController pushViewController:filter animated:YES];
         
     }
+    if(titleButtonIndex==0 && rightIndex==1 )
+    {
+        NSLog(@"clear All");
+        
+        FilterLogic *fil=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
+        
+        [self.navigationController pushViewController:fil animated:YES];
+        
+    }
+    
     // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
     {
@@ -2303,26 +3034,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     //  NSString *str = [NSString stringWithFormat:@"Filter\n TiltleButton Index is %zd, leftIndex is %zd, rightIndex %zd",titleButtonIndex, leftIndex, rightIndex];
     
     
-    
-    
-    
-    //    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"1st popUp" message:str preferredStyle:UIAlertControllerStyleAlert];
-    //    [self presentViewController:alertController animated:NO completion:^{
-    //        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //
-    //            UIAlertController *alertController2 = [UIAlertController alertControllerWithTitle:str22 message:str2 preferredStyle:UIAlertControllerStyleAlert];
-    //            [self presentViewController:alertController2 animated:NO completion:^{
-    //                UIAlertAction *alertAction2 = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //
-    //                }];
-    //                [alertController2 addAction:alertAction2];
-    //            }];
-    //
-    //        }];
-    //        [alertController addAction:alertAction];
-    //    }];
-    //
-    
+
     
 }
 
@@ -2338,19 +3050,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     NSLog(@"%@",str);
     
     
-    //    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"第二个代理方法" message:str preferredStyle:UIAlertControllerStyleAlert];
-    //    [self presentViewController:alertController animated:NO completion:^{
-    //        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //
-    //
-    //        }];
-    //        [alertController addAction:alertAction];
-    //    }];
 }
-
-
-
-
 
 
 @end

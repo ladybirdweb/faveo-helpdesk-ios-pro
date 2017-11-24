@@ -103,6 +103,157 @@
 }
 
 
+-(void)callPATCHAPIWithAPIName:(NSString *)urlString
+              parameter:(id)parameter
+        callbackHandler:(callbackHandler)block{
+    NSError *err;
+    //urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    
+
+    
+    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)request] forHTTPHeaderField:@"Content-Length"];
+    [request addValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Offer-type"];
+    [request setTimeoutInterval:45.0];
+    
+    NSData *postData = nil;
+    if ([parameter isKindOfClass:[NSString class]]) {
+        postData = [((NSString *)parameter) dataUsingEncoding:NSUTF8StringEncoding];
+    } else {
+        // postData = [NSJSONSerialization dataWithJSONObject:parameter options:0 error:&err];
+        
+        postData = [NSJSONSerialization dataWithJSONObject:parameter options:kNilOptions error:&err];
+    }
+    [request setHTTPBody:postData];
+    //[request setHTTPBody:[NSJSONSerialization dataWithJSONObject:parameter options:nil error:&err]];
+    
+    [request setHTTPMethod:@"PATCH"];
+    
+    //
+    NSLog(@"Request body %@", [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding]);
+    NSLog(@"Thread--httpResponsePOST--Request : %@", urlString);
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] ];
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block(error,nil,nil);
+            });
+            NSLog(@"dataTaskWithRequest error: %@", [error localizedDescription]);
+            
+        }else if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            
+            NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+            
+            if (statusCode != 200) {
+                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                
+                if (statusCode==400) {
+                    if ([[self refreshToken] isEqualToString:@"tokenRefreshed"]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil,nil,@"tokenRefreshed");
+                        });
+                        NSLog(@"Thread--httpResponsePOST--tokenRefreshed");
+                    }else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil,nil,@"tokenNotRefreshed");
+                        });
+                        NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
+                    }
+                }else if (statusCode==401)
+                {
+                    if ([[self refreshToken] isEqualToString:@"tokenRefreshed"]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil,nil,@"tokenRefreshed");
+                        });
+                        NSLog(@"Thread--httpResponsePOST--tokenRefreshed");
+                    }else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil,nil,@"tokenNotRefreshed");
+                        });
+                        NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
+                    }
+                    
+                    
+                }
+                else
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        block(nil, nil,[NSString stringWithFormat:@"Error-%ld",(long)statusCode]);
+                    });
+                return ;
+            }
+            
+            NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            if ([replyStr containsString:@"token_expired"]) {
+                NSLog(@"Thread--httpResponsePOST--token_expired");
+                
+                if ([[self refreshToken] isEqualToString:@"tokenRefreshed"]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        block(nil,nil,@"tokenRefreshed");
+                    });
+                    NSLog(@"Thread--httpResponsePOST--tokenRefreshed");
+                }else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        block(nil,nil,@"tokenNotRefreshed");
+                    });
+                    NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
+                }
+                return;
+            }
+            
+            NSError *jsonerror = nil;
+            
+            id responseData =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonerror];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block(jsonerror,responseData,nil);
+            });
+            
+        }
+        
+    }] resume];
+}
+//
+//+(NSURLSessionTask *)callPATCHAPIWithAPIName:(NSString *)apiName andCompletionHandler:(void(^)(id result, NSInteger responseCode, NSError *error))completionHandler
+//{
+//    NSString *getURL = apiName;
+//    NSURL *url = [NSURL URLWithString:getURL];
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+//
+//    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    sessionConfiguration.timeoutIntervalForRequest = 45.0f;
+//
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+//
+//    // Create Data from request
+//    NSData *requestData = [NSData dataWithBytes: [@"" UTF8String] length:[@"" length]];
+//
+//    [request setHTTPMethod:@"PATCH"];
+//    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[requestData length]] forHTTPHeaderField:@"Content-Length"];
+//
+//    [request setHTTPBody:requestData];
+//
+//    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+//                                            completionHandler:
+//                                  ^(NSData *data, NSURLResponse *response, NSError *error)
+//                                  {
+//                                      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+//
+//                                      NSInteger responseCode = [httpResponse statusCode];
+//                                      NSLog(@"response Code : %ld",(long)responseCode);
+//                                  }];
+//
+//    [task resume];
+//    return task;
+//}
+
 -(void)httpResponsePOST:(NSString *)urlString
               parameter:(id)parameter
         callbackHandler:(callbackHandler)block{

@@ -203,7 +203,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"FirstName should have more than 2 characters.", nil)
+                                          subtitle:NSLocalizedString(@"Enter Full Email", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -289,18 +289,12 @@
 -(void)createTicket{
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
-        //connection unavailable
-        //[utils showAlertWithMessage:NO_INTERNET sendViewController:self];
         [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
         
         [[AppDelegate sharedAppdelegate] showProgressView];
         
-        
-        
-        //   NSString *url=[NSString stringWithFormat:@"%@helpdesk/ticket?api_key=%@&ip=%@&token=%@&id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD];
-        // http://jamboreebliss.com/sayar/public/api/v1/helpdesk/register?token=&first_name=&last_name=&email=&mobile=&company
         
         NSString *url =[NSString stringWithFormat:@"%@helpdesk/register?token=%@&first_name=%@&last_name=%@&email=%@&mobile=%@&company=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],_firstNameView.text,_lastNameView.text,_emailTextView.text,_mobileView.text,_companyName.text];
         
@@ -337,11 +331,7 @@
                 return;
             }
             
-            // let dictData = yourArrayOfDict[index] as Dictionary. let valueObject = dictData["message"]
-            
-            //  "message": "Activate your account! Click on the link that we've sent to your mail",
-            // error
-            
+  
             NSArray * arr1=json;
             NSLog(@"Arrtay is 12345 : %@",arr1);
             NSDictionary * dictionary = (NSDictionary *)[arr1 objectAtIndex: 0];
@@ -353,43 +343,7 @@
             NSLog(@"stringMessage111 - %@",stringMessage111);
             NSLog(@"stringMessage222 - %@",stringMessage222);
             
-            //                if([stringMessage111 hasPrefix:@"message"])
-            //
-            //                {
-            //                    [RMessage showNotificationInViewController:self.navigationController
-            //                                                         title:NSLocalizedString(@"Sucess", nil)
-            //                                                      subtitle:NSLocalizedString(@"Requester Created successfully.", nil)
-            //                                                     iconImage:nil
-            //                                                          type:RMessageTypeSuccess
-            //                                                customTypeName:nil
-            //                                                      duration:RMessageDurationAutomatic
-            //                                                      callback:nil
-            //                                                   buttonTitle:nil
-            //                                                buttonCallback:nil
-            //                                                    atPosition:RMessagePositionBottom
-            //                                          canBeDismissedByUser:YES];
-            //
-            //
-            //                    InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-            //                    [self.navigationController pushViewController:inboxVC animated:YES];
-            //                }
-            //
-            //                if([stringMessage222 hasPrefix:@"error"])
-            //
-            //                {
-            //                    [RMessage showNotificationInViewController:self.navigationController
-            //                                                         title:NSLocalizedString(@"Fali", nil)
-            //                                                      subtitle:NSLocalizedString(@"Fail.", nil)
-            //                                                     iconImage:nil
-            //                                                          type:RMessageTypeSuccess
-            //                                                customTypeName:nil
-            //                                                      duration:RMessageDurationAutomatic
-            //                                                      callback:nil
-            //                                                   buttonTitle:nil
-            //                                                buttonCallback:nil
-            //                                                    atPosition:RMessagePositionBottom
-            //                                          canBeDismissedByUser:YES];
-            //                }
+     
             
             if (json) {
                 NSLog(@"JSON-addRequester-%@",json);
@@ -402,23 +356,7 @@
                     
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                        
-                        
-                        //                            [RMessage showNotificationInViewController:self.navigationController
-                        //                                                                 title:NSLocalizedString(@"Sucess", nil)
-                        //                                                              subtitle:NSLocalizedString(@"Requester Created successfully.", nil)
-                        //                                                             iconImage:nil
-                        //                                                                  type:RMessageTypeSuccess
-                        //                                                        customTypeName:nil
-                        //                                                              duration:RMessageDurationAutomatic
-                        //                                                              callback:nil
-                        //                                                           buttonTitle:nil
-                        //                                                        buttonCallback:nil
-                        //                                                            atPosition:RMessagePositionBottom
-                        //                                                  canBeDismissedByUser:YES];
-                        
-                        
+                   
                         if (self.navigationController.navigationBarHidden) {
                             [self.navigationController setNavigationBarHidden:NO];
                         }
@@ -469,32 +407,7 @@
                 }
                 
                 
-                //                    if([msg isEqualToString:@"Activate your account! Click on the link that we've sent to your mail"])
-                //                    {
-                //                        dispatch_async(dispatch_get_main_queue(), ^{
-                //                            // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                //
-                //
-                //                            [RMessage showNotificationInViewController:self.navigationController
-                //                                                                 title:NSLocalizedString(@"Sucess", nil)
-                //                                                              subtitle:NSLocalizedString(@"Requester Created successfully.", nil)
-                //                                                             iconImage:nil
-                //                                                                  type:RMessageTypeSuccess
-                //                                                        customTypeName:nil
-                //                                                              duration:RMessageDurationAutomatic
-                //                                                              callback:nil
-                //                                                           buttonTitle:nil
-                //                                                        buttonCallback:nil
-                //                                                            atPosition:RMessagePositionBottom
-                //                                                  canBeDismissedByUser:YES];
-                //
-                //
-                //                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                //                            [self.navigationController pushViewController:inboxVC animated:YES];
-                //                        });
-                //                    } //
-                //
-                
+           
             }
             NSLog(@"Thread-NO5-postCreateTicket-closed");
             

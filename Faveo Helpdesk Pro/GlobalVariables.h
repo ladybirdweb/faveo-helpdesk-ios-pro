@@ -145,4 +145,22 @@
 @property (strong, nonatomic) NSString *statusTextField;
 @property (strong, nonatomic) NSString *assignedTextFiled1;
 
+
+//customer filteration
+@property (strong, nonatomic) NSString *userFilterId;
+@property (strong, nonatomic) NSString *nameInCilent;
+
+
+//edit user
+@property (strong, nonatomic) NSString *emailInUserList;
+@property (strong, nonatomic) NSString *userNameInUserList;
+@property (strong, nonatomic) NSString *phoneNumberInUserList;
+@property (strong, nonatomic) NSString *mobileNumberInUserList;
+
+@property (strong, nonatomic) NSString *UserState;
+
+@property (strong, nonatomic) NSString *ActiveDeactiveStateOfUser;
+@property (strong, nonatomic) NSString *ActiveDeactiveStateOfUser1;
+
+
 @end

@@ -30,6 +30,8 @@
 		D9AA44461FA890AC00938081 /* BDCustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA44441FA890AC00938081 /* BDCustomAlertView.m */; };
 		D9AA44471FA890AC00938081 /* BDCustomAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9AA44451FA890AC00938081 /* BDCustomAlertView.xib */; };
 		D9AAFAB91F5D475400891CA5 /* FTPopOverMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AAFAB81F5D475400891CA5 /* FTPopOverMenu.m */; };
+		D9AF85311FC421AF005232A0 /* AWNavigationMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF852F1FC421AE005232A0 /* AWNavigationMenuItem.m */; };
+		D9AF85371FC4610E005232A0 /* EditClientDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF85361FC4610E005232A0 /* EditClientDetail.m */; };
 		D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */; };
 		D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */; };
 		D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */; };
@@ -157,6 +159,10 @@
 		D9AA44451FA890AC00938081 /* BDCustomAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDCustomAlertView.xib; sourceTree = "<group>"; };
 		D9AAFAB71F5D475400891CA5 /* FTPopOverMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPopOverMenu.h; sourceTree = "<group>"; };
 		D9AAFAB81F5D475400891CA5 /* FTPopOverMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPopOverMenu.m; sourceTree = "<group>"; };
+		D9AF852F1FC421AE005232A0 /* AWNavigationMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWNavigationMenuItem.m; sourceTree = "<group>"; };
+		D9AF85301FC421AF005232A0 /* AWNavigationMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWNavigationMenuItem.h; sourceTree = "<group>"; };
+		D9AF85351FC4610E005232A0 /* EditClientDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditClientDetail.h; sourceTree = "<group>"; };
+		D9AF85361FC4610E005232A0 /* EditClientDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditClientDetail.m; sourceTree = "<group>"; };
 		D9B6E2D71E9B8B1600AAB724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LoadingTableViewCell.xib; sourceTree = "<group>"; };
 		D9B6E2DA1E9B8B1A00AAB724 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2DC1E9B8B1C00AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
@@ -335,6 +341,7 @@
 		D92C35C71F750F83001DD67D /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D9AF852E1FC4218A005232A0 /* NavigationMenuItem */,
 				D9F9F11B1FB9A4D10044DA27 /* kDropDown */,
 				D9AA44421FA890AC00938081 /* BDCustomeAlert */,
 				D9D2F34F1F9E131E00BC5456 /* MultiStageDropDown */,
@@ -376,6 +383,15 @@
 				D9AAFAB81F5D475400891CA5 /* FTPopOverMenu.m */,
 			);
 			name = "Pop Over";
+			sourceTree = "<group>";
+		};
+		D9AF852E1FC4218A005232A0 /* NavigationMenuItem */ = {
+			isa = PBXGroup;
+			children = (
+				D9AF85301FC421AF005232A0 /* AWNavigationMenuItem.h */,
+				D9AF852F1FC421AE005232A0 /* AWNavigationMenuItem.m */,
+			);
+			path = NavigationMenuItem;
 			sourceTree = "<group>";
 		};
 		D9D2F34F1F9E131E00BC5456 /* MultiStageDropDown */ = {
@@ -512,6 +528,8 @@
 				D9EB9F861E07C3270001115F /* LoginViewController.m */,
 				D9EB9F911E07C3270001115F /* CreateTicketViewController.h */,
 				D9EB9F921E07C3270001115F /* CreateTicketViewController.m */,
+				D953D53C1FA321420077D519 /* AddRequester.h */,
+				D953D53D1FA321420077D519 /* AddRequester.m */,
 				D9EB9F931E07C3270001115F /* InboxViewController.h */,
 				D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */,
 				D9F9F1181FB977B40044DA27 /* FilterViewController.h */,
@@ -530,22 +548,22 @@
 				D9EB9F8C1E07C3270001115F /* TrashTicketsViewController.m */,
 				D9EB9F891E07C3270001115F /* ClientListViewController.h */,
 				D9EB9F8A1E07C3270001115F /* ClientListViewController.m */,
-				D9EB9F971E07C3270001115F /* AboutViewController.h */,
-				D9EB9F981E07C3270001115F /* AboutViewController.m */,
-				D9EB9F951E07C3270001115F /* TicketDetailViewController.h */,
-				D9EB9F961E07C3270001115F /* TicketDetailViewController.m */,
 				D9EB9F991E07C3270001115F /* ClientDetailViewController.h */,
 				D9EB9F9A1E07C3270001115F /* ClientDetailViewController.m */,
+				D9AF85351FC4610E005232A0 /* EditClientDetail.h */,
+				D9AF85361FC4610E005232A0 /* EditClientDetail.m */,
+				D9EB9F971E07C3270001115F /* AboutViewController.h */,
+				D9EB9F981E07C3270001115F /* AboutViewController.m */,
 				D9EB9F9B1E07C3270001115F /* ConversationViewController.h */,
 				D9EB9F9C1E07C3270001115F /* ConversationViewController.m */,
+				D9EB9F951E07C3270001115F /* TicketDetailViewController.h */,
+				D9EB9F961E07C3270001115F /* TicketDetailViewController.m */,
 				D9EB9F9D1E07C3270001115F /* DetailViewController.h */,
 				D9EB9F9E1E07C3270001115F /* DetailViewController.m */,
 				D92C35D51F7682B5001DD67D /* EditDetailTableViewController.h */,
 				D92C35D61F7682B5001DD67D /* EditDetailTableViewController.m */,
 				D9A2FCAE1F18904000C829DD /* NotificationViewController.h */,
 				D9A2FCAF1F18904000C829DD /* NotificationViewController.m */,
-				D953D53C1FA321420077D519 /* AddRequester.h */,
-				D953D53D1FA321420077D519 /* AddRequester.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -870,6 +888,7 @@
 				D9E57B411EFAA4C1002E4C19 /* UITextField+PasswordField.m in Sources */,
 				D9F9F13B1FB9B2530044DA27 /* DropDownListView.m in Sources */,
 				D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */,
+				D9AF85371FC4610E005232A0 /* EditClientDetail.m in Sources */,
 				D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */,
 				D9E57B401EFAA4C1002E4C19 /* UIView+Shake.m in Sources */,
 				D9EB9F811E07C2F00001115F /* LoadingTableViewCell.m in Sources */,
@@ -903,6 +922,7 @@
 				D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */,
 				D9F9F13D1FB9B2530044DA27 /* DropDownViewCell.m in Sources */,
 				D9F9F11A1FB977B40044DA27 /* FilterViewController.m in Sources */,
+				D9AF85311FC421AF005232A0 /* AWNavigationMenuItem.m in Sources */,
 				D9F9F1421FBAE8CC0044DA27 /* FilterLogic.m in Sources */,
 				D9EB9FA41E07C3270001115F /* ClosedTicketsViewController.m in Sources */,
 				D9D2F35A1F9E131E00BC5456 /* CFMultistageConditionTableView.m in Sources */,
