@@ -94,13 +94,13 @@
     UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [moreButton setImage:[UIImage imageNamed:@"verticle"] forState:UIControlStateNormal];
     [moreButton addTarget:self action:@selector(onNavButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
-    [moreButton setFrame:CGRectMake(56, 0, 32, 32)];
+    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
     
     UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
     [NotificationBtn addTarget:self action:@selector(NotificationBtnPressed) forControlEvents:UIControlEventTouchUpInside];
    // [NotificationBtn setFrame:CGRectMake(44, 0, 32, 32)];
-    [NotificationBtn setFrame:CGRectMake(20, 0, 32, 32)];
+    [NotificationBtn setFrame:CGRectMake(10, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
     [rightBarButtonItems addSubview:moreButton];
@@ -115,6 +115,7 @@
     UILongPressGestureRecognizer *lpGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(EditTableView:)];
     [lpGesture setMinimumPressDuration:1];
     [self.tableView addGestureRecognizer:lpGesture];
+    
     
     [self reload];
     [self getDependencies];
@@ -878,7 +879,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-     self.selectedPath = indexPath;
+    self.selectedPath = indexPath;
     
     if ([tableView isEditing]) {
  
@@ -892,6 +893,8 @@
        
         selectedIDs = [selectedArray componentsJoinedByString:@","];
          NSLog(@"Slected Ticket Id are : %@",selectedIDs);
+        
+    
         
     }else{
         
@@ -925,9 +928,8 @@
     
     selectedIDs = [selectedArray componentsJoinedByString:@","];
     NSLog(@"Slected Ticket Id are : %@",selectedIDs);
-
-
-
+    
+   
     if (!selectedArray.count) {
         [self.tableView setEditing:NO animated:YES];
     }
@@ -1383,7 +1385,7 @@
                          // Filter - left array
                          @[],
                          // sort - left array
-                         @[@"Ticket Title", @"Ticket Number", @"Priority", @"Updated at", @"Created at",@"Due on"],
+                         @[@"Ticket Title", @"Ticket Number", @"Priority", @"Updated at", @"Created at",@"Due Date"],
                          //
                          @[]
                          ];
@@ -1399,7 +1401,7 @@
                           @[
                               // 一级菜单
                               // 金额
-                              @[@"ASC", @"DES",@"None"], @[@"ASC", @"DES",@"None"], @[@"ASC", @"DES",@"None"], @[@"ASC", @"DES",@"None"],@[@"ASC", @"DES",@"None"],@[@"ASC", @"DES",@"None"]
+                              @[@"ASC", @"DES",@"Exit"], @[@"ASC", @"DES",@"Exit"], @[@"ASC", @"DES",@"Exit"], @[@"ASC", @"DES",@"Exit"],@[@"ASC", @"DES",@"Exit"],@[@"ASC", @"DES",@"Exit"]
                               ],
                           //                          @[
                           //                              // 一级菜单

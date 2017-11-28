@@ -1,10 +1,11 @@
 //
-//  ClientListViewController.m
-//  SideMEnuDemo
+//  ClientFilter.m
+//  Faveo Helpdesk Pro
 //
-//  Created by Narendra on 01/09/16.
-//  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
+//  Created by Mallikarjun on 27/11/17.
+//  Copyright © 2017 Ladybird websolutions pvt ltd. All rights reserved.
 //
+
 
 #import "ClientListViewController.h"
 #import "ClientListTableViewCell.h"
@@ -24,8 +25,8 @@
 #import "ClientFilter.h"
 
 
-@interface ClientListViewController ()<RMessageProtocol,AWNavigationMenuItemDataSource, AWNavigationMenuItemDelegate>{
-
+@interface ClientFilter ()<RMessageProtocol,AWNavigationMenuItemDataSource, AWNavigationMenuItemDelegate>{
+    
     Utils *utils;
     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
@@ -48,7 +49,7 @@
 
 @end
 
-@implementation ClientListViewController
+@implementation ClientFilter
 
 
 - (void)viewDidLoad {
@@ -61,7 +62,7 @@
     utils=[[Utils alloc]init];
     userDefaults=[NSUserDefaults standardUserDefaults];
     globalVariables=[GlobalVariables sharedInstance];
-
+    
     
     self.titles = @[@"All users", @"Agent users", @"Active users", @"Client users", @"Banned users",@"Inactive users",@"Deactivated users"];
     
@@ -74,7 +75,7 @@
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
-
+    
     // Do any additional setup after loading the view.
 }
 
@@ -85,7 +86,7 @@
     { [refresh endRefreshing];
         //connection unavailable
         [[AppDelegate sharedAppdelegate] hideProgressView];
-     //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -103,13 +104,13 @@
                                     buttonCallback:nil
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
-
         
-    
+        
+        
         
     }else{
         // http://jamboreebliss.com/sayar/public/api/v2/helpdesk/user/filter?api_key=&token=&role=
-      if([globalVariables.userFilterId isEqualToString:@"AGENTUSERS"])
+        if([globalVariables.userFilterId isEqualToString:@"AGENTUSERS"])
         {
             tempString=@"agent";
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&role=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString];
@@ -140,84 +141,77 @@
             tempString=[NSString stringWithFormat:@"%i",1];
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&deleted=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString];
             
-        }else if([globalVariables.userFilterId isEqualToString:@"ALLUSERS"])
+        }
+        else
         {
-            
-            url=[NSString stringWithFormat:@"%@helpdesk/customers-custom?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
-            
-        }else
-        {
-          
-            url=[NSString stringWithFormat:@"%@helpdesk/customers-custom?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
-            
-            
+            NSLog(@"I am in else condition...!");
         }
         
         //        [[AppDelegate sharedAppdelegate] showProgressView];
         
-@try{
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
-            if (error || [msg containsString:@"Error"]) {
-                [refresh endRefreshing];
-                [[AppDelegate sharedAppdelegate] hideProgressView];
+        @try{
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
-                if (msg) {
+                if (error || [msg containsString:@"Error"]) {
+                    [refresh endRefreshing];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                     
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    
-                }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
-                }
-                return ;
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                
-                [self reload];
-                NSLog(@"Thread--NO4-call-getClients");
-                return;
-            }
-            
-            if (json) {
-                //NSError *error;
-                _mutableArray=[[NSMutableArray alloc]initWithCapacity:11];
-                NSLog(@"Thread-NO4--getClientsAPI--%@",json);
-                _mutableArray = [json objectForKey:@"data"];
-                _nextPageUrl =[json objectForKey:@"next_page_url"];
-                _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[json objectForKey:@"total"] integerValue];
-                _totalPages=[[json objectForKey:@"last_page"] integerValue];
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                    if (msg) {
                         
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [refresh endRefreshing];
-                        [self.tableView reloadData];
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        
+                    }else if(error)  {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+                    }
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self reload];
+                    NSLog(@"Thread--NO4-call-getClients");
+                    return;
+                }
+                
+                if (json) {
+                    //NSError *error;
+                    _mutableArray=[[NSMutableArray alloc]initWithCapacity:11];
+                    NSLog(@"Thread-NO4--getClientsAPI--%@",json);
+                    _mutableArray = [json objectForKey:@"data"];
+                    _nextPageUrl =[json objectForKey:@"next_page_url"];
+                    _currentPage=[[json objectForKey:@"current_page"] integerValue];
+                    _totalTickets=[[json objectForKey:@"total"] integerValue];
+                    _totalPages=[[json objectForKey:@"last_page"] integerValue];
+                    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            [refresh endRefreshing];
+                            [self.tableView reloadData];
+                        });
                     });
-                });
-               
-            }
-            NSLog(@"Thread-NO5-getClients-closed");
-            
-        }];
-}@catch (NSException *exception)
+                    
+                }
+                NSLog(@"Thread-NO5-getClients-closed");
+                
+            }];
+        }@catch (NSException *exception)
         {
             // Print exception information
-//            NSLog( @"NSException caught in reload method in ClientList ViewController\n" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
+            //            NSLog( @"NSException caught in reload method in ClientList ViewController\n" );
+            //            NSLog( @"Name: %@", exception.name);
+            //            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-           // NSLog( @"In finally block");
+            // NSLog( @"In finally block");
             
         }
-
+        
     }
 }
 
@@ -232,7 +226,7 @@
             [self loadMore];
         }
         else{
-           // [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            // [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
             
             [RMessage showNotificationInViewController:self
                                                  title:nil
@@ -246,7 +240,7 @@
                                         buttonCallback:nil
                                             atPosition:RMessagePositionBottom
                                   canBeDismissedByUser:YES];
-
+            
         }
     }
 }
@@ -256,7 +250,7 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-     // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -274,73 +268,73 @@
                                     buttonCallback:nil
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
-
+        
         
         
     }else{
         
-    @try{
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
-            if (error || [msg containsString:@"Error"]) {
+        @try{
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
-                if (msg) {
+                if (error || [msg containsString:@"Error"]) {
                     
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    
-                }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
-                }
-                return ;
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                
-                [self loadMore];
-                //NSLog(@"Thread--NO4-call-getInbox");
-                return;
-            }
-            
-            if (json) {
-                NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-                
-                _nextPageUrl =[json objectForKey:@"next_page_url"];
-                _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[json objectForKey:@"total"] integerValue];
-                _totalPages=[[json objectForKey:@"last_page"] integerValue];
-                
-                _mutableArray= [_mutableArray mutableCopy];
-                
-                [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
-                
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.tableView reloadData];
+                    if (msg) {
                         
-                    });
-                });
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        
+                    }else if(error)  {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+                    }
+                    return ;
+                }
                 
-            }
-            NSLog(@"Thread-NO5-getInbox-closed");
-            
-        }];
-    }@catch (NSException *exception)
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self loadMore];
+                    //NSLog(@"Thread--NO4-call-getInbox");
+                    return;
+                }
+                
+                if (json) {
+                    NSLog(@"Thread-NO4--getInboxAPI--%@",json);
+                    
+                    _nextPageUrl =[json objectForKey:@"next_page_url"];
+                    _currentPage=[[json objectForKey:@"current_page"] integerValue];
+                    _totalTickets=[[json objectForKey:@"total"] integerValue];
+                    _totalPages=[[json objectForKey:@"last_page"] integerValue];
+                    
+                    _mutableArray= [_mutableArray mutableCopy];
+                    
+                    [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
+                    
+                    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.tableView reloadData];
+                            
+                        });
+                    });
+                    
+                }
+                NSLog(@"Thread-NO5-getInbox-closed");
+                
+            }];
+        }@catch (NSException *exception)
         {
             // Print exception information
-//            NSLog( @"NSException caught in loadmore methos in ClienList ViewController\n" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
+            //            NSLog( @"NSException caught in loadmore methos in ClienList ViewController\n" );
+            //            NSLog( @"Name: %@", exception.name);
+            //            NSLog( @"Reason: %@", exception.reason );
             return ;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            //  NSLog( @"In finally block");
             
         }
-
+        
     }
 }
 
@@ -390,154 +384,151 @@
         [activityIndicator startAnimating];
         return cell;
     }else{
-
-    
-    ClientListTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"ClientListCellID"];
-    
-    if (cell == nil)
-    {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ClientListTableViewCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
-    
-    NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
-    
-
-   // NSString *email=[finaldic objectForKey:@"email"];
         
-   /* NSString *phone=[finaldic objectForKey:@"phone_number"];
-        if ([email isEqualToString:@""]) {
-        email=NSLocalizedString(@"Not Available",nil);
-    }
-    if ([phone isEqualToString:@""]) {
-        phone=NSLocalizedString(@"Not Available",nil);
-    } */
         
- @try{
-     
-     
-     
-     
-        NSString *email=[finaldic objectForKey:@"email"];
-     
-        NSString *mobile=[finaldic objectForKey:@"mobile"];
-        NSString *phone=[finaldic objectForKey:@"phone_number"];
-        NSString *telephone=[finaldic objectForKey:@"telephone"];
-
-
+        ClientListTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"ClientListCellID"];
         
-     
-        
-        [Utils isEmpty:email];
-        [Utils isEmpty:mobile];
-        [Utils isEmpty:phone];
-        [Utils isEmpty:telephone];
-        
-        if(![Utils isEmpty:email])
+        if (cell == nil)
         {
-            cell.emailIdLabel.text=email;
-        }
-        else{
-            cell.emailIdLabel.text=NSLocalizedString(@"Not Available",nil);
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ClientListTableViewCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
         }
         
-     NSString *code= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile_code"]];
-     [Utils isEmpty:code];
-     
-     NSString *codeTemp;
-     
-     if( ![Utils isEmpty:code])
-     {
-         if([code isEqualToString:@"0"])
-         {
-             codeTemp=@"";
-             
+        NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
+        
+        
+        // NSString *email=[finaldic objectForKey:@"email"];
+        
+        /* NSString *phone=[finaldic objectForKey:@"phone_number"];
+         if ([email isEqualToString:@""]) {
+         email=NSLocalizedString(@"Not Available",nil);
          }
-         else
-         {
-         codeTemp =[NSString stringWithFormat:@"+%@",[finaldic objectForKey:@"mobile_code"]];
-         }
-     }
-     else
-     {
-         codeTemp =@"";
-     }
-     //cell.codeLabel.text= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile_code"]];
-
-     
-         if(! [Utils isEmpty:phone])
-        {
-            cell.phoneNumberLabel.text= [NSString stringWithFormat:@"%@ %@",codeTemp,phone];
-        }
-        else if(![Utils isEmpty:telephone])
-        {
-            cell.phoneNumberLabel.text= [NSString stringWithFormat:@"%@ %@",codeTemp,telephone];
-        }
-       else if( ![Utils isEmpty:mobile])
-        {
-            cell.phoneNumberLabel.text=[NSString stringWithFormat:@"%@ %@",codeTemp,mobile];
-        }
-     
-        else
-        {
-            cell.phoneNumberLabel.text=NSLocalizedString(@"Not Available",nil);
-        }
-     
-     
-     
-        NSString *clientFirstName=[finaldic objectForKey:@"first_name"];
-        NSString *clientLastName=[finaldic objectForKey:@"last_name"];
-        NSString *userName= [finaldic objectForKey:@"user_name"];
+         if ([phone isEqualToString:@""]) {
+         phone=NSLocalizedString(@"Not Available",nil);
+         } */
         
-        [Utils isEmpty:clientFirstName];
-        [Utils isEmpty:clientLastName];
-       [Utils isEmpty:userName];
-        
-        if(![Utils isEmpty:clientFirstName] && ![Utils isEmpty:clientLastName])
-        {
-            cell.clientNameLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
-        }
-    
-        else if (![Utils isEmpty:clientFirstName] && [Utils isEmpty:clientLastName])
-        {
-            cell.clientNameLabel.text=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"first_name"]];
-        }
-        else if(![Utils isEmpty:userName])
-        {
-            cell.clientNameLabel.text= [finaldic objectForKey:@"user_name"];
-        }
-        else
-        {
-            cell.clientNameLabel.text=NSLocalizedString(@"Not Available",nil);
-        }
+        @try{
             
-        
-   // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-        
-        if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-        {
-            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
             
-        }
-        else
-        {
-            [cell setUserProfileimage:@"default_pic.png"];
-        }
- }@catch (NSException *exception)
+            
+            
+            NSString *email=[finaldic objectForKey:@"email"];
+            
+            NSString *mobile=[finaldic objectForKey:@"mobile"];
+            NSString *phone=[finaldic objectForKey:@"phone_number"];
+          //  NSString *telephone=[finaldic objectForKey:@"telephone"];
+            
+            
+            
+            
+            
+            [Utils isEmpty:email];
+            [Utils isEmpty:mobile];
+            [Utils isEmpty:phone];
+          //  [Utils isEmpty:telephone];
+            
+            if(![Utils isEmpty:email])
+            {
+                cell.emailIdLabel.text=email;
+            }
+            else{
+                cell.emailIdLabel.text=NSLocalizedString(@"Not Available",nil);
+            }
+            
+            NSString *code= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"ext"]];
+            [Utils isEmpty:code];
+            
+            NSString *codeTemp;
+            
+            if( ![Utils isEmpty:code])
+            {
+                if([code isEqualToString:@"0"])
+                {
+                    codeTemp=@"";
+                    
+                }
+                else
+                {
+                    codeTemp =[NSString stringWithFormat:@"+%@",[finaldic objectForKey:@"ext"]];
+                }
+            }
+            else
+            {
+                codeTemp =@"";
+            }
+            //cell.codeLabel.text= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile_code"]];
+            
+            
+            if(! [Utils isEmpty:phone])
+            {
+                cell.phoneNumberLabel.text= [NSString stringWithFormat:@"%@ %@",codeTemp,phone];
+            }
+            
+            else if( ![Utils isEmpty:mobile])
+            {
+                cell.phoneNumberLabel.text=[NSString stringWithFormat:@"%@ %@",codeTemp,mobile];
+            }
+            
+            else
+            {
+                cell.phoneNumberLabel.text=NSLocalizedString(@"Not Available",nil);
+            }
+            
+            
+            
+            NSString *clientFirstName=[finaldic objectForKey:@"first_name"];
+            NSString *clientLastName=[finaldic objectForKey:@"last_name"];
+            NSString *userName= [finaldic objectForKey:@"user_name"];
+            
+            [Utils isEmpty:clientFirstName];
+            [Utils isEmpty:clientLastName];
+            [Utils isEmpty:userName];
+            
+            if(![Utils isEmpty:clientFirstName] && ![Utils isEmpty:clientLastName])
+            {
+                cell.clientNameLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"first_name"],[finaldic objectForKey:@"last_name"]];
+            }
+            
+            else if (![Utils isEmpty:clientFirstName] && [Utils isEmpty:clientLastName])
+            {
+                cell.clientNameLabel.text=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"first_name"]];
+            }
+            else if(![Utils isEmpty:userName])
+            {
+                cell.clientNameLabel.text= [finaldic objectForKey:@"user_name"];
+            }
+            else
+            {
+                cell.clientNameLabel.text=NSLocalizedString(@"Not Available",nil);
+            }
+            
+            
+            // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+            
+            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+            {
+                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+                
+            }
+            else
+            {
+                [cell setUserProfileimage:@"default_pic.png"];
+            }
+        }@catch (NSException *exception)
         {
             // Print exception information
-//            NSLog( @"NSException caught in CellForRowAtIndexPath method in ClintList ViewController\n" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
+            //            NSLog( @"NSException caught in CellForRowAtIndexPath method in ClintList ViewController\n" );
+            //            NSLog( @"Name: %@", exception.name);
+            //            NSLog( @"Reason: %@", exception.reason );
             return cell;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            //  NSLog( @"In finally block");
             
         }
-
+        
         return cell;
     }
 }
@@ -548,22 +539,17 @@
     NSString *client_id=[finaldic objectForKey:@"id"];
     
     globalVariables.iD=@([client_id intValue]);
-    
     globalVariables.First_name=[finaldic objectForKey:@"first_name"];
     globalVariables.Last_name=[finaldic objectForKey:@"last_name"];
-    
     globalVariables.userNameInUserList= [finaldic objectForKey:@"user_name"];
-    
-     globalVariables.emailInUserList= [finaldic objectForKey:@"email"];
-    globalVariables.phoneNumberInUserList= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"phone_number"]];
-    globalVariables.mobileNumberInUserList= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile"]];
-    
+    globalVariables.emailInUserList= [finaldic objectForKey:@"email"];
+    globalVariables.phoneNumberInUserList= [finaldic objectForKey:@"phone_number"];
+    globalVariables.mobileNumberInUserList= [finaldic objectForKey:@"mobile"]; // UserState
     globalVariables.UserState= [finaldic objectForKey:@"active"];
-    globalVariables.mobileCode1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"mobile_code"]]; //compnayUser1
-   
-    globalVariables.customerFromView=@"normalView";
-    globalVariables.customerImage= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"profile_pic"]];
-
+    globalVariables.mobileCode1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"ext"]];
+    globalVariables.customerFromView=@"filterView";
+    globalVariables.ActiveDeactiveStateOfUser1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"is_delete"]];
+    
     ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
     [self.navigationController pushViewController:td animated:YES];
 }
@@ -578,8 +564,8 @@
     
     refresh=[[UIRefreshControl alloc] init];
     refresh.tintColor=[UIColor whiteColor];
-   // refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
-     refresh.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
+    // refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+    refresh.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
     refresh.attributedTitle =refreshing;
     [refresh addTarget:self action:@selector(reloadd) forControlEvents:UIControlEventValueChanged];
     [_tableView insertSubview:refresh atIndex:0];
@@ -615,8 +601,8 @@
 - (NSAttributedString *)navigationMenuItem:(AWNavigationMenuItem *)inMenuItem attributedMenuTitleAtIndex:(NSUInteger)inIndex
 {
     
-  attributedMenu = [[NSMutableAttributedString alloc] initWithString:self.titles[inIndex] attributes:@{NSForegroundColorAttributeName: [UIColor blackColor], NSFontAttributeName: [UIFont systemFontOfSize:16.f]}];
-
+    attributedMenu = [[NSMutableAttributedString alloc] initWithString:self.titles[inIndex] attributes:@{NSForegroundColorAttributeName: [UIColor blackColor], NSFontAttributeName: [UIFont systemFontOfSize:16.f]}];
+    
     globalVariables.nameInCilent=[NSString stringWithFormat:@"%@",attributedMenu];
     
     return (inIndex % 1) == 0 ? attributedMenu : nil;
@@ -637,88 +623,69 @@
         globalVariables.userFilterId=@"ALLUSERS";
         
         ClientListViewController *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientListID"];
-//
-       [self.navigationController pushViewController:view1 animated:YES];
-//       [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-//
-//        [self reload];
+        //
+        [self.navigationController pushViewController:view1 animated:YES];
+        //       [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+        //
+        //        [self reload];
     }
     if(inIndex==1)
     {
         NSLog(@"Agent Users");
-         globalVariables.userFilterId=@"AGENTUSERS";
+        globalVariables.userFilterId=@"AGENTUSERS";
         
-        ClientFilter *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientFilterID"];
-        //
-        [self.navigationController pushViewController:view1 animated:YES];
-       //[self reload];
+        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+        [self reload];
         
     }
     if(inIndex==2)
     {
         NSLog(@"Active users");
         globalVariables.userFilterId=@"ACTIVEUSERS";
-        ClientFilter *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientFilterID"];
-        //
-        [self.navigationController pushViewController:view1 animated:YES];
         
-//        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-//        [self reload];
-    
+        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+        [self reload];
+        
     }
     if(inIndex==3)
     {
         NSLog(@"Client users");
         globalVariables.userFilterId=@"CLIENTUSERS";
         
-        ClientFilter *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientFilterID"];
-        //
-        [self.navigationController pushViewController:view1 animated:YES];
-        
-//        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-//        [self reload];
+        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+        [self reload];
     }
     if(inIndex==4)
     {
         NSLog(@"Banned users");
-         globalVariables.userFilterId=@"BANNEDUSERS";
-       
-        ClientFilter *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientFilterID"];
-        //
-        [self.navigationController pushViewController:view1 animated:YES];
+        globalVariables.userFilterId=@"BANNEDUSERS";
         
-//        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-//        [self reload];
+        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+        [self reload];
         
-
+        
     }
     if(inIndex==5)
     {
         NSLog(@"Inactive users");
-         globalVariables.userFilterId=@"INACTIVEUSERS";
+        globalVariables.userFilterId=@"INACTIVEUSERS";
         
-        ClientFilter *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientFilterID"];
-        //
-        [self.navigationController pushViewController:view1 animated:YES];
-//        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-//
-//        [self reload];
+        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+        
+        [self reload];
     }
     if(inIndex==6)
     {
         NSLog(@"Deactivated users");
-         globalVariables.userFilterId=@"DEACTIVEUSERS";
-
-        ClientFilter *view1=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientFilterID"];
-        //
-        [self.navigationController pushViewController:view1 animated:YES];
+        globalVariables.userFilterId=@"DEACTIVEUSERS";
         
-//        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-//
-//        [self reload];
+        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+        
+        [self reload];
     }
     
-
+    
 }
 
 @end
+

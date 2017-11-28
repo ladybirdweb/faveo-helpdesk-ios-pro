@@ -59,7 +59,7 @@
 static NSTimeInterval const kNavigationMenuAnimationDuration = 0.25;
 static NSString *const kMenuCellIdentifier = @"kMenuCellIdentifier";
 static CGFloat const kNavigationButtonHeight = 48.f;
-static CGFloat const kMenuTopSpacing = 40.f;
+static CGFloat const kMenuTopSpacing = 20.f;
 
 @interface AWNavigationMenuItem ()
 <UITableViewDelegate,

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
+		D9283F9F1FCC3B4E00C6A073 /* ClientFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D9283F9E1FCC3B4E00C6A073 /* ClientFilter.m */; };
 		D92C35D11F750FDE001DD67D /* LGPlusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D92C35CA1F750FDE001DD67D /* LGPlusButton.m */; };
 		D92C35D21F750FDE001DD67D /* LGPlusButtonDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = D92C35CC1F750FDE001DD67D /* LGPlusButtonDescription.m */; };
 		D92C35D31F750FDE001DD67D /* LGPlusButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D92C35CE1F750FDE001DD67D /* LGPlusButtonsView.m */; };
@@ -24,6 +25,8 @@
 		D97B137D1E080BCA007F46DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137C1E080BCA007F46DA /* SystemConfiguration.framework */; };
 		D97B137F1E080BDB007F46DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137E1E080BDB007F46DA /* CoreGraphics.framework */; };
 		D97B13811E080BE3007F46DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B13801E080BE3007F46DA /* Foundation.framework */; };
+		D97CA1401FCC229800A7B982 /* LGFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D97CA13D1FCC229800A7B982 /* LGFilterView.m */; };
+		D97CA1411FCC229800A7B982 /* LGFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D97CA13F1FCC229800A7B982 /* LGFilterViewCell.m */; };
 		D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */ = {isa = PBXBuildFile; fileRef = D985BAC71EDC5FAA001EB153 /* Dat.m */; };
 		D9A2FCB01F18904000C829DD /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FCAF1F18904000C829DD /* NotificationViewController.m */; };
 		D9A2FCB41F18942800C829DD /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */; };
@@ -112,6 +115,8 @@
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9283F9D1FCC3B4E00C6A073 /* ClientFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClientFilter.h; sourceTree = "<group>"; };
+		D9283F9E1FCC3B4E00C6A073 /* ClientFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClientFilter.m; sourceTree = "<group>"; };
 		D92C35C91F750FDE001DD67D /* LGPlusButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPlusButton.h; sourceTree = "<group>"; };
 		D92C35CA1F750FDE001DD67D /* LGPlusButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGPlusButton.m; sourceTree = "<group>"; };
 		D92C35CB1F750FDE001DD67D /* LGPlusButtonDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPlusButtonDescription.h; sourceTree = "<group>"; };
@@ -148,6 +153,10 @@
 		D97B137C1E080BCA007F46DA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D97B137E1E080BDB007F46DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D97B13801E080BE3007F46DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D97CA13C1FCC229800A7B982 /* LGFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFilterView.h; sourceTree = "<group>"; };
+		D97CA13D1FCC229800A7B982 /* LGFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGFilterView.m; sourceTree = "<group>"; };
+		D97CA13E1FCC229800A7B982 /* LGFilterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFilterViewCell.h; sourceTree = "<group>"; };
+		D97CA13F1FCC229800A7B982 /* LGFilterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGFilterViewCell.m; sourceTree = "<group>"; };
 		D985BAC61EDC5FAA001EB153 /* Dat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dat.h; sourceTree = "<group>"; };
 		D985BAC71EDC5FAA001EB153 /* Dat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dat.m; sourceTree = "<group>"; };
 		D9A2FCAE1F18904000C829DD /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
@@ -341,6 +350,7 @@
 		D92C35C71F750F83001DD67D /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D97CA13B1FCC229800A7B982 /* LGFilterView */,
 				D9AF852E1FC4218A005232A0 /* NavigationMenuItem */,
 				D9F9F11B1FB9A4D10044DA27 /* kDropDown */,
 				D9AA44421FA890AC00938081 /* BDCustomeAlert */,
@@ -364,6 +374,17 @@
 				D92C35D01F750FDE001DD67D /* LGPlusButtonsViewShared.m */,
 			);
 			path = LGPlusButtonsView;
+			sourceTree = "<group>";
+		};
+		D97CA13B1FCC229800A7B982 /* LGFilterView */ = {
+			isa = PBXGroup;
+			children = (
+				D97CA13C1FCC229800A7B982 /* LGFilterView.h */,
+				D97CA13D1FCC229800A7B982 /* LGFilterView.m */,
+				D97CA13E1FCC229800A7B982 /* LGFilterViewCell.h */,
+				D97CA13F1FCC229800A7B982 /* LGFilterViewCell.m */,
+			);
+			path = LGFilterView;
 			sourceTree = "<group>";
 		};
 		D9AA44421FA890AC00938081 /* BDCustomeAlert */ = {
@@ -548,6 +569,8 @@
 				D9EB9F8C1E07C3270001115F /* TrashTicketsViewController.m */,
 				D9EB9F891E07C3270001115F /* ClientListViewController.h */,
 				D9EB9F8A1E07C3270001115F /* ClientListViewController.m */,
+				D9283F9D1FCC3B4E00C6A073 /* ClientFilter.h */,
+				D9283F9E1FCC3B4E00C6A073 /* ClientFilter.m */,
 				D9EB9F991E07C3270001115F /* ClientDetailViewController.h */,
 				D9EB9F9A1E07C3270001115F /* ClientDetailViewController.m */,
 				D9AF85351FC4610E005232A0 /* EditClientDetail.h */,
@@ -882,9 +905,11 @@
 				D9D2F3591F9E131E00BC5456 /* CFLabelOnLeftButton.m in Sources */,
 				D9EB9FA81E07C3270001115F /* TicketDetailViewController.m in Sources */,
 				D9EB9FAC1E07C3270001115F /* DetailViewController.m in Sources */,
+				D9283F9F1FCC3B4E00C6A073 /* ClientFilter.m in Sources */,
 				D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */,
 				D9EB9F641E07C2D00001115F /* GlobalVariables.m in Sources */,
 				D92C35D41F750FDE001DD67D /* LGPlusButtonsViewShared.m in Sources */,
+				D97CA1411FCC229800A7B982 /* LGFilterViewCell.m in Sources */,
 				D9E57B411EFAA4C1002E4C19 /* UITextField+PasswordField.m in Sources */,
 				D9F9F13B1FB9B2530044DA27 /* DropDownListView.m in Sources */,
 				D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */,
@@ -909,6 +934,7 @@
 				D92C35D21F750FDE001DD67D /* LGPlusButtonDescription.m in Sources */,
 				D9EB9FA11E07C3270001115F /* UnassignedTicketsViewController.m in Sources */,
 				D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */,
+				D97CA1401FCC229800A7B982 /* LGFilterView.m in Sources */,
 				D92C35D31F750FDE001DD67D /* LGPlusButtonsView.m in Sources */,
 				D9EB9FA61E07C3270001115F /* CreateTicketViewController.m in Sources */,
 				D9EB9FC01E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.m in Sources */,

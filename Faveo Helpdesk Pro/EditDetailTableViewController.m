@@ -90,6 +90,10 @@
     [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
     [self.subjectTextView setInputAccessoryView:toolBar];
     
+    self.subjectTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.subjectTextView.layer.borderWidth = 0.4;
+    self.subjectTextView.layer.cornerRadius = 3;
+    
     _saveButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     _imgViewLoading = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 78, 78)];
     _imgViewLoading.image=[UIImage imageNamed:@"loading_imgBlue_78x78"];
@@ -201,7 +205,7 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
                             //                        _clientNameTextField.text=[NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"first_name"],[dic objectForKey:@"last_name"]];
-                            _createdDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"created_at"]];
+                            //_createdDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"created_at"]];
                             
 //                            if (([[dic objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"first_name"] length] == 0 )) {
 //                                _firstnameTextField.text=NSLocalizedString(@"Not Available",nil);
@@ -295,7 +299,7 @@
                             
                             
                            // _emailTextField.text=[dic objectForKey:@"email"];
-                            _lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
+                            //_lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
                             
                             
                             // _deptTextField.text= [dic objectForKey:@"dept_name"];
@@ -334,7 +338,7 @@
                             
                             // _statusTextField.text= [dic objectForKey:@"status_name"];
                             
-                            _dueDateTextField.text= [utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
+                            //_dueDateTextField.text= [utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
                             
                             [self.refreshControl endRefreshing];
                             [_imgViewLoading setHidden:YES];
@@ -628,7 +632,7 @@
         _assinTextField.text=NSLocalizedString(@"Not Available",nil);
         source_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Source" rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:@"Select Assignee" rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
 }
 }
 
@@ -869,78 +873,7 @@
     self.priorityTextField.text = (_priorityArray)[(NSUInteger) [selectedIndex intValue]];
 }
 
-/*#pragma mark - UITextFieldDelegate
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    
-    if (textField.tag==2) {
-        
-        [_priorityTextField resignFirstResponder];
-         _priorityTextField.tintColor = [UIColor clearColor];
-        
-        if (!_priorityArray||![_priorityArray count]) {
-            _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
-            priority_id=0;
-            
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:@"Select Priority" rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        
-        // return NO;
-    }else if(textField.tag==3){
-        //[_subjectTextField resignFirstResponder];
-        [_helpTopicTextField resignFirstResponder];
-         _helpTopicTextField.tintColor = [UIColor clearColor];
-        
-        if (!_helptopicsArray||!_helptopicsArray.count) {
-            _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
-            help_topic_id=0;
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        // return NO;
-    }else if(textField.tag==4){
-        [_sourceTextField resignFirstResponder];
-         _sourceTextField.tintColor = [UIColor clearColor];
-        
-        //[_subjectTextField resignFirstResponder];
-        if (!_sourceArray||!_sourceArray.count) {
-            _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
-            source_id=0;
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:@"Select Source" rows:_sourceArray initialSelection:0 target:self successAction:@selector(sourceWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        // return  NO;
-    }else if(textField.tag==5){
-        [_typeTextField resignFirstResponder];
-         _typeTextField.tintColor = [UIColor clearColor];
-        
-        
-        if (!_typeArray||!_typeArray.count) {
-            _typeTextField.text=NSLocalizedString(@"Not Available",nil);
-            type_id=0;
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:@"Select Ticket Type" rows:_typeArray initialSelection:0 target:self successAction:@selector(typeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        // return  NO;
-    }else if(textField.tag==7){
-        [_assinTextField resignFirstResponder];
-         _assinTextField.tintColor = [UIColor clearColor];
-        
-        //[_subjectTextField resignFirstResponder];
-        if (!_assignArray||!_assignArray.count) {
-            _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-            staff_id=0;
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:@"Select Assignee" rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        // return  NO;
-    }else{
-        
-    }
-    // return YES;
-}
-*/
 - (CAAnimation *)imageAnimationForEmptyDataSet{
     
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform"];

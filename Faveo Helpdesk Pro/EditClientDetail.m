@@ -481,11 +481,18 @@
         
         BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
         
-        [customAlert showAlertWithTitle:@"Alert !" message:@"                    Are You Sure to Deactivate ?" cancelButtonTitle:@"No" successButtonTitle:@"Yes" withSuccessBlock:^{
+        [customAlert showAlertWithTitle:@"Alert !" message:@"Are You Sure to Deactivate ?" cancelButtonTitle:@"No" successButtonTitle:@"Yes" withSuccessBlock:^{
             
+            globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
+            [_switch1 setOn:YES];
+            _switch1.onTintColor= [UIColor redColor];
             [self deactivateUser];
         } cancelBlock:^{
             
+            [_switch1 setOn:NO];
+            //   _switch1.tintColor = [UIColor greenColor];
+            _switch1.layer.cornerRadius = 16;
+            _switch1.backgroundColor= [UIColor greenColor];
         }];
         
         
@@ -494,11 +501,16 @@
         
         BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
         
-        [customAlert showAlertWithTitle:@"Alert !" message:@"                         Are You Sure to Activate ?" cancelButtonTitle:@"No" successButtonTitle:@"Yes" withSuccessBlock:^{
+        [customAlert showAlertWithTitle:@"Alert !" message:@"Are You Sure to Activate ?" cancelButtonTitle:@"No" successButtonTitle:@"Yes" withSuccessBlock:^{
             
+            [_switch1 setOn:NO];
+            //   _switch1.tintColor = [UIColor greenColor];
+            _switch1.layer.cornerRadius = 16;
+            _switch1.backgroundColor= [UIColor greenColor];
          [self activeUser];
         } cancelBlock:^{
-            
+            [_switch1 setOn:YES];
+            _switch1.onTintColor= [UIColor redColor];
         }];
     }
 }

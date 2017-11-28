@@ -99,12 +99,21 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
 
     
-    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
-                                    initWithTitle:@"Clear"
-                                    style:UIBarButtonItemStylePlain
-                                    target:self
-                                    action:@selector(flipView)];
-    self.navigationItem.rightBarButtonItem = clearButton;
+//    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
+//                                    initWithTitle:@"Clear"
+//                                    style:UIBarButtonItemStylePlain
+//                                    target:self
+//                                    action:@selector(flipView)];
+//    self.navigationItem.rightBarButtonItem = clearButton;
+    UIButton *clearButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [clearButton setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
+    [clearButton addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
+    [clearButton setFrame:CGRectMake(44, 0, 32, 32)];
+    
+    UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
+    [rightBarButtonItems addSubview: clearButton];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];

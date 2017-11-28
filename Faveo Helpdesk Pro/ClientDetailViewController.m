@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title=@"Client Details";
+   // self.title=@"Client Details";
     
     self.profileImageView.clipsToBounds = YES;
     self.profileImageView.layer.borderWidth=1.3f;
@@ -76,10 +76,110 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
    
-    _testingLAbel.backgroundColor=[UIColor purpleColor];
+    _testingLAbel.backgroundColor=[UIColor lightGrayColor];
     _testingLAbel.layer.cornerRadius=8;
     _testingLAbel.layer.masksToBounds=true;
     _testingLAbel.userInteractionEnabled=YES;
+    
+  //  NSString *str=[NSString stringWithFormat:@"%@",globalVariables.customerFromView];
+    
+//    if ([str isEqualToString:@"normalView"])
+//    {
+//
+        NSString *email1= [NSString stringWithFormat:@"%@",globalVariables.emailInUserList];
+        
+        [Utils isEmpty:email1];
+        
+        if (![Utils isEmpty:email1])
+        {
+            
+           _emailLabel.text= [NSString stringWithFormat:@"%@",email1];
+        }
+        else
+        {
+            _mobileLabel.text= @"Not Availabel";
+        }
+        
+        NSString *fname= [NSString stringWithFormat:@"%@",globalVariables.First_name];
+         NSString *lname= [NSString stringWithFormat:@"%@",globalVariables.Last_name];
+        
+        [Utils isEmpty:fname];
+        [Utils isEmpty:lname];
+        
+        if (![Utils isEmpty:fname] || ! [Utils isEmpty:lname] )
+        {
+            
+            if (![Utils isEmpty:fname] && ! [Utils isEmpty:lname] )
+            {
+             _clientNameLabel.text= [NSString stringWithFormat:@"%@ %@",globalVariables.First_name,globalVariables.Last_name];
+            }
+            else  if (![Utils isEmpty:fname] || ! [Utils isEmpty:lname] )
+            {
+                _clientNameLabel.text= [NSString stringWithFormat:@"%@ %@",globalVariables.First_name,globalVariables.Last_name];
+            }
+          
+        }
+        else
+        {
+            _mobileLabel.text= @"Not Availabel";
+        }
+    
+       
+        
+        NSString *phone1= [NSString stringWithFormat:@"%@",globalVariables.phoneNumberInUserList];
+         NSString *mobile1= [NSString stringWithFormat:@"%@", globalVariables.mobileNumberInUserList];
+        NSString *code1= [NSString stringWithFormat:@"%@",globalVariables.mobileCode1];
+      
+        [Utils isEmpty:phone1];
+        [Utils isEmpty:mobile1];
+        [Utils isEmpty:code1];
+        
+       if (![Utils isEmpty:phone1])
+       {
+          if(![Utils isEmpty:phone1] && ![Utils isEmpty:code1])
+          {
+              _phoneLabel.text= [NSString stringWithFormat:@"+%@ %@",code1,phone1];
+          }
+           else
+           {
+               
+               _phoneLabel.text= [NSString stringWithFormat:@"%@",phone1];
+           }
+       }else
+        {
+            _phoneLabel.text= @"Not Availabel";
+        }
+        
+        if (![Utils isEmpty:mobile1])
+        {
+            
+            _mobileLabel.text= [NSString stringWithFormat:@"%@",mobile1];
+        }
+        else
+        {
+              _mobileLabel.text= @"Not Availabel";
+        }
+       
+        
+    
+         [self setUserProfileimage:globalVariables.customerImage];
+        
+         NSString *isClientActive= [NSString stringWithFormat:@"%@",globalVariables.UserState];
+        [Utils isEmpty:isClientActive];
+        
+        if (![Utils isEmpty:isClientActive]) {
+            
+            if ([isClientActive isEqualToString:@"1"])
+               {
+                     _testingLAbel.textColor=[UIColor whiteColor];
+                    _testingLAbel.text=@"ACTIVE";
+               }else
+              {
+                  _testingLAbel.textColor=[UIColor whiteColor];
+                   _testingLAbel.text=@"INACTIVE";
+              }
+        }
+   // }
     
     [_activityIndicatorObject startAnimating];
     [self reload];
@@ -124,7 +224,9 @@
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
-            if (error || [msg containsString:@"Error"]) { [refresh endRefreshing];
+            if (error || [msg containsString:@"Error"]) {
+                
+                [refresh endRefreshing];
                 
                 [utils showAlertWithMessage:@"Error" sendViewController:self];
                 NSLog(@"Thread-NO4-getClientTickets-Refresh-error == %@",error.localizedDescription);
@@ -141,8 +243,22 @@
             if (json) {
                 // NSError *error;
                 mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
-                NSLog(@"Thread-NO4--getClientTickets--%@",json);
+                NSLog(@"Thread-NO4--getClientTickets111--%@",json);
+                
+                NSString * str= [json objectForKey:@"error"];
+                if([str isEqualToString:@"This is not a client"])
+                {
+                   
+            
+                     [utils showAlertWithMessage:@"This is not a Client" sendViewController:self];
+                }
+                
                 mutableArray = [[json objectForKey:@"tickets"] copy];
+                
+                if ( [mutableArray count] == 0){
+                    
+                     [utils showAlertWithMessage:@"User have no Tickets" sendViewController:self];
+                }
                 
                 NSDictionary *requester=[json objectForKey:@"requester"];
                 
@@ -150,104 +266,74 @@
                 
                 //[requester objectForKey:@"company"];
              
-                if(( ![[json objectForKey:@"requester"] isEqual:[NSNull null]] ) )
-            
-                { /////////
-            
-                    if (( ![[requester objectForKey:@"email"] isEqual:[NSNull null]] )) {
-                        
-                         _emailID= [requester objectForKey:@"email"];
-                    }
-                    else
-                    {
-                         _emailID=NSLocalizedString(@"Not Available",nil);
-                    }
-                    
-                    if (( ![[requester objectForKey:@"active"] isEqual:[NSNull null]] )) {
-                        // _isClientActive=[requester objectForKey:@"active"];
-                         _isClientActive= [NSString stringWithFormat:@"%@",[requester objectForKey:@"active"]];
-                        
-                        if ([_isClientActive isEqualToString:@"1"]) {
-                            _isClientActive=@"ACTIVE";
-                        }else  _isClientActive=@"INACTIVE";
-                    }
-                    else
-                    {
-                        _isClientActive= NSLocalizedString(@"Not Available",nil);
-                    }
-                    
-                    if (( ![[requester objectForKey:@"first_name"] isEqual:[NSNull null]] )) {
-                        _clientName=[NSString stringWithFormat:@"%@ %@ ", [requester objectForKey:@"first_name"], [requester objectForKey:@"last_name"]];
-                    }
-                    else
-                    {
-                        _clientName=NSLocalizedString(@"Not Available",nil);
-                    }
-                    
-                   
-                    
-                    
-                    if (( ![[requester objectForKey:@"phone_number"] isEqual:[NSNull null]] ) && ![[requester objectForKey:@"phone_number"] isEqualToString:@""]) {
-                       
-                         _phone=[requester objectForKey:@"phone_number"];
-                    }else
-                    {
-                        _phone=NSLocalizedString(@"Not Available",nil);
-                    }
-                    
-                    if( ![[requester objectForKey:@"mobile"] isEqual:[NSNull null]] && ![[requester objectForKey:@"phone_number"] isEqualToString:@""])
-                    {
-                        _mobileLabel.text=[requester objectForKey:@"mobile"];
-                    }
-                    else
-                    {
-                        _mobileLabel.text=NSLocalizedString(@"Not Available",nil);
-                    }
-                  
-                 
-                     NSString *Company1= [NSString stringWithFormat:@"%@",[requester objectForKey:@"company"]];
-                    [Utils isEmpty:Company1];
-                    
-                    if(![Utils isEmpty:Company1])
-                    {
-                        
-                        if([Company1 isEqualToString:@"<null>"])
-                        {
-                            _companyLabel.text= NSLocalizedString(@"Not Available",nil);
-                        }
-                        else
-                        {
-                            _companyLabel.text=Company1;
-                        }
-                    }
-                    else
-                    {
-                         _companyLabel.text= NSLocalizedString(@"Not Available",nil);
-                    }
-                    
-                    
-                    
-//                    if( ![[requester objectForKey:@"company"] isEqual:[NSNull null]] || ![[requester objectForKey:@"company"] isEqualToString:@""])
-//                    {
-//                        _companyLabel=[requester objectForKey:@"company"];
+//                if(( ![[json objectForKey:@"requester"] isEqual:[NSNull null]] ) )
+//
+//                { /////////
+//
+//                    if (( ![[requester objectForKey:@"email"] isEqual:[NSNull null]] )) {
+//
+//                         _emailID= [requester objectForKey:@"email"];
 //                    }
 //                    else
 //                    {
-//                        _companyLabel.text=@"";
+//                         _emailID=NSLocalizedString(@"Not Available",nil);
 //                    }
 //
-                    
+//                    if (( ![[requester objectForKey:@"active"] isEqual:[NSNull null]] )) {
+//                        // _isClientActive=[requester objectForKey:@"active"];
+//                         _isClientActive= [NSString stringWithFormat:@"%@",[requester objectForKey:@"active"]];
+//
+//                        if ([_isClientActive isEqualToString:@"1"]) {
+//                            _isClientActive=@"ACTIVE";
+//                        }else  _isClientActive=@"INACTIVE";
+//                    }
+//                    else
+//                    {
+//                        _isClientActive= NSLocalizedString(@"Not Available",nil);
+//                    }
+//
+//                    if (( ![[requester objectForKey:@"first_name"] isEqual:[NSNull null]] )) {
+//                        _clientName=[NSString stringWithFormat:@"%@ %@ ", [requester objectForKey:@"first_name"], [requester objectForKey:@"last_name"]];
+//                    }
+//                    else
+//                    {
+//                        _clientName=NSLocalizedString(@"Not Available",nil);
+//                    }
+//
+//
+//
+//
+//                    if (( ![[requester objectForKey:@"phone_number"] isEqual:[NSNull null]] ) && ![[requester objectForKey:@"phone_number"] isEqualToString:@""]) {
+//
+//                         _phone=[requester objectForKey:@"phone_number"];
+//                    }else
+//                    {
+//                        _phone=NSLocalizedString(@"Not Available",nil);
+//                    }
+//
+//                    if( ![[requester objectForKey:@"mobile"] isEqual:[NSNull null]] && ![[requester objectForKey:@"mobile"] isEqualToString:@""])
+//                    {
+//                        _mobileLabel=[requester objectForKey:@"mobile"];
+//                    }
+//                    else
+//                    {
+//                        _mobileLabel.text =NSLocalizedString(@"Not Available",nil);
+//                    }
+//
+//
+//
+//
                      NSString *isDelete= [NSString stringWithFormat:@"%@",[requester objectForKey:@"is_delete"]];
-                    
+
                     [Utils isEmpty:isDelete];
                     if(![Utils isEmpty:isDelete])
                     {
-                        
+
                         if([isDelete isEqualToString:@"1"])
                         {
                             globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
                         }
-                        
+
                         if([isDelete isEqualToString:@"0"])
                         {
                             globalVariables.ActiveDeactiveStateOfUser1=@"Active";
@@ -257,62 +343,62 @@
                     {
                         NSLog(@"is_delete parameter is empty");
                     }
-                    
-                    
-                    
-                    NSString *code1= [NSString stringWithFormat:@"%@",[requester objectForKey:@"country_code"]];
-        
-                    [Utils isEmpty:code1];
-                    if(![Utils isEmpty:code1])
-                    {
-                        if([code1 isEqualToString:@"0"])
-                        {
-                            code2=@"";
-                            
-                        }
-                        else
-                        {
-                        code2=[NSString stringWithFormat:@"+%@",[requester objectForKey:@"country_code"]];
-                        }
-                    }
-                    else
-                    {
-                        code2=@"";
-                    }
-                    
-                   [requester objectForKey:@"profile_pic"];
-
-            
-                } ///////
-                
+//
+//
+//
+//                    NSString *code1= [NSString stringWithFormat:@"%@",[requester objectForKey:@"country_code"]];
+//
+//                    [Utils isEmpty:code1];
+//                    if(![Utils isEmpty:code1])
+//                    {
+//                        if([code1 isEqualToString:@"0"])
+//                        {
+//                            code2=@"";
+//
+//                        }
+//                        else
+//                        {
+//                        code2=[NSString stringWithFormat:@"+%@",[requester objectForKey:@"country_code"]];
+//                        }
+//                    }
+//                    else
+//                    {
+//                        code2=@"";
+//                    }
+//
+//                   [requester objectForKey:@"profile_pic"];
+//
+//
+//                } ///////
+//
                 
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [_activityIndicatorObject stopAnimating];
                         [refresh endRefreshing];
                             //self.testingLAbel.text=self.isClientActive;
-                            self.emailLabel.text=self.emailID;
-                            self.clientNameLabel.text=self.clientName;
+   //                         self.emailLabel.text=self.emailID;
+    //                        self.clientNameLabel.text=self.clientName;
                            // self.phoneLabel.text=self.phone;
                         
-                        self.phoneLabel.text=[NSString stringWithFormat:@"%@  %@",code2,self.phone];
+                      //  self.phoneLabel.text=[NSString stringWithFormat:@"%@  %@",code2,self.phone];
                         
-                         [self setUserProfileimage:[requester objectForKey:@"profile_pic"]];
+     //                    [self setUserProfileimage:[requester objectForKey:@"profile_pic"]];
                        // self.testingLAbel.text=self.isClientActive;
                         
-                        if ([_isClientActive isEqualToString:@"ACTIVE"])
-                        {
-                            self.testingLAbel.textColor=[UIColor greenColor];
-                            self.testingLAbel.text=@"ACTIVE";
-                            
-                        }else
-                        {
-                    
-                            self.testingLAbel.textColor=[UIColor greenColor];
-                            self.testingLAbel.text=@"INACTIVE";
-
-                        }
-                        
+//                        if ([_isClientActive isEqualToString:@"ACTIVE"])
+//                        {
+//                            self.testingLAbel.textColor=[UIColor whiteColor];
+//                            self.testingLAbel.text=@"ACTIVE";
+//                            
+//                        }else
+//                        {
+//                    
+//                            self.testingLAbel.textColor=[UIColor whiteColor];
+//                            self.testingLAbel.text=@"INACTIVE";
+//
+//                        }
+//                        
                         [self.tableView reloadData];
                     });
                 });
@@ -350,7 +436,8 @@
     if ([mutableArray count]==0)
     {
         self.noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        self.noDataLabel.text             =  @"User is Inactive or Deactivated.";
+      //  self.noDataLabel.text             =  @"User is Inactive or Deactivated.";
+        self.noDataLabel.text             =  @"";
         
         self.noDataLabel.textColor        = [UIColor blackColor];
         self.noDataLabel.textAlignment    = NSTextAlignmentCenter;

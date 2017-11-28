@@ -98,7 +98,7 @@
     
     
     _view1.alpha=0.5;
-    _view1.layer.cornerRadius = 20;
+    _view1.layer.cornerRadius = 20; // #A9BCF5
     _view1.backgroundColor = [UIColor purpleColor];
     
     _view2.alpha=0.5;

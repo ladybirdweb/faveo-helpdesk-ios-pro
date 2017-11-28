@@ -93,6 +93,11 @@
    // _subjectTextField.text=globalVariables.title;
     userDefaults=[NSUserDefaults standardUserDefaults];
     //[_activityIndicatorObject startAnimating];
+    
+    self.subjectTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.subjectTextView.layer.borderWidth = 0.4;
+    self.subjectTextView.layer.cornerRadius = 3;
+    
     [self reload];
     
     [self readFromPlist];

@@ -58,6 +58,26 @@
     _mobileView.delegate=self;
     _companyName.delegate=self;
     
+    _emailTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    _emailTextView.layer.borderWidth = 0.4;
+    _emailTextView.layer.cornerRadius = 3;
+    
+    
+    _firstNameView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    _firstNameView.layer.borderWidth = 0.4;
+    _firstNameView.layer.cornerRadius = 3;
+    
+    _lastNameView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    _lastNameView.layer.borderWidth = 0.4;
+    _lastNameView.layer.cornerRadius = 3;
+    
+    _mobileView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    _mobileView.layer.borderWidth = 0.4;
+    _mobileView.layer.cornerRadius = 3;
+    
+    _companyName.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    _companyName.layer.borderWidth = 0.4;
+    _companyName.layer.cornerRadius = 3;
     
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
@@ -68,15 +88,24 @@
     utils=[[Utils alloc]init];
     
     userDefaults=[NSUserDefaults standardUserDefaults];
-    //_codeTextField.text=[self setDefaultCountryCode];
     
     
-    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
-                                    initWithTitle:@"Clear"
-                                    style:UIBarButtonItemStylePlain
-                                    target:self
-                                    action:@selector(flipView)];
-    self.navigationItem.rightBarButtonItem = clearButton;
+    
+//    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
+//                                    initWithTitle:@"Clear"
+//                                    style:UIBarButtonItemStylePlain
+//                                    target:self
+//                                    action:@selector(flipView)];
+//    self.navigationItem.rightBarButtonItem = clearButton;
+    UIButton *clearButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [clearButton setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
+    [clearButton addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
+    [clearButton setFrame:CGRectMake(44, 0, 32, 32)];
+    
+    UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
+    [rightBarButtonItems addSubview: clearButton];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style: UIBarButtonItemStylePlain target:self action:@selector(Back)];
     self.navigationItem.leftBarButtonItem = backButton;
@@ -395,15 +424,15 @@
                     
                 {
                     
-                    
-                    [utils showAlertWithMessage:NSLocalizedString(@"Integrity constraint violation: 1062 Duplicate entry", nil) sendViewController:self];
+                    [utils showAlertWithMessage:NSLocalizedString(@"Email already exist.", nil) sendViewController:self];
+                 //   [utils showAlertWithMessage:NSLocalizedString(@"Integrity constraint violation: 1062 Duplicate entry", nil) sendViewController:self];
                 }
                 
                 else
                 {
                     
-                    
-                    [utils showAlertWithMessage:NSLocalizedString(@"Integrity constraint violation: 1062 Duplicate entry", nil) sendViewController:self];
+                    [utils showAlertWithMessage:NSLocalizedString(@"Email already exist.", nil) sendViewController:self];
+                  //  [utils showAlertWithMessage:NSLocalizedString(@"Integrity constraint violation: 1062 Duplicate entry", nil) sendViewController:self];
                 }
                 
                 

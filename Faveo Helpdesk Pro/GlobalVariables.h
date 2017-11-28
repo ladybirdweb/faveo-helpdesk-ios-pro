@@ -158,9 +158,15 @@
 @property (strong, nonatomic) NSString *mobileNumberInUserList;
 
 @property (strong, nonatomic) NSString *UserState;
+@property (strong, nonatomic) NSString *compnayUser1;
+@property (strong, nonatomic) NSString *filteredUserView;
 
 @property (strong, nonatomic) NSString *ActiveDeactiveStateOfUser;
 @property (strong, nonatomic) NSString *ActiveDeactiveStateOfUser1;
+
+@property (strong, nonatomic) NSString *customerFromView;
+@property (strong, nonatomic) NSString *customerImage;
+@property (strong, nonatomic) NSString *customerDeleted;
 
 
 @end

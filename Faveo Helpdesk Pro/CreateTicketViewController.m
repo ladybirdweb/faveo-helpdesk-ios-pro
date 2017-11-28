@@ -98,12 +98,23 @@
     
     [self setTitle:NSLocalizedString(@"CreateTicket",nil)];
     
-    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
-                                    initWithTitle:@"Clear"
-                                    style:UIBarButtonItemStylePlain
-                                    target:self
-                                    action:@selector(flipView)];
-    self.navigationItem.rightBarButtonItem = clearButton;
+//    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
+//                                    initWithTitle:@"Clear"
+//                                    style:UIBarButtonItemStylePlain
+//                                    target:self
+//                                    action:@selector(flipView)];
+//    self.navigationItem.rightBarButtonItem = clearButton;
+    
+    UIButton *clearButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [clearButton setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
+    [clearButton addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
+    [clearButton setFrame:CGRectMake(44, 0, 32, 32)];
+    
+    UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
+    [rightBarButtonItems addSubview: clearButton];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
+
     
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTaped:)];
@@ -420,6 +431,37 @@
 
     @try{
     
+        
+                if (![_mobileView.text isEqualToString:@""]) {
+                // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        
+                if([_codeTextField.text isEqualToString:@""])
+                {
+        
+                    if (self.navigationController.navigationBarHidden) {
+                        [self.navigationController setNavigationBarHidden:NO];
+                    }
+        
+                    [RMessage showNotificationInViewController:self.navigationController
+                                                         title:NSLocalizedString(@"Warning !", nil)
+                                                      subtitle:NSLocalizedString(@"Please Mobile Code.!", nil)
+                                                     iconImage:nil
+                                                          type:RMessageTypeWarning
+                                                customTypeName:nil
+                                                      duration:RMessageDurationAutomatic
+                                                      callback:nil
+                                                   buttonTitle:nil
+                                                buttonCallback:nil
+                                                    atPosition:RMessagePositionNavBarOverlay
+                                          canBeDismissedByUser:YES];
+        
+        
+                }
+        
+                }
+        
+
+        
     if(self.emailTextView.text.length==0 && self.firstNameView.text.length==0 && self.helpTopicTextField.text.length==0 && self.subjectView.text.length==0 && self.priorityTextField.text.length==0 && self.textViewMsg.text.length==0)
     {
         if (self.navigationController.navigationBarHidden) {
@@ -480,7 +522,8 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
 
-    } else if (self.emailTextView.text.length<2) {
+    } else
+        if (self.emailTextView.text.length<2) {
         
     //[RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"FirstName should have more than 2 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
 
@@ -502,28 +545,36 @@
                               canBeDismissedByUser:YES];
 
      
-    }else /*if (self.mobileTextField.text.length==0) {
-        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-        
-        if (self.navigationController.navigationBarHidden) {
-            [self.navigationController setNavigationBarHidden:NO];
-        }
-        
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Please enter Mobile...!", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeWarning
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionNavBarOverlay
-                              canBeDismissedByUser:YES];
-        
-        
-    }else */ if (self.helpTopicTextField.text.length==0) {
+    }else
+//        if (![_mobileView.text isEqualToString:@""]) {
+//        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+//
+//        if([_codeTextField.text isEqualToString:@""])
+//        {
+//
+//            if (self.navigationController.navigationBarHidden) {
+//                [self.navigationController setNavigationBarHidden:NO];
+//            }
+//
+//            [RMessage showNotificationInViewController:self.navigationController
+//                                                 title:NSLocalizedString(@"Warning !", nil)
+//                                              subtitle:NSLocalizedString(@"Please Mobile Code.!", nil)
+//                                             iconImage:nil
+//                                                  type:RMessageTypeWarning
+//                                        customTypeName:nil
+//                                              duration:RMessageDurationAutomatic
+//                                              callback:nil
+//                                           buttonTitle:nil
+//                                        buttonCallback:nil
+//                                            atPosition:RMessagePositionNavBarOverlay
+//                                  canBeDismissedByUser:YES];
+//
+//
+//        }
+//
+//
+//    }else
+        if (self.helpTopicTextField.text.length==0) {
        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
@@ -683,7 +734,7 @@
     @finally
     {
         // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+      //  NSLog( @"In finally block");
     
     }
 }
@@ -770,6 +821,23 @@
                                                         atPosition:RMessagePositionBottom
                                               canBeDismissedByUser:YES];
 
+                        
+                        _emailTextView.text=@"";
+                        _firstNameView.text=@"";
+                        _lastNameView.text=@"";
+                        _mobileView.text=@"";
+                        _codeTextField.text=@"";
+                        _helpTopicTextField.text=@"";
+                        _subjectView.text=@"";
+                        _priorityTextField.text=@"";
+                        _assignTextField.text=@"";
+                        _textViewMsg.text=@"";
+                        
+                        globalVariables.emailAddRequester=@"";
+                        globalVariables.firstNameAddRequester=@"";
+                        globalVariables.lastAddRequester=@"";
+                        globalVariables.mobileAddRequester=@"";
+                        
                         
                         InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                         [self.navigationController pushViewController:inboxVC animated:YES];
