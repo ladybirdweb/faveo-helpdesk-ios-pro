@@ -1026,13 +1026,14 @@
         
     }else{
         
-        [[AppDelegate sharedAppdelegate] showProgressView];
+      //  [[AppDelegate sharedAppdelegate] showProgressView];
         
         [[AppDelegate sharedAppdelegate] showProgressView];
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
-            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
              [[AppDelegate sharedAppdelegate] hideProgressView];
+            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            
         }else{
             
         NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.OpenStausId];
@@ -1137,7 +1138,7 @@
         
     }else{
         
-        [[AppDelegate sharedAppdelegate] showProgressView];
+       // [[AppDelegate sharedAppdelegate] showProgressView];
         
         [[AppDelegate sharedAppdelegate] showProgressView];
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )

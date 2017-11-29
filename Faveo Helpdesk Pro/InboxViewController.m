@@ -126,6 +126,8 @@
 
 -(void)reload{
     
+
+    
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
          [refresh endRefreshing];
@@ -208,6 +210,10 @@
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                         [refresh endRefreshing];
                         [self.tableView reloadData];
+//                        [selectedArray removeAllObjects];
+//                        if (!selectedArray.count) {
+//                            [self.tableView setEditing:NO animated:YES];
+//                        }
                     });
                 });
                 
@@ -419,7 +425,10 @@
         NSLog(@"nextURL111  %@",_nextPageUrl);
         
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
+            
             [self loadMore];
+            
+            
         }
         else{
 
@@ -441,6 +450,7 @@
 
 -(void)loadMore{
     
+ 
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
@@ -524,7 +534,9 @@
               //                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
+                     
                         [self.tableView reloadData];
+                    
 //                        [self.tableView beginUpdates];
 //                        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[_mutableArray count]-[_indexPaths count] inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 //                        [self.tableView endUpdates];
@@ -895,6 +907,7 @@
          NSLog(@"Slected Ticket Id are : %@",selectedIDs);
         
     
+       
         
     }else{
         
@@ -1070,7 +1083,7 @@
         }
         else{
         NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ClosedStausId];
-        
+            NSLog(@"URL is : %@",url);
         if([globalVariables.Ticket_status isEqualToString:@"Closed"])
         {
             [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];

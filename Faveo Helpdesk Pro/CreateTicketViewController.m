@@ -803,7 +803,15 @@
             
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
-                if ([json objectForKey:@"response"]) {
+                
+                NSString * str= [json objectForKey:@"message"];
+                
+                if([str isEqualToString:@"Permission denied, you do not have permission to access the requested page.;"] || [str hasPrefix:@"Permission denied"])
+                    
+                {
+                    [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                }
+                else if ([json objectForKey:@"response"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         

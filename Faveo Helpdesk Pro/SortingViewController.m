@@ -214,6 +214,9 @@
             else{
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketTitle,orderASC];
             NSLog(@"URL is : %@",url);
+                
+                globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_title&order=ASC";
+                globalVariables.sortCondition=@"INBOX";
             }
         }
         
@@ -227,6 +230,8 @@
             else{
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketTitle,orderDESC];
             NSLog(@"URL is : %@",url);
+                globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_title&order=DESC";
+                globalVariables.sortCondition=@"INBOX";
             }
         }
    
@@ -240,6 +245,8 @@
             }else{
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketNumber,orderASC];
             NSLog(@"URL is : %@",url);
+                globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_number&order=ASC";
+                globalVariables.sortCondition=@"INBOX";
             }
         }
 
@@ -252,6 +259,8 @@
             }else{
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketNumber,orderDESC];
             NSLog(@"URL is : %@",url);
+                 globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_number&order=DESC";
+                globalVariables.sortCondition=@"INBOX";
             }
         }
  
@@ -264,6 +273,8 @@
             }else{
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByPriority,orderASC];
             NSLog(@"URL is : %@",url);
+                 globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=priority&order=ASC";
+                globalVariables.sortCondition=@"INBOX";
             }
         }
 
@@ -276,6 +287,8 @@
             }else{
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByPriority,orderDESC];
             NSLog(@"URL is : %@",url);
+                  globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=priority&order=DESC";
+                globalVariables.sortCondition=@"INBOX";
             }
         }
 
@@ -288,6 +301,8 @@
             }else{
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByUpdatedAt,orderASC];
             NSLog(@"URL is : %@",url);
+                 globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=updated_at&order=ASC";
+                globalVariables.sortCondition=@"INBOX";
             }
         }
 
@@ -300,6 +315,8 @@
             }else{
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByUpdatedAt,orderDESC];
             NSLog(@"URL is : %@",url);
+                globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=updated_at&order=DESC";
+                globalVariables.sortCondition=@"INBOX";
             }
         }
 
@@ -312,6 +329,8 @@
             }else{
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByCreatedAt,orderASC];
             NSLog(@"URL is : %@",url);
+                globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=created_at&order=ASC";
+                globalVariables.sortCondition=@"INBOX";
             }
         }
 
@@ -324,6 +343,8 @@
             }else{
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByCreatedAt,orderDESC];
             NSLog(@"URL is : %@",url);
+                 globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=created_at&order=DESC";
+                globalVariables.sortCondition=@"INBOX";
             }
         }
 //
@@ -336,6 +357,8 @@
             }else{
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByDue,orderASC];
             NSLog(@"URL is : %@",url);
+                globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=due&order=ASC";
+                globalVariables.sortCondition=@"INBOX";
             }
         }
 
@@ -348,6 +371,8 @@
             }else{
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByDue,orderDESC];
             NSLog(@"URL is : %@",url);
+                 globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=due&order=DESC";
+                globalVariables.sortCondition=@"INBOX";
             }
         }
         else
@@ -388,6 +413,8 @@
                  else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketTitle,orderASC];
                  NSLog(@"URL is : %@",url);
+                      globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_title&order=ASC";
+                     globalVariables.sortCondition=@"UNASSIGNED";
                  }
              }
              
@@ -401,6 +428,8 @@
                  else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketTitle,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_title&order=DESC";
+                     globalVariables.sortCondition=@"UNASSIGNED";
                  }
              }
              
@@ -414,6 +443,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketNumber,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_number&order=ASC";
+                     globalVariables.sortCondition=@"UNASSIGNED";
                  }
                  
              }
@@ -427,6 +458,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketNumber,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_number&order=DESC";
+                     globalVariables.sortCondition=@"UNASSIGNED";
                  }
              }
              
@@ -439,6 +472,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByPriority,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=priority&order=ASC";
+                     globalVariables.sortCondition=@"UNASSIGNED";
                  }
              }
              
@@ -451,6 +486,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByPriority,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=priority&order=DESC";
+                     globalVariables.sortCondition=@"UNASSIGNED";
                  }
              }
              
@@ -463,6 +500,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByUpdatedAt,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=updated_at&order=ASC";
+                     globalVariables.sortCondition=@"UNASSIGNED";
                  }
                  
              }
@@ -476,6 +515,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByUpdatedAt,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=updated_at&order=DESC";
+                     globalVariables.sortCondition=@"UNASSIGNED";
                  }
              }
              
@@ -488,6 +529,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByCreatedAt,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=created_at&order=ASC";
+                     globalVariables.sortCondition=@"UNASSIGNED";
                  }
              }
              
@@ -500,6 +543,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByCreatedAt,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=created_at&order=DESC";
+                     globalVariables.sortCondition=@"UNASSIGNED";
                  }
              }
              //
@@ -512,6 +557,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByDue,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=due&order=ASC";
+                     globalVariables.sortCondition=@"UNASSIGNED";
                  }
              }
              
@@ -524,6 +571,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByDue,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=due&order=DESC";
+                     globalVariables.sortCondition=@"UNASSIGNED";
                  }
              }
              else
@@ -564,6 +613,8 @@
                  else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showMyTickets,Alldeparatments,ticketSortByTicketTitle,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_title&order=ASC";
+                     globalVariables.sortCondition=@"MYTICKETS";
                  }
              }
              
@@ -576,6 +627,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showMyTickets,Alldeparatments,ticketSortByTicketTitle,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_title&order=DESC";
+                     globalVariables.sortCondition=@"MYTICKETS";
              }
              }
              
@@ -589,6 +642,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showMyTickets,Alldeparatments,ticketSortByTicketNumber,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_number&order=ASC";
+                     globalVariables.sortCondition=@"MYTICKETS";
                  }
                  
              }
@@ -602,6 +657,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showMyTickets,Alldeparatments,ticketSortByTicketNumber,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_number&order=DESC";
+                     globalVariables.sortCondition=@"MYTICKETS";
                  }
                  
              }
@@ -615,6 +672,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showMyTickets,Alldeparatments,ticketSortByPriority,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=priority&order=ASC";
+                     globalVariables.sortCondition=@"MYTICKETS";
                  }
                  
              }
@@ -628,6 +687,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showMyTickets,Alldeparatments,ticketSortByPriority,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=priority&order=DESC";
+                     globalVariables.sortCondition=@"MYTICKETS";
                  }
                  
              }
@@ -641,6 +702,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showMyTickets,Alldeparatments,ticketSortByUpdatedAt,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=updated_at&order=ASC";
+                     globalVariables.sortCondition=@"MYTICKETS";
                  }
                  
              }
@@ -654,6 +717,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showMyTickets,Alldeparatments,ticketSortByUpdatedAt,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=updated_at&order=DESC";
+                     globalVariables.sortCondition=@"MYTICKETS";
                  }
                  
              }
@@ -667,6 +732,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showMyTickets,Alldeparatments,ticketSortByCreatedAt,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=created_at&order=ASC";
+                     globalVariables.sortCondition=@"MYTICKETS";
                  }
              }
              
@@ -679,6 +746,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showMyTickets,Alldeparatments,ticketSortByCreatedAt,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=created_at&order=DESC";
+                     globalVariables.sortCondition=@"MYTICKETS";
                  }
              }
              //
@@ -691,6 +760,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showMyTickets,Alldeparatments,ticketSortByDue,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=due&order=ASC";
+                     globalVariables.sortCondition=@"MYTICKETS";
                  }
              }
              
@@ -703,6 +774,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showMyTickets,Alldeparatments,ticketSortByDue,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=due&order=DESC";
+                     globalVariables.sortCondition=@"MYTICKETS";
                  }
              }
              else
@@ -742,6 +815,8 @@
                  else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments,ticketSortByTicketTitle,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_title&order=ASC";
+                     globalVariables.sortCondition=@"CLOSED";
                  }
              }
              
@@ -755,6 +830,8 @@
                  else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments,ticketSortByTicketTitle,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_title&order=DESC";
+                      globalVariables.sortCondition=@"CLOSED";
                  }
              }
              
@@ -768,6 +845,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments,ticketSortByTicketNumber,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_number&order=ASC";
+                      globalVariables.sortCondition=@"CLOSED";
                  }
                  
              }
@@ -781,6 +860,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments,ticketSortByTicketNumber,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_number&order=DESC";
+                      globalVariables.sortCondition=@"CLOSED";
                  }
                  
              }
@@ -794,6 +875,7 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments,ticketSortByPriority,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=priority&order=ASC"; globalVariables.sortCondition=@"CLOSED";
                  }
                  
              }
@@ -807,6 +889,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments,ticketSortByPriority,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=priority&order=DESC";
+                      globalVariables.sortCondition=@"CLOSED";
                  }
                  
              }
@@ -820,6 +904,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments,ticketSortByUpdatedAt,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=updated_at&order=ASC";
+                      globalVariables.sortCondition=@"CLOSED";
                  }
                  
              }
@@ -833,6 +919,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments,ticketSortByUpdatedAt,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=updated_at&order=DESC";
+                      globalVariables.sortCondition=@"CLOSED";
                  }
              }
              
@@ -845,6 +933,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments,ticketSortByCreatedAt,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=created_at&order=ASC";
+                      globalVariables.sortCondition=@"CLOSED";
                  }
              }
              
@@ -857,6 +947,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments,ticketSortByCreatedAt,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=created_at&order=DESC";
+                      globalVariables.sortCondition=@"CLOSED";
                  }
              }
              //
@@ -869,6 +961,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments,ticketSortByDue,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=due&order=ASC";
+                      globalVariables.sortCondition=@"CLOSED";
                  }
              }
              
@@ -881,6 +975,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showClosedTickets,Alldeparatments,ticketSortByDue,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=due&order=DESC";
+                      globalVariables.sortCondition=@"CLOSED";
                  }
              }
              else
@@ -921,6 +1017,8 @@
                  else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showTrashTickets,Alldeparatments,ticketSortByTicketTitle,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_title&order=ASC";
+                      globalVariables.sortCondition=@"TRASH";
                  }
              }
              
@@ -934,6 +1032,8 @@
                  else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showTrashTickets,Alldeparatments,ticketSortByTicketTitle,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_title&order=DESC";
+                      globalVariables.sortCondition=@"TRASH";
                  }
              }
              
@@ -947,6 +1047,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showTrashTickets,Alldeparatments,ticketSortByTicketNumber,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_number&order=ASC";
+                      globalVariables.sortCondition=@"TRASH";
                  }
                  
              }
@@ -960,6 +1062,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showTrashTickets,Alldeparatments,ticketSortByTicketNumber,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_number&order=DESC";
+                      globalVariables.sortCondition=@"TRASH";
                  }
                  
              }
@@ -973,6 +1077,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showTrashTickets,Alldeparatments,ticketSortByPriority,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=priority&order=ASC";
+                      globalVariables.sortCondition=@"TRASH";
                  }
                  
              }
@@ -986,6 +1092,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showTrashTickets,Alldeparatments,ticketSortByPriority,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=priority&order=DESC";
+                      globalVariables.sortCondition=@"TRASH";
                  }
                  
              }
@@ -999,6 +1107,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showTrashTickets,Alldeparatments,ticketSortByUpdatedAt,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=updated_at&order=ASC";
+                      globalVariables.sortCondition=@"TRASH";
                  }
                  
              }
@@ -1012,6 +1122,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showTrashTickets,Alldeparatments,ticketSortByUpdatedAt,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=updated_at&order=DESC";
+                      globalVariables.sortCondition=@"TRASH";
                  }
              }
              
@@ -1024,6 +1136,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showTrashTickets,Alldeparatments,ticketSortByCreatedAt,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=created_at&order=ASC";
+                     globalVariables.sortCondition=@"TRASH";
                  }
              }
              
@@ -1036,6 +1150,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showTrashTickets,Alldeparatments,ticketSortByCreatedAt,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=created_at&order=DESC";
+                      globalVariables.sortCondition=@"TRASH";
                  }
              }
              //
@@ -1048,6 +1164,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showTrashTickets,Alldeparatments,ticketSortByDue,orderASC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=due&order=ASC";
+                      globalVariables.sortCondition=@"TRASH";
                  }
              }
              
@@ -1060,6 +1178,8 @@
                  }else{
                  url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showTrashTickets,Alldeparatments,ticketSortByDue,orderDESC];
                  NSLog(@"URL is : %@",url);
+                     globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=due&order=DESC";
+                      globalVariables.sortCondition=@"TRASH";
                  }
              }
              else

@@ -137,6 +137,9 @@
 @property (strong, nonatomic) NSString *urlFromFilterLogicView;
 
 
+
+
+
 /// filter form global variables
 @property (strong, nonatomic) NSString *departmentTextFiled1;
 @property (strong, nonatomic) NSString *priorityTextFiled1;
@@ -169,4 +172,9 @@
 @property (strong, nonatomic) NSString *customerDeleted;
 
 
+
+// sort
+
+@property (strong, nonatomic) NSString *sortCondtionValueToSendWebServices;
+@property (strong, nonatomic) NSString *filterCondtionValueToSendWebServices;
 @end

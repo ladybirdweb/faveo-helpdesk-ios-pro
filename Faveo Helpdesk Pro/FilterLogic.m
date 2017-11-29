@@ -344,7 +344,7 @@
 
 -(void)apiCallMethod
 {
-    
+    // departmnt is no empty
     if(![Utils isEmpty:dep111] &&([Utils isEmpty:globalVariables.prioo1] && [Utils isEmpty:globalVariables.typee1] && [Utils isEmpty:globalVariables.sourcee1] &&  [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
     {
         
@@ -522,8 +522,9 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     
     
         MyWebservices *webservices=[MyWebservices sharedInstance];
-        globalVariables.urlFromFilterLogicView=url;
-        [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+     globalVariables.urlFromFilterLogicView=url;
+    
+    [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
             
             
@@ -822,9 +823,13 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             
             NSLog(@"String is : %@",szResult);
             NSLog(@"Page is : %@",Page);
+            globalVariables.filterId=@"INBOXFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-            [webservices getNextPageURLInbox:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+         
+       //     [webservices getNextPageURLInbox:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            
+             [webservices getNextPageURLInbox:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
                 if (error || [msg containsString:@"Error"]) {
                     
@@ -888,10 +893,12 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             
             NSLog(@"String is : %@",szResult);
             NSLog(@"Page is : %@",Page);
+            globalVariables.filterId=@"MYTICKETSFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-            [webservices getNextPageURLMyTickets:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
-                
+           // [webservices getNextPageURLMyTickets:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            
+                [webservices getNextPageURLMyTickets:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 if (error || [msg containsString:@"Error"]) {
                     
                     if (msg) {
@@ -954,9 +961,12 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             
             NSLog(@"String is : %@",szResult);
             NSLog(@"Page is : %@",Page);
+            globalVariables.filterId=@"UNASSIGNEDFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-            [webservices getNextPageURLUnassigned:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+         //   [webservices getNextPageURLUnassigned:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            
+            [webservices getNextPageURLUnassigned:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
                 if (error || [msg containsString:@"Error"]) {
                     
@@ -1022,9 +1032,12 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             
             NSLog(@"String is : %@",szResult);
             NSLog(@"Page is : %@",Page);
+            globalVariables.filterId=@"CLOSEDFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-            [webservices getNextPageURLClosed:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+          //  [webservices getNextPageURLClosed:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+           
+            [webservices getNextPageURLClosed:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
                 if (error || [msg containsString:@"Error"]) {
                     
@@ -1089,9 +1102,12 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             
             NSLog(@"String is : %@",szResult);
             NSLog(@"Page is : %@",Page);
+             globalVariables.filterId=@"TRASHFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-            [webservices getNextPageURLTrash:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+         //   [webservices getNextPageURLTrash:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            
+             [webservices getNextPageURLTrash:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
                 if (error || [msg containsString:@"Error"]) {
                     

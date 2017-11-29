@@ -1241,7 +1241,7 @@
         
     }else{
         
-        [[AppDelegate sharedAppdelegate] showProgressView];
+       // [[AppDelegate sharedAppdelegate] showProgressView];
         [[AppDelegate sharedAppdelegate] showProgressView];
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
