@@ -610,6 +610,8 @@
         
         NSString*appendedURL;
         appendedURL = [url222 stringByAppendingString:sortContiionValue];
+        NSLog(@"Append url is : %@",appendedURL);
+        NSLog(@"Append url is : %@",appendedURL);
         [self httpResponseGET:appendedURL parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 block(error,json,msg);

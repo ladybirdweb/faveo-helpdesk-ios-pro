@@ -100,6 +100,17 @@
 
 }
 
+
+- (void)reloadTableView
+{
+    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+    [self.tableView reloadData];
+    for (NSIndexPath *path in indexPaths) {
+        [self.tableView selectRowAtIndexPath:path animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+}
+
+
 -(void)reload{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -182,7 +193,8 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                         [refresh endRefreshing];
-                        [self.tableView reloadData];
+                       // [self.tableView reloadData];
+                        [self reloadTableView];
                     });
                 });
                 
@@ -488,7 +500,8 @@
                 
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.tableView reloadData];
+                        // [self.tableView reloadData];
+                        [self reloadTableView];
                         
                     });
                 });

@@ -549,6 +549,7 @@
     globalVariables.mobileCode1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"ext"]];
     globalVariables.customerFromView=@"filterView";
     globalVariables.ActiveDeactiveStateOfUser1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"is_delete"]];
+    globalVariables.customerImage= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"profile_pic"]];
     
     ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
     [self.navigationController pushViewController:td animated:YES];

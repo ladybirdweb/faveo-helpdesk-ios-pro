@@ -48,6 +48,7 @@
     NSMutableArray *selectedArray;
     int count1;
     NSString *selectedIDs;
+    NSString * assigned1;
     
 }
 
@@ -151,6 +152,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+- (void)reloadTableView
+{
+    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+    [self.tableView reloadData];
+    for (NSIndexPath *path in indexPaths) {
+        [self.tableView selectRowAtIndexPath:path animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+}
+
 
 -(void)reload{
     
@@ -399,6 +410,7 @@
              NSString * orderASC =@"ASC";
              NSString * orderDESC =@"DESC";
              
+             assigned1 = [NSString stringWithFormat:@"%i",0];
              
              NSLog(@"Value of globalsort i s: %@",globalVariables.sortingValueId);
              
@@ -411,7 +423,7 @@
                      url= [strURL stringByAppendingString:@"&sort-by=ticket_title&order=ASC"];
                  }
                  else{
-                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketTitle,orderASC];
+                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketTitle,orderASC,assigned1];
                  NSLog(@"URL is : %@",url);
                       globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_title&order=ASC";
                      globalVariables.sortCondition=@"UNASSIGNED";
@@ -426,7 +438,7 @@
                      url= [strURL stringByAppendingString:@"&sort-by=ticket_title&order=DESC"];
                  }
                  else{
-                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketTitle,orderDESC];
+                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketTitle,orderDESC,assigned1];
                  NSLog(@"URL is : %@",url);
                      globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_title&order=DESC";
                      globalVariables.sortCondition=@"UNASSIGNED";
@@ -441,7 +453,7 @@
                      NSString *strURL= [NSString stringWithFormat:@"%@",globalVariables.urlFromFilterLogicView];
                      url= [strURL stringByAppendingString:@"&sort-by=ticket_number&order=ASC"];
                  }else{
-                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketNumber,orderASC];
+                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketNumber,orderASC,assigned1];
                  NSLog(@"URL is : %@",url);
                      globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_number&order=ASC";
                      globalVariables.sortCondition=@"UNASSIGNED";
@@ -455,8 +467,9 @@
                  {
                      NSString *strURL= [NSString stringWithFormat:@"%@",globalVariables.urlFromFilterLogicView];
                      url= [strURL stringByAppendingString:@"&sort-by=ticket_number&order=DESC"];
+                
                  }else{
-                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketNumber,orderDESC];
+                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByTicketNumber,orderDESC,assigned1];
                  NSLog(@"URL is : %@",url);
                      globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=ticket_number&order=DESC";
                      globalVariables.sortCondition=@"UNASSIGNED";
@@ -470,7 +483,7 @@
                      NSString *strURL= [NSString stringWithFormat:@"%@",globalVariables.urlFromFilterLogicView];
                      url= [strURL stringByAppendingString:@"&sort-by=priority&order=ASC"];
                  }else{
-                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByPriority,orderASC];
+                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByPriority,orderASC,assigned1];
                  NSLog(@"URL is : %@",url);
                      globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=priority&order=ASC";
                      globalVariables.sortCondition=@"UNASSIGNED";
@@ -484,7 +497,7 @@
                      NSString *strURL= [NSString stringWithFormat:@"%@",globalVariables.urlFromFilterLogicView];
                      url= [strURL stringByAppendingString:@"&sort-by=priority&order=DESC"];
                  }else{
-                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByPriority,orderDESC];
+                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByPriority,orderDESC,assigned1];
                  NSLog(@"URL is : %@",url);
                      globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=priority&order=DESC";
                      globalVariables.sortCondition=@"UNASSIGNED";
@@ -498,7 +511,7 @@
                      NSString *strURL= [NSString stringWithFormat:@"%@",globalVariables.urlFromFilterLogicView];
                      url= [strURL stringByAppendingString:@"&sort-by=updated_at&order=ASC"];
                  }else{
-                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByUpdatedAt,orderASC];
+                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByUpdatedAt,orderASC,assigned1];
                  NSLog(@"URL is : %@",url);
                      globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=updated_at&order=ASC";
                      globalVariables.sortCondition=@"UNASSIGNED";
@@ -513,7 +526,7 @@
                      NSString *strURL= [NSString stringWithFormat:@"%@",globalVariables.urlFromFilterLogicView];
                      url= [strURL stringByAppendingString:@"&sort-by=updated_at&order=DESC"];
                  }else{
-                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByUpdatedAt,orderDESC];
+                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByUpdatedAt,orderDESC,assigned1];
                  NSLog(@"URL is : %@",url);
                      globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=updated_at&order=DESC";
                      globalVariables.sortCondition=@"UNASSIGNED";
@@ -527,7 +540,7 @@
                      NSString *strURL= [NSString stringWithFormat:@"%@",globalVariables.urlFromFilterLogicView];
                      url= [strURL stringByAppendingString:@"&sort-by=created_at&order=ASC"];
                  }else{
-                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByCreatedAt,orderASC];
+                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByCreatedAt,orderASC,assigned1];
                  NSLog(@"URL is : %@",url);
                      globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=created_at&order=ASC";
                      globalVariables.sortCondition=@"UNASSIGNED";
@@ -541,7 +554,7 @@
                      NSString *strURL= [NSString stringWithFormat:@"%@",globalVariables.urlFromFilterLogicView];
                      url= [strURL stringByAppendingString:@"&sort-by=created_at&order=DESC"];
                  }else{
-                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByCreatedAt,orderDESC];
+                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByCreatedAt,orderDESC,assigned1];
                  NSLog(@"URL is : %@",url);
                      globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=created_at&order=DESC";
                      globalVariables.sortCondition=@"UNASSIGNED";
@@ -555,7 +568,7 @@
                      NSString *strURL= [NSString stringWithFormat:@"%@",globalVariables.urlFromFilterLogicView];
                      url= [strURL stringByAppendingString:@"&sort-by=due&order=ASC"];
                  }else{
-                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByDue,orderASC];
+                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByDue,orderASC,assigned1];
                  NSLog(@"URL is : %@",url);
                      globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=due&order=ASC";
                      globalVariables.sortCondition=@"UNASSIGNED";
@@ -569,7 +582,7 @@
                      NSString *strURL= [NSString stringWithFormat:@"%@",globalVariables.urlFromFilterLogicView];
                      url= [strURL stringByAppendingString:@"&sort-by=due&order=DESC"];
                  }else{
-                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByDue,orderDESC];
+                 url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&sort-by=%@&order=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments,ticketSortByDue,orderDESC,assigned1];
                  NSLog(@"URL is : %@",url);
                      globalVariables.sortCondtionValueToSendWebServices=@"&sort-by=due&order=DESC";
                      globalVariables.sortCondition=@"UNASSIGNED";
@@ -1240,7 +1253,8 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             [refresh endRefreshing];
-                            [self.tableView reloadData];
+                          //  [self.tableView reloadData];
+                            [self reloadTableView];
                         });
                     });
                     
@@ -1552,7 +1566,8 @@
                 
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.tableView reloadData];
+                           // [self.tableView reloadData];
+                            [self reloadTableView];
                            
                         });
                     });
@@ -1618,7 +1633,8 @@
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.tableView reloadData];
+                           // [self.tableView reloadData];
+                            [self reloadTableView];
                             
                         });
                     });
@@ -1684,7 +1700,8 @@
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.tableView reloadData];
+                          //  [self.tableView reloadData];
+                            [self reloadTableView];
                             
                         });
                     });
@@ -1752,7 +1769,8 @@
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.tableView reloadData];
+                           // [self.tableView reloadData];
+                            [self reloadTableView];
                             
                         });
                     });
@@ -1819,7 +1837,8 @@
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.tableView reloadData];
+                          //  [self.tableView reloadData];
+                            [self reloadTableView];
                             
                         });
                     });

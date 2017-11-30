@@ -250,14 +250,14 @@
                 {
                    
             
-                     [utils showAlertWithMessage:@"This is not a Client" sendViewController:self];
+                  //   [utils showAlertWithMessage:@"This is not a Client" sendViewController:self];
                 }
                 
                 mutableArray = [[json objectForKey:@"tickets"] copy];
                 
                 if ( [mutableArray count] == 0){
                     
-                     [utils showAlertWithMessage:@"User have no Tickets" sendViewController:self];
+                  //   [utils showAlertWithMessage:@"User have no Tickets" sendViewController:self];
                 }
                 
                 NSDictionary *requester=[json objectForKey:@"requester"];

@@ -153,6 +153,14 @@
     
 }
 
+- (void)reloadTableView
+{
+    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+    [self.tableView reloadData];
+    for (NSIndexPath *path in indexPaths) {
+        [self.tableView selectRowAtIndexPath:path animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+}
 
 -(void)reload{
     
@@ -222,7 +230,46 @@
             
             [self apiCallMethod];
             
-        }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){ // Tikcet Filter
+        }
+        if([globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"]){ // Tikcet Filter
+            
+            //  http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?token=%@&api=1&show=inbox&departments=%@&source=%@&priority=%@&assigned=1&types=%@
+            //departments priority types source status assigned
+            
+            apiValue=[NSString stringWithFormat:@"%i",1];
+            showInbox = @"inbox&assigned=0";
+            //  NSString * Alldeparatments=@"All";
+            
+            dep111=[NSString stringWithFormat:@"%@",globalVariables.deptt1];
+            
+            [Utils isEmpty:dep111];
+            if([Utils isEmpty:dep111] || [dep111 isEqualToString:@""])
+            {
+                dep111=@"All";
+            }
+            else
+            {
+                dep111= [NSString stringWithFormat:@"%@",globalVariables.deptt1];
+            }
+            //
+            assignee111= [NSString stringWithFormat:@"%@",globalVariables.assignn1];
+            
+            if([assignee111 isEqualToString:@"Yes"])
+            {
+                assignee111=@"1";
+            }else if([assignee111 isEqualToString:@"No"])
+            {
+                assignee111=@"0";
+            }else  if([Utils isEmpty:assignee111] || [assignee111 isEqualToString:@""])
+            {
+                assignee111=@"";
+            }
+            
+            
+            [self apiCallMethod];
+            
+        }
+        else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){ // Tikcet Filter
             
             //  http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?token=%@&api=1&show=inbox&departments=%@&source=%@&priority=%@&assigned=1&types=%@
             //departments priority types source status assigned
@@ -567,7 +614,9 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                         [refresh endRefreshing];
-                        [self.tableView reloadData];
+                       // [self.tableView reloadData];
+                        
+                        [self reloadTableView];
                     });
                 });
                 
@@ -867,7 +916,9 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.tableView reloadData];
+                           // [self.tableView reloadData];
+                            
+                             [self reloadTableView];
                             
                         });
                     });
@@ -935,7 +986,8 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.tableView reloadData];
+                           // [self.tableView reloadData];
+                            [self reloadTableView];
                             
                         });
                     });
@@ -1004,7 +1056,8 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.tableView reloadData];
+                           // [self.tableView reloadData];
+                            [self reloadTableView];
                             
                         });
                     });
@@ -1075,7 +1128,8 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.tableView reloadData];
+                         //   [self.tableView reloadData];
+                            [self reloadTableView];
                             
                         });
                     });
@@ -1145,7 +1199,8 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.tableView reloadData];
+                           // [self.tableView reloadData];
+                            [self reloadTableView];
                             
                         });
                     });
