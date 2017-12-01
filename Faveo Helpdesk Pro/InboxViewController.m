@@ -401,6 +401,7 @@
         noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = noDataLabel;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
     }
     else
     {
@@ -444,7 +445,7 @@
 
             [RMessage showNotificationInViewController:self
                                                  title:nil
-                                              subtitle:NSLocalizedString(@"All Caught Up)", nil)
+                                              subtitle:NSLocalizedString(@"All Caught Up", nil)
                                              iconImage:nil
                                                   type:RMessageTypeSuccess
                                         customTypeName:nil
@@ -1096,12 +1097,12 @@
         else{
         NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ClosedStausId];
             NSLog(@"URL is : %@",url);
-        if([globalVariables.Ticket_status isEqualToString:@"Closed"])
-        {
-            [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            
-        }else{
+//        if([globalVariables.Ticket_status isEqualToString:@"Closed"])
+//        {
+//            [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];
+//            [[AppDelegate sharedAppdelegate] hideProgressView];
+//            
+//        }else{
             
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -1136,43 +1137,49 @@
                     NSLog(@"Thread--NO4-call-postTicketStatusChange");
                     return;
                 }
-                
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
                     if ([json objectForKey:@"response"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        id object;
+                        NSDictionary * dict1= [json objectForKey:@"response"];
+                        object = [dict1 objectForKey:@"message"];
+                        
+                        NSLog(@"object is :%@",object);
+                        NSLog(@"object is :%@",object);
+                        
+                        if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Closed"]){
                             
-                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
-                            
-                            
-                            
-                            /* if (self.navigationController.navigationBarHidden) {
-                             [self.navigationController setNavigationBarHidden:NO];
-                             }
-                             
-                             [RMessage showNotificationInViewController:self.navigationController
-                             title:NSLocalizedString(@"Sucess.", nil)
-                             subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                             iconImage:nil
-                             type:RMessageTypeSuccess
-                             customTypeName:nil
-                             duration:RMessageDurationAutomatic
-                             callback:nil
-                             buttonTitle:nil
-                             buttonCallback:nil
-                             atPosition:RMessagePositionNavBarOverlay
-                             canBeDismissedByUser:YES]; */
+                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:inboxVC animated:YES];
-                        });
+                            
+                        }else
+                        {
+                            
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                            
+                        }
+                        
                     }
                 }
+//                if (json) {
+//                    NSLog(@"JSON-CreateTicket-%@",json);
+//                    if ([json objectForKey:@"response"]) {
+//                        dispatch_async(dispatch_get_main_queue(), ^{
+//
+//                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+//
+//                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+//                            [self.navigationController pushViewController:inboxVC animated:YES];
+//                        });
+//                    }
+//                }// end json
                 NSLog(@"Thread-NO5-postTicketStatusChange-closed");
                 
             }];
-        }
+       // }
     }
     }
 }
@@ -1199,13 +1206,13 @@
         NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ResolvedStausId];
         
         
-        if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
-        {
-            [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            
-        }else{
-            
+//        if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
+//        {
+//            [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
+//            [[AppDelegate sharedAppdelegate] hideProgressView];
+//
+//        }else{
+//
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
             [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -1242,39 +1249,51 @@
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
                     if ([json objectForKey:@"response"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        id object;
+                        NSDictionary * dict1= [json objectForKey:@"response"];
+                        object = [dict1 objectForKey:@"message"];
+                        
+                        NSLog(@"object is :%@",object);
+                        NSLog(@"object is :%@",object);
+                        
+                        if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Resolved"]){
                             
-                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
-                            
-                            
-                            
-                            /*  if (self.navigationController.navigationBarHidden) {
-                             [self.navigationController setNavigationBarHidden:NO];
-                             }
-                             
-                             [RMessage showNotificationInViewController:self.navigationController
-                             title:NSLocalizedString(@"Sucess.", nil)
-                             subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                             iconImage:nil
-                             type:RMessageTypeSuccess
-                             customTypeName:nil
-                             duration:RMessageDurationAutomatic
-                             callback:nil
-                             buttonTitle:nil
-                             buttonCallback:nil
-                             atPosition:RMessagePositionNavBarOverlay
-                             canBeDismissedByUser:YES]; */
+                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:inboxVC animated:YES];
-                        });
+                            
+                        }else
+                        {
+                            
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
+                            
+                        }
+                        
                     }
-                }
+                    
+                    
+                } // end json
+                
+//                if (json) {
+//                    NSLog(@"JSON-CreateTicket-%@",json);
+//                    if ([json objectForKey:@"response"]) {
+//                        dispatch_async(dispatch_get_main_queue(), ^{
+//
+//                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+//
+//
+//
+//                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+//                            [self.navigationController pushViewController:inboxVC animated:YES];
+//                        });
+//                    }
+//                }
                 NSLog(@"Thread-NO5-postTicketStatusChange-closed");
                 
             }];
-        }
+       // }
         } }
 }
 
@@ -1299,12 +1318,12 @@
         else{
         NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.DeletedStausId];
         
-        if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
-        {
-            [utils showAlertWithMessage:@"Ticket is Already Deleted" sendViewController:self];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            
-        }else{
+//        if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
+//        {
+//            [utils showAlertWithMessage:@"Ticket is Already Deleted" sendViewController:self];
+//            [[AppDelegate sharedAppdelegate] hideProgressView];
+//
+//        }else{
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
@@ -1339,46 +1358,55 @@
                     return;
                 }
                 
-                
-                
-                
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
                     if ([json objectForKey:@"response"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        id object;
+                        NSDictionary * dict1= [json objectForKey:@"response"];
+                        object = [dict1 objectForKey:@"message"];
+                        
+                        NSLog(@"object is :%@",object);
+                        NSLog(@"object is :%@",object);
+                        
+                        if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Deleted"]){
                             
-                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
-                            
-                            
-                            
-                            /*   if (self.navigationController.navigationBarHidden) {
-                             [self.navigationController setNavigationBarHidden:NO];
-                             }
-                             
-                             [RMessage showNotificationInViewController:self.navigationController
-                             title:NSLocalizedString(@"Sucess.", nil)
-                             subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                             iconImage:nil
-                             type:RMessageTypeSuccess
-                             customTypeName:nil
-                             duration:RMessageDurationAutomatic
-                             callback:nil
-                             buttonTitle:nil
-                             buttonCallback:nil
-                             atPosition:RMessagePositionNavBarOverlay
-                             canBeDismissedByUser:YES]; */
-                            
+                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:inboxVC animated:YES];
-                        });
+                            
+                        }else
+                        {
+                            
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
+                            
+                        }
+                        
                     }
-                }
+                    
+                    
+                    //                }
+                } // end json
+                
+                
+//                if (json) {
+//                    NSLog(@"JSON-CreateTicket-%@",json);
+//                    if ([json objectForKey:@"response"]) {
+//                        dispatch_async(dispatch_get_main_queue(), ^{
+//
+//                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+//
+//
+//                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+//                            [self.navigationController pushViewController:inboxVC animated:YES];
+//                        });
+//                    }
+//                }
                 NSLog(@"Thread-NO5-postTicketStatusChange-closed");
                 
             }];
-        }
+      //  }
         } }
 }
 

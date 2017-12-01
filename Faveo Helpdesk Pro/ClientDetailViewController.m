@@ -97,7 +97,7 @@
         }
         else
         {
-            _mobileLabel.text= @"Not Availabel";
+            _mobileLabel.text= @"Not Available";
         }
         
         NSString *fname= [NSString stringWithFormat:@"%@",globalVariables.First_name];
@@ -121,7 +121,7 @@
         }
         else
         {
-            _mobileLabel.text= @"Not Availabel";
+            _mobileLabel.text= @"Not Available";
         }
     
        
@@ -147,7 +147,7 @@
            }
        }else
         {
-            _phoneLabel.text= @"Not Availabel";
+            _phoneLabel.text= @"Not Available";
         }
         
         if (![Utils isEmpty:mobile1])
@@ -157,7 +157,7 @@
         }
         else
         {
-              _mobileLabel.text= @"Not Availabel";
+              _mobileLabel.text= @"Not Available";
         }
        
         

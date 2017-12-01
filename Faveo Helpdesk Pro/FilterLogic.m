@@ -55,6 +55,8 @@
     NSMutableArray *selectedArray;
     int count1;
     NSString *selectedIDs;
+    
+    
 }
 
 @property (strong,nonatomic) NSIndexPath *selectedPath;
@@ -67,6 +69,7 @@
 @property (nonatomic, assign) NSInteger totalTickets;
 @property (nonatomic, strong) NSString *nextPageUrl;
 @property (nonatomic, strong) NSString *path1;
+@property (nonatomic) int pageInt;
 
 @property (nonatomic, strong) CFMultistageDropdownMenuView *multistageDropdownMenuView;
 @property (nonatomic, strong) CFMultistageConditionTableView *multistageConditionTableView;
@@ -813,7 +816,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             
             [RMessage showNotificationInViewController:self
                                                  title:nil
-                                              subtitle:NSLocalizedString(@"All Caught Up)", nil)
+                                              subtitle:NSLocalizedString(@"All Caught Up", nil)
                                              iconImage:nil
                                                   type:RMessageTypeSuccess
                                         customTypeName:nil
@@ -2401,7 +2404,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                     if ([json objectForKey:@"response"]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
                             
                             

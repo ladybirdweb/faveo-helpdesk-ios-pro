@@ -136,4 +136,6 @@ typedef void (^ApiResponse)(NSError* , id);
 -(void)callPATCHAPIWithAPIName:(NSString *)urlString
                      parameter:(id)parameter
                callbackHandler:(callbackHandler)block;
+
+-(void)getNextPageUSERFilter:(NSString*)url  callbackHandler:(callbackHandler)block;
 @end

@@ -1466,7 +1466,7 @@
             
             [RMessage showNotificationInViewController:self
                                                  title:nil
-                                              subtitle:NSLocalizedString(@"All Caught Up)", nil)
+                                              subtitle:NSLocalizedString(@"All Caught Up", nil)
                                              iconImage:nil
                                                   type:RMessageTypeSuccess
                                         customTypeName:nil

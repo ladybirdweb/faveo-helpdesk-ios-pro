@@ -113,13 +113,19 @@
         if([globalVariables.userFilterId isEqualToString:@"AGENTUSERS"])
         {
             tempString=@"agent";
-            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&role=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString];
+            NSString *str= [NSString stringWithFormat:@"%i",1];
+            
+            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&role=%@&active=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString,str];
+             globalVariables.userFilterId=@"AGENTUSERS";
             
         }else  if([globalVariables.userFilterId isEqualToString:@"ACTIVEUSERS"])
         {
             // api_key=&token=&active=1
+            NSString *str=@"user";
             tempString=[NSString stringWithFormat:@"%i",1];
-            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&active=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString];
+            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&active=%@&role=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString,str];
+            
+            globalVariables.userFilterId=@"ACTIVEUSERS";
             
         }else  if([globalVariables.userFilterId isEqualToString:@"CLIENTUSERS"])
         {
@@ -151,6 +157,9 @@
         
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
+          
+            // webservices getNextPageURLInbox:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
                 if (error || [msg containsString:@"Error"]) {
@@ -230,7 +239,7 @@
             
             [RMessage showNotificationInViewController:self
                                                  title:nil
-                                              subtitle:NSLocalizedString(@"All Caught Up)", nil)
+                                              subtitle:NSLocalizedString(@"All Caught Up", nil)
                                              iconImage:nil
                                                   type:RMessageTypeSuccess
                                         customTypeName:nil
@@ -275,7 +284,9 @@
         
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
-            [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
+           // [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
+            
+            [webservices getNextPageUSERFilter:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
                 if (error || [msg containsString:@"Error"]) {
                     

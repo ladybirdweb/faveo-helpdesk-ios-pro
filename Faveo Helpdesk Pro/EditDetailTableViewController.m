@@ -762,8 +762,7 @@
                     
                     if ([json objectForKey:@"result"]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            // [RKDropdownAlert title:APP_NAME message:@"Updated successfully!" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
+                         
                             if (self.navigationController.navigationBarHidden) {
                                 [self.navigationController setNavigationBarHidden:NO];
                             }
@@ -790,6 +789,44 @@
                            // self.navigationItem.hidesBackButton = YES;
                             
                         });
+                    }else if([json objectForKey:@"response"])
+                        
+                    {
+                        NSDictionary *dict1=[json objectForKey:@"response"];
+                        NSString *msg= [dict1 objectForKey:@"message"];
+                        
+                        if([msg isEqualToString:@"Permission denied, you do not have permission to access the requested page."])
+                            
+                        {
+                            [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            
+                        }
+                        else
+                            
+                        {
+                            if (self.navigationController.navigationBarHidden) {
+                                [self.navigationController setNavigationBarHidden:NO];
+                            }
+                            
+                            [RMessage showNotificationInViewController:self.navigationController
+                                                                 title:NSLocalizedString(@"Done!", nil)
+                                                              subtitle:NSLocalizedString(@"Updated successfully..!", nil)
+                                                             iconImage:nil
+                                                                  type:RMessageTypeSuccess
+                                                        customTypeName:nil
+                                                              duration:RMessageDurationAutomatic
+                                                              callback:nil
+                                                           buttonTitle:nil
+                                                        buttonCallback:nil
+                                                            atPosition:RMessagePositionNavBarOverlay
+                                                  canBeDismissedByUser:YES];
+                            
+                            
+                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                            [self.navigationController pushViewController:inboxVC animated:YES];
+                            
+                        }
+                        
                     }
                 }
                 NSLog(@"Thread-NO5-postCreateTicket-closed");

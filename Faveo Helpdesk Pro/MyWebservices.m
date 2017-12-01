@@ -835,6 +835,107 @@
 
 
 
+-(void)getNextPageUSERFilter:(NSString*)url callbackHandler:(callbackHandler)block{
+  
+    globalVariables=[GlobalVariables sharedInstance];
+    _userDefaults=[NSUserDefaults standardUserDefaults];
+    
+   
+    
+    NSString *urll=[NSString stringWithFormat:@"%@&api_key=%@&ip=%@&token=%@",url,API_KEY,IP,[_userDefaults objectForKey:@"token"]];
+    
+    NSLog(@"Old url is : %@",urll);
+    
+   
+    if([globalVariables.userFilterId isEqualToString:@"AGENTUSERS"])
+        
+    {
+        
+        NSString *appendedURL;
+        appendedURL = [urll stringByAppendingString:@"&active=1"];
+        
+        [self httpResponseGET:appendedURL parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block(error,json,msg);
+            });
+            
+        }];
+        
+    }else if([globalVariables.userFilterId isEqualToString:@"ACTIVEUSERS"])
+        
+    {
+        NSString *appendedURL;
+        
+        appendedURL = [urll stringByAppendingString:@"&active=1&role=user"];
+        
+        [self httpResponseGET:appendedURL parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block(error,json,msg);
+            });
+            
+        }];
+        
+    }else if([globalVariables.userFilterId isEqualToString:@"CLIENTUSERS"])
+        
+    {
+        
+        [self httpResponseGET:urll parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block(error,json,msg);
+            });
+            
+        }];
+        
+    }else if([globalVariables.userFilterId isEqualToString:@"BANNEDUSERS"])
+        
+    {
+        
+        NSString *appendedURL;
+        appendedURL = [urll stringByAppendingString:@"&ban=1"];
+        
+        [self httpResponseGET:appendedURL parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block(error,json,msg);
+            });
+            
+        }];
+        
+        
+    }else if([globalVariables.userFilterId isEqualToString:@"INACTIVEUSERS"])
+        
+    {
+        
+        NSString *appendedURL;
+        appendedURL = [urll stringByAppendingString:@"&active=0"];
+        
+        [self httpResponseGET:appendedURL parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block(error,json,msg);
+            });
+            
+        }];
+        
+    }else if([globalVariables.userFilterId isEqualToString:@"DEACTIVEUSERS"])
+        
+    {  // deleted=%@
+        
+        NSString *appendedURL;
+        appendedURL = [urll stringByAppendingString:@"&deleted=1"];
+        
+        [self httpResponseGET:appendedURL parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block(error,json,msg);
+            });
+            
+        }];
+        
+    }
+    
+    
+    
+    
+} // getNextPageURLTrash
+
 
 -(void)getNextPageURL:(NSString*)url user_id:(NSString*)uid callbackHandler:(callbackHandler)block{
     _userDefaults=[NSUserDefaults standardUserDefaults];

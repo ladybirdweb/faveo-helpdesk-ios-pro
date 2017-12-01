@@ -13,4 +13,6 @@
 
     
 }
+
+@property (nonatomic) NSInteger page;
 @end

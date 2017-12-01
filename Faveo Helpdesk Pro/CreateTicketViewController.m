@@ -444,7 +444,7 @@
         
                     [RMessage showNotificationInViewController:self.navigationController
                                                          title:NSLocalizedString(@"Warning !", nil)
-                                                      subtitle:NSLocalizedString(@"Please Mobile Code.!", nil)
+                                                      subtitle:NSLocalizedString(@"Please Enter Mobile Code.!", nil)
                                                      iconImage:nil
                                                           type:RMessageTypeWarning
                                                 customTypeName:nil

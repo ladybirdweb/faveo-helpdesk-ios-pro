@@ -320,7 +320,10 @@
                         
                      //   cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
                         
-                        _dueDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"duedate"]];
+                        //[utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
+                        
+                        _dueDateTextField.text= [utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
+                        
                         
                         [self.refreshControl endRefreshing];
                         [_imgViewLoading setHidden:YES];

@@ -47,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+91 9482189901" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hH2-UJ-QXg">
-                                <rect key="frame" x="106" y="46" width="148" height="26"/>
+                                <rect key="frame" x="105" y="46" width="148" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="cIq-uT-8GO"/>
                                 </constraints>
@@ -65,12 +65,12 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lsn-fo-koh" firstAttribute="top" secondItem="Tao-A8-ngO" secondAttribute="top" id="4HE-vH-68Z"/>
-                            <constraint firstItem="hH2-UJ-QXg" firstAttribute="leading" secondItem="8wC-5v-j9h" secondAttribute="trailing" constant="10" id="BKZ-bt-g41"/>
+                            <constraint firstItem="hH2-UJ-QXg" firstAttribute="leading" secondItem="8wC-5v-j9h" secondAttribute="trailing" constant="9" id="BKZ-bt-g41"/>
                             <constraint firstAttribute="trailing" secondItem="YEh-9k-nRs" secondAttribute="trailing" constant="3" id="Ea8-vH-rSP"/>
                             <constraint firstItem="Tao-A8-ngO" firstAttribute="leading" secondItem="n51-Gz-KNn" secondAttribute="leading" constant="16" id="LaL-W9-NLT"/>
                             <constraint firstItem="x83-b6-fXu" firstAttribute="centerY" secondItem="Tao-A8-ngO" secondAttribute="centerY" constant="1" id="Mlq-5P-CdZ"/>
                             <constraint firstItem="Tao-A8-ngO" firstAttribute="centerY" secondItem="n51-Gz-KNn" secondAttribute="centerY" id="PiP-iQ-IYC"/>
-                            <constraint firstAttribute="trailing" secondItem="hH2-UJ-QXg" secondAttribute="trailing" constant="66" id="SCx-1l-9CG"/>
+                            <constraint firstAttribute="trailing" secondItem="hH2-UJ-QXg" secondAttribute="trailing" constant="67" id="SCx-1l-9CG"/>
                             <constraint firstAttribute="bottom" secondItem="8wC-5v-j9h" secondAttribute="bottom" constant="13.5" id="SQQ-NF-iB6"/>
                             <constraint firstItem="YEh-9k-nRs" firstAttribute="centerY" secondItem="Tao-A8-ngO" secondAttribute="centerY" id="W1z-8X-cwz"/>
                             <constraint firstItem="lsn-fo-koh" firstAttribute="leading" secondItem="Tao-A8-ngO" secondAttribute="trailing" constant="10" id="YS5-3U-l6j"/>
