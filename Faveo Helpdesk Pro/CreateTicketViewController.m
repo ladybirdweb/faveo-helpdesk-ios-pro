@@ -167,6 +167,7 @@
     _firstNameView.text=globalVariables.firstNameAddRequester;
     _lastNameView.text=globalVariables.lastAddRequester;
     _mobileView.text=globalVariables.mobileAddRequester;
+    _codeTextField.text=globalVariables.mobileCode;
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
@@ -815,7 +816,18 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
-                                                
+                        
+                        NSDictionary * dict1=[json objectForKey:@"response"];
+                        NSString *str= [dict1 objectForKey:@"message"];
+                        
+                        
+                        if([str isEqualToString:@"Permission denied, you do not have permission to access the requested page."] || [str hasPrefix:@"Permission denied"])
+                        {
+                            
+                            [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            
+                        }else{
+                        
                         [RMessage showNotificationInViewController:self.navigationController
                                                              title:NSLocalizedString(@"Sucess", nil)
                                                           subtitle:NSLocalizedString(@"Ticket created successfully.", nil)
@@ -849,6 +861,7 @@
                         
                         InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                         [self.navigationController pushViewController:inboxVC animated:YES];
+                        }
                     });
                 }
             }
@@ -1085,7 +1098,6 @@
   
     return YES;
 }
-
 
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu

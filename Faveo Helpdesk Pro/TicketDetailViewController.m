@@ -941,10 +941,10 @@
     //[ textViewInternalNote setReturnKeyType:UIReturnKeyDone];
     
    // textViewInternalNote.inputAccessoryView.hidden =YES;
-    textViewInternalNote.autocorrectionType = NO;
-    textViewInternalNote.textContentType = UITextContentTypeName;
-    textViewInternalNote.autocapitalizationType=NO;
-    textViewInternalNote.autocorrectionType = UITextAutocorrectionTypeNo;
+  //  textViewInternalNote.autocorrectionType = NO;
+   // textViewInternalNote.textContentType = UITextContentTypeName;
+   // textViewInternalNote.autocapitalizationType=NO;
+ //   textViewInternalNote.autocorrectionType = UITextAutocorrectionTypeNo;
 
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
@@ -1087,10 +1087,10 @@
     
     
    // textViewReply.inputAccessoryView.hidden =YES;
-    textViewReply.autocorrectionType = NO;
-    textViewReply.textContentType = UITextContentTypeName;
-    textViewReply.autocapitalizationType=NO;
-    textViewReply.autocorrectionType = UITextAutocorrectionTypeNo;
+   // textViewReply.autocorrectionType = NO;
+   // textViewReply.textContentType = UITextContentTypeName;
+   // textViewReply.autocapitalizationType=NO;
+  //  textViewReply.autocorrectionType = UITextAutocorrectionTypeNo;
 
     
     textViewReply.layer.cornerRadius=4;
@@ -1222,8 +1222,8 @@
                         [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your note.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
-                       
-                        TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+           
+                       TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
                         [self.navigationController pushViewController:td animated:YES];
                         
                       
@@ -1334,8 +1334,8 @@
                         
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
                         
-                        TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-                        [self.navigationController pushViewController:td animated:YES];
+                       TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+                       [self.navigationController pushViewController:td animated:YES];
                         // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
                     });
                 }

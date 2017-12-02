@@ -851,10 +851,10 @@
         
     {
         
-        NSString *appendedURL;
-        appendedURL = [urll stringByAppendingString:@"&active=1"];
+    //    NSString *appendedURL;
+      //  appendedURL = [urll stringByAppendingString:@"&active=1"];
         
-        [self httpResponseGET:appendedURL parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        [self httpResponseGET:urll parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 block(error,json,msg);
             });

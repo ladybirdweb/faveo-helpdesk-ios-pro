@@ -113,9 +113,9 @@
         if([globalVariables.userFilterId isEqualToString:@"AGENTUSERS"])
         {
             tempString=@"agent";
-            NSString *str= [NSString stringWithFormat:@"%i",1];
+           // NSString *str= [NSString stringWithFormat:@"%i",1];
             
-            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&role=%@&active=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString,str];
+            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&role=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString];
              globalVariables.userFilterId=@"AGENTUSERS";
             
         }else  if([globalVariables.userFilterId isEqualToString:@"ACTIVEUSERS"])

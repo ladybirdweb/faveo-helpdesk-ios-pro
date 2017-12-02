@@ -120,6 +120,7 @@
 @property (strong, nonatomic) NSString *sortAlert;
 
 
+@property (strong, nonatomic) NSString *mobileCode;
 
 //filter globalvaribales
 

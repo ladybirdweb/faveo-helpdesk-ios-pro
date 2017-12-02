@@ -11,7 +11,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *lastNameView;
 
-@property (weak, nonatomic) IBOutlet UITextField *codeTextField;
+
 
 @property (weak, nonatomic) IBOutlet UITextField *mobileTextField;
 @property (weak, nonatomic) IBOutlet UITextView *mobileView;
@@ -34,6 +34,12 @@
 @property (weak, nonatomic) IBOutlet UITextView *companyName;
 
 @property (weak, nonatomic) IBOutlet UIView *headerTitleView;
+
+@property (weak, nonatomic) IBOutlet UITextField *codeTextField;
+- (IBAction)countryCodeClicked:(id)sender;
+
+@property (nonatomic, strong) NSDictionary * countryDic;
+
 
 
 @end

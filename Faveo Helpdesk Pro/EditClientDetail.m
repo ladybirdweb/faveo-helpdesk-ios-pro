@@ -434,7 +434,7 @@
                             }
                             
                             [RMessage showNotificationInViewController:self.navigationController
-                                                                 title:NSLocalizedString(@"Sucess", nil)
+                                                                 title:NSLocalizedString(@"Success", nil)
                                                               subtitle:NSLocalizedString(@"Details Updated successfully.", nil)
                                                              iconImage:nil
                                                                   type:RMessageTypeSuccess
@@ -583,7 +583,7 @@
                     }
                     
                     [RMessage showNotificationInViewController:self.navigationController
-                                                         title:NSLocalizedString(@"Sucess", nil)
+                                                         title:NSLocalizedString(@"Success", nil)
                                                       subtitle:NSLocalizedString(@"Deactivated successfully.", nil)
                                                      iconImage:nil
                                                           type:RMessageTypeSuccess
@@ -703,7 +703,7 @@
                         }
                         
                         [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess", nil)
+                                                             title:NSLocalizedString(@"Success", nil)
                                                           subtitle:NSLocalizedString(@"Activated successfully.", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
