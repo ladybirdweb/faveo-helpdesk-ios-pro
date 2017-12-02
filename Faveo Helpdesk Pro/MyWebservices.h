@@ -117,4 +117,25 @@ typedef void (^ApiResponse)(NSError* , id);
 
  */
 -(void)getNextPageURL:(NSString*)url user_id:(NSString*)uid callbackHandler:(callbackHandler)block;
+
+
+
+-(void)getNextPageURLInbox:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;
+
+-(void)getNextPageURLUnassigned:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;
+
+-(void)getNextPageURLMyTickets:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;
+
+-(void)getNextPageURLClosed:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block; // getNextPageURLTrash
+
+-(void)getNextPageURLTrash:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;
+
+
+//+(NSURLSessionTask *)callPATCHAPIWithAPIName:(NSString *)apiName andCompletionHandler:(void(^)(id result, NSInteger responseCode, NSError *error))completionHandler;
+
+-(void)callPATCHAPIWithAPIName:(NSString *)urlString
+                     parameter:(id)parameter
+               callbackHandler:(callbackHandler)block;
+
+-(void)getNextPageUSERFilter:(NSString*)url  callbackHandler:(callbackHandler)block;
 @end

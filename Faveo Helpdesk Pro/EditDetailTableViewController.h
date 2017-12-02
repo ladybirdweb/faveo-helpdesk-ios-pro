@@ -28,12 +28,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *sourceTextField;
 
-@property (weak, nonatomic) IBOutlet UITextField *dueDateTextField;
-
-@property (weak, nonatomic) IBOutlet UITextField *createdDateTextField;
-
-@property (weak, nonatomic) IBOutlet UITextField *lastResponseDateTextField;
-
 
 @property (nonatomic, strong) NSArray * helptopicsArray;
 

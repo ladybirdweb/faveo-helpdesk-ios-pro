@@ -16,7 +16,7 @@
  @brief This class contains Global variable declaration
  
  @discussion It contains variable declaration that are commonly used throughout the app so that accessing and calling is very easy.
- Also it cointans Singleton class that contains global variables and global functions.It’s an extremely powerful way to share data between different parts of code without having to pass the data around manually.
+       Also it cointans Singleton class that contains global variables and global functions.It’s an extremely powerful way to share data between different parts of code without having to pass the data around manually.
  
  @superclass NSObject
  
@@ -111,5 +111,71 @@
 @property (strong, nonatomic) NSString *mobileAddRequester;
 
 
-@end
+@property (strong, nonatomic) NSString *sortingValueId;  
 
+@property (strong, nonatomic) NSString *check;  
+
+@property (strong, nonatomic) NSString *sortCondition;
+
+@property (strong, nonatomic) NSString *sortAlert;
+
+
+@property (strong, nonatomic) NSString *mobileCode;
+
+//filter globalvaribales
+
+@property (strong, nonatomic) NSString *filterCondition;
+
+@property (strong, nonatomic) NSString *deptt1;
+@property (strong, nonatomic) NSString *prioo1;
+@property (strong, nonatomic) NSString *typee1;
+@property (strong, nonatomic) NSString *sourcee1;
+@property (strong, nonatomic) NSString *statuss1;
+@property (strong, nonatomic) NSString *assignn1;
+
+@property (strong, nonatomic) NSString *filterId;
+
+@property (strong, nonatomic) NSString *urlFromFilterLogicView;
+
+
+
+
+
+/// filter form global variables
+@property (strong, nonatomic) NSString *departmentTextFiled1;
+@property (strong, nonatomic) NSString *priorityTextFiled1;
+@property (strong, nonatomic) NSString *typeTextFiled1;
+@property (strong, nonatomic) NSString *sourceTextFiled1;
+@property (strong, nonatomic) NSString *statusTextField;
+@property (strong, nonatomic) NSString *assignedTextFiled1;
+
+
+//customer filteration
+@property (strong, nonatomic) NSString *userFilterId;
+@property (strong, nonatomic) NSString *nameInCilent;
+
+
+//edit user
+@property (strong, nonatomic) NSString *emailInUserList;
+@property (strong, nonatomic) NSString *userNameInUserList;
+@property (strong, nonatomic) NSString *phoneNumberInUserList;
+@property (strong, nonatomic) NSString *mobileNumberInUserList;
+
+@property (strong, nonatomic) NSString *UserState;
+@property (strong, nonatomic) NSString *compnayUser1;
+@property (strong, nonatomic) NSString *filteredUserView;
+
+@property (strong, nonatomic) NSString *ActiveDeactiveStateOfUser;
+@property (strong, nonatomic) NSString *ActiveDeactiveStateOfUser1;
+
+@property (strong, nonatomic) NSString *customerFromView;
+@property (strong, nonatomic) NSString *customerImage;
+@property (strong, nonatomic) NSString *customerDeleted;
+
+
+
+// sort
+
+@property (strong, nonatomic) NSString *sortCondtionValueToSendWebServices;
+@property (strong, nonatomic) NSString *filterCondtionValueToSendWebServices;
+@end

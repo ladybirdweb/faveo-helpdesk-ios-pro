@@ -25,7 +25,7 @@
 #import "InboxViewController.h"
 
 
-@interface EditDetailTableViewController ()<RMessageProtocol,UITextViewDelegate,UITextFieldDelegate>{
+@interface EditDetailTableViewController ()<RMessageProtocol>{
     
     Utils *utils;
     NSUserDefaults *userDefaults;
@@ -82,14 +82,6 @@
     staff_id=[[NSNumber alloc]init];
     
     
-    _subjectTextView.delegate=self;
-    _priorityTextField.delegate=self;
-    _helpTopicTextField.delegate=self;
-    _sourceTextField.delegate=self;
-    _typeTextField.delegate=self;
-    _assinTextField.delegate=self;
-    
-    
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
     
@@ -98,8 +90,11 @@
     [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
     [self.subjectTextView setInputAccessoryView:toolBar];
     
+    self.subjectTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.subjectTextView.layer.borderWidth = 0.4;
+    self.subjectTextView.layer.cornerRadius = 3;
+    
     _saveButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
-  //  _saveButton.hidden=YES;
     _imgViewLoading = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 78, 78)];
     _imgViewLoading.image=[UIImage imageNamed:@"loading_imgBlue_78x78"];
     _imgViewLoading.center=CGPointMake(self.view.frame.size.width/2,(self.view.frame.size.height/2)-100);
@@ -118,10 +113,13 @@
     //[_activityIndicatorObject startAnimating];
     [self reload];
     
+
+   
     [self readFromPlist];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
 }
+
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
@@ -207,7 +205,7 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
                             //                        _clientNameTextField.text=[NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"first_name"],[dic objectForKey:@"last_name"]];
-                            _createdDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"created_at"]];
+                            //_createdDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"created_at"]];
                             
 //                            if (([[dic objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"first_name"] length] == 0 )) {
 //                                _firstnameTextField.text=NSLocalizedString(@"Not Available",nil);
@@ -301,7 +299,7 @@
                             
                             
                            // _emailTextField.text=[dic objectForKey:@"email"];
-                            _lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
+                            //_lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
                             
                             
                             // _deptTextField.text= [dic objectForKey:@"dept_name"];
@@ -330,14 +328,17 @@
                             
                             if (([[dic objectForKey:@"assignee_email"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"assignee_email"] length] == 0 )) {
                                 // _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-                                _assinTextField.text=NSLocalizedString(@"Select Assignee",nil);
+                                _assinTextField.text=NSLocalizedString(@"Not Available",nil);
                             }else{
-                                _assinTextField.text= [dic objectForKey:@"assignee_email"];
+                                NSString * name= [NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"assignee_first_name"],[dic objectForKey:@"assignee_last_name"]];
+                                
+                                _assinTextField.text=name;
+                                // _assinTextField.text= [dic objectForKey:@"assignee_email"];
                             }
                             
                             // _statusTextField.text= [dic objectForKey:@"status_name"];
                             
-                            _dueDateTextField.text= [utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
+                            //_dueDateTextField.text= [utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
                             
                             [self.refreshControl endRefreshing];
                             [_imgViewLoading setHidden:YES];
@@ -354,15 +355,15 @@
         }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in reload method in Detail ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in reload method in Detail ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return ;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
         
@@ -631,7 +632,7 @@
         _assinTextField.text=NSLocalizedString(@"Not Available",nil);
         source_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Source" rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:@"Select Assignee" rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
 }
 }
 
@@ -687,20 +688,28 @@
         source_id = [NSNumber numberWithInteger:1+[_sourceArray indexOfObject:_sourceTextField.text]];
         status_id = [NSNumber numberWithInteger:1+[_statusArray indexOfObject:_statusTextField.text]];
         
-        //staff_id = [NSNumber numberWithInteger:1+[_assignArray indexOfObject:_assinTextField.text]];
-        
+//        staff_id = [NSNumber numberWithInteger:1+[_assignArray indexOfObject:_assinTextField.text]];
+//
+//           NSLog(@"stffId111111 is : %@",staff_id);
+//          NSLog(@"stffId22222 is : %@",staff_id);
         
         sla_id=[NSNumber numberWithInt:1];
         [[AppDelegate sharedAppdelegate] showProgressView];
         
         NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
-        
-        if([staffID isEqualToString:@"(null)"] )
+       
+       
+        NSLog(@"stffId is : %@",staffID);
+        NSLog(@"stffId is : %@",staffID);
+        //int number = [string integerValue];
+        if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
         {
             
-            staffID=@"";
+            staffID=@"0";
+           
         }
         
+       
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&help_topic=%@&ticket_type=%@&ticket_priority=%@&ticket_source=%@&subject=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,help_topic_id,type_id,priority_id,source_id,_subjectTextView.text,staffID];
         
@@ -743,10 +752,17 @@
                 
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
+                    NSString *str= [json objectForKey:@"message"];
+                    
+                    if([str isEqualToString:@"Permission denied, you do not have permission to access the requested page."] || [str hasPrefix:@"Permission denied"])
+                        
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                    }else
+                    
                     if ([json objectForKey:@"result"]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            // [RKDropdownAlert title:APP_NAME message:@"Updated successfully!" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
+                         
                             if (self.navigationController.navigationBarHidden) {
                                 [self.navigationController setNavigationBarHidden:NO];
                             }
@@ -773,6 +789,46 @@
                            // self.navigationItem.hidesBackButton = YES;
                             
                         });
+                        
+                        
+                    }else if([json objectForKey:@"response"])
+                        
+                    {
+                        NSDictionary *dict1=[json objectForKey:@"response"];
+                        NSString *msg= [dict1 objectForKey:@"message"];
+                        
+                        if([msg isEqualToString:@"Permission denied, you do not have permission to access the requested page."])
+                            
+                        {
+                            [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            
+                        }
+                        else
+                            
+                        {
+                            if (self.navigationController.navigationBarHidden) {
+                                [self.navigationController setNavigationBarHidden:NO];
+                            }
+                            
+                            [RMessage showNotificationInViewController:self.navigationController
+                                                                 title:NSLocalizedString(@"Done!", nil)
+                                                              subtitle:NSLocalizedString(@"Updated successfully..!", nil)
+                                                             iconImage:nil
+                                                                  type:RMessageTypeSuccess
+                                                        customTypeName:nil
+                                                              duration:RMessageDurationAutomatic
+                                                              callback:nil
+                                                           buttonTitle:nil
+                                                        buttonCallback:nil
+                                                            atPosition:RMessagePositionNavBarOverlay
+                                                  canBeDismissedByUser:YES];
+                            
+                            
+                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                            [self.navigationController pushViewController:inboxVC animated:YES];
+                            
+                        }
+                        
                     }
                 }
                 NSLog(@"Thread-NO5-postCreateTicket-closed");
@@ -781,15 +837,15 @@
         }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in save method in Detail ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in save method in Detail ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return ;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
         
@@ -864,78 +920,7 @@
     self.priorityTextField.text = (_priorityArray)[(NSUInteger) [selectedIndex intValue]];
 }
 
-/*#pragma mark - UITextFieldDelegate
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    
-    if (textField.tag==2) {
-        
-        [_priorityTextField resignFirstResponder];
-         _priorityTextField.tintColor = [UIColor clearColor];
-        
-        if (!_priorityArray||![_priorityArray count]) {
-            _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
-            priority_id=0;
-            
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:@"Select Priority" rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        
-        // return NO;
-    }else if(textField.tag==3){
-        //[_subjectTextField resignFirstResponder];
-        [_helpTopicTextField resignFirstResponder];
-         _helpTopicTextField.tintColor = [UIColor clearColor];
-        
-        if (!_helptopicsArray||!_helptopicsArray.count) {
-            _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
-            help_topic_id=0;
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        // return NO;
-    }else if(textField.tag==4){
-        [_sourceTextField resignFirstResponder];
-         _sourceTextField.tintColor = [UIColor clearColor];
-        
-        //[_subjectTextField resignFirstResponder];
-        if (!_sourceArray||!_sourceArray.count) {
-            _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
-            source_id=0;
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:@"Select Source" rows:_sourceArray initialSelection:0 target:self successAction:@selector(sourceWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        // return  NO;
-    }else if(textField.tag==5){
-        [_typeTextField resignFirstResponder];
-         _typeTextField.tintColor = [UIColor clearColor];
-        
-        
-        if (!_typeArray||!_typeArray.count) {
-            _typeTextField.text=NSLocalizedString(@"Not Available",nil);
-            type_id=0;
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:@"Select Ticket Type" rows:_typeArray initialSelection:0 target:self successAction:@selector(typeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        // return  NO;
-    }else if(textField.tag==7){
-        [_assinTextField resignFirstResponder];
-         _assinTextField.tintColor = [UIColor clearColor];
-        
-        //[_subjectTextField resignFirstResponder];
-        if (!_assignArray||!_assignArray.count) {
-            _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-            staff_id=0;
-        }else{
-            [ActionSheetStringPicker showPickerWithTitle:@"Select Assignee" rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:self.view];
-        }
-        // return  NO;
-    }else{
-        
-    }
-    // return YES;
-}
-*/
 - (CAAnimation *)imageAnimationForEmptyDataSet{
     
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform"];

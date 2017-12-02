@@ -93,6 +93,11 @@
    // _subjectTextField.text=globalVariables.title;
     userDefaults=[NSUserDefaults standardUserDefaults];
     //[_activityIndicatorObject startAnimating];
+    
+    self.subjectTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.subjectTextView.layer.borderWidth = 0.4;
+    self.subjectTextView.layer.cornerRadius = 3;
+    
     [self reload];
     
     [self readFromPlist];
@@ -179,6 +184,7 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         //                        _clientNameTextField.text=[NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"first_name"],[dic objectForKey:@"last_name"]];
+                      
                         _createdDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"created_at"]];
                         
                         if (([[dic objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"first_name"] length] == 0 )) {
@@ -270,6 +276,9 @@
                         
                         
                         _emailTextField.text=[dic objectForKey:@"email"];
+                       
+                        // cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+                        
                         _lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
                       
                         
@@ -309,7 +318,12 @@
                         
                        // _statusTextField.text= [dic objectForKey:@"status_name"];
                         
+                     //   cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+                        
+                        //[utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
+                        
                         _dueDateTextField.text= [utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
+                        
                         
                         [self.refreshControl endRefreshing];
                         [_imgViewLoading setHidden:YES];
@@ -326,15 +340,15 @@
  }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in reload method in Detail ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in reload method in Detail ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return ;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+         //   NSLog( @"In finally block");
             
         }
 
@@ -714,7 +728,7 @@
                                                         atPosition:RMessagePositionNavBarOverlay
                                               canBeDismissedByUser:YES];
 
-                        
+                      //   [ self.navigationController popViewControllerAnimated:YES];
                         
                     });
                 }
@@ -725,15 +739,15 @@
     }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in save method in Detail ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in save method in Detail ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return ;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
 

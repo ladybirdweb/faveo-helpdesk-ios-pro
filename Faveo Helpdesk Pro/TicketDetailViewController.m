@@ -76,9 +76,10 @@
     
     
         UIButton *editTicket =  [UIButton buttonWithType:UIButtonTypeCustom]; // editTicket
-        [editTicket setImage:[UIImage imageNamed:@"editTicket"] forState:UIControlStateNormal];
+        [editTicket setImage:[UIImage imageNamed:@"pencileEdit"] forState:UIControlStateNormal];
         [editTicket addTarget:self action:@selector(editTicketTapped) forControlEvents:UIControlEventTouchUpInside];
-        [editTicket setFrame:CGRectMake(0, 0, 32, 32)];
+       // [editTicket setFrame:CGRectMake(0, 0, 32, 32)];
+    [editTicket setFrame:CGRectMake(10, 7, 20, 20)];
     
     UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [moreButton setImage:[UIImage imageNamed:@"verticle"] forState:UIControlStateNormal];
@@ -91,13 +92,12 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
 
-   
+    
     NSLog(@"Ticket is isssss : %@",globalVariables.iD);
     
     [self getDependencies];
     
 }
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -150,7 +150,7 @@
     _plusButtonsViewMain.plusButtonAnimationType = LGPlusButtonAnimationTypeRotate;
     
     [_plusButtonsViewMain setButtonsTitles:@[@"+", @"", @""] forState:UIControlStateNormal];
-    [_plusButtonsViewMain setDescriptionsTexts:@[@"", @"Ticket Replay", @"Internal Notes"]];
+    [_plusButtonsViewMain setDescriptionsTexts:@[@"", @"Ticket Reply", @"Internal Notes"]];
     [_plusButtonsViewMain setButtonsImages:@[[NSNull new], [UIImage imageNamed:@"reply1"], [UIImage imageNamed:@"note3"]]
                                   forState:UIControlStateNormal
                             forOrientation:LGPlusButtonsViewOrientationAll];
@@ -356,15 +356,15 @@
         }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
     }
@@ -503,43 +503,40 @@
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"response"]) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                       
-                        [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                    
+                    id object;
+                    NSDictionary * dict1= [json objectForKey:@"response"];
+                    object = [dict1 objectForKey:@"message"];
+                    
+                    NSLog(@"object is :%@",object);
+                    NSLog(@"object is :%@",object);
+                    
+                    if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Open"]){
                         
-
-                        
-                        
-                        /*if (self.navigationController.navigationBarHidden) {
-                            [self.navigationController setNavigationBarHidden:NO];
-                        }
-                        
-                        [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess.", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                                                         iconImage:nil
-                                                              type:RMessageTypeSuccess
-                                                    customTypeName:nil
-                                                          duration:RMessageDurationAutomatic
-                                                          callback:nil
-                                                       buttonTitle:nil
-                                                    buttonCallback:nil
-                                                        atPosition:RMessagePositionNavBarOverlay
-                                              canBeDismissedByUser:YES]; */
-                        
+                        [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
                         InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                         [self.navigationController pushViewController:inboxVC animated:YES];
-                    });
+                        
+                    }else
+                    {
+                        
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Open a ticket", nil) sendViewController:self];
+                        
+                    }
+                    
                 }
-            }
+                
+                
+            } // end json
+            
             NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
-        }];
+        }]; // end webservice call
         }
-    }
-    
+    }//end rechability
 }
+
 
 -(void)changeStaus2
 {
@@ -597,43 +594,72 @@
                 return;
             }
             
+           //NSSingleObjectArrayI
+            
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"response"]) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                       
-                        [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                    
+                    id object;
+                    NSDictionary * dict1= [json objectForKey:@"response"];
+                    object = [dict1 objectForKey:@"message"];
+               
+                    NSLog(@"object is :%@",object);
+                    NSLog(@"object is :%@",object);
+                    
+                    if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Closed"]){
                         
-
-                        
-                        
-                       /* if (self.navigationController.navigationBarHidden) {
-                            [self.navigationController setNavigationBarHidden:NO];
-                        }
-                        
-                        [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess.", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                                                         iconImage:nil
-                                                              type:RMessageTypeSuccess
-                                                    customTypeName:nil
-                                                          duration:RMessageDurationAutomatic
-                                                          callback:nil
-                                                       buttonTitle:nil
-                                                    buttonCallback:nil
-                                                        atPosition:RMessagePositionNavBarOverlay
-                                              canBeDismissedByUser:YES]; */
+                        [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
                         InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                         [self.navigationController pushViewController:inboxVC animated:YES];
-                    });
+                        
+                    }else
+                    {
+                        
+                          [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                        
+                    }
+                    
                 }
-            }
+                   
+//                    NSString * msg12= [[json objectForKey:@"response"] objectForKey:@"message"];
+//                    NSLog(@"object is :%@",msg12);
+//
+//                    NSString * msg121= [object objectAtIndex:0];
+//                    NSLog(@"object is :%@",msg121);
+//
+//                  if([object isEqualToString:@"Status changed to Closed"]){
+//
+//                      [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+//
+//                      InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+//                      [self.navigationController pushViewController:inboxVC animated:YES];
+//
+//                      }else if([msg121 isEqualToString:@"Status changed to Closed"])
+//                    {
+//                        [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+//
+//                        InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+//                        [self.navigationController pushViewController:inboxVC animated:YES];
+//                    }else if([msg121 isEqualToString:@"Permission denied, you do not have permission to access the requested page."] || [msg121 hasPrefix:@"Permission denied"]){
+//
+//                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+//                        }
+//
+//                    }}
+//                else
+//
+//                {
+//                    [utils showAlertWithMessage:NSLocalizedString(@"ERROR", nil) sendViewController:self];
+//                }
+            } // end json
+            
             NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
-        }];
-    }
-    }
+        }]; // end webservice call
+        }
+    }//end rechability
 }
 
 -(void)changeStaus3
@@ -695,41 +721,40 @@
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"response"]) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                       
-                        [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                    
+                    id object;
+                    NSDictionary * dict1= [json objectForKey:@"response"];
+                    object = [dict1 objectForKey:@"message"];
+                    
+                    NSLog(@"object is :%@",object);
+                    NSLog(@"object is :%@",object);
+                    
+                    if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Resolved"]){
                         
-
-                        
-                        
-                      /*  if (self.navigationController.navigationBarHidden) {
-                            [self.navigationController setNavigationBarHidden:NO];
-                        }
-                        
-                        [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess.", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                                                         iconImage:nil
-                                                              type:RMessageTypeSuccess
-                                                    customTypeName:nil
-                                                          duration:RMessageDurationAutomatic
-                                                          callback:nil
-                                                       buttonTitle:nil
-                                                    buttonCallback:nil
-                                                        atPosition:RMessagePositionNavBarOverlay
-                                              canBeDismissedByUser:YES]; */
+                        [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
                         InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                         [self.navigationController pushViewController:inboxVC animated:YES];
-                    });
+                        
+                    }else
+                    {
+                        
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
+                        
+                    }
+                    
                 }
-            }
+                
+                
+            } // end json
+            
             NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
-        }];
-    }
-    }
+        }]; // end webservice call
+        }
+    }//end rechability
 }
+
 
 -(void)changeStaus4
 {
@@ -792,42 +817,41 @@
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"response"]) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    id object;
+                    NSDictionary * dict1= [json objectForKey:@"response"];
+                    object = [dict1 objectForKey:@"message"];
+                    
+                    NSLog(@"object is :%@",object);
+                    NSLog(@"object is :%@",object);
+                    
+                    if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Deleted"]){
                         
-                         [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                        
-            
-                        
-                        
-                     /*   if (self.navigationController.navigationBarHidden) {
-                            [self.navigationController setNavigationBarHidden:NO];
-                        }
-                        
-                        [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess.", nil)
-                                                          subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                                                         iconImage:nil
-                                                              type:RMessageTypeSuccess
-                                                    customTypeName:nil
-                                                          duration:RMessageDurationAutomatic
-                                                          callback:nil
-                                                       buttonTitle:nil
-                                                    buttonCallback:nil
-                                                        atPosition:RMessagePositionNavBarOverlay
-                                              canBeDismissedByUser:YES]; */
-
+                        [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
                         InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                         [self.navigationController pushViewController:inboxVC animated:YES];
-                    });
+                        
+                    }else
+                    {
+                        
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
+                        
+                    }
+                    
                 }
-            }
+                
+                
+                //                }
+            } // end json
+            
             NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
-        }];
-    }
-    }
+        }]; // end webservice call
+        }
+    }//end rechability
 }
+
 
 
 
@@ -917,10 +941,10 @@
     //[ textViewInternalNote setReturnKeyType:UIReturnKeyDone];
     
    // textViewInternalNote.inputAccessoryView.hidden =YES;
-    textViewInternalNote.autocorrectionType = NO;
-    textViewInternalNote.textContentType = UITextContentTypeName;
-    textViewInternalNote.autocapitalizationType=NO;
-    textViewInternalNote.autocorrectionType = UITextAutocorrectionTypeNo;
+  //  textViewInternalNote.autocorrectionType = NO;
+   // textViewInternalNote.textContentType = UITextContentTypeName;
+   // textViewInternalNote.autocapitalizationType=NO;
+ //   textViewInternalNote.autocorrectionType = UITextAutocorrectionTypeNo;
 
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
@@ -1063,10 +1087,10 @@
     
     
    // textViewReply.inputAccessoryView.hidden =YES;
-    textViewReply.autocorrectionType = NO;
-    textViewReply.textContentType = UITextContentTypeName;
-    textViewReply.autocapitalizationType=NO;
-    textViewReply.autocorrectionType = UITextAutocorrectionTypeNo;
+   // textViewReply.autocorrectionType = NO;
+   // textViewReply.textContentType = UITextContentTypeName;
+   // textViewReply.autocapitalizationType=NO;
+  //  textViewReply.autocorrectionType = UITextAutocorrectionTypeNo;
 
     
     textViewReply.layer.cornerRadius=4;
@@ -1195,14 +1219,15 @@
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"thread"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [RKDropdownAlert title:NSLocalizedString(@"Sucess", nil) message:NSLocalizedString(@"Posted your note.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your note.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
-                       
-                        
-                        TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+           
+                       TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
                         [self.navigationController pushViewController:td animated:YES];
                         
+                      
+
 
                        // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
                     });
@@ -1214,15 +1239,15 @@
   }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in Post-Internal-Note method in TicketDetail ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in Post-Internal-Note method in TicketDetail ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
 
@@ -1304,13 +1329,13 @@
                 NSLog(@"JSON-CreateTicket-%@",json);
                 if ([json objectForKey:@"result"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                         [RKDropdownAlert title:NSLocalizedString(@"Sucess", nil) message:NSLocalizedString(@"Posted your reply.", nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                         [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your reply.", nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
                         
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
                         
-                        TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-                        [self.navigationController pushViewController:td animated:YES];
+                       TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+                       [self.navigationController pushViewController:td animated:YES];
                         // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
                     });
                 }
@@ -1321,15 +1346,15 @@
   }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in post-replay methos in TicketDetail ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in post-replay methos in TicketDetail ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
 
@@ -1337,20 +1362,6 @@
     
 }
 
-
-//- (NSString *)removeEndSpaceFrom:(NSString *)strtoremove{
-//    NSUInteger location = 0;
-//    unichar charBuffer[[strtoremove length]];
-//    [strtoremove getCharacters:charBuffer];
-//    int i = 0;
-//    for(i = [strtoremove length]; i >0; i--) {
-//        NSCharacterSet* charSet = [NSCharacterSet whitespaceCharacterSet];
-//        if(![charSet characterIsMember:charBuffer[i - 1]]) {
-//            break;
-//        }
-//    }
-//    return [strtoremove substringWithRange:NSMakeRange(location, i  - location)];
-//}
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)aTextField
@@ -1360,11 +1371,6 @@
 }
 
 
-//- (BOOL) validate: (NSString *) candidate {
-//    NSString *emailRegex = @"[a-zA-Z]*";
-//    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-//    
-//    return [emailTest evaluateWithObject:candidate];
-//}
+
 
 @end

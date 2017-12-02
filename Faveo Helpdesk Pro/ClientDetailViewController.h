@@ -130,4 +130,8 @@
  */
 @property(nonatomic,strong) NSString * clientId;
 
+@property (weak, nonatomic) IBOutlet UILabel *mobileLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *companyLabel;
+
 @end

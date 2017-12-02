@@ -140,6 +140,7 @@
                 //NSError *error;
                 NSLog(@"Thread-NO4--getInboxAPI--%@",json);
                 _mutableArray = [json objectForKey:@"data"];
+                
                 _nextPageUrl =[json objectForKey:@"next_page_url"];
                 _currentPage=[[json objectForKey:@"current_page"] integerValue];
                 _totalTickets=[[json objectForKey:@"total"] integerValue];
@@ -160,15 +161,15 @@
     }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in reload method in Notification ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in reload method in Notification ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return ;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+          //  NSLog( @"In finally block");
             
         }
 
@@ -320,15 +321,15 @@
     }@catch (NSException *exception)
         {
             // Print exception information
-            NSLog( @"NSException caught in load-more methos in Notification ViewController\n" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+//            NSLog( @"NSException caught in load-more methos in Notification ViewController\n" );
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return ;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+       //    NSLog( @"In finally block");
             
         }
 
@@ -687,7 +688,8 @@
     
     refresh=[[UIRefreshControl alloc] init];
     refresh.tintColor=[UIColor whiteColor];
-    refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+  //  refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+     refresh.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
     refresh.attributedTitle =refreshing;
     [refresh addTarget:self action:@selector(reloadd) forControlEvents:UIControlEventValueChanged];
     [_tableView insertSubview:refresh atIndex:0];
