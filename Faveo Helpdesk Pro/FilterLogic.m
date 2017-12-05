@@ -572,8 +572,11 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     
     
         MyWebservices *webservices=[MyWebservices sharedInstance];
-     globalVariables.urlFromFilterLogicView=url;
-    
+        globalVariables.urlFromFilterLogicView=url;
+        NSLog(@"URL is : %@",url);
+        NSLog(@"URL is : %@",url);
+        NSLog(@"URL is : %@",url);
+
     [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
             
@@ -867,13 +870,10 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             
             
             NSString *str=_nextPageUrl;
-            NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
-            NSRange range = [str rangeOfString:szNeedle];
-            NSInteger idx = range.location + range.length;
-            NSString *szResult = [str substringFromIndex:idx];
-            NSString *Page = [str substringFromIndex:idx];
+            NSString *Page = [str substringFromIndex:[str length] - 1];
             
-            NSLog(@"String is : %@",szResult);
+            //     NSLog(@"String is : %@",szResult);
+            NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
             globalVariables.filterId=@"INBOXFilter";
             
@@ -939,13 +939,10 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             
             
             NSString *str=_nextPageUrl;
-            NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
-            NSRange range = [str rangeOfString:szNeedle];
-            NSInteger idx = range.location + range.length;
-            NSString *szResult = [str substringFromIndex:idx];
-            NSString *Page = [str substringFromIndex:idx];
+            NSString *Page = [str substringFromIndex:[str length] - 1];
             
-            NSLog(@"String is : %@",szResult);
+            //     NSLog(@"String is : %@",szResult);
+            NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
             globalVariables.filterId=@"MYTICKETSFilter";
             
@@ -1008,13 +1005,10 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             
             
             NSString *str=_nextPageUrl;
-            NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
-            NSRange range = [str rangeOfString:szNeedle];
-            NSInteger idx = range.location + range.length;
-            NSString *szResult = [str substringFromIndex:idx];
-            NSString *Page = [str substringFromIndex:idx];
+            NSString *Page = [str substringFromIndex:[str length] - 1];
             
-            NSLog(@"String is : %@",szResult);
+            //     NSLog(@"String is : %@",szResult);
+            NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
             globalVariables.filterId=@"UNASSIGNEDFilter";
             
@@ -1080,13 +1074,10 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             
             
             NSString *str=_nextPageUrl;
-            NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
-            NSRange range = [str rangeOfString:szNeedle];
-            NSInteger idx = range.location + range.length;
-            NSString *szResult = [str substringFromIndex:idx];
-            NSString *Page = [str substringFromIndex:idx];
+            NSString *Page = [str substringFromIndex:[str length] - 1];
             
-            NSLog(@"String is : %@",szResult);
+            //     NSLog(@"String is : %@",szResult);
+            NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
             globalVariables.filterId=@"CLOSEDFilter";
             
@@ -1151,13 +1142,10 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             
             
             NSString *str=_nextPageUrl;
-            NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
-            NSRange range = [str rangeOfString:szNeedle];
-            NSInteger idx = range.location + range.length;
-            NSString *szResult = [str substringFromIndex:idx];
-            NSString *Page = [str substringFromIndex:idx];
+            NSString *Page = [str substringFromIndex:[str length] - 1];
             
-            NSLog(@"String is : %@",szResult);
+            //     NSLog(@"String is : %@",szResult);
+            NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
              globalVariables.filterId=@"TRASHFilter";
             

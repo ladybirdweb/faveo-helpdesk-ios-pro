@@ -1518,13 +1518,10 @@
             
             
             NSString *str=_nextPageUrl;
-            NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
-            NSRange range = [str rangeOfString:szNeedle];
-            NSInteger idx = range.location + range.length;
-            NSString *szResult = [str substringFromIndex:idx];
-            NSString *Page = [str substringFromIndex:idx];
+            NSString *Page = [str substringFromIndex:[str length] - 1];
             
-            NSLog(@"String is : %@",szResult);
+            //     NSLog(@"String is : %@",szResult);
+            NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -1585,13 +1582,10 @@
             
             
             NSString *str=_nextPageUrl;
-            NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
-            NSRange range = [str rangeOfString:szNeedle];
-            NSInteger idx = range.location + range.length;
-            NSString *szResult = [str substringFromIndex:idx];
-            NSString *Page = [str substringFromIndex:idx];
+            NSString *Page = [str substringFromIndex:[str length] - 1];
             
-            NSLog(@"String is : %@",szResult);
+            //     NSLog(@"String is : %@",szResult);
+            NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -1652,13 +1646,10 @@
             
             
             NSString *str=_nextPageUrl;
-            NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
-            NSRange range = [str rangeOfString:szNeedle];
-            NSInteger idx = range.location + range.length;
-            NSString *szResult = [str substringFromIndex:idx];
-            NSString *Page = [str substringFromIndex:idx];
+            NSString *Page = [str substringFromIndex:[str length] - 1];
             
-            NSLog(@"String is : %@",szResult);
+            //     NSLog(@"String is : %@",szResult);
+            NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -1721,13 +1712,10 @@
             
             
             NSString *str=_nextPageUrl;
-            NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
-            NSRange range = [str rangeOfString:szNeedle];
-            NSInteger idx = range.location + range.length;
-            NSString *szResult = [str substringFromIndex:idx];
-            NSString *Page = [str substringFromIndex:idx];
+            NSString *Page = [str substringFromIndex:[str length] - 1];
             
-            NSLog(@"String is : %@",szResult);
+            //     NSLog(@"String is : %@",szResult);
+            NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -1789,13 +1777,10 @@
             
             
             NSString *str=_nextPageUrl;
-            NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
-            NSRange range = [str rangeOfString:szNeedle];
-            NSInteger idx = range.location + range.length;
-            NSString *szResult = [str substringFromIndex:idx];
-            NSString *Page = [str substringFromIndex:idx];
+            NSString *Page = [str substringFromIndex:[str length] - 1];
             
-            NSLog(@"String is : %@",szResult);
+            //     NSLog(@"String is : %@",szResult);
+            NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
             
             MyWebservices *webservices=[MyWebservices sharedInstance];

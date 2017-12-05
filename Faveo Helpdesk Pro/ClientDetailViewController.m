@@ -102,9 +102,12 @@
         
         NSString *fname= [NSString stringWithFormat:@"%@",globalVariables.First_name];
          NSString *lname= [NSString stringWithFormat:@"%@",globalVariables.Last_name];
+     NSString *userName= [NSString stringWithFormat:@"%@",globalVariables.userNameInUserList];
         
         [Utils isEmpty:fname];
         [Utils isEmpty:lname];
+     [Utils isEmpty:userName];
+    
         
         if (![Utils isEmpty:fname] || ! [Utils isEmpty:lname] )
         {
@@ -118,12 +121,16 @@
                 _clientNameLabel.text= [NSString stringWithFormat:@"%@ %@",globalVariables.First_name,globalVariables.Last_name];
             }
           
-        }
-        else
+        }else if(![Utils isEmpty:userName])
+        
         {
-            _mobileLabel.text= @"Not Available";
+             _clientNameLabel.text= [NSString stringWithFormat:@"%@",globalVariables.userNameInUserList];
         }
-    
+       else
+       {
+           _clientNameLabel.text= @"Not Available";
+           
+       }
        
         
         NSString *phone1= [NSString stringWithFormat:@"%@",globalVariables.phoneNumberInUserList];

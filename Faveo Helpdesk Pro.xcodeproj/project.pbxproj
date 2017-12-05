@@ -19,7 +19,7 @@
 		D946D6981FA9F519005E5BF1 /* SortingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D946D6971FA9F519005E5BF1 /* SortingViewController.m */; };
 		D9532C131E9CE9090063B318 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9532C151E9CE9090063B318 /* Localizable.strings */; };
 		D953D53E1FA321420077D519 /* AddRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = D953D53D1FA321420077D519 /* AddRequester.m */; };
-		D955A5511F2A05630045429F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D955A5501F2A05630045429F /* Assets.xcassets */; };
+		D955A5511F2A05630045429F /* a.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D955A5501F2A05630045429F /* a.xcassets */; };
 		D97B13791E080BA8007F46DA /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B13781E080BA8007F46DA /* UserNotifications.framework */; };
 		D97B137B1E080BC3007F46DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137A1E080BC3007F46DA /* UIKit.framework */; };
 		D97B137D1E080BCA007F46DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97B137C1E080BCA007F46DA /* SystemConfiguration.framework */; };
@@ -146,7 +146,7 @@
 		D9532C191E9CE9110063B318 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D953D53C1FA321420077D519 /* AddRequester.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRequester.h; sourceTree = "<group>"; };
 		D953D53D1FA321420077D519 /* AddRequester.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRequester.m; sourceTree = "<group>"; };
-		D955A5501F2A05630045429F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D955A5501F2A05630045429F /* a.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = a.xcassets; sourceTree = "<group>"; };
 		D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Faveo Helpdesk Pro.entitlements"; sourceTree = "<group>"; };
 		D97B13781E080BA8007F46DA /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D97B137A1E080BC3007F46DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -471,7 +471,7 @@
 				D9F954FA1E617BE500DA9B30 /* countries.json */,
 				D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */,
 				D9DBD34D1E07ACFC00219F93 /* Main.storyboard */,
-				D955A5501F2A05630045429F /* Assets.xcassets */,
+				D955A5501F2A05630045429F /* a.xcassets */,
 				D9DBD3521E07ACFC00219F93 /* LaunchScreen.storyboard */,
 				D9DBD3551E07ACFC00219F93 /* Info.plist */,
 				D9DBD3451E07ACFC00219F93 /* main.m */,
@@ -816,7 +816,7 @@
 				D9532C131E9CE9090063B318 /* Localizable.strings in Resources */,
 				D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */,
 				D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */,
-				D955A5511F2A05630045429F /* Assets.xcassets in Resources */,
+				D955A5511F2A05630045429F /* a.xcassets in Resources */,
 				D9F9F13C1FB9B2530044DA27 /* check_mark@2x.png in Resources */,
 				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
 				D9F9F13E1FB9B2530044DA27 /* drop_down@2x.png in Resources */,

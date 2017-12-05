@@ -318,15 +318,10 @@
         // NSLog(@"Page is : %ld",(long)_page);
         
         NSString *str=_nextPageUrl;
+        NSString *Page = [str substringFromIndex:[str length] - 1];
         
-        // NSString *szHaystack= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=2";
-        NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
-        NSRange range = [str rangeOfString:szNeedle];
-        NSInteger idx = range.location + range.length;
-        NSString *szResult = [str substringFromIndex:idx];
-        NSString *Page = [str substringFromIndex:idx];
-        
-        NSLog(@"String is : %@",szResult);
+        //     NSLog(@"String is : %@",szResult);
+        NSLog(@"Page is : %@",Page);
         NSLog(@"Page is : %@",Page);
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
