@@ -448,6 +448,14 @@
         //cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
         
         @try{
+            
+            NSString *replyer12=[finaldic objectForKey:@"last_replier"];
+            
+            if([replyer12 isEqualToString:@"client"])
+            {
+                cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
+            }
+            
             NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
             
             [Utils isEmpty:ticketNumber];

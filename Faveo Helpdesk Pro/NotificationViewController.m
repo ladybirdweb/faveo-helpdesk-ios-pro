@@ -415,10 +415,33 @@
         NSLog(@"Dict is : %@", finaldic);
         
     
+        
         NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
         
+        NSString * seen=[NSString stringWithFormat:@"%i",1];
+       
+        NSString * str=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"seen"]];
         
+       
+        [Utils isEmpty:str];
         
+        if  (![Utils isEmpty:str] && ![str isEqualToString:@""])
+        {
+               if([str isEqualToString:seen])
+                {
+            
+                cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
+                }else
+                {
+                    NSLog(@"I am in else condition..!");
+                }
+        }
+        else
+        {
+            NSLog(@"I am in else condition..!");
+        }
+        
+
         // cell.msglbl.text=[finaldic objectForKey:@"message"];
         
         if ( ( ![[finaldic objectForKey:@"message"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"message"] length] != 0 ) )

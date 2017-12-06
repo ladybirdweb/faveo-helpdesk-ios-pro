@@ -768,13 +768,12 @@
 					};
 					D9DBD3591E07ACFC00219F93 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 8VY8B59STG;
 						ProvisioningStyle = Automatic;
 						TestTargetID = D9DBD3401E07ACFC00219F93;
 					};
 					D9DBD3641E07ACFC00219F93 = {
 						CreatedOnToolsVersion = 8.1;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						TestTargetID = D9DBD3401E07ACFC00219F93;
 					};
 				};
@@ -1333,6 +1332,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Faveo Helpdesk ProUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1347,6 +1347,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Faveo Helpdesk ProUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

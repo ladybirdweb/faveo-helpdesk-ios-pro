@@ -598,12 +598,37 @@
             cell = [nib objectAtIndex:0];
         }
         
+        
+        
+        
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
         
         tempDict= [_mutableArray objectAtIndex:indexPath.row];
         //cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
         
         @try{
+            
+            
+            NSString *replyer12=[finaldic objectForKey:@"last_replier"];
+            [Utils isEmpty:replyer12];
+            
+            if  (![Utils isEmpty:replyer12] || ![replyer12 isEqualToString:@""])
+            {
+                if([replyer12 isEqualToString:@"client"])
+                 {
+                cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
+                 }else
+                 {
+                     NSLog(@"I am in else condition..!");
+                 }
+                
+            }else
+            {
+                NSLog(@"I am in else condition..!");
+            }
+            
+            
+            
             NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
             
             [Utils isEmpty:ticketNumber];

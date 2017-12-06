@@ -145,7 +145,9 @@
                 
                 [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Verifying URL","")];
                 
-                NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/check-url?check-url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
+               // NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/check-url?check-url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
+                
+        NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/url?url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
                 NSLog(@"URL :%@",url);
                 
                 globalVariables.urlDemo=baseURL;
@@ -182,6 +184,7 @@
                         }
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                         [utils showAlertWithMessage:errorMsg sendViewController:self];
+                        
                         NSLog(@"dataTaskWithRequest error: %@", errorMsg);
                         return;
                     }else if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
@@ -219,7 +222,8 @@
                         }else{
                         
                         [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [utils showAlertWithMessage:NSLocalizedString(@"Error verifying URL",nil)sendViewController:self];
+                      //  [utils showAlertWithMessage:NSLocalizedString(@"Error verifying URL",nil)sendViewController:self];
+                        [utils showAlertWithMessage:NSLocalizedString(@"Error - Please Check Your Helpdesk URL",nil)sendViewController:self];
                           }
                     }@catch (NSException *exception)
                     {
