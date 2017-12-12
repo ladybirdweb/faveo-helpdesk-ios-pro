@@ -30,6 +30,7 @@
 #import "BDCustomAlertView.h"
 #import "FilterViewController.h"
 #import "FTPopOverMenu.h"
+#import "MergeViewForm.h"
 
 @interface FilterLogic ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>
 {
@@ -55,6 +56,7 @@
     NSMutableArray *selectedArray;
     int count1;
     NSString *selectedIDs;
+    UINavigationBar*  navbar;
     
     
 }
@@ -120,22 +122,18 @@
     
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
-    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [moreButton setImage:[UIImage imageNamed:@"verticle"] forState:UIControlStateNormal];
-    [moreButton addTarget:self action:@selector(onNavButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
-    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
-    
     UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
     [NotificationBtn addTarget:self action:@selector(NotificationBtnPressed) forControlEvents:UIControlEventTouchUpInside];
-    // [NotificationBtn setFrame:CGRectMake(44, 0, 32, 32)];
-    [NotificationBtn setFrame:CGRectMake(10, 0, 32, 32)];
+    // [NotificationBtn setFrame:CGRectMake(10, 0, 32, 32)];
+    [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    [rightBarButtonItems addSubview:moreButton];
+    // [rightBarButtonItems addSubview:moreButton];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
+  
     
     //To set Gesture on Tableview for multiselection
     count1=0;
@@ -146,6 +144,50 @@
     [self.tableView addGestureRecognizer:lpGesture];
     
     
+    navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    
+    UIImage *image1 = [UIImage imageNamed:@"merg111"];
+    UIImage *image2 = [UIImage imageNamed:@"x1"];
+    
+    
+    
+    // UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Assign"];
+    UINavigationItem* navItem = [[UINavigationItem alloc] init];
+    // self.navigationItem.titleView = myImageView;
+    
+    UIImage *image5 = [UIImage imageNamed:@"merge2a"];
+    //chnaging size of img
+    CGRect rect = CGRectMake(0,0,26,26);
+    UIGraphicsBeginImageContext( rect.size );
+    [image5 drawInRect:rect];
+    UIImage *picture1 = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    NSData *imageData = UIImagePNGRepresentation(picture1);
+    UIImage *img3=[UIImage imageWithData:imageData];
+    
+    UIImageView* img = [[UIImageView alloc] initWithImage:img3];
+    
+    //giving action to image
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    [img setUserInteractionEnabled:YES];
+    [img addGestureRecognizer:singleTap];
+    
+    
+    navItem.titleView = img;
+    
+    
+    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStylePlain  target:self action:@selector(MergeButtonClicked)];
+    navItem.leftBarButtonItem = button1;
+    
+    
+    UIBarButtonItem *button2 = [[UIBarButtonItem alloc] initWithImage:image2 style:UIBarButtonItemStylePlain  target:self action:@selector(onNavButtonTapped:event:)];
+    navItem.rightBarButtonItem = button2;
+    
+    [navbar setItems:@[navItem]];
+    [self.view addSubview:navbar];
+    
+    
     
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
@@ -153,6 +195,41 @@
     [self reload];
     [self getDependencies];
 
+    
+}
+
+-(void)tapDetected{
+    NSLog(@"single Tap on imageview");
+    
+    
+    
+}
+
+-(void)MergeButtonClicked
+{
+    NSLog(@"Clicked on merge");
+    MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
+    [self.navigationController pushViewController:merge animated:YES];
+    
+}
+
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    if (self.selectedPath != nil) {
+        [_tableView selectRowAtIndexPath:self.selectedPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+    if([globalVariables.backButtonActionFromMergeViewMenu isEqualToString:@"true"])
+    {
+        navbar.hidden=NO;
+        globalVariables.backButtonActionFromMergeViewMenu=@"false";
+    }else{
+        navbar.hidden=YES;
+        
+    }
+    [super viewWillAppear:YES];
+    [[self navigationController] setNavigationBarHidden:NO];
     
 }
 
@@ -770,6 +847,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
 
 -(void)EditTableView:(UIGestureRecognizer*)gesture{
     [self.tableView setEditing:YES animated:YES];
+    navbar.hidden=NO;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -1205,122 +1283,6 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
 }
 
 
-//-(void)loadMore{
-//
-//    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-//    {
-//        //connection unavailable
-//
-//        //   [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-//
-//        if (self.navigationController.navigationBarHidden) {
-//            [self.navigationController setNavigationBarHidden:NO];
-//        }
-//
-//        [RMessage showNotificationInViewController:self.navigationController
-//                                             title:NSLocalizedString(@"Error..!", nil)
-//                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
-//                                         iconImage:nil
-//                                              type:RMessageTypeError
-//                                    customTypeName:nil
-//                                          duration:RMessageDurationAutomatic
-//                                          callback:nil
-//                                       buttonTitle:nil
-//                                    buttonCallback:nil
-//                                        atPosition:RMessagePositionNavBarOverlay
-//                              canBeDismissedByUser:YES];
-//
-//
-//    }else{
-//
-//        @try{
-//
-//            self.page = _page + 1;
-//            // NSLog(@"Page is : %ld",(long)_page);
-//
-//            NSString *str=_nextPageUrl;
-//
-//            // NSString *szHaystack= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=2";
-//            NSString *szNeedle= @"http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?page=";
-//            NSRange range = [str rangeOfString:szNeedle];
-//            NSInteger idx = range.location + range.length;
-//            NSString *szResult = [str substringFromIndex:idx];
-//            NSString *Page = [str substringFromIndex:idx];
-//
-//            NSLog(@"String is : %@",szResult);
-//            NSLog(@"Page is : %@",Page);
-//
-//            MyWebservices *webservices=[MyWebservices sharedInstance];
-//            [webservices getNextPageURLInbox:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
-//
-//                //[webservices getNextPageURL:_nextPageUrl  callbackHandler:^(NSError *error,id json,NSString* msg) {
-//
-//                if (error || [msg containsString:@"Error"]) {
-//
-//                    if (msg) {
-//
-//                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-//
-//                    }else if(error)  {
-//                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-//                        NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
-//                    }
-//                    return ;
-//                }
-//
-//                if ([msg isEqualToString:@"tokenRefreshed"]) {
-//
-//                    [self loadMore];
-//                    //NSLog(@"Thread--NO4-call-getInbox");
-//                    return;
-//                }
-//
-//                if (json) {
-//                    NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-//                    //_indexPaths=[[NSArray alloc]init];
-//                    //_indexPaths = [json objectForKey:@"data"];
-//                    _nextPageUrl =[json objectForKey:@"next_page_url"];
-//                    _currentPage=[[json objectForKey:@"current_page"] integerValue];
-//                    _totalTickets=[[json objectForKey:@"total"] integerValue];
-//                    _totalPages=[[json objectForKey:@"last_page"] integerValue];
-//
-//
-//                    _mutableArray= [_mutableArray mutableCopy];
-//
-//                    [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
-//
-//                    //                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
-//                    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-//                        dispatch_async(dispatch_get_main_queue(), ^{
-//                            [self.tableView reloadData];
-//                            //                        [self.tableView beginUpdates];
-//                            //                        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[_mutableArray count]-[_indexPaths count] inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
-//                            //                        [self.tableView endUpdates];
-//                        });
-//                    });
-//
-//                }
-//                NSLog(@"Thread-NO5-getInbox-closed");
-//
-//            }];
-//        }@catch (NSException *exception)
-//        {
-//            // Print exception information
-//            //            NSLog( @"NSException caught in loadMore method in Inbox ViewController" );
-//            //            NSLog( @"Name: %@", exception.name);
-//            //            NSLog( @"Reason: %@", exception.reason );
-//            return;
-//        }
-//        @finally
-//        {
-//            // Cleanup, in both success and fail cases
-//            //  NSLog( @"In finally block");
-//
-//        }
-//    }
-//}
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -1718,6 +1680,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     
     if (!selectedArray.count) {
         [self.tableView setEditing:NO animated:YES];
+         navbar.hidden=YES;
     }
     
 }
@@ -1753,11 +1716,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    [[self navigationController] setNavigationBarHidden:NO];
-    
-}
+
 
 -(void)addUIRefresh{
     

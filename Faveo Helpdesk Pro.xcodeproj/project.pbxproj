@@ -28,6 +28,7 @@
 		D97CA1401FCC229800A7B982 /* LGFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D97CA13D1FCC229800A7B982 /* LGFilterView.m */; };
 		D97CA1411FCC229800A7B982 /* LGFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D97CA13F1FCC229800A7B982 /* LGFilterViewCell.m */; };
 		D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */ = {isa = PBXBuildFile; fileRef = D985BAC71EDC5FAA001EB153 /* Dat.m */; };
+		D99776D71FDAB631004EA9B8 /* MergeViewForm.m in Sources */ = {isa = PBXBuildFile; fileRef = D99776D61FDAB631004EA9B8 /* MergeViewForm.m */; };
 		D9A2FCB01F18904000C829DD /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FCAF1F18904000C829DD /* NotificationViewController.m */; };
 		D9A2FCB41F18942800C829DD /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */; };
 		D9AA44461FA890AC00938081 /* BDCustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA44441FA890AC00938081 /* BDCustomAlertView.m */; };
@@ -159,6 +160,8 @@
 		D97CA13F1FCC229800A7B982 /* LGFilterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGFilterViewCell.m; sourceTree = "<group>"; };
 		D985BAC61EDC5FAA001EB153 /* Dat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dat.h; sourceTree = "<group>"; };
 		D985BAC71EDC5FAA001EB153 /* Dat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dat.m; sourceTree = "<group>"; };
+		D99776D51FDAB631004EA9B8 /* MergeViewForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MergeViewForm.h; sourceTree = "<group>"; };
+		D99776D61FDAB631004EA9B8 /* MergeViewForm.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MergeViewForm.m; sourceTree = "<group>"; };
 		D9A2FCAE1F18904000C829DD /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
 		D9A2FCAF1F18904000C829DD /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
 		D9A2FCB11F18942800C829DD /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
@@ -551,6 +554,8 @@
 				D9EB9F921E07C3270001115F /* CreateTicketViewController.m */,
 				D953D53C1FA321420077D519 /* AddRequester.h */,
 				D953D53D1FA321420077D519 /* AddRequester.m */,
+				D99776D51FDAB631004EA9B8 /* MergeViewForm.h */,
+				D99776D61FDAB631004EA9B8 /* MergeViewForm.m */,
 				D9EB9F931E07C3270001115F /* InboxViewController.h */,
 				D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */,
 				D9F9F1181FB977B40044DA27 /* FilterViewController.h */,
@@ -954,6 +959,7 @@
 				D9EB9FC11E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
 				D9EB9F791E07C2F00001115F /* ClientListTableViewCell.m in Sources */,
 				D9EB9FBE1E07C4490001115F /* SlideNavigationContorllerAnimatorScale.m in Sources */,
+				D99776D71FDAB631004EA9B8 /* MergeViewForm.m in Sources */,
 				D9EB9FAB1E07C3270001115F /* ConversationViewController.m in Sources */,
 				D9EB9FA01E07C3270001115F /* LoginViewController.m in Sources */,
 				D9EB9FA21E07C3270001115F /* ClientListViewController.m in Sources */,

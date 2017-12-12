@@ -352,6 +352,8 @@
     }else{
         
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        
+        NSLog(@"Staff Array is : %@",_staffArray);
     }
 }
 
@@ -895,6 +897,10 @@
 {
     staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
     self.assignTextField.text = (_staffArray)[(NSUInteger) [selectedIndex intValue]];
+    
+    
+    NSLog(@"staff_id issss :%@",staff_id);
+    NSLog(@"Selectd value in textfiled is : %@",_assignTextField.text);
 }
 
 

@@ -433,6 +433,7 @@
                 cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
                 }else
                 {
+                     cell.viewMain.backgroundColor=[UIColor clearColor];
                     NSLog(@"I am in else condition..!");
                 }
         }

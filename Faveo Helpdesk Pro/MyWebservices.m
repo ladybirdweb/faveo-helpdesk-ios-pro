@@ -10,11 +10,13 @@
 #import "AppConstanst.h"
 #import "AppDelegate.h"
 #import "GlobalVariables.h"
+#import "Utils.h"
 
 @interface MyWebservices(){
     
     NSString *tokenRefreshed;
     GlobalVariables *globalVariables;
+    Utils *utils;
 }
 
 @property (nonatomic,strong) NSUserDefaults *userDefaults;
@@ -330,6 +332,22 @@
                     }
 
                     
+                }else
+                if (statusCode==429)
+                {
+                    if ([[self refreshToken] isEqualToString:@"tokenRefreshed"]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil,nil,@"tokenRefreshed");
+                        });
+                        NSLog(@"Thread--httpResponsePOST--tokenRefreshed");
+                    }else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil,nil,@"tokenNotRefreshed");
+                        });
+                        NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
+                    }
+                    
+                    
                 }
                 else
                        dispatch_async(dispatch_get_main_queue(), ^{
@@ -409,7 +427,10 @@
         }else if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
             
             NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+            NSLog(@"Status code is : %ld",(long)statusCode);
+           
             
+        
             if (statusCode != 200) {
                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                 
