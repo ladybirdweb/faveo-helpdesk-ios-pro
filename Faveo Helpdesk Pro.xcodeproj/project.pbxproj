@@ -171,6 +171,7 @@
 		D9AA44451FA890AC00938081 /* BDCustomAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDCustomAlertView.xib; sourceTree = "<group>"; };
 		D9AAFAB71F5D475400891CA5 /* FTPopOverMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPopOverMenu.h; sourceTree = "<group>"; };
 		D9AAFAB81F5D475400891CA5 /* FTPopOverMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPopOverMenu.m; sourceTree = "<group>"; };
+		D9AE2E771FE137D700D734ED /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D9AF852F1FC421AE005232A0 /* AWNavigationMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWNavigationMenuItem.m; sourceTree = "<group>"; };
 		D9AF85301FC421AF005232A0 /* AWNavigationMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWNavigationMenuItem.h; sourceTree = "<group>"; };
 		D9AF85351FC4610E005232A0 /* EditClientDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditClientDetail.h; sourceTree = "<group>"; };
@@ -331,6 +332,7 @@
 		2C616208362AC6156509CE49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D9AE2E771FE137D700D734ED /* CoreLocation.framework */,
 				D97B13801E080BE3007F46DA /* Foundation.framework */,
 				D97B137E1E080BDB007F46DA /* CoreGraphics.framework */,
 				D97B137C1E080BCA007F46DA /* SystemConfiguration.framework */,
@@ -758,7 +760,7 @@
 		D9DBD3391E07ACFC00219F93 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Ladybird websolutions pvt ltd";
 				TargetAttributes = {
 					D9DBD3401E07ACFC00219F93 = {
@@ -1234,7 +1236,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "008cee0d-eb74-49d5-bcb0-5a20d3207d46";
+				PROVISIONING_PROFILE = "b6acff33-de39-4e37-9753-6514b09c9673";
 				PROVISIONING_PROFILE_SPECIFIER = "Faveo Helpdesk Pro Dev All Phones";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1247,7 +1249,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Faveo Helpdesk Pro/Faveo Helpdesk Pro.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ladybird Web Solution Private Limited (8VY8B59STG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = YES;
 				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
@@ -1302,8 +1304,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c8eccd09-66da-4f20-a53f-aaf14b298fcf";
-				PROVISIONING_PROFILE_SPECIFIER = "Faveo Helpdesk Pro Dis";
+				PROVISIONING_PROFILE = "b6acff33-de39-4e37-9753-6514b09c9673";
+				PROVISIONING_PROFILE_SPECIFIER = "Faveo Helpdesk Pro Dev All Phones";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

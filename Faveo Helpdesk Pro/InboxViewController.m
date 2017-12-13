@@ -34,18 +34,19 @@
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
 
-@interface InboxViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
+@interface InboxViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate,UISearchDisplayDelegate,UISearchBarDelegate>{
     Utils *utils;
     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
     NSDictionary *tempDict;
+   // NSMutableArray *mutableArray;
     NSMutableArray *selectedArray;
     NSMutableArray *selectedSubjectArray;
     int count1;
     NSString *selectedIDs;
     UINavigationBar*  navbar;
-    
+    NSString *trimmedString;
 }
 
 @property (strong,nonatomic) NSIndexPath *selectedPath;
@@ -72,6 +73,10 @@
     
      NSLog(@"Naa-Inbox");
     
+    _searchBar.delegate = self;
+  
+    _filteredSampleDataArray = [[NSMutableArray alloc] init];
+    
     
    _multistageDropdownMenuView.tag=99;
     
@@ -93,11 +98,15 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
 
-    
-//    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-//    [moreButton setImage:[UIImage imageNamed:@"verticle"] forState:UIControlStateNormal];
-//    [moreButton addTarget:self action:@selector(onNavButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
+    [moreButton setFrame:CGRectMake(10, 0, 32, 32)];
+    
+    
+    
     
     UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
@@ -106,7 +115,7 @@
     [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-   // [rightBarButtonItems addSubview:moreButton];
+    [rightBarButtonItems addSubview:moreButton];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
@@ -175,6 +184,219 @@
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     
 }
+
+
+
+
+- (IBAction)searchButtonClicked {
+    self.navigationItem.rightBarButtonItem = nil;
+    _searchBar = [[UISearchBar alloc] init];
+    _searchBar.delegate = self;
+    _searchBar.placeholder = @"Search Data";
+    [_searchBar sizeToFit];
+    self.navigationItem.titleView = _searchBar;
+    [_searchBar becomeFirstResponder];
+    [_searchBar.window makeKeyAndVisible];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [_searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    
+ //   [_searchBar resignFirstResponder];
+}
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+   // [_searchBar setShowsCancelButton:YES animated:YES];
+    
+    if([text isEqualToString:@"\n"])
+    {
+        [searchBar resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    searching = NO;
+    [self.tableView reloadData];
+    self.navigationItem.titleView = nil;
+//    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"about"] style:UIBarButtonItemStylePlain  target:self action:@selector(searchButtonClicked)];
+//    self.navigationItem.rightBarButtonItem = rightBarButton;
+    
+    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
+    [moreButton setFrame:CGRectMake(10, 0, 32, 32)];
+    
+    UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
+    [NotificationBtn addTarget:self action:@selector(NotificationBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    // [NotificationBtn setFrame:CGRectMake(10, 0, 32, 32)];
+    [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)];
+    
+    UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
+    [rightBarButtonItems addSubview:moreButton];
+    [rightBarButtonItems addSubview:NotificationBtn];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
+    ////
+    [_searchBar setShowsCancelButton:NO];
+  //  [_searchBar resignFirstResponder];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+   //t [_filteredSampleDataArray removeAllObjects];
+    
+    if ([searchText length] != 0) {
+        searching = YES;
+        [self searchData];
+    } else {
+        searching = NO;
+    }
+    
+    [self.tableView reloadData];
+}
+
+- (void)searchData {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@", _searchBar.text];
+    NSLog(@"Data is : %@",predicate);
+    NSLog(@"Data is : %@",predicate);
+    NSString *str1= [NSString stringWithFormat:@"%@",predicate];
+    
+    NSString *prefixToRemove = @"SELF CONTAINS[c] ";
+    NSString *newString = [str1 copy];
+    if ([str1 hasPrefix:prefixToRemove])
+        newString = [str1 substringFromIndex:[prefixToRemove length]];
+    
+    NSLog(@"Data1111 is : %@",newString);
+    NSLog(@"Data1111 is : %@",newString);
+    
+    NSString *str2= [NSString stringWithFormat:@"%@",newString];
+    
+    NSCharacterSet *quoteCharset = [NSCharacterSet characterSetWithCharactersInString:@"\""];
+    trimmedString = [str2 stringByTrimmingCharactersInSet:quoteCharset];
+    
+    NSLog(@"Data222 is : %@",trimmedString);
+    NSLog(@"Data222 is : %@",trimmedString);
+    
+    
+ //   NSString *searchString = searchController.searchBar.text;
+    if (trimmedString != nil && ![trimmedString  isEqual: @""]) {
+        [self getAirports:trimmedString];
+    }
+    
+    
+//    NSArray *tempArray = [_sampleDataArray filteredArrayUsingPredicate:predicate];
+//    NSLog(@"%@", tempArray);
+//    _filteredSampleDataArray = [NSMutableArray arrayWithArray:tempArray];
+}
+
+- (void)getAirports:(NSString *)needeedString
+{
+    //http://jamboreebliss.com/sayar/public/api/v1/helpdesk/ticket-search?search
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        [refresh endRefreshing];
+        
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+        
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
+        
+        
+    }else{
+        
+    }
+    NSString * url= [NSString stringWithFormat:@"%@api/v1/helpdesk/ticket-search?token=%@&search=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],needeedString];
+    NSLog(@"URL is : %@",url);
+    
+    
+        MyWebservices *webservices=[MyWebservices sharedInstance];
+        [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            
+            
+            
+            if (error || [msg containsString:@"Error"]) {
+                [refresh endRefreshing];
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                if (msg) {
+                    
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    
+                }else if(error)  {
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    NSLog(@"Thread-NO4-Search-Refresh-error == %@",error.localizedDescription);
+                }
+                return ;
+            }
+            
+            if ([msg isEqualToString:@"tokenRefreshed"]) {
+                
+                [self getAirports:needeedString];
+                NSLog(@"Thread--NO4-call-Search");
+                return;
+            }
+            
+            if (json) {
+                //NSError *error;
+                NSLog(@"Thread-NO4--SearchAPI--%@",json);
+                
+                NSDictionary * dict1 = [json objectForKey:@"result"];
+                _filteredSampleDataArray = [dict1 objectForKey:@"data"];
+                
+                NSLog(@"Mutable Array is--%@",_filteredSampleDataArray);
+        
+                
+                _nextPageUrl =[dict1 objectForKey:@"next_page_url"];
+                NSLog(@"Next page url is : %@",_nextPageUrl);
+                
+                _path1=[dict1 objectForKey:@"path"];
+                
+                _currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
+                _totalTickets=[[dict1 objectForKey:@"total"] integerValue];
+                _totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
+              
+            //    NSLog(@"Thread-Search-dic--%@", _mutableArray);
+                
+                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                  dispatch_async(dispatch_get_main_queue(), ^{
+//                        [[AppDelegate sharedAppdelegate] hideProgressView];
+//                        [refresh endRefreshing];
+                         [self.tableView reloadData];
+//                      // [self reloadTableView];
+//
+                  });
+              });
+                
+            }
+            NSLog(@"Thread-NO5-Search-closed");
+            
+        }];
+    
+    
+}
+
+
 -(void)tapDetected{
     NSLog(@"single Tap on imageview");
     [utils showAlertWithMessage:@"Clicked on Multiple Ticket Assign" sendViewController:self];
@@ -208,10 +430,10 @@
     }
     if([globalVariables.backButtonActionFromMergeViewMenu isEqualToString:@"true"])
     {
-       navbar.hidden=NO;
+        navbar.hidden=NO;
         globalVariables.backButtonActionFromMergeViewMenu=@"false";
     }else{
-    navbar.hidden=YES;
+        navbar.hidden=YES;
         
     }
     [super viewWillAppear:YES];
@@ -313,12 +535,12 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                         [refresh endRefreshing];
-                      //  [self.tableView reloadData];
+                        //  [self.tableView reloadData];
                         [self reloadTableView];
-//                        [selectedArray removeAllObjects];
-//                        if (!selectedArray.count) {
-//                            [self.tableView setEditing:NO animated:YES];
-//                        }
+                        //                        [selectedArray removeAllObjects];
+                        //                        if (!selectedArray.count) {
+                        //                            [self.tableView setEditing:NO animated:YES];
+                        //                        }
                     });
                 });
                 
@@ -496,6 +718,32 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    
+    if(searching)
+    {
+        
+        NSInteger numOfSections = 0;
+        if ([_filteredSampleDataArray count]==0)
+        {
+            UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+            noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
+            noDataLabel.textColor        = [UIColor blackColor];
+            noDataLabel.textAlignment    = NSTextAlignmentCenter;
+            tableView.backgroundView = noDataLabel;
+            tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            
+        }
+        else
+        {
+            tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+            numOfSections                = 1;
+            tableView.backgroundView = nil;
+        }
+        
+        return numOfSections;
+    }
+    else{
+        
     NSInteger numOfSections = 0;
     if ([_mutableArray count]==0)
     {
@@ -515,17 +763,35 @@
     }
     
     return numOfSections;
+    }
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.currentPage == self.totalPages
-        || self.totalTickets == _mutableArray.count) {
-        return _mutableArray.count;
+    
+    if (searching) {
+       
+        if (self.currentPage == self.totalPages
+            || self.totalTickets == _filteredSampleDataArray.count) {
+            return _filteredSampleDataArray.count;
+        }
+        
+        return _filteredSampleDataArray.count + 1;
+        
+    } else {
+        
+        
+        if (self.currentPage == self.totalPages
+            || self.totalTickets == _mutableArray.count) {
+            return _mutableArray.count;
+        }
+        
+        return _mutableArray.count + 1;
     }
     
     
-    return _mutableArray.count + 1;
+    
+    
 }
 
 
@@ -535,7 +801,35 @@
     
  // cell.selectionStyle=UITableViewCellSelectionStyleNone;
   //  cell.selectionStyle=UITableViewCellSelectionStyleBlue;
-    
+    if(searching)
+    {
+        if (indexPath.row == [_filteredSampleDataArray count] - 1 ) {
+            NSLog(@"nextURL111  %@",_nextPageUrl);
+            
+            if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
+                
+                [self loadMore];
+                
+                
+            }
+            else{
+                
+                [RMessage showNotificationInViewController:self
+                                                     title:nil
+                                                  subtitle:NSLocalizedString(@"All Caught Up", nil)
+                                                 iconImage:nil
+                                                      type:RMessageTypeSuccess
+                                            customTypeName:nil
+                                                  duration:RMessageDurationAutomatic
+                                                  callback:nil
+                                               buttonTitle:nil
+                                            buttonCallback:nil
+                                                atPosition:RMessagePositionBottom
+                                      canBeDismissedByUser:YES];
+            }
+        }
+    }
+    else{
     if (indexPath.row == [_mutableArray count] - 1 ) {
         NSLog(@"nextURL111  %@",_nextPageUrl);
         
@@ -561,6 +855,8 @@
                                   canBeDismissedByUser:YES];
         }
     }
+    
+}
 }
 
 -(void)loadMore{
@@ -626,34 +922,34 @@
                 return;
             }
             
-            if (json) {
-                NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-                //_indexPaths=[[NSArray alloc]init];
-                //_indexPaths = [json objectForKey:@"data"];
-                _nextPageUrl =[json objectForKey:@"next_page_url"];
-                _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[json objectForKey:@"total"] integerValue];
-                _totalPages=[[json objectForKey:@"last_page"] integerValue];
-
-                
+           if (json) {
+               NSLog(@"Thread-NO4--getInboxAPI--%@",json);
+               //_indexPaths=[[NSArray alloc]init];
+               //_indexPaths = [json objectForKey:@"data"];
+               _nextPageUrl =[json objectForKey:@"next_page_url"];
+               _currentPage=[[json objectForKey:@"current_page"] integerValue];
+               _totalTickets=[[json objectForKey:@"total"] integerValue];
+               _totalPages=[[json objectForKey:@"last_page"] integerValue];
+               
+               
                _mutableArray= [_mutableArray mutableCopy];
- 
-              
-                [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
-                
-              //                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                     
+               
+               
+               [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
+               
+               //                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
+               dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                   dispatch_async(dispatch_get_main_queue(), ^{
+                       
                        // [self.tableView reloadData];
-                    
-                         [self reloadTableView];
-                        
-//                        [self.tableView beginUpdates];
-//                        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[_mutableArray count]-[_indexPaths count] inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
-//                        [self.tableView endUpdates];
-                    });
-                });
+                       
+                       [self reloadTableView];
+                       
+                       //                        [self.tableView beginUpdates];
+                       //                        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[_mutableArray count]-[_indexPaths count] inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                       //                        [self.tableView endUpdates];
+                   });
+               });
             
             }
             NSLog(@"Thread-NO5-getInbox-closed");
@@ -679,6 +975,145 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+  if(searching)
+  {
+    if (indexPath.row == [_filteredSampleDataArray count])
+        {
+          LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"LoadingCellID"];
+           if (cell == nil)
+           {
+               NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingTableViewCell" owner:self options:nil];
+               cell = [nib objectAtIndex:0];
+               
+           }
+           UIActivityIndicatorView *activityIndicator = (UIActivityIndicatorView *)[cell.contentView viewWithTag:1];
+           [activityIndicator startAnimating];
+           return cell;
+           
+       }else
+       {
+           TicketTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"TableViewCellID"];
+           
+           if (cell == nil)
+           {
+               NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TicketTableViewCell" owner:self options:nil];
+               cell = [nib objectAtIndex:0];
+           }
+        
+        //agent name deatils
+           NSDictionary *searchDictionary=[_filteredSampleDataArray objectAtIndex:indexPath.row];
+           NSLog(@"searchDictionary is : %@",searchDictionary);
+           
+           
+//          if(![[searchDictionary objectForKey:@"assigned"] isEqual:[NSNull null]] || ![[searchDictionary objectForKey:@"assigned"] isEqualToString:@"null"])
+//          {
+//              NSDictionary * userDict= [searchDictionary objectForKey:@"assigned"];
+//
+//              NSString *agentFirstName= [userDict objectForKey:@"first_name"];
+//
+//              NSString *agentLastName= [userDict objectForKey:@"last_name"];
+//
+//              NSString*AgentuserName=[userDict objectForKey:@"user_name"];
+//
+//              [Utils isEmpty:agentFirstName];
+//              [Utils isEmpty:agentLastName];
+//              [Utils isEmpty:AgentuserName];
+//
+//              if  (![Utils isEmpty:agentFirstName] || ![Utils isEmpty:agentLastName])
+//              {
+//                  if (![Utils isEmpty:agentFirstName] && ![Utils isEmpty:agentLastName])
+//                  {   cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",agentFirstName,agentLastName];
+//                  }
+//                  else{
+//                      cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",agentFirstName,agentLastName];
+//                  }
+//              }
+//              else
+//              {
+//                  if(![Utils isEmpty:AgentuserName])
+//                  {
+//                      cell.agentLabel.text=AgentuserName;
+//                  }
+//                  else{
+//                      cell.agentLabel.text=NSLocalizedString(@"No Agent", nil);
+//                  }
+//
+//              }
+//          }
+           // first name, last name, user name owner name
+           NSDictionary * userDict= [searchDictionary objectForKey:@"user"];
+           
+           NSString *fname= [userDict objectForKey:@"first_name"];
+           
+           NSString *lname= [userDict objectForKey:@"last_name"];
+          
+           NSString*userName=[userDict objectForKey:@"user_name"];
+           
+           NSString*profilPic=[userDict objectForKey:@"profile_pic"];
+           
+           
+           [Utils isEmpty:fname];
+           [Utils isEmpty:lname];
+           [Utils isEmpty:userName];
+           [Utils isEmpty:profilPic];
+           
+           
+           if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+           {
+               if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+               {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
+               }
+               else{
+                   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
+               }
+           }
+           else
+           {
+               if(![Utils isEmpty:userName])
+               {
+                   cell.mailIdLabel.text=userName;
+               }
+               else{
+                   cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
+               }
+               
+           }
+        
+        // ticket numbner
+           NSString *ticketNumber=[searchDictionary objectForKey:@"ticket_number"];
+           
+           [Utils isEmpty:ticketNumber];
+           if  (![Utils isEmpty:ticketNumber] && ![ticketNumber isEqualToString:@""])
+           {
+               cell.ticketIdLabel.text=ticketNumber;
+           }
+           else
+           {
+               cell.ticketIdLabel.text=NSLocalizedString(@"Not Available", nil);
+           }
+           
+           //profile picture
+           if (  ![profilPic isEqual:[NSNull null]]   )
+           {
+               [cell setUserProfileimage:profilPic];
+               
+           }
+           else
+           {
+               [cell setUserProfileimage:@"default_pic.png"];
+           }
+           
+           //
+        //   cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+           
+           cell.ticketSubLabel.text=@"Updating wait...";
+           
+           
+           return cell;
+       }
+  }
+      
+else{
     
     if (indexPath.row == [_mutableArray count]) {
         
@@ -694,6 +1129,7 @@
         return cell;
     }else{
         
+
         TicketTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"TableViewCellID"];
         
         if (cell == nil)
@@ -702,9 +1138,7 @@
             cell = [nib objectAtIndex:0];
         }
         
-        
-        
-        
+    
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
         
         tempDict= [_mutableArray objectAtIndex:indexPath.row];
@@ -1013,8 +1447,10 @@
             
         }
         
+       // }
         return cell;
     }
+  }
 }
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
