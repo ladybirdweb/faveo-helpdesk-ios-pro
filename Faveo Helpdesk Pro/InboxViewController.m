@@ -103,7 +103,7 @@
     [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
     [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
-    [moreButton setFrame:CGRectMake(10, 0, 32, 32)];
+    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
     
     
     
@@ -230,7 +230,7 @@
     [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
     [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
-    [moreButton setFrame:CGRectMake(10, 0, 32, 32)];
+    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
     
     UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
@@ -249,11 +249,12 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-   //t [_filteredSampleDataArray removeAllObjects];
+  // [_filteredSampleDataArray removeAllObjects];
     
     if ([searchText length] != 0) {
         searching = YES;
         [self searchData];
+    
     } else {
         searching = NO;
     }
@@ -1004,42 +1005,7 @@
            NSDictionary *searchDictionary=[_filteredSampleDataArray objectAtIndex:indexPath.row];
            NSLog(@"searchDictionary is : %@",searchDictionary);
            
-           
-//          if(![[searchDictionary objectForKey:@"assigned"] isEqual:[NSNull null]] || ![[searchDictionary objectForKey:@"assigned"] isEqualToString:@"null"])
-//          {
-//              NSDictionary * userDict= [searchDictionary objectForKey:@"assigned"];
-//
-//              NSString *agentFirstName= [userDict objectForKey:@"first_name"];
-//
-//              NSString *agentLastName= [userDict objectForKey:@"last_name"];
-//
-//              NSString*AgentuserName=[userDict objectForKey:@"user_name"];
-//
-//              [Utils isEmpty:agentFirstName];
-//              [Utils isEmpty:agentLastName];
-//              [Utils isEmpty:AgentuserName];
-//
-//              if  (![Utils isEmpty:agentFirstName] || ![Utils isEmpty:agentLastName])
-//              {
-//                  if (![Utils isEmpty:agentFirstName] && ![Utils isEmpty:agentLastName])
-//                  {   cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",agentFirstName,agentLastName];
-//                  }
-//                  else{
-//                      cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",agentFirstName,agentLastName];
-//                  }
-//              }
-//              else
-//              {
-//                  if(![Utils isEmpty:AgentuserName])
-//                  {
-//                      cell.agentLabel.text=AgentuserName;
-//                  }
-//                  else{
-//                      cell.agentLabel.text=NSLocalizedString(@"No Agent", nil);
-//                  }
-//
-//              }
-//          }
+        
            // first name, last name, user name owner name
            NSDictionary * userDict= [searchDictionary objectForKey:@"user"];
            
@@ -1106,11 +1072,117 @@
            //
         //   cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
            
-           cell.ticketSubLabel.text=@"Updating wait...";
+         //  cell.ticketSubLabel.text=@"Updating wait...";
            
            
+           //Agent info
+           // if(( ![[json objectForKey:@"requester"] isEqual:[NSNull null]] ) )
+           NSDictionary *AgentDict= [searchDictionary objectForKey:@"assigned"];
+           
+           if(( ![[searchDictionary objectForKey:@"assigned"] isEqual:[NSNull null]] ) )
+               
+           {
+               if(( ![[AgentDict objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( ![[AgentDict objectForKey:@"last_name"] isEqual:[NSNull null]] ) )
+                   
+               {
+                   if(( ![[AgentDict objectForKey:@"first_name"] isEqual:[NSNull null]] ) && ( ![[AgentDict objectForKey:@"last_name"] isEqual:[NSNull null]] ) )
+                   {
+                       
+                       
+                       cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[AgentDict objectForKey:@"first_name"],[AgentDict objectForKey:@"last_name"]];
+                       
+                   }else if(( ![[AgentDict objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( ![[AgentDict objectForKey:@"last_name"] isEqual:[NSNull null]] ) )
+                   {
+                       
+                       
+                       cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[AgentDict objectForKey:@"first_name"],[AgentDict objectForKey:@"last_name"]];
+                       
+                   }
+                   
+               }else if(( ![[AgentDict objectForKey:@"user_name"] isEqual:[NSNull null]] ) )
+               {
+                   cell.agentLabel.text=[NSString stringWithFormat:@"%@",[AgentDict objectForKey:@"user_name"]];
+                   
+               }
+               
+           }else
+           {
+               cell.agentLabel.text=@"Unassigned";
+               
+           }
+           
+           
+           
+        //   NSDictionary *searchDictionary=[_filteredSampleDataArray objectAtIndex:indexPath.row];
+           
+           NSArray * ticketThredArray= [searchDictionary objectForKey:@"thread"];
+           
+      if(( ![[searchDictionary objectForKey:@"thread"] isEqual:[NSNull null]] ) )
+        {
+           NSDictionary *ticketDict=[ticketThredArray objectAtIndex:0];
+           
+            if(( ![[ticketDict objectForKey:@"ticket_id"] isEqual:[NSNull null]] ) )
+                
+            {
+                NSString * ticketidIs= [NSString stringWithFormat:@"%@",[ticketDict objectForKey:@"ticket_id"]];
+                NSLog(@"Ticket id is : %@",ticketidIs);
+                
+            }
+           
+           if(( ![[ticketDict objectForKey:@"title"] isEqual:[NSNull null]] ) )
+           {
+              NSString * ticketTitle= [NSString stringWithFormat:@"%@",[ticketDict objectForKey:@"title"]];
+              NSLog(@"Ticket Title is : %@",ticketTitle);
+               
+               cell.ticketSubLabel.text=ticketTitle;
+           }
+           
+        }else
+        {
+            cell.ticketSubLabel.text=@"No Title - EMPTY JSON ";
+            
+        }
+           
+        //due/oberdue
+           
+           if(( ![[searchDictionary objectForKey:@"duedate"] isEqual:[NSNull null]] ) )
+               
+           {
+               
+               if([utils compareDates:[searchDictionary objectForKey:@"duedate"]]){
+                   [cell.overDueLabel setHidden:NO];
+                   [cell.today setHidden:YES];
+               }else
+               {
+                   [cell.overDueLabel setHidden:YES];
+                   [cell.today setHidden:NO];
+               }
+               
+           }
+           
+           //indication color/priority color
+           
+           if(( ![[searchDictionary objectForKey:@"priority"] isEqual:[NSNull null]] ) )
+           {
+               
+               NSDictionary * priority =[searchDictionary objectForKey:@"priority"];
+               
+               if(( ![[priority objectForKey:@"priority_color"] isEqual:[NSNull null]] ) )
+               {
+                   
+                    cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[priority objectForKey:@"priority_color"]] CGColor];
+               }
+               else{
+                   NSLog(@"I am in else condition");
+               }
+               
+           }
+
+       
            return cell;
        }
+      
+
   }
       
 else{
@@ -1204,7 +1276,7 @@ else{
                     cell.agentLabel.text= [finaldic objectForKey:@"a_uname"];
                }else
                   {
-                    cell.agentLabel.text= NSLocalizedString(@"No Agent", nil);
+                    cell.agentLabel.text= NSLocalizedString(@"Unassigned", nil);
                    }
             
             
@@ -1413,20 +1485,28 @@ else{
                 cell.sourceImgView.image=[UIImage imageNamed:@"chat"];
             }
         
-            if(![cc isEqualToString:@"0"])
+            
+            
+
+            
+           if(![cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
             {
                 cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
-            }
-            
-            if([cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
-            {
-                cell.ccImgView.image=[UIImage imageNamed:@"attach"];
-            }
-            else if(![cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
-            {
                 cell.attachImgView.image=[UIImage imageNamed:@"attach"];
             }
+           else if(![cc isEqualToString:@"0"] && [attachment1 isEqualToString:@"0"])
+           {
+               cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
+           }
+           else if([cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+            {
+                cell.ccImgView.image=[UIImage imageNamed:@"attach"];
+            }else
+            {
+               
+            }
             
+    
             
             cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"color"]] CGColor];
             

@@ -728,7 +728,7 @@
                 cell.agentLabel.text= [finaldic objectForKey:@"a_uname"];
             }else
             {
-                cell.agentLabel.text= NSLocalizedString(@"No Agent", nil);
+                cell.agentLabel.text= NSLocalizedString(@"Unassigned", nil);
             }
             
         } @catch (NSException *exception)
@@ -897,20 +897,36 @@
                 cell.sourceImgView.image=[UIImage imageNamed:@"chat"];
             }
             
-            if(![cc isEqualToString:@"0"])
+//            if(![cc isEqualToString:@"0"])
+//            {
+//                cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
+//            }
+//
+//            if([cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+//            {
+//                cell.ccImgView.image=[UIImage imageNamed:@"attach"];
+//            }
+//            else if(![cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+//            {
+//                cell.attachImgView.image=[UIImage imageNamed:@"attach"];
+//            }
+            
+            if(![cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+            {
+                cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
+                cell.attachImgView.image=[UIImage imageNamed:@"attach"];
+            }
+            else if(![cc isEqualToString:@"0"] && [attachment1 isEqualToString:@"0"])
             {
                 cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
             }
-            
-            if([cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+            else if([cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
             {
                 cell.ccImgView.image=[UIImage imageNamed:@"attach"];
-            }
-            else if(![cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+            }else
             {
-                cell.attachImgView.image=[UIImage imageNamed:@"attach"];
+                
             }
-            
             
             cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"color"]] CGColor];
             
