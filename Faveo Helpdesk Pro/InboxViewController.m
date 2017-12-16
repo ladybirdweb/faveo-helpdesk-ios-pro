@@ -47,6 +47,9 @@
     NSString *selectedIDs;
     UINavigationBar*  navbar;
     NSString *trimmedString;
+    
+    UIView *uiDisableViewOverlay;
+    
 }
 
 @property (strong,nonatomic) NSIndexPath *selectedPath;
@@ -197,6 +200,9 @@
     self.navigationItem.titleView = _searchBar;
     [_searchBar becomeFirstResponder];
     [_searchBar.window makeKeyAndVisible];
+    
+    
+
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
@@ -206,6 +212,7 @@
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     
  //   [_searchBar resignFirstResponder];
+  
 }
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
@@ -221,7 +228,8 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     searching = NO;
-    [self.tableView reloadData];
+     [self.tableView reloadData];
+    
     self.navigationItem.titleView = nil;
 //    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"about"] style:UIBarButtonItemStylePlain  target:self action:@selector(searchButtonClicked)];
 //    self.navigationItem.rightBarButtonItem = rightBarButton;
@@ -246,6 +254,8 @@
     ////
     [_searchBar setShowsCancelButton:NO];
   //  [_searchBar resignFirstResponder];
+    
+   
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -1570,6 +1580,30 @@ else{
         
     }else{
         
+        if(searching)
+        {
+            NSDictionary *searchDictionary=[_filteredSampleDataArray objectAtIndex:indexPath.row];
+            NSArray * ticketThredArray = [searchDictionary objectForKey:@"thread"];
+            NSDictionary *ticketDict=[ticketThredArray objectAtIndex:0];
+            
+            
+            NSDictionary * userDict= [searchDictionary objectForKey:@"user"];
+            
+            globalVariables.iD= [ticketDict objectForKey:@"ticket_id"];
+            globalVariables.ticket_number=[searchDictionary objectForKey:@"ticket_number"];
+            
+            globalVariables.First_name=[userDict objectForKey:@"first_name"];
+            globalVariables.Last_name=[userDict objectForKey:@"last_name"];
+            
+            NSDictionary * statusDict = [searchDictionary objectForKey:@"statuses"];
+            
+            globalVariables.Ticket_status=[statusDict objectForKey:@"name"];
+            
+            
+            TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+             [self.navigationController pushViewController:td animated:YES];
+            
+        }else{
       TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
     
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
@@ -1583,6 +1617,8 @@ else{
        globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
  
        [self.navigationController pushViewController:td animated:YES];
+            
+        }
     }
 }
 
