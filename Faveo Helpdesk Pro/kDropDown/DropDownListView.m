@@ -20,6 +20,10 @@
 @end
 @implementation DropDownListView
 
+{
+    
+    NSDictionary *attributes;
+}
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -205,13 +209,16 @@
         UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:16.0];
         UIColor *cl=[UIColor whiteColor];
         
-        NSDictionary *attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:cl};
+      attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:cl};
         [_kTitleText drawInRect:titleRect withAttributes:attributes];
     }
-    else
-        [_kTitleText drawInRect:titleRect withFont:[UIFont systemFontOfSize:16.]];
+    else   // -drawInRect:withAttributes:
+      //  [_kTitleText drawInRect:titleRect withFont:[UIFont systemFontOfSize:16.]];
+    {
+        [_kTitleText drawInRect:titleRect withAttributes:attributes];
     
     CGContextFillRect(ctx, separatorRect);
+    }
 }
 
 -(void)SetBackGroundDropDown_R:(CGFloat)r G:(CGFloat)g B:(CGFloat)b alpha:(CGFloat)alph {
