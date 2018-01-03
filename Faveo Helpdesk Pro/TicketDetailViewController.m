@@ -150,7 +150,7 @@
     _plusButtonsViewMain.plusButtonAnimationType = LGPlusButtonAnimationTypeRotate;
     
     [_plusButtonsViewMain setButtonsTitles:@[@"+", @"", @""] forState:UIControlStateNormal];
-    [_plusButtonsViewMain setDescriptionsTexts:@[@"", @"Ticket Reply", @"Internal Notes"]];
+    [_plusButtonsViewMain setDescriptionsTexts:@[@"", NSLocalizedString(@"Ticket Reply", nil), NSLocalizedString(@"Internal Notes", nil)]];
     [_plusButtonsViewMain setButtonsImages:@[[NSNull new], [UIImage imageNamed:@"reply1"], [UIImage imageNamed:@"note3"]]
                                   forState:UIControlStateNormal
                             forOrientation:LGPlusButtonsViewOrientationAll];
@@ -455,7 +455,8 @@
        
         if([globalVariables.Ticket_status isEqualToString:@"Open"])
         {
-            [utils showAlertWithMessage:@"Ticket is Already Open" sendViewController:self];
+            //
+            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Open", nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }
@@ -553,9 +554,10 @@
         
         NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],globalVariables.iD,globalVariables.ClosedStausId];
         
+        NSLog(@"API call is : %@",url);
         if([globalVariables.Ticket_status isEqualToString:@"Closed"])
         {
-            [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Closed", nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }else{
@@ -680,7 +682,7 @@
         
         if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
         {
-            [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Resolved", nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }else{
@@ -773,7 +775,7 @@
         
         if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
         {
-            [utils showAlertWithMessage:@"Ticket is Already Deleted" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Deleted", nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }else{

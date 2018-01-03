@@ -62,8 +62,9 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     globalVariables=[GlobalVariables sharedInstance];
 
+    self.titles = @[NSLocalizedString(@"All users", nil),NSLocalizedString(@"Agent users", nil) , NSLocalizedString(@"Active users", nil),NSLocalizedString(@"Client users", nil) , NSLocalizedString(@"Banned users", nil),NSLocalizedString(@"Inactive users", nil),NSLocalizedString(@"Deactivated users",nil)];
     
-    self.titles = @[@"All users", @"Agent users", @"Active users", @"Client users", @"Banned users",@"Inactive users",@"Deactivated users"];
+    //self.titles = @[@"All users", @"Agent users", @"Active users", @"Client users", @"Banned users",@"Inactive users",@"Deactivated users"];
     
     self.menuItem = [[AWNavigationMenuItem alloc] init];
     self.menuItem.dataSource = self;

@@ -2391,9 +2391,10 @@
         //                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
         
         [FTPopOverMenu showFromEvent:event
-                       withMenuArray:@[@"Change Ticket Status",@"Closed",@"Resolved",@"Deleted"]
+                       withMenuArray:@[NSLocalizedString(@"Change Ticket Status", nil),NSLocalizedString(@"Closed", nil),NSLocalizedString(@"Resolved", nil),NSLocalizedString(@"Deleted", nil)]
                           imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
                            doneBlock:^(NSInteger selectedIndex) {
+                            
                                
                                if(selectedIndex==0)
                                {
@@ -2442,11 +2443,13 @@
         //    [FTPopOverMenu showFromEvent:event
         //                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
         
-        [FTPopOverMenu showFromEvent:event
-                       withMenuArray:@[@"Change Ticket Status",@"Open",@"Resolved",@"Deleted"]
-                          imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"folderIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
-                           doneBlock:^(NSInteger selectedIndex) {
-                               
+
+        
+         [FTPopOverMenu showFromEvent:event
+                            withMenuArray:@[NSLocalizedString(@"Change Ticket Status", nil),NSLocalizedString(@"Open", nil),NSLocalizedString(@"Resolved", nil),NSLocalizedString(@"Deleted", nil)]
+                                    imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
+                                    doneBlock:^(NSInteger selectedIndex) {
+                                        
                                if(selectedIndex==0)
                                {
                                    NSLog(@"Index 0 clicked");
@@ -2497,7 +2500,7 @@
         //                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
         
         [FTPopOverMenu showFromEvent:event
-                       withMenuArray:@[@"Change Ticket Status",@"Open",@"Closed",@"Resolved"]
+                       withMenuArray:@[NSLocalizedString(@"Change Ticket Status",nil),NSLocalizedString(@"Open",nil),NSLocalizedString(@"Closed",nil),NSLocalizedString(@"Resolved",nil)]
                           imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"folderIcon"],[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"]]
                            doneBlock:^(NSInteger selectedIndex) {
                                
@@ -2609,7 +2612,7 @@
         [[AppDelegate sharedAppdelegate] showProgressView];
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
-            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!",nil) sendViewController:self];
              [[AppDelegate sharedAppdelegate] hideProgressView];
         }
         else{
@@ -2618,7 +2621,7 @@
         
         if([globalVariables.Ticket_status isEqualToString:@"Open"])
         {
-            [utils showAlertWithMessage:@"Ticket is Already Open" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Open",nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }
@@ -2719,14 +2722,14 @@
         
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
-            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!",nil) sendViewController:self];
              [[AppDelegate sharedAppdelegate] hideProgressView];
         }else{
         NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ClosedStausId];
         
         if([globalVariables.Ticket_status isEqualToString:@"Closed"])
         {
-            [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Closed",nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }else{
@@ -2819,7 +2822,7 @@
         
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
-            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!",nil) sendViewController:self];
              [[AppDelegate sharedAppdelegate] hideProgressView];
         }else{
         NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ResolvedStausId];
@@ -2827,7 +2830,7 @@
         
         if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
         {
-            [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Resolved",nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }else{
@@ -2919,7 +2922,7 @@
         
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
-            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!",nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
         }else{
             
@@ -2927,7 +2930,7 @@
         
         if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
         {
-            [utils showAlertWithMessage:@"Ticket is Already Deleted" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Deleted",nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }else{

@@ -181,10 +181,11 @@
     //  [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor]];
     
 //    navItem.rightBarButtonItem = status;
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     
     [self reload];
     [self getDependencies];
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+    
     
 }
 
@@ -340,7 +341,7 @@
     }
     NSString * url= [NSString stringWithFormat:@"%@api/v1/helpdesk/ticket-search?token=%@&search=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],needeedString];
     NSLog(@"URL is : %@",url);
-    
+    globalVariables.searchString=needeedString;
     
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -736,7 +737,11 @@
         NSInteger numOfSections = 0;
         if ([_filteredSampleDataArray count]==0)
         {
+            // CGRectMake(0, -10, tableView.bounds.size.width, tableView.bounds.size.height)
             UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+    //CGPointMake(self.view.frame.size.width/2,self.view.frame.size.height/2);
+            
+    
             noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
             noDataLabel.textColor        = [UIColor blackColor];
             noDataLabel.textAlignment    = NSTextAlignmentCenter;
@@ -819,7 +824,7 @@
             
             if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
                 
-                [self loadMore];
+                [self loadMoreforSearchResults];
                 
                 
             }
@@ -984,6 +989,105 @@
 }
 
 
+-(void)loadMoreforSearchResults
+{
+    
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
+        
+    }else{
+    
+            self.page = _page + 1;
+            // NSLog(@"Page is : %ld",(long)_page);
+            
+            NSString *str=_nextPageUrl;
+            NSString *Page = [str substringFromIndex:[str length] - 1];
+            
+            //     NSLog(@"String is : %@",szResult);
+            NSLog(@"Page is : %@",Page);
+            NSLog(@"Page is : %@",Page);
+            
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+        
+        
+        [webservices getNextPageURLInboxSearchResults:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+                
+                if (error || [msg containsString:@"Error"]) {
+                    
+                    if (msg) {
+                        
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        
+                    }else if(error)  {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+                    }
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self loadMore];
+                    //NSLog(@"Thread--NO4-call-getInbox");
+                    return;
+                }
+                
+                if (json) {
+                    NSLog(@"Thread-NO4--getInboxAPI--%@",json);
+                    //_indexPaths=[[NSArray alloc]init];
+                    //_indexPaths = [json objectForKey:@"data"];
+                    _nextPageUrl =[json objectForKey:@"next_page_url"];
+                    _currentPage=[[json objectForKey:@"current_page"] integerValue];
+                    _totalTickets=[[json objectForKey:@"total"] integerValue];
+                    _totalPages=[[json objectForKey:@"last_page"] integerValue];
+                    
+                    
+                    _mutableArray= [_mutableArray mutableCopy];
+                    
+                    
+                    [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
+                    
+                    //                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
+                    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            // [self.tableView reloadData];
+                            
+                            [self reloadTableView];
+                            
+                            //                        [self.tableView beginUpdates];
+                            //                        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[_mutableArray count]-[_indexPaths count] inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                            //                        [self.tableView endUpdates];
+                        });
+                    });
+                    
+                }
+                NSLog(@"Thread-NO5-getInbox-closed");
+                
+            }];
+        
+    }
+    
+    
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
   if(searching)
@@ -1725,9 +1829,13 @@ else{
     //                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
     
     [FTPopOverMenu showFromEvent:event
-                   withMenuArray:@[@"Change Ticket Status",@"Closed",@"Resolved",@"Deleted"]
+                   withMenuArray:@[NSLocalizedString(@"Change Ticket Status", nil),NSLocalizedString(@"Closed", nil), NSLocalizedString(@"Resolved", nil),NSLocalizedString(@"Deleted", nil)]
                       imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
                        doneBlock:^(NSInteger selectedIndex) {
+                           
+                           
+                           
+                          
                            
                            if(selectedIndex==0)
                            {

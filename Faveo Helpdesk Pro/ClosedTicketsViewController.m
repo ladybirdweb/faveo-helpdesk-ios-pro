@@ -1075,9 +1075,11 @@
     //                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
     
     [FTPopOverMenu showFromEvent:event
-                   withMenuArray:@[@"Change Ticket Status",@"Open",@"Resolved",@"Deleted"]
+                   withMenuArray:@[NSLocalizedString(@"Change Ticket Status", nil), NSLocalizedString(@"Open", nil), NSLocalizedString(@"Resolved", nil),NSLocalizedString(@"Deleted", nil)]
                       imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"folderIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
                        doneBlock:^(NSInteger selectedIndex) {
+                           
+                        
                            
                            if(selectedIndex==0)
                            {
@@ -1124,7 +1126,7 @@
         
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
-            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!",nil) sendViewController:self];
              [[AppDelegate sharedAppdelegate] hideProgressView];
         }else{
             
@@ -1234,7 +1236,7 @@
 
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
-            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!",nil) sendViewController:self];
              [[AppDelegate sharedAppdelegate] hideProgressView];
         }else{
             
@@ -1335,7 +1337,7 @@
         [[AppDelegate sharedAppdelegate] showProgressView];
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
-            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!",nil) sendViewController:self];
         }else{
             
         NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.DeletedStausId];

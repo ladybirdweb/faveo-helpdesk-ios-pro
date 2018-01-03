@@ -831,7 +831,7 @@
                         }else{
                         
                         [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess", nil)
+                                                             title:NSLocalizedString(@"success", nil)
                                                           subtitle:NSLocalizedString(@"Ticket created successfully.", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess

@@ -59,7 +59,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title=@"Edit Profile";
+    self.title=NSLocalizedString(@"Edit Profile", nil);
     
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
@@ -481,7 +481,7 @@
         
         BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
         
-        [customAlert showAlertWithTitle:@"Alert !" message:@"Are You Sure to Deactivate ?" cancelButtonTitle:@"No" successButtonTitle:@"Yes" withSuccessBlock:^{
+        [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Deactivate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
             
             globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
             [_switch1 setOn:YES];
@@ -501,7 +501,7 @@
         
         BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
         
-        [customAlert showAlertWithTitle:@"Alert !" message:@"Are You Sure to Activate ?" cancelButtonTitle:@"No" successButtonTitle:@"Yes" withSuccessBlock:^{
+        [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Activate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
             
             [_switch1 setOn:NO];
             //   _switch1.tintColor = [UIColor greenColor];

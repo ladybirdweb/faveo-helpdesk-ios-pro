@@ -496,7 +496,7 @@
         _assinTextField.text=NSLocalizedString(@"Not Available",nil);
         source_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Source" rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
 }
 
@@ -507,7 +507,7 @@
         _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
         source_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Source" rows:_sourceArray initialSelection:0 target:self successAction:@selector(sourceWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Source",nil) rows:_sourceArray initialSelection:0 target:self successAction:@selector(sourceWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
 }
 
@@ -519,7 +519,7 @@
         _statusTextField.text=NSLocalizedString(@"Not Available",nil);
         status_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Status" rows:_statusArray initialSelection:0 target:self successAction:@selector(statusWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Status",nil) rows:_statusArray initialSelection:0 target:self successAction:@selector(statusWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
 }
 
@@ -531,7 +531,7 @@
         _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
         help_topic_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Helptopic",nil) rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
     
 }
@@ -544,7 +544,7 @@
         sla_id=0;
         
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select SLA" rows:_slaPlansArray initialSelection:0 target:self successAction:@selector(slaWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select SLA",nil) rows:_slaPlansArray initialSelection:0 target:self successAction:@selector(slaWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
     
 }
@@ -556,7 +556,7 @@
         _deptTextField.text=NSLocalizedString(@"Not Available",nil);
         dept_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Department" rows:_deptArray initialSelection:0 target:self successAction:@selector(deptWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Department",nil) rows:_deptArray initialSelection:0 target:self successAction:@selector(deptWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
     
 }
@@ -568,7 +568,7 @@
         type_id=0;
         
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Ticket Type" rows:_typeArray initialSelection:0 target:self successAction:@selector(typeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Ticket Type",nil) rows:_typeArray initialSelection:0 target:self successAction:@selector(typeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
     
 }
@@ -580,7 +580,7 @@
         priority_id=0;
         
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Priority" rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Priority",nil) rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
     
 }

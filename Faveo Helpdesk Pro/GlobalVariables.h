@@ -186,4 +186,7 @@
 @property (strong, nonatomic) NSMutableArray *idList;
 @property (strong, nonatomic) NSMutableArray *subjectList;
 
+//search
+@property (strong, nonatomic) NSString *searchString;
+
 @end

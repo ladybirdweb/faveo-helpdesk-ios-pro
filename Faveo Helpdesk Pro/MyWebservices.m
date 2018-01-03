@@ -596,7 +596,25 @@
     
 }
 
-
+-(void)getNextPageURLInboxSearchResults:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block
+{
+    _userDefaults=[NSUserDefaults standardUserDefaults];
+    globalVariables=[GlobalVariables sharedInstance];
+    
+    NSLog(@"page isssss : %@",pageInt);
+    
+    NSString *urlAAA= [url stringByAppendingString:@"&page="];
+    NSString *urlBBB= [urlAAA stringByAppendingString:pageInt];
+    
+    [self httpResponseGET:urlBBB parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(error,json,msg);
+        });
+        
+    }];
+    
+    
+}
 -(void)getNextPageURLUnassigned:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
     _userDefaults=[NSUserDefaults standardUserDefaults];
      globalVariables=[GlobalVariables sharedInstance];

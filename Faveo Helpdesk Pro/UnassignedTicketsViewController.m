@@ -941,10 +941,11 @@
     //                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
     
     [FTPopOverMenu showFromEvent:event
-                   withMenuArray:@[@"Change Ticket Status",@"Closed",@"Resolved",@"Deleted"]
+                   withMenuArray:@[NSLocalizedString(@"Change Ticket Status", nil),NSLocalizedString(@"Closed", nil),NSLocalizedString(@"Resolved", nil),NSLocalizedString(@"Deleted", nil)]
                       imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
                        doneBlock:^(NSInteger selectedIndex) {
                            
+                    
                            if(selectedIndex==0)
                            {
                                NSLog(@"Index 0 clicked");
@@ -987,7 +988,7 @@
         
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
-            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!",nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
         }
         else{

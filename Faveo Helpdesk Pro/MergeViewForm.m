@@ -49,7 +49,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title=@"Merge Tickets";
+    self.title=NSLocalizedString(@"Merge Tickets",nil);
     self.tableView.separatorColor = [UIColor clearColor];
     
      subject_id =[[NSNumber alloc]init];
@@ -265,7 +265,7 @@
                         
                             [RMessage showNotificationInViewController:self.navigationController
                                                                  title:NSLocalizedString(@"Alert !", nil)
-                                                              subtitle:NSLocalizedString(@"tickets from different users.", nil)
+                                                              subtitle:NSLocalizedString(@"Tickets from different users.", nil)
                                                              iconImage:nil
                                                                   type:RMessageTypeWarning
                                                         customTypeName:nil

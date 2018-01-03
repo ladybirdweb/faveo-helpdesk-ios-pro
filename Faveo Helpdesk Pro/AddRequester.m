@@ -409,7 +409,7 @@
                         }
                         
                         [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Sucess", nil)
+                                                             title:NSLocalizedString(@"success", nil)
                                                           subtitle:NSLocalizedString(@"Requester Created successfully.", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeSuccess
@@ -484,7 +484,7 @@
 {
     BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
     
-    [customAlert showAlertWithTitle:@"Alert" message:@" Discard Changes ?" cancelButtonTitle:@"No" successButtonTitle:@"Yes" withSuccessBlock:^{
+    [customAlert showAlertWithTitle:@"Alert" message:NSLocalizedString(@"Discard Changes ?",nil) cancelButtonTitle:NSLocalizedString(@"No",nil) successButtonTitle:NSLocalizedString(@"Yes",nil) withSuccessBlock:^{
         
         [self.navigationController popViewControllerAnimated:YES];
     } cancelBlock:^{

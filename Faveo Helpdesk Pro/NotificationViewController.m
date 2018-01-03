@@ -58,7 +58,7 @@
     
     [self setTitle:NSLocalizedString(@"Notifications",nil)];
     [self addUIRefresh];
-    NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
+   // NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
     _mutableArray=[[NSMutableArray alloc]init];
     
     utils=[[Utils alloc]init];
@@ -92,7 +92,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Error..!", nil)
-                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                          subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check it.", nil)
                                          iconImage:nil
                                               type:RMessageTypeError
                                     customTypeName:nil
