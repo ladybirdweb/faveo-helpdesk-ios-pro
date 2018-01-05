@@ -28,6 +28,7 @@
 #import "FilterViewController.h"
 #import "MergeViewForm.h"
 #import "FTPopOverMenu.h"
+#import "MultpleTicketAssignTableViewController.h"
 
 @interface UnassignedTicketsViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
     Utils *utils;
@@ -35,6 +36,7 @@
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
     NSMutableArray *selectedArray;
+     NSMutableArray *selectedSubjectArray;
     int count1;
     NSString *selectedIDs;
     UINavigationBar*  navbar;
@@ -142,7 +144,21 @@
 }
 
 -(void)tapDetected{
-    NSLog(@"single Tap on imageview");
+    
+    NSLog(@"Clicked on merge");
+    if (!selectedArray.count) {
+        
+        [utils showAlertWithMessage:@"Select The Tickets for Assign" sendViewController:self];
+        
+    }
+    else{
+        //selectedIDs
+        
+        globalVariables.ticketIDListForAssign=selectedIDs;
+        
+        MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
     
     
@@ -151,9 +167,22 @@
 -(void)MergeButtonClicked
 {
     NSLog(@"Clicked on merge");
-    MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
-    [self.navigationController pushViewController:merge animated:YES];
-    
+    if (!selectedArray.count) {
+        
+        [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
+        
+    }else if(selectedArray.count<2)
+    {
+        [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
+    }
+    else{
+        
+        globalVariables.idList=selectedArray;
+        globalVariables.subjectList=selectedSubjectArray;
+        
+        MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
+        [self.navigationController pushViewController:merge animated:YES];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{

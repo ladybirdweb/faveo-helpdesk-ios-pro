@@ -414,7 +414,7 @@
     NSLog(@"Clicked on merge");
     if (!selectedArray.count) {
         
-        [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
+        [utils showAlertWithMessage:@"Select The Tickets for Assign" sendViewController:self];
         
     }
     else{
@@ -437,6 +437,9 @@
         
         [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
         
+    }else if(selectedArray.count<2)
+    {
+        [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
     }
     else{
     

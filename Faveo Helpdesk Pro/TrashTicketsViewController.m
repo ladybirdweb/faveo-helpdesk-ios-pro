@@ -28,6 +28,7 @@
 #import "FilterViewController.h"
 #import "FTPopOverMenu.h"
 #import "MergeViewForm.h"
+#import "MultpleTicketAssignTableViewController.h"
 
 @interface TrashTicketsViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
 
@@ -37,8 +38,10 @@
     GlobalVariables *globalVariables;
     NSDictionary *tempDict;
     NSMutableArray *selectedArray;
+     NSMutableArray *selectedSubjectArray;
     int count1;
     NSString *selectedIDs;
+    NSString *selectedIDsForDeleteForever;
     UINavigationBar*  navbar;
 }
 
@@ -153,7 +156,20 @@
 
 
 -(void)tapDetected{
-    NSLog(@"single Tap on imageview");
+    NSLog(@"Clicked on merge");
+    if (!selectedArray.count) {
+        
+        [utils showAlertWithMessage:@"Select The Tickets for Assign" sendViewController:self];
+        
+    }
+    else{
+        //selectedIDs
+        
+        globalVariables.ticketIDListForAssign=selectedIDs;
+        
+        MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
     
     
@@ -162,8 +178,22 @@
 -(void)MergeButtonClicked
 {
     NSLog(@"Clicked on merge");
-    MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
-    [self.navigationController pushViewController:merge animated:YES];
+    if (!selectedArray.count) {
+        
+        [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
+        
+    }else if(selectedArray.count<2)
+    {
+        [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
+    }
+    else{
+        
+        globalVariables.idList=selectedArray;
+        globalVariables.subjectList=selectedSubjectArray;
+        
+        MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
+        [self.navigationController pushViewController:merge animated:YES];
+    }
     
 }
 
@@ -1461,9 +1491,22 @@
             [[AppDelegate sharedAppdelegate] hideProgressView];
         }else{
             
-            NSString * url= [NSString stringWithFormat:@"%@api/v2/helpdesk/ticket/delete?api_key=%@&token=%@&id[]=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs];
+//            NSString *str = @"This is a string";
+//
+//            str = [str stringByReplacingOccurrencesOfString:@"string"
+//                                                 withString:@"duck"];
             
+            selectedIDsForDeleteForever=[NSString stringWithFormat:@"%@",selectedIDs];
+            
+            selectedIDsForDeleteForever= [selectedIDsForDeleteForever stringByReplacingOccurrencesOfString:@"," withString:@"&id[]="];
+            
+            NSString *finalId= [@"&id[]=" stringByAppendingString:selectedIDsForDeleteForever];
+            
+            NSString * url= [NSString stringWithFormat:@"%@api/v2/helpdesk/ticket/delete?api_key=%@&token=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"]];
+            
+            url = [url stringByAppendingString:finalId];
             NSLog(@"API is : %@",url);
+        
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
