@@ -29,7 +29,7 @@
 #import "FilterViewController.h"
 #import "FTPopOverMenu.h"
 #import "MergeViewForm.h"
-
+#import "MultpleTicketAssignTableViewController.h"
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
@@ -410,8 +410,24 @@
 
 
 -(void)tapDetected{
-    NSLog(@"single Tap on imageview");
-    [utils showAlertWithMessage:@"Clicked on Multiple Ticket Assign" sendViewController:self];
+    
+    NSLog(@"Clicked on merge");
+    if (!selectedArray.count) {
+        
+        [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
+        
+    }
+    else{
+        //selectedIDs
+       
+        globalVariables.ticketIDListForAssign=selectedIDs;
+        
+        MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
+    
 }
 
 -(void)MergeButtonClicked

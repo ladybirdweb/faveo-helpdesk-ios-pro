@@ -266,6 +266,10 @@
     
     urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
     
+//    urlString = [urlString stringByReplacingOccurrencesOfString:@"%5B%5D"
+//                                         withString:@"[]"];
+//    NSLog(@"String 11111 is : %@",urlString);
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     
     [request addValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];

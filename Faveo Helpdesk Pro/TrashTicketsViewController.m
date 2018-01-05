@@ -1461,16 +1461,9 @@
             [[AppDelegate sharedAppdelegate] hideProgressView];
         }else{
             
-            NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/ticket/delete?api_key=%@&token=%@&id[]=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs];
+            NSString * url= [NSString stringWithFormat:@"%@api/v2/helpdesk/ticket/delete?api_key=%@&token=%@&id[]=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs];
             
             NSLog(@"API is : %@",url);
-            
-            //        if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
-            //        {
-            //            [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
-            //            [[AppDelegate sharedAppdelegate] hideProgressView];
-            //
-            //        }else{
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
@@ -1483,7 +1476,7 @@
                         
                         if([msg isEqualToString:@"Error-403"])
                         {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Resolve a ticket", nil) sendViewController:self];
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Delete a ticket", nil) sendViewController:self];
                         }
                         else{
                             [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];

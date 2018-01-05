@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
+		D9166B551FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9166B541FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m */; };
 		D9283F9F1FCC3B4E00C6A073 /* ClientFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D9283F9E1FCC3B4E00C6A073 /* ClientFilter.m */; };
 		D92C35D11F750FDE001DD67D /* LGPlusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D92C35CA1F750FDE001DD67D /* LGPlusButton.m */; };
 		D92C35D21F750FDE001DD67D /* LGPlusButtonDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = D92C35CC1F750FDE001DD67D /* LGPlusButtonDescription.m */; };
@@ -117,6 +118,8 @@
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9166B141FFB4ACE005B4776 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D9166B531FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultpleTicketAssignTableViewController.h; sourceTree = "<group>"; };
+		D9166B541FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultpleTicketAssignTableViewController.m; sourceTree = "<group>"; };
 		D9283F9D1FCC3B4E00C6A073 /* ClientFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClientFilter.h; sourceTree = "<group>"; };
 		D9283F9E1FCC3B4E00C6A073 /* ClientFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClientFilter.m; sourceTree = "<group>"; };
 		D92C35C91F750FDE001DD67D /* LGPlusButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPlusButton.h; sourceTree = "<group>"; };
@@ -559,6 +562,8 @@
 				D953D53D1FA321420077D519 /* AddRequester.m */,
 				D99776D51FDAB631004EA9B8 /* MergeViewForm.h */,
 				D99776D61FDAB631004EA9B8 /* MergeViewForm.m */,
+				D9166B531FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.h */,
+				D9166B541FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m */,
 				D9EB9F931E07C3270001115F /* InboxViewController.h */,
 				D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */,
 				D9F9F1181FB977B40044DA27 /* FilterViewController.h */,
@@ -906,6 +911,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9166B551FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m in Sources */,
 				D9A2FCB01F18904000C829DD /* NotificationViewController.m in Sources */,
 				D9EB9FBD1E07C4490001115F /* SlideNavigationContorllerAnimatorFade.m in Sources */,
 				D9EB9FA51E07C3270001115F /* MyTicketsViewController.m in Sources */,
