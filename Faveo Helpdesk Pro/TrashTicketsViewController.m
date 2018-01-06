@@ -170,14 +170,12 @@
         MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
-    
-    
+
 }
 
 -(void)MergeButtonClicked
 {
-    NSLog(@"Clicked on merge");
+    NSLog(@"Clicked on merged....!");
     if (!selectedArray.count) {
         
         [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
