@@ -1,0 +1,163 @@
+///*
+//  Localization.strings
+//  Faveo Helpdesk Pro
+//
+//  Copyright © 2017 Ladybird websolutions pvt ltd. All rights reserved.
+//*/
+//
+
+"Refreshing"="forfriskende";
+"Error"="Feil";
+"All Caught Up"="Alle fanget opp";
+
+"Empty"="Tømme";
+"Getting Data"="Få data";
+"Done!"="Ferdig!";
+"Not Available"="Ikke tilgjengelig";
+"success"="suksess";
+"Warning"="Advarsel";
+"Alert"="Varsling";
+"No"="Nei";
+"Yes"="Ja";
+"All Caught Up"="Alle fanget opp";
+"No Records"="Ingen poster";
+"Done"="Ferdig";
+"Success"="Suksess";
+
+"Something is Wrong."="Noe er galt.";
+
+
+
+"Are You Sure to Deactivate ?"="Er du sikker på å deaktivere ?";
+"Are You Sure to Activate ?"="Er du sikker på å aktivere ?";
+
+"Ticket Status Changed."="Billettstatus endret.";
+"Ticket is Already Open"="Billetten er allerede åpen";
+"Ticket is Already Closed"="oppgaver en er allerede stengt";
+"Ticket is Already Resolved"="oppgaver en er allerede løst";
+"Ticket is Already Deleted"="oppgaver en er allerede slettet";
+
+"All users"="Alle brukere";
+"Agent users"="Agent brukere";
+"Active users"="Aktive brukere";
+"Client users"="Klientbrukere";
+"Banned users"="Forbudte brukere";
+"Inactive users"="Inaktive brukere";
+"Deactivated users"="Deaktiverte brukere";
+
+"Change Ticket Status"="Endre oppgaver status";
+"Open"="Åpen";
+"Closed"="Lukket";
+"Resolved"="Løst";
+"Deleted"="slettet";
+
+"Inbox"="Innboks";
+"MyTickets"="MyTickets";
+"My Tickets"="Mine oppgaver er";
+"Ticket Reply"="oppgaver svar";
+"Internal Notes"="Interne notater";
+"About"="Handle om";
+"Closed Tickets"="Lukkede oppgaver er";
+"Edit Ticket"="Rediger oppgaver ";
+"Notifications"="Varsler";
+"Edit Profile"="Rediger profil";
+"Client List"="Klientliste";
+"Unassigned Tickets"="Ikke-tildelte oppgaver er";
+"Trash Tickets"="Papirkurv oppgaver er";
+"Merge Tickets"="Merge oppgaver er";
+"Ticket Title"="oppgaver  tittel";
+"Ticket Number"="oppgaver nummer";
+"Priority"="Prioritet";
+"Updated at"="Oppdatert på";
+"Created at"="Opprettet på";
+"Due Date"="Tidsfrist";
+"Show Filter"="Vis filter";
+"Clear All"="Rydd alt";
+"Exit"="Exit";
+"ASC"="ASC";
+"DES"="DES";
+"Filter"="Filter";
+"Sort by"="Sorter etter";
+"Details"="detaljer";
+"Message"="Budskap";
+"Cc"="Cc";
+"Please wait"="Vennligst vent";
+
+"Discard Changes ?"="Forkaste endringer ?";
+
+"Details Updated successfully"="Detaljer Oppdatert vellykket";
+"Merged Successfully"="Fusjonert suksessivt";
+"Requester Created successfully"="Forespørger er opprettet";
+"Tickets from different users"="oppgaver er fra forskjellige brukere";
+"URL Verified successfully"="URL bekreftet";
+"You have logged in successfully"="Du har logget inn med hell";
+"Updated successfully"="Oppdatert vellykket";
+"Activated successfully"="Aktivert vellykket";
+"Deactivated successfully"="Deaktivert med hell";
+
+
+"Email already exist"="E-post finnes allerede";
+
+"Please Enter the URL"="Vennligst skriv inn nettadressen";
+"Please insert username & password"="Vennligst sett inn brukernavn og passord";
+"Please insert username"="Vennligst sett inn brukernavn";
+"Please insert password"="Vennligst sett inn passord";
+"Verifying URL"="Verifiserer nettadresse";
+
+"Please Enter Mobile Code"="Vennligst skriv inn mobil kode";
+"Please Select The Tickets"="Vennligst velg oppgaver er";
+"Please Select The Parent Ticket"="Vennligst velg Parent Ticket";
+"Please enter SUBJECT"="Vennligst skriv inn SUBJECT";
+"Please select HELP-TOPIC"="Vennligst velg HJELP-TOPIC";
+"Please select PRIORITY"="Vennligst velg PRIORITY";
+"Select CountryCode"="Velg landskode";
+
+"Please select SOURCE"="Vennligst velg SOURCE";
+"Please fill all mandatory fields"="Vennligst fyll ut alle obligatoriske felt";
+"Enter First Name & Last Name"="Skriv inn fornavn og etternavn ";
+"Enter First Name & Email"="Skriv inn fornavn og e-post";
+"Enter Last Name & Email"="Skriv inn etternavn og e-post ";
+"Enter Full Email"="Skriv inn full e-post";
+
+"Enter First Name, Last Name & Email"="Skriv inn fornavn, etternavn og e-post";
+"Please enter username"="Vennligst skriv inn brukernavn";
+"Please enter First Name."="Vennligst skriv inn Fornavn.";
+"Please enter Last Name"="Vennligst skriv inn etternavn";
+"Please enter Email"="Vennligst skriv inn e-post";
+"Please enter valid email id"="Vennligst skriv inn gyldig epost-ID";
+"Please refresh the Inbox"="Oppdatere innboksen";
+
+"FirstName should have more than 2 characters"="Fornavn skal ha mer enn 2 tegn";
+"SUBJECT requires at least 5 characters"="SUBJECT krever minst 5 tegn";
+"MESSAGE requires at least 10 characters"="MESSAGE krever minst 10 tegn";
+
+
+"Select Status"="Velg Status";
+"Select SLA"="Velg SLA";
+"Select Department"="Velg Avdeling";
+"Select Priority"="Velg prioritet";
+"Select Helptopic"="Velg Helptopisk";
+"Select Source"="Velg Kilde";
+"Select Ticket Type"="Velg oppgaver ype";
+"Select Assignee"="Velg Oppdragsgiver";
+
+
+
+"Permission Denied - You don't have permission to Open a ticket"="Tillatelse nektet - Du har ikke tillatelse til å åpne en oppgaver ";
+"Permission Denied - Yo don't have permission to Close a ticket"="Tillatelse nektet - Du har ikke tillatelse til å lukke en oppgaver ";
+"Permission Denied - You don't have permission to Resolve a ticket"="Tillatelse nektet - Du har ikke tillatelse til å løse en oppgaver ";
+"Permission Denied - You don't have permission to Delete a ticket"="Tillatelse nektet - Du har ikke tillatelse til å slette en oppgaver ";
+
+"Permission denied, you do not have permission to access the requested page."="Tillatelse nektet, du har ikke tillatelse til å få tilgang til den forespurte siden.";
+"Access Denied - You don't have permission."="Tilgang nektet - Du har ikke tillatelse.";
+"There is no Internet Connection"="Det er ingen Internett-tilkobling";
+"The internet connection seems to be down. Please check it."="Internett-tilkoblingen ser ut til å være nede. Vennligst sjekk det.";
+
+
+"Cannot find specified host. Retype URL"="Kan ikke finne spesifisert vert. Skriv inn nettadressen på nytt";
+"Cannot connect to specified host. Server may be down."="Kan ikke koble til spesifisert vert. Serveren kan være nede.";
+"Cannot connect to the internet. Service may not be available"="Kan ikke koble til Internett. Tjenesten er kanskje ikke tilgjengelig ";
+
+"Headquarter in Bangalore, Faveo Helpdesk provides Businesses with an automated Helpdesk system to manage customer support. The word Faveo comes from Latin which means to be favourable. Which truly highlights vision and the scope as well as the functionality of the product that Faveo is. Faveo empowers your business with state of art, ticket based support system. In today’s competitive startup scenario customer retention is one of the major challenges. Handling client query diligently is all the difference between retaining or losing a long lasting relationship. The company is driven with passion of providing tools for managing consumer queries for strategic insights and helping companies take those decisive decisions."= "Hovedkontor i Bangalore, tilbyr Faveo Helpdesk bedrifter med et automatisert helpdesk system for å administrere kundesupport. Ordet Faveo kommer fra latin som betyr å være gunstig. Som virkelig fremhever visjon og omfang, samt funksjonaliteten til produktet som Faveo er. Faveo gir bedriften mulighet til å gi toppmoderne, oppgaver basert støttesystem. I dagens konkurransedyktige oppstartsscenario er kundeoppbevaring en av de store utfordringene. Håndtering av klientens forespørsel flittig er all forskjellen mellom å beholde eller miste et langvarig forhold. Selskapet drives av lidenskap for å tilby verktøy for å håndtere forbruksspørsmål for strategisk innsikt og å hjelpe bedrifter med å ta de avgjørende beslutninger.";
+
+

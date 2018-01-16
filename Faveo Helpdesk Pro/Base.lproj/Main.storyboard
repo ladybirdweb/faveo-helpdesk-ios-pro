@@ -4696,10 +4696,7 @@
                                                     <rect key="frame" x="20" y="0.0" width="374" height="65"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Ticket Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3XU-7w-abR">
-                                                            <rect key="frame" x="8" y="9" width="200" height="15"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="6zF-Y3-UO1"/>
-                                                            </constraints>
+                                                            <rect key="frame" x="8" y="9" width="91.333333333333329" height="15"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <color key="textColor" red="0.0" green="0.68235294120000001" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -4715,11 +4712,11 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="3XU-7w-abR" firstAttribute="leading" secondItem="yha-Z9-Rq0" secondAttribute="leading" id="0nA-2v-Krf"/>
+                                                        <constraint firstItem="3XU-7w-abR" firstAttribute="leading" secondItem="3Mt-eY-qQu" secondAttribute="leading" constant="8" id="Aen-8M-ATV"/>
                                                         <constraint firstAttribute="bottom" secondItem="yha-Z9-Rq0" secondAttribute="bottom" id="Bn6-3G-EFU"/>
-                                                        <constraint firstItem="yha-Z9-Rq0" firstAttribute="top" secondItem="3XU-7w-abR" secondAttribute="bottom" constant="40" id="H1m-9Q-AGX"/>
                                                         <constraint firstItem="yha-Z9-Rq0" firstAttribute="leading" secondItem="3Mt-eY-qQu" secondAttribute="leading" constant="8" id="ZKL-MD-zaE"/>
                                                         <constraint firstAttribute="trailing" secondItem="yha-Z9-Rq0" secondAttribute="trailing" constant="8" id="j1t-eD-SqK"/>
+                                                        <constraint firstItem="3XU-7w-abR" firstAttribute="top" secondItem="3Mt-eY-qQu" secondAttribute="top" constant="9" id="yBn-De-KE8"/>
                                                     </constraints>
                                                 </view>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="13b-RY-Jv4">
@@ -4931,7 +4928,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="03L-ns-eS0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2017.3913043478262" y="1254.6195652173915"/>
+            <point key="canvasLocation" x="-2018" y="1254"/>
         </scene>
         <!--Multple Ticket Assign Table View Controller-->
         <scene sceneID="QRO-1P-oir">
@@ -4955,7 +4952,10 @@
                                                     <rect key="frame" x="20" y="0.0" width="374" height="69.666666666666671"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Multiple Tickets Assign" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ng8-Hr-UQN">
-                                                            <rect key="frame" x="73" y="0.0" width="213" height="53.666666666666664"/>
+                                                            <rect key="frame" x="73" y="22" width="205" height="23"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="23" id="TsL-ua-97L"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                             <color key="textColor" red="0.0" green="0.68235294120000001" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -4963,10 +4963,8 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="Ng8-Hr-UQN" firstAttribute="top" secondItem="Pez-n8-VXw" secondAttribute="top" id="A2q-me-QAH"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Ng8-Hr-UQN" secondAttribute="bottom" constant="16" id="Pv0-jd-43P"/>
-                                                        <constraint firstItem="Ng8-Hr-UQN" firstAttribute="leading" secondItem="Pez-n8-VXw" secondAttribute="leading" constant="73" id="SNB-XQ-1W9"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Ng8-Hr-UQN" secondAttribute="trailing" constant="88" id="aKU-ZR-QZa"/>
+                                                        <constraint firstItem="Ng8-Hr-UQN" firstAttribute="leading" secondItem="Pez-n8-VXw" secondAttribute="leading" constant="73" id="Bvp-aB-QKJ"/>
+                                                        <constraint firstItem="Ng8-Hr-UQN" firstAttribute="top" secondItem="Pez-n8-VXw" secondAttribute="top" constant="22" id="awa-Wk-Rhz"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>

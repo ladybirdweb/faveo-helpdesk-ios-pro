@@ -257,7 +257,8 @@
                         {
                             [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Merged Successfully.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
-                          InboxViewController *create=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];                      [self.navigationController pushViewController:create animated:YES];
+                          InboxViewController *create=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                            [self.navigationController pushViewController:create animated:YES];
                         }else
                         if([msg isEqualToString:@"tickets from different users"])
                         {

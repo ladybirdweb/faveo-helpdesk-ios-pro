@@ -158,8 +158,10 @@
     NSString *fg=[dtFormat stringFromDate:aDate];
     
     return fg;
+   
     
 }
+
 
 +(BOOL)isEmpty:(NSString *)str{
     if (str == nil || str == (id)[NSNull null] || [[NSString stringWithFormat:@"%@",str] length] == 0 || [[[NSString stringWithFormat:@"%@",str] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0){

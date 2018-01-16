@@ -126,9 +126,16 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"]; // #FCF1EE  
      self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
+    
+    
     // Do any additional setup after loading the view.
 }
 
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
 - (void)imageTaped:(UIGestureRecognizer *)gestureRecognizer {
     NSLog(@"Image Button Tapped");
     
@@ -162,7 +169,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     _emailTextView.text=globalVariables.emailAddRequester;
     _firstNameView.text=globalVariables.firstNameAddRequester;
     _lastNameView.text=globalVariables.lastAddRequester;
@@ -173,7 +179,7 @@
     [super viewWillDisappear:YES];
    // _submitButton.userInteractionEnabled = false;
     
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
+  [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
 
 }
 

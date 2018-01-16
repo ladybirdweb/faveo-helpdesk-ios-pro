@@ -635,10 +635,10 @@
                 if( [msg containsString:@"Error-429"])
                     
                 {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
+                     [utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
                     
                 }else{
-                NSLog(@"Thread-NO4-postCreateTicket-Refresh-error == %@",error.localizedDescription);
+                NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
                 return ;
                 }
             }
