@@ -76,10 +76,6 @@
     [self.lastNameView setInputAccessoryView:toolBar];
     [self.emailTextView setInputAccessoryView:toolBar];
     
-
-    
-    
-    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     sla_id=[[NSNumber alloc]init];
     dept_id=[[NSNumber alloc]init];
@@ -132,6 +128,30 @@
 }
 
 
+-(void)removeKeyboard{
+    [_emailTextView resignFirstResponder];
+    // [_mobileTextField resignFirstResponder];
+    //  [_msgTextField resignFirstResponder];
+    [_subjectView resignFirstResponder];
+    [_firstNameView resignFirstResponder];
+    
+    
+}
+-(void)removeKeyBoard
+{
+    
+    [self.textViewMsg resignFirstResponder];
+    [_mobileView resignFirstResponder];
+    [_emailTextView resignFirstResponder];
+    [_firstNameView resignFirstResponder];
+    [_lastNameView resignFirstResponder];
+    [_subjectView resignFirstResponder];
+    [_codeTextField resignFirstResponder];
+    [_helpTopicTextField resignFirstResponder];
+    [_priorityTextField resignFirstResponder];
+    [_assignTextField resignFirstResponder];
+    
+}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
@@ -322,30 +342,7 @@
 }
 
 
--(void)removeKeyboard{
-    [_emailTextView resignFirstResponder];
-   // [_mobileTextField resignFirstResponder];
-  //  [_msgTextField resignFirstResponder];
-    [_subjectView resignFirstResponder];
-    [_firstNameView resignFirstResponder];
 
-    
-}
--(void)removeKeyBoard
-{
-    
-    [self.textViewMsg resignFirstResponder];
-    [_mobileView resignFirstResponder];
-     [_emailTextView resignFirstResponder];
-     [_firstNameView resignFirstResponder];
-     [_lastNameView resignFirstResponder];
-     [_subjectView resignFirstResponder];
-     [_codeTextField resignFirstResponder];
-     [_helpTopicTextField resignFirstResponder];
-     [_priorityTextField resignFirstResponder];
-     [_assignTextField resignFirstResponder];
-
-}
 
 
 

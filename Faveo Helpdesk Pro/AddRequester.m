@@ -46,39 +46,12 @@
     
     [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
     
-    [self.mobileView setInputAccessoryView:toolBar];
+    [self.mobileTextField setInputAccessoryView:toolBar];
     [self.firstNameView setInputAccessoryView:toolBar];
     [self.lastNameView setInputAccessoryView:toolBar];
     [self.emailTextView setInputAccessoryView:toolBar];
-    [self.companyName setInputAccessoryView:toolBar];
     
-    _emailTextView.delegate=self;
-    _firstNameView.delegate=self;
-    _lastNameView.delegate=self;
-    _mobileView.delegate=self;
-    _companyName.delegate=self;
-    
-    _emailTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    _emailTextView.layer.borderWidth = 0.4;
-    _emailTextView.layer.cornerRadius = 3;
-    
-    
-    _firstNameView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    _firstNameView.layer.borderWidth = 0.4;
-    _firstNameView.layer.cornerRadius = 3;
-    
-    _lastNameView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    _lastNameView.layer.borderWidth = 0.4;
-    _lastNameView.layer.cornerRadius = 3;
-    
-    _mobileView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    _mobileView.layer.borderWidth = 0.4;
-    _mobileView.layer.cornerRadius = 3;
-    
-    _companyName.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    _companyName.layer.borderWidth = 0.4;
-    _companyName.layer.cornerRadius = 3;
-    
+   
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
     
@@ -89,14 +62,6 @@
     
     userDefaults=[NSUserDefaults standardUserDefaults];
     
-    
-    
-//    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
-//                                    initWithTitle:@"Clear"
-//                                    style:UIBarButtonItemStylePlain
-//                                    target:self
-//                                    action:@selector(flipView)];
-//    self.navigationItem.rightBarButtonItem = clearButton;
     UIButton *clearButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [clearButton setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
     [clearButton addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
@@ -127,8 +92,7 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     // _submitButton.userInteractionEnabled = false;
-    
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
+     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
     
 }
 
@@ -139,31 +103,46 @@
     // Dispose of any resources that can be recreated.
 }
 
-
--(void)removeKeyboard{
-    [_emailTextView resignFirstResponder];
-    // [_mobileTextField resignFirstResponder];
-    //  [_msgTextField resignFirstResponder];
-    
-    [_firstNameView resignFirstResponder];
-}
 -(void)removeKeyBoard
 {
     
-    [_mobileView resignFirstResponder];
+    [_mobileTextField resignFirstResponder];
     [_emailTextView resignFirstResponder];
     [_firstNameView resignFirstResponder];
     [_lastNameView resignFirstResponder];
-    [_companyName resignFirstResponder];
     
 }
-
 
 - (IBAction)countryCodeClicked:(id)sender {
-    
+    [_codeTextField resignFirstResponder];
     [self.view endEditing:YES];
+    [_codeTextField setTintColor:[UIColor clearColor]];
+    
     [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
 }
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    // Here You can do additional code or task instead of writing with keyboard
+    if(textField==_codeTextField)
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
+// check below solution later its work or not // date 18 Jan 2018
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+//{
+//    if(textfield == yourtextField)
+//    {
+//        [textfield resignFirstResponder];
+//        // Show you custom picker here....
+//        return NO;
+//    }
+//}
+
 
 - (void)countryCodeWasSelected:(NSNumber *)selectedIndex element:(id)element{
     // self.selectedIndex = [selectedIndex intValue];
@@ -343,7 +322,7 @@
         [[AppDelegate sharedAppdelegate] showProgressView];
         
         
-        NSString *url =[NSString stringWithFormat:@"%@helpdesk/register?token=%@&first_name=%@&last_name=%@&email=%@&mobile=%@&company=%@&code=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],_firstNameView.text,_lastNameView.text,_emailTextView.text,_mobileView.text,_companyName.text,_codeTextField.text];
+        NSString *url =[NSString stringWithFormat:@"%@helpdesk/register?token=%@&first_name=%@&last_name=%@&email=%@&mobile=%@&code=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],_firstNameView.text,_lastNameView.text,_emailTextView.text,_mobileTextField.text,_codeTextField.text];
         
         
         
@@ -425,7 +404,7 @@
                         globalVariables.emailAddRequester=_emailTextView.text;
                         globalVariables.firstNameAddRequester=_firstNameView.text;
                         globalVariables.lastAddRequester=_lastNameView.text;
-                        globalVariables.mobileAddRequester=_mobileView.text;
+                        globalVariables.mobileAddRequester=_mobileTextField.text;
                         globalVariables.mobileCode=_codeTextField.text;
                         
                         
@@ -471,12 +450,13 @@
     _emailTextView.text=@"";
     _firstNameView.text=@"";
     _lastNameView.text=@"";
-    _companyName.text=@"";
-    _mobileView.text=@"";
+   
+    _mobileTextField.text=@"";
     _codeTextField.text=@"";
 }
 
-- (void)textViewDidBeginEditing:(UITextView *)textView{
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
     _submitButton.hidden = NO;
 }
 
@@ -493,111 +473,123 @@
     
 }
 
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
-    if (textView == _emailTextView)
+    if(textField == _emailTextView)
     {
-        
         //do not allow the first character to be space | do not allow more than one space
-        if ([text isEqualToString:@" "]) {
-            if (!textView.text.length)
+        if ([string isEqualToString:@" "]) {
+            if (!textField.text.length)
                 return NO;
             //                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
             //                            return NO;
         }
         
         // allow backspace
-        if ([textView.text stringByReplacingCharactersInRange:range withString:text].length < textView.text.length) {
+        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
             return YES;
         }
         
         // in case you need to limit the max number of characters
-        if ([textView.text stringByReplacingCharactersInRange:range withString:text].length > 40) {
+        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 40) {
             return NO;
         }
         
         // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
         NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyz1234567890@. "];
         
-        if ([text rangeOfCharacterFromSet:set].location == NSNotFound) {
+        if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
             return NO;
         }
-        
-    }else if(textView==_firstNameView || textView==_lastNameView){
+    }
+    else if(textField==_firstNameView || textField==_lastNameView){
         
         //do not allow the first character to be space | do not allow more than one space
-        if ([text isEqualToString:@" "]) {
-            if (!textView.text.length)
+        if ([string isEqualToString:@" "]) {
+            if (!textField.text.length)
                 return NO;
         }
         // allow backspace
-        if ([textView.text stringByReplacingCharactersInRange:range withString:text].length < textView.text.length) {
+        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
             return YES;
         }
         
-        if (textView==_firstNameView || textView==_lastNameView) {
+        if (textField==_firstNameView || textField==_lastNameView) {
             // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
             
             //        // in case you need to limit the max number of characters
-            if ([textView.text stringByReplacingCharactersInRange:range withString:text].length > 15) {
+            if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 15) {
                 return NO;
             }
             
             NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"];
             
-            if ([text rangeOfCharacterFromSet:set].location == NSNotFound) {
+            if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
                 return NO;
             }
         }
         
-    } else  if (textView == _mobileView) {
+    } else  if (textField == _mobileTextField) {
         
         //do not allow the first character to be space | do not allow more than one space
-        if ([text isEqualToString:@" "]) {
-            if (!textView.text.length)
+        if ([string isEqualToString:@" "]) {
+            if (!textField.text.length)
                 return NO;
             //                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
             //                            return NO;
         }
         
         // allow backspace
-        if ([textView.text stringByReplacingCharactersInRange:range withString:text].length < textView.text.length) {
+        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
             return YES;
         }
         
         // in case you need to limit the max number of characters
-        if ([textView.text stringByReplacingCharactersInRange:range withString:text].length > 15) {
+        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 15) {
             return NO;
         }
         
         // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
         NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"1234567890"];
         
-        if ([text rangeOfCharacterFromSet:set].location == NSNotFound) {
+        if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
             return NO;
         }
         
     }
     
     
-    
     return YES;
 }
 
 
-#pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    return NO;
-}
+
+//#pragma mark - UITextFieldDelegate
+//
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+//    return NO;
+//}
 
 
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+  // [textField resignFirstResponder];
+    if (textField == _emailTextView) {
+        
+        [_firstNameView becomeFirstResponder];
+        
+    } else if (textField == _firstNameView) {
+        
+        [_lastNameView becomeFirstResponder];
+        //[textField resignFirstResponder]
+    }else if(textField == _lastNameView)
+    {
+        [textField resignFirstResponder];
+    }
+    
     
     return YES;
 }
@@ -927,6 +919,7 @@
             @"886", @"TW", @"255", @"TZ", @"670", @"TL", @"58", @"VE",
             @"84", @"VN", @"1", @"VG", @"1", @"VI", nil];
 }
+
 
 
 
