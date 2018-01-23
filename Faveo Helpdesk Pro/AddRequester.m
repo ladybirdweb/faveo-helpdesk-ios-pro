@@ -77,7 +77,7 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
-    _submitButton.hidden=YES;
+  //  _submitButton.hidden=YES;
     
     //  _titleBar.backgroundColor =  [UIColor hx_colorWithHexRGBAString:@"#F9E9E6"];
     
@@ -457,7 +457,7 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    _submitButton.hidden = NO;
+   // _submitButton.hidden = NO;
 }
 
 - (IBAction)Back

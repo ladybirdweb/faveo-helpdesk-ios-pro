@@ -127,6 +127,8 @@
         _switch1.backgroundColor= [UIColor greenColor];
         
     }
+
+    
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
@@ -160,6 +162,10 @@
     [_phoneTextField resignFirstResponder];
     [_mobileTextField resignFirstResponder];
     
+}
+- (IBAction)submitButton:(id)sender {
+    
+    [self submit];
 }
 
 -(void)submit
@@ -459,7 +465,8 @@
                        ClientDetailViewController  *create=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
                             [self.navigationController pushViewController:create animated:YES];
                         
-                            
+                            [self viewDidLoad];
+                            [self viewWillAppear:YES];
                             
                         });
                         

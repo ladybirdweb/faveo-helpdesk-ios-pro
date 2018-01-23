@@ -3653,7 +3653,7 @@
                                                     <rect key="frame" x="8" y="0.0" width="78" height="54"/>
                                                     <subviews>
                                                         <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+91" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8bY-2a-prj">
-                                                            <rect key="frame" x="19" y="8" width="62" height="46"/>
+                                                            <rect key="frame" x="19" y="15" width="62" height="38"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                             <connections>
@@ -3685,9 +3685,9 @@
                                                         <constraint firstItem="57s-Cw-PUe" firstAttribute="top" secondItem="60M-xg-cXg" secondAttribute="top" constant="5" id="HPu-bZ-Fy6"/>
                                                         <constraint firstAttribute="trailing" secondItem="xP2-zL-LlW" secondAttribute="trailing" constant="1" id="MXf-rB-ark"/>
                                                         <constraint firstItem="57s-Cw-PUe" firstAttribute="leading" secondItem="60M-xg-cXg" secondAttribute="leading" constant="19" id="P5J-Gv-rz1"/>
-                                                        <constraint firstItem="8bY-2a-prj" firstAttribute="top" secondItem="60M-xg-cXg" secondAttribute="top" constant="8" id="Qtd-eg-SgV"/>
+                                                        <constraint firstItem="8bY-2a-prj" firstAttribute="top" secondItem="60M-xg-cXg" secondAttribute="top" constant="15" id="Qtd-eg-SgV"/>
                                                         <constraint firstItem="8bY-2a-prj" firstAttribute="leading" secondItem="60M-xg-cXg" secondAttribute="leading" constant="19" id="XLb-I3-rIr"/>
-                                                        <constraint firstAttribute="bottom" secondItem="8bY-2a-prj" secondAttribute="bottom" id="gfE-Jz-b9u"/>
+                                                        <constraint firstAttribute="bottom" secondItem="8bY-2a-prj" secondAttribute="bottom" constant="1" id="gfE-Jz-b9u"/>
                                                         <constraint firstAttribute="bottom" secondItem="xP2-zL-LlW" secondAttribute="bottom" id="ir7-xA-UbX"/>
                                                         <constraint firstItem="xP2-zL-LlW" firstAttribute="leading" secondItem="60M-xg-cXg" secondAttribute="leading" constant="17" id="syv-RT-KGu"/>
                                                     </constraints>
@@ -4605,6 +4605,41 @@
                                                 <constraint firstItem="lqI-ro-Jz9" firstAttribute="leading" secondItem="ec3-XU-qra" secondAttribute="leadingMargin" constant="6" id="Ogg-Rj-dDi"/>
                                                 <constraint firstAttribute="bottom" secondItem="lqI-ro-Jz9" secondAttribute="bottom" id="cRF-7j-k9n"/>
                                                 <constraint firstItem="lqI-ro-Jz9" firstAttribute="trailing" secondItem="ec3-XU-qra" secondAttribute="trailingMargin" constant="-17" id="pLZ-gg-FbF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="119" id="mQl-yo-CCk">
+                                        <rect key="frame" x="0.0" y="395" width="414" height="119"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mQl-yo-CCk" id="bf2-NR-knF">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="118.66666666666667"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNk-s8-29n">
+                                                    <rect key="frame" x="107" y="42" width="200" height="35"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="K5T-fE-nzj"/>
+                                                        <constraint firstAttribute="height" constant="35" id="iWr-9M-q6J"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                    <state key="normal" title="Submit">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="submitButton:" destination="QIn-H5-RBr" eventType="touchDown" id="YWr-ic-0d2"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="jNk-s8-29n" firstAttribute="centerX" secondItem="bf2-NR-knF" secondAttribute="centerX" id="a5s-I8-eYD"/>
+                                                <constraint firstItem="jNk-s8-29n" firstAttribute="centerY" secondItem="bf2-NR-knF" secondAttribute="centerY" id="v19-20-pGH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
