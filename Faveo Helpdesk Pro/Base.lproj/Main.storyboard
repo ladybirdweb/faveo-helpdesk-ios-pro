@@ -1862,12 +1862,18 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999999999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQK-HK-ch8">
-                                        <rect key="frame" x="46" y="145" width="74" height="14.666666666666657"/>
+                                        <rect key="frame" x="46" y="145" width="74" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="74" id="JwQ-X1-NtQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="role" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l00-Pf-NGh">
+                                        <rect key="frame" x="331" y="123" width="70" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1880,17 +1886,21 @@
                                     <constraint firstItem="g6s-L0-Ldc" firstAttribute="top" secondItem="qFj-e0-5Rw" secondAttribute="top" constant="4" id="A8D-hQ-UW7"/>
                                     <constraint firstAttribute="trailing" secondItem="Xmx-EM-axR" secondAttribute="trailing" constant="8" id="EKK-35-rD9"/>
                                     <constraint firstItem="OTI-p0-kg7" firstAttribute="top" secondItem="H5i-YI-b5K" secondAttribute="bottom" constant="4" id="HRi-vx-G62"/>
+                                    <constraint firstItem="l00-Pf-NGh" firstAttribute="trailing" secondItem="B1T-Ry-EJE" secondAttribute="trailing" id="Lsy-oO-qHe"/>
                                     <constraint firstItem="TLE-mm-17Z" firstAttribute="leading" secondItem="4lh-RG-lnI" secondAttribute="leading" constant="-1" id="Pk8-qB-6gl"/>
                                     <constraint firstItem="Xmx-EM-axR" firstAttribute="top" secondItem="g6s-L0-Ldc" secondAttribute="bottom" constant="5" id="QKa-CZ-jEM"/>
                                     <constraint firstItem="g6s-L0-Ldc" firstAttribute="centerX" secondItem="qFj-e0-5Rw" secondAttribute="centerX" id="QWc-W5-qpg"/>
+                                    <constraint firstItem="l00-Pf-NGh" firstAttribute="leading" secondItem="B1T-Ry-EJE" secondAttribute="leading" id="Qce-f8-ZCM"/>
                                     <constraint firstItem="fQK-HK-ch8" firstAttribute="top" secondItem="OTI-p0-kg7" secondAttribute="bottom" constant="5" id="RGB-Be-Pzr"/>
                                     <constraint firstItem="H5i-YI-b5K" firstAttribute="leading" secondItem="aDk-wO-wnH" secondAttribute="trailing" constant="12" id="ROc-jb-BH6"/>
                                     <constraint firstItem="B1T-Ry-EJE" firstAttribute="leading" secondItem="H5i-YI-b5K" secondAttribute="trailing" constant="-7" id="Tik-fl-1s5"/>
                                     <constraint firstItem="aDk-wO-wnH" firstAttribute="centerY" secondItem="H5i-YI-b5K" secondAttribute="centerY" constant="-0.5" id="VS0-E0-s8c"/>
                                     <constraint firstItem="aDk-wO-wnH" firstAttribute="leading" secondItem="4lh-RG-lnI" secondAttribute="leading" id="YC2-GE-w2B"/>
+                                    <constraint firstItem="l00-Pf-NGh" firstAttribute="top" secondItem="4lh-RG-lnI" secondAttribute="top" id="YKs-JH-d3L"/>
                                     <constraint firstItem="OTI-p0-kg7" firstAttribute="leading" secondItem="4lh-RG-lnI" secondAttribute="trailing" constant="12" id="ZaX-fI-902"/>
                                     <constraint firstItem="aDk-wO-wnH" firstAttribute="leading" secondItem="qFj-e0-5Rw" secondAttribute="leading" constant="20" id="c6J-zj-JzN"/>
                                     <constraint firstItem="aDk-wO-wnH" firstAttribute="top" secondItem="B1T-Ry-EJE" secondAttribute="top" constant="3" id="eDG-4o-JIY"/>
+                                    <constraint firstItem="l2X-Ya-5Zb" firstAttribute="top" secondItem="l00-Pf-NGh" secondAttribute="bottom" constant="39" id="f9h-M1-uWT"/>
                                     <constraint firstItem="TLE-mm-17Z" firstAttribute="top" secondItem="4lh-RG-lnI" secondAttribute="bottom" constant="8" id="fhu-Xt-wp8"/>
                                     <constraint firstAttribute="trailing" secondItem="B1T-Ry-EJE" secondAttribute="trailing" constant="13" id="fu1-bz-tIa"/>
                                     <constraint firstItem="fQK-HK-ch8" firstAttribute="leading" secondItem="TLE-mm-17Z" secondAttribute="trailing" constant="11" id="kIE-AQ-7eZ"/>
@@ -1936,6 +1946,7 @@
                         <outlet property="mobileLabel" destination="fQK-HK-ch8" id="8dZ-Ml-PhI"/>
                         <outlet property="phoneLabel" destination="OTI-p0-kg7" id="86P-01-gxN"/>
                         <outlet property="profileImageView" destination="g6s-L0-Ldc" id="YMS-E4-jM5"/>
+                        <outlet property="rolLabel" destination="l00-Pf-NGh" id="pHO-FJ-uqb"/>
                         <outlet property="tableView" destination="yJU-Xv-FwO" id="uHC-d7-jKl"/>
                         <outlet property="testingLAbel" destination="B1T-Ry-EJE" id="mlK-MG-ocR"/>
                     </connections>

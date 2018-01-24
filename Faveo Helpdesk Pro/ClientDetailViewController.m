@@ -81,6 +81,11 @@
     _testingLAbel.layer.masksToBounds=true;
     _testingLAbel.userInteractionEnabled=YES;
     
+    _rolLabel.backgroundColor=[UIColor lightGrayColor];
+    _rolLabel.layer.cornerRadius=8;
+    _rolLabel.layer.masksToBounds=true;
+    _rolLabel.userInteractionEnabled=YES;
+    
   //  NSString *str=[NSString stringWithFormat:@"%@",globalVariables.customerFromView];
     
 //    if ([str isEqualToString:@"normalView"])
@@ -170,7 +175,23 @@
         
     
          [self setUserProfileimage:globalVariables.customerImage];
-        
+    
+         NSString *role=[NSString stringWithFormat:@"%@",globalVariables.userRole];
+    
+        if (![Utils isEmpty:role]) {
+         if([role isEqualToString:@"user"])
+         {
+              _rolLabel.textColor=[UIColor whiteColor];
+             _rolLabel.text=@"USER";
+         }else  if([role isEqualToString:@"agent"])
+         {
+             _rolLabel.textColor=[UIColor whiteColor];
+             _rolLabel.text=@"AGENT";
+         }
+        }else
+        {
+            _rolLabel.hidden=YES;
+        }
          NSString *isClientActive= [NSString stringWithFormat:@"%@",globalVariables.UserState];
         [Utils isEmpty:isClientActive];
         

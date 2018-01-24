@@ -190,4 +190,7 @@
 @property (strong, nonatomic) NSString *searchString;
 
 @property (strong, nonatomic) NSString *ticketIDListForAssign;
+
+@property (strong, nonatomic) NSString *userRole;
+
 @end

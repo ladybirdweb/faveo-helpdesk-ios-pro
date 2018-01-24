@@ -565,6 +565,7 @@
     globalVariables.customerFromView=@"normalView";
     globalVariables.customerImage= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"profile_pic"]];
 
+    globalVariables.userRole=@"";
     ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
     [self.navigationController pushViewController:td animated:YES];
 }

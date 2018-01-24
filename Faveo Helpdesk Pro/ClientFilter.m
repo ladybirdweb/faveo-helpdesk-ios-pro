@@ -561,7 +561,7 @@
     globalVariables.customerFromView=@"filterView";
     globalVariables.ActiveDeactiveStateOfUser1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"is_delete"]];
     globalVariables.customerImage= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"profile_pic"]];
-    
+    globalVariables.userRole= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"role"]];
     ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
     [self.navigationController pushViewController:td animated:YES];
 }

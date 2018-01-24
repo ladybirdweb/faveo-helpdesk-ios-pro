@@ -134,4 +134,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *companyLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *rolLabel;
+
 @end
