@@ -57,28 +57,28 @@
     
     [self update];
     [self getDependencies];
-   
-     [self.tableView reloadData];
     
-   [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-   
-
+    [self.tableView reloadData];
+    
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+    
+    
     
     // Do any additional setup after loading the view from its nib.
-       // Do any additional setup after loading the view from its nib.
+    // Do any additional setup after loading the view from its nib.
 }
 
 
 
 -(void)viewWillAppear:(BOOL)animated{
-   
- [self.tableView reloadData];
+    
+    [self.tableView reloadData];
     //[self.tableView reloadData];
-
+    
 }
 
 -(void)update{
-   
+    
     
     userDefaults=[NSUserDefaults standardUserDefaults];
     globalVariables=[GlobalVariables sharedInstance];
@@ -146,9 +146,9 @@
         _c2.text=@"99+";
     }else
         _c2.text=@(my_tickets).stringValue;
-
+    
     [self.tableView reloadData];
-
+    
 }
 -(void)getDependencies{
     
@@ -179,6 +179,8 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/dependency?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
         
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+        
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
@@ -206,7 +208,7 @@
                     NSDictionary *resultDic = [json objectForKey:@"result"];
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
                     
-                  
+                    
                     
                     for (int i = 0; i < ticketCountArray.count; i++) {
                         NSString *name = [[ticketCountArray objectAtIndex:i]objectForKey:@"name"];
@@ -303,88 +305,88 @@
     
     UIViewController *vc ;
     
-@try{
-    switch (indexPath.row)
-    {
-        case 1:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"CreateTicket"];
-            break;
-            
-        case 2:
-            [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-            break;
-        case 3:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"InboxID"];
-            break;
-        case 4:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"MyTicketsID"];
-            break;
-        case 5:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"UnassignedTicketsID"];
-            break;
-        case 6:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"ClosedTicketsID"];
-            break;
-            
-        case 7:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"TrashTicketsID"];
-            break;
-            
-        case 8:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"ClientListID"];
-             globalVariables.userFilterId=@"ALLUSERS";
-            break;
-            
-        case 10:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"AboutVCID"];
-            break;
-            
-            
-        case 11:
-            
-            [self wipeDataInLogout];
-            //[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-            //[[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
-            
-           // [RKDropdownAlert title:@"Faveo Helpdesk" message:@"You've logged out, successfully." backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-            
-            if (self.navigationController.navigationBarHidden) {
-                [self.navigationController setNavigationBarHidden:NO];
-            }
-            
-            [RMessage showNotificationInViewController:self.navigationController
-                                                 title:NSLocalizedString(@" Faveo Helpdesk ", nil)
-                                              subtitle:NSLocalizedString(@"You've logged out, successfully...!", nil)
-                                             iconImage:nil
-                                                  type:RMessageTypeSuccess
-                                        customTypeName:nil
-                                              duration:RMessageDurationAutomatic
-                                              callback:nil
-                                           buttonTitle:nil
-                                        buttonCallback:nil
-                                            atPosition:RMessagePositionNavBarOverlay
-                                  canBeDismissedByUser:YES];
-
-            
-            /*[RMessage showNotificationWithTitle:NSLocalizedString(@"Faveo Helpdesk", nil)
-                                       subtitle:NSLocalizedString(@"You've logged out, successfully...!", nil)
-                                           type:RMessageTypeSuccess
-                                 customTypeName:nil
-                                       callback:nil]; */
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"Login"];
-            // (vc.view.window!.rootViewController?).dismissViewControllerAnimated(false, completion: nil);
-            break;
-            
-            //        case 3:
-            //            [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-            //            [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
-            //            return;
-            //            break;
-            
-        default:
-            break;
-    }
-}@catch (NSException *exception)
+    @try{
+        switch (indexPath.row)
+        {
+            case 1:
+                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"CreateTicket"];
+                break;
+                
+            case 2:
+                [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+                break;
+            case 3:
+                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"InboxID"];
+                break;
+            case 4:
+                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"MyTicketsID"];
+                break;
+            case 5:
+                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"UnassignedTicketsID"];
+                break;
+            case 6:
+                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"ClosedTicketsID"];
+                break;
+                
+            case 7:
+                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"TrashTicketsID"];
+                break;
+                
+            case 8:
+                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"ClientListID"];
+                globalVariables.userFilterId=@"ALLUSERS";
+                break;
+                
+            case 10:
+                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"AboutVCID"];
+                break;
+                
+                
+            case 11:
+                
+                [self wipeDataInLogout];
+                //[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+                //[[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
+                
+                // [RKDropdownAlert title:@"Faveo Helpdesk" message:@"You've logged out, successfully." backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                
+                if (self.navigationController.navigationBarHidden) {
+                    [self.navigationController setNavigationBarHidden:NO];
+                }
+                
+                [RMessage showNotificationInViewController:self.navigationController
+                                                     title:NSLocalizedString(@" Faveo Helpdesk ", nil)
+                                                  subtitle:NSLocalizedString(@"You've logged out, successfully...!", nil)
+                                                 iconImage:nil
+                                                      type:RMessageTypeSuccess
+                                            customTypeName:nil
+                                                  duration:RMessageDurationAutomatic
+                                                  callback:nil
+                                               buttonTitle:nil
+                                            buttonCallback:nil
+                                                atPosition:RMessagePositionNavBarOverlay
+                                      canBeDismissedByUser:YES];
+                
+                
+                /*[RMessage showNotificationWithTitle:NSLocalizedString(@"Faveo Helpdesk", nil)
+                 subtitle:NSLocalizedString(@"You've logged out, successfully...!", nil)
+                 type:RMessageTypeSuccess
+                 customTypeName:nil
+                 callback:nil]; */
+                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"Login"];
+                // (vc.view.window!.rootViewController?).dismissViewControllerAnimated(false, completion: nil);
+                break;
+                
+                //        case 3:
+                //            [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+                //            [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
+                //            return;
+                //            break;
+                
+            default:
+                break;
+        }
+    }@catch (NSException *exception)
     {
         // Print exception information
         NSLog( @"NSException caught in LeftMenu View Controller" );
@@ -396,9 +398,9 @@
     {
         // Cleanup, in both success and fail cases
         NSLog( @"In finally block");
-    
+        
     }
-   
+    
     [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc
                                                              withSlideOutAnimation:self.slideOutAnimationEnabled
                                                                      andCompletion:nil];
@@ -426,13 +428,13 @@
     // get the path to our Data/plist file
     NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
     NSError *error;
-  @try{
-    if(![[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error])
-    {
-        NSLog(@"Error while removing the plist %@", error.localizedDescription);
-        //TODO: Handle/Log error
-    }
-  }@catch (NSException *exception)
+    @try{
+        if(![[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error])
+        {
+            NSLog(@"Error while removing the plist %@", error.localizedDescription);
+            //TODO: Handle/Log error
+        }
+    }@catch (NSException *exception)
     {
         // Print exception information
         NSLog( @"NSException caught in Logout Process in LeftMenu ViewController" );
@@ -444,7 +446,7 @@
     {
         // Cleanup, in both success and fail cases
         NSLog( @"In finally block");
-
+        
     }
     
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -455,30 +457,30 @@
 }
 
 -(void)sendDeviceToken{
-
-   // NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    
+    // NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     NSString *url=[NSString stringWithFormat:@"%@fcmtoken?user_id=%@&fcm_token=%s&os=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"user_id"],"0",@"ios"];
-@try{
-    MyWebservices *webservices=[MyWebservices sharedInstance];
-    [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-        if (error || [msg containsString:@"Error"]) {
-            if (msg) {
-                
-                // [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
-            }else if(error)  {
-                //                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
+    @try{
+        MyWebservices *webservices=[MyWebservices sharedInstance];
+        [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
+            if (error || [msg containsString:@"Error"]) {
+                if (msg) {
+                    
+                    // [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
+                }else if(error)  {
+                    //                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
+                }
+                return ;
             }
-            return ;
-        }
-        if (json) {
+            if (json) {
+                
+                NSLog(@"Thread-sendAPNS-token-json-%@",json);
+            }
             
-            NSLog(@"Thread-sendAPNS-token-json-%@",json);
-        }
-        
-    }];
-}@catch (NSException *exception)
+        }];
+    }@catch (NSException *exception)
     {
         // Print exception information
         NSLog( @"NSException caught In sendDeviceToken method in LeftMenu ViewController" );
@@ -490,7 +492,7 @@
     {
         // Cleanup, in both success and fail cases
         NSLog( @"In finally block");
-    
+        
     }
 }
 
@@ -524,8 +526,8 @@
     
     refresh=[[UIRefreshControl alloc] init];
     refresh.tintColor=[UIColor whiteColor];
-   // refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
-     refresh.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
+    // refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+    refresh.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
     refresh.attributedTitle =refreshing;
     [refresh addTarget:self action:@selector(reloadd) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refresh atIndex:0];
@@ -537,8 +539,9 @@
     [self update];
     [self.tableView reloadData];
     
-       [refresh endRefreshing];
+    [refresh endRefreshing];
 }
 
 
 @end
+

@@ -20,7 +20,7 @@
 #import "RKDropdownAlert.h"
 #import "HexColors.h"
 #import "RMessage.h"
-#import "RMessageView.h" 
+#import "RMessageView.h"
 #import "NotificationViewController.h"
 #import "CFMacro.h"
 #import "CFMultistageDropdownMenuView.h"
@@ -40,7 +40,7 @@
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
     NSDictionary *tempDict;
-   // NSMutableArray *mutableArray;
+    // NSMutableArray *mutableArray;
     NSMutableArray *selectedArray;
     NSMutableArray *selectedSubjectArray;
     int count1;
@@ -74,14 +74,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-     NSLog(@"Naa-Inbox");
+    NSLog(@"Naa-Inbox");
     
     _searchBar.delegate = self;
-  
+    
     _filteredSampleDataArray = [[NSMutableArray alloc] init];
     
     
-   _multistageDropdownMenuView.tag=99;
+    _multistageDropdownMenuView.tag=99;
     
     self.view.backgroundColor=[UIColor grayColor];
     [self.view addSubview:self.multistageDropdownMenuView];
@@ -95,17 +95,17 @@
     [self addUIRefresh];
     NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
     _mutableArray=[[NSMutableArray alloc]init];
-
+    
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
-
-
+    
+    
     UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
     [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-//    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
+    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
     [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
     
     
@@ -114,7 +114,7 @@
     UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
     [NotificationBtn addTarget:self action:@selector(NotificationBtnPressed) forControlEvents:UIControlEventTouchUpInside];
-   // [NotificationBtn setFrame:CGRectMake(10, 0, 32, 32)];
+    // [NotificationBtn setFrame:CGRectMake(10, 0, 32, 32)];
     [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
@@ -133,13 +133,13 @@
     [lpGesture setMinimumPressDuration:1];
     [self.tableView addGestureRecognizer:lpGesture];
     
-  
+    
     navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     
     UIImage *image1 = [UIImage imageNamed:@"merg111"];
     UIImage *image2 = [UIImage imageNamed:@"x1"];
-
-   // UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Assign"];
+    
+    // UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Assign"];
     UINavigationItem* navItem = [[UINavigationItem alloc] init];
     // self.navigationItem.titleView = myImageView;
     
@@ -160,13 +160,13 @@
     singleTap.numberOfTapsRequired = 1;
     [img setUserInteractionEnabled:YES];
     [img addGestureRecognizer:singleTap];
-
+    
     
     navItem.titleView = img;
     
     
     UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStylePlain  target:self action:@selector(MergeButtonClicked)];
-     navItem.leftBarButtonItem = button1;
+    navItem.leftBarButtonItem = button1;
     
     
     UIBarButtonItem *button2 = [[UIBarButtonItem alloc] initWithImage:image2 style:UIBarButtonItemStylePlain  target:self action:@selector(onNavButtonTapped:event:)];
@@ -176,11 +176,11 @@
     [self.view addSubview:navbar];
     
     
-//    UIBarButtonItem* status = [[UIBarButtonItem alloc] initWithTitle:@"Change Status" style:UIBarButtonItemStylePlain target:self action:@selector(onNavButtonTapped:event:)];
-     // [navbar setBarTintColor:[UIColor lightGrayColor]];
+    //    UIBarButtonItem* status = [[UIBarButtonItem alloc] initWithTitle:@"Change Status" style:UIBarButtonItemStylePlain target:self action:@selector(onNavButtonTapped:event:)];
+    // [navbar setBarTintColor:[UIColor lightGrayColor]];
     //  [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor]];
     
-//    navItem.rightBarButtonItem = status;
+    //    navItem.rightBarButtonItem = status;
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     
     [self reload];
@@ -203,7 +203,7 @@
     [_searchBar.window makeKeyAndVisible];
     
     
-
+    
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
@@ -212,12 +212,12 @@
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     
- //   [_searchBar resignFirstResponder];
-  
+    //   [_searchBar resignFirstResponder];
+    
 }
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-   // [_searchBar setShowsCancelButton:YES animated:YES];
+    // [_searchBar setShowsCancelButton:YES animated:YES];
     
     if([text isEqualToString:@"\n"])
     {
@@ -229,11 +229,11 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     searching = NO;
-     [self.tableView reloadData];
+    [self.tableView reloadData];
     
     self.navigationItem.titleView = nil;
-//    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"about"] style:UIBarButtonItemStylePlain  target:self action:@selector(searchButtonClicked)];
-//    self.navigationItem.rightBarButtonItem = rightBarButton;
+    //    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"about"] style:UIBarButtonItemStylePlain  target:self action:@selector(searchButtonClicked)];
+    //    self.navigationItem.rightBarButtonItem = rightBarButton;
     
     UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
@@ -254,18 +254,18 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
     ////
     [_searchBar setShowsCancelButton:NO];
-  //  [_searchBar resignFirstResponder];
+    //  [_searchBar resignFirstResponder];
     
-   
+    
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-  // [_filteredSampleDataArray removeAllObjects];
+    // [_filteredSampleDataArray removeAllObjects];
     
     if ([searchText length] != 0) {
         searching = YES;
         [self searchData];
-    
+        
     } else {
         searching = NO;
     }
@@ -296,15 +296,15 @@
     NSLog(@"Data222 is : %@",trimmedString);
     
     
- //   NSString *searchString = searchController.searchBar.text;
+    //   NSString *searchString = searchController.searchBar.text;
     if (trimmedString != nil && ![trimmedString  isEqual: @""]) {
         [self getAirports:trimmedString];
     }
     
     
-//    NSArray *tempArray = [_sampleDataArray filteredArrayUsingPredicate:predicate];
-//    NSLog(@"%@", tempArray);
-//    _filteredSampleDataArray = [NSMutableArray arrayWithArray:tempArray];
+    //    NSArray *tempArray = [_sampleDataArray filteredArrayUsingPredicate:predicate];
+    //    NSLog(@"%@", tempArray);
+    //    _filteredSampleDataArray = [NSMutableArray arrayWithArray:tempArray];
 }
 
 - (void)getAirports:(NSString *)needeedString
@@ -343,67 +343,67 @@
     NSLog(@"URL is : %@",url);
     globalVariables.searchString=needeedString;
     
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
-            
-            
-            if (error || [msg containsString:@"Error"]) {
-                [refresh endRefreshing];
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                if (msg) {
-                    
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    
-                }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-Search-Refresh-error == %@",error.localizedDescription);
-                }
-                return ;
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                
-                [self getAirports:needeedString];
-                NSLog(@"Thread--NO4-call-Search");
-                return;
-            }
-            
-            if (json) {
-                //NSError *error;
-                NSLog(@"Thread-NO4--SearchAPI--%@",json);
-                
-                NSDictionary * dict1 = [json objectForKey:@"result"];
-                _filteredSampleDataArray = [dict1 objectForKey:@"data"];
-                
-                NSLog(@"Mutable Array is--%@",_filteredSampleDataArray);
+    MyWebservices *webservices=[MyWebservices sharedInstance];
+    [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
         
+        
+        
+        if (error || [msg containsString:@"Error"]) {
+            [refresh endRefreshing];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            if (msg) {
                 
-                _nextPageUrl =[dict1 objectForKey:@"next_page_url"];
-                NSLog(@"Next page url is : %@",_nextPageUrl);
+                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                 
-                _path1=[dict1 objectForKey:@"path"];
-                
-                _currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[dict1 objectForKey:@"total"] integerValue];
-                _totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
-              
-            //    NSLog(@"Thread-Search-dic--%@", _mutableArray);
-                
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                  dispatch_async(dispatch_get_main_queue(), ^{
-//                        [[AppDelegate sharedAppdelegate] hideProgressView];
-//                        [refresh endRefreshing];
-                         [self.tableView reloadData];
-//                      // [self reloadTableView];
-//
-                  });
-              });
-                
+            }else if(error)  {
+                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                NSLog(@"Thread-NO4-Search-Refresh-error == %@",error.localizedDescription);
             }
-            NSLog(@"Thread-NO5-Search-closed");
+            return ;
+        }
+        
+        if ([msg isEqualToString:@"tokenRefreshed"]) {
             
-        }];
+            [self getAirports:needeedString];
+            NSLog(@"Thread--NO4-call-Search");
+            return;
+        }
+        
+        if (json) {
+            //NSError *error;
+            NSLog(@"Thread-NO4--SearchAPI--%@",json);
+            
+            NSDictionary * dict1 = [json objectForKey:@"result"];
+            _filteredSampleDataArray = [dict1 objectForKey:@"data"];
+            
+            NSLog(@"Mutable Array is--%@",_filteredSampleDataArray);
+            
+            
+            _nextPageUrl =[dict1 objectForKey:@"next_page_url"];
+            NSLog(@"Next page url is : %@",_nextPageUrl);
+            
+            _path1=[dict1 objectForKey:@"path"];
+            
+            _currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
+            _totalTickets=[[dict1 objectForKey:@"total"] integerValue];
+            _totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
+            
+            //    NSLog(@"Thread-Search-dic--%@", _mutableArray);
+            
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    //                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                    //                        [refresh endRefreshing];
+                    [self.tableView reloadData];
+                    //                      // [self reloadTableView];
+                    //
+                });
+            });
+            
+        }
+        NSLog(@"Thread-NO5-Search-closed");
+        
+    }];
     
     
 }
@@ -419,7 +419,7 @@
     }
     else{
         //selectedIDs
-       
+        
         globalVariables.ticketIDListForAssign=selectedIDs;
         
         MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
@@ -442,12 +442,12 @@
         [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
     }
     else{
-    
+        
         globalVariables.idList=selectedArray;
         globalVariables.subjectList=selectedSubjectArray;
         
-    MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
-    [self.navigationController pushViewController:merge animated:YES];
+        MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
+        [self.navigationController pushViewController:merge animated:YES];
     }
     
 }
@@ -483,11 +483,11 @@
 
 -(void)reload{
     
-
+    
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
-         [refresh endRefreshing];
+        [refresh endRefreshing];
         
         [[AppDelegate sharedAppdelegate] hideProgressView];
         
@@ -508,7 +508,7 @@
                                     buttonCallback:nil
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
-
+        
         
         
     }else{
@@ -517,80 +517,90 @@
         NSString * apiValue=[NSString stringWithFormat:@"%i",1];
         NSString * showInbox = @"inbox";
         NSString * Alldeparatments=@"All";
-     
+        
         NSString * url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,Alldeparatments];
-          NSLog(@"URL is : %@",url);
-     
-       @try{
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
-            
-            
-            if (error || [msg containsString:@"Error"]) {
-                [refresh endRefreshing];
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                if (msg) {
-                    
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    
-                }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+        NSLog(@"URL is : %@",url);
+        
+        @try{
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                
+                
+                
+                if (error || [msg containsString:@"Error"]) {
+                    [refresh endRefreshing];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    if (msg) {
+                        
+                        NSLog(@"Message is : %@",msg);
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        
+                    }else if(error)  {
+                        NSLog(@"Error is : %@",error);
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+                    }
+                    return ;
                 }
-                return ;
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
                 
-                [self reload];
-                NSLog(@"Thread--NO4-call-getInbox");
-                return;
-            }
-            
-            if (json) {
-                //NSError *error;
-                 NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-                _mutableArray = [json objectForKey:@"data"];
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    
+                    [self reload];
+                    NSLog(@"Thread--NO4-call-getInbox");
+                    return;
+                }
                 
-               _nextPageUrl =[json objectForKey:@"next_page_url"];
-                NSLog(@"bexr page url is : %@",_nextPageUrl);
+                if ([msg isEqualToString:@"tokenNotRefreshed"]) {
+                    
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [utils showAlertWithMessage:@"Your Login Credentials Changed. Contact to Admin" sendViewController:self];
+                    return;
+                }
                 
-                _path1=[json objectForKey:@"path"];
-                
-                _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[json objectForKey:@"total"] integerValue];
-                _totalPages=[[json objectForKey:@"last_page"] integerValue];
-                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [refresh endRefreshing];
-                        //  [self.tableView reloadData];
-                        [self reloadTableView];
-                        //                        [selectedArray removeAllObjects];
-                        //                        if (!selectedArray.count) {
-                        //                            [self.tableView setEditing:NO animated:YES];
-                        //                        }
+                if (json) {
+                    //NSError *error;
+                    NSLog(@"Thread-NO4--getInboxAPI--%@",json);
+                    _mutableArray = [json objectForKey:@"data"];
+                    
+                    _nextPageUrl =[json objectForKey:@"next_page_url"];
+                    NSLog(@"bexr page url is : %@",_nextPageUrl);
+                    
+                    _path1=[json objectForKey:@"path"];
+                    
+                    _currentPage=[[json objectForKey:@"current_page"] integerValue];
+                    _totalTickets=[[json objectForKey:@"total"] integerValue];
+                    _totalPages=[[json objectForKey:@"last_page"] integerValue];
+                    NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
+                    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            [refresh endRefreshing];
+                            //  [self.tableView reloadData];
+                            [self reloadTableView];
+                            //                        [selectedArray removeAllObjects];
+                            //                        if (!selectedArray.count) {
+                            //                            [self.tableView setEditing:NO animated:YES];
+                            //                        }
+                        });
                     });
-                });
+                    
+                }
+                NSLog(@"Thread-NO5-getInbox-closed");
                 
-            }
-            NSLog(@"Thread-NO5-getInbox-closed");
-            
-        }];
-}@catch (NSException *exception)
+            }];
+        }@catch (NSException *exception)
         {
             // Print exception information
-           // NSLog( @"NSException caught in reload method in Inbox ViewController " );
-           // NSLog( @"Name: %@", exception.name);
-           // NSLog( @"Reason: %@", exception.reason );
+            // NSLog( @"NSException caught in reload method in Inbox ViewController " );
+            // NSLog( @"Name: %@", exception.name);
+            // NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            //  NSLog( @"In finally block");
             
         }
     }
@@ -619,120 +629,120 @@
                                     buttonCallback:nil
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
-
-
+        
+        
         
     }else{
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/dependency?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
-       
-  @try{
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-            NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
-            if (error || [msg containsString:@"Error"]) {
-                
-                if( [msg containsString:@"Error-429"])
+        
+        @try{
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
+                NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+                if (error || [msg containsString:@"Error"]) {
                     
-                {
-                     [utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
-                    
-                }else{
-                NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
-                return ;
-                }
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                //               dispatch_async(dispatch_get_main_queue(), ^{
-                //                  [self getDependencies];
-                //               });
-                
-                [self getDependencies];
-                NSLog(@"Thread--NO4-call-getDependecies");
-                return;
-            }
-            
-            if (json) {
-                
-                NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
-                NSDictionary *resultDic = [json objectForKey:@"result"];
-                NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
-                
-                for (int i = 0; i < ticketCountArray.count; i++) {
-                    NSString *name = [[ticketCountArray objectAtIndex:i]objectForKey:@"name"];
-                    NSString *count = [[ticketCountArray objectAtIndex:i]objectForKey:@"count"];
-                    if ([name isEqualToString:@"Open"]) {
-                        globalVariables.OpenCount=count;
-                    }else if ([name isEqualToString:@"Closed"]) {
-                        globalVariables.ClosedCount=count;
-                    }else if ([name isEqualToString:@"Deleted"]) {
-                        globalVariables.DeletedCount=count;
-                    }else if ([name isEqualToString:@"unassigned"]) {
-                        globalVariables.UnassignedCount=count;
-                    }else if ([name isEqualToString:@"mytickets"]) {
-                        globalVariables.MyticketsCount=count;
+                    if( [msg containsString:@"Error-429"])
+                        
+                    {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
+                        
+                    }else{
+                        NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
+                        return ;
                     }
                 }
                 
-                NSArray *ticketStatusArray=[resultDic objectForKey:@"status"];
-                
-                for (int i = 0; i < ticketStatusArray.count; i++) {
-                    NSString *statusName = [[ticketStatusArray objectAtIndex:i]objectForKey:@"name"];
-                    NSString *statusId = [[ticketStatusArray objectAtIndex:i]objectForKey:@"id"];
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    //               dispatch_async(dispatch_get_main_queue(), ^{
+                    //                  [self getDependencies];
+                    //               });
                     
-                    if ([statusName isEqualToString:@"Open"]) {
-                        globalVariables.OpenStausId=statusId;
-                    }else if ([statusName isEqualToString:@"Resolved"]) {
-                        globalVariables.ResolvedStausId=statusId;
-                    }else if ([statusName isEqualToString:@"Closed"]) {
-                        globalVariables.ClosedStausId=statusId;
-                    }else if ([statusName isEqualToString:@"Deleted"]) {
-                        globalVariables.DeletedStausId=statusId;
-                    }else if ([statusName isEqualToString:@"Request for close"]) {
-                        globalVariables.RequestCloseStausId=statusId;
-                    }else if ([statusName isEqualToString:@"Spam"]) {
-                        globalVariables.SpamStausId=statusId;
+                    [self getDependencies];
+                    NSLog(@"Thread--NO4-call-getDependecies");
+                    return;
+                }
+                
+                if (json) {
+                    
+                    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    NSDictionary *resultDic = [json objectForKey:@"result"];
+                    NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
+                    
+                    for (int i = 0; i < ticketCountArray.count; i++) {
+                        NSString *name = [[ticketCountArray objectAtIndex:i]objectForKey:@"name"];
+                        NSString *count = [[ticketCountArray objectAtIndex:i]objectForKey:@"count"];
+                        if ([name isEqualToString:@"Open"]) {
+                            globalVariables.OpenCount=count;
+                        }else if ([name isEqualToString:@"Closed"]) {
+                            globalVariables.ClosedCount=count;
+                        }else if ([name isEqualToString:@"Deleted"]) {
+                            globalVariables.DeletedCount=count;
+                        }else if ([name isEqualToString:@"unassigned"]) {
+                            globalVariables.UnassignedCount=count;
+                        }else if ([name isEqualToString:@"mytickets"]) {
+                            globalVariables.MyticketsCount=count;
+                        }
                     }
+                    
+                    NSArray *ticketStatusArray=[resultDic objectForKey:@"status"];
+                    
+                    for (int i = 0; i < ticketStatusArray.count; i++) {
+                        NSString *statusName = [[ticketStatusArray objectAtIndex:i]objectForKey:@"name"];
+                        NSString *statusId = [[ticketStatusArray objectAtIndex:i]objectForKey:@"id"];
+                        
+                        if ([statusName isEqualToString:@"Open"]) {
+                            globalVariables.OpenStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Resolved"]) {
+                            globalVariables.ResolvedStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Closed"]) {
+                            globalVariables.ClosedStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Deleted"]) {
+                            globalVariables.DeletedStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Request for close"]) {
+                            globalVariables.RequestCloseStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Spam"]) {
+                            globalVariables.SpamStausId=statusId;
+                        }
+                    }
+                    
+                    
+                    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+                    
+                    // get documents path
+                    NSString *documentsPath = [paths objectAtIndex:0];
+                    
+                    // get the path to our Data/plist file
+                    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
+                    NSError *writeError = nil;
+                    
+                    NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:resultDic format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&writeError];
+                    
+                    if(plistData)
+                    {
+                        [plistData writeToFile:plistPath atomically:YES];
+                        NSLog(@"Data saved sucessfully");
+                    }
+                    else
+                    {
+                        NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
+                    
                 }
-
-                
-                NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-                
-                // get documents path
-                NSString *documentsPath = [paths objectAtIndex:0];
-                
-                // get the path to our Data/plist file
-                NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
-                NSError *writeError = nil;
-                
-                NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:resultDic format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&writeError];
-                
-                if(plistData)
-                {
-                    [plistData writeToFile:plistPath atomically:YES];
-                    NSLog(@"Data saved sucessfully");
-                }
-                else
-                {
-                    NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
-                
+                NSLog(@"Thread-NO5-getDependencies-closed");
             }
-            NSLog(@"Thread-NO5-getDependencies-closed");
-        }
-         ];
-  }@catch (NSException *exception)
+             ];
+        }@catch (NSException *exception)
         {
             // Print exception information
-//            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
+            //            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
+            //            NSLog( @"Name: %@", exception.name);
+            //            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
             // Cleanup, in both success and fail cases
-        //    NSLog( @"In finally block");
+            //    NSLog( @"In finally block");
             
         }
     }
@@ -758,9 +768,9 @@
         {
             // CGRectMake(0, -10, tableView.bounds.size.width, tableView.bounds.size.height)
             UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-    //CGPointMake(self.view.frame.size.width/2,self.view.frame.size.height/2);
+            //CGPointMake(self.view.frame.size.width/2,self.view.frame.size.height/2);
             
-    
+            
             noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
             noDataLabel.textColor        = [UIColor blackColor];
             noDataLabel.textAlignment    = NSTextAlignmentCenter;
@@ -779,25 +789,25 @@
     }
     else{
         
-    NSInteger numOfSections = 0;
-    if ([_mutableArray count]==0)
-    {
-        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
-        noDataLabel.textColor        = [UIColor blackColor];
-        noDataLabel.textAlignment    = NSTextAlignmentCenter;
-        tableView.backgroundView = noDataLabel;
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        NSInteger numOfSections = 0;
+        if ([_mutableArray count]==0)
+        {
+            UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+            noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
+            noDataLabel.textColor        = [UIColor blackColor];
+            noDataLabel.textAlignment    = NSTextAlignmentCenter;
+            tableView.backgroundView = noDataLabel;
+            tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            
+        }
+        else
+        {
+            tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+            numOfSections                = 1;
+            tableView.backgroundView = nil;
+        }
         
-    }
-    else
-    {
-        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        numOfSections                = 1;
-        tableView.backgroundView = nil;
-    }
-    
-    return numOfSections;
+        return numOfSections;
     }
 }
 
@@ -805,7 +815,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (searching) {
-       
+        
         if (self.currentPage == self.totalPages
             || self.totalTickets == _filteredSampleDataArray.count) {
             return _filteredSampleDataArray.count;
@@ -834,8 +844,8 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
- // cell.selectionStyle=UITableViewCellSelectionStyleNone;
-  //  cell.selectionStyle=UITableViewCellSelectionStyleBlue;
+    // cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    //  cell.selectionStyle=UITableViewCellSelectionStyleBlue;
     if(searching)
     {
         if (indexPath.row == [_filteredSampleDataArray count] - 1 ) {
@@ -865,151 +875,37 @@
         }
     }
     else{
-    if (indexPath.row == [_mutableArray count] - 1 ) {
-        NSLog(@"nextURL111  %@",_nextPageUrl);
+        if (indexPath.row == [_mutableArray count] - 1 ) {
+            NSLog(@"nextURL111  %@",_nextPageUrl);
+            
+            if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
+                
+                [self loadMore];
+                
+                
+            }
+            else{
+                
+                [RMessage showNotificationInViewController:self
+                                                     title:nil
+                                                  subtitle:NSLocalizedString(@"All Caught Up", nil)
+                                                 iconImage:nil
+                                                      type:RMessageTypeSuccess
+                                            customTypeName:nil
+                                                  duration:RMessageDurationAutomatic
+                                                  callback:nil
+                                               buttonTitle:nil
+                                            buttonCallback:nil
+                                                atPosition:RMessagePositionBottom
+                                      canBeDismissedByUser:YES];
+            }
+        }
         
-        if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
-            
-            [self loadMore];
-            
-            
-        }
-        else{
-
-            [RMessage showNotificationInViewController:self
-                                                 title:nil
-                                              subtitle:NSLocalizedString(@"All Caught Up", nil)
-                                             iconImage:nil
-                                                  type:RMessageTypeSuccess
-                                        customTypeName:nil
-                                              duration:RMessageDurationAutomatic
-                                              callback:nil
-                                           buttonTitle:nil
-                                        buttonCallback:nil
-                                            atPosition:RMessagePositionBottom
-                                  canBeDismissedByUser:YES];
-        }
     }
-    
-}
 }
 
 -(void)loadMore{
     
- 
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
-        //connection unavailable
-        if (self.navigationController.navigationBarHidden) {
-            [self.navigationController setNavigationBarHidden:NO];
-        }
-        
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Error..!", nil)
-                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeError
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionNavBarOverlay
-                              canBeDismissedByUser:YES];
-
-        
-    }else{
-        
- @try{
-     
-     self.page = _page + 1;
-    // NSLog(@"Page is : %ld",(long)_page);
-     
-     NSString *str=_nextPageUrl;
-     NSString *Page = [str substringFromIndex:[str length] - 1];
-     
-//     NSLog(@"String is : %@",szResult);
-     NSLog(@"Page is : %@",Page);
-     NSLog(@"Page is : %@",Page);
-     
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-       [webservices getNextPageURLInbox:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
-     
-     //[webservices getNextPageURL:_nextPageUrl  callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
-            if (error || [msg containsString:@"Error"]) {
-                
-                if (msg) {
-                    
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    
-                }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
-                }
-                return ;
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                
-                [self loadMore];
-                //NSLog(@"Thread--NO4-call-getInbox");
-                return;
-            }
-            
-           if (json) {
-               NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-               //_indexPaths=[[NSArray alloc]init];
-               //_indexPaths = [json objectForKey:@"data"];
-               _nextPageUrl =[json objectForKey:@"next_page_url"];
-               _currentPage=[[json objectForKey:@"current_page"] integerValue];
-               _totalTickets=[[json objectForKey:@"total"] integerValue];
-               _totalPages=[[json objectForKey:@"last_page"] integerValue];
-               
-               
-               _mutableArray= [_mutableArray mutableCopy];
-               
-               
-               [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
-               
-               //                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
-               dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                   dispatch_async(dispatch_get_main_queue(), ^{
-                       
-                       // [self.tableView reloadData];
-                       
-                       [self reloadTableView];
-                       
-                       //                        [self.tableView beginUpdates];
-                       //                        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[_mutableArray count]-[_indexPaths count] inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
-                       //                        [self.tableView endUpdates];
-                   });
-               });
-            
-            }
-            NSLog(@"Thread-NO5-getInbox-closed");
-            
-        }];
- }@catch (NSException *exception)
-        {
-            // Print exception information
-//            NSLog( @"NSException caught in loadMore method in Inbox ViewController" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
-            return;
-        }
-        @finally
-        {
-            // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
-            
-        }
-    }
-}
-
-
--(void)loadMoreforSearchResults
-{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
@@ -1033,7 +929,9 @@
         
         
     }else{
-    
+        
+        @try{
+            
             self.page = _page + 1;
             // NSLog(@"Page is : %ld",(long)_page);
             
@@ -1045,9 +943,9 @@
             NSLog(@"Page is : %@",Page);
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-        
-        
-        [webservices getNextPageURLInboxSearchResults:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            [webservices getNextPageURLInbox:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+                
+                //[webservices getNextPageURL:_nextPageUrl  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
                 if (error || [msg containsString:@"Error"]) {
                     
@@ -1102,6 +1000,118 @@
                 NSLog(@"Thread-NO5-getInbox-closed");
                 
             }];
+        }@catch (NSException *exception)
+        {
+            // Print exception information
+            //            NSLog( @"NSException caught in loadMore method in Inbox ViewController" );
+            //            NSLog( @"Name: %@", exception.name);
+            //            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            // Cleanup, in both success and fail cases
+            //  NSLog( @"In finally block");
+            
+        }
+    }
+}
+
+
+-(void)loadMoreforSearchResults
+{
+    
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        //connection unavailable
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
+        
+    }else{
+        
+        self.page = _page + 1;
+        // NSLog(@"Page is : %ld",(long)_page);
+        
+        NSString *str=_nextPageUrl;
+        NSString *Page = [str substringFromIndex:[str length] - 1];
+        
+        //     NSLog(@"String is : %@",szResult);
+        NSLog(@"Page is : %@",Page);
+        NSLog(@"Page is : %@",Page);
+        
+        MyWebservices *webservices=[MyWebservices sharedInstance];
+        
+        
+        [webservices getNextPageURLInboxSearchResults:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            
+            if (error || [msg containsString:@"Error"]) {
+                
+                if (msg) {
+                    
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    
+                }else if(error)  {
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+                }
+                return ;
+            }
+            
+            if ([msg isEqualToString:@"tokenRefreshed"]) {
+                
+                [self loadMore];
+                //NSLog(@"Thread--NO4-call-getInbox");
+                return;
+            }
+            
+            if (json) {
+                NSLog(@"Thread-NO4--getInboxAPI--%@",json);
+                //_indexPaths=[[NSArray alloc]init];
+                //_indexPaths = [json objectForKey:@"data"];
+                _nextPageUrl =[json objectForKey:@"next_page_url"];
+                _currentPage=[[json objectForKey:@"current_page"] integerValue];
+                _totalTickets=[[json objectForKey:@"total"] integerValue];
+                _totalPages=[[json objectForKey:@"last_page"] integerValue];
+                
+                
+                _mutableArray= [_mutableArray mutableCopy];
+                
+                
+                [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
+                
+                //                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
+                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        // [self.tableView reloadData];
+                        
+                        [self reloadTableView];
+                        
+                        //                        [self.tableView beginUpdates];
+                        //                        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[_mutableArray count]-[_indexPaths count] inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                        //                        [self.tableView endUpdates];
+                    });
+                });
+                
+            }
+            NSLog(@"Thread-NO5-getInbox-closed");
+            
+        }];
         
     }
     
@@ -1109,274 +1119,79 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-  if(searching)
-  {
-    if (indexPath.row == [_filteredSampleDataArray count])
+    if(searching)
+    {
+        if (indexPath.row == [_filteredSampleDataArray count])
         {
-          LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"LoadingCellID"];
-           if (cell == nil)
-           {
-               NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingTableViewCell" owner:self options:nil];
-               cell = [nib objectAtIndex:0];
-               
-           }
-           UIActivityIndicatorView *activityIndicator = (UIActivityIndicatorView *)[cell.contentView viewWithTag:1];
-           [activityIndicator startAnimating];
-           return cell;
-           
-       }else
-       {
-           TicketTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"TableViewCellID"];
-           
-           if (cell == nil)
-           {
-               NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TicketTableViewCell" owner:self options:nil];
-               cell = [nib objectAtIndex:0];
-           }
-        
-        //agent name deatils
-           NSDictionary *searchDictionary=[_filteredSampleDataArray objectAtIndex:indexPath.row];
-           NSLog(@"searchDictionary is : %@",searchDictionary);
-           
-        
-           // first name, last name, user name owner name
-           NSDictionary * userDict= [searchDictionary objectForKey:@"user"];
-           
-           NSString *fname= [userDict objectForKey:@"first_name"];
-           
-           NSString *lname= [userDict objectForKey:@"last_name"];
-          
-           NSString*userName=[userDict objectForKey:@"user_name"];
-           
-           NSString*profilPic=[userDict objectForKey:@"profile_pic"];
-           
-           
-           [Utils isEmpty:fname];
-           [Utils isEmpty:lname];
-           [Utils isEmpty:userName];
-           [Utils isEmpty:profilPic];
-           
-           
-           if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
-           {
-               if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
-               {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
-               }
-               else{
-                   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
-               }
-           }
-           else
-           {
-               if(![Utils isEmpty:userName])
-               {
-                   cell.mailIdLabel.text=userName;
-               }
-               else{
-                   cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
-               }
-               
-           }
-        
-        // ticket numbner
-           NSString *ticketNumber=[searchDictionary objectForKey:@"ticket_number"];
-           
-           [Utils isEmpty:ticketNumber];
-           if  (![Utils isEmpty:ticketNumber] && ![ticketNumber isEqualToString:@""])
-           {
-               cell.ticketIdLabel.text=ticketNumber;
-           }
-           else
-           {
-               cell.ticketIdLabel.text=NSLocalizedString(@"Not Available", nil);
-           }
-           
-           //profile picture
-           if (  ![profilPic isEqual:[NSNull null]]   )
-           {
-               [cell setUserProfileimage:profilPic];
-               
-           }
-           else
-           {
-               [cell setUserProfileimage:@"default_pic.png"];
-           }
-           
-           //
-        //   cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
-           
-         //  cell.ticketSubLabel.text=@"Updating wait...";
-           
-           
-           //Agent info
-           // if(( ![[json objectForKey:@"requester"] isEqual:[NSNull null]] ) )
-           NSDictionary *AgentDict= [searchDictionary objectForKey:@"assigned"];
-           
-           if(( ![[searchDictionary objectForKey:@"assigned"] isEqual:[NSNull null]] ) )
-               
-           {
-               if(( ![[AgentDict objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( ![[AgentDict objectForKey:@"last_name"] isEqual:[NSNull null]] ) )
-                   
-               {
-                   if(( ![[AgentDict objectForKey:@"first_name"] isEqual:[NSNull null]] ) && ( ![[AgentDict objectForKey:@"last_name"] isEqual:[NSNull null]] ) )
-                   {
-                       
-                       
-                       cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[AgentDict objectForKey:@"first_name"],[AgentDict objectForKey:@"last_name"]];
-                       
-                   }else if(( ![[AgentDict objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( ![[AgentDict objectForKey:@"last_name"] isEqual:[NSNull null]] ) )
-                   {
-                       
-                       
-                       cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[AgentDict objectForKey:@"first_name"],[AgentDict objectForKey:@"last_name"]];
-                       
-                   }
-                   
-               }else if(( ![[AgentDict objectForKey:@"user_name"] isEqual:[NSNull null]] ) )
-               {
-                   cell.agentLabel.text=[NSString stringWithFormat:@"%@",[AgentDict objectForKey:@"user_name"]];
-                   
-               }
-               
-           }else
-           {
-               cell.agentLabel.text=@"Unassigned";
-               
-           }
-           
-           
-           
-        //   NSDictionary *searchDictionary=[_filteredSampleDataArray objectAtIndex:indexPath.row];
-           
-           NSArray * ticketThredArray= [searchDictionary objectForKey:@"thread"];
-           
-      if(( ![[searchDictionary objectForKey:@"thread"] isEqual:[NSNull null]] ) )
-        {
-           NSDictionary *ticketDict=[ticketThredArray objectAtIndex:0];
-           
-            if(( ![[ticketDict objectForKey:@"ticket_id"] isEqual:[NSNull null]] ) )
-                
+            LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"LoadingCellID"];
+            if (cell == nil)
             {
-                NSString * ticketidIs= [NSString stringWithFormat:@"%@",[ticketDict objectForKey:@"ticket_id"]];
-                NSLog(@"Ticket id is : %@",ticketidIs);
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingTableViewCell" owner:self options:nil];
+                cell = [nib objectAtIndex:0];
                 
             }
-           
-           if(( ![[ticketDict objectForKey:@"title"] isEqual:[NSNull null]] ) )
-           {
-              NSString * ticketTitle= [NSString stringWithFormat:@"%@",[ticketDict objectForKey:@"title"]];
-              NSLog(@"Ticket Title is : %@",ticketTitle);
-               
-               cell.ticketSubLabel.text=ticketTitle;
-           }
-           
+            UIActivityIndicatorView *activityIndicator = (UIActivityIndicatorView *)[cell.contentView viewWithTag:1];
+            [activityIndicator startAnimating];
+            return cell;
+            
         }else
         {
-            cell.ticketSubLabel.text=@"No Title - EMPTY JSON ";
+            TicketTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"TableViewCellID"];
             
-        }
-           
-        //due/oberdue
-           
-           if(( ![[searchDictionary objectForKey:@"duedate"] isEqual:[NSNull null]] ) )
-               
-           {
-               
-               if([utils compareDates:[searchDictionary objectForKey:@"duedate"]]){
-                   [cell.overDueLabel setHidden:NO];
-                   [cell.today setHidden:YES];
-               }else
-               {
-                   [cell.overDueLabel setHidden:YES];
-                   [cell.today setHidden:NO];
-               }
-               
-           }
-           
-           //indication color/priority color
-           
-           if(( ![[searchDictionary objectForKey:@"priority"] isEqual:[NSNull null]] ) )
-           {
-               
-               NSDictionary * priority =[searchDictionary objectForKey:@"priority"];
-               
-               if(( ![[priority objectForKey:@"priority_color"] isEqual:[NSNull null]] ) )
-               {
-                   
-                    cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[priority objectForKey:@"priority_color"]] CGColor];
-               }
-               else{
-                   NSLog(@"I am in else condition");
-               }
-               
-           }
-
-       
-           return cell;
-       }
-      
-
-  }
-      
-else{
-    
-    if (indexPath.row == [_mutableArray count]) {
-        
-        LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"LoadingCellID"];
-        if (cell == nil)
-        {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingTableViewCell" owner:self options:nil];
-            cell = [nib objectAtIndex:0];
-           
-        }
-        UIActivityIndicatorView *activityIndicator = (UIActivityIndicatorView *)[cell.contentView viewWithTag:1];
-        [activityIndicator startAnimating];
-        return cell;
-    }else{
-        
-
-        TicketTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"TableViewCellID"];
-        
-        if (cell == nil)
-        {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TicketTableViewCell" owner:self options:nil];
-            cell = [nib objectAtIndex:0];
-        }
-        
-    
-        NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
-        
-        tempDict= [_mutableArray objectAtIndex:indexPath.row];
-        //cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
-        
-        @try{
-            
-            
-            NSString *replyer12=[finaldic objectForKey:@"last_replier"];
-            [Utils isEmpty:replyer12];
-            
-            if  (![Utils isEmpty:replyer12] || ![replyer12 isEqualToString:@""])
+            if (cell == nil)
             {
-                if([replyer12 isEqualToString:@"client"])
-                 {
-                cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
-                 }else
-                 {
-                     NSLog(@"I am in else condition..!");
-                 }
-                
-            }else
-            {
-                NSLog(@"I am in else condition..!");
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TicketTableViewCell" owner:self options:nil];
+                cell = [nib objectAtIndex:0];
             }
             
+            //agent name deatils
+            NSDictionary *searchDictionary=[_filteredSampleDataArray objectAtIndex:indexPath.row];
+            NSLog(@"searchDictionary is : %@",searchDictionary);
             
             
-            NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
+            // first name, last name, user name owner name
+            NSDictionary * userDict= [searchDictionary objectForKey:@"user"];
+            
+            NSString *fname= [userDict objectForKey:@"first_name"];
+            
+            NSString *lname= [userDict objectForKey:@"last_name"];
+            
+            NSString*userName=[userDict objectForKey:@"user_name"];
+            
+            NSString*profilPic=[userDict objectForKey:@"profile_pic"];
+            
+            
+            [Utils isEmpty:fname];
+            [Utils isEmpty:lname];
+            [Utils isEmpty:userName];
+            [Utils isEmpty:profilPic];
+            
+            
+            if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+            {
+                if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+                {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
+                }
+                else{
+                    cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
+                }
+            }
+            else
+            {
+                if(![Utils isEmpty:userName])
+                {
+                    cell.mailIdLabel.text=userName;
+                }
+                else{
+                    cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
+                }
+                
+            }
+            
+            // ticket numbner
+            NSString *ticketNumber=[searchDictionary objectForKey:@"ticket_number"];
             
             [Utils isEmpty:ticketNumber];
-            
-            
             if  (![Utils isEmpty:ticketNumber] && ![ticketNumber isEqualToString:@""])
             {
                 cell.ticketIdLabel.text=ticketNumber;
@@ -1386,180 +1201,10 @@ else{
                 cell.ticketIdLabel.text=NSLocalizedString(@"Not Available", nil);
             }
             
-            NSString *assigneeFirstName= [finaldic objectForKey:@"a_fname"];
-            NSString *assigneeLaststName= [finaldic objectForKey:@"a_lname"];
-            NSString *assigneeUserName= [finaldic objectForKey:@"a_uname"];
-            
-            [Utils isEmpty:assigneeFirstName];
-            [Utils isEmpty:assigneeLaststName];
-            [Utils isEmpty:assigneeUserName];
-            
-         if (![Utils isEmpty:assigneeFirstName] || ![Utils isEmpty:assigneeLaststName])
+            //profile picture
+            if (  ![profilPic isEqual:[NSNull null]]   )
             {
-                if  (![Utils isEmpty:assigneeFirstName] && ![Utils isEmpty:assigneeLaststName])
-                {
-                    cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"a_fname"],[finaldic objectForKey:@"a_lname"]];
-                }
-                else
-                {
-                    cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"a_fname"],[finaldic objectForKey:@"a_lname"]];
-                }
-            }  else if(![Utils isEmpty:assigneeUserName])
-               {
-                    cell.agentLabel.text= [finaldic objectForKey:@"a_uname"];
-               }else
-                  {
-                    cell.agentLabel.text= NSLocalizedString(@"Unassigned", nil);
-                   }
-            
-            
-            NSString *fname= [finaldic objectForKey:@"c_fname"];
-  
-            NSString *lname= [finaldic objectForKey:@"c_lname"];
-            //  NSString *userName= [finaldic objectForKey:@"c_uname"];
-            NSString*email1=[finaldic objectForKey:@"c_uname"];
-            
-            [Utils isEmpty:fname];
-            [Utils isEmpty:lname];
-            [Utils isEmpty:email1];
-        
-            
-            if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
-            {
-                if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
-                {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"c_fname"],[finaldic objectForKey:@"c_lname"]];
-                }
-                else{
-                    cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"c_fname"],[finaldic objectForKey:@"c_lname"]];
-                }
-            }
-            else
-            {
-                //                if(![Utils isEmpty:userName])
-                //               {
-                //                cell.mailIdLabel.text=[finaldic objectForKey:@"user_name"];
-                //               }
-                
-                if(![Utils isEmpty:email1])
-                {
-                    cell.mailIdLabel.text=[finaldic objectForKey:@"c_uname"];
-                }
-                else{
-                    cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
-                }
-                
-            }
-            
-            
-            
-            cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
-            
-            
-        } @catch (NSException *exception)
-        {
-            // Print exception information
-//            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
-            return cell;
-        }
-        @finally
-        {
-            // Cleanup, in both success and fail cases
-         //   NSLog( @"In finally block");
-            
-        }
-        // ______________________________________________________________________________________________________
-        ////////////////for UTF-8 data encoding ///////
-        //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
-        
-        
-        
-        // NSString *encodedString = @"=?UTF-8?Q?Re:_Robin_-_Implementing_Faveo_H?= =?UTF-8?Q?elp_Desk._Let=E2=80=99s_get_you_started.?=";
-        
-        
-        
-        
-        
-        NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
-        
-        
-        [Utils isEmpty:encodedString];
-        
-        if  ([Utils isEmpty:encodedString]){
-            cell.ticketSubLabel.text=@"No Title";
-        }
-        else
-        {
-            
-            NSMutableString *decodedString = [[NSMutableString alloc] init];
-            
-            if ([encodedString hasPrefix:@"=?UTF-8?Q?"] || [encodedString hasSuffix:@"?="])
-            {
-                NSScanner *scanner = [NSScanner scannerWithString:encodedString];
-                NSString *buf = nil;
-                //  NSMutableString *decodedString = [[NSMutableString alloc] init];
-                
-                while ([scanner scanString:@"=?UTF-8?Q?" intoString:NULL]
-                       || ([scanner scanUpToString:@"=?UTF-8?Q?" intoString:&buf] && [scanner scanString:@"=?UTF-8?Q?" intoString:NULL])) {
-                    if (buf != nil) {
-                        [decodedString appendString:buf];
-                    }
-                    
-                    buf = nil;
-                    
-                    NSString *encodedRange;
-                    
-                    if (![scanner scanUpToString:@"?=" intoString:&encodedRange]) {
-                        break; // Invalid encoding
-                    }
-                    
-                    [scanner scanString:@"?=" intoString:NULL]; // Skip the terminating "?="
-                    
-                    // Decode the encoded portion (naively using UTF-8 and assuming it really is Q encoded)
-                    // I'm doing this really naively, but it should work
-                    
-                    // Firstly I'm encoding % signs so I can cheat and turn this into a URL-encoded string, which NSString can decode
-                    encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"%" withString:@"=25"];
-                    
-                    // Turn this into a URL-encoded string
-                    encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"=" withString:@"%"];
-                    
-                    
-                    // Remove the underscores
-                    encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"_" withString:@" "];
-                    
-                    // [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                    
-                    NSString *str1= [encodedRange stringByRemovingPercentEncoding];
-                    [decodedString appendString:str1];
-                    
-                    
-                }
-                
-                NSLog(@"Decoded string = %@", decodedString);
-                
-             //   cell.ticketSubLabel.text= decodedString; //countthread
-                cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",decodedString,[finaldic objectForKey:@"countthread"]];
-            }
-            else{
-                
-               // cell.ticketSubLabel.text= encodedString;
-                cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",encodedString,[finaldic objectForKey:@"countthread"]];
-                
-            }
-            
-        }
-        ///////////////////////////////////////////////////
-        //____________________________________________________________________________________________________
-
-        
-        // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-        @try{
-            
-            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-            {
-                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+                [cell setUserProfileimage:profilPic];
                 
             }
             else
@@ -1567,17 +1212,87 @@ else{
                 [cell setUserProfileimage:@"default_pic.png"];
             }
             
+            //
+            //   cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
             
-            if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
+            //  cell.ticketSubLabel.text=@"Updating wait...";
+            
+            
+            //Agent info
+            // if(( ![[json objectForKey:@"requester"] isEqual:[NSNull null]] ) )
+            NSDictionary *AgentDict= [searchDictionary objectForKey:@"assigned"];
+            
+            if(( ![[searchDictionary objectForKey:@"assigned"] isEqual:[NSNull null]] ) )
                 
-                /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
-                 [cell.overDueLabel setHidden:NO];
-                 
-                 }else [cell.overDueLabel setHidden:YES];
-                 
-                 } */
+            {
+                if(( ![[AgentDict objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( ![[AgentDict objectForKey:@"last_name"] isEqual:[NSNull null]] ) )
+                    
+                {
+                    if(( ![[AgentDict objectForKey:@"first_name"] isEqual:[NSNull null]] ) && ( ![[AgentDict objectForKey:@"last_name"] isEqual:[NSNull null]] ) )
+                    {
+                        
+                        
+                        cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[AgentDict objectForKey:@"first_name"],[AgentDict objectForKey:@"last_name"]];
+                        
+                    }else if(( ![[AgentDict objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( ![[AgentDict objectForKey:@"last_name"] isEqual:[NSNull null]] ) )
+                    {
+                        
+                        
+                        cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[AgentDict objectForKey:@"first_name"],[AgentDict objectForKey:@"last_name"]];
+                        
+                    }
+                    
+                }else if(( ![[AgentDict objectForKey:@"user_name"] isEqual:[NSNull null]] ) )
+                {
+                    cell.agentLabel.text=[NSString stringWithFormat:@"%@",[AgentDict objectForKey:@"user_name"]];
+                    
+                }
                 
-                if([utils compareDates:[finaldic objectForKey:@"duedate"]]){
+            }else
+            {
+                cell.agentLabel.text=@"Unassigned";
+                
+            }
+            
+            
+            
+            //   NSDictionary *searchDictionary=[_filteredSampleDataArray objectAtIndex:indexPath.row];
+            
+            NSArray * ticketThredArray= [searchDictionary objectForKey:@"thread"];
+            
+            if(( ![[searchDictionary objectForKey:@"thread"] isEqual:[NSNull null]] ) )
+            {
+                NSDictionary *ticketDict=[ticketThredArray objectAtIndex:0];
+                
+                if(( ![[ticketDict objectForKey:@"ticket_id"] isEqual:[NSNull null]] ) )
+                    
+                {
+                    NSString * ticketidIs= [NSString stringWithFormat:@"%@",[ticketDict objectForKey:@"ticket_id"]];
+                    NSLog(@"Ticket id is : %@",ticketidIs);
+                    
+                }
+                
+                if(( ![[ticketDict objectForKey:@"title"] isEqual:[NSNull null]] ) )
+                {
+                    NSString * ticketTitle= [NSString stringWithFormat:@"%@",[ticketDict objectForKey:@"title"]];
+                    NSLog(@"Ticket Title is : %@",ticketTitle);
+                    
+                    cell.ticketSubLabel.text=ticketTitle;
+                }
+                
+            }else
+            {
+                cell.ticketSubLabel.text=@"No Title - EMPTY JSON ";
+                
+            }
+            
+            //due/oberdue
+            
+            if(( ![[searchDictionary objectForKey:@"duedate"] isEqual:[NSNull null]] ) )
+                
+            {
+                
+                if([utils compareDates:[searchDictionary objectForKey:@"duedate"]]){
                     [cell.overDueLabel setHidden:NO];
                     [cell.today setHidden:YES];
                 }else
@@ -1588,82 +1303,377 @@ else{
                 
             }
             
+            //indication color/priority color
             
-            NSString * source1=[finaldic objectForKey:@"source"];
-            
-            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countcollaborator"]];
-            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countattachment"]];
-        
-            
-            if([source1 isEqualToString:@"web"])
+            if(( ![[searchDictionary objectForKey:@"priority"] isEqual:[NSNull null]] ) )
             {
-                cell.sourceImgView.image=[UIImage imageNamed:@"internert"];
-            }else  if([source1 isEqualToString:@"email"])
-            {
-                cell.sourceImgView.image=[UIImage imageNamed:@"agentORmail"];
-            }else  if([source1 isEqualToString:@"agent"])
-            {
-                cell.sourceImgView.image=[UIImage imageNamed:@"agentORmail"];
-            }else  if([source1 isEqualToString:@"facebook"])
-            {
-                cell.sourceImgView.image=[UIImage imageNamed:@"fb"];
-            }else  if([source1 isEqualToString:@"twitter"])
-            {
-                cell.sourceImgView.image=[UIImage imageNamed:@"twitter"];
-            }else  if([source1 isEqualToString:@"call"])
-            {
-                cell.sourceImgView.image=[UIImage imageNamed:@"call"];
-            }else if([source1 isEqualToString:@"chat"])
-            {
-                cell.sourceImgView.image=[UIImage imageNamed:@"chat"];
-            }
-        
-            
-            
-
-            
-           if(![cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
-            {
-                cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
-                cell.attachImgView.image=[UIImage imageNamed:@"attach"];
-            }
-           else if(![cc isEqualToString:@"0"] && [attachment1 isEqualToString:@"0"])
-           {
-               cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
-           }
-           else if([cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
-            {
-                cell.ccImgView.image=[UIImage imageNamed:@"attach"];
-            }else
-            {
-               
+                
+                NSDictionary * priority =[searchDictionary objectForKey:@"priority"];
+                
+                if(( ![[priority objectForKey:@"priority_color"] isEqual:[NSNull null]] ) )
+                {
+                    
+                    cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[priority objectForKey:@"priority_color"]] CGColor];
+                }
+                else{
+                    NSLog(@"I am in else condition");
+                }
+                
             }
             
-    
             
-            cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"color"]] CGColor];
-            
-            
-            
-        }@catch (NSException *exception)
-        {
-            // Print exception information
-//            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
             return cell;
         }
-        @finally
-        {
-            // Cleanup, in both success and fail cases
-       //     NSLog( @"In finally block");
-            
-        }
         
-       // }
-        return cell;
+        
     }
-  }
+    
+    else{
+        
+        if (indexPath.row == [_mutableArray count]) {
+            
+            LoadingTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"LoadingCellID"];
+            if (cell == nil)
+            {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingTableViewCell" owner:self options:nil];
+                cell = [nib objectAtIndex:0];
+                
+            }
+            UIActivityIndicatorView *activityIndicator = (UIActivityIndicatorView *)[cell.contentView viewWithTag:1];
+            [activityIndicator startAnimating];
+            return cell;
+        }else{
+            
+            
+            TicketTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"TableViewCellID"];
+            
+            if (cell == nil)
+            {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TicketTableViewCell" owner:self options:nil];
+                cell = [nib objectAtIndex:0];
+            }
+            
+            
+            NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
+            
+            tempDict= [_mutableArray objectAtIndex:indexPath.row];
+            //cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+            
+            @try{
+                
+                
+                NSString *replyer12=[finaldic objectForKey:@"last_replier"];
+                [Utils isEmpty:replyer12];
+                
+                if  (![Utils isEmpty:replyer12] || ![replyer12 isEqualToString:@""])
+                {
+                    if([replyer12 isEqualToString:@"client"])
+                    {
+                        cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
+                    }else
+                    {
+                        NSLog(@"I am in else condition..!");
+                    }
+                    
+                }else
+                {
+                    NSLog(@"I am in else condition..!");
+                }
+                
+                
+                
+                NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
+                
+                [Utils isEmpty:ticketNumber];
+                
+                
+                if  (![Utils isEmpty:ticketNumber] && ![ticketNumber isEqualToString:@""])
+                {
+                    cell.ticketIdLabel.text=ticketNumber;
+                }
+                else
+                {
+                    cell.ticketIdLabel.text=NSLocalizedString(@"Not Available", nil);
+                }
+                
+                NSString *assigneeFirstName= [finaldic objectForKey:@"a_fname"];
+                NSString *assigneeLaststName= [finaldic objectForKey:@"a_lname"];
+                NSString *assigneeUserName= [finaldic objectForKey:@"a_uname"];
+                
+                [Utils isEmpty:assigneeFirstName];
+                [Utils isEmpty:assigneeLaststName];
+                [Utils isEmpty:assigneeUserName];
+                
+                if (![Utils isEmpty:assigneeFirstName] || ![Utils isEmpty:assigneeLaststName])
+                {
+                    if  (![Utils isEmpty:assigneeFirstName] && ![Utils isEmpty:assigneeLaststName])
+                    {
+                        cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"a_fname"],[finaldic objectForKey:@"a_lname"]];
+                    }
+                    else
+                    {
+                        cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"a_fname"],[finaldic objectForKey:@"a_lname"]];
+                    }
+                }  else if(![Utils isEmpty:assigneeUserName])
+                {
+                    cell.agentLabel.text= [finaldic objectForKey:@"a_uname"];
+                }else
+                {
+                    cell.agentLabel.text= NSLocalizedString(@"Unassigned", nil);
+                }
+                
+                
+                NSString *fname= [finaldic objectForKey:@"c_fname"];
+                
+                NSString *lname= [finaldic objectForKey:@"c_lname"];
+                //  NSString *userName= [finaldic objectForKey:@"c_uname"];
+                NSString*email1=[finaldic objectForKey:@"c_uname"];
+                
+                [Utils isEmpty:fname];
+                [Utils isEmpty:lname];
+                [Utils isEmpty:email1];
+                
+                
+                if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+                {
+                    if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+                    {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"c_fname"],[finaldic objectForKey:@"c_lname"]];
+                    }
+                    else{
+                        cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"c_fname"],[finaldic objectForKey:@"c_lname"]];
+                    }
+                }
+                else
+                {
+                    //                if(![Utils isEmpty:userName])
+                    //               {
+                    //                cell.mailIdLabel.text=[finaldic objectForKey:@"user_name"];
+                    //               }
+                    
+                    if(![Utils isEmpty:email1])
+                    {
+                        cell.mailIdLabel.text=[finaldic objectForKey:@"c_uname"];
+                    }
+                    else{
+                        cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
+                    }
+                    
+                }
+                
+                
+                
+                cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+                
+                
+            } @catch (NSException *exception)
+            {
+                // Print exception information
+                //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
+                //            NSLog( @"Name: %@", exception.name);
+                //            NSLog( @"Reason: %@", exception.reason );
+                return cell;
+            }
+            @finally
+            {
+                // Cleanup, in both success and fail cases
+                //   NSLog( @"In finally block");
+                
+            }
+            // ______________________________________________________________________________________________________
+            ////////////////for UTF-8 data encoding ///////
+            //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
+            
+            
+            
+            // NSString *encodedString = @"=?UTF-8?Q?Re:_Robin_-_Implementing_Faveo_H?= =?UTF-8?Q?elp_Desk._Let=E2=80=99s_get_you_started.?=";
+            
+            
+            
+            
+            
+            NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
+            
+            
+            [Utils isEmpty:encodedString];
+            
+            if  ([Utils isEmpty:encodedString]){
+                cell.ticketSubLabel.text=@"No Title";
+            }
+            else
+            {
+                
+                NSMutableString *decodedString = [[NSMutableString alloc] init];
+                
+                if ([encodedString hasPrefix:@"=?UTF-8?Q?"] || [encodedString hasSuffix:@"?="])
+                {
+                    NSScanner *scanner = [NSScanner scannerWithString:encodedString];
+                    NSString *buf = nil;
+                    //  NSMutableString *decodedString = [[NSMutableString alloc] init];
+                    
+                    while ([scanner scanString:@"=?UTF-8?Q?" intoString:NULL]
+                           || ([scanner scanUpToString:@"=?UTF-8?Q?" intoString:&buf] && [scanner scanString:@"=?UTF-8?Q?" intoString:NULL])) {
+                        if (buf != nil) {
+                            [decodedString appendString:buf];
+                        }
+                        
+                        buf = nil;
+                        
+                        NSString *encodedRange;
+                        
+                        if (![scanner scanUpToString:@"?=" intoString:&encodedRange]) {
+                            break; // Invalid encoding
+                        }
+                        
+                        [scanner scanString:@"?=" intoString:NULL]; // Skip the terminating "?="
+                        
+                        // Decode the encoded portion (naively using UTF-8 and assuming it really is Q encoded)
+                        // I'm doing this really naively, but it should work
+                        
+                        // Firstly I'm encoding % signs so I can cheat and turn this into a URL-encoded string, which NSString can decode
+                        encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"%" withString:@"=25"];
+                        
+                        // Turn this into a URL-encoded string
+                        encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"=" withString:@"%"];
+                        
+                        
+                        // Remove the underscores
+                        encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+                        
+                        // [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                        
+                        NSString *str1= [encodedRange stringByRemovingPercentEncoding];
+                        [decodedString appendString:str1];
+                        
+                        
+                    }
+                    
+                    NSLog(@"Decoded string = %@", decodedString);
+                    
+                    //   cell.ticketSubLabel.text= decodedString; //countthread
+                    cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",decodedString,[finaldic objectForKey:@"countthread"]];
+                }
+                else{
+                    
+                    // cell.ticketSubLabel.text= encodedString;
+                    cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",encodedString,[finaldic objectForKey:@"countthread"]];
+                    
+                }
+                
+            }
+            ///////////////////////////////////////////////////
+            //____________________________________________________________________________________________________
+            
+            
+            // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+            @try{
+                
+                if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+                {
+                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+                    
+                }
+                else
+                {
+                    [cell setUserProfileimage:@"default_pic.png"];
+                }
+                
+                
+                if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
+                    
+                    /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+                     [cell.overDueLabel setHidden:NO];
+                     
+                     }else [cell.overDueLabel setHidden:YES];
+                     
+                     } */
+                    
+                    if([utils compareDates:[finaldic objectForKey:@"duedate"]]){
+                        [cell.overDueLabel setHidden:NO];
+                        [cell.today setHidden:YES];
+                    }else
+                    {
+                        [cell.overDueLabel setHidden:YES];
+                        [cell.today setHidden:NO];
+                    }
+                    
+                }
+                
+                
+                NSString * source1=[finaldic objectForKey:@"source"];
+                
+                NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countcollaborator"]];
+                NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countattachment"]];
+                
+                
+                if([source1 isEqualToString:@"web"])
+                {
+                    cell.sourceImgView.image=[UIImage imageNamed:@"internert"];
+                }else  if([source1 isEqualToString:@"email"])
+                {
+                    cell.sourceImgView.image=[UIImage imageNamed:@"agentORmail"];
+                }else  if([source1 isEqualToString:@"agent"])
+                {
+                    cell.sourceImgView.image=[UIImage imageNamed:@"agentORmail"];
+                }else  if([source1 isEqualToString:@"facebook"])
+                {
+                    cell.sourceImgView.image=[UIImage imageNamed:@"fb"];
+                }else  if([source1 isEqualToString:@"twitter"])
+                {
+                    cell.sourceImgView.image=[UIImage imageNamed:@"twitter"];
+                }else  if([source1 isEqualToString:@"call"])
+                {
+                    cell.sourceImgView.image=[UIImage imageNamed:@"call"];
+                }else if([source1 isEqualToString:@"chat"])
+                {
+                    cell.sourceImgView.image=[UIImage imageNamed:@"chat"];
+                }
+                
+                
+                
+                
+                
+                if(![cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+                {
+                    cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
+                    cell.attachImgView.image=[UIImage imageNamed:@"attach"];
+                }
+                else if(![cc isEqualToString:@"0"] && [attachment1 isEqualToString:@"0"])
+                {
+                    cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
+                }
+                else if([cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+                {
+                    cell.ccImgView.image=[UIImage imageNamed:@"attach"];
+                }else
+                {
+                    
+                }
+                
+                
+                
+                cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"color"]] CGColor];
+                
+                
+                
+            }@catch (NSException *exception)
+            {
+                // Print exception information
+                //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
+                //            NSLog( @"Name: %@", exception.name);
+                //            NSLog( @"Reason: %@", exception.reason );
+                return cell;
+            }
+            @finally
+            {
+                // Cleanup, in both success and fail cases
+                //     NSLog( @"In finally block");
+                
+            }
+            
+            // }
+            return cell;
+        }
+    }
 }
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1680,26 +1690,26 @@ else{
     self.selectedPath = indexPath;
     
     if ([tableView isEditing]) {
- 
+        
         //  [selectedArray addObject:[_mutableArray objectAtIndex:indexPath.row]];
         
         //taking id from selected rows
         [selectedArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
         
         //taking ticket title from selected rows
-         [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
-       
+        [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
+        
         count1=(int)[selectedArray count];
         NSLog(@"Selected count is :%i",count1);
         NSLog(@"Slected Array Id : %@",selectedArray);
-       
+        
         selectedIDs = [selectedArray componentsJoinedByString:@","];
-         NSLog(@"Slected Ticket Id are : %@",selectedIDs);
+        NSLog(@"Slected Ticket Id are : %@",selectedIDs);
         
-         NSLog(@"Slected Ticket Subjects are : %@",selectedSubjectArray);
+        NSLog(@"Slected Ticket Subjects are : %@",selectedSubjectArray);
         
-//        globalVariables.idList=selectedArray;
-//        globalVariables.subjectList=selectedSubjectArray;
+        //        globalVariables.idList=selectedArray;
+        //        globalVariables.subjectList=selectedSubjectArray;
         
     }else{
         
@@ -1724,35 +1734,35 @@ else{
             
             
             TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-             [self.navigationController pushViewController:td animated:YES];
+            [self.navigationController pushViewController:td animated:YES];
             
         }else{
-      TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-    
-        NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
-    
-        globalVariables.iD=[finaldic objectForKey:@"id"];
-        globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
-    
-        globalVariables.First_name=[finaldic objectForKey:@"c_fname"];
-        globalVariables.Last_name=[finaldic objectForKey:@"c_lname"];
-    
-       globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
- 
-       [self.navigationController pushViewController:td animated:YES];
+            TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+            
+            NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
+            
+            globalVariables.iD=[finaldic objectForKey:@"id"];
+            globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
+            
+            globalVariables.First_name=[finaldic objectForKey:@"c_fname"];
+            globalVariables.Last_name=[finaldic objectForKey:@"c_lname"];
+            
+            globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
+            
+            [self.navigationController pushViewController:td animated:YES];
             
         }
     }
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
- 
+    
     self.selectedPath = indexPath;
-
-
- //   [selectedArray removeObject:[_mutableArray objectAtIndex:indexPath.row]];
+    
+    
+    //   [selectedArray removeObject:[_mutableArray objectAtIndex:indexPath.row]];
     [selectedArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
-
+    
     [selectedSubjectArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
     
     
@@ -1764,14 +1774,14 @@ else{
     NSLog(@"Slected Ticket Id are : %@",selectedIDs);
     NSLog(@"Slected Ticket Subjects are : %@",selectedSubjectArray);
     
-//    globalVariables.idList=selectedArray;
-//     globalVariables.subjectList=selectedSubjectArray;
+    //    globalVariables.idList=selectedArray;
+    //     globalVariables.subjectList=selectedSubjectArray;
     
     if (!selectedArray.count) {
         [self.tableView setEditing:NO animated:YES];
         navbar.hidden=YES;
     }
-
+    
 }
 
 #pragma mark - SlideNavigationController Methods -
@@ -1788,7 +1798,7 @@ else{
     
     [self.navigationController pushViewController:createTicket animated:YES];
     
-} 
+}
 
 -(void)NotificationBtnPressed
 
@@ -1816,8 +1826,8 @@ else{
     
     refresh=[[UIRefreshControl alloc] init];
     refresh.tintColor=[UIColor whiteColor];
-   // refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
-     refresh.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
+    // refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+    refresh.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
     refresh.attributedTitle =refreshing;
     [refresh addTarget:self action:@selector(reloadd) forControlEvents:UIControlEventValueChanged];
     [_tableView insertSubview:refresh atIndex:0];
@@ -1827,8 +1837,8 @@ else{
 
 -(void)onNavButtonTapped:(UIBarButtonItem *)sender event:(UIEvent *)event
 {
-     NSLog(@"11111111*********111111111111");
-   
+    NSLog(@"11111111*********111111111111");
+    
 #ifdef IfMethodOne
     CGRect rect = [self.navigationController.navigationBar convertRect:[event.allTouches.anyObject view].frame toView:[[UIApplication sharedApplication] keyWindow]];
     
@@ -1854,7 +1864,7 @@ else{
                            
                            
                            
-                          
+                           
                            
                            if(selectedIndex==0)
                            {
@@ -1871,7 +1881,7 @@ else{
                                [self changeStaus3];
                            }else if(selectedIndex==3)
                            {
-                                NSLog(@"Clicked on Deleted");
+                               NSLog(@"Clicked on Deleted");
                                [self changeStaus4];
                            }
                            
@@ -1902,14 +1912,14 @@ else{
             [[AppDelegate sharedAppdelegate] hideProgressView];
         }
         else{
-        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ClosedStausId];
+            NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ClosedStausId];
             NSLog(@"URL is : %@",url);
-//        if([globalVariables.Ticket_status isEqualToString:@"Closed"])
-//        {
-//            [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];
-//            [[AppDelegate sharedAppdelegate] hideProgressView];
-//            
-//        }else{
+            //        if([globalVariables.Ticket_status isEqualToString:@"Closed"])
+            //        {
+            //            [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];
+            //            [[AppDelegate sharedAppdelegate] hideProgressView];
+            //
+            //        }else{
             
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -1971,23 +1981,23 @@ else{
                         
                     }
                 }
-//                if (json) {
-//                    NSLog(@"JSON-CreateTicket-%@",json);
-//                    if ([json objectForKey:@"response"]) {
-//                        dispatch_async(dispatch_get_main_queue(), ^{
-//
-//                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-//
-//                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-//                            [self.navigationController pushViewController:inboxVC animated:YES];
-//                        });
-//                    }
-//                }// end json
+                //                if (json) {
+                //                    NSLog(@"JSON-CreateTicket-%@",json);
+                //                    if ([json objectForKey:@"response"]) {
+                //                        dispatch_async(dispatch_get_main_queue(), ^{
+                //
+                //                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                //
+                //                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                //                            [self.navigationController pushViewController:inboxVC animated:YES];
+                //                        });
+                //                    }
+                //                }// end json
                 NSLog(@"Thread-NO5-postTicketStatusChange-closed");
                 
             }];
-       // }
-    }
+            // }
+        }
     }
 }
 
@@ -2010,16 +2020,16 @@ else{
             [[AppDelegate sharedAppdelegate] hideProgressView];
         }
         else{
-        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ResolvedStausId];
-        
-        
-//        if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
-//        {
-//            [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
-//            [[AppDelegate sharedAppdelegate] hideProgressView];
-//
-//        }else{
-//
+            NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ResolvedStausId];
+            
+            
+            //        if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
+            //        {
+            //            [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
+            //            [[AppDelegate sharedAppdelegate] hideProgressView];
+            //
+            //        }else{
+            //
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
             [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -2083,24 +2093,24 @@ else{
                     
                 } // end json
                 
-//                if (json) {
-//                    NSLog(@"JSON-CreateTicket-%@",json);
-//                    if ([json objectForKey:@"response"]) {
-//                        dispatch_async(dispatch_get_main_queue(), ^{
-//
-//                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-//
-//
-//
-//                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-//                            [self.navigationController pushViewController:inboxVC animated:YES];
-//                        });
-//                    }
-//                }
+                //                if (json) {
+                //                    NSLog(@"JSON-CreateTicket-%@",json);
+                //                    if ([json objectForKey:@"response"]) {
+                //                        dispatch_async(dispatch_get_main_queue(), ^{
+                //
+                //                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                //
+                //
+                //
+                //                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                //                            [self.navigationController pushViewController:inboxVC animated:YES];
+                //                        });
+                //                    }
+                //                }
                 NSLog(@"Thread-NO5-postTicketStatusChange-closed");
                 
             }];
-       // }
+            // }
         } }
 }
 
@@ -2123,14 +2133,14 @@ else{
             [[AppDelegate sharedAppdelegate] hideProgressView];
         }
         else{
-        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.DeletedStausId];
-        
-//        if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
-//        {
-//            [utils showAlertWithMessage:@"Ticket is Already Deleted" sendViewController:self];
-//            [[AppDelegate sharedAppdelegate] hideProgressView];
-//
-//        }else{
+            NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.DeletedStausId];
+            
+            //        if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
+            //        {
+            //            [utils showAlertWithMessage:@"Ticket is Already Deleted" sendViewController:self];
+            //            [[AppDelegate sharedAppdelegate] hideProgressView];
+            //
+            //        }else{
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
@@ -2197,23 +2207,23 @@ else{
                 } // end json
                 
                 
-//                if (json) {
-//                    NSLog(@"JSON-CreateTicket-%@",json);
-//                    if ([json objectForKey:@"response"]) {
-//                        dispatch_async(dispatch_get_main_queue(), ^{
-//
-//                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-//
-//
-//                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-//                            [self.navigationController pushViewController:inboxVC animated:YES];
-//                        });
-//                    }
-//                }
+                //                if (json) {
+                //                    NSLog(@"JSON-CreateTicket-%@",json);
+                //                    if ([json objectForKey:@"response"]) {
+                //                        dispatch_async(dispatch_get_main_queue(), ^{
+                //
+                //                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                //
+                //
+                //                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                //                            [self.navigationController pushViewController:inboxVC animated:YES];
+                //                        });
+                //                    }
+                //                }
                 NSLog(@"Thread-NO5-postTicketStatusChange-closed");
                 
             }];
-      //  }
+            //  }
         } }
 }
 
@@ -2236,8 +2246,8 @@ else{
     // DEMO
     _multistageDropdownMenuView = [[CFMultistageDropdownMenuView alloc] initWithFrame:CGRectMake(0, -5, CFScreenWidth, 30)];
     
-  
-//
+    
+    //
     // main top menu 2 menu aahet aata
     _multistageDropdownMenuView.defaulTitleArray = [NSArray arrayWithObjects:@"Filter",@"Sort by", nil];
     
@@ -2253,9 +2263,9 @@ else{
                           // 对应dataSourceLeftArray
                           @[
                               
-                             // @[]
-                             @[@"Show Filter",@"Clear All",@"Exit"]
-                          
+                              // @[]
+                              @[@"Show Filter",@"Clear All",@"Exit"]
+                              
                               
                               ],
                           @[
@@ -2296,7 +2306,7 @@ else{
 - (void)multistageDropdownMenuView:(CFMultistageDropdownMenuView *)multistageDropdownMenuView selecteTitleButtonIndex:(NSInteger)titleButtonIndex conditionLeftIndex:(NSInteger)leftIndex conditionRightIndex:(NSInteger)rightIndex
 {
     
-
+    
     if(titleButtonIndex==0 && rightIndex==0)
     {
         NSLog(@"*************show********");
@@ -2320,25 +2330,25 @@ else{
         NSLog(@"Ticket title - ASC");
         //sortAlert
         globalVariables.sortingValueId=@"sortTitleAsc";
-         globalVariables.sortAlert=@"sortTitleAscAlert";
-         globalVariables.sortCondition=@"INBOX";
+        globalVariables.sortAlert=@"sortTitleAscAlert";
+        globalVariables.sortCondition=@"INBOX";
         
-       SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-       [self.navigationController pushViewController:sort animated:YES];
-
+        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+        [self.navigationController pushViewController:sort animated:YES];
+        
     }
     
     else if (titleButtonIndex==1 && leftIndex==0 && rightIndex==1 )
     {
         NSLog(@"Ticket Title  - DSC");
         globalVariables.sortingValueId=@"sortTitleDsc";
-         globalVariables.sortAlert=@"sortTitleDscAlert";
+        globalVariables.sortAlert=@"sortTitleDscAlert";
         globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
-       
-   
+        
+        
     }
     
     else if (titleButtonIndex==1 && leftIndex==0 && rightIndex==2 )
@@ -2349,12 +2359,12 @@ else{
     
     
     //sort by - ticket number
-   else  if(titleButtonIndex==1 && leftIndex==1 && rightIndex==0 )
+    else  if(titleButtonIndex==1 && leftIndex==1 && rightIndex==0 )
     {
         NSLog(@" Ticket number - ASC");
         globalVariables.sortingValueId=@"sortNumberAsc";
-         globalVariables.sortAlert=@"sortNumberAscAlert";
-         globalVariables.sortCondition=@"INBOX";
+        globalVariables.sortAlert=@"sortNumberAscAlert";
+        globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -2372,7 +2382,7 @@ else{
         [self.navigationController pushViewController:sort animated:YES];
         
         
-   
+        
     }
     
     else if (titleButtonIndex==1 && leftIndex==1 && rightIndex==3 )
@@ -2382,98 +2392,98 @@ else{
     }
     
     //ticket priority
-   else if(titleButtonIndex==1 && leftIndex==2 && rightIndex==0 )
+    else if(titleButtonIndex==1 && leftIndex==2 && rightIndex==0 )
     {
         NSLog(@" Ticket priority - ASC");
         globalVariables.sortingValueId=@"sortPriorityAsc";
-         globalVariables.sortAlert=@"sortPriorityAscAlert";
+        globalVariables.sortAlert=@"sortPriorityAscAlert";
         globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
         
-  
+        
     }
-   else if(titleButtonIndex==1 && leftIndex==2 && rightIndex==1 )
+    else if(titleButtonIndex==1 && leftIndex==2 && rightIndex==1 )
     {
         NSLog(@" Ticket priority - DSC");
         globalVariables.sortingValueId=@"sortPriorityDsc";
-         globalVariables.sortAlert=@"sortPriorityDscAlert";
-         globalVariables.sortCondition=@"INBOX";
+        globalVariables.sortAlert=@"sortPriorityDscAlert";
+        globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
-      
+        
         
     }
-   else if (titleButtonIndex==1 && leftIndex==2 && rightIndex==2 )
-   {
-       
-       NSLog(@"Exit Clicked ");
-   }
+    else if (titleButtonIndex==1 && leftIndex==2 && rightIndex==2 )
+    {
+        
+        NSLog(@"Exit Clicked ");
+    }
     // upated at
-   else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==0 )
+    else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==0 )
     {
         NSLog(@" upated at - ASC");
         globalVariables.sortingValueId=@"sortUpdatedAsc";
-         globalVariables.sortAlert=@"sortUpdatedAscAlert";
-         globalVariables.sortCondition=@"INBOX";
+        globalVariables.sortAlert=@"sortUpdatedAscAlert";
+        globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
         
-      
+        
     }
-   else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==1 )
+    else if(titleButtonIndex==1 && leftIndex==3 && rightIndex==1 )
     {
         NSLog(@" upated at - DSC");
         globalVariables.sortingValueId=@"sortUpdatedDsc";
         globalVariables.sortAlert=@"sortUpdatedDscAlert";
-         globalVariables.sortCondition=@"INBOX";
+        globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
-       
-      
+        
+        
     }
-   else if (titleButtonIndex==1 && leftIndex==3 && rightIndex==2 )
-   {
-       
-       NSLog(@"Exit Clicked ");
-   }
+    else if (titleButtonIndex==1 && leftIndex==3 && rightIndex==2 )
+    {
+        
+        NSLog(@"Exit Clicked ");
+    }
     
     // created at
-   else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==0 )
+    else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==0 )
     {
         NSLog(@" created At - ASC");
         globalVariables.sortingValueId=@"sortCreatedAsc";
         globalVariables.sortAlert=@"sortCreatedAscAlert";
-         globalVariables.sortCondition=@"INBOX";
+        globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
         
     }
-   else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==1 )
+    else if(titleButtonIndex==1 && leftIndex==4 && rightIndex==1 )
     {
         NSLog(@" created At - DSC");
         globalVariables.sortingValueId=@"sortCreatedDsc";
-         globalVariables.sortAlert=@"sortCreatedDscAlert";
-         globalVariables.sortCondition=@"INBOX";
+        globalVariables.sortAlert=@"sortCreatedDscAlert";
+        globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
         
- 
+        
     }
-   else if (titleButtonIndex==1 && leftIndex==4 && rightIndex==2 )
-   {
-       
-       NSLog(@"Exit Clicked ");
-   }
+    else if (titleButtonIndex==1 && leftIndex==4 && rightIndex==2 )
+    {
+        
+        NSLog(@"Exit Clicked ");
+    }
     
     // due on
-   else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==0 )
+    else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==0 )
     {
         NSLog(@" due on - ASC");
         globalVariables.sortingValueId=@"sortDueAsc";
@@ -2484,28 +2494,28 @@ else{
         [self.navigationController pushViewController:sort animated:YES];
         
     }
-   else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==1 )
+    else if(titleButtonIndex==1 && leftIndex==5 && rightIndex==1 )
     {
         NSLog(@" due on - DSC");
         globalVariables.sortingValueId=@"sortDueDsc";
         globalVariables.sortAlert=@"sortDueDscAlert";
-         globalVariables.sortCondition=@"INBOX";
+        globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
         
-     
+        
     }
-   else if (titleButtonIndex==1 && leftIndex==5 && rightIndex==2 )
-   {
-       
-       NSLog(@"Exit Clicked ");
-   }
+    else if (titleButtonIndex==1 && leftIndex==5 && rightIndex==2 )
+    {
+        
+        NSLog(@"Exit Clicked ");
+    }
     
-  else
-  {
-  }
-   
+    else
+    {
+    }
+    
     
     NSString *titleStr = [multistageDropdownMenuView.defaulTitleArray objectAtIndex:titleButtonIndex];
     NSArray *leftArr = [multistageDropdownMenuView.dataSourceLeftArray objectAtIndex:titleButtonIndex];
@@ -2547,7 +2557,8 @@ else{
     NSString *str = [NSString stringWithFormat:@"当前选中的是 \"%@\" \n 当前展示的所有条件是:\n (%@)",currentTitle, mStr];
     NSLog(@"%@",str);
     
-
+    
 }
 
 @end
+

@@ -31,6 +31,8 @@
 #import "FilterViewController.h"
 #import "FTPopOverMenu.h"
 #import "MergeViewForm.h"
+#import "IQKeyboardManager.h"
+
 
 @interface FilterLogic ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>
 {

@@ -944,9 +944,11 @@
     
    // textViewInternalNote.inputAccessoryView.hidden =YES;
   //  textViewInternalNote.autocorrectionType = NO;
-   // textViewInternalNote.textContentType = UITextContentTypeName;
-   // textViewInternalNote.autocapitalizationType=NO;
- //   textViewInternalNote.autocorrectionType = UITextAutocorrectionTypeNo;
+    // textViewInternalNote.autocapitalizationType=NO;
+    textViewInternalNote.textContentType = UITextContentTypeName;
+    textViewInternalNote.spellCheckingType = UITextSpellCheckingTypeYes;
+
+    textViewInternalNote.autocorrectionType = UITextAutocorrectionTypeYes;
 
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
@@ -1089,8 +1091,10 @@
     
     
    // textViewReply.inputAccessoryView.hidden =YES;
-   // textViewReply.autocorrectionType = NO;
-   // textViewReply.textContentType = UITextContentTypeName;
+    textViewReply.autocorrectionType = YES;
+    textViewReply.textContentType = UITextContentTypeName;
+    textViewReply.spellCheckingType = UITextSpellCheckingTypeYes;
+
    // textViewReply.autocapitalizationType=NO;
   //  textViewReply.autocorrectionType = UITextAutocorrectionTypeNo;
 
