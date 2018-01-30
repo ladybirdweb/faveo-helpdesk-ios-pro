@@ -40,9 +40,12 @@
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
     NSDictionary *tempDict;
+    
     // NSMutableArray *mutableArray;
     NSMutableArray *selectedArray;
     NSMutableArray *selectedSubjectArray;
+     NSMutableArray *selectedTicketOwner;
+    
     int count1;
     NSString *selectedIDs;
     UINavigationBar*  navbar;
@@ -127,6 +130,7 @@
     count1=0;
     selectedArray = [[NSMutableArray alloc] init];
     selectedSubjectArray = [[NSMutableArray alloc] init];
+    selectedTicketOwner = [[NSMutableArray alloc] init];
     
     self.tableView.allowsMultipleSelectionDuringEditing = true;
     UILongPressGestureRecognizer *lpGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(EditTableView:)];
@@ -411,7 +415,8 @@
 
 -(void)tapDetected{
     
-    NSLog(@"Clicked on merge");
+
+    NSLog(@"Clicked on Asign");
     if (!selectedArray.count) {
         
         [utils showAlertWithMessage:@"Select The Tickets for Assign" sendViewController:self];
@@ -433,6 +438,12 @@
 -(void)MergeButtonClicked
 {
     NSLog(@"Clicked on merge");
+    
+    NSString * email1= [selectedTicketOwner objectAtIndex:0];
+    NSString * email2= [selectedTicketOwner objectAtIndex:1];
+    NSLog(@"email 1 is : %@",email1);
+    NSLog(@"email 2 is : %@",email2);
+    
     if (!selectedArray.count) {
         
         [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
@@ -440,6 +451,10 @@
     }else if(selectedArray.count<2)
     {
         [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
+    }
+    else if(![email1 isEqualToString:email2])
+    {
+        [utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
     }
     else{
         
@@ -531,9 +546,21 @@
                     [refresh endRefreshing];
                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     if (msg) {
-                        
+                        if([msg isEqualToString:@"Error-402"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-403"])
+                        {
+                            [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                        else{
+                            
                         NSLog(@"Message is : %@",msg);
                         [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        }
                         
                     }else if(error)  {
                         NSLog(@"Error is : %@",error);
@@ -554,7 +581,7 @@
                 if ([msg isEqualToString:@"tokenNotRefreshed"]) {
                     
                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [utils showAlertWithMessage:@"Your Login Credentials Changed. Contact to Admin" sendViewController:self];
+                    [utils showAlertWithMessage:@"Your account credentials were changed, contact to Admin and please log back in." sendViewController:self];
                     return;
                 }
                 
@@ -1699,9 +1726,12 @@
         //taking ticket title from selected rows
         [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
         
+        [selectedTicketOwner addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
+        
         count1=(int)[selectedArray count];
         NSLog(@"Selected count is :%i",count1);
         NSLog(@"Slected Array Id : %@",selectedArray);
+        NSLog(@"Slected Owner Emails are : %@",selectedTicketOwner);
         
         selectedIDs = [selectedArray componentsJoinedByString:@","];
         NSLog(@"Slected Ticket Id are : %@",selectedIDs);

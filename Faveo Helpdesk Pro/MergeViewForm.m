@@ -221,7 +221,13 @@
                     {
                         [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                         [[AppDelegate sharedAppdelegate] hideProgressView];
-                    }else{
+                    }
+                    else if([msg isEqualToString:@"Error-402"])
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Your account credentials were changed, contact to Admin and please log back in.", nil) sendViewController:self];
+                        
+                    }
+                    else{
                         [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Error is : %@",msg);
                         [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -280,8 +286,29 @@
                         }
                         else
                         {
-                            
-                            [utils showAlertWithMessage:@"Error..!" sendViewController:self];
+                            NSDictionary *dict1= [json objectForKey:@"response"];
+                            NSDictionary *dict2= [dict1 objectForKey:@"message"];
+                            NSString * str = [dict2 objectForKey:@"message"];
+                            if([str isEqualToString:@"tickets from different users"])
+                            {
+                                [RMessage showNotificationInViewController:self.navigationController
+                                                                     title:NSLocalizedString(@"Alert !", nil)
+                                                                  subtitle:NSLocalizedString(@"Tickets from different users.", nil)
+                                                                 iconImage:nil
+                                                                      type:RMessageTypeWarning
+                                                            customTypeName:nil
+                                                                  duration:RMessageDurationAutomatic
+                                                                  callback:nil
+                                                               buttonTitle:nil
+                                                            buttonCallback:nil
+                                                                atPosition:RMessagePositionNavBarOverlay
+                                                      canBeDismissedByUser:YES];
+                            }
+                            else
+                            {
+                               [utils showAlertWithMessage:@"Error..!" sendViewController:self];
+                                
+                            }
                         }
                         
                     });

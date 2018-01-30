@@ -310,18 +310,18 @@
                             }else _typeTextField.text=[dic objectForKey:@"type_name"];
                             
                             if (([[dic objectForKey:@"helptopic_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"helptopic_name"] length] == 0 )) {
-                                _helpTopicTextField.text=@"Nil";
+                                _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
                                 
                             }else _helpTopicTextField.text=[dic objectForKey:@"helptopic_name"];
                             
                             
                             if (([[dic objectForKey:@"source_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"source_name"] length] == 0 )) {
-                                _sourceTextField.text=@"Nil";
+                                _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
                                 
                             }else _sourceTextField.text=[dic objectForKey:@"source_name"];
                             
                             if (([[dic objectForKey:@"priority_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"priority_name"] length] == 0 )) {
-                                _priorityTextField.text=@"Nil";
+                                _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
                                 
                             }else _priorityTextField.text=[dic objectForKey:@"priority_name"];
                             
@@ -729,6 +729,11 @@
                         {
                             [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                        else if([msg isEqualToString:@"Error-402"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                         }
                         else{
                             [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];

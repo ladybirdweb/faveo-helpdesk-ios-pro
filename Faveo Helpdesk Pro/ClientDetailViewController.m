@@ -256,9 +256,14 @@
                 
                 [refresh endRefreshing];
                 
-                [utils showAlertWithMessage:@"Error" sendViewController:self];
-                NSLog(@"Thread-NO4-getClientTickets-Refresh-error == %@",error.localizedDescription);
-                return ;
+                if([msg isEqualToString:@"Error-402"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                }
+                else{
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                }
             }
             
             if ([msg isEqualToString:@"tokenRefreshed"]) {

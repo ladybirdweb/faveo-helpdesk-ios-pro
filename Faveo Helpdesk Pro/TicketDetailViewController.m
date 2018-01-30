@@ -284,6 +284,11 @@
                     NSLog(@"Thread-NO4-postCreateTicket-Refresh-error == %@",error.localizedDescription);
                     return ;
                 }
+                if([msg isEqualToString:@"Error-402"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                }
                 
                 if ([msg isEqualToString:@"tokenRefreshed"]) {
                     //               dispatch_async(dispatch_get_main_queue(), ^{

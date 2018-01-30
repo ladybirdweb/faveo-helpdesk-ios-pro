@@ -214,7 +214,13 @@
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
                                 [utils showAlertWithMessage:@"Invalid URL..!" sendViewController:self];
                                 return;
-                            }else{
+                            }else if(statusCode == 402)
+                            {
+                                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                                [[AppDelegate sharedAppdelegate] hideProgressView];
+                                [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+                            }
+                            else{
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
                                 [utils showAlertWithMessage:@"Unknown Error!" sendViewController:self];
@@ -227,6 +233,13 @@
                     NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     
                     NSLog(@"Get your response == %@", replyStr);
+                    // if status code is 402 the json is
+//                    {
+//                        "result": {
+//                            "fails": "api disabled"
+//                        }
+//                    }
+                    
                     
                     @try{
                         if ([replyStr containsString:@"success"]) {
@@ -371,6 +384,11 @@
                             [utils showAlertWithMessage: NSLocalizedString(@"Incorrect Username or Password!", nil) sendViewController:self];
                             //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                             return;
+                        }else if(statusCode == 402)
+                        {
+                            NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
                         }else{
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -493,9 +511,15 @@
         if (error || [msg containsString:@"Error"]) {
             [[AppDelegate sharedAppdelegate] hideProgressView];
             if (msg) {
+                if([msg isEqualToString:@"Error-402"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                }else{
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
+                }
                 
-                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
             }else if(error)  {
                 [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                 NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
