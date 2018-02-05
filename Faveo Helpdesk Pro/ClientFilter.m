@@ -23,7 +23,7 @@
 #import "RMessageView.h"
 #import "AWNavigationMenuItem.h"
 #import "ClientFilter.h"
-
+#import "UIImageView+Letters.h"
 
 @interface ClientFilter ()<RMessageProtocol,AWNavigationMenuItemDataSource, AWNavigationMenuItemDelegate>{
     
@@ -520,18 +520,32 @@
                 cell.clientNameLabel.text=NSLocalizedString(@"Not Available",nil);
             }
             
+            if(![Utils isEmpty:clientFirstName])
+            {
+                if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+                {
+                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+                }else
+                {
+                    [cell.profilePicView setImageWithString:clientFirstName color:nil ];
+                }
+                
+            }
+            else{
+                [cell.profilePicView setImageWithString:userName color:nil ];
+            }
             
             // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
             
-            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-            {
-                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-                
-            }
-            else
-            {
-                [cell setUserProfileimage:@"default_pic.png"];
-            }
+//            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+//            {
+//                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+//
+//            }
+//            else
+//            {
+//                [cell setUserProfileimage:@"default_pic.png"];
+//            }
         }@catch (NSException *exception)
         {
             // Print exception information

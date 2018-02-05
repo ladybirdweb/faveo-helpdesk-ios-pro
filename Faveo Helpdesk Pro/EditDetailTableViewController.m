@@ -31,6 +31,10 @@
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
     
+    NSString *AssignID;
+    NSString *SourceID;
+
+    
     NSNumber *sla_id;
     NSNumber *type_id;
     NSNumber *help_topic_id;
@@ -220,7 +224,7 @@
                           
                             //_subjectTextField.text=[dic objectForKey:@"title"];
                             
-                            
+                            AssignID=[NSString stringWithFormat:@"%@", [dic objectForKey:@"assignee_id"]];
                             //______________________________________________________________________________________________________
                             ////////////////for UTF-8 data encoding ///////
                             
@@ -319,6 +323,8 @@
                                 _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
                                 
                             }else _sourceTextField.text=[dic objectForKey:@"source_name"];
+                               SourceID=[dic objectForKey:@"source"];
+                            
                             
                             if (([[dic objectForKey:@"priority_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"priority_name"] length] == 0 )) {
                                 _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
@@ -636,6 +642,15 @@
 }
 }
 
+- (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
+{
+    staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
+    NSLog(@"Id is : %@",staff_id);
+    
+    self.assinTextField.text = (_assignArray)[(NSUInteger) [selectedIndex intValue]];
+    NSLog(@"TextField value is : %@", _assinTextField.text);
+}
+
 - (IBAction)saveClicked:(id)sender {
     
     
@@ -688,32 +703,90 @@
         source_id = [NSNumber numberWithInteger:1+[_sourceArray indexOfObject:_sourceTextField.text]];
         status_id = [NSNumber numberWithInteger:1+[_statusArray indexOfObject:_statusTextField.text]];
         
-//        staff_id = [NSNumber numberWithInteger:1+[_assignArray indexOfObject:_assinTextField.text]];
-//
-//           NSLog(@"stffId111111 is : %@",staff_id);
-//          NSLog(@"stffId22222 is : %@",staff_id);
         
+        NSLog(@"Tciket SOirce is : %@",source_id);
+         NSLog(@"Tciket SOirce is : %@",source_id);
+        
+        
+    //  staff_id = [NSNumber numberWithInteger:1+[_assignArray indexOfObject:_assinTextField.text]];
+
         sla_id=[NSNumber numberWithInt:1];
         [[AppDelegate sharedAppdelegate] showProgressView];
         
-        NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
-       
-       
-        NSLog(@"stffId is : %@",staffID);
-        NSLog(@"stffId is : %@",staffID);
-        //int number = [string integerValue];
-        if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
-        {
-            
-            staffID=@"0";
-           
-        }
+
+                NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
+                NSLog(@"stffId is : %@",staffID);
+                NSLog(@"stffId is : %@",staffID);
         
-       
+        if (([_assinTextField.text isEqualToString:@"Not Available"])||([staffID isEqualToString:@""] && [_assinTextField.text isEqualToString:@"Select Assignee"]) || ([staffID isEqualToString:@""] || [_assinTextField.text isEqualToString:@"Select Assignee"]))
+        {
+            staffID=@"0";
+        }
+        else
+         if (staffID == (id)[NSNull null] || staffID.length == 0 || staffID == nil || [staffID isEqualToString:@"(null)"])
+        {
+            staffID=AssignID;
+            
+            NSLog(@"Assssissisinne id : %@",AssignID);
+             NSLog(@"Assssissisinne id : %@",AssignID);
+            
+            NSLog(@"IDDDDDDDD id : %@",staffID);
+             NSLog(@"IDDDDDDDD id : %@",staffID);
+        }
+//        else if ( [staffID isEqualToString:@""])
+//                    {
+//                         staffID=@"0";
+//                    }
+        
+//        NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
+//        NSLog(@"stffId is : %@",staffID);
+//        NSLog(@"stffId is : %@",staffID);
+//
+//        if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@"<null>"])
+//        {
+//
+//            staffID=@"";
+//        }
+//
+//       if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@"<null>"])
+//        {
+//
+//            staffID=@"0";
+//         //   staffID=AssignID;
+//
+//        }
+//        else if ( [staffID isEqualToString:@""])
+//        {
+//             staffID=@"0";
+//        }
+//        else
+//        {
+//            staffID= [NSString stringWithFormat:@"%@",staff_id];
+//
+//        }
+//
+
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&help_topic=%@&ticket_type=%@&ticket_priority=%@&ticket_source=%@&subject=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,help_topic_id,type_id,priority_id,source_id,_subjectTextView.text,staffID];
         
         NSLog(@"URL is : %@",url);
+        
+//        NSString *one=@"<null>";
+//        NSString *two=@"%3Cnull%3E";
+//
+//        url=[url copy];
+//        if([url hasSuffix:one])
+//        {
+//            url=[url substringFromIndex:[one length]];
+//            url=[url stringByAppendingString:@"0"];
+//        }if([url hasSuffix:two])
+//        {
+//            url=[url substringFromIndex:[one length]];
+//             url=[url stringByAppendingString:@"0"];
+//        }
+        
+        
+        
         
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -861,13 +934,7 @@
     NSLog(@"Delegate has been informed that ActionSheetPicker was cancelled");
 }
 
-- (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
-{
-    staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
-    
-    self.assinTextField.text = (_assignArray)[(NSUInteger) [selectedIndex intValue]];
-    
-}
+
 
 
 - (void)sourceWasSelected:(NSNumber *)selectedIndex element:(id)element {

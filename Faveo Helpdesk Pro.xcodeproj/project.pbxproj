@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06B8B01D20287E4300E5E8CA /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */; };
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
 		D9166B551FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9166B541FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m */; };
 		D9283F9F1FCC3B4E00C6A073 /* ClientFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D9283F9E1FCC3B4E00C6A073 /* ClientFilter.m */; };
@@ -114,6 +115,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06B8B01B20287E4200E5E8CA /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
+		06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -338,6 +341,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06B8B01A20287E4200E5E8CA /* UIImageView+Letters */ = {
+			isa = PBXGroup;
+			children = (
+				06B8B01B20287E4200E5E8CA /* UIImageView+Letters.h */,
+				06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */,
+			);
+			path = "UIImageView+Letters";
+			sourceTree = "<group>";
+		};
 		2C616208362AC6156509CE49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +376,7 @@
 		D92C35C71F750F83001DD67D /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				06B8B01A20287E4200E5E8CA /* UIImageView+Letters */,
 				D97CA13B1FCC229800A7B982 /* LGFilterView */,
 				D9AF852E1FC4218A005232A0 /* NavigationMenuItem */,
 				D9F9F11B1FB9A4D10044DA27 /* kDropDown */,
@@ -972,6 +985,7 @@
 				D9F9F1421FBAE8CC0044DA27 /* FilterLogic.m in Sources */,
 				D9EB9FA41E07C3270001115F /* ClosedTicketsViewController.m in Sources */,
 				D9EB9FC11E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
+				06B8B01D20287E4300E5E8CA /* UIImageView+Letters.m in Sources */,
 				D9EB9F791E07C2F00001115F /* ClientListTableViewCell.m in Sources */,
 				D9EB9FBE1E07C4490001115F /* SlideNavigationContorllerAnimatorScale.m in Sources */,
 				D99776D71FDAB631004EA9B8 /* MergeViewForm.m in Sources */,

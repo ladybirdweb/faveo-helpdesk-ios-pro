@@ -21,6 +21,7 @@
 #import "RMessage.h"
 #import "RMessageView.h"
 #import "EditClientDetail.h"
+#import "UIImageView+Letters.h"
 
 @interface ClientDetailViewController ()<RMessageProtocol>
 {
@@ -171,10 +172,30 @@
         {
               _mobileLabel.text= @"Not Available";
         }
-       
-        
+
     
-         [self setUserProfileimage:globalVariables.customerImage];
+       //  [self setUserProfileimage:globalVariables.customerImage];
+    //Image view
+    if(![Utils isEmpty:fname])
+    {
+        if([globalVariables.customerImage hasSuffix:@".jpg"] || [globalVariables.customerImage hasSuffix:@".jpeg"] || [globalVariables.customerImage hasSuffix:@".png"] )
+        {
+            [self setUserProfileimage:globalVariables.customerImage];
+        }else
+        {
+            // [cell.profilePicView setImageWithString:fname color:nil ];
+            
+            [_profileImageView setImageWithString:fname color:nil];
+        
+        }
+        
+    }
+    else{
+       [_profileImageView setImageWithString:email1 color:nil];
+    }
+    
+    
+    
     
          NSString *role=[NSString stringWithFormat:@"%@",globalVariables.userRole];
     

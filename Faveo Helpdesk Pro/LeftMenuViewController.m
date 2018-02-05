@@ -18,7 +18,7 @@
 #import "Reachability.h"
 #import "Utils.h"
 #import "AppDelegate.h"
-
+#import "UIImageView+Letters.h"
 
 @import Firebase;
 @interface LeftMenuViewController ()<RMessageProtocol>{
@@ -88,8 +88,18 @@
     _user_nameLabel.text=[userDefaults objectForKey:@"profile_name"];
     _url_label.text=[userDefaults objectForKey:@"baseURL"];
     
-    [_user_profileImage sd_setImageWithURL:[NSURL URLWithString:[userDefaults objectForKey:@"profile_pic"]]
-                          placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
+    if([[userDefaults objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[userDefaults objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[userDefaults objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+    {
+        [_user_profileImage sd_setImageWithURL:[NSURL URLWithString:[userDefaults objectForKey:@"profile_pic"]]
+                              placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
+    }else
+    {
+        [_user_profileImage setImageWithString:[userDefaults objectForKey:@"profile_name"] color:nil ];
+    }
+    
+
+//    [_user_profileImage sd_setImageWithURL:[NSURL URLWithString:[userDefaults objectForKey:@"profile_pic"]]
+//                          placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
     _user_profileImage.layer.borderColor=[[UIColor hx_colorWithHexRGBAString:@"#0288D1"] CGColor];
     
     _user_profileImage.layer.cornerRadius = _user_profileImage.frame.size.height /2;

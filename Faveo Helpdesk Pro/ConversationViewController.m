@@ -20,7 +20,7 @@
 #import "NotificationViewController.h"
 #import "RMessage.h"
 #import "RMessageView.h"
-
+#import "UIImageView+Letters.h"
 
 @interface ConversationViewController ()<CNPPopupControllerDelegate,UIWebViewDelegate,RMessageProtocol>{
     
@@ -272,19 +272,34 @@
         
     }
    
+    if(![Utils isEmpty:fName])
+    {
+        if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+        {
+            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        }else
+        {
+            [cell.profilePicView setImageWithString:fName color:nil ];
+        }
+        
+    }
+    else{
+        [cell.profilePicView setImageWithString:userName color:nil ];
+    }
+
    
 
    // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
     
-    if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-    {
-        [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-        
-    }
-    else
-    {
-        [cell setUserProfileimage:@"default_pic.png"];
-    }
+//    if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+//    {
+//        [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+//
+//    }
+//    else
+//    {
+//        [cell setUserProfileimage:@"default_pic.png"];
+//    }
     
 }@catch (NSException *exception)
     {

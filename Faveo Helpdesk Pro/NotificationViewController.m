@@ -22,6 +22,8 @@
 #import "ClientDetailViewController.h"
 #import "RMessage.h"
 #import "RMessageView.h"
+#import "UIImageView+Letters.h"
+
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
 
@@ -478,7 +480,7 @@
         
         if(( ![[finaldic objectForKey:@"requester"] isEqual:[NSNull null]] ) )
         {
-            [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
+           // [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
            
             // changed_by_user_name
             NSString *fname= [profileDict objectForKey:@"changed_by_first_name"];
@@ -508,7 +510,25 @@
                // cell.name.text=@"Not Availabel";
                 cell.name.text= NSLocalizedString(@"Not Available",nil);
             }
+            
+            if(![Utils isEmpty:fname])
+            {
+                if([[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+                {
+                    [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
+                }else
+                {
+                    [cell.profilePicView setImageWithString:fname color:nil ];
+                }
                 
+            }
+            else{
+                [cell.profilePicView setImageWithString:userName color:nil ];
+            }
+            
+
+            
+            
          //   cell.name.text=[NSString stringWithFormat:@"%@ %@",[profileDict objectForKey:@"changed_by_first_name"],[profileDict objectForKey:@"changed_by_last_name"]];
         }
         else{

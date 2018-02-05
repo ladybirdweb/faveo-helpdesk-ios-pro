@@ -29,6 +29,7 @@
 #import "FTPopOverMenu.h"
 #import "MergeViewForm.h"
 #import "MultpleTicketAssignTableViewController.h"
+#import "UIImageView+Letters.h"
 
 @interface TrashTicketsViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
 
@@ -735,7 +736,21 @@
                 
             }
             
-            
+            //Image view
+            if(![Utils isEmpty:fname])
+            {
+                if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+                {
+                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+                }else
+                {
+                    [cell.profilePicView setImageWithString:fname color:nil ];
+                }
+                
+            }
+            else{
+                [cell.profilePicView setImageWithString:email1 color:nil ];
+            }
             
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
             
@@ -872,15 +887,15 @@
         // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         @try{
             
-            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-            {
-                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-                
-            }
-            else
-            {
-                [cell setUserProfileimage:@"default_pic.png"];
-            }
+//            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+//            {
+//                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+//
+//            }
+//            else
+//            {
+//                [cell setUserProfileimage:@"default_pic.png"];
+//            }
             
             
             if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
@@ -909,25 +924,25 @@
             NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countattachment"]];
             
             
-            if([source1 isEqualToString:@"web"])
+            if([source1 isEqualToString:@"web"] || [source1 isEqualToString:@"Web"])
             {
                 cell.sourceImgView.image=[UIImage imageNamed:@"internert"];
-            }else  if([source1 isEqualToString:@"email"])
+            }else  if([source1 isEqualToString:@"email"] ||[source1 isEqualToString:@"Email"] )
             {
                 cell.sourceImgView.image=[UIImage imageNamed:@"agentORmail"];
-            }else  if([source1 isEqualToString:@"agent"])
+            }else  if([source1 isEqualToString:@"agent"] || [source1 isEqualToString:@"Agent"])
             {
                 cell.sourceImgView.image=[UIImage imageNamed:@"agentORmail"];
-            }else  if([source1 isEqualToString:@"facebook"])
+            }else  if([source1 isEqualToString:@"facebook"] || [source1 isEqualToString:@"Facebook"])
             {
                 cell.sourceImgView.image=[UIImage imageNamed:@"fb"];
-            }else  if([source1 isEqualToString:@"twitter"])
+            }else  if([source1 isEqualToString:@"twitter"] || [source1 isEqualToString:@"Twitter"])
             {
                 cell.sourceImgView.image=[UIImage imageNamed:@"twitter"];
-            }else  if([source1 isEqualToString:@"call"])
+            }else  if([source1 isEqualToString:@"call"] || [source1 isEqualToString:@"Call"])
             {
                 cell.sourceImgView.image=[UIImage imageNamed:@"call"];
-            }else if([source1 isEqualToString:@"chat"])
+            }else if([source1 isEqualToString:@"chat"] || [source1 isEqualToString:@"Chat"])
             {
                 cell.sourceImgView.image=[UIImage imageNamed:@"chat"];
             }

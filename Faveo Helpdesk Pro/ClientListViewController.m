@@ -22,7 +22,7 @@
 #import "RMessageView.h"
 #import "AWNavigationMenuItem.h"
 #import "ClientFilter.h"
-
+#import "UIImageView+Letters.h"
 
 @interface ClientListViewController ()<RMessageProtocol,AWNavigationMenuItemDataSource, AWNavigationMenuItemDelegate>{
 
@@ -409,32 +409,14 @@
     }
     
     NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
-    
-
-   // NSString *email=[finaldic objectForKey:@"email"];
-        
-   /* NSString *phone=[finaldic objectForKey:@"phone_number"];
-        if ([email isEqualToString:@""]) {
-        email=NSLocalizedString(@"Not Available",nil);
-    }
-    if ([phone isEqualToString:@""]) {
-        phone=NSLocalizedString(@"Not Available",nil);
-    } */
         
  @try{
-     
-     
-     
      
         NSString *email=[finaldic objectForKey:@"email"];
      
         NSString *mobile=[finaldic objectForKey:@"mobile"];
         NSString *phone=[finaldic objectForKey:@"phone_number"];
         NSString *telephone=[finaldic objectForKey:@"telephone"];
-
-
-        
-     
         
         [Utils isEmpty:email];
         [Utils isEmpty:mobile];
@@ -519,18 +501,33 @@
             cell.clientNameLabel.text=NSLocalizedString(@"Not Available",nil);
         }
             
-        
+     //Image view
+     if(![Utils isEmpty:clientFirstName])
+     {
+         if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+         {
+             [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+         }else
+         {
+             [cell.profilePicView setImageWithString:clientFirstName color:nil ];
+         }
+         
+     }
+     else{
+         [cell.profilePicView setImageWithString:email color:nil ];
+     }
    // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         
-        if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-        {
-            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-            
-        }
-        else
-        {
-            [cell setUserProfileimage:@"default_pic.png"];
-        }
+//        if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+//        {
+//            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+//
+//        }
+//        else
+//        {
+//            [cell setUserProfileimage:@"default_pic.png"];
+//        }
+     
  }@catch (NSException *exception)
         {
             // Print exception information
