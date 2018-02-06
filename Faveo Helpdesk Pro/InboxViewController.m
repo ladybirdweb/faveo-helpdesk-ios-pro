@@ -105,12 +105,12 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
-    
-    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
-    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
-    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
+    //search buitton
+//    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+//    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
+//    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+//    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
+//    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
     
     
     
@@ -122,7 +122,7 @@
     [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    [rightBarButtonItems addSubview:moreButton];
+    //[rightBarButtonItems addSubview:moreButton];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
@@ -141,7 +141,7 @@
     
     navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     
-    UIImage *image1 = [UIImage imageNamed:@"merg111"];
+ //   UIImage *image1 = [UIImage imageNamed:@"merg111"];
     UIImage *image2 = [UIImage imageNamed:@"x1"];
     
     // UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Assign"];
@@ -157,20 +157,23 @@
     UIGraphicsEndImageContext();
     NSData *imageData = UIImagePNGRepresentation(picture1);
     UIImage *img3=[UIImage imageWithData:imageData];
+
+  //  UIImageView* img = [[UIImageView alloc] initWithImage:img3];
+//
+//    //giving action to image
+//    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+//    singleTap.numberOfTapsRequired = 1;
+//    [img setUserInteractionEnabled:YES];
+//    [img addGestureRecognizer:singleTap];
+//
+//
+//    navItem.titleView = img;
     
-    UIImageView* img = [[UIImageView alloc] initWithImage:img3];
     
-    //giving action to image
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
-    singleTap.numberOfTapsRequired = 1;
-    [img setUserInteractionEnabled:YES];
-    [img addGestureRecognizer:singleTap];
+//    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStylePlain  target:self action:@selector(MergeButtonClicked)];
+//    navItem.leftBarButtonItem = button1;
     
-    
-    navItem.titleView = img;
-    
-    
-    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStylePlain  target:self action:@selector(MergeButtonClicked)];
+    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:img3 style:UIBarButtonItemStylePlain  target:self action:@selector(tapDetected)];
     navItem.leftBarButtonItem = button1;
     
     

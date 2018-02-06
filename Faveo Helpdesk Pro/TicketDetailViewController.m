@@ -948,7 +948,7 @@
     //[ textViewInternalNote setReturnKeyType:UIReturnKeyDone];
     
    // textViewInternalNote.inputAccessoryView.hidden =YES;
-  //  textViewInternalNote.autocorrectionType = NO;
+    textViewInternalNote.autocorrectionType = YES;
     // textViewInternalNote.autocapitalizationType=NO;
     textViewInternalNote.textContentType = UITextContentTypeName;
     textViewInternalNote.spellCheckingType = UITextSpellCheckingTypeYes;
@@ -1101,7 +1101,7 @@
     textViewReply.spellCheckingType = UITextSpellCheckingTypeYes;
 
    // textViewReply.autocapitalizationType=NO;
-  //  textViewReply.autocorrectionType = UITextAutocorrectionTypeNo;
+    textViewReply.autocorrectionType = UITextAutocorrectionTypeYes;
 
     
     textViewReply.layer.cornerRadius=4;

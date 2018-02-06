@@ -105,7 +105,7 @@
     
     navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     
-    UIImage *image1 = [UIImage imageNamed:@"merg111"];
+  //  UIImage *image1 = [UIImage imageNamed:@"merg111"];
     UIImage *image2 = [UIImage imageNamed:@"x1"];
     
     
@@ -124,20 +124,22 @@
     NSData *imageData = UIImagePNGRepresentation(picture1);
     UIImage *img3=[UIImage imageWithData:imageData];
     
-    UIImageView* img = [[UIImageView alloc] initWithImage:img3];
+    //  UIImageView* img = [[UIImageView alloc] initWithImage:img3];
+    //
+    //    //giving action to image
+    //    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    //    singleTap.numberOfTapsRequired = 1;
+    //    [img setUserInteractionEnabled:YES];
+    //    [img addGestureRecognizer:singleTap];
+    //
+    //
+    //    navItem.titleView = img;
     
-    //giving action to image
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
-    singleTap.numberOfTapsRequired = 1;
-    [img setUserInteractionEnabled:YES];
-    [img addGestureRecognizer:singleTap];
     
-    
-    navItem.titleView = img;
-    
-    
-    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStylePlain  target:self action:@selector(MergeButtonClicked)];
+    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:img3 style:UIBarButtonItemStylePlain  target:self action:@selector(tapDetected)];
+    //  button1.width=10;
     navItem.leftBarButtonItem = button1;
+    
     
     
     UIBarButtonItem *button2 = [[UIBarButtonItem alloc] initWithImage:image2 style:UIBarButtonItemStylePlain  target:self action:@selector(onNavButtonTapped:event:)];
