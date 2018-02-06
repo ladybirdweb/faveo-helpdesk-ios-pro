@@ -20,7 +20,7 @@
 #import "NotificationViewController.h"
 #import "RMessage.h"
 #import "RMessageView.h"
-
+#import "UIImageView+Letters.h"
 
 @interface ConversationViewController ()<CNPPopupControllerDelegate,UIWebViewDelegate,RMessageProtocol>{
     
@@ -100,7 +100,11 @@
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 if (msg) {
                     
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    if([msg isEqualToString:@"Error-402"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                    }
                     
                 }else if(error)  {
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
@@ -268,19 +272,34 @@
         
     }
    
+    if(![Utils isEmpty:fName])
+    {
+        if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+        {
+            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        }else
+        {
+            [cell.profilePicView setImageWithString:fName color:nil ];
+        }
+        
+    }
+    else{
+        [cell.profilePicView setImageWithString:userName color:nil ];
+    }
+
    
 
    // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
     
-    if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-    {
-        [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-        
-    }
-    else
-    {
-        [cell setUserProfileimage:@"default_pic.png"];
-    }
+//    if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+//    {
+//        [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+//
+//    }
+//    else
+//    {
+//        [cell setUserProfileimage:@"default_pic.png"];
+//    }
     
 }@catch (NSException *exception)
     {

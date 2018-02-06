@@ -22,6 +22,7 @@
 
 -(void)setUserProfileimage:(NSString*)imageUrl;
 
+@property (weak, nonatomic) IBOutlet UIView *viewMain;
 
 
 @end

@@ -22,6 +22,8 @@
 #import "ClientDetailViewController.h"
 #import "RMessage.h"
 #import "RMessageView.h"
+#import "UIImageView+Letters.h"
+
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
 
@@ -58,7 +60,7 @@
     
     [self setTitle:NSLocalizedString(@"Notifications",nil)];
     [self addUIRefresh];
-    NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
+   // NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
     _mutableArray=[[NSMutableArray alloc]init];
     
     utils=[[Utils alloc]init];
@@ -92,7 +94,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Error..!", nil)
-                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                          subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check it.", nil)
                                          iconImage:nil
                                               type:RMessageTypeError
                                     customTypeName:nil
@@ -119,8 +121,14 @@
                 [refresh endRefreshing];
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 if (msg) {
-                    
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    if([msg isEqualToString:@"Error-402"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                    }else{
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
+                    }
                     
                 }else if(error)  {
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
@@ -415,10 +423,34 @@
         NSLog(@"Dict is : %@", finaldic);
         
     
+        
         NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
         
+        NSString * seen=[NSString stringWithFormat:@"%i",1];
+       
+        NSString * str=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"seen"]];
         
+       
+        [Utils isEmpty:str];
         
+        if  (![Utils isEmpty:str] && ![str isEqualToString:@""])
+        {
+               if([str isEqualToString:seen])
+                {
+            
+                cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
+                }else
+                {
+                     cell.viewMain.backgroundColor=[UIColor clearColor];
+                    NSLog(@"I am in else condition..!");
+                }
+        }
+        else
+        {
+            NSLog(@"I am in else condition..!");
+        }
+        
+
         // cell.msglbl.text=[finaldic objectForKey:@"message"];
         
         if ( ( ![[finaldic objectForKey:@"message"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"message"] length] != 0 ) )
@@ -448,7 +480,7 @@
         
         if(( ![[finaldic objectForKey:@"requester"] isEqual:[NSNull null]] ) )
         {
-            [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
+           // [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
            
             // changed_by_user_name
             NSString *fname= [profileDict objectForKey:@"changed_by_first_name"];
@@ -478,7 +510,25 @@
                // cell.name.text=@"Not Availabel";
                 cell.name.text= NSLocalizedString(@"Not Available",nil);
             }
+            
+            if(![Utils isEmpty:fname])
+            {
+                if([[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+                {
+                    [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
+                }else
+                {
+                    [cell.profilePicView setImageWithString:fname color:nil ];
+                }
                 
+            }
+            else{
+                [cell.profilePicView setImageWithString:userName color:nil ];
+            }
+            
+
+            
+            
          //   cell.name.text=[NSString stringWithFormat:@"%@ %@",[profileDict objectForKey:@"changed_by_first_name"],[profileDict objectForKey:@"changed_by_last_name"]];
         }
         else{

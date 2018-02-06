@@ -22,6 +22,9 @@
 
 @interface InboxViewController : UIViewController<SlideNavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate>
 
+{
+    BOOL searching;
+}
 /*!
  @property tableView
  
@@ -51,7 +54,9 @@
 
 @property (nonatomic) NSInteger page;
 
-
+@property (strong, nonatomic) UISearchBar *searchBar;
+@property (strong, nonatomic) NSMutableArray *sampleDataArray;
+@property (strong, nonatomic) NSMutableArray *filteredSampleDataArray;
 
 @end
 

@@ -178,4 +178,19 @@
 
 @property (strong, nonatomic) NSString *sortCondtionValueToSendWebServices;
 @property (strong, nonatomic) NSString *filterCondtionValueToSendWebServices;
+
+@property (strong, nonatomic) NSString *backButtonActionFromMergeViewMenu;
+
+// merge
+
+@property (strong, nonatomic) NSMutableArray *idList;
+@property (strong, nonatomic) NSMutableArray *subjectList;
+
+//search
+@property (strong, nonatomic) NSString *searchString;
+
+@property (strong, nonatomic) NSString *ticketIDListForAssign;
+
+@property (strong, nonatomic) NSString *userRole;
+
 @end

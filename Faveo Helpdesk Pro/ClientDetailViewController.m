@@ -21,6 +21,7 @@
 #import "RMessage.h"
 #import "RMessageView.h"
 #import "EditClientDetail.h"
+#import "UIImageView+Letters.h"
 
 @interface ClientDetailViewController ()<RMessageProtocol>
 {
@@ -81,6 +82,11 @@
     _testingLAbel.layer.masksToBounds=true;
     _testingLAbel.userInteractionEnabled=YES;
     
+    _rolLabel.backgroundColor=[UIColor lightGrayColor];
+    _rolLabel.layer.cornerRadius=8;
+    _rolLabel.layer.masksToBounds=true;
+    _rolLabel.userInteractionEnabled=YES;
+    
   //  NSString *str=[NSString stringWithFormat:@"%@",globalVariables.customerFromView];
     
 //    if ([str isEqualToString:@"normalView"])
@@ -102,9 +108,12 @@
         
         NSString *fname= [NSString stringWithFormat:@"%@",globalVariables.First_name];
          NSString *lname= [NSString stringWithFormat:@"%@",globalVariables.Last_name];
+     NSString *userName= [NSString stringWithFormat:@"%@",globalVariables.userNameInUserList];
         
         [Utils isEmpty:fname];
         [Utils isEmpty:lname];
+     [Utils isEmpty:userName];
+    
         
         if (![Utils isEmpty:fname] || ! [Utils isEmpty:lname] )
         {
@@ -118,12 +127,16 @@
                 _clientNameLabel.text= [NSString stringWithFormat:@"%@ %@",globalVariables.First_name,globalVariables.Last_name];
             }
           
-        }
-        else
+        }else if(![Utils isEmpty:userName])
+        
         {
-            _mobileLabel.text= @"Not Available";
+             _clientNameLabel.text= [NSString stringWithFormat:@"%@",globalVariables.userNameInUserList];
         }
-    
+       else
+       {
+           _clientNameLabel.text= @"Not Available";
+           
+       }
        
         
         NSString *phone1= [NSString stringWithFormat:@"%@",globalVariables.phoneNumberInUserList];
@@ -159,11 +172,47 @@
         {
               _mobileLabel.text= @"Not Available";
         }
-       
-        
+
     
-         [self setUserProfileimage:globalVariables.customerImage];
+       //  [self setUserProfileimage:globalVariables.customerImage];
+    //Image view
+    if(![Utils isEmpty:fname])
+    {
+        if([globalVariables.customerImage hasSuffix:@".jpg"] || [globalVariables.customerImage hasSuffix:@".jpeg"] || [globalVariables.customerImage hasSuffix:@".png"] )
+        {
+            [self setUserProfileimage:globalVariables.customerImage];
+        }else
+        {
+            // [cell.profilePicView setImageWithString:fname color:nil ];
+            
+            [_profileImageView setImageWithString:fname color:nil];
         
+        }
+        
+    }
+    else{
+       [_profileImageView setImageWithString:email1 color:nil];
+    }
+    
+    
+    
+    
+         NSString *role=[NSString stringWithFormat:@"%@",globalVariables.userRole];
+    
+        if (![Utils isEmpty:role]) {
+         if([role isEqualToString:@"user"])
+         {
+              _rolLabel.textColor=[UIColor whiteColor];
+             _rolLabel.text=@"USER";
+         }else  if([role isEqualToString:@"agent"])
+         {
+             _rolLabel.textColor=[UIColor whiteColor];
+             _rolLabel.text=@"AGENT";
+         }
+        }else
+        {
+            _rolLabel.hidden=YES;
+        }
          NSString *isClientActive= [NSString stringWithFormat:@"%@",globalVariables.UserState];
         [Utils isEmpty:isClientActive];
         
@@ -228,9 +277,14 @@
                 
                 [refresh endRefreshing];
                 
-                [utils showAlertWithMessage:@"Error" sendViewController:self];
-                NSLog(@"Thread-NO4-getClientTickets-Refresh-error == %@",error.localizedDescription);
-                return ;
+                if([msg isEqualToString:@"Error-402"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                }
+                else{
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                }
             }
             
             if ([msg isEqualToString:@"tokenRefreshed"]) {

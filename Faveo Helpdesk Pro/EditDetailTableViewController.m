@@ -31,6 +31,10 @@
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
     
+    NSString *AssignID;
+    NSString *SourceID;
+
+    
     NSNumber *sla_id;
     NSNumber *type_id;
     NSNumber *help_topic_id;
@@ -83,7 +87,7 @@
     
     
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-    UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
+    UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Done",nil) style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
     
     UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
@@ -220,7 +224,7 @@
                           
                             //_subjectTextField.text=[dic objectForKey:@"title"];
                             
-                            
+                            AssignID=[NSString stringWithFormat:@"%@", [dic objectForKey:@"assignee_id"]];
                             //______________________________________________________________________________________________________
                             ////////////////for UTF-8 data encoding ///////
                             
@@ -310,18 +314,20 @@
                             }else _typeTextField.text=[dic objectForKey:@"type_name"];
                             
                             if (([[dic objectForKey:@"helptopic_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"helptopic_name"] length] == 0 )) {
-                                _helpTopicTextField.text=@"Nil";
+                                _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
                                 
                             }else _helpTopicTextField.text=[dic objectForKey:@"helptopic_name"];
                             
                             
                             if (([[dic objectForKey:@"source_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"source_name"] length] == 0 )) {
-                                _sourceTextField.text=@"Nil";
+                                _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
                                 
                             }else _sourceTextField.text=[dic objectForKey:@"source_name"];
+                               SourceID=[dic objectForKey:@"source"];
+                            
                             
                             if (([[dic objectForKey:@"priority_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"priority_name"] length] == 0 )) {
-                                _priorityTextField.text=@"Nil";
+                                _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
                                 
                             }else _priorityTextField.text=[dic objectForKey:@"priority_name"];
                             
@@ -542,7 +548,7 @@
         _statusTextField.text=NSLocalizedString(@"Not Available",nil);
         status_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Status" rows:_statusArray initialSelection:0 target:self successAction:@selector(statusWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Status",nil) rows:_statusArray initialSelection:0 target:self successAction:@selector(statusWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
 }
 
@@ -554,7 +560,7 @@
         sla_id=0;
         
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select SLA" rows:_slaPlansArray initialSelection:0 target:self successAction:@selector(slaWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select SLA",nil) rows:_slaPlansArray initialSelection:0 target:self successAction:@selector(slaWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
     
 }
@@ -566,7 +572,7 @@
         _deptTextField.text=NSLocalizedString(@"Not Available",nil);
         dept_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Department" rows:_deptArray initialSelection:0 target:self successAction:@selector(deptWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Department",nil) rows:_deptArray initialSelection:0 target:self successAction:@selector(deptWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
     
 }
@@ -583,7 +589,7 @@
         priority_id=0;
         
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Priority" rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Priority",nil) rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
 }
 
@@ -596,7 +602,7 @@
         _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
         help_topic_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Helptopic",nil) rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
 }
 - (IBAction)sourceClicked:(id)sender
@@ -608,7 +614,7 @@
         _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
         source_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Source" rows:_sourceArray initialSelection:0 target:self successAction:@selector(sourceWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Source",nil) rows:_sourceArray initialSelection:0 target:self successAction:@selector(sourceWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
 }
 - (IBAction)typeClicked:(id)sender {
@@ -620,7 +626,7 @@
         type_id=0;
         
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Ticket Type" rows:_typeArray initialSelection:0 target:self successAction:@selector(typeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Ticket Type",nil) rows:_typeArray initialSelection:0 target:self successAction:@selector(typeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
 }
 
@@ -632,8 +638,17 @@
         _assinTextField.text=NSLocalizedString(@"Not Available",nil);
         source_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Assignee" rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
 }
+}
+
+- (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
+{
+    staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
+    NSLog(@"Id is : %@",staff_id);
+    
+    self.assinTextField.text = (_assignArray)[(NSUInteger) [selectedIndex intValue]];
+    NSLog(@"TextField value is : %@", _assinTextField.text);
 }
 
 - (IBAction)saveClicked:(id)sender {
@@ -688,32 +703,90 @@
         source_id = [NSNumber numberWithInteger:1+[_sourceArray indexOfObject:_sourceTextField.text]];
         status_id = [NSNumber numberWithInteger:1+[_statusArray indexOfObject:_statusTextField.text]];
         
-//        staff_id = [NSNumber numberWithInteger:1+[_assignArray indexOfObject:_assinTextField.text]];
-//
-//           NSLog(@"stffId111111 is : %@",staff_id);
-//          NSLog(@"stffId22222 is : %@",staff_id);
         
+        NSLog(@"Tciket SOirce is : %@",source_id);
+         NSLog(@"Tciket SOirce is : %@",source_id);
+        
+        
+    //  staff_id = [NSNumber numberWithInteger:1+[_assignArray indexOfObject:_assinTextField.text]];
+
         sla_id=[NSNumber numberWithInt:1];
         [[AppDelegate sharedAppdelegate] showProgressView];
         
-        NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
-       
-       
-        NSLog(@"stffId is : %@",staffID);
-        NSLog(@"stffId is : %@",staffID);
-        //int number = [string integerValue];
-        if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
-        {
-            
-            staffID=@"0";
-           
-        }
+
+                NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
+                NSLog(@"stffId is : %@",staffID);
+                NSLog(@"stffId is : %@",staffID);
         
-       
+        if (([_assinTextField.text isEqualToString:@"Not Available"])||([staffID isEqualToString:@""] && [_assinTextField.text isEqualToString:@"Select Assignee"]) || ([staffID isEqualToString:@""] || [_assinTextField.text isEqualToString:@"Select Assignee"]))
+        {
+            staffID=@"0";
+        }
+        else
+         if (staffID == (id)[NSNull null] || staffID.length == 0 || staffID == nil || [staffID isEqualToString:@"(null)"])
+        {
+            staffID=AssignID;
+            
+            NSLog(@"Assssissisinne id : %@",AssignID);
+             NSLog(@"Assssissisinne id : %@",AssignID);
+            
+            NSLog(@"IDDDDDDDD id : %@",staffID);
+             NSLog(@"IDDDDDDDD id : %@",staffID);
+        }
+//        else if ( [staffID isEqualToString:@""])
+//                    {
+//                         staffID=@"0";
+//                    }
+        
+//        NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
+//        NSLog(@"stffId is : %@",staffID);
+//        NSLog(@"stffId is : %@",staffID);
+//
+//        if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@"<null>"])
+//        {
+//
+//            staffID=@"";
+//        }
+//
+//       if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@"<null>"])
+//        {
+//
+//            staffID=@"0";
+//         //   staffID=AssignID;
+//
+//        }
+//        else if ( [staffID isEqualToString:@""])
+//        {
+//             staffID=@"0";
+//        }
+//        else
+//        {
+//            staffID= [NSString stringWithFormat:@"%@",staff_id];
+//
+//        }
+//
+
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&help_topic=%@&ticket_type=%@&ticket_priority=%@&ticket_source=%@&subject=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,help_topic_id,type_id,priority_id,source_id,_subjectTextView.text,staffID];
         
         NSLog(@"URL is : %@",url);
+        
+//        NSString *one=@"<null>";
+//        NSString *two=@"%3Cnull%3E";
+//
+//        url=[url copy];
+//        if([url hasSuffix:one])
+//        {
+//            url=[url substringFromIndex:[one length]];
+//            url=[url stringByAppendingString:@"0"];
+//        }if([url hasSuffix:two])
+//        {
+//            url=[url substringFromIndex:[one length]];
+//             url=[url stringByAppendingString:@"0"];
+//        }
+        
+        
+        
         
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -729,6 +802,11 @@
                         {
                             [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                        else if([msg isEqualToString:@"Error-402"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                         }
                         else{
                             [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -856,13 +934,7 @@
     NSLog(@"Delegate has been informed that ActionSheetPicker was cancelled");
 }
 
-- (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
-{
-    staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
-    
-    self.assinTextField.text = (_assignArray)[(NSUInteger) [selectedIndex intValue]];
-    
-}
+
 
 
 - (void)sourceWasSelected:(NSNumber *)selectedIndex element:(id)element {

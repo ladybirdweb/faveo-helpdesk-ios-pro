@@ -27,7 +27,7 @@
 
 -(void)setUserProfileimage:(NSString*)imageUrl
 {
-    self.profilePicView.layer.borderWidth=1.25f;
+   // self.profilePicView.layer.borderWidth=1.25f;
     self.profilePicView.layer.borderColor=[[UIColor hx_colorWithHexRGBAString:@"#0288D1"] CGColor];
     [self.profilePicView sd_setImageWithURL:[NSURL URLWithString:imageUrl]
                            placeholderImage:[UIImage imageNamed:@"default_pic.png"]];

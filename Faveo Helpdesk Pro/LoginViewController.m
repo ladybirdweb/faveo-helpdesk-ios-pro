@@ -65,6 +65,11 @@
     
     // end solution
     
+    // setting go button instead of next or donw on keyboard
+    [_urlTextfield setReturnKeyType:UIReturnKeyGo];
+    [_userNameTextField setReturnKeyType:UIReturnKeyDone];
+    [_passcodeTextField setReturnKeyType:UIReturnKeyDone];
+    
     //this for password eye icon
     [self.passcodeTextField addPasswordField];
     //end
@@ -77,10 +82,14 @@
 }
 
 
-- (IBAction)textFieldFinished:(id)sender
+-(void)textFieldFinished:(id)sender
 {
-    // [sender resignFirstResponder];
+    [_urlTextfield resignFirstResponder];
 }
+//- (IBAction)textFieldFinished:(id)sender
+//{
+//    // [sender resignFirstResponder];
+//}
 
 
 
@@ -106,11 +115,19 @@
 
 
 - (IBAction)urlButton:(id)sender {
-     [self.urlTextfield resignFirstResponder];
     
+    
+    [self URLValidationMethod];
+}
 
+-(void)URLValidationMethod
+{
+    
+    [self.urlTextfield resignFirstResponder];
+    
+    
     if (self.urlTextfield.text.length==0){
-       // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please Enter the URL", "")  backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please Enter the URL", "")  backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
         [utils showAlertWithMessage:@"Please Enter the URL" sendViewController:self];
         
@@ -131,7 +148,7 @@
                 //connection unavailable
                 // [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
                 
-              //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+                //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
                 
                 [RMessage
                  showNotificationWithTitle:NSLocalizedString(@"Something failed", nil)
@@ -145,8 +162,10 @@
                 
                 [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Verifying URL","")];
                 
-                NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/check-url?check-url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
-                NSLog(@"URL :%@",url);
+                // NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/check-url?check-url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
+                
+                NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/url?url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
+                NSLog(@"Check URL is :%@",url);
                 
                 globalVariables.urlDemo=baseURL;
                 
@@ -182,6 +201,7 @@
                         }
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                         [utils showAlertWithMessage:errorMsg sendViewController:self];
+                        
                         NSLog(@"dataTaskWithRequest error: %@", errorMsg);
                         return;
                     }else if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
@@ -194,7 +214,13 @@
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
                                 [utils showAlertWithMessage:@"Invalid URL..!" sendViewController:self];
                                 return;
-                            }else{
+                            }else if(statusCode == 402)
+                            {
+                                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                                [[AppDelegate sharedAppdelegate] hideProgressView];
+                                [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+                            }
+                            else{
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
                                 [utils showAlertWithMessage:@"Unknown Error!" sendViewController:self];
@@ -207,20 +233,28 @@
                     NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     
                     NSLog(@"Get your response == %@", replyStr);
+                    // if status code is 402 the json is
+//                    {
+//                        "result": {
+//                            "fails": "api disabled"
+//                        }
+//                    }
+                    
                     
                     @try{
                         if ([replyStr containsString:@"success"]) {
-                        
+                            
                             NSLog(@"Success");
                             
-                           [self verifyBilling];
-                         
-                        
+                            [self verifyBilling];
+                            
+                            
                         }else{
-                        
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [utils showAlertWithMessage:NSLocalizedString(@"Error verifying URL",nil)sendViewController:self];
-                          }
+                            
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            //  [utils showAlertWithMessage:NSLocalizedString(@"Error verifying URL",nil)sendViewController:self];
+                            [utils showAlertWithMessage:NSLocalizedString(@"Error - Please Check Your Helpdesk URL",nil)sendViewController:self];
+                        }
                     }@catch (NSException *exception)
                     {
                         // Print exception information
@@ -229,7 +263,7 @@
                         NSLog( @"Reason: %@", exception.reason );
                         return;
                     }
-                    @finally 
+                    @finally
                     {
                         // Cleanup, in both success and fail cases
                         NSLog( @"In finally block");
@@ -245,17 +279,36 @@
             [utils showAlertWithMessage:NSLocalizedString(@"Please Enter a valid URL",nil) sendViewController:self];
     }
 }
-
 -(void)viewDidAppear:(BOOL)animated{
     [self.urlTextfield becomeFirstResponder];
-    
+
 }
-/*
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-     [self.urlTextfield becomeFirstResponder];
+    
+    if(textField == _urlTextfield)
+    {
+        
+        [self URLValidationMethod];
+      //  [self.urlTextfield resignFirstResponder];
+        NSLog(@"Clicked on go");
+        //urlButton
+        
+    }
+    
+//    if (textField == _userNameTextField) {
+//
+//        [_passcodeTextField becomeFirstResponder];
+//
+//    } else if (textField == _passcodeTextField) {
+//
+//        [textField resignFirstResponder];
+//
+//    }
+    
     return YES;
-}*/
+}
 
 
 - (IBAction)btnLogin:(id)sender {
@@ -331,6 +384,11 @@
                             [utils showAlertWithMessage: NSLocalizedString(@"Incorrect Username or Password!", nil) sendViewController:self];
                             //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                             return;
+                        }else if(statusCode == 402)
+                        {
+                            NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
                         }else{
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -453,9 +511,15 @@
         if (error || [msg containsString:@"Error"]) {
             [[AppDelegate sharedAppdelegate] hideProgressView];
             if (msg) {
+                if([msg isEqualToString:@"Error-402"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                }else{
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
+                }
                 
-                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
             }else if(error)  {
                 [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                 NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);

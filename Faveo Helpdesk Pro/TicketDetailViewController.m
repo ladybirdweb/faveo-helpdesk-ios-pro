@@ -150,7 +150,7 @@
     _plusButtonsViewMain.plusButtonAnimationType = LGPlusButtonAnimationTypeRotate;
     
     [_plusButtonsViewMain setButtonsTitles:@[@"+", @"", @""] forState:UIControlStateNormal];
-    [_plusButtonsViewMain setDescriptionsTexts:@[@"", @"Ticket Reply", @"Internal Notes"]];
+    [_plusButtonsViewMain setDescriptionsTexts:@[@"", NSLocalizedString(@"Ticket Reply", nil), NSLocalizedString(@"Internal Notes", nil)]];
     [_plusButtonsViewMain setButtonsImages:@[[NSNull new], [UIImage imageNamed:@"reply1"], [UIImage imageNamed:@"note3"]]
                                   forState:UIControlStateNormal
                             forOrientation:LGPlusButtonsViewOrientationAll];
@@ -283,6 +283,11 @@
                     
                     NSLog(@"Thread-NO4-postCreateTicket-Refresh-error == %@",error.localizedDescription);
                     return ;
+                }
+                if([msg isEqualToString:@"Error-402"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                 }
                 
                 if ([msg isEqualToString:@"tokenRefreshed"]) {
@@ -455,7 +460,8 @@
        
         if([globalVariables.Ticket_status isEqualToString:@"Open"])
         {
-            [utils showAlertWithMessage:@"Ticket is Already Open" sendViewController:self];
+            //
+            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Open", nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }
@@ -553,9 +559,10 @@
         
         NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],globalVariables.iD,globalVariables.ClosedStausId];
         
+        NSLog(@"API call is : %@",url);
         if([globalVariables.Ticket_status isEqualToString:@"Closed"])
         {
-            [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Closed", nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }else{
@@ -680,7 +687,7 @@
         
         if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
         {
-            [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Resolved", nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }else{
@@ -773,7 +780,7 @@
         
         if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
         {
-            [utils showAlertWithMessage:@"Ticket is Already Deleted" sendViewController:self];
+            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Deleted", nil) sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }else{
@@ -941,10 +948,12 @@
     //[ textViewInternalNote setReturnKeyType:UIReturnKeyDone];
     
    // textViewInternalNote.inputAccessoryView.hidden =YES;
-  //  textViewInternalNote.autocorrectionType = NO;
-   // textViewInternalNote.textContentType = UITextContentTypeName;
-   // textViewInternalNote.autocapitalizationType=NO;
- //   textViewInternalNote.autocorrectionType = UITextAutocorrectionTypeNo;
+    textViewInternalNote.autocorrectionType = YES;
+    // textViewInternalNote.autocapitalizationType=NO;
+    textViewInternalNote.textContentType = UITextContentTypeName;
+    textViewInternalNote.spellCheckingType = UITextSpellCheckingTypeYes;
+
+    textViewInternalNote.autocorrectionType = UITextAutocorrectionTypeYes;
 
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
@@ -1087,10 +1096,12 @@
     
     
    // textViewReply.inputAccessoryView.hidden =YES;
-   // textViewReply.autocorrectionType = NO;
-   // textViewReply.textContentType = UITextContentTypeName;
+    textViewReply.autocorrectionType = YES;
+    textViewReply.textContentType = UITextContentTypeName;
+    textViewReply.spellCheckingType = UITextSpellCheckingTypeYes;
+
    // textViewReply.autocapitalizationType=NO;
-  //  textViewReply.autocorrectionType = UITextAutocorrectionTypeNo;
+    textViewReply.autocorrectionType = UITextAutocorrectionTypeYes;
 
     
     textViewReply.layer.cornerRadius=4;

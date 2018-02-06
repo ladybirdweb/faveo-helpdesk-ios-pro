@@ -59,7 +59,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title=@"Edit Profile";
+    self.title=NSLocalizedString(@"Edit Profile", nil);
     
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
@@ -127,6 +127,8 @@
         _switch1.backgroundColor= [UIColor greenColor];
         
     }
+
+    
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
@@ -160,6 +162,10 @@
     [_phoneTextField resignFirstResponder];
     [_mobileTextField resignFirstResponder];
     
+}
+- (IBAction)submitButton:(id)sender {
+    
+    [self submit];
 }
 
 -(void)submit
@@ -402,7 +408,14 @@
                         if([msg isEqualToString:@"Error-403"])
                         {
                             [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-                        }else{
+                        }
+                        else if([msg isEqualToString:@"Error-402"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                        }
+                        
+                        else{
                             [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                             NSLog(@"Error is : %@",msg);
                         }
@@ -459,7 +472,8 @@
                        ClientDetailViewController  *create=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
                             [self.navigationController pushViewController:create animated:YES];
                         
-                            
+                            [self viewDidLoad];
+                            [self viewWillAppear:YES];
                             
                         });
                         
@@ -481,7 +495,7 @@
         
         BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
         
-        [customAlert showAlertWithTitle:@"Alert !" message:@"Are You Sure to Deactivate ?" cancelButtonTitle:@"No" successButtonTitle:@"Yes" withSuccessBlock:^{
+        [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Deactivate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
             
             globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
             [_switch1 setOn:YES];
@@ -501,7 +515,7 @@
         
         BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
         
-        [customAlert showAlertWithTitle:@"Alert !" message:@"Are You Sure to Activate ?" cancelButtonTitle:@"No" successButtonTitle:@"Yes" withSuccessBlock:^{
+        [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Activate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
             
             [_switch1 setOn:NO];
             //   _switch1.tintColor = [UIColor greenColor];

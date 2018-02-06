@@ -10,11 +10,13 @@
 #import "AppConstanst.h"
 #import "AppDelegate.h"
 #import "GlobalVariables.h"
+#import "Utils.h"
 
 @interface MyWebservices(){
     
     NSString *tokenRefreshed;
     GlobalVariables *globalVariables;
+    Utils *utils;
 }
 
 @property (nonatomic,strong) NSUserDefaults *userDefaults;
@@ -264,6 +266,10 @@
     
     urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
     
+//    urlString = [urlString stringByReplacingOccurrencesOfString:@"%5B%5D"
+//                                         withString:@"[]"];
+//    NSLog(@"String 11111 is : %@",urlString);
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     
     [request addValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
@@ -329,6 +335,22 @@
                         NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
                     }
 
+                    
+                }else
+                if (statusCode==429)
+                {
+                    if ([[self refreshToken] isEqualToString:@"tokenRefreshed"]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil,nil,@"tokenRefreshed");
+                        });
+                        NSLog(@"Thread--httpResponsePOST--tokenRefreshed");
+                    }else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil,nil,@"tokenNotRefreshed");
+                        });
+                        NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
+                    }
+                    
                     
                 }
                 else
@@ -409,7 +431,10 @@
         }else if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
             
             NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+            NSLog(@"Status code is : %ld",(long)statusCode);
+           
             
+        
             if (statusCode != 200) {
                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                 
@@ -575,7 +600,25 @@
     
 }
 
-
+-(void)getNextPageURLInboxSearchResults:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block
+{
+    _userDefaults=[NSUserDefaults standardUserDefaults];
+    globalVariables=[GlobalVariables sharedInstance];
+    
+    NSLog(@"page isssss : %@",pageInt);
+    
+    NSString *urlAAA= [url stringByAppendingString:@"&page="];
+    NSString *urlBBB= [urlAAA stringByAppendingString:pageInt];
+    
+    [self httpResponseGET:urlBBB parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(error,json,msg);
+        });
+        
+    }];
+    
+    
+}
 -(void)getNextPageURLUnassigned:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
     _userDefaults=[NSUserDefaults standardUserDefaults];
      globalVariables=[GlobalVariables sharedInstance];

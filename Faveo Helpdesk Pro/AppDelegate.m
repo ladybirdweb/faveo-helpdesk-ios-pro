@@ -15,10 +15,13 @@
 #import "TicketDetailViewController.h"
 #import "MyWebservices.h"
 #import "ClientDetailViewController.h"
+#import "IQKeyboardManager.h"
+
 
 @import Firebase;
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
+
 
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 @import UserNotifications;
@@ -49,10 +52,17 @@
 NSString *const kGCMMessageIDKey = @"gcm.message_id";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+   // [[IQKeyboardManager sharedManager] setEnabled:true];
+  [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
+    
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
    
     // it is deprecated
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
     
 //    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
 //    [center removeAllDeliveredNotifications];

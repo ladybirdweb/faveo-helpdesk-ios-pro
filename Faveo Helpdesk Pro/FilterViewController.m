@@ -293,7 +293,7 @@
     self.departmentTextField.tintColor = [UIColor clearColor];
     
     [Dropobj fadeOut];
-    [self showPopUpWithTitle:@"Select Department" withOption:_deptArray xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:YES];
+    [self showPopUpWithTitle:NSLocalizedString(@"Select Department",nil) withOption:_deptArray xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:YES];
 }
 
 //select priotty
@@ -303,7 +303,7 @@
     self.priorityTextField.tintColor = [UIColor clearColor];
     
     [Dropobj fadeOut];
-    [self showPopUpWithTitle:@"Select Priority" withOption:_priorityArray xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:YES];
+    [self showPopUpWithTitle:NSLocalizedString(@"Select Priority",nil) withOption:_priorityArray xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:YES];
 }
 
 //select ticket types
@@ -313,7 +313,7 @@
     self.typeTextField.tintColor = [UIColor clearColor];
     
     [Dropobj fadeOut];
-    [self showPopUpWithTitle:@"Select Ticket Types" withOption:_typeArray xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:YES];
+    [self showPopUpWithTitle:NSLocalizedString(@"Select Ticket Types",nil) withOption:_typeArray xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:YES];
     
 }
 //select ticket source
@@ -323,7 +323,7 @@
     self.sourceTextField.tintColor = [UIColor clearColor];
     
     [Dropobj fadeOut];
-    [self showPopUpWithTitle:@"Select Ticket Source" withOption:_sourceArray xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:YES];
+    [self showPopUpWithTitle:NSLocalizedString(@"Select Ticket Source",nil) withOption:_sourceArray xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:YES];
 }
 
 //select ticket status
@@ -333,7 +333,7 @@
     self.statusTextField.tintColor = [UIColor clearColor];
     
     [Dropobj fadeOut];
-    [self showPopUpWithTitle:@"Select Ticket Source" withOption:statusArray1 xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:YES];
+    [self showPopUpWithTitle:NSLocalizedString(@"Select Ticket Source",nil) withOption:statusArray1 xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:YES];
 
 }
 
@@ -344,7 +344,7 @@
     self.assignTextField.tintColor = [UIColor clearColor];
     
     [Dropobj fadeOut];
-    [self showPopUpWithTitle:@"Select Department" withOption:assignee xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:NO];
+    [self showPopUpWithTitle:NSLocalizedString(@"Select Department",nil) withOption:assignee xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:NO];
 }
 
 -(void)showPopUpWithTitle:(NSString*)popupTitle withOption:(NSArray*)arrOptions xy:(CGPoint)point size:(CGSize)size isMultiple:(BOOL)isMultiple{

@@ -23,7 +23,7 @@
 #import "RMessageView.h"
 #import "AWNavigationMenuItem.h"
 #import "ClientFilter.h"
-
+#import "UIImageView+Letters.h"
 
 @interface ClientFilter ()<RMessageProtocol,AWNavigationMenuItemDataSource, AWNavigationMenuItemDelegate>{
     
@@ -64,7 +64,7 @@
     globalVariables=[GlobalVariables sharedInstance];
     
     
-    self.titles = @[@"All users", @"Agent users", @"Active users", @"Client users", @"Banned users",@"Inactive users",@"Deactivated users"];
+    self.titles = @[NSLocalizedString(@"All users", nil),NSLocalizedString(@"Agent users", nil) , NSLocalizedString(@"Active users", nil),NSLocalizedString(@"Client users", nil) , NSLocalizedString(@"Banned users", nil),NSLocalizedString(@"Inactive users", nil),NSLocalizedString(@"Deactivated users",nil)];
     
     self.menuItem = [[AWNavigationMenuItem alloc] init];
     self.menuItem.dataSource = self;
@@ -122,6 +122,7 @@
         {
             // api_key=&token=&active=1
             NSString *str=@"user";
+            
             tempString=[NSString stringWithFormat:@"%i",1];
             url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&active=%@&role=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString,str];
             
@@ -168,7 +169,14 @@
                     
                     if (msg) {
                         
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        if([msg isEqualToString:@"Error-402"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                        }
+                        else{
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        }
                         
                     }else if(error)  {
                         [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
@@ -513,18 +521,32 @@
                 cell.clientNameLabel.text=NSLocalizedString(@"Not Available",nil);
             }
             
+            if(![Utils isEmpty:clientFirstName])
+            {
+                if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+                {
+                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+                }else
+                {
+                    [cell.profilePicView setImageWithString:clientFirstName color:nil ];
+                }
+                
+            }
+            else{
+                [cell.profilePicView setImageWithString:userName color:nil ];
+            }
             
             // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
             
-            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-            {
-                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-                
-            }
-            else
-            {
-                [cell setUserProfileimage:@"default_pic.png"];
-            }
+//            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+//            {
+//                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+//
+//            }
+//            else
+//            {
+//                [cell setUserProfileimage:@"default_pic.png"];
+//            }
         }@catch (NSException *exception)
         {
             // Print exception information
@@ -561,7 +583,7 @@
     globalVariables.customerFromView=@"filterView";
     globalVariables.ActiveDeactiveStateOfUser1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"is_delete"]];
     globalVariables.customerImage= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"profile_pic"]];
-    
+    globalVariables.userRole= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"role"]];
     ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
     [self.navigationController pushViewController:td animated:YES];
 }
