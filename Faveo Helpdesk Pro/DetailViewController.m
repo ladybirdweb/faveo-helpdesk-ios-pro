@@ -329,7 +329,9 @@
                         
                         //[utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
                         //AgoStringFromTime
-                        _dueDateTextField.text= [utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
+                      //  _dueDateTextField.text= [utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
+                        
+                        _dueDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"duedate"]];
                         
                        
                         

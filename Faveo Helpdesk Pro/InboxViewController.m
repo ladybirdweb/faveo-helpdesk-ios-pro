@@ -45,7 +45,7 @@
     // NSMutableArray *mutableArray;
     NSMutableArray *selectedArray;
     NSMutableArray *selectedSubjectArray;
-     NSMutableArray *selectedTicketOwner;
+    NSMutableArray *selectedTicketOwner;
     
     int count1;
     NSString *selectedIDs;
@@ -105,12 +105,12 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
-    //search buitton
-//    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-//    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
-//    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-//    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
-//    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
+    
+    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
+    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
     
     
     
@@ -122,7 +122,7 @@
     [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    //[rightBarButtonItems addSubview:moreButton];
+    [rightBarButtonItems addSubview:moreButton];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
@@ -141,7 +141,7 @@
     
     navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     
- //   UIImage *image1 = [UIImage imageNamed:@"merg111"];
+    UIImage *image1 = [UIImage imageNamed:@"merg111"];
     UIImage *image2 = [UIImage imageNamed:@"x1"];
     
     // UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Assign"];
@@ -157,23 +157,20 @@
     UIGraphicsEndImageContext();
     NSData *imageData = UIImagePNGRepresentation(picture1);
     UIImage *img3=[UIImage imageWithData:imageData];
-
-  //  UIImageView* img = [[UIImageView alloc] initWithImage:img3];
-//
-//    //giving action to image
-//    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
-//    singleTap.numberOfTapsRequired = 1;
-//    [img setUserInteractionEnabled:YES];
-//    [img addGestureRecognizer:singleTap];
-//
-//
-//    navItem.titleView = img;
+    
+    UIImageView* img = [[UIImageView alloc] initWithImage:img3];
+    
+    //giving action to image
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    [img setUserInteractionEnabled:YES];
+    [img addGestureRecognizer:singleTap];
     
     
-//    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStylePlain  target:self action:@selector(MergeButtonClicked)];
-//    navItem.leftBarButtonItem = button1;
+    navItem.titleView = img;
     
-    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:img3 style:UIBarButtonItemStylePlain  target:self action:@selector(tapDetected)];
+    
+    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStylePlain  target:self action:@selector(MergeButtonClicked)];
     navItem.leftBarButtonItem = button1;
     
     
@@ -419,7 +416,7 @@
 
 -(void)tapDetected{
     
-
+    
     NSLog(@"Clicked on Asign");
     if (!selectedArray.count) {
         
@@ -443,11 +440,7 @@
 {
     NSLog(@"Clicked on merge");
     
-    NSString * email1= [selectedTicketOwner objectAtIndex:0];
-    NSString * email2= [selectedTicketOwner objectAtIndex:1];
-    NSLog(@"email 1 is : %@",email1);
-    NSLog(@"email 2 is : %@",email2);
-    
+
     if (!selectedArray.count) {
         
         [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
@@ -455,20 +448,32 @@
     }else if(selectedArray.count<2)
     {
         [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
-    }
-    else if(![email1 isEqualToString:email2])
-    {
-        [utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
-    }
-    else{
+    }else{
+        if(selectedArray.count>=2)
+        {
+        NSString * email1= [selectedTicketOwner objectAtIndex:0];
+        NSString * email2= [selectedTicketOwner objectAtIndex:1];
+        NSLog(@"email 1 is : %@",email1);
+        NSLog(@"email 2 is : %@",email2);
+        if(![email1 isEqualToString:email2] || ![email1 isEqualToString:[selectedTicketOwner lastObject]])
+        {
+            [utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
+        }
+        else{
         
-        globalVariables.idList=selectedArray;
-        globalVariables.subjectList=selectedSubjectArray;
+             globalVariables.idList=selectedArray;
+             globalVariables.subjectList=selectedSubjectArray;
         
-        MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
-        [self.navigationController pushViewController:merge animated:YES];
+           MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
+          [self.navigationController pushViewController:merge animated:YES];
+        }
+            
+        }else
+        {
+            
+             [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
+        }
     }
-    
 }
 
 
@@ -562,8 +567,8 @@
                         }
                         else{
                             
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         }
                         
                     }else if(error)  {
@@ -785,6 +790,7 @@
 -(void)EditTableView:(UIGestureRecognizer*)gesture{
     [self.tableView setEditing:YES animated:YES];
     navbar.hidden=NO;
+   // [selectedTicketOwner removeAllObjects];
 }
 
 
@@ -1613,15 +1619,15 @@
             // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
             @try{
                 
-//                if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-//                {
-//                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-//
-//                }
-//                else
-//                {
-//                    [cell setUserProfileimage:@"default_pic.png"];
-//                }
+                //                if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+                //                {
+                //                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+                //
+                //                }
+                //                else
+                //                {
+                //                    [cell setUserProfileimage:@"default_pic.png"];
+                //                }
                 
                 
                 if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
@@ -1744,7 +1750,7 @@
         
         //taking ticket title from selected rows
         [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
-        
+        //taking email id
         [selectedTicketOwner addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
         
         count1=(int)[selectedArray count];
@@ -1814,17 +1820,17 @@
     
     [selectedSubjectArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
     
+    [selectedTicketOwner removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
     
     count1=(int)[selectedArray count];
     NSLog(@"Selected count is :%i",count1);
     NSLog(@"Slected Id : %@",selectedArray);
     
     selectedIDs = [selectedArray componentsJoinedByString:@","];
+    
     NSLog(@"Slected Ticket Id are : %@",selectedIDs);
     NSLog(@"Slected Ticket Subjects are : %@",selectedSubjectArray);
-    
-    //    globalVariables.idList=selectedArray;
-    //     globalVariables.subjectList=selectedSubjectArray;
+    NSLog(@"Slected Owner Emails are : %@",selectedTicketOwner);
     
     if (!selectedArray.count) {
         [self.tableView setEditing:NO animated:YES];
@@ -1832,6 +1838,7 @@
     }
     
 }
+
 
 #pragma mark - SlideNavigationController Methods -
 
@@ -1888,6 +1895,13 @@
 {
     NSLog(@"11111111*********111111111111");
     
+    if (!selectedArray.count) {
+        
+        [utils showAlertWithMessage:@"Select The Tickets First For Changing Ticket Status" sendViewController:self];
+        
+    }else
+    {
+    
 #ifdef IfMethodOne
     CGRect rect = [self.navigationController.navigationBar convertRect:[event.allTouches.anyObject view].frame toView:[[UIApplication sharedApplication] keyWindow]];
     
@@ -1939,7 +1953,7 @@
                        }];
     
 #endif
-    
+    }
 }
 
 -(void)changeStaus2

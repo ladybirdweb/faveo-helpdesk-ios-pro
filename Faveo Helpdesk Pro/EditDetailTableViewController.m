@@ -124,6 +124,15 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)textViewDidChange:(UITextView *)textView
+{
+    CGFloat fixedWidth = textView.frame.size.width;
+    CGSize newSize = [textView sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    CGRect newFrame = textView.frame;
+    newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    textView.frame = newFrame;
+}
+
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
@@ -1037,7 +1046,7 @@
             return  YES;
         }
         
-        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >100)
+        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >500)
         {
             return NO;
         }

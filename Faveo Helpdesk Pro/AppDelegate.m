@@ -16,7 +16,7 @@
 #import "MyWebservices.h"
 #import "ClientDetailViewController.h"
 #import "IQKeyboardManager.h"
-
+#import "ATAppUpdater.h"
 
 @import Firebase;
 @import FirebaseInstanceID;
@@ -31,7 +31,7 @@
 // running iOS 10 and above. Implement FIRMessagingDelegate to receive data message via FCM for
 // devices running iOS 10 and above.
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
-@interface AppDelegate () <FIRMessagingDelegate>
+@interface AppDelegate () <FIRMessagingDelegate,ATAppUpdaterDelegate>
 @end
 #endif
 
@@ -62,7 +62,17 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
    
     // it is deprecated
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    
+//_________________________________________________________________________________________________
+    //code for new code is availbel - to show pop-up
+    ATAppUpdater *updater = [ATAppUpdater sharedUpdater];
+    [updater setAlertTitle:NSLocalizedString(@"New Version", @"Alert Title")];
+    [updater setAlertMessage:NSLocalizedString(@"Version %@ is available on AppStore.", @"Alert Message")];
+    [updater setAlertUpdateButtonTitle:@"Update"];
+    [updater setAlertCancelButtonTitle:@"Not Now"];
+    [updater setDelegate:self]; // Optional
+    [updater showUpdateWithConfirmation];
+    return YES;
+ //   -----------------------------------------------------------------------------------------
     
 //    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
 //    [center removeAllDeliveredNotifications];

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */; };
 		06B8B01D20287E4300E5E8CA /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */; };
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
 		D9166B551FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9166B541FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m */; };
@@ -115,6 +116,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		067605F8202B2C8800D9EFE6 /* ATAppUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAppUpdater.h; sourceTree = "<group>"; };
+		067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATAppUpdater.m; sourceTree = "<group>"; };
 		06B8B01B20287E4200E5E8CA /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
@@ -341,6 +344,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		067605F7202B2C8800D9EFE6 /* ATAppUpdater */ = {
+			isa = PBXGroup;
+			children = (
+				067605F8202B2C8800D9EFE6 /* ATAppUpdater.h */,
+				067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */,
+			);
+			path = ATAppUpdater;
+			sourceTree = "<group>";
+		};
 		06B8B01A20287E4200E5E8CA /* UIImageView+Letters */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +388,7 @@
 		D92C35C71F750F83001DD67D /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				067605F7202B2C8800D9EFE6 /* ATAppUpdater */,
 				06B8B01A20287E4200E5E8CA /* UIImageView+Letters */,
 				D97CA13B1FCC229800A7B982 /* LGFilterView */,
 				D9AF852E1FC4218A005232A0 /* NavigationMenuItem */,
@@ -789,7 +802,6 @@
 				TargetAttributes = {
 					D9DBD3401E07ACFC00219F93 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 8VY8B59STG;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -982,6 +994,7 @@
 				D9AE08382007231800DD9E94 /* CFMultistageConditionTableView.m in Sources */,
 				D9F9F11A1FB977B40044DA27 /* FilterViewController.m in Sources */,
 				D9AF85311FC421AF005232A0 /* AWNavigationMenuItem.m in Sources */,
+				067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */,
 				D9F9F1421FBAE8CC0044DA27 /* FilterLogic.m in Sources */,
 				D9EB9FA41E07C3270001115F /* ClosedTicketsViewController.m in Sources */,
 				D9EB9FC11E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
@@ -1218,7 +1231,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMPRESS_PNG_FILES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1287,7 +1300,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMPRESS_PNG_FILES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

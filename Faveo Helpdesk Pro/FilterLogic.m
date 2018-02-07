@@ -33,6 +33,7 @@
 #import "MergeViewForm.h"
 #import "IQKeyboardManager.h"
 #import "UIImageView+Letters.h"
+#import "MultpleTicketAssignTableViewController.h"
 
 @interface FilterLogic ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>
 {
@@ -50,12 +51,15 @@
     NSString * apiValue;
     
     NSString * showInbox;
-     NSString * showMyTickets;
-     NSString * showUnassignedTickets;
-     NSString * showClosedTickets;
-     NSString * showTashTickets;
+    NSString * showMyTickets;
+    NSString * showUnassignedTickets;
+    NSString * showClosedTickets;
+    NSString * showTashTickets;
     
     NSMutableArray *selectedArray;
+    NSMutableArray *selectedSubjectArray;
+    NSMutableArray *selectedTicketOwner;
+    
     int count1;
     NSString *selectedIDs;
     UINavigationBar*  navbar;
@@ -117,6 +121,8 @@
     
     
     _mutableArray=[[NSMutableArray alloc]init];
+    selectedTicketOwner = [[NSMutableArray alloc] init];
+    selectedSubjectArray = [[NSMutableArray alloc] init];
     
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
@@ -135,7 +141,7 @@
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
-  
+    
     
     //To set Gesture on Tableview for multiselection
     count1=0;
@@ -148,7 +154,7 @@
     
     navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     
-   // UIImage *image1 = [UIImage imageNamed:@"merg111"];
+    UIImage *image1 = [UIImage imageNamed:@"merg111"];
     UIImage *image2 = [UIImage imageNamed:@"x1"];
     
     
@@ -167,20 +173,19 @@
     NSData *imageData = UIImagePNGRepresentation(picture1);
     UIImage *img3=[UIImage imageWithData:imageData];
     
-    //  UIImageView* img = [[UIImageView alloc] initWithImage:img3];
-    //
-    //    //giving action to image
-    //    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
-    //    singleTap.numberOfTapsRequired = 1;
-    //    [img setUserInteractionEnabled:YES];
-    //    [img addGestureRecognizer:singleTap];
-    //
-    //
-    //    navItem.titleView = img;
+    UIImageView* img = [[UIImageView alloc] initWithImage:img3];
+    
+    //giving action to image
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    [img setUserInteractionEnabled:YES];
+    [img addGestureRecognizer:singleTap];
     
     
-    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:img3 style:UIBarButtonItemStylePlain  target:self action:@selector(tapDetected)];
-    //  button1.width=10;
+    navItem.titleView = img;
+    
+    
+    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStylePlain  target:self action:@selector(MergeButtonClicked)];
     navItem.leftBarButtonItem = button1;
     
     
@@ -194,15 +199,30 @@
     
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-   
+    
     [self reload];
     [self getDependencies];
-
+    
     
 }
 
 -(void)tapDetected{
-    NSLog(@"single Tap on imageview");
+    
+    
+    NSLog(@"Clicked on Asign");
+    if (!selectedArray.count) {
+        
+        [utils showAlertWithMessage:@"Select The Tickets for Assign" sendViewController:self];
+        
+    }
+    else{
+        //selectedIDs
+        
+        globalVariables.ticketIDListForAssign=selectedIDs;
+        
+        MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
     
     
@@ -211,10 +231,36 @@
 -(void)MergeButtonClicked
 {
     NSLog(@"Clicked on merge");
-    MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
-    [self.navigationController pushViewController:merge animated:YES];
     
+    
+    if (!selectedArray.count) {
+        
+        [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
+        
+    }else if(selectedArray.count<2)
+    {
+        [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
+    }else{
+        
+        NSString * email1= [selectedTicketOwner objectAtIndex:0];
+        NSString * email2= [selectedTicketOwner objectAtIndex:1];
+        NSLog(@"email 1 is : %@",email1);
+        NSLog(@"email 2 is : %@",email2);
+        if(![email1 isEqualToString:email2] || ![email1 isEqualToString:[selectedTicketOwner lastObject]])
+        {
+            [utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
+        }
+        else{
+            
+            globalVariables.idList=selectedArray;
+            globalVariables.subjectList=selectedSubjectArray;
+            
+            MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
+            [self.navigationController pushViewController:merge animated:YES];
+        }
+    }
 }
+
 
 
 
@@ -281,12 +327,12 @@
             //  http://jamboreebliss.com/sayar/public/api/v2/helpdesk/get-tickets?token=%@&api=1&show=inbox&departments=%@&source=%@&priority=%@&assigned=1&types=%@
             //departments priority types source status assigned
             
-               apiValue=[NSString stringWithFormat:@"%i",1];
-               showInbox = @"inbox";
+            apiValue=[NSString stringWithFormat:@"%i",1];
+            showInbox = @"inbox";
             //  NSString * Alldeparatments=@"All";
             
-              dep111=[NSString stringWithFormat:@"%@",globalVariables.deptt1];
-
+            dep111=[NSString stringWithFormat:@"%@",globalVariables.deptt1];
+            
             [Utils isEmpty:dep111];
             if([Utils isEmpty:dep111] || [dep111 isEqualToString:@""])
             {
@@ -296,9 +342,9 @@
             {
                 dep111= [NSString stringWithFormat:@"%@",globalVariables.deptt1];
             }
-//
-             assignee111= [NSString stringWithFormat:@"%@",globalVariables.assignn1];
-
+            //
+            assignee111= [NSString stringWithFormat:@"%@",globalVariables.assignn1];
+            
             if([assignee111 isEqualToString:@"Yes"])
             {
                 assignee111=@"1";
@@ -309,7 +355,7 @@
             {
                 assignee111=@"";
             }
-
+            
             
             [self apiCallMethod];
             
@@ -484,20 +530,20 @@
     }
     
     // priority  is not empty
-   else if(![Utils isEmpty:globalVariables.prioo1] && ( [Utils isEmpty:globalVariables.typee1] && [Utils isEmpty:globalVariables.sourcee1] &&  [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
+    else if(![Utils isEmpty:globalVariables.prioo1] && ( [Utils isEmpty:globalVariables.typee1] && [Utils isEmpty:globalVariables.sourcee1] &&  [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&priority=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.prioo1];
         NSLog(@"URL is : %@",url);
     }
     // priority and type in not empty
-  else  if((![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1]) &&([Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
+    else  if((![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1]) &&([Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&priority=%@&types=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.prioo1,globalVariables.typee1];
         NSLog(@"URL is : %@",url);
         
     }
     // prioity, type and source in not empty
-  else  if((![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1]) &&([Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
+    else  if((![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1]) &&([Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&priority=%@&types=%@&source=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.prioo1,globalVariables.typee1,globalVariables.sourcee1];
         NSLog(@"URL is : %@",url);
@@ -505,7 +551,7 @@
     }
     
     // prioity, type , source and status in not empty
-   else if((![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.statuss1] ) && ([Utils isEmpty:assignee111]) )
+    else if((![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.statuss1] ) && ([Utils isEmpty:assignee111]) )
     {
         
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&priority=%@&types=%@&source=%@&status=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.prioo1,globalVariables.typee1,globalVariables.sourcee1,globalVariables.sourcee1];
@@ -513,7 +559,7 @@
         
     }
     //  prioity, type , source and status & assignee in not empty
-  else  if((![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.statuss1] && ![Utils isEmpty:assignee111]) )
+    else  if((![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.statuss1] && ![Utils isEmpty:assignee111]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&priority=%@&types=%@&source=%@&status=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.prioo1,globalVariables.typee1,globalVariables.sourcee1,globalVariables.sourcee1,assignee111];
         NSLog(@"URL is : %@",url);
@@ -523,20 +569,20 @@
     
     
     // type in not empty
-  else  if(![Utils isEmpty:globalVariables.typee1] && ( [Utils isEmpty:globalVariables.prioo1] && [Utils isEmpty:globalVariables.sourcee1] &&  [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
+    else  if(![Utils isEmpty:globalVariables.typee1] && ( [Utils isEmpty:globalVariables.prioo1] && [Utils isEmpty:globalVariables.sourcee1] &&  [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&types=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.typee1];
         NSLog(@"URL is : %@",url);
     }
     
     // type and source not empty
- else   if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1]) && ( [Utils isEmpty:globalVariables.prioo1] && [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
+    else   if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1]) && ( [Utils isEmpty:globalVariables.prioo1] && [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&types=%@&source=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.typee1,globalVariables.sourcee1];
         NSLog(@"URL is : %@",url);
     }
     // type, source and priority not empty
-else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.prioo1]) && ([Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
+    else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.prioo1]) && ([Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
     {
         
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&types=%@&source=%@&priority=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.typee1,globalVariables.sourcee1,globalVariables.prioo1];
@@ -545,7 +591,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     }
     
     // type, source ,priority and status not empty
- else   if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.statuss1]) && ( [Utils isEmpty:assignee111]) )
+    else   if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.statuss1]) && ( [Utils isEmpty:assignee111]) )
     {
         
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&types=%@&source=%@&priority=%@&status=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.typee1,globalVariables.sourcee1,globalVariables.prioo1,globalVariables.statuss1];
@@ -554,21 +600,21 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     }
     
     // source is not empty
-  else  if(![Utils isEmpty:globalVariables.sourcee1] && ( [Utils isEmpty:globalVariables.prioo1] && [Utils isEmpty:globalVariables.typee1] &&  [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
+    else  if(![Utils isEmpty:globalVariables.sourcee1] && ( [Utils isEmpty:globalVariables.prioo1] && [Utils isEmpty:globalVariables.typee1] &&  [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&source=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.sourcee1];
         NSLog(@"URL is : %@",url);
     }
     
     //source and prioity is not empty
-   else if((![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.prioo1]) && ([Utils isEmpty:globalVariables.typee1] &&  [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
+    else if((![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.prioo1]) && ([Utils isEmpty:globalVariables.typee1] &&  [Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&source=%@&priority=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.sourcee1,globalVariables.prioo1];
         NSLog(@"URL is : %@",url);
     }
     
     //source , prioity and type is not empty
-   else if((![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1]) && ([Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
+    else if((![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1]) && ([Utils isEmpty:globalVariables.statuss1] && [Utils isEmpty:assignee111]) )
     {
         
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&source=%@&priority=%@&types=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.sourcee1,globalVariables.prioo1,globalVariables.typee1];
@@ -577,21 +623,21 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     }
     
     //source , prioity , type and status is not empty
- else   if((![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.statuss1]) && ([Utils isEmpty:assignee111]) )
+    else   if((![Utils isEmpty:globalVariables.sourcee1] && ![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.statuss1]) && ([Utils isEmpty:assignee111]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&source=%@&priority=%@&types=%@&status=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.sourcee1,globalVariables.prioo1,globalVariables.typee1,globalVariables.statuss1];
         NSLog(@"URL is : %@",url);
     }
     
     //status is not empty
-  else  if(![Utils isEmpty:globalVariables.statuss1] && ( [Utils isEmpty:globalVariables.prioo1] && [Utils isEmpty:globalVariables.typee1] &&  [Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:assignee111]) )
+    else  if(![Utils isEmpty:globalVariables.statuss1] && ( [Utils isEmpty:globalVariables.prioo1] && [Utils isEmpty:globalVariables.typee1] &&  [Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:assignee111]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&status=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.statuss1];
         NSLog(@"URL is : %@",url);
     }
     
     //status and prioty not empty
-  else  if((![Utils isEmpty:globalVariables.statuss1] && ![Utils isEmpty:globalVariables.prioo1] )&& ( [Utils isEmpty:globalVariables.typee1] &&  [Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:assignee111]) )
+    else  if((![Utils isEmpty:globalVariables.statuss1] && ![Utils isEmpty:globalVariables.prioo1] )&& ( [Utils isEmpty:globalVariables.typee1] &&  [Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:assignee111]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&status=%@&priority=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.statuss1,globalVariables.prioo1];
         NSLog(@"URL is : %@",url);
@@ -599,7 +645,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     }
     
     //status, prioty and types not empty
-   else if((![Utils isEmpty:globalVariables.statuss1] && ![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1]) && ([Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:assignee111]) )
+    else if((![Utils isEmpty:globalVariables.statuss1] && ![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1]) && ([Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:assignee111]) )
     {
         
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&status=%@&priority=%@&types=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.statuss1,globalVariables.prioo1,globalVariables.typee1];
@@ -608,7 +654,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     }
     
     //status, prioty , types and source not empty
- else   if((![Utils isEmpty:globalVariables.statuss1] && ![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1])&& ( [Utils isEmpty:assignee111]) )
+    else   if((![Utils isEmpty:globalVariables.statuss1] && ![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVariables.sourcee1])&& ( [Utils isEmpty:assignee111]) )
     {
         
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&status=%@&priority=%@&types=%@&source=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.statuss1,globalVariables.prioo1,globalVariables.typee1,globalVariables.sourcee1];
@@ -618,7 +664,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     
     
     // assignee is not empty
-   else if(![Utils isEmpty:assignee111] && ( [Utils isEmpty:globalVariables.prioo1] && [Utils isEmpty:globalVariables.typee1] &&  [Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:globalVariables.statuss1]) )
+    else if(![Utils isEmpty:assignee111] && ( [Utils isEmpty:globalVariables.prioo1] && [Utils isEmpty:globalVariables.typee1] &&  [Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:globalVariables.statuss1]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,assignee111];
         NSLog(@"URL is : %@",url);
@@ -626,14 +672,14 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     
     
     // assignee, priotity  is not empty
-  else    if((![Utils isEmpty:assignee111] && ![Utils isEmpty:globalVariables.prioo1] ) && ([Utils isEmpty:globalVariables.typee1] &&  [Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:globalVariables.statuss1]) )
+    else    if((![Utils isEmpty:assignee111] && ![Utils isEmpty:globalVariables.prioo1] ) && ([Utils isEmpty:globalVariables.typee1] &&  [Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:globalVariables.statuss1]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&assigned=%@&priority=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,assignee111,globalVariables.prioo1];
         NSLog(@"URL is : %@",url);
     }
     
     // assignee, priotity and types is not empty
-   else if((![Utils isEmpty:assignee111] && ![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1]) && ([Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:globalVariables.statuss1]) )
+    else if((![Utils isEmpty:assignee111] && ![Utils isEmpty:globalVariables.prioo1] && ![Utils isEmpty:globalVariables.typee1]) && ([Utils isEmpty:globalVariables.sourcee1] && [Utils isEmpty:globalVariables.statuss1]) )
     {
         url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&assigned=%@&priority=%@&types=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,assignee111,globalVariables.prioo1,globalVariables.typee1];
         NSLog(@"URL is : %@",url);
@@ -651,80 +697,80 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     }
     
     
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        globalVariables.urlFromFilterLogicView=url;
-        NSLog(@"URL is : %@",url);
-        NSLog(@"URL is : %@",url);
-        NSLog(@"URL is : %@",url);
-
+    MyWebservices *webservices=[MyWebservices sharedInstance];
+    globalVariables.urlFromFilterLogicView=url;
+    NSLog(@"URL is : %@",url);
+    NSLog(@"URL is : %@",url);
+    NSLog(@"URL is : %@",url);
+    
     [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
-            
-            
-            if (error || [msg containsString:@"Error"]) {
-                [refresh endRefreshing];
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                if (msg) {
-                    
-                  
-                    
-                    if([msg isEqualToString:@"Error-403"])
-                    {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
-                    }
-                  else  if([msg isEqualToString:@"Error-402"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                    }
-                    else
-                    {
-                        NSLog(@"Error msg is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    }
-                    
-                }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+        
+        
+        
+        if (error || [msg containsString:@"Error"]) {
+            [refresh endRefreshing];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            if (msg) {
+                
+                
+                
+                if([msg isEqualToString:@"Error-403"])
+                {
+                    [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
-                return ;
+                else  if([msg isEqualToString:@"Error-402"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                }
+                else
+                {
+                    NSLog(@"Error msg is : %@",msg);
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                }
+                
+            }else if(error)  {
+                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
             }
+            return ;
+        }
+        
+        if ([msg isEqualToString:@"tokenRefreshed"]) {
             
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                
-                [self reload];
-                NSLog(@"Thread--NO4-call-getInbox");
-                return;
-            }
+            [self reload];
+            NSLog(@"Thread--NO4-call-getInbox");
+            return;
+        }
+        
+        if (json) {
+            //NSError *error;
+            NSLog(@"Thread-NO4--getInboxAPI--%@",json);
+            _mutableArray = [json objectForKey:@"data"];
+            _nextPageUrl =[json objectForKey:@"next_page_url"];
+            NSLog(@"bexr page url is : %@",_nextPageUrl);
             
-            if (json) {
-                //NSError *error;
-                NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-                _mutableArray = [json objectForKey:@"data"];
-                _nextPageUrl =[json objectForKey:@"next_page_url"];
-                NSLog(@"bexr page url is : %@",_nextPageUrl);
-                
-                _path1=[json objectForKey:@"path"];
-                
-                _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[json objectForKey:@"total"] integerValue];
-                _totalPages=[[json objectForKey:@"last_page"] integerValue];
-                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [refresh endRefreshing];
-                       // [self.tableView reloadData];
-                        
-                        [self reloadTableView];
-                    });
+            _path1=[json objectForKey:@"path"];
+            
+            _currentPage=[[json objectForKey:@"current_page"] integerValue];
+            _totalTickets=[[json objectForKey:@"total"] integerValue];
+            _totalPages=[[json objectForKey:@"last_page"] integerValue];
+            NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [refresh endRefreshing];
+                    // [self.tableView reloadData];
+                    
+                    [self reloadTableView];
                 });
-                
-            }
-            NSLog(@"Thread-NO5-getInbox-closed");
+            });
             
-        }];
+        }
+        NSLog(@"Thread-NO5-getInbox-closed");
+        
+    }];
 }
 
 -(void)getDependencies{
@@ -866,6 +912,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
 -(void)EditTableView:(UIGestureRecognizer*)gesture{
     [self.tableView setEditing:YES animated:YES];
     navbar.hidden=NO;
+  //  [selectedTicketOwner removeAllObjects];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -903,7 +950,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-   // cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    // cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
     if (indexPath.row == [_mutableArray count] - 1 ) {
         NSLog(@"nextURL  %@",_nextPageUrl);
@@ -974,10 +1021,10 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             globalVariables.filterId=@"INBOXFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-         
-       //     [webservices getNextPageURLInbox:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
             
-             [webservices getNextPageURLInbox:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            //     [webservices getNextPageURLInbox:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            
+            [webservices getNextPageURLInbox:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
                 if (error || [msg containsString:@"Error"]) {
                     
@@ -1015,9 +1062,9 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                           // [self.tableView reloadData];
+                            // [self.tableView reloadData];
                             
-                             [self reloadTableView];
+                            [self reloadTableView];
                             
                         });
                     });
@@ -1043,9 +1090,9 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             globalVariables.filterId=@"MYTICKETSFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-           // [webservices getNextPageURLMyTickets:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            // [webservices getNextPageURLMyTickets:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
             
-                [webservices getNextPageURLMyTickets:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            [webservices getNextPageURLMyTickets:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 if (error || [msg containsString:@"Error"]) {
                     
                     if (msg) {
@@ -1082,7 +1129,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                           // [self.tableView reloadData];
+                            // [self.tableView reloadData];
                             [self reloadTableView];
                             
                         });
@@ -1109,7 +1156,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             globalVariables.filterId=@"UNASSIGNEDFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-         //   [webservices getNextPageURLUnassigned:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            //   [webservices getNextPageURLUnassigned:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
             
             [webservices getNextPageURLUnassigned:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
@@ -1149,7 +1196,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                           // [self.tableView reloadData];
+                            // [self.tableView reloadData];
                             [self reloadTableView];
                             
                         });
@@ -1178,8 +1225,8 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             globalVariables.filterId=@"CLOSEDFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-          //  [webservices getNextPageURLClosed:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
-           
+            //  [webservices getNextPageURLClosed:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            
             [webservices getNextPageURLClosed:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
                 if (error || [msg containsString:@"Error"]) {
@@ -1218,7 +1265,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                         //   [self.tableView reloadData];
+                            //   [self.tableView reloadData];
                             [self reloadTableView];
                             
                         });
@@ -1243,12 +1290,12 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             //     NSLog(@"String is : %@",szResult);
             NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
-             globalVariables.filterId=@"TRASHFilter";
+            globalVariables.filterId=@"TRASHFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-         //   [webservices getNextPageURLTrash:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            //   [webservices getNextPageURLTrash:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
             
-             [webservices getNextPageURLTrash:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+            [webservices getNextPageURLTrash:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
                 if (error || [msg containsString:@"Error"]) {
                     
@@ -1286,7 +1333,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                           // [self.tableView reloadData];
+                            // [self.tableView reloadData];
                             [self reloadTableView];
                             
                         });
@@ -1549,15 +1596,15 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         @try{
             
-//            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-//            {
-//                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-//
-//            }
-//            else
-//            {
-//                [cell setUserProfileimage:@"default_pic.png"];
-//            }
+            //            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+            //            {
+            //                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+            //
+            //            }
+            //            else
+            //            {
+            //                [cell setUserProfileimage:@"default_pic.png"];
+            //            }
             
             
             if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
@@ -1668,28 +1715,32 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         //  [selectedArray addObject:[_mutableArray objectAtIndex:indexPath.row]];
         
         [selectedArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
+        [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
+        //taking email id
+        [selectedTicketOwner addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
         
         count1=(int)[selectedArray count];
         NSLog(@"Selected count is :%i",count1);
         NSLog(@"Slected Array Id : %@",selectedArray);
+        NSLog(@"Slected Owner Emails are : %@",selectedTicketOwner);
         
         selectedIDs = [selectedArray componentsJoinedByString:@","];
         NSLog(@"Slected Ticket Id are : %@",selectedIDs);
         
     }else{
-    TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-    
-    NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
-    
-    globalVariables.iD=[finaldic objectForKey:@"id"];
-    globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
-    
-    globalVariables.First_name=[finaldic objectForKey:@"c_fname"];
-    globalVariables.Last_name=[finaldic objectForKey:@"c_lname"];
-    
-    globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
-    
-    [self.navigationController pushViewController:td animated:YES];
+        TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+        
+        NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
+        
+        globalVariables.iD=[finaldic objectForKey:@"id"];
+        globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
+        
+        globalVariables.First_name=[finaldic objectForKey:@"c_fname"];
+        globalVariables.Last_name=[finaldic objectForKey:@"c_lname"];
+        
+        globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
+        
+        [self.navigationController pushViewController:td animated:YES];
     }
 }
 
@@ -1701,18 +1752,22 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     //   [selectedArray removeObject:[_mutableArray objectAtIndex:indexPath.row]];
     [selectedArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
     
+    [selectedSubjectArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
+    
+    [selectedTicketOwner removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
+    
     count1=(int)[selectedArray count];
     NSLog(@"Selected count is :%i",count1);
     NSLog(@"Slected Id : %@",selectedArray);
     
     selectedIDs = [selectedArray componentsJoinedByString:@","];
     NSLog(@"Slected Ticket Id are : %@",selectedIDs);
-    
-    
+    NSLog(@"Slected Ticket Subjects are : %@",selectedSubjectArray);
+    NSLog(@"Slected Owner Emails are : %@",selectedTicketOwner);
     
     if (!selectedArray.count) {
         [self.tableView setEditing:NO animated:YES];
-         navbar.hidden=YES;
+        navbar.hidden=YES;
     }
     
 }
@@ -1760,8 +1815,8 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     
     refresh=[[UIRefreshControl alloc] init];
     refresh.tintColor=[UIColor whiteColor];
-  //  refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
-     refresh.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
+    //  refresh.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+    refresh.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"#BDBDBD"];
     refresh.attributedTitle =refreshing;
     [refresh addTarget:self action:@selector(reloadd) forControlEvents:UIControlEventValueChanged];
     [_tableView insertSubview:refresh atIndex:0];
@@ -1779,10 +1834,6 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
 
 -(void)onNavButtonTapped:(UIBarButtonItem *)sender event:(UIEvent *)event
 {
-    
-    // provide two methods to deal with the barbuttonitems
-    // comment this fowowing line and see how the other way of dealing with barbuttonitems
-    
     //#define IfMethodOne
     
     if([globalVariables.filterId isEqualToString:@"INBOXFilter"] ||[globalVariables.filterId isEqualToString:@"MYTICKETSFilter"] || [globalVariables.filterId isEqualToString:@"UNASSIGNEDFilter"] )
@@ -2030,93 +2081,93 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             [[AppDelegate sharedAppdelegate] hideProgressView];
         }
         else {
-        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.OpenStausId];
-        
-        
-        if([globalVariables.Ticket_status isEqualToString:@"Open"])
-        {
-            [utils showAlertWithMessage:@"Ticket is Already Open" sendViewController:self];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+            NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.OpenStausId];
             
-        }
-        else{
-            //   NSLog(@"URL is : %@",url);
             
-            MyWebservices *webservices=[MyWebservices sharedInstance];
-            
-            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            if([globalVariables.Ticket_status isEqualToString:@"Open"])
+            {
+                [utils showAlertWithMessage:@"Ticket is Already Open" sendViewController:self];
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 
-                if (error || [msg containsString:@"Error"]) {
+            }
+            else{
+                //   NSLog(@"URL is : %@",url);
+                
+                MyWebservices *webservices=[MyWebservices sharedInstance];
+                
+                [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                     
-                    if (msg) {
+                    if (error || [msg containsString:@"Error"]) {
                         
-                        if([msg isEqualToString:@"Error-403"])
-                        {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Open a ticket", nil) sendViewController:self];
+                        if (msg) {
+                            
+                            if([msg isEqualToString:@"Error-403"])
+                            {
+                                [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Open a ticket", nil) sendViewController:self];
+                            }
+                            else{
+                                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            }
+                            //  NSLog(@"Message is : %@",msg);
+                            
+                        }else if(error)  {
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                            NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
                         }
-                        else{
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                        }
-                        //  NSLog(@"Message is : %@",msg);
                         
-                    }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                        NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                        return ;
                     }
                     
-                    return ;
-                }
-                
-                if ([msg isEqualToString:@"tokenRefreshed"]) {
-                    
-                    [self changeStaus1];
-                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
-                    return;
-                }
-                
-                // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
-                
-                // message = "Status changed to Open";
-                
-                
-                if (json) {
-                    NSLog(@"JSON-CreateTicket-%@",json);
-                    if ([json objectForKey:@"response"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            
-                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
-                            
-                            
-                            
-                            /*if (self.navigationController.navigationBarHidden) {
-                             [self.navigationController setNavigationBarHidden:NO];
-                             }
-                             
-                             [RMessage showNotificationInViewController:self.navigationController
-                             title:NSLocalizedString(@"Sucess.", nil)
-                             subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                             iconImage:nil
-                             type:RMessageTypeSuccess
-                             customTypeName:nil
-                             duration:RMessageDurationAutomatic
-                             callback:nil
-                             buttonTitle:nil
-                             buttonCallback:nil
-                             atPosition:RMessagePositionNavBarOverlay
-                             canBeDismissedByUser:YES]; */
-                            
-                            
-                            FilterLogic *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
-                            [self.navigationController pushViewController:sort animated:YES];
-                        });
+                    if ([msg isEqualToString:@"tokenRefreshed"]) {
+                        
+                        [self changeStaus1];
+                        NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                        return;
                     }
-                }
-                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
-                
-            }];
-        }
+                    
+                    // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
+                    
+                    // message = "Status changed to Open";
+                    
+                    
+                    if (json) {
+                        NSLog(@"JSON-CreateTicket-%@",json);
+                        if ([json objectForKey:@"response"]) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                
+                                [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                                
+                                
+                                
+                                
+                                /*if (self.navigationController.navigationBarHidden) {
+                                 [self.navigationController setNavigationBarHidden:NO];
+                                 }
+                                 
+                                 [RMessage showNotificationInViewController:self.navigationController
+                                 title:NSLocalizedString(@"Sucess.", nil)
+                                 subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                                 iconImage:nil
+                                 type:RMessageTypeSuccess
+                                 customTypeName:nil
+                                 duration:RMessageDurationAutomatic
+                                 callback:nil
+                                 buttonTitle:nil
+                                 buttonCallback:nil
+                                 atPosition:RMessagePositionNavBarOverlay
+                                 canBeDismissedByUser:YES]; */
+                                
+                                
+                                FilterLogic *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
+                                [self.navigationController pushViewController:sort animated:YES];
+                            });
+                        }
+                    }
+                    NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                    
+                }];
+            }
         } }
     
 }
@@ -2139,85 +2190,85 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
         }else{
-        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ClosedStausId];
-        
-        if([globalVariables.Ticket_status isEqualToString:@"Closed"])
-        {
-            [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+            NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ClosedStausId];
             
-        }else{
-            
-            
-            MyWebservices *webservices=[MyWebservices sharedInstance];
-            
-            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            if([globalVariables.Ticket_status isEqualToString:@"Closed"])
+            {
+                [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 
-                if (error || [msg containsString:@"Error"]) {
+            }else{
+                
+                
+                MyWebservices *webservices=[MyWebservices sharedInstance];
+                
+                [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                     
-                    if (msg) {
+                    if (error || [msg containsString:@"Error"]) {
                         
-                        if([msg isEqualToString:@"Error-403"])
-                        {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                        if (msg) {
+                            
+                            if([msg isEqualToString:@"Error-403"])
+                            {
+                                [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                            }
+                            else{
+                                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            }
+                            //  NSLog(@"Message is : %@",msg);
+                            
+                        }else if(error)  {
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                            NSLog(@"Thread-NO4-getTicketStausChange-Refresh-error == %@",error.localizedDescription);
                         }
-                        else{
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                        }
-                        //  NSLog(@"Message is : %@",msg);
                         
-                    }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                        NSLog(@"Thread-NO4-getTicketStausChange-Refresh-error == %@",error.localizedDescription);
+                        return ;
                     }
                     
-                    return ;
-                }
-                
-                if ([msg isEqualToString:@"tokenRefreshed"]) {
-                    
-                    [self changeStaus2];
-                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
-                    return;
-                }
-                
-                if (json) {
-                    NSLog(@"JSON-CreateTicket-%@",json);
-                    if ([json objectForKey:@"response"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            
-                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
-                            
-                            
-                            
-                            /* if (self.navigationController.navigationBarHidden) {
-                             [self.navigationController setNavigationBarHidden:NO];
-                             }
-                             
-                             [RMessage showNotificationInViewController:self.navigationController
-                             title:NSLocalizedString(@"Sucess.", nil)
-                             subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                             iconImage:nil
-                             type:RMessageTypeSuccess
-                             customTypeName:nil
-                             duration:RMessageDurationAutomatic
-                             callback:nil
-                             buttonTitle:nil
-                             buttonCallback:nil
-                             atPosition:RMessagePositionNavBarOverlay
-                             canBeDismissedByUser:YES]; */
-                            
-                            FilterLogic *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
-                            [self.navigationController pushViewController:sort animated:YES];
-                        });
+                    if ([msg isEqualToString:@"tokenRefreshed"]) {
+                        
+                        [self changeStaus2];
+                        NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                        return;
                     }
-                }
-                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
-                
-            }];
-        }
+                    
+                    if (json) {
+                        NSLog(@"JSON-CreateTicket-%@",json);
+                        if ([json objectForKey:@"response"]) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                
+                                [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                                
+                                
+                                
+                                
+                                /* if (self.navigationController.navigationBarHidden) {
+                                 [self.navigationController setNavigationBarHidden:NO];
+                                 }
+                                 
+                                 [RMessage showNotificationInViewController:self.navigationController
+                                 title:NSLocalizedString(@"Sucess.", nil)
+                                 subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                                 iconImage:nil
+                                 type:RMessageTypeSuccess
+                                 customTypeName:nil
+                                 duration:RMessageDurationAutomatic
+                                 callback:nil
+                                 buttonTitle:nil
+                                 buttonCallback:nil
+                                 atPosition:RMessagePositionNavBarOverlay
+                                 canBeDismissedByUser:YES]; */
+                                
+                                FilterLogic *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
+                                [self.navigationController pushViewController:sort animated:YES];
+                            });
+                        }
+                    }
+                    NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                    
+                }];
+            }
         } }
 }
 
@@ -2239,86 +2290,86 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
         }else
-        
+            
         {  NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ResolvedStausId];
-        
-        
-        if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
-        {
-            [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
             
-        }else{
             
-            MyWebservices *webservices=[MyWebservices sharedInstance];
-            
-            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
+            {
+                [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 
-                if (error || [msg containsString:@"Error"]) {
+            }else{
+                
+                MyWebservices *webservices=[MyWebservices sharedInstance];
+                
+                [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                     
-                    if (msg) {
+                    if (error || [msg containsString:@"Error"]) {
                         
-                        if([msg isEqualToString:@"Error-403"])
-                        {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Resolve a ticket", nil) sendViewController:self];
+                        if (msg) {
+                            
+                            if([msg isEqualToString:@"Error-403"])
+                            {
+                                [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Resolve a ticket", nil) sendViewController:self];
+                            }
+                            else{
+                                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            }
+                            //  NSLog(@"Message is : %@",msg);
+                            
+                        }else if(error)  {
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                            NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
                         }
-                        else{
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                        }
-                        //  NSLog(@"Message is : %@",msg);
                         
-                    }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                        NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                        return ;
                     }
                     
-                    return ;
-                }
-                
-                if ([msg isEqualToString:@"tokenRefreshed"]) {
-                    
-                    [self changeStaus3];
-                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
-                    return;
-                }
-                
-                if (json) {
-                    NSLog(@"JSON-CreateTicket-%@",json);
-                    if ([json objectForKey:@"response"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            
-                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
-                            
-                            
-                            
-                            /*  if (self.navigationController.navigationBarHidden) {
-                             [self.navigationController setNavigationBarHidden:NO];
-                             }
-                             
-                             [RMessage showNotificationInViewController:self.navigationController
-                             title:NSLocalizedString(@"Sucess.", nil)
-                             subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                             iconImage:nil
-                             type:RMessageTypeSuccess
-                             customTypeName:nil
-                             duration:RMessageDurationAutomatic
-                             callback:nil
-                             buttonTitle:nil
-                             buttonCallback:nil
-                             atPosition:RMessagePositionNavBarOverlay
-                             canBeDismissedByUser:YES]; */
-                            
-                            FilterLogic *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
-                            [self.navigationController pushViewController:sort animated:YES];
-                        });
+                    if ([msg isEqualToString:@"tokenRefreshed"]) {
+                        
+                        [self changeStaus3];
+                        NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                        return;
                     }
-                }
-                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
-                
-            }];
-        }
+                    
+                    if (json) {
+                        NSLog(@"JSON-CreateTicket-%@",json);
+                        if ([json objectForKey:@"response"]) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                
+                                [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                                
+                                
+                                
+                                
+                                /*  if (self.navigationController.navigationBarHidden) {
+                                 [self.navigationController setNavigationBarHidden:NO];
+                                 }
+                                 
+                                 [RMessage showNotificationInViewController:self.navigationController
+                                 title:NSLocalizedString(@"Sucess.", nil)
+                                 subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                                 iconImage:nil
+                                 type:RMessageTypeSuccess
+                                 customTypeName:nil
+                                 duration:RMessageDurationAutomatic
+                                 callback:nil
+                                 buttonTitle:nil
+                                 buttonCallback:nil
+                                 atPosition:RMessagePositionNavBarOverlay
+                                 canBeDismissedByUser:YES]; */
+                                
+                                FilterLogic *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
+                                [self.navigationController pushViewController:sort animated:YES];
+                            });
+                        }
+                    }
+                    NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                    
+                }];
+            }
         } }
 }
 
@@ -2342,88 +2393,88 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
             [[AppDelegate sharedAppdelegate] hideProgressView];
         }
         else {
-        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.DeletedStausId];
-        
-        if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
-        {
-            [utils showAlertWithMessage:@"Ticket is Already Deleted" sendViewController:self];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+            NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.DeletedStausId];
             
-        }else{
-            
-            MyWebservices *webservices=[MyWebservices sharedInstance];
-            
-            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
+            {
+                [utils showAlertWithMessage:@"Ticket is Already Deleted" sendViewController:self];
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 
-                if (error || [msg containsString:@"Error"]) {
+            }else{
+                
+                MyWebservices *webservices=[MyWebservices sharedInstance];
+                
+                [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                     
-                    if (msg) {
+                    if (error || [msg containsString:@"Error"]) {
                         
-                        if([msg isEqualToString:@"Error-403"])
-                        {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Delete a ticket", nil) sendViewController:self];
+                        if (msg) {
+                            
+                            if([msg isEqualToString:@"Error-403"])
+                            {
+                                [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Delete a ticket", nil) sendViewController:self];
+                            }
+                            else{
+                                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            }
+                            //  NSLog(@"Message is : %@",msg);
+                            
+                        }else if(error)  {
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                            NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
                         }
-                        else{
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                        }
-                        //  NSLog(@"Message is : %@",msg);
                         
-                    }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                        NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                        return ;
                     }
                     
-                    return ;
-                }
-                
-                if ([msg isEqualToString:@"tokenRefreshed"]) {
-                    
-                    [self changeStaus4];
-                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
-                    return;
-                }
-                
-                
-                
-                
-                if (json) {
-                    NSLog(@"JSON-CreateTicket-%@",json);
-                    if ([json objectForKey:@"response"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            
-                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
-                            
-                            
-                            
-                            /*   if (self.navigationController.navigationBarHidden) {
-                             [self.navigationController setNavigationBarHidden:NO];
-                             }
-                             
-                             [RMessage showNotificationInViewController:self.navigationController
-                             title:NSLocalizedString(@"Sucess.", nil)
-                             subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                             iconImage:nil
-                             type:RMessageTypeSuccess
-                             customTypeName:nil
-                             duration:RMessageDurationAutomatic
-                             callback:nil
-                             buttonTitle:nil
-                             buttonCallback:nil
-                             atPosition:RMessagePositionNavBarOverlay
-                             canBeDismissedByUser:YES]; */
-                            
-                            
-                            FilterLogic *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
-                            [self.navigationController pushViewController:sort animated:YES];
-                        });
+                    if ([msg isEqualToString:@"tokenRefreshed"]) {
+                        
+                        [self changeStaus4];
+                        NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                        return;
                     }
-                }
-                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
-                
-            }];
-        }
+                    
+                    
+                    
+                    
+                    if (json) {
+                        NSLog(@"JSON-CreateTicket-%@",json);
+                        if ([json objectForKey:@"response"]) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                
+                                [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                                
+                                
+                                
+                                
+                                /*   if (self.navigationController.navigationBarHidden) {
+                                 [self.navigationController setNavigationBarHidden:NO];
+                                 }
+                                 
+                                 [RMessage showNotificationInViewController:self.navigationController
+                                 title:NSLocalizedString(@"Sucess.", nil)
+                                 subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                                 iconImage:nil
+                                 type:RMessageTypeSuccess
+                                 customTypeName:nil
+                                 duration:RMessageDurationAutomatic
+                                 callback:nil
+                                 buttonTitle:nil
+                                 buttonCallback:nil
+                                 atPosition:RMessagePositionNavBarOverlay
+                                 canBeDismissedByUser:YES]; */
+                                
+                                
+                                FilterLogic *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
+                                [self.navigationController pushViewController:sort animated:YES];
+                            });
+                        }
+                    }
+                    NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                    
+                }];
+            }
         } }
 }
 
@@ -2500,7 +2551,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         NSLog(@"*************show********");
         
         if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){
-        globalVariables.filterCondition=@"INBOX";
+            globalVariables.filterCondition=@"INBOX";
         }else if([globalVariables.filterId isEqualToString:@"MYTICKETSFilter"]){
             globalVariables.filterCondition=@"MYTICKETS";
         }
@@ -2511,7 +2562,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         }else if([globalVariables.filterId isEqualToString:@"TRASHFilter"]){
             globalVariables.filterCondition=@"TRASH";
         }else{
-       
+            
             NSLog(@"I am in FilterLogic View Controller");
             NSLog(@"I am in slese condoton");
         }
@@ -2612,7 +2663,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         globalVariables.sortingValueId=@"sortTitleDsc";
         globalVariables.sortAlert=@"sortTitleDscAlert";
         globalVariables.urlFromFilterLogicView=url;
-      //  globalVariables.sortCondition=@"INBOX";
+        //  globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -2657,7 +2708,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         globalVariables.sortingValueId=@"sortNumberAsc";
         globalVariables.sortAlert=@"sortNumberAscAlert";
         globalVariables.urlFromFilterLogicView=url;
-      //  globalVariables.sortCondition=@"INBOX";
+        //  globalVariables.sortCondition=@"INBOX";
         
         NSLog(@"Filter Condtion is : %@", globalVariables.filterCondition);
         NSLog(@"sortCondition Condtion is : %@", globalVariables.sortCondition);
@@ -2705,7 +2756,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         globalVariables.sortingValueId=@"sortNumberDsc";
         globalVariables.sortAlert=@"sortNumberDscAlert";
         globalVariables.urlFromFilterLogicView=url;
-     //   globalVariables.sortCondition=@"INBOX";
+        //   globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -2753,7 +2804,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         globalVariables.sortingValueId=@"sortPriorityAsc";
         globalVariables.sortAlert=@"sortPriorityAscAlert";
         globalVariables.urlFromFilterLogicView=url;
-      //  globalVariables.sortCondition=@"INBOX";
+        //  globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -2795,7 +2846,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         globalVariables.sortingValueId=@"sortPriorityDsc";
         globalVariables.sortAlert=@"sortPriorityDscAlert";
         globalVariables.urlFromFilterLogicView=url;
-       // globalVariables.sortCondition=@"INBOX";
+        // globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -2839,7 +2890,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         globalVariables.sortingValueId=@"sortUpdatedAsc";
         globalVariables.sortAlert=@"sortUpdatedAscAlert";
         globalVariables.urlFromFilterLogicView=url;
-       // globalVariables.sortCondition=@"INBOX";
+        // globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -2968,7 +3019,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         globalVariables.sortingValueId=@"sortCreatedDsc";
         globalVariables.sortAlert=@"sortCreatedDscAlert";
         globalVariables.urlFromFilterLogicView=url;
-       // globalVariables.sortCondition=@"INBOX";
+        // globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -3012,7 +3063,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         globalVariables.sortingValueId=@"sortDueAsc";
         globalVariables.sortAlert=@"sortDueAscAlert";
         globalVariables.urlFromFilterLogicView=url;
-       // globalVariables.sortCondition=@"INBOX";
+        // globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -3054,7 +3105,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
         globalVariables.sortingValueId=@"sortDueDsc";
         globalVariables.sortAlert=@"sortDueDscAlert";
         globalVariables.urlFromFilterLogicView=url;
-     //   globalVariables.sortCondition=@"INBOX";
+        //   globalVariables.sortCondition=@"INBOX";
         
         SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
         [self.navigationController pushViewController:sort animated:YES];
@@ -3096,7 +3147,7 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
     //  NSString *str = [NSString stringWithFormat:@"Filter\n TiltleButton Index is %zd, leftIndex is %zd, rightIndex %zd",titleButtonIndex, leftIndex, rightIndex];
     
     
-
+    
     
 }
 
@@ -3116,3 +3167,4 @@ else    if((![Utils isEmpty:globalVariables.typee1] && ![Utils isEmpty:globalVar
 
 
 @end
+
