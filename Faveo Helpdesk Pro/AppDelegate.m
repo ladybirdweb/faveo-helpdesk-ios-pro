@@ -16,7 +16,7 @@
 #import "MyWebservices.h"
 #import "ClientDetailViewController.h"
 #import "IQKeyboardManager.h"
-#import "ATAppUpdater.h"
+
 
 @import Firebase;
 @import FirebaseInstanceID;
@@ -31,7 +31,7 @@
 // running iOS 10 and above. Implement FIRMessagingDelegate to receive data message via FCM for
 // devices running iOS 10 and above.
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
-@interface AppDelegate () <FIRMessagingDelegate,ATAppUpdaterDelegate>
+@interface AppDelegate () <FIRMessagingDelegate>
 @end
 #endif
 
@@ -53,31 +53,21 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-   // [[IQKeyboardManager sharedManager] setEnabled:true];
-  [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
+    // [[IQKeyboardManager sharedManager] setEnabled:true];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
     
     [[IQKeyboardManager sharedManager] setEnable:YES];
     
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
-   
+    
     // it is deprecated
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-//_________________________________________________________________________________________________
-    //code for new code is availbel - to show pop-up
-    ATAppUpdater *updater = [ATAppUpdater sharedUpdater];
-    [updater setAlertTitle:NSLocalizedString(@"New Version", @"Alert Title")];
-    [updater setAlertMessage:NSLocalizedString(@"Version %@ is available on AppStore.", @"Alert Message")];
-    [updater setAlertUpdateButtonTitle:@"Update"];
-    [updater setAlertCancelButtonTitle:@"Not Now"];
-    [updater setDelegate:self]; // Optional
-    [updater showUpdateWithConfirmation];
-    return YES;
- //   -----------------------------------------------------------------------------------------
     
-//    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-//    [center removeAllDeliveredNotifications];
-//    [center removeAllPendingNotificationRequests];  // added 3 lines
-
+    
+    //    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    //    [center removeAllDeliveredNotifications];
+    //    [center removeAllPendingNotificationRequests];  // added 3 lines
+    
     //[Fabric with:@[[Crashlytics class]]];
     
     //firebase FCM
@@ -303,12 +293,12 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
                                                                   options:kNilOptions
                                                                     error:&error];
         
-      
+        
         globalVariables.First_name= [requester objectForKey:@"first_name"];
         globalVariables.Last_name= [requester objectForKey:@"last_name"];
-
         
-     //   globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
+        
+        //   globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
         [(UINavigationController *)self.window.rootViewController pushViewController:td animated:YES];
         ///////////////////////////
         [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -530,3 +520,4 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 }
 
 @end
+

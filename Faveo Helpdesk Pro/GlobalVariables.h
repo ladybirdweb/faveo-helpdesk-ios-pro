@@ -193,4 +193,6 @@
 
 @property (strong, nonatomic) NSString *userRole;
 
+@property (strong, nonatomic) NSString *ticketStatusBool;
+
 @end

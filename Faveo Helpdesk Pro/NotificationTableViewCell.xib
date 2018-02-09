@@ -30,7 +30,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ckd-Id-tc5">
-                                <rect key="frame" x="71" y="15" width="111" height="20"/>
+                                <rect key="frame" x="71" y="15" width="124" height="20"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -62,7 +62,7 @@
                             <constraint firstItem="Ckd-Id-tc5" firstAttribute="leading" secondItem="53O-dF-h8M" secondAttribute="trailing" constant="13" id="VVI-sw-GjK"/>
                             <constraint firstItem="53O-dF-h8M" firstAttribute="leading" secondItem="hCG-1y-fMS" secondAttribute="leadingMargin" id="ad5-FN-fom"/>
                             <constraint firstItem="Ckd-Id-tc5" firstAttribute="baseline" secondItem="XGS-gO-zvq" secondAttribute="baseline" constant="1" id="apF-Ly-KkP"/>
-                            <constraint firstItem="XGS-gO-zvq" firstAttribute="leading" secondItem="Ckd-Id-tc5" secondAttribute="trailing" constant="-17" id="b4g-n5-7vR"/>
+                            <constraint firstItem="XGS-gO-zvq" firstAttribute="leading" secondItem="Ckd-Id-tc5" secondAttribute="trailing" constant="-30" id="b4g-n5-7vR"/>
                             <constraint firstAttribute="bottom" secondItem="Ckd-Id-tc5" secondAttribute="bottom" constant="45" id="jUc-UR-a8K"/>
                             <constraint firstItem="Ckd-Id-tc5" firstAttribute="top" secondItem="hCG-1y-fMS" secondAttribute="topMargin" constant="7" id="lsp-c0-o7d"/>
                             <constraint firstItem="LPv-Px-QNx" firstAttribute="leading" secondItem="53O-dF-h8M" secondAttribute="trailing" constant="13" id="pRg-yj-Rmm"/>

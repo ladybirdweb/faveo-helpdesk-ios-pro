@@ -48,7 +48,7 @@
    // self.title=@"Client Details";
     
     self.profileImageView.clipsToBounds = YES;
-    self.profileImageView.layer.borderWidth=1.3f;
+  //  self.profileImageView.layer.borderWidth=1.3f;
     self.profileImageView.layer.borderColor=[[UIColor hx_colorWithHexRGBAString:@"#0288D1"] CGColor];
     //  self.profileImageView.layer.borderColor=[[UIColor blackColor] CGColor];
     

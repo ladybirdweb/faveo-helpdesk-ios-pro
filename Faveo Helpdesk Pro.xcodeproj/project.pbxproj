@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */; };
 		06B8B01D20287E4300E5E8CA /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */; };
+		06BB2A39202C314C00B33C43 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06BB2A38202C314C00B33C43 /* GoogleService-Info.plist */; };
+		06BB2A3B202C3B3F00B33C43 /* systemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06BB2A3A202C3B3E00B33C43 /* systemIcon.png */; };
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
 		D9166B551FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9166B541FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m */; };
 		D9283F9F1FCC3B4E00C6A073 /* ClientFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D9283F9E1FCC3B4E00C6A073 /* ClientFilter.m */; };
@@ -42,7 +44,6 @@
 		D9AE083E200723DE00DD9E94 /* UIView+CFFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AE083D200723DE00DD9E94 /* UIView+CFFrame.m */; };
 		D9AF85311FC421AF005232A0 /* AWNavigationMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF852F1FC421AE005232A0 /* AWNavigationMenuItem.m */; };
 		D9AF85371FC4610E005232A0 /* EditClientDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF85361FC4610E005232A0 /* EditClientDetail.m */; };
-		D9B221AE200772C600607F11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9B221AD200772C600607F11 /* GoogleService-Info.plist */; };
 		D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */; };
 		D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */; };
 		D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */; };
@@ -120,6 +121,8 @@
 		067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATAppUpdater.m; sourceTree = "<group>"; };
 		06B8B01B20287E4200E5E8CA /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
+		06BB2A38202C314C00B33C43 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		06BB2A3A202C3B3E00B33C43 /* systemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = systemIcon.png; sourceTree = "<group>"; };
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,7 +197,6 @@
 		D9AF85301FC421AF005232A0 /* AWNavigationMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWNavigationMenuItem.h; sourceTree = "<group>"; };
 		D9AF85351FC4610E005232A0 /* EditClientDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditClientDetail.h; sourceTree = "<group>"; };
 		D9AF85361FC4610E005232A0 /* EditClientDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditClientDetail.m; sourceTree = "<group>"; };
-		D9B221AD200772C600607F11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D9B22209200C628900607F11 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9B2220A200C628A00607F11 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D9B2220B200C628B00607F11 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 		D92C35C71F750F83001DD67D /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				06BB2A3A202C3B3E00B33C43 /* systemIcon.png */,
 				067605F7202B2C8800D9EFE6 /* ATAppUpdater */,
 				06B8B01A20287E4200E5E8CA /* UIImageView+Letters */,
 				D97CA13B1FCC229800A7B982 /* LGFilterView */,
@@ -507,7 +510,7 @@
 		D9DBD3441E07ACFC00219F93 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D9B221AD200772C600607F11 /* GoogleService-Info.plist */,
+				06BB2A38202C314C00B33C43 /* GoogleService-Info.plist */,
 				D9F954FA1E617BE500DA9B30 /* countries.json */,
 				D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */,
 				D9DBD34D1E07ACFC00219F93 /* Main.storyboard */,
@@ -804,6 +807,12 @@
 						CreatedOnToolsVersion = 8.1;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -864,8 +873,9 @@
 				D9F9F13E1FB9B2530044DA27 /* drop_down@2x.png in Resources */,
 				D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */,
 				D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */,
+				06BB2A3B202C3B3F00B33C43 /* systemIcon.png in Resources */,
 				D9AA44471FA890AC00938081 /* BDCustomAlertView.xib in Resources */,
-				D9B221AE200772C600607F11 /* GoogleService-Info.plist in Resources */,
+				06BB2A39202C314C00B33C43 /* GoogleService-Info.plist in Resources */,
 				D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */,
 				D9F9F13F1FB9B2530044DA27 /* done@2x.png in Resources */,
 				D9EB9F801E07C2F00001115F /* OpenCloseTableViewCell.xib in Resources */,

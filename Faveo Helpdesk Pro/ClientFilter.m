@@ -112,15 +112,17 @@
         // http://jamboreebliss.com/sayar/public/api/v2/helpdesk/user/filter?api_key=&token=&role=
         if([globalVariables.userFilterId isEqualToString:@"AGENTUSERS"])
         {
-            tempString=@"agent";
+            tempString=[NSString stringWithFormat:@"%i",1];
+            NSString * str=@"agent";
            // NSString *str= [NSString stringWithFormat:@"%i",1];
             
-            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&role=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],tempString];
+            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&role=%@&active=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],str,tempString];
              globalVariables.userFilterId=@"AGENTUSERS";
             
         }else  if([globalVariables.userFilterId isEqualToString:@"ACTIVEUSERS"])
         {
             // api_key=&token=&active=1
+            tempString=[NSString stringWithFormat:@"%i",1];
             NSString *str=@"user";
             
             tempString=[NSString stringWithFormat:@"%i",1];

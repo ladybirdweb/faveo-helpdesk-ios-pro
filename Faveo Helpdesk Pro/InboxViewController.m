@@ -672,6 +672,7 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/dependency?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
         
+        NSLog(@"URL is : %@",url);
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
@@ -1803,6 +1804,8 @@
             globalVariables.Last_name=[finaldic objectForKey:@"c_lname"];
             
             globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
+            
+            globalVariables.ticketStatusBool=@"ticketView";
             
             [self.navigationController pushViewController:td animated:YES];
             

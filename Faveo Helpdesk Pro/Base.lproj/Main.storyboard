@@ -1781,7 +1781,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFj-e0-5Rw">
                                 <rect key="frame" x="0.0" y="28" width="414" height="172"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xmx-EM-axR">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xmx-EM-axR">
                                         <rect key="frame" x="8" y="67" width="398" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="3MD-qy-3fK"/>
@@ -5172,7 +5172,7 @@
         <image name="clientlist2" width="24" height="24"/>
         <image name="closed2" width="512" height="512"/>
         <image name="createTicket" width="512" height="512"/>
-        <image name="default_pic" width="96" height="96"/>
+        <image name="default_pic" width="512" height="512"/>
         <image name="ic_forward" width="512" height="512"/>
         <image name="inbox3" width="512" height="512"/>
         <image name="list2" width="24" height="24"/>

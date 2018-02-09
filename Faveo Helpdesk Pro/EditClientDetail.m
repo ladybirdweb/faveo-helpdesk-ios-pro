@@ -545,7 +545,6 @@
         NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/status/%@?token=%@&status=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.iD,[userDefaults objectForKey:@"token"],statusDeActivate];
         
         NSLog(@"%@",url);
-        NSLog(@"%@",url);
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
