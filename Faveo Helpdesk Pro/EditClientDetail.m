@@ -617,16 +617,21 @@
                 }else
                     
                 {
+                    msg= [json objectForKey:@"error"];
+                    NSLog(@"Message is : %@",msg);
                     
+            
+                    if([msg isEqualToString:@"user not found"])
+                    {
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
                     }
                     
                     [RMessage showNotificationInViewController:self.navigationController
-                                                         title:NSLocalizedString(@"Error", nil)
-                                                      subtitle:NSLocalizedString(@"Something is Wrong.", nil)
+                                                         title:NSLocalizedString(@"This is not user.", nil)
+                                                      subtitle:NSLocalizedString(@"You cant deactivate Agent from here.", nil)
                                                      iconImage:nil
-                                                          type:RMessageTypeSuccess
+                                                          type:RMessageTypeWarning
                                                 customTypeName:nil
                                                       duration:RMessageDurationAutomatic
                                                       callback:nil
@@ -634,7 +639,25 @@
                                                 buttonCallback:nil
                                                     atPosition:RMessagePositionNavBarOverlay
                                           canBeDismissedByUser:YES];
-                    
+                    }else
+                    {
+                        if (self.navigationController.navigationBarHidden) {
+                            [self.navigationController setNavigationBarHidden:NO];
+                        }
+                        
+                        [RMessage showNotificationInViewController:self.navigationController
+                                                             title:NSLocalizedString(@"Error", nil)
+                                                          subtitle:NSLocalizedString(@"Something went wrong.", nil)
+                                                         iconImage:nil
+                                                              type:RMessageTypeWarning
+                                                    customTypeName:nil
+                                                          duration:RMessageDurationAutomatic
+                                                          callback:nil
+                                                       buttonTitle:nil
+                                                    buttonCallback:nil
+                                                        atPosition:RMessagePositionNavBarOverlay
+                                              canBeDismissedByUser:YES];
+                    }
                 }
             } // end if json
             

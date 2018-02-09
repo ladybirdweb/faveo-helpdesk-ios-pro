@@ -180,6 +180,9 @@
     [navbar setItems:@[navItem]];
     [self.view addSubview:navbar];
     
+    [self getDependencies];
+    [self reload];
+   
     
     //    UIBarButtonItem* status = [[UIBarButtonItem alloc] initWithTitle:@"Change Status" style:UIBarButtonItemStylePlain target:self action:@selector(onNavButtonTapped:event:)];
     // [navbar setBarTintColor:[UIColor lightGrayColor]];
@@ -188,8 +191,7 @@
     //    navItem.rightBarButtonItem = status;
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     
-    [self reload];
-    [self getDependencies];
+    
     
     
 }

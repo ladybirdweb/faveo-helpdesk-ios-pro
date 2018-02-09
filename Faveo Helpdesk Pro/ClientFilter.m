@@ -571,9 +571,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
-    NSString *client_id=[finaldic objectForKey:@"id"];
+   // NSString *client_id=[finaldic objectForKey:@"id"];
     
-    globalVariables.iD=@([client_id intValue]);
+    globalVariables.iD=[finaldic objectForKey:@"id"];
     globalVariables.First_name=[finaldic objectForKey:@"first_name"];
     globalVariables.Last_name=[finaldic objectForKey:@"last_name"];
     globalVariables.userNameInUserList= [finaldic objectForKey:@"user_name"];

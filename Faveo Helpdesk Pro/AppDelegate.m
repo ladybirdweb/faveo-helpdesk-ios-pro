@@ -278,8 +278,6 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     
     GlobalVariables *globalVariables=[GlobalVariables sharedInstance];
     
-    
-    
     NSString * scenario=[userInfo objectForKey:@"scenario"];
     if ([scenario isEqualToString:@"tickets"])  {
         
@@ -297,8 +295,10 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
         globalVariables.First_name= [requester objectForKey:@"first_name"];
         globalVariables.Last_name= [requester objectForKey:@"last_name"];
         
+        globalVariables.ticketStatusBool=@"AppDeledateNotificationView";
+        globalVariables.Ticket_status=@"Open";
         
-        //   globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
+        //globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
         [(UINavigationController *)self.window.rootViewController pushViewController:td animated:YES];
         ///////////////////////////
         [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -315,6 +315,13 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
         globalVariables.iD=[requester objectForKey:@"id"];
         globalVariables.First_name= [requester objectForKey:@"first_name"];
         globalVariables.Last_name= [requester objectForKey:@"last_name"];
+        
+        globalVariables.emailInUserList= [requester objectForKey:@"email"];
+        
+        globalVariables.mobileCode1= @"";
+        globalVariables.phoneNumberInUserList= @"";
+        globalVariables.mobileNumberInUserList= @"";
+        globalVariables.userRole=@"";
         
         [(UINavigationController *)self.window.rootViewController pushViewController:cd animated:YES];
         ////////////////////

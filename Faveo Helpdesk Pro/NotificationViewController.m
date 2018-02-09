@@ -504,33 +504,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-  /*
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-    //Use checkedCellAtIndex for check or uncheck cell
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    [self checkedCellAtIndex:(int)indexPath.row];
-    
-    if([self getCheckedForIndex:(int)indexPath.row]==YES)
-    {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        
-        
-    }
-    else
-    {
-        //cell.accessoryType = UITableViewCellAccessoryNone;
-    } */
-    
       NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
     NSLog(@"dict issssss : %@",finaldic);
     
          notifyID= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"id"]];
-    
-   // [self nofificationSeen];
-    
     
      NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
     
@@ -572,7 +549,14 @@
         globalVariables.iD=[profileDict objectForKey:@"id"];
         globalVariables.First_name=  [profileDict objectForKey:@"changed_by_first_name"];
         globalVariables.Last_name= [profileDict objectForKey:@"changed_by_last_name"];
-        
+       
+         globalVariables.customerImage= [profileDict objectForKey:@"profile_pic"];
+         globalVariables.emailInUserList= [profileDict objectForKey:@"email"];
+        globalVariables.mobileCode1=@"";
+        globalVariables.phoneNumberInUserList=@"Not Available";
+        globalVariables.userRole=@"";
+        globalVariables.mobileNumberInUserList=@"";
+        globalVariables.userNameInUserList=[profileDict objectForKey:@"changed_by_user_name"];
         [self.navigationController pushViewController:clientDetail animated:YES];
     }
     
