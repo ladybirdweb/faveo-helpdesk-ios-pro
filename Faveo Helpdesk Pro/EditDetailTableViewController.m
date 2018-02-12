@@ -398,7 +398,7 @@
             plistPath = [[NSBundle mainBundle] pathForResource:@"faveoData" ofType:@"plist"];
         }
         NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-        //    NSLog(@"resultDic--%@",resultDic);
+           NSLog(@"resultDic--%@",resultDic);
         NSArray *deptArray=[resultDic objectForKey:@"departments"];
         NSArray *helpTopicArray=[resultDic objectForKey:@"helptopics"];
         NSArray *prioritiesArray=[resultDic objectForKey:@"priorities"];

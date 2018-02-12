@@ -462,17 +462,17 @@
             [utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
         }
         else{
-        
+
              globalVariables.idList=selectedArray;
              globalVariables.subjectList=selectedSubjectArray;
-        
+
            MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
           [self.navigationController pushViewController:merge animated:YES];
         }
-            
+
         }else
         {
-            
+
              [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
         }
     }

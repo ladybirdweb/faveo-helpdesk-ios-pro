@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */; };
+		0689708F20318A3700702313 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0689708E20318A3700702313 /* ConversationTableViewCell.xib */; };
 		06B8B01D20287E4300E5E8CA /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */; };
 		06BB2A39202C314C00B33C43 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06BB2A38202C314C00B33C43 /* GoogleService-Info.plist */; };
 		06BB2A3B202C3B3F00B33C43 /* systemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06BB2A3A202C3B3E00B33C43 /* systemIcon.png */; };
@@ -45,7 +46,6 @@
 		D9AF85311FC421AF005232A0 /* AWNavigationMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF852F1FC421AE005232A0 /* AWNavigationMenuItem.m */; };
 		D9AF85371FC4610E005232A0 /* EditClientDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF85361FC4610E005232A0 /* EditClientDetail.m */; };
 		D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */; };
-		D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */; };
 		D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */; };
 		D9CF41AD1F4C15320087BBFA /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */; };
 		D9DBD3461E07ACFC00219F93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3451E07ACFC00219F93 /* main.m */; };
@@ -119,6 +119,7 @@
 /* Begin PBXFileReference section */
 		067605F8202B2C8800D9EFE6 /* ATAppUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAppUpdater.h; sourceTree = "<group>"; };
 		067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATAppUpdater.m; sourceTree = "<group>"; };
+		0689708E20318A3700702313 /* ConversationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationTableViewCell.xib; sourceTree = "<group>"; };
 		06B8B01B20287E4200E5E8CA /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
 		06BB2A38202C314C00B33C43 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -142,11 +143,9 @@
 		D92C35D51F7682B5001DD67D /* EditDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDetailTableViewController.h; sourceTree = "<group>"; };
 		D92C35D61F7682B5001DD67D /* EditDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDetailTableViewController.m; sourceTree = "<group>"; };
 		D92CE70C1F3D706600D98708 /* ClientListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientListTableViewCell.xib; sourceTree = "<group>"; };
-		D93D3D4F1EA0BACD00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D501EA0BACE00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D511EA0BACE00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		D93D3D531EA0BAF500C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D93D3D541EA0BB1000C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D551EA0BB1000C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D561EA0BB1000C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		D93D3D581EA0BB1800C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -197,7 +196,6 @@
 		D9AF85301FC421AF005232A0 /* AWNavigationMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWNavigationMenuItem.h; sourceTree = "<group>"; };
 		D9AF85351FC4610E005232A0 /* EditClientDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditClientDetail.h; sourceTree = "<group>"; };
 		D9AF85361FC4610E005232A0 /* EditClientDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditClientDetail.m; sourceTree = "<group>"; };
-		D9B22209200C628900607F11 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9B2220A200C628A00607F11 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D9B2220B200C628B00607F11 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
 		D9B2220C200C628B00607F11 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -207,11 +205,6 @@
 		D9B6E2DC1E9B8B1C00AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2DE1E9B8B1D00AAB724 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2E01E9B8B2100AAB724 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
-		D9B6E2E81E9B8B9400AAB724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ConversationTableViewCell.xib; sourceTree = "<group>"; };
-		D9B6E2EB1E9B8B9600AAB724 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
-		D9B6E2ED1E9B8B9700AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
-		D9B6E2EF1E9B8B9900AAB724 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
-		D9B6E2F11E9B8B9B00AAB724 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxViewController.m; sourceTree = "<group>"; };
 		D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		D9D66BD41E97B14C000214FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
@@ -572,7 +565,7 @@
 				D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */,
 				D9EB9F6E1E07C2F00001115F /* ConversationTableViewCell.h */,
 				D9EB9F6F1E07C2F00001115F /* ConversationTableViewCell.m */,
-				D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */,
+				0689708E20318A3700702313 /* ConversationTableViewCell.xib */,
 				D9EB9F711E07C2F00001115F /* OpenCloseTableViewCell.h */,
 				D9EB9F721E07C2F00001115F /* OpenCloseTableViewCell.m */,
 				D9EB9F731E07C2F00001115F /* OpenCloseTableViewCell.xib */,
@@ -865,7 +858,6 @@
 				D9CF41AD1F4C15320087BBFA /* NotificationTableViewCell.xib in Resources */,
 				D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */,
 				D9532C131E9CE9090063B318 /* Localizable.strings in Resources */,
-				D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */,
 				D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */,
 				D955A5511F2A05630045429F /* a.xcassets in Resources */,
 				D9F9F13C1FB9B2530044DA27 /* check_mark@2x.png in Resources */,
@@ -875,6 +867,7 @@
 				D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */,
 				06BB2A3B202C3B3F00B33C43 /* systemIcon.png in Resources */,
 				D9AA44471FA890AC00938081 /* BDCustomAlertView.xib in Resources */,
+				0689708F20318A3700702313 /* ConversationTableViewCell.xib in Resources */,
 				06BB2A39202C314C00B33C43 /* GoogleService-Info.plist in Resources */,
 				D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */,
 				D9F9F13F1FB9B2530044DA27 /* done@2x.png in Resources */,
@@ -1080,21 +1073,6 @@
 				D9B2220A200C628A00607F11 /* nb */,
 			);
 			name = LoadingTableViewCell.xib;
-			sourceTree = "<group>";
-		};
-		D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D9B6E2E81E9B8B9400AAB724 /* Base */,
-				D9B6E2EB1E9B8B9600AAB724 /* de */,
-				D9B6E2ED1E9B8B9700AAB724 /* fr */,
-				D9B6E2EF1E9B8B9900AAB724 /* es */,
-				D9B6E2F11E9B8B9B00AAB724 /* it */,
-				D93D3D4F1EA0BACD00C1EE7E /* nl */,
-				D93D3D541EA0BB1000C1EE7E /* ru */,
-				D9B22209200C628900607F11 /* nb */,
-			);
-			name = ConversationTableViewCell.xib;
 			sourceTree = "<group>";
 		};
 		D9DBD34D1E07ACFC00219F93 /* Main.storyboard */ = {
