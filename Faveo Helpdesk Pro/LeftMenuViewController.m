@@ -348,17 +348,17 @@
                 break;
                 
             case 10:
+                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"HelpSectionHomePageId"];
+                break;
+                
+            case 11:
                 vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"AboutVCID"];
                 break;
                 
                 
-            case 11:
+            case 12:
                 
                 [self wipeDataInLogout];
-                //[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-                //[[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
-                
-                // [RKDropdownAlert title:@"Faveo Helpdesk" message:@"You've logged out, successfully." backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                 
                 if (self.navigationController.navigationBarHidden) {
                     [self.navigationController setNavigationBarHidden:NO];
@@ -377,22 +377,11 @@
                                                 atPosition:RMessagePositionNavBarOverlay
                                       canBeDismissedByUser:YES];
                 
-                
-                /*[RMessage showNotificationWithTitle:NSLocalizedString(@"Faveo Helpdesk", nil)
-                 subtitle:NSLocalizedString(@"You've logged out, successfully...!", nil)
-                 type:RMessageTypeSuccess
-                 customTypeName:nil
-                 callback:nil]; */
+            
                 vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"Login"];
                 // (vc.view.window!.rootViewController?).dismissViewControllerAnimated(false, completion: nil);
                 break;
-                
-                //        case 3:
-                //            [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-                //            [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
-                //            return;
-                //            break;
-                
+            
             default:
                 break;
         }

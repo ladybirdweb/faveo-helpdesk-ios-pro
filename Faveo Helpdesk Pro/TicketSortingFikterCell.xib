@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TicketSortingFikterCellId" rowHeight="1206" id="KGk-i7-Jjw" customClass="TicketSortingFikterCell">
+            <rect key="frame" x="0.0" y="0.0" width="409" height="1426"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="409" height="1425.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2TG-ul-phF">
+                        <rect key="frame" x="0.0" y="0.0" width="409" height="1426"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBz-G5-MhO">
+                                <rect key="frame" x="18" y="27" width="253" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="0e8-qb-Ylv"/>
+                                    <constraint firstAttribute="width" constant="253" id="VPX-9H-Hhg"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="1. How to filter ticket?">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="TimesNewRomanPS-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6C-7P-bWa">
+                                <rect key="frame" x="23" y="55" width="352" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="g39-Gi-bcA"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Goto specific view for example Inbox, My Tickets, Closed Tickets, Unassigned Tickets or Trash tickets. In this page you can able see below image of filter and sorting.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28.299999237060547">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56.650001525878906">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="85">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="113.34999847412109">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="141.69999694824219">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="170.05000305175781">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="198.39999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="226.75">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="255.10000610351562">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="283.45001220703125">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="311.79998779296875">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="340.14999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticket_filter.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="cEK-Rm-XPm">
+                                <rect key="frame" x="72" y="594" width="253" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="253" id="33g-SN-wV0"/>
+                                    <constraint firstAttribute="height" constant="500" id="REW-rT-qzB"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort121.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uuu-Mm-f2F">
+                                <rect key="frame" x="25" y="138" width="350" height="137"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="137" id="WMC-3L-ziz"/>
+                                    <constraint firstAttribute="width" constant="350" id="XGU-0R-2gu"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="137" id="pP6-Ev-eEe"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter1212.png" translatesAutoresizingMaskIntoConstraints="NO" id="V1F-CK-d35">
+                                <rect key="frame" x="22" y="341" width="353" height="201"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="201" id="7va-Tn-WA1"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="201" id="DcE-8p-sOc"/>
+                                    <constraint firstAttribute="width" constant="353" id="lDR-qu-O7T"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rA4-5u-Jdo">
+                                <rect key="frame" x="25" y="295" width="350" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="PIV-qJ-VHF"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="For filter tickets click on Filter button, you will below view,">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28.299999237060547">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56.650001525878906">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="85">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="113.34999847412109">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="141.69999694824219">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="170.05000305175781">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="198.39999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="226.75">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="255.10000610351562">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="283.45001220703125">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="311.79998779296875">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="340.14999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AER-cU-xIb">
+                                <rect key="frame" x="24" y="558" width="350" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="p47-qm-3y6"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="click on Show Filter, you will get next view.">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28.299999237060547">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56.650001525878906">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="85">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="113.34999847412109">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="141.69999694824219">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="170.05000305175781">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="198.39999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="226.75">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="255.10000610351562">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="283.45001220703125">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="311.79998779296875">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="340.14999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfQ-yB-5Hn">
+                                <rect key="frame" x="11" y="1102" width="386" height="311"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="311" id="OUV-uV-ePh"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="311" id="hJu-Tr-c3X"/>
+                                    <constraint firstAttribute="width" constant="386" id="ilj-GR-p8l"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <mutableString key="content">In this screen, there are so many option for filtering a ticket.
+Click on specific field depend on your requirements. After clicking on any option it will show one pop-up view, here you can select option. 
+
+You select multiple values and after selecting click on done button which is on pop-up view.
+
+Same like other fields, you add multiple values to any fields.
+If you want to clear the data whichever you entered, there is clear button at top right corner, after clicking on that button all filled data will be erased.
+
+Now, click on submit button to filter ticket. After clicking on submit button it will navigate inbox page if you entered to filter view from Inbox page like similar to other view also it will work like this.</mutableString>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28.299999237060547">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56.650001525878906">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="85">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="113.34999847412109">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="141.69999694824219">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="170.05000305175781">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="198.39999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="226.75">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="255.10000610351562">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="283.45001220703125">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="311.79998779296875">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="340.14999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="r6C-7P-bWa" secondAttribute="trailing" constant="34" id="0Pj-un-HVO"/>
+                            <constraint firstItem="r6C-7P-bWa" firstAttribute="centerX" secondItem="V1F-CK-d35" secondAttribute="centerX" id="0vk-rf-Squ"/>
+                            <constraint firstItem="AER-cU-xIb" firstAttribute="top" secondItem="V1F-CK-d35" secondAttribute="bottom" constant="16" id="1AK-Ta-qoN"/>
+                            <constraint firstItem="r6C-7P-bWa" firstAttribute="trailing" secondItem="Uuu-Mm-f2F" secondAttribute="trailing" id="5vt-Sy-s2L"/>
+                            <constraint firstItem="kfQ-yB-5Hn" firstAttribute="top" secondItem="cEK-Rm-XPm" secondAttribute="bottom" constant="8" symbolic="YES" id="8MK-qr-VYQ"/>
+                            <constraint firstItem="cEK-Rm-XPm" firstAttribute="leading" secondItem="2TG-ul-phF" secondAttribute="leading" constant="72" id="DIS-dU-bPh"/>
+                            <constraint firstItem="V1F-CK-d35" firstAttribute="top" secondItem="rA4-5u-Jdo" secondAttribute="bottom" constant="8" symbolic="YES" id="HJ8-jX-HZ1"/>
+                            <constraint firstItem="AER-cU-xIb" firstAttribute="centerX" secondItem="cEK-Rm-XPm" secondAttribute="centerX" id="JvZ-WC-hz1"/>
+                            <constraint firstItem="Uuu-Mm-f2F" firstAttribute="trailing" secondItem="rA4-5u-Jdo" secondAttribute="trailing" id="QUH-yD-9yh"/>
+                            <constraint firstItem="r6C-7P-bWa" firstAttribute="top" secondItem="MBz-G5-MhO" secondAttribute="bottom" constant="9" id="S86-hd-wkH"/>
+                            <constraint firstItem="MBz-G5-MhO" firstAttribute="top" secondItem="2TG-ul-phF" secondAttribute="top" constant="27" id="Ugi-MZ-044"/>
+                            <constraint firstItem="AER-cU-xIb" firstAttribute="leading" secondItem="2TG-ul-phF" secondAttribute="leading" constant="24" id="YLD-Tn-Ohp"/>
+                            <constraint firstItem="V1F-CK-d35" firstAttribute="leading" secondItem="2TG-ul-phF" secondAttribute="leading" constant="22" id="Zyu-Hm-cU1"/>
+                            <constraint firstItem="Uuu-Mm-f2F" firstAttribute="leading" secondItem="2TG-ul-phF" secondAttribute="leading" constant="25" id="dF5-lC-aC2"/>
+                            <constraint firstItem="Uuu-Mm-f2F" firstAttribute="top" secondItem="r6C-7P-bWa" secondAttribute="bottom" constant="15" id="dgR-B1-BVT"/>
+                            <constraint firstItem="kfQ-yB-5Hn" firstAttribute="centerX" secondItem="2TG-ul-phF" secondAttribute="centerX" id="gat-ZE-0i4"/>
+                            <constraint firstItem="cEK-Rm-XPm" firstAttribute="top" secondItem="AER-cU-xIb" secondAttribute="bottom" constant="8" symbolic="YES" id="kR8-y8-fD0"/>
+                            <constraint firstItem="rA4-5u-Jdo" firstAttribute="top" secondItem="Uuu-Mm-f2F" secondAttribute="bottom" constant="20" id="m5r-Hd-T18"/>
+                            <constraint firstItem="V1F-CK-d35" firstAttribute="centerX" secondItem="AER-cU-xIb" secondAttribute="centerX" id="nAQ-Ky-XUZ"/>
+                            <constraint firstItem="rA4-5u-Jdo" firstAttribute="trailing" secondItem="V1F-CK-d35" secondAttribute="trailing" id="pex-xl-p85"/>
+                            <constraint firstItem="MBz-G5-MhO" firstAttribute="leading" secondItem="2TG-ul-phF" secondAttribute="leading" constant="18" id="pzN-B4-Tm7"/>
+                            <constraint firstAttribute="bottom" secondItem="kfQ-yB-5Hn" secondAttribute="bottom" constant="13" id="ro4-s2-ybx"/>
+                            <constraint firstItem="Uuu-Mm-f2F" firstAttribute="leading" secondItem="rA4-5u-Jdo" secondAttribute="leading" id="yhC-ks-TKO"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="2TG-ul-phF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3dg-0X-nHN"/>
+                    <constraint firstAttribute="trailing" secondItem="2TG-ul-phF" secondAttribute="trailing" id="6NX-J7-z86"/>
+                    <constraint firstItem="2TG-ul-phF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="NNS-tC-IJF"/>
+                    <constraint firstItem="2TG-ul-phF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mQ0-cR-1qb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="-8.5" y="390"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="filter1212.png" width="374" height="220"/>
+        <image name="sort121.png" width="377" height="148"/>
+        <image name="ticket_filter.jpg" width="1041" height="2087"/>
+    </resources>
+</document>

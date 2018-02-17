@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="otherFeatureMenuListCellId" rowHeight="74" id="KGk-i7-Jjw" customClass="otherFeatureMenuListCell">
+            <rect key="frame" x="0.0" y="0.0" width="369" height="74"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="369" height="73.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQ7-5e-zd4">
+                        <rect key="frame" x="2" y="2" width="365" height="71"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. This is question or heading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHO-Cb-gyg">
+                                <rect key="frame" x="8" y="22" width="337" height="26"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HHO-Cb-gyg" firstAttribute="top" secondItem="XQ7-5e-zd4" secondAttribute="top" constant="22" id="AZB-qo-FPa"/>
+                            <constraint firstAttribute="trailing" secondItem="HHO-Cb-gyg" secondAttribute="trailing" constant="20" id="Nvu-1i-3lB"/>
+                            <constraint firstItem="HHO-Cb-gyg" firstAttribute="leading" secondItem="XQ7-5e-zd4" secondAttribute="leadingMargin" id="Wwi-fo-GZK"/>
+                            <constraint firstItem="HHO-Cb-gyg" firstAttribute="centerY" secondItem="XQ7-5e-zd4" secondAttribute="centerY" id="oXM-aI-OBK"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="XQ7-5e-zd4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="0t2-fV-aPw"/>
+                    <constraint firstItem="XQ7-5e-zd4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-14" id="DAy-Dt-bp0"/>
+                    <constraint firstItem="XQ7-5e-zd4" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="HXU-Qc-mzd"/>
+                    <constraint firstItem="XQ7-5e-zd4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-9" id="IT3-zS-IO0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="questionLabel" destination="HHO-Cb-gyg" id="Jwd-d4-EfN"/>
+            </connections>
+            <point key="canvasLocation" x="-909" y="198"/>
+        </tableViewCell>
+    </objects>
+</document>
