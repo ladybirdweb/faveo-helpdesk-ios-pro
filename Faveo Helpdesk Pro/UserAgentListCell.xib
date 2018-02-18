@@ -24,12 +24,7 @@
                         <rect key="frame" x="2" y="2" width="415" height="1281"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ml-XD-FeU">
-                                <rect key="frame" x="18" y="8" width="352" height="47"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="352" id="ATd-Oe-6i9"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="47" id="Gys-5b-8FD"/>
-                                    <constraint firstAttribute="height" constant="47" id="NuE-Nx-fwd"/>
-                                </constraints>
+                                <rect key="frame" x="18" y="31" width="353" height="47"/>
                                 <attributedString key="attributedText">
                                     <fragment>
                                         <string key="content">Goto side menu view, in that view check the label called ‘Client list’ (see below image)
@@ -52,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hnu-WR-1vM">
-                                <rect key="frame" x="18" y="571" width="363" height="47"/>
+                                <rect key="frame" x="18" y="602" width="363" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="oLg-p4-Df9"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="47" id="tI7-6j-WGK"/>
@@ -80,15 +75,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sidemenu.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="mYR-88-RSp">
-                                <rect key="frame" x="68" y="63" width="253" height="500"/>
+                                <rect key="frame" x="81" y="92" width="240" height="500"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="253" id="AVt-Q4-obd"/>
+                                    <constraint firstAttribute="width" constant="240" id="AVt-Q4-obd"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="500" id="XkR-xh-PD1"/>
                                     <constraint firstAttribute="height" constant="500" id="ucI-1f-zHO"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vI3-d3-NaF">
-                                <rect key="frame" x="14" y="1178" width="386" height="77"/>
+                                <rect key="frame" x="14" y="1187" width="386" height="77"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="386" id="Kxk-3K-gcb"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="77" id="SwO-K3-4W3"/>
@@ -114,8 +109,8 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticketStatus1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="uM6-5v-PKz">
-                                <rect key="frame" x="81" y="644" width="253" height="500"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="allUserList.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="uM6-5v-PKz">
+                                <rect key="frame" x="81" y="664" width="253" height="500"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="500" id="Hg0-Xw-xc9"/>
                                     <constraint firstAttribute="width" constant="253" id="iqE-WV-HbY"/>
@@ -124,20 +119,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="vI3-d3-NaF" secondAttribute="bottom" constant="26" id="1Mi-JH-bF5"/>
-                            <constraint firstItem="4Ml-XD-FeU" firstAttribute="top" secondItem="JMa-WG-d0r" secondAttribute="topMargin" id="3NG-d1-keg"/>
-                            <constraint firstItem="uM6-5v-PKz" firstAttribute="top" secondItem="Hnu-WR-1vM" secondAttribute="bottom" constant="26" id="79W-0J-wzg"/>
-                            <constraint firstItem="mYR-88-RSp" firstAttribute="leading" secondItem="JMa-WG-d0r" secondAttribute="leading" constant="68" id="7Pe-oD-yhd"/>
-                            <constraint firstItem="mYR-88-RSp" firstAttribute="top" secondItem="4Ml-XD-FeU" secondAttribute="bottom" constant="8" symbolic="YES" id="FAd-SN-Kxr"/>
-                            <constraint firstAttribute="trailing" secondItem="4Ml-XD-FeU" secondAttribute="trailing" constant="45" id="FqJ-7c-Rwu"/>
-                            <constraint firstItem="Hnu-WR-1vM" firstAttribute="top" secondItem="mYR-88-RSp" secondAttribute="bottom" constant="8" symbolic="YES" id="ONg-Oz-C87"/>
-                            <constraint firstItem="4Ml-XD-FeU" firstAttribute="centerX" secondItem="mYR-88-RSp" secondAttribute="centerX" id="Spm-MJ-m3Y"/>
+                            <constraint firstAttribute="bottom" secondItem="vI3-d3-NaF" secondAttribute="bottom" constant="17" id="1Mi-JH-bF5"/>
+                            <constraint firstItem="uM6-5v-PKz" firstAttribute="top" secondItem="Hnu-WR-1vM" secondAttribute="bottom" constant="15" id="79W-0J-wzg"/>
+                            <constraint firstItem="mYR-88-RSp" firstAttribute="leading" secondItem="JMa-WG-d0r" secondAttribute="leading" constant="81" id="7Pe-oD-yhd"/>
+                            <constraint firstItem="4Ml-XD-FeU" firstAttribute="leading" secondItem="JMa-WG-d0r" secondAttribute="leading" constant="18" id="IIZ-C9-EkF"/>
+                            <constraint firstItem="mYR-88-RSp" firstAttribute="top" secondItem="4Ml-XD-FeU" secondAttribute="bottom" constant="14" id="Kbt-4b-rJS"/>
+                            <constraint firstItem="Hnu-WR-1vM" firstAttribute="top" secondItem="mYR-88-RSp" secondAttribute="bottom" constant="10" id="ONg-Oz-C87"/>
+                            <constraint firstItem="4Ml-XD-FeU" firstAttribute="top" secondItem="JMa-WG-d0r" secondAttribute="top" constant="31" id="Unj-ze-Q6y"/>
+                            <constraint firstItem="4Ml-XD-FeU" firstAttribute="centerX" secondItem="mYR-88-RSp" secondAttribute="centerX" constant="-6.5" id="aZh-GL-DM9"/>
                             <constraint firstItem="uM6-5v-PKz" firstAttribute="leading" secondItem="JMa-WG-d0r" secondAttribute="leading" constant="81" id="f6r-m2-cBu"/>
-                            <constraint firstItem="4Ml-XD-FeU" firstAttribute="leading" secondItem="JMa-WG-d0r" secondAttribute="leading" constant="18" id="gx1-8i-JEj"/>
                             <constraint firstItem="vI3-d3-NaF" firstAttribute="centerX" secondItem="JMa-WG-d0r" secondAttribute="centerX" id="htc-8A-uya"/>
                             <constraint firstItem="uM6-5v-PKz" firstAttribute="centerX" secondItem="vI3-d3-NaF" secondAttribute="centerX" id="i4j-de-Qe0"/>
-                            <constraint firstItem="vI3-d3-NaF" firstAttribute="top" secondItem="uM6-5v-PKz" secondAttribute="bottom" constant="34" id="qKg-RY-ss3"/>
-                            <constraint firstItem="4Ml-XD-FeU" firstAttribute="leading" secondItem="Hnu-WR-1vM" secondAttribute="leading" id="z0C-AE-g5r"/>
+                            <constraint firstItem="4Ml-XD-FeU" firstAttribute="leading" secondItem="Hnu-WR-1vM" secondAttribute="leading" id="ltR-xf-5pL"/>
+                            <constraint firstItem="vI3-d3-NaF" firstAttribute="top" secondItem="uM6-5v-PKz" secondAttribute="bottom" constant="23" id="qKg-RY-ss3"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -153,7 +147,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="allUserList.jpg" width="1015" height="2087"/>
         <image name="sidemenu.jpg" width="1023" height="2093"/>
-        <image name="ticketStatus1.jpg" width="1058" height="2070"/>
     </resources>
 </document>

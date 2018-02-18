@@ -23,10 +23,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="370" height="602"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="createTicket1111.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4Id-yL-6bJ">
-                                <rect key="frame" x="68" y="8" width="228" height="583"/>
+                                <rect key="frame" x="58" y="8" width="259" height="583"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="583" id="UIE-AU-mQx"/>
-                                    <constraint firstAttribute="width" constant="228" id="cTm-Y1-0z3"/>
+                                    <constraint firstAttribute="width" constant="259" id="cTm-Y1-0z3"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -34,8 +34,8 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="4Id-yL-6bJ" secondAttribute="bottom" constant="11" id="Hvs-6a-oVS"/>
                             <constraint firstItem="4Id-yL-6bJ" firstAttribute="top" secondItem="3jY-pl-HVJ" secondAttribute="top" constant="8" id="Lwj-fK-Wkz"/>
-                            <constraint firstAttribute="trailing" secondItem="4Id-yL-6bJ" secondAttribute="trailing" constant="74" id="aTa-kx-7eK"/>
-                            <constraint firstItem="4Id-yL-6bJ" firstAttribute="leading" secondItem="3jY-pl-HVJ" secondAttribute="leading" constant="68" id="vYf-kH-9aE"/>
+                            <constraint firstAttribute="trailing" secondItem="4Id-yL-6bJ" secondAttribute="trailing" constant="53" id="aTa-kx-7eK"/>
+                            <constraint firstItem="4Id-yL-6bJ" firstAttribute="leading" secondItem="3jY-pl-HVJ" secondAttribute="leading" constant="58" id="vYf-kH-9aE"/>
                         </constraints>
                     </view>
                 </subviews>

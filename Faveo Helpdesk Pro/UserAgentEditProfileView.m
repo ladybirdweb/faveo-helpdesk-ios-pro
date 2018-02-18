@@ -7,8 +7,9 @@
 //
 
 #import "UserAgentEditProfileView.h"
+#import "UserAgentEditCell.h"
 
-@interface UserAgentEditProfileView ()
+@interface UserAgentEditProfileView ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
 
@@ -17,21 +18,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tablview.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    
+    return 1;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UserAgentEditCell *cell=[tableView dequeueReusableCellWithIdentifier:@"UserAgentEditCellId"];
+    
+    if (cell == nil)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"UserAgentEditCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    
+    //   cell.nameLabel.text=[questions objectAtIndex:indexPath.row];
+    
+    return cell;
 }
-*/
 
 @end
