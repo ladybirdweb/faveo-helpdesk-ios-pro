@@ -5460,6 +5460,154 @@
             </objects>
             <point key="canvasLocation" x="407" y="2723"/>
         </scene>
+        <!--Multiple Ticket Select View-->
+        <scene sceneID="uqH-ik-fwW">
+            <objects>
+                <viewController storyboardIdentifier="MultipleTicketSelectViewId" id="HD8-D9-u1S" customClass="MultipleTicketSelectView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C5P-NT-9md"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hmh-Gy-Qwf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RrE-5R-rRJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bQy-y1-TCZ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="HD8-D9-u1S" id="pIQ-7L-d4z"/>
+                                    <outlet property="delegate" destination="HD8-D9-u1S" id="0n2-Em-hxi"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bQy-y1-TCZ" secondAttribute="trailing" id="8uY-N9-atn"/>
+                            <constraint firstItem="bQy-y1-TCZ" firstAttribute="bottom" secondItem="Hmh-Gy-Qwf" secondAttribute="top" id="B00-xK-Y7W"/>
+                            <constraint firstItem="bQy-y1-TCZ" firstAttribute="top" secondItem="RrE-5R-rRJ" secondAttribute="top" id="PxO-Og-gkc"/>
+                            <constraint firstItem="bQy-y1-TCZ" firstAttribute="leading" secondItem="RrE-5R-rRJ" secondAttribute="leading" id="Q9n-sY-1Xe"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tablview" destination="bQy-y1-TCZ" id="4xn-Xy-fk8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Po-e0-EQj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1160.8695652173915" y="2722.826086956522"/>
+        </scene>
+        <!--Multiple Ticket Assign-->
+        <scene sceneID="aUI-zx-xPR">
+            <objects>
+                <viewController storyboardIdentifier="MultipleTicketAssignId" id="EYx-7z-KrZ" customClass="MultipleTicketAssign" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Vda-0x-4Ae"/>
+                        <viewControllerLayoutGuide type="bottom" id="YYY-vh-bJD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ScY-ul-Mrd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hMA-jJ-Xm1">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="EYx-7z-KrZ" id="V6u-PO-Wlw"/>
+                                    <outlet property="delegate" destination="EYx-7z-KrZ" id="X8U-qS-BBg"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hMA-jJ-Xm1" firstAttribute="leading" secondItem="ScY-ul-Mrd" secondAttribute="leading" id="XoT-T0-Tt4"/>
+                            <constraint firstItem="hMA-jJ-Xm1" firstAttribute="bottom" secondItem="YYY-vh-bJD" secondAttribute="top" id="rLg-ds-b9G"/>
+                            <constraint firstItem="hMA-jJ-Xm1" firstAttribute="top" secondItem="ScY-ul-Mrd" secondAttribute="top" id="wXK-vY-DD6"/>
+                            <constraint firstAttribute="trailing" secondItem="hMA-jJ-Xm1" secondAttribute="trailing" id="zOS-XP-Suf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableview" destination="hMA-jJ-Xm1" id="yO8-RA-YD0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AS8-sJ-pk6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1979.7101449275365" y="2722.826086956522"/>
+        </scene>
+        <!--Multiple Ticket Status Change-->
+        <scene sceneID="hGS-l5-5b8">
+            <objects>
+                <viewController storyboardIdentifier="MultipleTicketStatusChangeId" id="k6D-sj-Vbu" customClass="MultipleTicketStatusChange" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mRB-Bp-YMU"/>
+                        <viewControllerLayoutGuide type="bottom" id="j8S-eG-UnE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Q0c-p6-Nik">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xf4-W1-NXX">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="k6D-sj-Vbu" id="0gR-jU-D83"/>
+                                    <outlet property="delegate" destination="k6D-sj-Vbu" id="EBS-Wf-Aki"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Xf4-W1-NXX" firstAttribute="top" secondItem="Q0c-p6-Nik" secondAttribute="top" id="39y-Jh-6Vq"/>
+                            <constraint firstAttribute="trailing" secondItem="Xf4-W1-NXX" secondAttribute="trailing" id="Uba-vd-OyL"/>
+                            <constraint firstItem="Xf4-W1-NXX" firstAttribute="leading" secondItem="Q0c-p6-Nik" secondAttribute="leading" id="e3S-My-NI2"/>
+                            <constraint firstItem="Xf4-W1-NXX" firstAttribute="bottom" secondItem="j8S-eG-UnE" secondAttribute="top" id="raO-Wl-ypY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tablview" destination="Xf4-W1-NXX" id="hhw-Gl-LNG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NrW-Pn-Zlu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2813.04347826087" y="2722.826086956522"/>
+        </scene>
+        <!--Merge Ticket View-->
+        <scene sceneID="Knx-Wh-0yU">
+            <objects>
+                <viewController storyboardIdentifier="MergeTicketViewId" id="neH-A9-3AU" customClass="MergeTicketView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nw9-pT-xpq"/>
+                        <viewControllerLayoutGuide type="bottom" id="dzM-Ky-4Zg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dZp-kJ-Xzb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1hX-gg-jCk">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="neH-A9-3AU" id="3Q8-G3-dbV"/>
+                                    <outlet property="delegate" destination="neH-A9-3AU" id="mb8-N3-dRu"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1hX-gg-jCk" firstAttribute="top" secondItem="dZp-kJ-Xzb" secondAttribute="top" id="5i4-r1-UTc"/>
+                            <constraint firstItem="1hX-gg-jCk" firstAttribute="bottom" secondItem="dzM-Ky-4Zg" secondAttribute="top" id="6pO-Va-EnX"/>
+                            <constraint firstAttribute="trailing" secondItem="1hX-gg-jCk" secondAttribute="trailing" id="Rz3-Qm-3Gc"/>
+                            <constraint firstItem="1hX-gg-jCk" firstAttribute="leading" secondItem="dZp-kJ-Xzb" secondAttribute="leading" id="iSR-zQ-enk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tablview" destination="1hX-gg-jCk" id="oaM-wa-ihR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xnA-HF-C7z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3585.507246376812" y="2722.826086956522"/>
+        </scene>
         <!--Ticket List Menu Table-->
         <scene sceneID="pi4-xg-mry">
             <objects>

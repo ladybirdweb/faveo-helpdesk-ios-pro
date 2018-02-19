@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserAndAgentMenuListCell2Id" rowHeight="642" id="KGk-i7-Jjw" customClass="UserAndAgentMenuListCell2">
+            <rect key="frame" x="0.0" y="0.0" width="352" height="642"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="352" height="641.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ao-Vy-pRE">
+                        <rect key="frame" x="0.0" y="0.0" width="352" height="642"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="usedetails.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dyb-n5-iy7">
+                                <rect key="frame" x="79" y="31" width="213" height="569"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="213" id="1PN-LU-7Uo"/>
+                                    <constraint firstAttribute="height" constant="569" id="wGf-Nu-Ocs"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dyb-n5-iy7" firstAttribute="top" secondItem="7Ao-Vy-pRE" secondAttribute="top" constant="31" id="6oe-Mk-Tpn"/>
+                            <constraint firstAttribute="bottom" secondItem="dyb-n5-iy7" secondAttribute="bottom" constant="42" id="AgJ-e1-1oP"/>
+                            <constraint firstAttribute="trailing" secondItem="dyb-n5-iy7" secondAttribute="trailing" constant="60" id="Bue-jf-MB6"/>
+                            <constraint firstItem="dyb-n5-iy7" firstAttribute="leading" secondItem="7Ao-Vy-pRE" secondAttribute="leading" constant="79" id="CT0-bM-uju"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="7Ao-Vy-pRE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DgE-f1-Ul5"/>
+                    <constraint firstItem="7Ao-Vy-pRE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="HXB-rV-D0p"/>
+                    <constraint firstAttribute="trailing" secondItem="7Ao-Vy-pRE" secondAttribute="trailing" id="gdh-kW-ll1"/>
+                    <constraint firstItem="7Ao-Vy-pRE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="wgo-YS-tJz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="25" y="92"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="usedetails.jpg" width="1015" height="2071"/>
+    </resources>
+</document>

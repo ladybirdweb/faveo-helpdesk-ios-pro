@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MergeTicketViewCellId" rowHeight="859" id="KGk-i7-Jjw" customClass="MergeTicketViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="419" height="749"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="419" height="748.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wan-Tv-Eaq">
+                        <rect key="frame" x="1" y="-5" width="417" height="752"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="16" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWA-VI-8zp">
+                                <rect key="frame" x="17" y="42" width="380" height="213"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="213" id="pz6-az-9rr"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Goto any view like Inbox, My tickets, Unassigned ticket, Closed tickets or Trash tickets.
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="For example">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPS-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">: We goto inbox view. Now, long press and hold on any one ticket, then multiple ticket select mode will activated.
+
+See below image one more view appeared which contains three image buttons. First image button is for ticket merge, second image button is for ticket assign and third is for ticket status change, see below image
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7v0-zX-g3X">
+                                <rect key="frame" x="17" y="395" width="380" height="73"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="73" id="YrP-13-xt0"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Now select the tickets and click on second image button(centre image) i.e assign button. If didn’t selected any button and if you click on assign button then it will show error message like selects the tickets for assign, see below image.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view124.png" translatesAutoresizingMaskIntoConstraints="NO" id="Smb-Sc-nEr">
+                                <rect key="frame" x="17" y="268" width="380" height="104"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="104" id="7y5-i7-zi8"/>
+                                    <constraint firstAttribute="width" constant="380" id="AvR-4T-3tn"/>
+                                    <constraint firstAttribute="height" constant="104" id="U2K-hb-kup"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view126.png" translatesAutoresizingMaskIntoConstraints="NO" id="0vX-qQ-DOm">
+                                <rect key="frame" x="40" y="495" width="321" height="227"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="321" id="4wP-7t-JWe"/>
+                                    <constraint firstAttribute="height" constant="227" id="5VA-aM-9yq"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="7v0-zX-g3X" firstAttribute="top" secondItem="Smb-Sc-nEr" secondAttribute="bottom" constant="23" id="5Pj-o0-q0v"/>
+                            <constraint firstItem="Smb-Sc-nEr" firstAttribute="leading" secondItem="7v0-zX-g3X" secondAttribute="leading" id="8Si-Cu-m6n"/>
+                            <constraint firstAttribute="trailing" secondItem="0vX-qQ-DOm" secondAttribute="trailing" constant="56" id="ARj-ZH-NhB"/>
+                            <constraint firstItem="Smb-Sc-nEr" firstAttribute="trailing" secondItem="7v0-zX-g3X" secondAttribute="trailing" id="Cc9-0d-NBL"/>
+                            <constraint firstAttribute="bottom" secondItem="0vX-qQ-DOm" secondAttribute="bottom" constant="30" id="NSa-Zd-GJv"/>
+                            <constraint firstItem="nWA-VI-8zp" firstAttribute="top" secondItem="Wan-Tv-Eaq" secondAttribute="top" constant="42" id="bTH-XN-PpA"/>
+                            <constraint firstItem="0vX-qQ-DOm" firstAttribute="leading" secondItem="Wan-Tv-Eaq" secondAttribute="leading" constant="40" id="duK-19-z1p"/>
+                            <constraint firstItem="nWA-VI-8zp" firstAttribute="leading" secondItem="Wan-Tv-Eaq" secondAttribute="leading" constant="17" id="h9Q-5a-2yB"/>
+                            <constraint firstItem="nWA-VI-8zp" firstAttribute="trailing" secondItem="Smb-Sc-nEr" secondAttribute="trailing" id="jXf-Fu-oM5"/>
+                            <constraint firstItem="0vX-qQ-DOm" firstAttribute="top" secondItem="7v0-zX-g3X" secondAttribute="bottom" constant="27" id="jf1-1d-T4m"/>
+                            <constraint firstItem="Smb-Sc-nEr" firstAttribute="top" secondItem="nWA-VI-8zp" secondAttribute="bottom" constant="13" id="liP-WN-Bus"/>
+                            <constraint firstItem="nWA-VI-8zp" firstAttribute="leading" secondItem="Smb-Sc-nEr" secondAttribute="leading" id="w2i-bK-8l5"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="Wan-Tv-Eaq" secondAttribute="bottom" constant="-9" id="IW5-Mo-OEc"/>
+                    <constraint firstItem="Wan-Tv-Eaq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-36" id="aXq-5I-yB0"/>
+                    <constraint firstItem="Wan-Tv-Eaq" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="bHI-gl-9Jh"/>
+                    <constraint firstItem="Wan-Tv-Eaq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-19" id="nrn-QN-ETx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="49.5" y="-388.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="view124.png" width="373" height="94"/>
+        <image name="view126.png" width="287" height="192"/>
+    </resources>
+</document>

@@ -188,10 +188,10 @@ If you go edit profile option again of that particular agent or user then it sho
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="deActive.png" translatesAutoresizingMaskIntoConstraints="NO" id="ivL-5n-r0n">
-                                <rect key="frame" x="18" y="1450" width="371" height="74"/>
+                                <rect key="frame" x="18" y="1450" width="371" height="71"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="74" id="aRT-Uv-buC"/>
-                                    <constraint firstAttribute="height" constant="74" id="h0Y-cZ-lye"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="71" id="aRT-Uv-buC"/>
+                                    <constraint firstAttribute="height" constant="71" id="h0Y-cZ-lye"/>
                                     <constraint firstAttribute="width" constant="371" id="rzD-et-3LU"/>
                                 </constraints>
                             </imageView>
@@ -222,7 +222,7 @@ If you go edit profile option again of that particular agent or user then it sho
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ghq-FR-nWX" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="29" id="2IL-C6-kPg"/>
                             <constraint firstItem="SL1-c2-4ym" firstAttribute="centerX" secondItem="e2k-wE-m7w" secondAttribute="centerX" id="4hP-vS-U8J"/>
@@ -239,7 +239,7 @@ If you go edit profile option again of that particular agent or user then it sho
                             <constraint firstItem="bhH-oX-TH5" firstAttribute="trailing" secondItem="fmb-Jy-ekW" secondAttribute="trailing" id="WtW-nx-YYY"/>
                             <constraint firstItem="apS-Ya-NlQ" firstAttribute="top" secondItem="SL1-c2-4ym" secondAttribute="bottom" constant="6" id="Xpo-wL-UlI"/>
                             <constraint firstItem="bhH-oX-TH5" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="34" id="aDt-QY-Mx3"/>
-                            <constraint firstItem="e2k-wE-m7w" firstAttribute="top" secondItem="ivL-5n-r0n" secondAttribute="bottom" constant="16" id="aZV-LV-qW1"/>
+                            <constraint firstItem="e2k-wE-m7w" firstAttribute="top" secondItem="ivL-5n-r0n" secondAttribute="bottom" constant="19" id="aZV-LV-qW1"/>
                             <constraint firstItem="NQ5-5i-kLu" firstAttribute="top" secondItem="85K-gc-KNb" secondAttribute="bottom" constant="17" id="bdf-fm-Xqd"/>
                             <constraint firstItem="85K-gc-KNb" firstAttribute="trailing" secondItem="apS-Ya-NlQ" secondAttribute="trailing" id="d5g-sA-2Qw"/>
                             <constraint firstItem="San-kX-p3o" firstAttribute="top" secondItem="Ghq-FR-nWX" secondAttribute="bottom" constant="8" symbolic="YES" id="dCd-9i-29M"/>

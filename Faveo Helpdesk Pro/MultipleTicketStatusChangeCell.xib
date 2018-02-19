@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MultipleTicketStatusChangeCellId" rowHeight="1846" id="KGk-i7-Jjw" customClass="MultipleTicketStatusChangeCell">
+            <rect key="frame" x="0.0" y="0.0" width="419" height="1521"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="419" height="1520.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S8x-ff-3Ne">
+                        <rect key="frame" x="0.0" y="0.0" width="419" height="1521"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="16" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oob-xw-FBT">
+                                <rect key="frame" x="17" y="42" width="380" height="213"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="213" id="v2g-r1-FUH"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Goto any view like Inbox, My tickets, Unassigned ticket, Closed tickets or Trash tickets.
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="For example">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPS-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">: We goto inbox view. Now, long press and hold on any one ticket, then multiple ticket select mode will activated.
+
+See below image one more view appeared which contains three image buttons. First image button is for ticket merge, second image button is for ticket assign and third is for ticket status change, see below image
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXL-g1-WFa">
+                                <rect key="frame" x="17" y="395" width="380" height="73"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="73" id="Cch-AQ-xV7"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Now select the tickets and click on third image button i.e edit button. If didn’t selected any button and if you click on edit button then it will show error message like below image,</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view124.png" translatesAutoresizingMaskIntoConstraints="NO" id="XaK-tP-mQD">
+                                <rect key="frame" x="17" y="268" width="380" height="104"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="104" id="KRB-3a-ftV"/>
+                                    <constraint firstAttribute="width" constant="380" id="i7h-BF-KYV"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="104" id="yXJ-sf-efw"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view127.png" translatesAutoresizingMaskIntoConstraints="NO" id="spd-Km-3fK">
+                                <rect key="frame" x="43" y="476" width="333" height="230"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="230" id="2g4-LB-n8p"/>
+                                    <constraint firstAttribute="width" constant="333" id="XAz-1X-HmM"/>
+                                    <constraint firstAttribute="height" constant="230" id="fwx-YG-sAc"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWT-RY-dvx">
+                                <rect key="frame" x="19" y="724" width="380" height="52"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Select the tickets and click on edit button, you will get one small pop up which contains status names, see below image
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multpleticketstatuschnage.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="8Zv-Vs-7W8">
+                                <rect key="frame" x="67" y="784" width="274" height="541"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="274" id="3AO-YR-iPP"/>
+                                    <constraint firstAttribute="height" constant="541" id="9Le-lt-Fq3"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="541" id="ZQH-ju-CP3"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnx-s6-5ps">
+                                <rect key="frame" x="19" y="1333" width="380" height="156"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="156" id="T9s-UN-Hcz"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Select the any one option for status change. Suppose I select Closed option then these three selected tickets status will be changed to closed and that tickets moves to closed tickets menu.
+
+In this way, you can change any tickets status at any options like Inbox, My tickets, Unassigned tickets, Closed tickets and Trash tickets.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gnx-s6-5ps" firstAttribute="top" secondItem="8Zv-Vs-7W8" secondAttribute="bottom" constant="8" symbolic="YES" id="3by-T5-b4y"/>
+                            <constraint firstAttribute="trailing" secondItem="oob-xw-FBT" secondAttribute="trailing" constant="22" id="9AC-A9-df9"/>
+                            <constraint firstItem="oob-xw-FBT" firstAttribute="leading" secondItem="S8x-ff-3Ne" secondAttribute="leading" constant="17" id="CGB-SS-dsT"/>
+                            <constraint firstItem="AXL-g1-WFa" firstAttribute="top" secondItem="XaK-tP-mQD" secondAttribute="bottom" constant="23" id="CQ1-y7-wu9"/>
+                            <constraint firstItem="spd-Km-3fK" firstAttribute="centerX" secondItem="aWT-RY-dvx" secondAttribute="centerX" id="Fn4-gR-4Ss"/>
+                            <constraint firstItem="gnx-s6-5ps" firstAttribute="trailing" secondItem="aWT-RY-dvx" secondAttribute="trailing" id="OVm-TA-N9h"/>
+                            <constraint firstAttribute="trailing" secondItem="8Zv-Vs-7W8" secondAttribute="trailing" constant="78" id="SIC-56-1mv"/>
+                            <constraint firstItem="aWT-RY-dvx" firstAttribute="top" secondItem="spd-Km-3fK" secondAttribute="bottom" constant="18" id="SIX-bM-Y73"/>
+                            <constraint firstAttribute="bottom" secondItem="gnx-s6-5ps" secondAttribute="bottom" constant="32" id="Sa1-SL-bdE"/>
+                            <constraint firstItem="gnx-s6-5ps" firstAttribute="centerX" secondItem="S8x-ff-3Ne" secondAttribute="centerX" id="Trc-Vs-kHm"/>
+                            <constraint firstItem="8Zv-Vs-7W8" firstAttribute="leading" secondItem="S8x-ff-3Ne" secondAttribute="leading" constant="67" id="aBQ-Zq-Nmp"/>
+                            <constraint firstItem="oob-xw-FBT" firstAttribute="leading" secondItem="XaK-tP-mQD" secondAttribute="leading" id="dA9-1e-1Bv"/>
+                            <constraint firstItem="spd-Km-3fK" firstAttribute="leading" secondItem="S8x-ff-3Ne" secondAttribute="leading" constant="43" id="es3-px-nPw"/>
+                            <constraint firstItem="8Zv-Vs-7W8" firstAttribute="top" secondItem="aWT-RY-dvx" secondAttribute="bottom" constant="8" symbolic="YES" id="f6K-Fn-aGb"/>
+                            <constraint firstItem="gnx-s6-5ps" firstAttribute="leading" secondItem="S8x-ff-3Ne" secondAttribute="leading" constant="19" id="lEh-Vk-Roo"/>
+                            <constraint firstItem="XaK-tP-mQD" firstAttribute="leading" secondItem="AXL-g1-WFa" secondAttribute="leading" id="nuz-S0-esU"/>
+                            <constraint firstItem="gnx-s6-5ps" firstAttribute="leading" secondItem="aWT-RY-dvx" secondAttribute="leading" id="nyh-4I-KXB"/>
+                            <constraint firstItem="oob-xw-FBT" firstAttribute="trailing" secondItem="XaK-tP-mQD" secondAttribute="trailing" id="osl-iy-bOm"/>
+                            <constraint firstItem="oob-xw-FBT" firstAttribute="top" secondItem="S8x-ff-3Ne" secondAttribute="top" constant="42" id="r9C-xp-jei"/>
+                            <constraint firstItem="XaK-tP-mQD" firstAttribute="trailing" secondItem="AXL-g1-WFa" secondAttribute="trailing" id="vfd-HK-6Vd"/>
+                            <constraint firstItem="spd-Km-3fK" firstAttribute="top" secondItem="AXL-g1-WFa" secondAttribute="bottom" constant="8" symbolic="YES" id="vks-p1-KTF"/>
+                            <constraint firstItem="XaK-tP-mQD" firstAttribute="top" secondItem="oob-xw-FBT" secondAttribute="bottom" constant="13" id="yL7-S0-RE9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="S8x-ff-3Ne" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="HAc-T2-qJi"/>
+                    <constraint firstAttribute="trailing" secondItem="S8x-ff-3Ne" secondAttribute="trailing" id="bgg-A7-4Sw"/>
+                    <constraint firstItem="S8x-ff-3Ne" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="c6d-wC-ezO"/>
+                    <constraint firstItem="S8x-ff-3Ne" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="pSa-7u-4bN"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="32.5" y="-15.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="multpleticketstatuschnage.jpg" width="1058" height="2047"/>
+        <image name="view124.png" width="373" height="94"/>
+        <image name="view127.png" width="295" height="187"/>
+    </resources>
+</document>

@@ -9,6 +9,11 @@
 #import "otherFeatureMenuList.h"
 #import "otherFeatureMenuListCell.h"
 
+#import "MultipleTicketSelectView.h"
+#import "MultipleTicketAssign.h"
+#import "MultipleTicketStatusChange.h"
+#import "MergeTicketView.h"
+
 @interface otherFeatureMenuList ()<UITableViewDataSource,UITableViewDelegate>
 {
      NSArray *questions;
@@ -20,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    questions=[NSArray arrayWithObjects:@"1. All about tickets",@"2.Ticket Replay and Internal Note",@"3.Ticket sorting and filtration",@"4.Multple Ticket Selection Feature", nil];
+    questions=[NSArray arrayWithObjects:@"1. How to select multiple tickets?",@"2. How to assign multiple tickets to agent?",@"3. How to change status of multilple tickets?",@"4. How to merge tickets?", nil];
     
 }
 
@@ -44,6 +49,35 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if(indexPath.row==0)
+    {
+        
+        MultipleTicketSelectView *td=[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleTicketSelectViewId"];
+        [self.navigationController pushViewController:td animated:YES];
+        
+    }else  if(indexPath.row==1)
+    {
+        
+        MultipleTicketAssign *td=[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleTicketAssignId"];
+        [self.navigationController pushViewController:td animated:YES];
+        
+    } else  if(indexPath.row==2)
+    {
+        
+        MultipleTicketStatusChange *td=[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleTicketStatusChangeId"];
+        [self.navigationController pushViewController:td animated:YES];
+        
+    } if(indexPath.row==3)
+    {
+        
+        MergeTicketView *td=[self.storyboard instantiateViewControllerWithIdentifier:@"MergeTicketViewId"];
+        [self.navigationController pushViewController:td animated:YES];
+        
+    }
+}
 
 
 

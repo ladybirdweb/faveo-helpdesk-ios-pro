@@ -7,6 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06099CA5203AA14B0060831A /* MultipleTicketSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CA4203AA14B0060831A /* MultipleTicketSelectView.m */; };
+		06099CA8203AA1680060831A /* MultipleTicketAssign.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CA7203AA1680060831A /* MultipleTicketAssign.m */; };
+		06099CAB203AA1900060831A /* MultipleTicketStatusChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CAA203AA1900060831A /* MultipleTicketStatusChange.m */; };
+		06099CAE203AA1A60060831A /* MergeTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CAD203AA1A60060831A /* MergeTicketView.m */; };
+		06099CB2203AA2A30060831A /* MultipleTicketSelectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CB0203AA2A30060831A /* MultipleTicketSelectViewCell.m */; };
+		06099CB3203AA2A30060831A /* MultipleTicketSelectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06099CB1203AA2A30060831A /* MultipleTicketSelectViewCell.xib */; };
+		06099CB7203AA2B70060831A /* MultipleTicketAssignCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CB5203AA2B70060831A /* MultipleTicketAssignCell.m */; };
+		06099CB8203AA2B70060831A /* MultipleTicketAssignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06099CB6203AA2B70060831A /* MultipleTicketAssignCell.xib */; };
+		06099CBC203AA30D0060831A /* MultipleTicketStatusChangeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CBA203AA30D0060831A /* MultipleTicketStatusChangeCell.m */; };
+		06099CBD203AA30D0060831A /* MultipleTicketStatusChangeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06099CBB203AA30D0060831A /* MultipleTicketStatusChangeCell.xib */; };
+		06099CC1203AA3240060831A /* MergeTicketViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CBF203AA3240060831A /* MergeTicketViewCell.m */; };
+		06099CC2203AA3240060831A /* MergeTicketViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06099CC0203AA3240060831A /* MergeTicketViewCell.xib */; };
+		06099CC4203AAA640060831A /* Inbox2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06099CC3203AAA640060831A /* Inbox2.jpg */; };
+		06099CC6203AB2ED0060831A /* view124.png in Resources */ = {isa = PBXBuildFile; fileRef = 06099CC5203AB2ED0060831A /* view124.png */; };
+		06099CC8203AB55D0060831A /* view125.png in Resources */ = {isa = PBXBuildFile; fileRef = 06099CC7203AB55D0060831A /* view125.png */; };
+		06099CCA203AC0D20060831A /* view126.png in Resources */ = {isa = PBXBuildFile; fileRef = 06099CC9203AC0D20060831A /* view126.png */; };
+		06099CCE203AD21A0060831A /* MergeTicketViewCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CCC203AD21A0060831A /* MergeTicketViewCell2.m */; };
+		06099CCF203AD21A0060831A /* MergeTicketViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06099CCD203AD21A0060831A /* MergeTicketViewCell2.xib */; };
+		06099CD1203AD9160060831A /* view127.png in Resources */ = {isa = PBXBuildFile; fileRef = 06099CD0203AD9160060831A /* view127.png */; };
+		0609AD9D20397BDC00DCDC85 /* merge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609AD9C20397BDC00DCDC85 /* merge.jpg */; };
+		0609AD9F20397BE500DCDC85 /* multpleticketassign.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609AD9E20397BE400DCDC85 /* multpleticketassign.jpg */; };
+		0609ADA120397BEC00DCDC85 /* multpleticketstatuschnage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADA020397BEC00DCDC85 /* multpleticketstatuschnage.jpg */; };
+		0609ADA320397C1100DCDC85 /* allUserList.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADA220397C1000DCDC85 /* allUserList.jpg */; };
+		0609ADA520397C4700DCDC85 /* multipleSelect.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADA420397C4700DCDC85 /* multipleSelect.jpg */; };
+		0609ADA720397C6200DCDC85 /* userEditProfile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADA620397C6200DCDC85 /* userEditProfile.jpg */; };
+		0609ADA920397C8B00DCDC85 /* filteredResult.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADA820397C8A00DCDC85 /* filteredResult.jpg */; };
+		0609ADAB20397C9C00DCDC85 /* filterImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADAA20397C9C00DCDC85 /* filterImage.jpg */; };
+		0609ADAD20397E3F00DCDC85 /* usedetails.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADAC20397E3E00DCDC85 /* usedetails.jpg */; };
+		0609ADAF2039805100DCDC85 /* view121.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADAE2039805000DCDC85 /* view121.png */; };
+		0609ADB3203987E000DCDC85 /* UserAndAgentMenuListCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0609ADB1203987E000DCDC85 /* UserAndAgentMenuListCell2.m */; };
+		0609ADB4203987E000DCDC85 /* UserAndAgentMenuListCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB2203987E000DCDC85 /* UserAndAgentMenuListCell2.xib */; };
+		0609ADB620398E2A00DCDC85 /* view122.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB520398E2A00DCDC85 /* view122.png */; };
+		0609ADB920399B8100DCDC85 /* deActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB720399B8000DCDC85 /* deActive.png */; };
+		0609ADBA20399B8100DCDC85 /* Active.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB820399B8100DCDC85 /* Active.png */; };
 		061E30FD2035426800603D22 /* LoginListMenuTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E30FC2035426800603D22 /* LoginListMenuTable.m */; };
 		061E31042035479A00603D22 /* LoginListMenuTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E31022035479A00603D22 /* LoginListMenuTableCell.m */; };
 		061E31052035479A00603D22 /* LoginListMenuTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061E31032035479A00603D22 /* LoginListMenuTableCell.xib */; };
@@ -194,6 +228,50 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06099CA3203AA14B0060831A /* MultipleTicketSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketSelectView.h; sourceTree = "<group>"; };
+		06099CA4203AA14B0060831A /* MultipleTicketSelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultipleTicketSelectView.m; sourceTree = "<group>"; };
+		06099CA6203AA1680060831A /* MultipleTicketAssign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketAssign.h; sourceTree = "<group>"; };
+		06099CA7203AA1680060831A /* MultipleTicketAssign.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultipleTicketAssign.m; sourceTree = "<group>"; };
+		06099CA9203AA1900060831A /* MultipleTicketStatusChange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketStatusChange.h; sourceTree = "<group>"; };
+		06099CAA203AA1900060831A /* MultipleTicketStatusChange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultipleTicketStatusChange.m; sourceTree = "<group>"; };
+		06099CAC203AA1A60060831A /* MergeTicketView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MergeTicketView.h; sourceTree = "<group>"; };
+		06099CAD203AA1A60060831A /* MergeTicketView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MergeTicketView.m; sourceTree = "<group>"; };
+		06099CAF203AA2A30060831A /* MultipleTicketSelectViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketSelectViewCell.h; sourceTree = "<group>"; };
+		06099CB0203AA2A30060831A /* MultipleTicketSelectViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultipleTicketSelectViewCell.m; sourceTree = "<group>"; };
+		06099CB1203AA2A30060831A /* MultipleTicketSelectViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultipleTicketSelectViewCell.xib; sourceTree = "<group>"; };
+		06099CB4203AA2B70060831A /* MultipleTicketAssignCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketAssignCell.h; sourceTree = "<group>"; };
+		06099CB5203AA2B70060831A /* MultipleTicketAssignCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultipleTicketAssignCell.m; sourceTree = "<group>"; };
+		06099CB6203AA2B70060831A /* MultipleTicketAssignCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultipleTicketAssignCell.xib; sourceTree = "<group>"; };
+		06099CB9203AA30D0060831A /* MultipleTicketStatusChangeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketStatusChangeCell.h; sourceTree = "<group>"; };
+		06099CBA203AA30D0060831A /* MultipleTicketStatusChangeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultipleTicketStatusChangeCell.m; sourceTree = "<group>"; };
+		06099CBB203AA30D0060831A /* MultipleTicketStatusChangeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultipleTicketStatusChangeCell.xib; sourceTree = "<group>"; };
+		06099CBE203AA3240060831A /* MergeTicketViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MergeTicketViewCell.h; sourceTree = "<group>"; };
+		06099CBF203AA3240060831A /* MergeTicketViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MergeTicketViewCell.m; sourceTree = "<group>"; };
+		06099CC0203AA3240060831A /* MergeTicketViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MergeTicketViewCell.xib; sourceTree = "<group>"; };
+		06099CC3203AAA640060831A /* Inbox2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Inbox2.jpg; sourceTree = "<group>"; };
+		06099CC5203AB2ED0060831A /* view124.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view124.png; sourceTree = "<group>"; };
+		06099CC7203AB55D0060831A /* view125.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view125.png; sourceTree = "<group>"; };
+		06099CC9203AC0D20060831A /* view126.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view126.png; sourceTree = "<group>"; };
+		06099CCB203AD21A0060831A /* MergeTicketViewCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MergeTicketViewCell2.h; sourceTree = "<group>"; };
+		06099CCC203AD21A0060831A /* MergeTicketViewCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MergeTicketViewCell2.m; sourceTree = "<group>"; };
+		06099CCD203AD21A0060831A /* MergeTicketViewCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MergeTicketViewCell2.xib; sourceTree = "<group>"; };
+		06099CD0203AD9160060831A /* view127.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view127.png; sourceTree = "<group>"; };
+		0609AD9C20397BDC00DCDC85 /* merge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = merge.jpg; sourceTree = "<group>"; };
+		0609AD9E20397BE400DCDC85 /* multpleticketassign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = multpleticketassign.jpg; sourceTree = "<group>"; };
+		0609ADA020397BEC00DCDC85 /* multpleticketstatuschnage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = multpleticketstatuschnage.jpg; sourceTree = "<group>"; };
+		0609ADA220397C1000DCDC85 /* allUserList.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = allUserList.jpg; sourceTree = "<group>"; };
+		0609ADA420397C4700DCDC85 /* multipleSelect.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = multipleSelect.jpg; sourceTree = "<group>"; };
+		0609ADA620397C6200DCDC85 /* userEditProfile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = userEditProfile.jpg; sourceTree = "<group>"; };
+		0609ADA820397C8A00DCDC85 /* filteredResult.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = filteredResult.jpg; sourceTree = "<group>"; };
+		0609ADAA20397C9C00DCDC85 /* filterImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = filterImage.jpg; sourceTree = "<group>"; };
+		0609ADAC20397E3E00DCDC85 /* usedetails.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = usedetails.jpg; sourceTree = "<group>"; };
+		0609ADAE2039805000DCDC85 /* view121.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view121.png; sourceTree = "<group>"; };
+		0609ADB0203987E000DCDC85 /* UserAndAgentMenuListCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAndAgentMenuListCell2.h; sourceTree = "<group>"; };
+		0609ADB1203987E000DCDC85 /* UserAndAgentMenuListCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAndAgentMenuListCell2.m; sourceTree = "<group>"; };
+		0609ADB2203987E000DCDC85 /* UserAndAgentMenuListCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserAndAgentMenuListCell2.xib; sourceTree = "<group>"; };
+		0609ADB520398E2A00DCDC85 /* view122.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view122.png; sourceTree = "<group>"; };
+		0609ADB720399B8000DCDC85 /* deActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deActive.png; sourceTree = "<group>"; };
+		0609ADB820399B8100DCDC85 /* Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Active.png; sourceTree = "<group>"; };
 		061E30FB2035426800603D22 /* LoginListMenuTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginListMenuTable.h; sourceTree = "<group>"; };
 		061E30FC2035426800603D22 /* LoginListMenuTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginListMenuTable.m; sourceTree = "<group>"; };
 		061E31012035479A00603D22 /* LoginListMenuTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginListMenuTableCell.h; sourceTree = "<group>"; };
@@ -578,6 +656,24 @@
 				0634EB64203811FD002CB4E8 /* internalNote.jpg */,
 				0634EB7720381DC2002CB4E8 /* Edit ticket.jpg */,
 				0634EB93203844DA002CB4E8 /* ticket_filter.jpg */,
+				0609ADA420397C4700DCDC85 /* multipleSelect.jpg */,
+				0609AD9C20397BDC00DCDC85 /* merge.jpg */,
+				0609AD9E20397BE400DCDC85 /* multpleticketassign.jpg */,
+				0609ADAA20397C9C00DCDC85 /* filterImage.jpg */,
+				0609ADA020397BEC00DCDC85 /* multpleticketstatuschnage.jpg */,
+				0609ADA220397C1000DCDC85 /* allUserList.jpg */,
+				0609ADAC20397E3E00DCDC85 /* usedetails.jpg */,
+				0609ADA620397C6200DCDC85 /* userEditProfile.jpg */,
+				0609ADA820397C8A00DCDC85 /* filteredResult.jpg */,
+				0609ADAE2039805000DCDC85 /* view121.png */,
+				0609ADB520398E2A00DCDC85 /* view122.png */,
+				0609ADB820399B8100DCDC85 /* Active.png */,
+				0609ADB720399B8000DCDC85 /* deActive.png */,
+				06099CC3203AAA640060831A /* Inbox2.jpg */,
+				06099CC5203AB2ED0060831A /* view124.png */,
+				06099CC7203AB55D0060831A /* view125.png */,
+				06099CC9203AC0D20060831A /* view126.png */,
+				06099CD0203AD9160060831A /* view127.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -642,6 +738,14 @@
 			children = (
 				061E311220357C6400603D22 /* otherFeatureMenuList.h */,
 				061E311320357C6400603D22 /* otherFeatureMenuList.m */,
+				06099CA3203AA14B0060831A /* MultipleTicketSelectView.h */,
+				06099CA4203AA14B0060831A /* MultipleTicketSelectView.m */,
+				06099CA6203AA1680060831A /* MultipleTicketAssign.h */,
+				06099CA7203AA1680060831A /* MultipleTicketAssign.m */,
+				06099CA9203AA1900060831A /* MultipleTicketStatusChange.h */,
+				06099CAA203AA1900060831A /* MultipleTicketStatusChange.m */,
+				06099CAC203AA1A60060831A /* MergeTicketView.h */,
+				06099CAD203AA1A60060831A /* MergeTicketView.m */,
 			);
 			name = "Other Features";
 			sourceTree = "<group>";
@@ -679,6 +783,9 @@
 				061E311C2035843C00603D22 /* UserAndAgentMenuListCell.h */,
 				061E311D2035843C00603D22 /* UserAndAgentMenuListCell.m */,
 				061E311E2035843C00603D22 /* UserAndAgentMenuListCell.xib */,
+				0609ADB0203987E000DCDC85 /* UserAndAgentMenuListCell2.h */,
+				0609ADB1203987E000DCDC85 /* UserAndAgentMenuListCell2.m */,
+				0609ADB2203987E000DCDC85 /* UserAndAgentMenuListCell2.xib */,
 				0634EBA2203866A8002CB4E8 /* UserAgentListCell.h */,
 				0634EBA3203866A8002CB4E8 /* UserAgentListCell.m */,
 				0634EBA4203866A8002CB4E8 /* UserAgentListCell.xib */,
@@ -698,6 +805,21 @@
 				061E31212035845800603D22 /* otherFeatureMenuListCell.h */,
 				061E31222035845800603D22 /* otherFeatureMenuListCell.m */,
 				061E31232035845800603D22 /* otherFeatureMenuListCell.xib */,
+				06099CAF203AA2A30060831A /* MultipleTicketSelectViewCell.h */,
+				06099CB0203AA2A30060831A /* MultipleTicketSelectViewCell.m */,
+				06099CB1203AA2A30060831A /* MultipleTicketSelectViewCell.xib */,
+				06099CB4203AA2B70060831A /* MultipleTicketAssignCell.h */,
+				06099CB5203AA2B70060831A /* MultipleTicketAssignCell.m */,
+				06099CB6203AA2B70060831A /* MultipleTicketAssignCell.xib */,
+				06099CB9203AA30D0060831A /* MultipleTicketStatusChangeCell.h */,
+				06099CBA203AA30D0060831A /* MultipleTicketStatusChangeCell.m */,
+				06099CBB203AA30D0060831A /* MultipleTicketStatusChangeCell.xib */,
+				06099CBE203AA3240060831A /* MergeTicketViewCell.h */,
+				06099CBF203AA3240060831A /* MergeTicketViewCell.m */,
+				06099CC0203AA3240060831A /* MergeTicketViewCell.xib */,
+				06099CCB203AD21A0060831A /* MergeTicketViewCell2.h */,
+				06099CCC203AD21A0060831A /* MergeTicketViewCell2.m */,
+				06099CCD203AD21A0060831A /* MergeTicketViewCell2.xib */,
 			);
 			name = "Other Features";
 			sourceTree = "<group>";
@@ -1289,51 +1411,75 @@
 			buildActionMask = 2147483647;
 			files = (
 				0634EBA6203866A8002CB4E8 /* UserAgentListCell.xib in Resources */,
+				06099CC8203AB55D0060831A /* view125.png in Resources */,
 				0634EB65203811FD002CB4E8 /* internalNote.jpg in Resources */,
 				0634EB6A20381579002CB4E8 /* AllAboutTicketCell4.xib in Resources */,
 				061E313B2035A96300603D22 /* login.jpg in Resources */,
 				061E31202035843C00603D22 /* UserAndAgentMenuListCell.xib in Resources */,
 				0634EB7620381BE3002CB4E8 /* AllAboutTicketCell6.xib in Resources */,
+				0609AD9F20397BE500DCDC85 /* multpleticketassign.jpg in Resources */,
 				D9CF41AD1F4C15320087BBFA /* NotificationTableViewCell.xib in Resources */,
 				0624A51D2034733400F1B030 /* HelpSectionHomePageCell.xib in Resources */,
 				D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */,
 				0634EB7D20382958002CB4E8 /* TicketReplayInternalNoteCell2.xib in Resources */,
+				0609ADAF2039805100DCDC85 /* view121.png in Resources */,
 				D9532C131E9CE9090063B318 /* Localizable.strings in Resources */,
 				0624A51F2034733400F1B030 /* four.jpeg in Resources */,
+				0609ADA520397C4700DCDC85 /* multipleSelect.jpg in Resources */,
+				0609AD9D20397BDC00DCDC85 /* merge.jpg in Resources */,
 				0634EB492036EE3D002CB4E8 /* TicketSortingFikterCell.xib in Resources */,
 				D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */,
 				0624A5192034733400F1B030 /* three.jpeg in Resources */,
+				06099CCF203AD21A0060831A /* MergeTicketViewCell2.xib in Resources */,
 				061E31252035845800603D22 /* otherFeatureMenuListCell.xib in Resources */,
 				0634EBAB20386717002CB4E8 /* UserAgentFilterCell.xib in Resources */,
 				D955A5511F2A05630045429F /* a.xcassets in Resources */,
+				06099CB3203AA2A30060831A /* MultipleTicketSelectViewCell.xib in Resources */,
 				0634EB7820381DC2002CB4E8 /* Edit ticket.jpg in Resources */,
 				0634EBA120385D64002CB4E8 /* ticketStatus1.jpg in Resources */,
+				0609ADA120397BEC00DCDC85 /* multpleticketstatuschnage.jpg in Resources */,
 				D9F9F13C1FB9B2530044DA27 /* check_mark@2x.png in Resources */,
+				06099CD1203AD9160060831A /* view127.png in Resources */,
 				0624A51E2034733400F1B030 /* two.jpeg in Resources */,
 				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
+				0609ADB920399B8100DCDC85 /* deActive.png in Resources */,
 				0634EB6F2038158D002CB4E8 /* AllAboutTicketCell5.xib in Resources */,
+				06099CC4203AAA640060831A /* Inbox2.jpg in Resources */,
+				0609ADBA20399B8100DCDC85 /* Active.png in Resources */,
+				0609ADAD20397E3F00DCDC85 /* usedetails.jpg in Resources */,
 				0634EB4D2036F530002CB4E8 /* createTicket1111.jpg in Resources */,
 				0634EB8220382985002CB4E8 /* TicketReplayInternalNoteCell3.xib in Resources */,
+				06099CC2203AA3240060831A /* MergeTicketViewCell.xib in Resources */,
+				0609ADB4203987E000DCDC85 /* UserAndAgentMenuListCell2.xib in Resources */,
 				0634EB712038192D002CB4E8 /* ticket detail page1.jpg in Resources */,
 				0634EB8820384095002CB4E8 /* FIlterAndSort2.xib in Resources */,
 				0634EB9C20385767002CB4E8 /* TicketStusChangeCell.xib in Resources */,
 				D9F9F13E1FB9B2530044DA27 /* drop_down@2x.png in Resources */,
 				D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */,
+				0609ADB620398E2A00DCDC85 /* view122.png in Resources */,
 				0634EB5220370EC2002CB4E8 /* AllAboutTicketCell2.xib in Resources */,
+				06099CB8203AA2B70060831A /* MultipleTicketAssignCell.xib in Resources */,
+				06099CCA203AC0D20060831A /* view126.png in Resources */,
+				0609ADA320397C1100DCDC85 /* allUserList.jpg in Resources */,
 				061E312F2035A63000603D22 /* LoginDetailPage1Cell.xib in Resources */,
 				0634EB962038519B002CB4E8 /* sortCell.png in Resources */,
 				0624A51C2034733400F1B030 /* one.jpeg in Resources */,
 				061E313C2035A96300603D22 /* url.jpg in Resources */,
+				0609ADA920397C8B00DCDC85 /* filteredResult.jpg in Resources */,
 				061E312A20358BAD00603D22 /* TicketListTableView.xib in Resources */,
 				D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */,
+				0609ADAB20397C9C00DCDC85 /* filterImage.jpg in Resources */,
+				06099CBD203AA30D0060831A /* MultipleTicketStatusChangeCell.xib in Resources */,
 				06BB2A3B202C3B3F00B33C43 /* systemIcon.png in Resources */,
 				0634EB5720370ED5002CB4E8 /* AllAboutTicketCell3.xib in Resources */,
 				D9AA44471FA890AC00938081 /* BDCustomAlertView.xib in Resources */,
+				0609ADA720397C6200DCDC85 /* userEditProfile.jpg in Resources */,
 				0634EB4B2036F27A002CB4E8 /* sidemenu.jpg in Resources */,
 				0634EB61203811D6002CB4E8 /* ticket detail page2.jpg in Resources */,
 				0689708F20318A3700702313 /* ConversationTableViewCell.xib in Resources */,
 				0634EB63203811E0002CB4E8 /* Replay.jpg in Resources */,
 				06BB2A39202C314C00B33C43 /* GoogleService-Info.plist in Resources */,
+				06099CC6203AB2ED0060831A /* view124.png in Resources */,
 				D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */,
 				D9F9F13F1FB9B2530044DA27 /* done@2x.png in Resources */,
 				061E31052035479A00603D22 /* LoginListMenuTableCell.xib in Resources */,
@@ -1423,6 +1569,7 @@
 				0634EBA5203866A8002CB4E8 /* UserAgentListCell.m in Sources */,
 				0634EB5B20380359002CB4E8 /* AllAboutTicketCell1.m in Sources */,
 				D9A2FCB01F18904000C829DD /* NotificationViewController.m in Sources */,
+				06099CAE203AA1A60060831A /* MergeTicketView.m in Sources */,
 				0634EBAA20386717002CB4E8 /* UserAgentFilterCell.m in Sources */,
 				D9EB9FBD1E07C4490001115F /* SlideNavigationContorllerAnimatorFade.m in Sources */,
 				D9EB9FA51E07C3270001115F /* MyTicketsViewController.m in Sources */,
@@ -1445,7 +1592,9 @@
 				061E31082035594500603D22 /* LoginDetailPage1.m in Sources */,
 				D9F9F13B1FB9B2530044DA27 /* DropDownListView.m in Sources */,
 				D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */,
+				06099CB7203AA2B70060831A /* MultipleTicketAssignCell.m in Sources */,
 				0634EB8120382985002CB4E8 /* TicketReplayInternalNoteCell3.m in Sources */,
+				06099CB2203AA2A30060831A /* MultipleTicketSelectViewCell.m in Sources */,
 				0634EB3F2036EBFC002CB4E8 /* TicketSortingAndFilter.m in Sources */,
 				D9AF85371FC4610E005232A0 /* EditClientDetail.m in Sources */,
 				0634EBB920387581002CB4E8 /* UserAgentEditProfileView.m in Sources */,
@@ -1472,6 +1621,7 @@
 				0634EB482036EE3D002CB4E8 /* TicketSortingFikterCell.m in Sources */,
 				0634EB6E2038158D002CB4E8 /* AllAboutTicketCell5.m in Sources */,
 				0634EB9F203857A6002CB4E8 /* TicketStusChange.m in Sources */,
+				06099CA8203AA1680060831A /* MultipleTicketAssign.m in Sources */,
 				0634EB392036EBC3002CB4E8 /* AllAboutTicketsInformation.m in Sources */,
 				D9EB9FA11E07C3270001115F /* UnassignedTicketsViewController.m in Sources */,
 				D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */,
@@ -1485,16 +1635,22 @@
 				061E311120357C4100603D22 /* UserAndAgentMenuList.m in Sources */,
 				D946D6981FA9F519005E5BF1 /* SortingViewController.m in Sources */,
 				0634EBB62038755F002CB4E8 /* UserAgentFilterView.m in Sources */,
+				06099CCE203AD21A0060831A /* MergeTicketViewCell2.m in Sources */,
 				D9AE083B2007236700DD9E94 /* CFMultistageDropdownMenuView.m in Sources */,
 				061E311420357C6400603D22 /* otherFeatureMenuList.m in Sources */,
 				D9AAFAB91F5D475400891CA5 /* FTPopOverMenu.m in Sources */,
 				D9EB9F631E07C2D00001115F /* Data.m in Sources */,
+				0609ADB3203987E000DCDC85 /* UserAndAgentMenuListCell2.m in Sources */,
 				061E31042035479A00603D22 /* LoginListMenuTableCell.m in Sources */,
+				06099CAB203AA1900060831A /* MultipleTicketStatusChange.m in Sources */,
+				06099CA5203AA14B0060831A /* MultipleTicketSelectView.m in Sources */,
 				0634EB5120370EC2002CB4E8 /* AllAboutTicketCell2.m in Sources */,
 				D92C35D11F750FDE001DD67D /* LGPlusButton.m in Sources */,
 				061E310B2035595B00603D22 /* LoginDetailPage2.m in Sources */,
 				0634EB5620370ED5002CB4E8 /* AllAboutTicketCell3.m in Sources */,
+				06099CBC203AA30D0060831A /* MultipleTicketStatusChangeCell.m in Sources */,
 				D9EB9F771E07C2F00001115F /* TicketTableViewCell.m in Sources */,
+				06099CC1203AA3240060831A /* MergeTicketViewCell.m in Sources */,
 				D9EB9FA91E07C3270001115F /* AboutViewController.m in Sources */,
 				D953D53E1FA321420077D519 /* AddRequester.m in Sources */,
 				D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */,
