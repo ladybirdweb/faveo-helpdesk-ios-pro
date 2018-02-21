@@ -3119,7 +3119,8 @@
                           @[
                               
                               // @[]
-                              @[@"Show Filter",@"Clear All",@"Exit"]
+                              // @[@"Show Filter",@"Clear All",@"Exit"]
+                              @[@"Show Filter",@"Exit"]
                               
                               
                               ],
@@ -3192,14 +3193,14 @@
         
     }
     
-    if(titleButtonIndex==0 && rightIndex==1 )
-    {
-        NSLog(@"clear All");
-        
-        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-        [self.navigationController pushViewController:sort animated:YES];
-        
-    }
+//    if(titleButtonIndex==0 && rightIndex==1 )
+//    {
+//        NSLog(@"clear All");
+//        
+//        SortingViewController * sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+//        [self.navigationController pushViewController:sort animated:YES];
+//        
+//    }
     
     // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )

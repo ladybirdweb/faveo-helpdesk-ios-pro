@@ -2778,7 +2778,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jeQ-mr-T6r" customClass="IQPreviousNextView">
-                                <rect key="frame" x="7" y="329" width="403" height="200"/>
+                                <rect key="frame" x="7" y="329" width="403" height="351"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9EP-QV-KyI">
                                         <rect key="frame" x="8" y="8" width="374" height="54"/>
@@ -2867,12 +2867,24 @@
                                             <action selector="btnLogin:" destination="99b-SL-Zyv" eventType="touchUpInside" id="OJ3-eh-PRp"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzM-1A-KHl">
+                                        <rect key="frame" x="87" y="240" width="92" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="k60-oq-uJC"/>
+                                        </constraints>
+                                        <state key="normal" title="Facebbok"/>
+                                        <connections>
+                                            <action selector="googleClicked:" destination="99b-SL-Zyv" eventType="touchUpInside" id="kHd-M0-eji"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="TPV-e2-Fdo"/>
+                                    <constraint firstItem="rzM-1A-KHl" firstAttribute="leading" secondItem="VP0-T6-DvK" secondAttribute="leading" id="9AH-j2-GWb"/>
+                                    <constraint firstAttribute="height" constant="351" id="TPV-e2-Fdo"/>
+                                    <constraint firstItem="rzM-1A-KHl" firstAttribute="top" secondItem="VP0-T6-DvK" secondAttribute="bottom" constant="49" id="W2R-JO-NyZ"/>
                                     <constraint firstItem="9EP-QV-KyI" firstAttribute="top" secondItem="jeQ-mr-T6r" secondAttribute="top" constant="8" id="boa-x1-aTw"/>
-                                    <constraint firstAttribute="bottom" secondItem="VP0-T6-DvK" secondAttribute="bottom" constant="9" id="dN7-7g-dX8"/>
+                                    <constraint firstAttribute="bottom" secondItem="VP0-T6-DvK" secondAttribute="bottom" constant="160" id="dN7-7g-dX8"/>
                                     <constraint firstItem="fwd-k3-hsw" firstAttribute="leading" secondItem="jeQ-mr-T6r" secondAttribute="leading" constant="8" id="jn0-la-GHT"/>
                                     <constraint firstItem="9EP-QV-KyI" firstAttribute="leading" secondItem="jeQ-mr-T6r" secondAttribute="leading" constant="8" id="mCv-V2-2rP"/>
                                     <constraint firstAttribute="trailing" secondItem="fwd-k3-hsw" secondAttribute="trailing" constant="21" id="tJ9-tz-ia7"/>
@@ -2912,7 +2924,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cWc-zr-QgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="245.59999999999999" y="-483.50824587706148"/>
+            <point key="canvasLocation" x="244.92753623188409" y="-484.23913043478262"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oBe-6Z-TYm">
@@ -4712,6 +4724,7 @@
                         <outlet property="lastNameTextField" destination="TE8-6U-t8w" id="XaJ-td-RtR"/>
                         <outlet property="mobileTextField" destination="B5H-Hb-bxG" id="TSC-v4-GZK"/>
                         <outlet property="phoneTextField" destination="ZMh-JL-4Z6" id="fqz-hT-Ve5"/>
+                        <outlet property="submitButton" destination="jNk-s8-29n" id="gfv-ag-uBa"/>
                         <outlet property="switch1" destination="rMJ-ig-B6v" id="dmE-mb-PbV"/>
                         <outlet property="userNameTextField" destination="GRB-yE-1jc" id="Yqw-YW-pZI"/>
                         <outlet property="userStateChangeView" destination="lqI-ro-Jz9" id="VLd-gq-M1J"/>
@@ -5864,7 +5877,7 @@
         <image name="about2" width="24" height="24"/>
         <image name="call1" width="512" height="512"/>
         <image name="clientlist2" width="24" height="24"/>
-        <image name="closed2" width="512" height="512"/>
+        <image name="closed2" width="24" height="24"/>
         <image name="createTicket" width="512" height="512"/>
         <image name="default_pic" width="512" height="512"/>
         <image name="ic_forward" width="512" height="512"/>

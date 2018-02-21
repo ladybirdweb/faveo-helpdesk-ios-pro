@@ -1535,7 +1535,7 @@
                           @[
                               
                               // @[]
-                              @[@"Show Filter",@"Clear All",@"Exit"]
+                              @[@"Show Filter",@"Exit"]
                               
                               
                               ],
@@ -1588,14 +1588,14 @@
         
     }
     
-    if(titleButtonIndex==0 && rightIndex==1 )
-    {
-        NSLog(@"clear All");
-        
-        ClosedTicketsViewController * close=[self.storyboard instantiateViewControllerWithIdentifier:@"ClosedTicketsID"];
-        [self.navigationController pushViewController:close animated:YES];
-        
-    }
+//    if(titleButtonIndex==0 && rightIndex==1 )
+//    {
+//        NSLog(@"clear All");
+//
+//        ClosedTicketsViewController * close=[self.storyboard instantiateViewControllerWithIdentifier:@"ClosedTicketsID"];
+//        [self.navigationController pushViewController:close animated:YES];
+//
+//    }
     
     // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )

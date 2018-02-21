@@ -1422,7 +1422,7 @@
                           @[
                               
                               // @[]
-                              @[@"Show Filter",@"Clear All",@"Exit"]
+                              @[@"Show Filter",@"Exit"]
                               
                               
                               ],
@@ -1475,14 +1475,14 @@
         
     }
     
-    if(titleButtonIndex==0 && rightIndex==1 )
-    {
-        NSLog(@"clear All");
-        
-        UnassignedTicketsViewController * un=[self.storyboard instantiateViewControllerWithIdentifier:@"UnassignedTicketsID"];
-        [self.navigationController pushViewController:un animated:YES];
-        
-    }
+//    if(titleButtonIndex==0 && rightIndex==1 )
+//    {
+//        NSLog(@"clear All");
+//
+//        UnassignedTicketsViewController * un=[self.storyboard instantiateViewControllerWithIdentifier:@"UnassignedTicketsID"];
+//        [self.navigationController pushViewController:un animated:YES];
+//
+//    }
     
     
     // sort by - Tciket title

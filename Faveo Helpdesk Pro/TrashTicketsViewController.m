@@ -1682,7 +1682,7 @@
                           @[
                               
                               // @[]
-                              @[@"Show Filter",@"Clear All",@"Exit"]
+                              @[@"Show Filter",@"Exit"]
                               
                               
                               ],
@@ -1736,14 +1736,14 @@
         [self.navigationController pushViewController:filter animated:YES];
         
     }
-    if(titleButtonIndex==0 && rightIndex==1 )
-    {
-        NSLog(@"clear All");
-        
-        TrashTicketsViewController * trash=[self.storyboard instantiateViewControllerWithIdentifier:@"TrashTicketsID"];
-        [self.navigationController pushViewController:trash animated:YES];
-        
-    }
+//    if(titleButtonIndex==0 && rightIndex==1 )
+//    {
+//        NSLog(@"clear All");
+//
+//        TrashTicketsViewController * trash=[self.storyboard instantiateViewControllerWithIdentifier:@"TrashTicketsID"];
+//        [self.navigationController pushViewController:trash animated:YES];
+//
+//    }
     
     // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )

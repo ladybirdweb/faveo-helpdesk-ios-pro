@@ -2503,7 +2503,8 @@
                           @[
                               
                               // @[]
-                              @[@"Show Filter",@"Clear All",@"Exit"]
+                           //   @[@"Show Filter",@"Clear All",@"Exit"]
+                              @[@"Show Filter",@"Exit"]
                               
                               
                               ],
@@ -2571,15 +2572,15 @@
         [self.navigationController pushViewController:filter animated:YES];
         
     }
-    if(titleButtonIndex==0 && rightIndex==1 )
-    {
-        NSLog(@"clear All");
-        
-        FilterLogic *fil=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
-        
-        [self.navigationController pushViewController:fil animated:YES];
-        
-    }
+//    if(titleButtonIndex==0 && rightIndex==1 )
+//    {
+//        NSLog(@"clear All");
+//        
+//        FilterLogic *fil=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
+//        
+//        [self.navigationController pushViewController:fil animated:YES];
+//        
+//    }
     
     // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )

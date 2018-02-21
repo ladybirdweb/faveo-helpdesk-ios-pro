@@ -79,6 +79,9 @@
     [_cancelLabel addGestureRecognizer:tap];
     [_mergeLabel addGestureRecognizer:tap2];
     
+    _cancelLabel.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    _mergeLabel.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style: UIBarButtonItemStylePlain target:self action:@selector(Back)];
     self.navigationItem.leftBarButtonItem = backButton;

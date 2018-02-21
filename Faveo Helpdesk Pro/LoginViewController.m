@@ -504,6 +504,7 @@
     //[[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
     //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     NSString *url=[NSString stringWithFormat:@"%@?url=%@",BILLING_API,baseURL];
+    NSLog(@"url at VeryfuBillingIS : %@",url);
    
 @try{
     MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -605,6 +606,84 @@
         
     }];
 }
+
+- (IBAction)googleClicked:(id)sender {
+    
+//    NSURL *url = [NSURL URLWithString:@"http://www.jamboreebliss.com/avinash/Faveo-Helpdesk-Pro/public/social/login/redirect/google"];
+//    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+//        [[UIApplication sharedApplication] openURL:url];
+//    }else {
+//
+//    }
+    
+    NSString *url=[NSString stringWithFormat:@"%@social/login/facebook",baseURL];
+    NSLog(@"URL at social login : %@",url);
+    
+    @try{
+        MyWebservices *webservices=[MyWebservices sharedInstance];
+        [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
+            if (error || [msg containsString:@"Error"]) {
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                if (msg) {
+                    if([msg isEqualToString:@"Error-402"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                    }else{
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        NSLog(@"Thread-verifySocialFacebook-error == %@",error.localizedDescription);
+                    }
+                    
+                }else if(error)  {
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    NSLog(@"Thread-verifySocialFacebook-error == %@",error.localizedDescription);
+                }
+                return ;
+            }
+            
+            if (json) {
+                NSLog(@"JSO-verifySocialFacebook-is: %@",json);
+            
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    NSString * str=[json objectForKey:@"result"];
+                    if([str isEqualToString:@"success"])
+                    {
+                        
+                        NSString *str2=[baseURL stringByAppendingString:@"social/login/facebook"];
+                   NSURL *url = [NSURL URLWithString:str2];
+                    if ([[UIApplication sharedApplication] canOpenURL:url])
+                       {
+                             [[UIApplication sharedApplication] openURL:url];
+                       }else {
+                        
+                            }
+                        
+                    }
+                
+                });
+
+            }
+            
+        }];
+    }@catch (NSException *exception)
+    {
+        // Print exception information
+        NSLog( @"NSException caught in verifyBilling method in Login ViewController " );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        // Cleanup, in both success and fail cases
+        NSLog( @"In finally block");
+        
+    }
+    
+    
+}
+
 
 
 @end

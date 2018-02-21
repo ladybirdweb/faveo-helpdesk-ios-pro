@@ -62,6 +62,9 @@
     [_cancelLabel addGestureRecognizer:tap];
     [_assignLabel addGestureRecognizer:tap2];
     
+    _cancelLabel.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    _assignLabel.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];

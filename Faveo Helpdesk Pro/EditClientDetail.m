@@ -128,7 +128,7 @@
         
     }
 
-    
+    _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
