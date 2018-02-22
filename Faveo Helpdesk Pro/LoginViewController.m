@@ -2,7 +2,7 @@
 //  LoginViewController.m
 //  SideMEnuDemo
 //
-//  Created by Narendra on 18/08/16.
+//  Created on 18/08/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -86,12 +86,6 @@
 {
     [_urlTextfield resignFirstResponder];
 }
-//- (IBAction)textFieldFinished:(id)sender
-//{
-//    // [sender resignFirstResponder];
-//}
-
-
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
@@ -145,9 +139,7 @@
             
             if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
             {
-                //connection unavailable
-                // [utils showAlertWithMessage:NO_INTERNET sendViewController:self];
-                
+    
                 //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
                 
                 [RMessage
@@ -161,8 +153,6 @@
                 //connection available
                 
                 [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Verifying URL","")];
-                
-                // NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/check-url?check-url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
                 
                 NSString *url=[NSString stringWithFormat:@"%@api/v1/helpdesk/url?url=%@&api_key=%@",baseURL,[baseURL substringToIndex:[baseURL length]-1],API_KEY];
                 NSLog(@"Check URL is :%@",url);
@@ -257,16 +247,14 @@
                         }
                     }@catch (NSException *exception)
                     {
-                        // Print exception information
-                        NSLog( @"NSException caught in Billing in Login ViewController" );
+                        [utils showAlertWithMessage:exception.name sendViewController:self];
                         NSLog( @"Name: %@", exception.name);
                         NSLog( @"Reason: %@", exception.reason );
                         return;
                     }
                     @finally
                     {
-                        // Cleanup, in both success and fail cases
-                        NSLog( @"In finally block");
+                        NSLog( @" I am in Validate URL method in Login ViewController" );
                         
                     }
                     
@@ -289,23 +277,9 @@
     
     if(textField == _urlTextfield)
     {
-        
         [self URLValidationMethod];
-      //  [self.urlTextfield resignFirstResponder];
         NSLog(@"Clicked on go");
-        //urlButton
-        
     }
-    
-//    if (textField == _userNameTextField) {
-//
-//        [_passcodeTextField becomeFirstResponder];
-//
-//    } else if (textField == _passcodeTextField) {
-//
-//        [textField resignFirstResponder];
-//
-//    }
     
     return YES;
 }
@@ -313,16 +287,6 @@
 
 - (IBAction)btnLogin:(id)sender {
     
-    
-    /* [_userNameTextField shakeWithCallback:^{
-     NSLog(@"Shaking has ended");
-     }];
-     
-     [_passcodeTextField shakeWithCallback:^{
-     NSLog(@"Shaking has ended");
-     }]; */
-    
-    //[utils ];
     if (((self.userNameTextField.text.length==0 || self.passcodeTextField.text.length==0)))
     {
         if (self.userNameTextField.text.length==0 && self.passcodeTextField.text.length==0){
@@ -441,24 +405,7 @@
                             
                            [RKDropdownAlert title:NSLocalizedString(@"Welcome.",nil) message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
-                            
-//                            if (self.navigationController.navigationBarHidden) {
-//                                [self.navigationController setNavigationBarHidden:NO];
-//                            }
-//                            
-//                            [RMessage showNotificationInViewController:self.navigationController
-//                                                                 title:NSLocalizedString(@"Welcome", nil)
-//                                                              subtitle:NSLocalizedString(@"You have logged in successfully.", nil)
-//                                                             iconImage:nil
-//                                                                  type:RMessageTypeSuccess
-//                                                        customTypeName:nil
-//                                                              duration:RMessageDurationAutomatic
-//                                                              callback:nil
-//                                                           buttonTitle:nil
-//                                                        buttonCallback:nil
-//                                                            atPosition:RMessagePositionNavBarOverlay
-//                                                  canBeDismissedByUser:YES];
-
+                    
                             
                             [self sendDeviceToken];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -468,8 +415,17 @@
                             [[self navigationController] setNavigationBarHidden:NO];
                         });
                     }
-                    @catch(NSException *ne) {
-                        NSLog(@"exception %@",ne);
+                    @catch (NSException *exception)
+                    {
+                        [utils showAlertWithMessage:exception.name sendViewController:self];
+                        NSLog( @"Name: %@", exception.name);
+                        NSLog( @"Reason: %@", exception.reason );
+                        return;
+                    }
+                    @finally
+                    {
+                        NSLog( @" I am in Login method in Login ViewController" );
+                        
                     }
                     
                 }else {
@@ -492,17 +448,10 @@
         
     }
     
-    
-    //  [self dismissViewControllerAnimated:NO completion:Nil];
-    
-    //[self.navigationController popViewControllerAnimated:YES];
-    // [[self navigationController] setNavigationBarHidden:NO];
-    
 }
 
 -(void)verifyBilling{
-    //[[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Access checking!"];
-    //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+  
     NSString *url=[NSString stringWithFormat:@"%@?url=%@",BILLING_API,baseURL];
     NSLog(@"url at VeryfuBillingIS : %@",url);
    
@@ -549,28 +498,21 @@
             });
             [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
             [userdefaults synchronize];
-            //            }else {
-            //
-            //            [[AppDelegate sharedAppdelegate] hideProgressView];
-            //            [utils showAlertWithMessage:NSLocalizedString(@"Access denied, to use pro version!",nil) sendViewController:self];
-            //
-            //            }
+        
             
         }
         
     }];
 }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught in verifyBilling method in Login ViewController " );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+        NSLog( @" I am in Verify Billing method in Login ViewController" );
         
     }
 }
@@ -668,16 +610,14 @@
         }];
     }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught in verifyBilling method in Login ViewController " );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+        NSLog( @" I am in getDependencies method in Login ViewController" );
         
     }
     

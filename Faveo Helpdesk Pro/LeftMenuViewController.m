@@ -2,7 +2,7 @@
 //  LeftMenuViewController.m
 //  SideMEnuDemo
 //
-//  Created by Narendra on 17/08/16.
+//  Created  on 17/08/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -61,20 +61,14 @@
     [self.tableView reloadData];
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-    
-    
-    
-    // Do any additional setup after loading the view from its nib.
-    // Do any additional setup after loading the view from its nib.
+ 
 }
 
 
 
 -(void)viewWillAppear:(BOOL)animated{
-    
     [self.tableView reloadData];
-    //[self.tableView reloadData];
-    
+    //[self.tableView reloadData]
 }
 
 -(void)update{
@@ -271,16 +265,14 @@
              ];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+             NSLog( @" I am in getDependencies method in Leftmenu ViewController" );
             
         }
     }
@@ -293,18 +285,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return 0;
-//}
-//
-//// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-//// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return ;
-//}
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -387,16 +367,14 @@
         }
     }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught in LeftMenu View Controller" );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+        NSLog( @" I am in did-deselect method in Leftmenu ViewController" );
         
     }
     
@@ -435,16 +413,14 @@
         }
     }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught in Logout Process in LeftMenu ViewController" );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+        NSLog( @" I am in Logout method in Leftmenu ViewController" );
         
     }
     

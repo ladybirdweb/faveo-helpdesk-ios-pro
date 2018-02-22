@@ -2,7 +2,7 @@
 //  ConversationViewController.m
 //  SideMEnuDemo
 //
-//  Created by Narendra on 16/09/16.
+//  Created on 16/09/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -143,18 +143,17 @@
         }];
   }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in reload method in Conversation ViewController\n" );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
 //            NSLog( @"Name: %@", exception.name);
 //            NSLog( @"Reason: %@", exception.reason );
-            return ;
+            return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-         //   NSLog( @"In finally block");
+            NSLog( @" I am in reload method in Conversation ViewController" );
             
         }
+
 
     }
 }
@@ -303,18 +302,17 @@
     
 }@catch (NSException *exception)
     {
-        // Print exception information
-//        NSLog( @"NSException caught in CellForRowAtIndexPath methos in Conversation ViewController\n" );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
 //        NSLog( @"Name: %@", exception.name);
 //        NSLog( @"Reason: %@", exception.reason );
-        return cell;
+       // return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-       // NSLog( @"In finally block");
+        NSLog( @" I am in cellForROwAtIndexPath method in Conversation ViewController" );
         
     }
+
 
     return cell;
 }

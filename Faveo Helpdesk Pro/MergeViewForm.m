@@ -142,6 +142,7 @@
 {
     [[AppDelegate sharedAppdelegate] showProgressView];
     NSLog(@"Ckicked on merge button");
+   
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         
@@ -210,8 +211,9 @@
       NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/merge?api_key=%@&token=%@&p_id=%@&t_id[]=%@&title=%@&reason=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],subject_id,filteredID,_newtitleTextview.text,_reasonTextView.text];
         
         NSLog(@"Url is : %@",url);
-     //   NSLog(@"Url is : %@",url);
-        
+  
+    
+@try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -302,6 +304,19 @@
             NSLog(@"Thread-NO5-postMerge-closed");
             
         }];
+}@catch (NSException *exception)
+        {
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in mergeButton method in MergeViewForm ViewController" );
+            
+        }
+        
     }
 }
 

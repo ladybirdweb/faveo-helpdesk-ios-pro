@@ -2,7 +2,7 @@
 //  TicketDetailViewController.m
 //  SideMEnuDemo
 //
-//  Created by Narendra on 07/09/16.
+//  Created  on 07/09/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -360,18 +360,17 @@
              ];
         }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
 //            NSLog( @"Name: %@", exception.name);
 //            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            NSLog( @" I am in getDependencies method in TicketDetail ViewController" );
             
         }
+
     }
     NSLog(@"Thread-NO2-getDependencies()-closed");
 }
@@ -468,7 +467,8 @@
         else{
       //   NSLog(@"URL is : %@",url);
         
-        MyWebservices *webservices=[MyWebservices sharedInstance];
+  @try{
+            MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -539,7 +539,21 @@
             NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
         }]; // end webservice call
+     }@catch (NSException *exception)
+            {
+                [utils showAlertWithMessage:exception.name sendViewController:self];
+//                NSLog( @"Name: %@", exception.name);
+//                NSLog( @"Reason: %@", exception.reason );
+                return;
+            }
+            @finally
+            {
+                NSLog( @" I am in changeStatus1 method in TicketDetail ViewController" );
+                
+            }
+
         }
+            
     }//end rechability
 }
 
@@ -567,7 +581,7 @@
             
         }else{
         
-        
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -630,41 +644,25 @@
                     
                 }
                    
-//                    NSString * msg12= [[json objectForKey:@"response"] objectForKey:@"message"];
-//                    NSLog(@"object is :%@",msg12);
-//
-//                    NSString * msg121= [object objectAtIndex:0];
-//                    NSLog(@"object is :%@",msg121);
-//
-//                  if([object isEqualToString:@"Status changed to Closed"]){
-//
-//                      [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-//
-//                      InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-//                      [self.navigationController pushViewController:inboxVC animated:YES];
-//
-//                      }else if([msg121 isEqualToString:@"Status changed to Closed"])
-//                    {
-//                        [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-//
-//                        InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-//                        [self.navigationController pushViewController:inboxVC animated:YES];
-//                    }else if([msg121 isEqualToString:@"Permission denied, you do not have permission to access the requested page."] || [msg121 hasPrefix:@"Permission denied"]){
-//
-//                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
-//                        }
-//
-//                    }}
-//                else
-//
-//                {
-//                    [utils showAlertWithMessage:NSLocalizedString(@"ERROR", nil) sendViewController:self];
-//                }
+
             } // end json
             
             NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
         }]; // end webservice call
+    }@catch (NSException *exception)
+            {
+                [utils showAlertWithMessage:exception.name sendViewController:self];
+//                NSLog( @"Name: %@", exception.name);
+//                NSLog( @"Reason: %@", exception.reason );
+                return;
+            }
+            @finally
+            {
+                NSLog( @" I am in chnageStatus2 method in TicketDetail ViewController" );
+                
+            }
+
         }
     }//end rechability
 }
@@ -691,7 +689,7 @@
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }else{
-        
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -758,6 +756,19 @@
             NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
         }]; // end webservice call
+    }@catch (NSException *exception)
+            {
+                [utils showAlertWithMessage:exception.name sendViewController:self];
+//                NSLog( @"Name: %@", exception.name);
+//                NSLog( @"Reason: %@", exception.reason );
+                return;
+            }
+            @finally
+            {
+                NSLog( @" I am in changeStatus3 method in TicketDetail ViewController" );
+                
+            }
+
         }
     }//end rechability
 }
@@ -784,7 +795,7 @@
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }else{
-        
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -855,6 +866,19 @@
             NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
         }]; // end webservice call
+    }@catch (NSException *exception)
+            {
+                [utils showAlertWithMessage:exception.name sendViewController:self];
+//                NSLog( @"Name: %@", exception.name);
+//                NSLog( @"Reason: %@", exception.reason );
+                return;
+            }
+            @finally
+            {
+                NSLog( @" I am in chnageStatus4 method in TicketDetail ViewController" );
+                
+            }
+
         }
     }//end rechability
 }
@@ -1247,20 +1271,19 @@
             NSLog(@"Thread-NO5-postCreateTicket-closed");
             
         }];
-  }@catch (NSException *exception)
+ }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in Post-Internal-Note method in TicketDetail ViewController\n" );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
 //            NSLog( @"Name: %@", exception.name);
 //            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            NSLog( @" I am in InternalNote method in TicketDetail ViewController" );
             
         }
+
 
     }
 }
@@ -1356,18 +1379,17 @@
         }];
   }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in post-replay methos in TicketDetail ViewController\n" );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
 //            NSLog( @"Name: %@", exception.name);
 //            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            NSLog( @" I am in replatTicket method in TicketDetail ViewController" );
             
         }
+
 
     }
     

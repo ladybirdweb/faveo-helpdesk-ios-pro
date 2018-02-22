@@ -198,13 +198,6 @@
         type_idArray=[[NSMutableArray alloc]init];
         
         
-        //        for (NSDictionary *dicc in statusArray) {
-        //            if ([dicc objectForKey:@"name"]) {
-        //                [statusMU addObject:[dicc objectForKey:@"name"]];
-        //                [status_idArray addObject:[dicc objectForKey:@"id"]];
-        //            }
-        //        }
-        
         for (NSMutableDictionary *dicc in staffsArray) {
             if ([dicc objectForKey:@"email"]) {
                 [staffMU addObject:[dicc objectForKey:@"email"]];
@@ -272,16 +265,14 @@
         
     }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught in read-from-Plist methos in Detail ViewController\n" );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
-        return ;
+        return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+        NSLog( @" I am in readFromPlist method in FilterView ViewController" );
         
     }
     

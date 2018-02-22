@@ -2,7 +2,7 @@
 //  NotificationViewController.m
 //  Faveo Helpdesk Pro
 //
-//  Created by Narendra on 14/07/17.
+//  Created on 14/07/17.
 //  Copyright © 2017 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -168,16 +168,14 @@
         }];
     }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in reload method in Notification ViewController\n" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
-            return ;
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            NSLog( @" I am in reload method in Notification ViewController" );
             
         }
 
@@ -328,16 +326,14 @@
         }];
     }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in load-more methos in Notification ViewController\n" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
-            return ;
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-       //    NSLog( @"In finally block");
+            NSLog( @" I am in loadMore method in Notification ViewController" );
             
         }
 
@@ -381,120 +377,137 @@
         NSLog(@"Dict is : %@", finaldic);
         
     
-        
-        NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
-        
-        NSString * seen=[NSString stringWithFormat:@"%i",1];
-       
-        NSString * str=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"seen"]];
-        
-       
-        [Utils isEmpty:str];
-        
-        if  (![Utils isEmpty:str] && ![str isEqualToString:@""])
+@try{
+    
+    
+    NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
+    
+    NSString * seen=[NSString stringWithFormat:@"%i",1];
+    
+    NSString * str=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"seen"]];
+    
+    
+    [Utils isEmpty:str];
+    
+    if  (![Utils isEmpty:str] && ![str isEqualToString:@""])
+    {
+        if([str isEqualToString:seen])
         {
-               if([str isEqualToString:seen])
-                {
             
-                cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
-                }else
-                {
-                     cell.viewMain.backgroundColor=[UIColor clearColor];
-                    NSLog(@"I am in else condition..!");
-                }
-        }
-        else
+            cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
+        }else
         {
+            cell.viewMain.backgroundColor=[UIColor clearColor];
             NSLog(@"I am in else condition..!");
         }
+    }
+    else
+    {
+        NSLog(@"I am in else condition..!");
+    }
+    
+    
+    // cell.msglbl.text=[finaldic objectForKey:@"message"];
+    
+    if ( ( ![[finaldic objectForKey:@"message"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"message"] length] != 0 ) )
+    {
+        cell.msglbl.text=[finaldic objectForKey:@"message"];
+    }
+    else
+    {
+        cell.msglbl.text= NSLocalizedString(@"Not Available",nil);
+    }
+    
+    
+    // cell.timelbl.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]];
+    
+    if ( ( ![[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]] isEqual:[NSNull null]] ) && ( [[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]] length] != 0 ) )
+    {
+        cell.timelbl.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]];
+    }
+    else
+    {
+        cell.timelbl.text= NSLocalizedString(@"Not Available",nil);
+    }
+    
+    
+    //  NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
+    
+    
+    if(( ![[finaldic objectForKey:@"requester"] isEqual:[NSNull null]] ) )
+    {
+        // [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
         
-
-        // cell.msglbl.text=[finaldic objectForKey:@"message"];
+        // changed_by_user_name
+        NSString *fname= [profileDict objectForKey:@"changed_by_first_name"];
+        NSString *lname= [profileDict objectForKey:@"changed_by_last_name"];
+        NSString *userName= [profileDict objectForKey:@"changed_by_user_name"];
         
-        if ( ( ![[finaldic objectForKey:@"message"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"message"] length] != 0 ) )
+        [Utils isEmpty:fname];
+        [Utils isEmpty:lname];
+        [Utils isEmpty:userName];
+        
+        if (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
         {
-            cell.msglbl.text=[finaldic objectForKey:@"message"];
-        }
-        else
-        {
-            cell.msglbl.text= NSLocalizedString(@"Not Available",nil);
-        }
-       
-
-       // cell.timelbl.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]];
-        
-        if ( ( ![[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]] isEqual:[NSNull null]] ) && ( [[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]] length] != 0 ) )
-        {
-            cell.timelbl.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]];
-        }
-        else
-        {
-            cell.timelbl.text= NSLocalizedString(@"Not Available",nil);
-        }
-      
-        
-      //  NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
-        
-        
-        if(( ![[finaldic objectForKey:@"requester"] isEqual:[NSNull null]] ) )
-        {
-           // [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
-           
-            // changed_by_user_name
-            NSString *fname= [profileDict objectForKey:@"changed_by_first_name"];
-            NSString *lname= [profileDict objectForKey:@"changed_by_last_name"];
-            NSString *userName= [profileDict objectForKey:@"changed_by_user_name"];
-            
-            [Utils isEmpty:fname];
-            [Utils isEmpty:lname];
-            [Utils isEmpty:userName];
-            
-            if (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+            if(![Utils isEmpty:fname] && ![Utils isEmpty:lname])
             {
-                  if(![Utils isEmpty:fname] && ![Utils isEmpty:lname])
-                  {
-                      cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
-                  }
-                else
-                {
-                    cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
-                }
-            }else if(![Utils isEmpty:userName])
-            {
-                cell.name.text= [profileDict objectForKey:@"changed_by_user_name"];
+                cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
             }
             else
             {
-               // cell.name.text=@"Not Availabel";
-                cell.name.text= NSLocalizedString(@"Not Available",nil);
+                cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
             }
-            
-            if(![Utils isEmpty:fname])
-            {
-                if([[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".png"] )
-                {
-                    [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
-                }else
-                {
-                    [cell.profilePicView setImageWithString:fname color:nil ];
-                }
-                
-            }
-            else{
-                [cell.profilePicView setImageWithString:userName color:nil ];
-            }
-            
-
-            
-            
-         //   cell.name.text=[NSString stringWithFormat:@"%@ %@",[profileDict objectForKey:@"changed_by_first_name"],[profileDict objectForKey:@"changed_by_last_name"]];
+        }else if(![Utils isEmpty:userName])
+        {
+            cell.name.text= [profileDict objectForKey:@"changed_by_user_name"];
         }
-        else{
-            
-            [cell setUserProfileimage:@"default_pic.png"];
+        else
+        {
+            // cell.name.text=@"Not Availabel";
             cell.name.text= NSLocalizedString(@"Not Available",nil);
         }
+        
+        if(![Utils isEmpty:fname])
+        {
+            if([[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+            {
+                [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
+            }else
+            {
+                [cell.profilePicView setImageWithString:fname color:nil ];
+            }
             
+        }
+        else{
+            [cell.profilePicView setImageWithString:userName color:nil ];
+        }
+        
+        
+        
+        
+        //   cell.name.text=[NSString stringWithFormat:@"%@ %@",[profileDict objectForKey:@"changed_by_first_name"],[profileDict objectForKey:@"changed_by_last_name"]];
+    }
+    else{
+        
+        [cell setUserProfileimage:@"default_pic.png"];
+         cell.name.text= NSLocalizedString(@"Not Available",nil);
+    }
+    
+    
+    
+  }@catch (NSException *exception)
+        {
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+          //  NSLog( @"Reason: %@", exception.reason );
+            
+        }
+        @finally
+        {
+            NSLog( @" I am in cellForROwAtINdexPAth method in Notification ViewController" );
+            
+        }
+        
             //[[self.tableView didSelectRowAtIndexPath] ];
         
         return cell;
@@ -514,7 +527,8 @@
     TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
     
     ClientDetailViewController *clientDetail=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
-    
+
+@try{
     NSString *sen=[finaldic objectForKey:@"senario"];
     NSLog(@"Senario is : %@",sen);
     
@@ -558,6 +572,19 @@
         globalVariables.mobileNumberInUserList=@"";
         globalVariables.userNameInUserList=[profileDict objectForKey:@"changed_by_user_name"];
         [self.navigationController pushViewController:clientDetail animated:YES];
+    }
+    
+}@catch (NSException *exception)
+    {
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in didSelectRowMethod method in Notification ViewController" );
+        
     }
     
 }

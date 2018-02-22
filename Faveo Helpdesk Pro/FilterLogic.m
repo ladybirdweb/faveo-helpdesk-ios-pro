@@ -208,7 +208,7 @@
 
 -(void)tapDetected{
     
-    
+@try{
     NSLog(@"Clicked on Asign");
     if (!selectedArray.count) {
         
@@ -223,7 +223,18 @@
         MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
+ }@catch (NSException *exception)
+    {
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in selectAssigneeButton method in FilterLogic ViewController" );
+        
+    }
     
     
 }
@@ -232,7 +243,7 @@
 {
     NSLog(@"Clicked on merge");
     
-    
+@try{
     if (!selectedArray.count) {
         
         [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
@@ -258,6 +269,19 @@
             MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
             [self.navigationController pushViewController:merge animated:YES];
         }
+    }
+    
+}@catch (NSException *exception)
+    {
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in mergeButtonClicked method in FilterLogic ViewController" );
+        
     }
 }
 
@@ -317,9 +341,6 @@
         
         
     }else {
-        
-        //              NSString * url= [NSString stringWithFormat:@"%@api/v2/helpdesk/get-tickets?token=%@&api=%@&show=%@&departments=%@&priority=%@&types=%@&source=%@&status=%@&assigned=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],apiValue,showInbox,dep111,globalVariables.prioo1,globalVariables.typee1,globalVariables.sourcee1,globalVariables.statuss1,assignee111];
-        //            NSLog(@"URL is : %@",url);
         
         
         if([globalVariables.filterId isEqualToString:@"INBOXFilter"]){ // Tikcet Filter

@@ -2,7 +2,7 @@
 //  InboxViewController.m
 //  SideMEnuDemo
 //
-//  Created by Narendra on 19/08/16.
+//  Created on 19/08/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -183,16 +183,7 @@
     [self getDependencies];
     [self reload];
    
-    
-    //    UIBarButtonItem* status = [[UIBarButtonItem alloc] initWithTitle:@"Change Status" style:UIBarButtonItemStylePlain target:self action:@selector(onNavButtonTapped:event:)];
-    // [navbar setBarTintColor:[UIColor lightGrayColor]];
-    //  [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor]];
-    
-    //    navItem.rightBarButtonItem = status;
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-    
-    
-    
     
 }
 
@@ -418,7 +409,7 @@
 
 -(void)tapDetected{
     
-    
+@try{
     NSLog(@"Clicked on Asign");
     if (!selectedArray.count) {
         
@@ -434,7 +425,18 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
-    
+}@catch (NSException *exception)
+    {
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in clickedOnAssignButton method in Inbox ViewController" );
+        
+    }
     
 }
 
@@ -442,7 +444,7 @@
 {
     NSLog(@"Clicked on merge");
     
-
+@try{
     if (!selectedArray.count) {
         
         [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
@@ -475,6 +477,18 @@
 
              [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
         }
+    }
+}@catch (NSException *exception)
+    {
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in mergeButtonCicked method in Inbox ViewController" );
+        
     }
 }
 
@@ -629,16 +643,14 @@
             }];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            // NSLog( @"NSException caught in reload method in Inbox ViewController " );
-            // NSLog( @"Name: %@", exception.name);
-            // NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in reload method in Inbox ViewController" );
             
         }
     }
@@ -772,16 +784,14 @@
              ];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //    NSLog( @"In finally block");
+            NSLog( @" I am in getDependencies method in Inbox ViewController" );
             
         }
     }
@@ -981,7 +991,7 @@
             //     NSLog(@"String is : %@",szResult);
             NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
-            
+
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices getNextPageURLInbox:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
@@ -1042,16 +1052,14 @@
             }];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in loadMore method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in loadMore method in Inobx ViewController" );
             
         }
     }

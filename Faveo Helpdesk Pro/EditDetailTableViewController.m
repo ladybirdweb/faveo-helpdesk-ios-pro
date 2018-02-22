@@ -105,23 +105,16 @@
     [self.view addSubview:_imgViewLoading];
     [self.imgViewLoading.layer addAnimation:[self imageAnimationForEmptyDataSet] forKey:@"transform"];
     
-    //_activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    //_activityIndicatorObject.center =CGPointMake(self.view.frame.size.width/2,(self.view.frame.size.height/2)-100);
-    // _activityIndicatorObject.color=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
-    //[self.view addSubview:_activityIndicatorObject];
-    
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
-    // _subjectTextField.text=globalVariables.title;
+ 
     userDefaults=[NSUserDefaults standardUserDefaults];
-    //[_activityIndicatorObject startAnimating];
-    [self reload];
-    
 
-   
+    [self reload];
     [self readFromPlist];
+    
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
-    // Do any additional setup after loading the view.
+   
 }
 
 - (void)textViewDidChange:(UITextView *)textView
@@ -148,11 +141,9 @@
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
-        //connection unavailable
+    
         [_imgViewLoading setHidden:YES];
-        // [_activityIndicatorObject stopAnimating];
-        //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
+
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
         }
@@ -216,23 +207,10 @@
                     NSDictionary *dic= [json objectForKey:@"result"];
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            
-                            //                        _clientNameTextField.text=[NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"first_name"],[dic objectForKey:@"last_name"]];
-                            //_createdDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"created_at"]];
-                            
-//                            if (([[dic objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"first_name"] length] == 0 )) {
-//                                _firstnameTextField.text=NSLocalizedString(@"Not Available",nil);
-//                            }else _firstnameTextField.text=[dic objectForKey:@"first_name"];
-                            
-                            //                        if (([[dic objectForKey:@"last_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"last_name"] length] == 0 )) {
-                            //                            _lastnameTextField.text=NSLocalizedString(@"Not Available",nil);
-                            //                        }else _lastnameTextField.text= [dic objectForKey:@"last_name"];
+                    
                             
                             globalVariables.ticket_number=[dic objectForKey:@"ticket_number"];
-                            //globalVariables.title=[dic objectForKey:@"title"];
-                          
-                            //_subjectTextField.text=[dic objectForKey:@"title"];
-                            
+            
                             AssignID=[NSString stringWithFormat:@"%@", [dic objectForKey:@"assignee_id"]];
                             //______________________________________________________________________________________________________
                             ////////////////for UTF-8 data encoding ///////
@@ -308,16 +286,6 @@
                             ///////////////////////////////////////////////////
                             //____________________________________________________________________________________________________
                             
-
-                            
-                            
-                           // _emailTextField.text=[dic objectForKey:@"email"];
-                            //_lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
-                            
-                            
-                            // _deptTextField.text= [dic objectForKey:@"dept_name"];
-                            // _slaTextField.text=[dic objectForKey:@"sla_name"];
-                            
                             if (([[dic objectForKey:@"type_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"type_name"] length] == 0 )) {
                                 
                             }else _typeTextField.text=[dic objectForKey:@"type_name"];
@@ -369,18 +337,17 @@
             }];
         }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in reload method in Detail ViewController\n" );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
 //            NSLog( @"Name: %@", exception.name);
 //            NSLog( @"Reason: %@", exception.reason );
-            return ;
+            return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            NSLog( @" I am in reload method in EditTicketDetail ViewController" );
             
         }
+
         
     }
 }
@@ -432,14 +399,7 @@
         
         [staffMU insertObject:@"Select Assignee" atIndex:0];
         [staff_idArray insertObject:@"" atIndex:0];
-        
-//        for (NSMutableDictionary *dicc in staffsArray) {
-//            if ([dicc objectForKey:@"email"]) {
-//                [staffMU addObject:[dicc objectForKey:@"email"]];
-//                [staff_idArray addObject:[dicc objectForKey:@"id"]];
-//            }
-//
-//        }
+    
         
         
         for (NSMutableDictionary *dicc in staffsArray) {
@@ -534,24 +494,24 @@
         
     }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught in read-from-Plist methos in Detail ViewController\n" );
-        NSLog( @"Name: %@", exception.name);
-        NSLog( @"Reason: %@", exception.reason );
-        return ;
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+//        NSLog( @"Name: %@", exception.name);
+//        NSLog( @"Reason: %@", exception.reason );
+        return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+        NSLog( @" I am in readFromPList method in EditTIcketDetail ViewController" );
         
     }
+
     
 }
 
 
 
 - (IBAction)statusClicked:(id)sender {
+@try{
    // [_subjectTextField resignFirstResponder];
     if (!_statusArray||!_statusArray.count) {
         _statusTextField.text=NSLocalizedString(@"Not Available",nil);
@@ -559,9 +519,23 @@
     }else{
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Status",nil) rows:_statusArray initialSelection:0 target:self successAction:@selector(statusWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
+}@catch (NSException *exception)
+    {
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+//        NSLog( @"Name: %@", exception.name);
+//        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in statusCLicked method in EditTicketDetail ViewController" );
+        
+    }
+
 }
 
 - (IBAction)slaClicked:(id)sender {
+
    // [_subjectTextField resignFirstResponder];
     
     if (!_slaPlansArray||!_slaPlansArray.count) {
@@ -589,7 +563,7 @@
 
 
 - (IBAction)priorityClicked:(id)sender {
-    
+@try{
     [self.view endEditing:YES];
     [_priorityTextField resignFirstResponder];
     //[_subjectTextField resignFirstResponder];
@@ -600,10 +574,24 @@
     }else{
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Priority",nil) rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
+ }@catch (NSException *exception)
+    {
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+//        NSLog( @"Name: %@", exception.name);
+//        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in priorityCLicked method in EditTicketDetail ViewController" );
+        
+    }
+
 }
 
 - (IBAction)helpTopicClicked:(id)sender
 {
+@try{
     [self.view endEditing:YES];
     //[_subjectTextField resignFirstResponder];
     [_helpTopicTextField resignFirstResponder];
@@ -613,9 +601,23 @@
     }else{
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Helptopic",nil) rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
+}@catch (NSException *exception)
+    {
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+//        NSLog( @"Name: %@", exception.name);
+//        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in helpTopicCLicked method in EditTicketDteails ViewController" );
+        
+    }
+
 }
 - (IBAction)sourceClicked:(id)sender
 {
+@try{
     [self.view endEditing:YES];
    // [_subjectTextField resignFirstResponder];
     [_sourceTextField resignFirstResponder];
@@ -625,9 +627,22 @@
     }else{
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Source",nil) rows:_sourceArray initialSelection:0 target:self successAction:@selector(sourceWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
+}@catch (NSException *exception)
+    {
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+//        NSLog( @"Name: %@", exception.name);
+//        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in spurceCLicked method in EditTicketDetail ViewController" );
+        
+    }
+
 }
 - (IBAction)typeClicked:(id)sender {
-    
+@try{
     [self.view endEditing:YES];
     [_typeTextField resignFirstResponder];
     if (!_typeArray||![_typeArray count]) {
@@ -637,10 +652,24 @@
     }else{
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Ticket Type",nil) rows:_typeArray initialSelection:0 target:self successAction:@selector(typeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
+}@catch (NSException *exception)
+    {
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+//        NSLog( @"Name: %@", exception.name);
+//        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in typeClicked method in editTciketDetail ViewController" );
+        
+    }
+
 }
 
 - (IBAction)assignClicked:(id)sender
 {
+@try{
     [self.view endEditing:YES];
     [_assinTextField resignFirstResponder];
     if (!_assignArray||!_assignArray.count) {
@@ -648,7 +677,20 @@
         source_id=0;
     }else{
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
-}
+     }
+}@catch (NSException *exception)
+    {
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+//        NSLog( @"Name: %@", exception.name);
+//        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in assignClicked method in EditTicketDetails ViewController" );
+        
+    }
+
 }
 
 - (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
@@ -742,61 +784,13 @@
             NSLog(@"IDDDDDDDD id : %@",staffID);
              NSLog(@"IDDDDDDDD id : %@",staffID);
         }
-//        else if ( [staffID isEqualToString:@""])
-//                    {
-//                         staffID=@"0";
-//                    }
-        
-//        NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
-//        NSLog(@"stffId is : %@",staffID);
-//        NSLog(@"stffId is : %@",staffID);
-//
-//        if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@"<null>"])
-//        {
-//
-//            staffID=@"";
-//        }
-//
-//       if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@"<null>"])
-//        {
-//
-//            staffID=@"0";
-//         //   staffID=AssignID;
-//
-//        }
-//        else if ( [staffID isEqualToString:@""])
-//        {
-//             staffID=@"0";
-//        }
-//        else
-//        {
-//            staffID= [NSString stringWithFormat:@"%@",staff_id];
-//
-//        }
-//
+
 
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/edit?api_key=%@&ip=%@&token=%@&ticket_id=%@&help_topic=%@&ticket_type=%@&ticket_priority=%@&ticket_source=%@&subject=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],globalVariables.iD,help_topic_id,type_id,priority_id,source_id,_subjectTextView.text,staffID];
         
         NSLog(@"URL is : %@",url);
-        
-//        NSString *one=@"<null>";
-//        NSString *two=@"%3Cnull%3E";
-//
-//        url=[url copy];
-//        if([url hasSuffix:one])
-//        {
-//            url=[url substringFromIndex:[one length]];
-//            url=[url stringByAppendingString:@"0"];
-//        }if([url hasSuffix:two])
-//        {
-//            url=[url substringFromIndex:[one length]];
-//             url=[url stringByAppendingString:@"0"];
-//        }
-        
-        
-        
-        
+    
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
@@ -871,10 +865,7 @@
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:inboxVC animated:YES];
                             
-                          //  TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-                           // [self.navigationController pushViewController:td animated:YES];
-                           // self.navigationItem.hidesBackButton = YES;
-                            
+                
                         });
                         
                         
@@ -923,18 +914,17 @@
             }];
         }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in save method in Detail ViewController\n" );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
 //            NSLog( @"Name: %@", exception.name);
 //            NSLog( @"Reason: %@", exception.reason );
-            return ;
+            return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            NSLog( @" I am in saveButton method in EditTicketDetail ViewController" );
             
         }
+
         
     }
 }
