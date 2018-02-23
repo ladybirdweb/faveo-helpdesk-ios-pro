@@ -2,7 +2,7 @@
 //  MyTicketsViewController.m
 //  SideMEnuDemo
 //
-//  Created  on 01/09/16.
+//  Created on 01/09/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -132,7 +132,7 @@
     UIImageView* img = [[UIImageView alloc] initWithImage:img3];
     
     //giving action to image
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(assignButtonClicked)];
     singleTap.numberOfTapsRequired = 1;
     [img setUserInteractionEnabled:YES];
     [img addGestureRecognizer:singleTap];
@@ -160,10 +160,10 @@
     // Do any additional setup after loading the view.
 }
 
--(void)tapDetected{
-    
-    
+-(void)assignButtonClicked{
     NSLog(@"Clicked on Asign");
+    
+@try{
     if (!selectedArray.count) {
         
         [utils showAlertWithMessage:@"Select The Tickets for Assign" sendViewController:self];
@@ -177,7 +177,19 @@
         MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
+}@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in assignButtonClicked method in MyTickets ViewController" );
+        
+    }
+
     
     
 }
@@ -186,7 +198,7 @@
 {
     NSLog(@"Clicked on merge");
     
-    
+@try{
     if (!selectedArray.count) {
         
         [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
@@ -213,6 +225,19 @@
             [self.navigationController pushViewController:merge animated:YES];
         }
     }
+ }@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in mergeButtonClicked method in MyTickets ViewController" );
+        
+    }
+
 }
 
 
@@ -349,17 +374,17 @@
             }];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in reload method in My-Tickets ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in reload method in MyTickets ViewController" );
+            
         }
+
     }
 }
 
@@ -536,18 +561,17 @@
             }];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in loadMore method in My-Tickets ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //   NSLog( @"In finally block");
+            NSLog( @" I am in loadMore method in MyTickets ViewController" );
             
         }
+
     }
 }
 
@@ -690,18 +714,17 @@
             
         } @catch (NSException *exception)
         {
-            // Print exception information
-            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
-            return cell;
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+           // return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+            NSLog( @" I am in CellForRowAtIndexPath method in MyTickets ViewController" );
             
         }
+
         // ______________________________________________________________________________________________________
         ////////////////for UTF-8 data encoding ///////
         //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
@@ -880,18 +903,17 @@
             
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
-            return cell;
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+         //   return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //     NSLog( @"In finally block");
+            NSLog( @" I am in cellForRowAtIndexPath method in MyTickets ViewController" );
             
         }
+
         
         return cell;
     }

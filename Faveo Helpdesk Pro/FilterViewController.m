@@ -265,14 +265,14 @@
         
     }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
     {
-        NSLog( @" I am in readFromPlist method in FilterView ViewController" );
+        NSLog( @" I am in readFromPlist method in FilterTickets ViewController" );
         
     }
     

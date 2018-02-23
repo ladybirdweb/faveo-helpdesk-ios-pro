@@ -2,7 +2,7 @@
 //  ClientDetailViewController.h
 //  SideMEnuDemo
 //
-//  Created by Narendra on 08/09/16.
+//  Created on 08/09/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 

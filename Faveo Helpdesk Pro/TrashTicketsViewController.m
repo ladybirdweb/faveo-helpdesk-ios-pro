@@ -2,7 +2,7 @@
 //  TrashTicketsViewController.m
 //  SideMEnuDemo
 //
-//  Created by Narendra on 01/09/16.
+//  Created on 01/09/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -344,15 +344,17 @@
             }];
         }@catch (NSException *exception)
         {
-            //            NSLog( @"NSException caught in reload method in TrashTickets ViewController\n" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // NSLog(@"In Finally block");
+            NSLog( @" I am in reload method in TrashTicket ViewController" );
+            
         }
+
     }
 }
 
@@ -475,18 +477,17 @@
              ];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //   NSLog( @"In finally block");
+            NSLog( @" I am in getDependencies method in TrashTicket ViewController" );
             
         }
+
     }
     NSLog(@"Thread-NO2-getDependencies()-closed");
 }
@@ -649,18 +650,17 @@
             }];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in loadmore methos in TrashTickets ViewController\n" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //   NSLog( @"In finally block");
+            NSLog( @" I am in LoadMore method in TrashTickets ViewController" );
             
         }
+
         
     }
 }
@@ -804,18 +804,17 @@
             
         } @catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
-            return cell;
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            //return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in CellForRowAtIndexPath method in TrashTickets ViewController" );
             
         }
+
         // ______________________________________________________________________________________________________
         ////////////////for UTF-8 data encoding ///////
         //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
@@ -1005,18 +1004,17 @@
             
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
-            return cell;
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            //return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in CellForRowAtIndexPath method in TrashTicket ViewController" );
             
         }
+
         
         return cell;
     }
@@ -1285,7 +1283,7 @@
                 
                 // message = "Status changed to Open";
                 
-                
+          @try{
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
                     if ([json objectForKey:@"response"]) {
@@ -1315,7 +1313,19 @@
                     
                     
                 } // end json
-                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+          }@catch (NSException *exception)
+                {
+                    NSLog( @"Name: %@", exception.name);
+                    NSLog( @"Reason: %@", exception.reason );
+                    [utils showAlertWithMessage:exception.name sendViewController:self];
+                    return;
+                }
+                @finally
+                {
+                    NSLog( @" I am in changeStatus1 method in TrashTicket ViewController" );
+                    
+                }
+
                 
             }];
             //  }
@@ -1385,7 +1395,7 @@
                     NSLog(@"Thread--NO4-call-postTicketStatusChange");
                     return;
                 }
-                
+        @try{
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
                     if ([json objectForKey:@"response"]) {
@@ -1416,8 +1426,20 @@
                     
                     
                 } // end json
-                
-                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+            
+        }@catch (NSException *exception)
+                {
+                    NSLog( @"Name: %@", exception.name);
+                    NSLog( @"Reason: %@", exception.reason );
+                    [utils showAlertWithMessage:exception.name sendViewController:self];
+                    return;
+                }
+                @finally
+                {
+                    NSLog( @" I am in changeStatus2 method in TrashTicket ViewController" );
+                    
+                }
+
                 
             }];
             //   }
@@ -1487,7 +1509,7 @@
                     NSLog(@"Thread--NO4-call-postTicketStatusChange");
                     return;
                 }
-                
+        @try{
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
                     if ([json objectForKey:@"response"]) {
@@ -1518,7 +1540,19 @@
                     
                 } // end json
                 
-                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+        }@catch (NSException *exception)
+                {
+                    NSLog( @"Name: %@", exception.name);
+                    NSLog( @"Reason: %@", exception.reason );
+                    [utils showAlertWithMessage:exception.name sendViewController:self];
+                    return;
+                }
+                @finally
+                {
+                    NSLog( @" I am in chnageStatus3 method in TrashTicket ViewController" );
+                    
+                }
+
                 
             }];
             // }
@@ -1596,7 +1630,7 @@
                     NSLog(@"Thread--NO4-call-postTicketStatusChange");
                     return;
                 }
-                
+        @try{
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
                     //  NSLog(@"JSON-CreateTicket-%@",json);
@@ -1646,8 +1680,18 @@
                     
                     
                 } // end json
-                
-                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+        }@catch (NSException *exception)
+                {
+                    NSLog( @"Name: %@", exception.name);
+                    NSLog( @"Reason: %@", exception.reason );
+                    [utils showAlertWithMessage:exception.name sendViewController:self];
+                    return;
+                }
+                @finally
+                {
+                    NSLog( @" I am in changeStatus5 method in TrashTicket ViewController" );
+                    
+                }
                 
             }];
             // }

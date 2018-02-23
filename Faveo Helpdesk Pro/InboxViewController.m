@@ -427,9 +427,9 @@
     
 }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -480,9 +480,9 @@
     }
 }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -643,9 +643,9 @@
             }];
         }@catch (NSException *exception)
         {
-            [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+             [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
@@ -784,9 +784,9 @@
              ];
         }@catch (NSException *exception)
         {
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
             [utils showAlertWithMessage:exception.name sendViewController:self];
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
@@ -1052,9 +1052,9 @@
             }];
         }@catch (NSException *exception)
         {
-            [utils showAlertWithMessage:exception.name sendViewController:self];
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+             [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
@@ -1157,7 +1157,7 @@
                 });
                 
             }
-            NSLog(@"Thread-NO5-getInbox-closed");
+          
             
         }];
         
@@ -1530,16 +1530,14 @@
                 
             } @catch (NSException *exception)
             {
-                // Print exception information
-                //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-                //            NSLog( @"Name: %@", exception.name);
-                //            NSLog( @"Reason: %@", exception.reason );
-                return cell;
+                NSLog( @"Name: %@", exception.name);
+                NSLog( @"Reason: %@", exception.reason );
+                [utils showAlertWithMessage:exception.name sendViewController:self];
+               // return;
             }
             @finally
             {
-                // Cleanup, in both success and fail cases
-                //   NSLog( @"In finally block");
+                NSLog( @" I am in cellForRowAtIndexPath method in Leftmenu ViewController" );
                 
             }
             // ______________________________________________________________________________________________________
@@ -1720,16 +1718,14 @@
                 
             }@catch (NSException *exception)
             {
-                // Print exception information
-                //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-                //            NSLog( @"Name: %@", exception.name);
-                //            NSLog( @"Reason: %@", exception.reason );
-                return cell;
+                NSLog( @"Name: %@", exception.name);
+                NSLog( @"Reason: %@", exception.reason );
+                [utils showAlertWithMessage:exception.name sendViewController:self];
+                //return;
             }
             @finally
             {
-                // Cleanup, in both success and fail cases
-                //     NSLog( @"In finally block");
+                NSLog( @" I am in cellForAtIndexPath method in Inobx ViewController" );
                 
             }
             

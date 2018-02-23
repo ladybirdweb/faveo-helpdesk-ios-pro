@@ -393,7 +393,7 @@
             [[AppDelegate sharedAppdelegate] showProgressView];
         
             NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/edit/%@?api_key=%@&token=%@&user_name=%@&first_name=%@&last_name=%@&email=%@&phone_number=%@&mobile=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.iD,API_KEY,[userDefaults objectForKey:@"token"],_userNameTextField.text,_firstNameTextField.text,_lastNameTextField.text,_emailTextField.text,_phoneTextField.text,_mobileTextField.text];
-
+    @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
       
@@ -483,6 +483,18 @@
                 NSLog(@"Thread-NO5-EditCustomerDetails-closed");
                 
             }];
+       }@catch (NSException *exception)
+            {
+                [utils showAlertWithMessage:exception.name sendViewController:self];
+                NSLog( @"Name: %@", exception.name);
+                NSLog( @"Reason: %@", exception.reason );
+                return;
+            }
+            @finally
+            {
+                NSLog( @" I am in doneSubmitButton method in EditClientDetails ViewController" );
+                
+            }
             
         }
 }
@@ -492,7 +504,7 @@
     
     if([sender isOn]){
         NSLog(@"User Deactivate Switch Clicked - ON");
-        
+ @try{
         BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
         
         [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Deactivate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
@@ -508,11 +520,24 @@
             _switch1.layer.cornerRadius = 16;
             _switch1.backgroundColor= [UIColor greenColor];
         }];
-        
+     
+     }@catch (NSException *exception)
+        {
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in activate-deactivate cleint method in EditCLientDetails ViewController" );
+            
+        }
         
     } else{
          NSLog(@"User Activate Switch Clicked - OFF");
-        
+    
+  @try{
         BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
         
         [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Activate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
@@ -526,6 +551,18 @@
             [_switch1 setOn:YES];
             _switch1.onTintColor= [UIColor redColor];
         }];
+    }@catch (NSException *exception)
+        {
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in activate-deactivate user method in EditCLiuentDetail ViewController" );
+            
+        }
     }
 }
 
@@ -545,9 +582,9 @@
         NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/status/%@?token=%@&status=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.iD,[userDefaults objectForKey:@"token"],statusDeActivate];
         
         NSLog(@"%@",url);
-        
+     
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
-        
         
         [webservices callPATCHAPIWithAPIName:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -664,7 +701,18 @@
             NSLog(@"Thread-NO5-EditCustomerDetails-Deactive-closed");
             
         }];
-        
+     }@catch (NSException *exception)
+        {
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in deActivate user method in EditClientDeatil ViewController" );
+            
+        }
     }
     
     
@@ -689,9 +737,8 @@
         NSLog(@"%@",url);
         NSLog(@"%@",url);
         
+  @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
-        
-        
         [webservices callPATCHAPIWithAPIName:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
             
@@ -784,7 +831,20 @@
             NSLog(@"Thread-NO5-EditCustomerDetails-active-closed");
             
         }];
-        
+      
+    }@catch (NSException *exception)
+        {
+            
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in activeUser method in EditCLientDetails ViewController" );
+            
+        }
     }
     
     

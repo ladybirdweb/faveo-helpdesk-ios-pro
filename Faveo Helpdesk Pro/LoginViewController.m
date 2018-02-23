@@ -247,9 +247,10 @@
                         }
                     }@catch (NSException *exception)
                     {
-                        [utils showAlertWithMessage:exception.name sendViewController:self];
                         NSLog( @"Name: %@", exception.name);
                         NSLog( @"Reason: %@", exception.reason );
+                        [utils showAlertWithMessage:exception.name sendViewController:self];
+
                         return;
                     }
                     @finally
@@ -417,9 +418,10 @@
                     }
                     @catch (NSException *exception)
                     {
-                        [utils showAlertWithMessage:exception.name sendViewController:self];
                         NSLog( @"Name: %@", exception.name);
                         NSLog( @"Reason: %@", exception.reason );
+                        [utils showAlertWithMessage:exception.name sendViewController:self];
+
                         return;
                     }
                     @finally
@@ -505,9 +507,10 @@
     }];
 }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+
         return;
     }
     @finally
@@ -528,6 +531,8 @@
     NSLog(@"refreshed token  %@",refreshedToken);
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     NSString *url=[NSString stringWithFormat:@"%@fcmtoken?user_id=%@&fcm_token=%@&os=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"user_id"],[[FIRInstanceID instanceID] token],@"ios"];
+  
+@try{
     MyWebservices *webservices=[MyWebservices sharedInstance];
     [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
         if (error || [msg containsString:@"Error"]) {
@@ -547,6 +552,18 @@
         }
         
     }];
+ }@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in sendDeviceToken method in Login ViewController" );
+        
+    }
 }
 
 - (IBAction)googleClicked:(id)sender {

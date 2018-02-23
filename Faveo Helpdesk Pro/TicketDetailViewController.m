@@ -361,8 +361,8 @@
         }@catch (NSException *exception)
         {
             [utils showAlertWithMessage:exception.name sendViewController:self];
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
@@ -542,8 +542,8 @@
      }@catch (NSException *exception)
             {
                 [utils showAlertWithMessage:exception.name sendViewController:self];
-//                NSLog( @"Name: %@", exception.name);
-//                NSLog( @"Reason: %@", exception.reason );
+                NSLog( @"Name: %@", exception.name);
+                NSLog( @"Reason: %@", exception.reason );
                 return;
             }
             @finally
@@ -653,8 +653,8 @@
     }@catch (NSException *exception)
             {
                 [utils showAlertWithMessage:exception.name sendViewController:self];
-//                NSLog( @"Name: %@", exception.name);
-//                NSLog( @"Reason: %@", exception.reason );
+                NSLog( @"Name: %@", exception.name);
+                NSLog( @"Reason: %@", exception.reason );
                 return;
             }
             @finally
@@ -759,8 +759,8 @@
     }@catch (NSException *exception)
             {
                 [utils showAlertWithMessage:exception.name sendViewController:self];
-//                NSLog( @"Name: %@", exception.name);
-//                NSLog( @"Reason: %@", exception.reason );
+                NSLog( @"Name: %@", exception.name);
+                NSLog( @"Reason: %@", exception.reason );
                 return;
             }
             @finally
@@ -869,8 +869,8 @@
     }@catch (NSException *exception)
             {
                 [utils showAlertWithMessage:exception.name sendViewController:self];
-//                NSLog( @"Name: %@", exception.name);
-//                NSLog( @"Reason: %@", exception.reason );
+                NSLog( @"Name: %@", exception.name);
+                NSLog( @"Reason: %@", exception.reason );
                 return;
             }
             @finally
@@ -1274,8 +1274,8 @@
  }@catch (NSException *exception)
         {
             [utils showAlertWithMessage:exception.name sendViewController:self];
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
@@ -1380,8 +1380,8 @@
   }@catch (NSException *exception)
         {
             [utils showAlertWithMessage:exception.name sendViewController:self];
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally

@@ -260,14 +260,14 @@
                         NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
                     
                 }
-                NSLog(@"Thread-NO5-getDependencies-closed");
+                
             }
              ];
         }@catch (NSException *exception)
         {
-            [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
@@ -276,7 +276,7 @@
             
         }
     }
-    NSLog(@"Thread-NO2-getDependencies()-closed");
+   
     [[AppDelegate sharedAppdelegate] hideProgressView];
 }
 
@@ -367,9 +367,9 @@
         }
     }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -413,14 +413,14 @@
         }
     }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
     {
-        NSLog( @" I am in Logout method in Leftmenu ViewController" );
+        NSLog( @" I am in LogOut method in Leftmenu ViewController" );
         
     }
     
@@ -457,16 +457,14 @@
         }];
     }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught In sendDeviceToken method in LeftMenu ViewController" );
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+        NSLog( @" I am in sendDeveiceToken method in Leftmenu ViewController" );
         
     }
 }
@@ -478,11 +476,7 @@
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // rows in section 0 should not be selectable
-    // if ( indexPath.section == 0 ) return nil;
-    
-    
-    
+
     // first 3 rows in any section should not be selectable
     if ( (indexPath.row ==0) || (indexPath.row==2) ) return nil;
     

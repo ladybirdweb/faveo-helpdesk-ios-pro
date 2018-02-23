@@ -499,7 +499,7 @@
         {
             [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
-          //  NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Reason: %@", exception.reason );
             
         }
         @finally

@@ -139,9 +139,9 @@
         
 }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -165,9 +165,9 @@
     }
 }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -186,9 +186,9 @@
     self.assinTextField.text = (_assignArray)[(NSUInteger) [selectedIndex intValue]];
   }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -335,9 +335,9 @@
             
     }@catch (NSException *exception)
         {
-            [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+             [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally

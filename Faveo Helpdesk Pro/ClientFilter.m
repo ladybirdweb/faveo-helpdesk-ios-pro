@@ -218,16 +218,15 @@
             }];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in reload method in ClientList ViewController\n" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
+            
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            // NSLog( @"In finally block");
+            NSLog( @" I am in reload method in ClinetFilter ViewController" );
             
         }
         
@@ -343,16 +342,15 @@
             }];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in loadmore methos in ClienList ViewController\n" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
-            return ;
+            
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in LoadMore method in ClientFilter ViewController" );
             
         }
         
@@ -416,33 +414,15 @@
         }
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
-        
-        
-        // NSString *email=[finaldic objectForKey:@"email"];
-        
-        /* NSString *phone=[finaldic objectForKey:@"phone_number"];
-         if ([email isEqualToString:@""]) {
-         email=NSLocalizedString(@"Not Available",nil);
-         }
-         if ([phone isEqualToString:@""]) {
-         phone=NSLocalizedString(@"Not Available",nil);
-         } */
-        
+    
         @try{
-            
-            
-            
-            
+
             NSString *email=[finaldic objectForKey:@"email"];
             
             NSString *mobile=[finaldic objectForKey:@"mobile"];
             NSString *phone=[finaldic objectForKey:@"phone_number"];
           //  NSString *telephone=[finaldic objectForKey:@"telephone"];
-            
-            
-            
-            
-            
+
             [Utils isEmpty:email];
             [Utils isEmpty:mobile];
             [Utils isEmpty:phone];
@@ -551,16 +531,15 @@
 //            }
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in CellForRowAtIndexPath method in ClintList ViewController\n" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
-            return cell;
+            
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+         //   return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in cellForRowAtIndexPath method in ClientFilter ViewController" );
             
         }
         
@@ -653,6 +632,7 @@
 
 - (void)navigationMenuItem:(AWNavigationMenuItem *)inMenuItem selectionDidChange:(NSUInteger)inIndex
 {
+@try{
     if(inIndex==0)
     {
         NSLog(@"All users");
@@ -720,7 +700,19 @@
         [self reload];
     }
     
-    
+}@catch (NSException *exception)
+    {
+        
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in navigationMenuPop-up method in ClientFilter ViewController" );
+        
+    }
 }
 
 @end

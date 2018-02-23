@@ -338,8 +338,8 @@
         }@catch (NSException *exception)
         {
             [utils showAlertWithMessage:exception.name sendViewController:self];
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally
@@ -495,8 +495,8 @@
     }@catch (NSException *exception)
     {
         [utils showAlertWithMessage:exception.name sendViewController:self];
-//        NSLog( @"Name: %@", exception.name);
-//        NSLog( @"Reason: %@", exception.reason );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
         return;
     }
     @finally
@@ -522,8 +522,8 @@
 }@catch (NSException *exception)
     {
         [utils showAlertWithMessage:exception.name sendViewController:self];
-//        NSLog( @"Name: %@", exception.name);
-//        NSLog( @"Reason: %@", exception.reason );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
         return;
     }
     @finally
@@ -533,34 +533,6 @@
     }
 
 }
-
-- (IBAction)slaClicked:(id)sender {
-
-   // [_subjectTextField resignFirstResponder];
-    
-    if (!_slaPlansArray||!_slaPlansArray.count) {
-        _slaTextField.text=NSLocalizedString(@"Not Available",nil);
-        sla_id=0;
-        
-    }else{
-        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select SLA",nil) rows:_slaPlansArray initialSelection:0 target:self successAction:@selector(slaWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
-    }
-    
-}
-
-- (IBAction)deptClicked:(id)sender {
-   // [_subjectTextField resignFirstResponder];
-    
-    if (!_deptArray||!_deptArray.count) {
-        _deptTextField.text=NSLocalizedString(@"Not Available",nil);
-        dept_id=0;
-    }else{
-        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Department",nil) rows:_deptArray initialSelection:0 target:self successAction:@selector(deptWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
-    }
-    
-}
-
-
 
 - (IBAction)priorityClicked:(id)sender {
 @try{
@@ -577,8 +549,8 @@
  }@catch (NSException *exception)
     {
         [utils showAlertWithMessage:exception.name sendViewController:self];
-//        NSLog( @"Name: %@", exception.name);
-//        NSLog( @"Reason: %@", exception.reason );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
         return;
     }
     @finally
@@ -604,8 +576,8 @@
 }@catch (NSException *exception)
     {
         [utils showAlertWithMessage:exception.name sendViewController:self];
-//        NSLog( @"Name: %@", exception.name);
-//        NSLog( @"Reason: %@", exception.reason );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
         return;
     }
     @finally
@@ -630,8 +602,8 @@
 }@catch (NSException *exception)
     {
         [utils showAlertWithMessage:exception.name sendViewController:self];
-//        NSLog( @"Name: %@", exception.name);
-//        NSLog( @"Reason: %@", exception.reason );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
         return;
     }
     @finally
@@ -655,8 +627,8 @@
 }@catch (NSException *exception)
     {
         [utils showAlertWithMessage:exception.name sendViewController:self];
-//        NSLog( @"Name: %@", exception.name);
-//        NSLog( @"Reason: %@", exception.reason );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
         return;
     }
     @finally
@@ -681,8 +653,8 @@
 }@catch (NSException *exception)
     {
         [utils showAlertWithMessage:exception.name sendViewController:self];
-//        NSLog( @"Name: %@", exception.name);
-//        NSLog( @"Reason: %@", exception.reason );
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
         return;
     }
     @finally
@@ -915,8 +887,8 @@
         }@catch (NSException *exception)
         {
             [utils showAlertWithMessage:exception.name sendViewController:self];
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
             return;
         }
         @finally

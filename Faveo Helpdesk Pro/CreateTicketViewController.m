@@ -318,9 +318,9 @@
         
     }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -349,9 +349,9 @@
         }
     }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -367,9 +367,9 @@
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -391,9 +391,9 @@
           }
     }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -414,9 +414,9 @@
               }
     }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -715,9 +715,9 @@
         
     }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -868,9 +868,9 @@
             }];
         }@catch (NSException *exception)
         {
-            [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally

@@ -176,7 +176,7 @@
     UIImageView* img = [[UIImageView alloc] initWithImage:img3];
     
     //giving action to image
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickedOnAssignButton)];
     singleTap.numberOfTapsRequired = 1;
     [img setUserInteractionEnabled:YES];
     [img addGestureRecognizer:singleTap];
@@ -206,7 +206,7 @@
     
 }
 
--(void)tapDetected{
+-(void)clickedOnAssignButton{
     
 @try{
     NSLog(@"Clicked on Asign");
@@ -223,18 +223,19 @@
         MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
         [self.navigationController pushViewController:vc animated:YES];
     }
- }@catch (NSException *exception)
+}@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
     {
-        NSLog( @" I am in selectAssigneeButton method in FilterLogic ViewController" );
+        NSLog( @" I am in clickedOnAssignButton method in FilterLogic ViewController" );
         
     }
+
     
     
 }
@@ -273,16 +274,17 @@
     
 }@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
     {
-        NSLog( @" I am in mergeButtonClicked method in FilterLogic ViewController" );
+        NSLog( @" I am in mergeButtonClciked method in FilterLogic ViewController" );
         
     }
+
 }
 
 
@@ -913,20 +915,18 @@
              ];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in getDependecncies method in FilterLogic ViewController" );
             
         }
     }
-    NSLog(@"Thread-NO2-getDependencies()-closed");
+
 }
 
 
@@ -1361,7 +1361,7 @@
                     });
                     
                 }
-                NSLog(@"Thread-NO5-getInbox-closed");
+                
                 
             }];
         }
@@ -1513,16 +1513,14 @@
             
         } @catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
-            return cell;
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+          //  return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //   NSLog( @"In finally block");
+            NSLog( @" I am in cellForRowAtIndexPath method in FilterLogic ViewController" );
             
         }
         // ______________________________________________________________________________________________________
@@ -1702,16 +1700,14 @@
             
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
-            return cell;
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+           // return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //     NSLog( @"In finally block");
+            NSLog( @" I am in cellForRowAtIndexPath method in FilterLogic ViewController" );
             
         }
         

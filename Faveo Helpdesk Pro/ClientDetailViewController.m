@@ -2,7 +2,7 @@
 //  ClientDetailViewController.m
 //  SideMEnuDemo
 //
-//  Created by Narendra on 08/09/16.
+//  Created on 08/09/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -68,7 +68,7 @@
     
     UIButton *edit =  [UIButton buttonWithType:UIButtonTypeCustom];
     [edit setImage:[UIImage imageNamed:@"pencileEdit"] forState:UIControlStateNormal];
-    [edit addTarget:self action:@selector(NotificationBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [edit addTarget:self action:@selector(EditClientProfileMethod) forControlEvents:UIControlEventTouchUpInside];
     
     [edit setFrame:CGRectMake(50, 6, 20, 20)];
     
@@ -87,11 +87,8 @@
     _rolLabel.layer.masksToBounds=true;
     _rolLabel.userInteractionEnabled=YES;
     
-  //  NSString *str=[NSString stringWithFormat:@"%@",globalVariables.customerFromView];
-    
-//    if ([str isEqualToString:@"normalView"])
-//    {
-//
+  @try{
+ 
         NSString *email1= [NSString stringWithFormat:@"%@",globalVariables.emailInUserList];
         
         [Utils isEmpty:email1];
@@ -112,7 +109,7 @@
         
         [Utils isEmpty:fname];
         [Utils isEmpty:lname];
-     [Utils isEmpty:userName];
+        [Utils isEmpty:userName];
     
         
         if (![Utils isEmpty:fname] || ! [Utils isEmpty:lname] )
@@ -132,15 +129,15 @@
         {
              _clientNameLabel.text= [NSString stringWithFormat:@"%@",globalVariables.userNameInUserList];
         }
-       else
-       {
+         else
+         {
            _clientNameLabel.text= @"Not Available";
            
-       }
+          }
        
         
         NSString *phone1= [NSString stringWithFormat:@"%@",globalVariables.phoneNumberInUserList];
-         NSString *mobile1= [NSString stringWithFormat:@"%@", globalVariables.mobileNumberInUserList];
+        NSString *mobile1= [NSString stringWithFormat:@"%@", globalVariables.mobileNumberInUserList];
         NSString *code1= [NSString stringWithFormat:@"%@",globalVariables.mobileCode1];
       
         [Utils isEmpty:phone1];
@@ -172,31 +169,42 @@
         {
               _mobileLabel.text= @"Not Available";
         }
+      
+      //Image view
+      if(![Utils isEmpty:fname])
+      {
+          if([globalVariables.customerImage hasSuffix:@".jpg"] || [globalVariables.customerImage hasSuffix:@".jpeg"] || [globalVariables.customerImage hasSuffix:@".png"] )
+          {
+              [self setUserProfileimage:globalVariables.customerImage];
+          }else
+          {
+              // [cell.profilePicView setImageWithString:fname color:nil ];
+              
+              [_profileImageView setImageWithString:fname color:nil];
+              
+          }
+          
+      }
+      else{
+          [_profileImageView setImageWithString:email1 color:nil];
+      }
 
-    
-       //  [self setUserProfileimage:globalVariables.customerImage];
-    //Image view
-    if(![Utils isEmpty:fname])
+  }@catch (NSException *exception)
     {
-        if([globalVariables.customerImage hasSuffix:@".jpg"] || [globalVariables.customerImage hasSuffix:@".jpeg"] || [globalVariables.customerImage hasSuffix:@".png"] )
-        {
-            [self setUserProfileimage:globalVariables.customerImage];
-        }else
-        {
-            // [cell.profilePicView setImageWithString:fname color:nil ];
-            
-            [_profileImageView setImageWithString:fname color:nil];
         
-        }
-        
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
     }
-    else{
-       [_profileImageView setImageWithString:email1 color:nil];
+    @finally
+    {
+        NSLog( @" I am in viedDidLoad method in Client Detail ViewController" );
+        
     }
     
     
-    
-    
+    @try{
          NSString *role=[NSString stringWithFormat:@"%@",globalVariables.userRole];
     
         if (![Utils isEmpty:role]) {
@@ -228,12 +236,25 @@
                    _testingLAbel.text=@"INACTIVE";
               }
         }
-   // }
+    }@catch (NSException *exception)
+    {
+        
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in vidDidLoad method in ClinetDetail ViewController" );
+        
+    }
+    
     
     [_activityIndicatorObject startAnimating];
     [self reload];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
-    // Do any additional setup after loading the view.
+    
 }
 
 
@@ -242,7 +263,7 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [refresh endRefreshing];
-        //connection unavailable
+    
         [_activityIndicatorObject stopAnimating];
         //[RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
@@ -318,65 +339,7 @@
                 
                 requesterTempDict= [json objectForKey:@"requester"];
                 
-                //[requester objectForKey:@"company"];
-             
-//                if(( ![[json objectForKey:@"requester"] isEqual:[NSNull null]] ) )
-//
-//                { /////////
-//
-//                    if (( ![[requester objectForKey:@"email"] isEqual:[NSNull null]] )) {
-//
-//                         _emailID= [requester objectForKey:@"email"];
-//                    }
-//                    else
-//                    {
-//                         _emailID=NSLocalizedString(@"Not Available",nil);
-//                    }
-//
-//                    if (( ![[requester objectForKey:@"active"] isEqual:[NSNull null]] )) {
-//                        // _isClientActive=[requester objectForKey:@"active"];
-//                         _isClientActive= [NSString stringWithFormat:@"%@",[requester objectForKey:@"active"]];
-//
-//                        if ([_isClientActive isEqualToString:@"1"]) {
-//                            _isClientActive=@"ACTIVE";
-//                        }else  _isClientActive=@"INACTIVE";
-//                    }
-//                    else
-//                    {
-//                        _isClientActive= NSLocalizedString(@"Not Available",nil);
-//                    }
-//
-//                    if (( ![[requester objectForKey:@"first_name"] isEqual:[NSNull null]] )) {
-//                        _clientName=[NSString stringWithFormat:@"%@ %@ ", [requester objectForKey:@"first_name"], [requester objectForKey:@"last_name"]];
-//                    }
-//                    else
-//                    {
-//                        _clientName=NSLocalizedString(@"Not Available",nil);
-//                    }
-//
-//
-//
-//
-//                    if (( ![[requester objectForKey:@"phone_number"] isEqual:[NSNull null]] ) && ![[requester objectForKey:@"phone_number"] isEqualToString:@""]) {
-//
-//                         _phone=[requester objectForKey:@"phone_number"];
-//                    }else
-//                    {
-//                        _phone=NSLocalizedString(@"Not Available",nil);
-//                    }
-//
-//                    if( ![[requester objectForKey:@"mobile"] isEqual:[NSNull null]] && ![[requester objectForKey:@"mobile"] isEqualToString:@""])
-//                    {
-//                        _mobileLabel=[requester objectForKey:@"mobile"];
-//                    }
-//                    else
-//                    {
-//                        _mobileLabel.text =NSLocalizedString(@"Not Available",nil);
-//                    }
-//
-//
-//
-//
+
                      NSString *isDelete= [NSString stringWithFormat:@"%@",[requester objectForKey:@"is_delete"]];
 
                     [Utils isEmpty:isDelete];
@@ -399,59 +362,13 @@
                     }
 //
 //
-//
-//                    NSString *code1= [NSString stringWithFormat:@"%@",[requester objectForKey:@"country_code"]];
-//
-//                    [Utils isEmpty:code1];
-//                    if(![Utils isEmpty:code1])
-//                    {
-//                        if([code1 isEqualToString:@"0"])
-//                        {
-//                            code2=@"";
-//
-//                        }
-//                        else
-//                        {
-//                        code2=[NSString stringWithFormat:@"+%@",[requester objectForKey:@"country_code"]];
-//                        }
-//                    }
-//                    else
-//                    {
-//                        code2=@"";
-//                    }
-//
-//                   [requester objectForKey:@"profile_pic"];
-//
-//
-//                } ///////
-//
+
                 
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [_activityIndicatorObject stopAnimating];
                         [refresh endRefreshing];
-                            //self.testingLAbel.text=self.isClientActive;
-   //                         self.emailLabel.text=self.emailID;
-    //                        self.clientNameLabel.text=self.clientName;
-                           // self.phoneLabel.text=self.phone;
-                        
-                      //  self.phoneLabel.text=[NSString stringWithFormat:@"%@  %@",code2,self.phone];
-                        
-     //                    [self setUserProfileimage:[requester objectForKey:@"profile_pic"]];
-                       // self.testingLAbel.text=self.isClientActive;
-                        
-//                        if ([_isClientActive isEqualToString:@"ACTIVE"])
-//                        {
-//                            self.testingLAbel.textColor=[UIColor whiteColor];
-//                            self.testingLAbel.text=@"ACTIVE";
-//                            
-//                        }else
-//                        {
-//                    
-//                            self.testingLAbel.textColor=[UIColor whiteColor];
-//                            self.testingLAbel.text=@"INACTIVE";
-//
-//                        }
+
 //                        
                         [self.tableView reloadData];
                     });
@@ -464,16 +381,14 @@
         }];
  }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in reload method in Client ViewController\n" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
-            return ;
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            NSLog( @" I am in reload method in ClinetDetail ViewController" );
             
         }
 
@@ -570,23 +485,22 @@
     }
 }@catch (NSException *exception)
     {
-        // Print exception information
-//        NSLog( @"NSException caught in CellForRowAtIndexPath method in Client-Detail ViewController\n" );
-//        NSLog( @"Name: %@", exception.name);
-//        NSLog( @"Reason: %@", exception.reason );
-        return cell;
+        
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+       // return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-      //  NSLog( @"In finally block");
+        NSLog( @" I am in CellForAtIndexPath method in CLinetDetail ViewController" );
         
     }
 
     return cell;
 }
 
--(void)NotificationBtnPressed
+-(void)EditClientProfileMethod
 {
     
     EditClientDetail *edit=[self.storyboard instantiateViewControllerWithIdentifier:@"editClientID"];

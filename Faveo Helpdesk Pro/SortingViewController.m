@@ -164,7 +164,7 @@
     UIImageView* img = [[UIImageView alloc] initWithImage:img3];
     
     //giving action to image
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickedOnAssignButton)];
     singleTap.numberOfTapsRequired = 1;
     [img setUserInteractionEnabled:YES];
     [img addGestureRecognizer:singleTap];
@@ -192,9 +192,9 @@
 }
 
 
--(void)tapDetected{
+-(void)clickedOnAssignButton{
     
-    
+@try{
     NSLog(@"Clicked on Asign");
     if (!selectedArray.count) {
         
@@ -210,7 +210,19 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
-    
+}@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in clickedOnAssignButton method in Sorting ViewController" );
+        
+    }
+
     
 }
 
@@ -218,7 +230,7 @@
 {
     NSLog(@"Clicked on merge");
     
-    
+@try{
     if (!selectedArray.count) {
         
         [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
@@ -245,6 +257,20 @@
             [self.navigationController pushViewController:merge animated:YES];
         }
     }
+}@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in mergeButtonClicked method in Sorting ViewController" );
+        
+    }
+
+    
 }
 
 
@@ -1387,18 +1413,17 @@
             }];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            // NSLog( @"NSException caught in reload method in Inbox ViewController " );
-            // NSLog( @"Name: %@", exception.name);
-            // NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in reload method in SortingTickets ViewController" );
             
         }
+
     }
 }
 
@@ -1517,25 +1542,24 @@
                         NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
                     
                 }
-                NSLog(@"Thread-NO5-getDependencies-closed");
+    
             }
              ];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in getDependencies method in SortingTickets ViewController" );
             
         }
+
     }
-    NSLog(@"Thread-NO2-getDependencies()-closed");
+
 }
 
 -(void)EditTableView:(UIGestureRecognizer*)gesture{
@@ -2099,18 +2123,17 @@
             
         } @catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
-            return cell;
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+           // return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //   NSLog( @"In finally block");
+            NSLog( @" I am in cellForRowAtIndexPath method in SortingTickets ViewController" );
             
         }
+
         // ______________________________________________________________________________________________________
         ////////////////for UTF-8 data encoding ///////
         //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
@@ -2286,18 +2309,17 @@
             
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
-            return cell;
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            //return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in cellForRowAtIndexPath method in SortingTickets ViewController" );
             
         }
+
         
         return cell;
     }
