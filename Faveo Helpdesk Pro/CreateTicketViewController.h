@@ -2,7 +2,7 @@
 //  CreateTicketViewController.h
 //  SideMEnuDemo
 //
-//  Created by Narendra on 19/08/16.
+//  Created on 19/08/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -212,38 +212,6 @@
 - (IBAction)helpTopicClicked:(id)sender;
 
 /*!
- @method slaClicked
- 
- @brief This will gives List of SLA plans.
- 
- @discussion After clicking this button it will shows list of SLA plans.The SLA plan can be Emergency, High, Low or normal.
- 
- @code
- 
-- (IBAction)slaClicked:(id)sender;
- 
- @endcode
-
- */
-- (IBAction)slaClicked:(id)sender;
-
-/*!
- @method deptClicked
- 
- @brief This will gives List of Departments.
- 
- @discussion AFter clicking this button it will gives a list of all Departments.The department can be Operation, Sales, Support.
- 
- @code
- 
- - (IBAction)deptClicked:(id)sender;
- 
- @endcode
-
- */
-- (IBAction)deptClicked:(id)sender;
-
-/*!
  @method priorityClicked
  
  @brief This will gives List of Ticket Priorities.
@@ -257,7 +225,6 @@
  @endocde
  */
 
-- (IBAction)priorityClicked:(id)sender;
 
 /*!
  @method submitClicked

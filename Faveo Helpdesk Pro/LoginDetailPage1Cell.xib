@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="TimesNewRoman.ttf">
+            <string>TimesNewRomanPSMT</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="1693" id="KGk-i7-Jjw" customClass="LoginDetailPage1Cell">
+            <rect key="frame" x="0.0" y="0.0" width="493" height="1693"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="493" height="1692.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIb-1O-zZa">
+                        <rect key="frame" x="0.0" y="0.0" width="492" height="1687"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBj-wh-usV">
+                                <rect key="frame" x="25" y="21" width="426" height="35.5"/>
+                                <color key="tintColor" red="0.84372562419999997" green="0.67371866449999995" blue="0.29810332719999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="How to Log into Faveo Helpdesk?">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="TimesNewRomanPS-BoldMT"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Open the app. You will get below screen." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBy-Sd-aFn">
+                                <rect key="frame" x="25" y="64.5" width="434" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="zta-dJ-VaZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="url.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wCd-E3-PfM">
+                                <rect key="frame" x="23" y="107.5" width="447" height="634"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="634" id="1SH-9U-2w2"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AF2-fe-zWu">
+                                <rect key="frame" x="25" y="749.5" width="437" height="87"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="87" id="H8A-Dq-HKa"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="This this page, you have to give your ">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Helpdesk URL">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPS-BoldMT"/>
+                                            <font key="NSOriginalFont" size="15" name="TimesNewRomanPS-BoldMT"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">. After writing URL click on next button it will redirect to Login page only if your Helpdesk URL is correct else it will show some error message.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="im6-uV-hMk">
+                                <rect key="frame" x="23" y="844.5" width="447" height="634"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="634" id="KcO-lk-rMv"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vyi-HV-V0z">
+                                <rect key="frame" x="20" y="1497.5" width="447" height="169"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="169" id="wsz-nC-NPm"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Here you have to enter your login credentials.  
+                            
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28.299999237060547">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56.650001525878906">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="85">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="113.34999847412109">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="141.69999694824219">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="170.05000305175781">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="198.39999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="226.75">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="255.10000610351562">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="283.45001220703125">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="311.79998779296875">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="340.14999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="For example ">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPS-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28.299999237060547">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56.650001525878906">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="85">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="113.34999847412109">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="141.69999694824219">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="170.05000305175781">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="198.39999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="226.75">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="255.10000610351562">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="283.45001220703125">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="311.79998779296875">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="340.14999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">:  Username/Email - mallikarjun123
+                          Password            - password
+
+Then click on Login button. If your login credentials are correct then you will redirect to ticket inbox page (see below image) else it will display some error message.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28.299999237060547">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56.650001525878906">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="85">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="113.34999847412109">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="141.69999694824219">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="170.05000305175781">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="198.39999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="226.75">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="255.10000610351562">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="283.45001220703125">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="311.79998779296875">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="340.14999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mBy-Sd-aFn" firstAttribute="top" secondItem="WBj-wh-usV" secondAttribute="bottom" constant="8" symbolic="YES" id="0Rl-4o-jPU"/>
+                            <constraint firstItem="Vyi-HV-V0z" firstAttribute="trailing" secondItem="AF2-fe-zWu" secondAttribute="trailing" constant="5" id="1Y1-r0-R6T"/>
+                            <constraint firstItem="Vyi-HV-V0z" firstAttribute="leading" secondItem="im6-uV-hMk" secondAttribute="leading" constant="-3" id="2NY-wI-XeZ"/>
+                            <constraint firstAttribute="trailing" secondItem="WBj-wh-usV" secondAttribute="trailing" constant="41" id="2wn-lf-dRM"/>
+                            <constraint firstItem="wCd-E3-PfM" firstAttribute="leading" secondItem="aIb-1O-zZa" secondAttribute="leading" constant="23" id="9im-qR-mwG"/>
+                            <constraint firstItem="WBj-wh-usV" firstAttribute="leading" secondItem="mBy-Sd-aFn" secondAttribute="leading" id="Fwh-JM-GzW"/>
+                            <constraint firstAttribute="trailing" secondItem="mBy-Sd-aFn" secondAttribute="trailing" constant="33" id="KF0-pA-A9y"/>
+                            <constraint firstItem="im6-uV-hMk" firstAttribute="top" secondItem="AF2-fe-zWu" secondAttribute="bottom" constant="8" id="NJi-vI-052"/>
+                            <constraint firstItem="AF2-fe-zWu" firstAttribute="top" secondItem="wCd-E3-PfM" secondAttribute="bottom" constant="8" id="OZL-GT-S8J"/>
+                            <constraint firstItem="WBj-wh-usV" firstAttribute="top" secondItem="aIb-1O-zZa" secondAttribute="top" constant="21" id="PtN-tx-Zco"/>
+                            <constraint firstItem="AF2-fe-zWu" firstAttribute="centerX" secondItem="aIb-1O-zZa" secondAttribute="centerX" constant="-3" id="TN8-Ac-pi5"/>
+                            <constraint firstItem="mBy-Sd-aFn" firstAttribute="leading" secondItem="Vyi-HV-V0z" secondAttribute="leading" constant="5" id="VAW-IR-bSN"/>
+                            <constraint firstAttribute="trailing" secondItem="wCd-E3-PfM" secondAttribute="trailing" constant="22" id="WcQ-qL-Vgd"/>
+                            <constraint firstItem="mBy-Sd-aFn" firstAttribute="leading" secondItem="aIb-1O-zZa" secondAttribute="leading" constant="25" id="deh-Sd-Z9K"/>
+                            <constraint firstAttribute="bottom" secondItem="Vyi-HV-V0z" secondAttribute="bottom" constant="20.5" id="feW-hD-FR5"/>
+                            <constraint firstItem="wCd-E3-PfM" firstAttribute="top" secondItem="mBy-Sd-aFn" secondAttribute="bottom" constant="8" id="jd5-o9-gKb"/>
+                            <constraint firstItem="Vyi-HV-V0z" firstAttribute="trailing" secondItem="im6-uV-hMk" secondAttribute="trailing" constant="-3" id="l1A-lW-koV"/>
+                            <constraint firstItem="Vyi-HV-V0z" firstAttribute="top" secondItem="im6-uV-hMk" secondAttribute="bottom" constant="19" id="nhW-Te-kcM"/>
+                            <constraint firstItem="AF2-fe-zWu" firstAttribute="leading" secondItem="aIb-1O-zZa" secondAttribute="leading" constant="25" id="vzT-NN-C5L"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="aIb-1O-zZa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1Ql-7D-Fuq"/>
+                    <constraint firstItem="aIb-1O-zZa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="28u-JE-RJO"/>
+                    <constraint firstAttribute="trailing" secondItem="aIb-1O-zZa" secondAttribute="trailing" constant="1" id="NG9-rz-Xhk"/>
+                    <constraint firstItem="aIb-1O-zZa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-2.75" id="RNJ-H9-7ki"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="11.5" y="683.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="login.jpg" width="1242" height="2208"/>
+        <image name="url.jpg" width="1242" height="2208"/>
+    </resources>
+</document>

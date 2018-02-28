@@ -2,7 +2,7 @@
 //  ClientListViewController.m
 //  SideMEnuDemo
 //
-//  Created by Narendra on 01/09/16.
+//  Created on 01/09/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -213,16 +213,15 @@
         }];
 }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in reload method in ClientList ViewController\n" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
+            
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-           // NSLog( @"In finally block");
+            NSLog( @" I am in reload method in ClientList ViewController" );
             
         }
 
@@ -336,18 +335,17 @@
         }];
     }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in loadmore methos in ClienList ViewController\n" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
-            return ;
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            NSLog( @" I am in loadMore method in ClientList ViewController" );
             
         }
+
 
     }
 }
@@ -530,18 +528,17 @@
      
  }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in CellForRowAtIndexPath method in ClintList ViewController\n" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
-            return cell;
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+          //  return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            NSLog( @" I am in cellForRowArIndexPath method in ClientList ViewController" );
             
         }
+
 
         return cell;
     }
@@ -569,7 +566,10 @@
     globalVariables.customerFromView=@"normalView";
     globalVariables.customerImage= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"profile_pic"]];
 
+     globalVariables.ActiveDeactiveStateOfUser1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"is_delete"]];
+    
     globalVariables.userRole=@"";
+    
     ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
     [self.navigationController pushViewController:td animated:YES];
 }

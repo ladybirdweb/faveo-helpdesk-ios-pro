@@ -35,7 +35,7 @@
 @interface FilterViewController ()<RMessageProtocol,UITextViewDelegate,kDropDownListViewDelegate>{
     
     Utils *utils;
-     UIRefreshControl *refresh;
+    UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
     NSMutableArray *array1;
     NSDictionary *priDicc1;
@@ -75,18 +75,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-  
+    
+    
     
     assignee=@[@"Yes",@"No"];
     statusArray1=@[@"Open",@"Resolved",@"Closed",@"Deleted"];
-                
+    
     _departmentTextField.delegate=self;
-     _priorityTextField.delegate=self;
-     _typeTextField.delegate=self;
+    _priorityTextField.delegate=self;
+    _typeTextField.delegate=self;
     _statusTextField.delegate=self;
-     _sourceTextField.delegate=self;
-     _assignTextField.delegate=self;
+    _sourceTextField.delegate=self;
+    _assignTextField.delegate=self;
     
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
@@ -97,14 +97,14 @@
     utils=[[Utils alloc]init];
     
     userDefaults=[NSUserDefaults standardUserDefaults];
-
     
-//    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
-//                                    initWithTitle:@"Clear"
-//                                    style:UIBarButtonItemStylePlain
-//                                    target:self
-//                                    action:@selector(flipView)];
-//    self.navigationItem.rightBarButtonItem = clearButton;
+    
+    //    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
+    //                                    initWithTitle:@"Clear"
+    //                                    style:UIBarButtonItemStylePlain
+    //                                    target:self
+    //                                    action:@selector(flipView)];
+    //    self.navigationItem.rightBarButtonItem = clearButton;
     UIButton *clearButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [clearButton setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
     [clearButton addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
@@ -114,11 +114,11 @@
     [rightBarButtonItems addSubview: clearButton];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
-
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
-   
-
+    
+    
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     
     
@@ -172,8 +172,8 @@
         NSArray *slaArray=[resultDic objectForKey:@"sla"];
         NSArray *sourcesArray=[resultDic objectForKey:@"sources"];
         NSMutableArray *staffsArray=[resultDic objectForKey:@"staffs"];
-       // NSArray *statusArray=[resultDic objectForKey:@"status"];
-
+        // NSArray *statusArray=[resultDic objectForKey:@"status"];
+        
         NSArray *typeArray=[resultDic objectForKey:@"type"];
         
         //    NSLog(@"resultDic2--%@,%@,%@,%@,%@,%@,%@,%@",deptArray,helpTopicArray,prioritiesArray,slaArray,sourcesArray,staffsArray,statusArray,teamArray);
@@ -182,8 +182,8 @@
         NSMutableArray *slaMU=[[NSMutableArray alloc]init];
         NSMutableArray *helptopicMU=[[NSMutableArray alloc]init];
         NSMutableArray *priMU=[[NSMutableArray alloc]init];
-     //   NSMutableArray *statusMU=[[NSMutableArray alloc]init];
-
+        //   NSMutableArray *statusMU=[[NSMutableArray alloc]init];
+        
         NSMutableArray *sourceMU=[[NSMutableArray alloc]init];
         NSMutableArray *typeMU=[[NSMutableArray alloc]init];
         NSMutableArray *staffMU=[[NSMutableArray alloc]init];
@@ -196,14 +196,7 @@
         status_idArray=[[NSMutableArray alloc]init];
         source_idArray=[[NSMutableArray alloc]init];
         type_idArray=[[NSMutableArray alloc]init];
-       
-    
-//        for (NSDictionary *dicc in statusArray) {
-//            if ([dicc objectForKey:@"name"]) {
-//                [statusMU addObject:[dicc objectForKey:@"name"]];
-//                [status_idArray addObject:[dicc objectForKey:@"id"]];
-//            }
-//        }
+        
         
         for (NSMutableDictionary *dicc in staffsArray) {
             if ([dicc objectForKey:@"email"]) {
@@ -251,7 +244,7 @@
             }
         }
         
-    
+        
         
         for (NSDictionary *dicc in sourcesArray) {
             if ([dicc objectForKey:@"name"]) {
@@ -266,22 +259,20 @@
         _priorityArray=[priMU copy];
         _sourceArray=[sourceMU copy];
         _typeArray=[typeMU copy];
-      //  _statusArray=[statusMU copy];
-
-       
+        //  _statusArray=[statusMU copy];
+        
+        
         
     }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught in read-from-Plist methos in Detail ViewController\n" );
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
-        return ;
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+        NSLog( @" I am in readFromPlist method in FilterTickets ViewController" );
         
     }
     
@@ -299,7 +290,7 @@
 //select priotty
 - (IBAction)SelectPriority:(id)sender {
     
-   [ self.view endEditing:YES];
+    [ self.view endEditing:YES];
     self.priorityTextField.tintColor = [UIColor clearColor];
     
     [Dropobj fadeOut];
@@ -334,7 +325,7 @@
     
     [Dropobj fadeOut];
     [self showPopUpWithTitle:NSLocalizedString(@"Select Ticket Source",nil) withOption:statusArray1 xy:CGPointMake(16, 58) size:CGSizeMake(287, 330) isMultiple:YES];
-
+    
 }
 
 //select asignee
@@ -361,9 +352,9 @@
 
 - (void)DropDownListView:(DropDownListView *)dropdownListView didSelectedIndex:(NSInteger)anIndex{
     /*----------------Get Selected Value[Single selection]-----------------*/
-
-   // _textf1.text= [arryList objectAtIndex:anIndex];
-     _assignTextField.text= [assignee objectAtIndex:anIndex];
+    
+    // _textf1.text= [arryList objectAtIndex:anIndex];
+    _assignTextField.text= [assignee objectAtIndex:anIndex];
     
 }
 
@@ -371,18 +362,18 @@
 - (void)DropDownListView:(DropDownListView *)dropdownListView Datalist:(NSArray*)ArryData{
     
     /*----------------Get Selected Value[Multiple selection]-----------------*/
-
-   if([ArryData containsObject:@"Sales"] || [ArryData containsObject:@"Support"] || [ArryData containsObject:@"Operation"])
-
-   {
+    
+    if([ArryData containsObject:@"Sales"] || [ArryData containsObject:@"Support"] || [ArryData containsObject:@"Operation"])
+        
+    {
         _departmentTextField.text= [ArryData componentsJoinedByString:@","];
     }
     
-  
+    
     if([ArryData containsObject:@"Low"] || [ArryData containsObject:@"High"] || [ArryData containsObject:@"Emergency"] || [ArryData containsObject:@"Normal"] || [ArryData containsObject:@"Test"]|| [ArryData containsObject:@"checkin"])
     {
-       _priorityTextField.text= [ArryData componentsJoinedByString:@","];
-     }
+        _priorityTextField.text= [ArryData componentsJoinedByString:@","];
+    }
     
     
     if([ArryData containsObject:@"Question"] || [ArryData containsObject:@"Incident"] || [ArryData containsObject:@"Problem"] || [ArryData containsObject:@"Feature Request"])
@@ -390,7 +381,7 @@
         _typeTextField.text= [ArryData componentsJoinedByString:@","];
     }
     
-    if([ArryData containsObject:@"email"] || [ArryData containsObject:@"agent"] || [ArryData containsObject:@"facebook"] || [ArryData containsObject:@"twitter"] || [ArryData containsObject:@"call"]|| [ArryData containsObject:@"chat"] || [ArryData containsObject:@"web"])
+    if([ArryData containsObject:@"email"] || [ArryData containsObject:@"agent"] || [ArryData containsObject:@"facebook"] || [ArryData containsObject:@"twitter"] || [ArryData containsObject:@"call"]|| [ArryData containsObject:@"chat"] || [ArryData containsObject:@"web"] || [ArryData containsObject:@"Email"] || [ArryData containsObject:@"Agent"] || [ArryData containsObject:@"Facebook"] || [ArryData containsObject:@"Twitter"] || [ArryData containsObject:@"Call"]|| [ArryData containsObject:@"Chat"] || [ArryData containsObject:@"Web"])
     {
         _sourceTextField.text= [ArryData componentsJoinedByString:@","];
     }
@@ -400,7 +391,7 @@
         _statusTextField.text= [ArryData componentsJoinedByString:@","];
     }
     
-   
+    
 }
 
 - (void)DropDownListViewDidCancel{
@@ -437,11 +428,11 @@
         globalVariables.sourcee1=_sourceTextField.text;
         globalVariables.statuss1=_statusTextField.text;
         globalVariables.assignn1=_assignTextField.text;
-      
+        
         globalVariables.filterId=@"INBOXFilter";
         FilterLogic *fil=[self.storyboard instantiateViewControllerWithIdentifier:@"FilterLogicID"];
-    
-         [self.navigationController pushViewController:fil animated:YES];
+        
+        [self.navigationController pushViewController:fil animated:YES];
     }
     else if([globalVariables.filterCondition isEqualToString:@"MYTICKETS"])
     {
@@ -514,7 +505,7 @@
     _departmentTextField.text=@"";
     _priorityTextField.text=@"";
     _typeTextField.text=@"";
-   _sourceTextField.text=@"";
+    _sourceTextField.text=@"";
     _statusTextField.text=@"";
     _assignTextField.text=@"";
 }

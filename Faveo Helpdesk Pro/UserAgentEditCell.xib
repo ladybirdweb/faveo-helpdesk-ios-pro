@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserAgentEditCellId" rowHeight="2098" id="KGk-i7-Jjw" customClass="UserAgentEditCell">
+            <rect key="frame" x="0.0" y="0.0" width="419" height="1786"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="419" height="1785.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yyn-MU-TKF">
+                        <rect key="frame" x="0.0" y="12" width="419" height="1774"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghq-FR-nWX">
+                                <rect key="frame" x="29" y="72" width="352" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="Mc7-8i-SjL"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Goto to user or agent details page, then in this view these is edit button at top right corner, click on that button">
+                                        <attributes>
+                                            <color key="NSBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userEditProfile.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NQ5-5i-kLu">
+                                <rect key="frame" x="76" y="445" width="253" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="4mY-5a-xuQ"/>
+                                    <constraint firstAttribute="width" constant="253" id="GbS-35-LO1"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqt-Qe-BUh">
+                                <rect key="frame" x="27" y="28" width="335" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="xcF-Kb-Mki"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="1. How to edit agent and users profile details?">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="TimesNewRomanPS-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85K-gc-KNb">
+                                <rect key="frame" x="29" y="381" width="360" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="Iw8-kF-b8h"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="After clicking on edit button you will navigate to the agent or user profile edit view, see below image">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view122.png" translatesAutoresizingMaskIntoConstraints="NO" id="San-kX-p3o">
+                                <rect key="frame" x="34" y="132" width="353" height="234"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="353" id="Xzb-e6-gZ8"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="234" id="bQF-gF-YKd"/>
+                                    <constraint firstAttribute="height" constant="234" id="vTA-E2-BKz"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Guy-lK-Sve">
+                                <rect key="frame" x="21" y="960" width="363" height="119"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="363" id="CZr-vx-ien"/>
+                                    <constraint firstAttribute="height" constant="119" id="MlL-2v-QId"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="119" id="q5V-Ug-sma"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Here you can edit username, first name, last name and contact details. 
+
+After editing details click on submit button or click on right arrow which is place at top right corner of page then it will navigate to user details page page and shows updated profile of user or agent.
+</string>
+                                        <attributes>
+                                            <color key="NSBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmb-Jy-ekW">
+                                <rect key="frame" x="21" y="1100" width="335" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="335" id="YHT-9m-gyY"/>
+                                    <constraint firstAttribute="height" constant="36" id="hu0-Pp-4I7"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="2. How to activate or deactivate agent?">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="TimesNewRomanPS-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhH-oX-TH5">
+                                <rect key="frame" x="34" y="1130" width="322" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="cMF-dq-0eY"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="In user edit profile page at bottom of there is option for activate or deactivate a user or agent, see below image">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Active.png" translatesAutoresizingMaskIntoConstraints="NO" id="SL1-c2-4ym">
+                                <rect key="frame" x="21" y="1200" width="363" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="363" id="DgP-WI-Zay"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="74" id="OM4-Q0-73i"/>
+                                    <constraint firstAttribute="height" constant="74" id="g7R-3W-uep"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apS-Ya-NlQ">
+                                <rect key="frame" x="21" y="1280" width="368" height="161"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="368" id="UHa-nS-58u"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="161" id="a6i-f8-gbL"/>
+                                    <constraint firstAttribute="height" constant="161" id="e6m-64-ubn"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">The yellow color indicates that, user is active. Suppose you want to deactivate then you have to switch to right then you will get pop up which contain a message “Are you sure to Deactivate?”.
+If you click on yes then that user or agent will be deactivated.
+
+If you go edit profile option again of that particular agent or user then it show like below image.
+</string>
+                                        <attributes>
+                                            <color key="NSBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="deActive.png" translatesAutoresizingMaskIntoConstraints="NO" id="ivL-5n-r0n">
+                                <rect key="frame" x="18" y="1450" width="371" height="71"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="71" id="aRT-Uv-buC"/>
+                                    <constraint firstAttribute="height" constant="71" id="h0Y-cZ-lye"/>
+                                    <constraint firstAttribute="width" constant="371" id="rzD-et-3LU"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2k-wE-m7w">
+                                <rect key="frame" x="19" y="1540" width="368" height="91"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="368" id="FDr-mw-JHT"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="91" id="WM1-H8-fAe"/>
+                                    <constraint firstAttribute="height" constant="91" id="zAH-7R-FI1"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">The red color indicates that, the agent or user is deactivated. If you want to activate that user or agent then you have swift that button to left then it will ask you permission and if you click on yes then that particular agent or user will be activate.</string>
+                                        <attributes>
+                                            <color key="NSBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ghq-FR-nWX" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="29" id="2IL-C6-kPg"/>
+                            <constraint firstItem="SL1-c2-4ym" firstAttribute="centerX" secondItem="e2k-wE-m7w" secondAttribute="centerX" id="4hP-vS-U8J"/>
+                            <constraint firstItem="SL1-c2-4ym" firstAttribute="leading" secondItem="fmb-Jy-ekW" secondAttribute="leading" id="8Lm-hF-Bkq"/>
+                            <constraint firstAttribute="bottom" secondItem="e2k-wE-m7w" secondAttribute="bottom" constant="143" id="A8N-IJ-JAN"/>
+                            <constraint firstItem="fmb-Jy-ekW" firstAttribute="top" secondItem="Guy-lK-Sve" secondAttribute="bottom" constant="21" id="C5c-No-UIo"/>
+                            <constraint firstItem="ivL-5n-r0n" firstAttribute="centerX" secondItem="e2k-wE-m7w" secondAttribute="centerX" id="E4V-aV-bMC"/>
+                            <constraint firstItem="Ghq-FR-nWX" firstAttribute="top" secondItem="fqt-Qe-BUh" secondAttribute="bottom" constant="8" symbolic="YES" id="Hey-ck-z11"/>
+                            <constraint firstItem="NQ5-5i-kLu" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="76" id="IoY-A4-FLx"/>
+                            <constraint firstItem="Guy-lK-Sve" firstAttribute="top" secondItem="NQ5-5i-kLu" secondAttribute="bottom" constant="15" id="MBV-86-Lex"/>
+                            <constraint firstItem="ivL-5n-r0n" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="18" id="Nv6-66-YVp"/>
+                            <constraint firstItem="SL1-c2-4ym" firstAttribute="top" secondItem="bhH-oX-TH5" secondAttribute="bottom" constant="2" id="RzD-xD-G6x"/>
+                            <constraint firstItem="fqt-Qe-BUh" firstAttribute="top" secondItem="Yyn-MU-TKF" secondAttribute="top" constant="28" id="TiA-FI-1v8"/>
+                            <constraint firstItem="bhH-oX-TH5" firstAttribute="trailing" secondItem="fmb-Jy-ekW" secondAttribute="trailing" id="WtW-nx-YYY"/>
+                            <constraint firstItem="apS-Ya-NlQ" firstAttribute="top" secondItem="SL1-c2-4ym" secondAttribute="bottom" constant="6" id="Xpo-wL-UlI"/>
+                            <constraint firstItem="bhH-oX-TH5" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="34" id="aDt-QY-Mx3"/>
+                            <constraint firstItem="e2k-wE-m7w" firstAttribute="top" secondItem="ivL-5n-r0n" secondAttribute="bottom" constant="19" id="aZV-LV-qW1"/>
+                            <constraint firstItem="NQ5-5i-kLu" firstAttribute="top" secondItem="85K-gc-KNb" secondAttribute="bottom" constant="17" id="bdf-fm-Xqd"/>
+                            <constraint firstItem="85K-gc-KNb" firstAttribute="trailing" secondItem="apS-Ya-NlQ" secondAttribute="trailing" id="d5g-sA-2Qw"/>
+                            <constraint firstItem="San-kX-p3o" firstAttribute="top" secondItem="Ghq-FR-nWX" secondAttribute="bottom" constant="8" symbolic="YES" id="dCd-9i-29M"/>
+                            <constraint firstItem="Guy-lK-Sve" firstAttribute="trailing" secondItem="SL1-c2-4ym" secondAttribute="trailing" id="f7M-LK-sfp"/>
+                            <constraint firstAttribute="trailing" secondItem="fqt-Qe-BUh" secondAttribute="trailing" constant="57" id="fer-e7-lGV"/>
+                            <constraint firstItem="San-kX-p3o" firstAttribute="centerX" secondItem="NQ5-5i-kLu" secondAttribute="centerX" constant="8" id="fhe-jE-qit"/>
+                            <constraint firstItem="apS-Ya-NlQ" firstAttribute="trailing" secondItem="ivL-5n-r0n" secondAttribute="trailing" id="gXg-XA-OI4"/>
+                            <constraint firstItem="bhH-oX-TH5" firstAttribute="top" secondItem="Guy-lK-Sve" secondAttribute="bottom" constant="51" id="gf7-0f-dQX"/>
+                            <constraint firstItem="fqt-Qe-BUh" firstAttribute="centerX" secondItem="bhH-oX-TH5" secondAttribute="centerX" id="gkd-RH-oI1"/>
+                            <constraint firstItem="Guy-lK-Sve" firstAttribute="leading" secondItem="fmb-Jy-ekW" secondAttribute="leading" id="i4d-Gu-fp3"/>
+                            <constraint firstItem="ivL-5n-r0n" firstAttribute="top" secondItem="apS-Ya-NlQ" secondAttribute="bottom" constant="9" id="idY-Rx-VHQ"/>
+                            <constraint firstItem="85K-gc-KNb" firstAttribute="centerX" secondItem="Yyn-MU-TKF" secondAttribute="centerX" id="j3p-kM-WNg"/>
+                            <constraint firstItem="Ghq-FR-nWX" firstAttribute="centerX" secondItem="apS-Ya-NlQ" secondAttribute="centerX" id="lNt-0G-gIv"/>
+                            <constraint firstItem="NQ5-5i-kLu" firstAttribute="centerX" secondItem="Guy-lK-Sve" secondAttribute="centerX" id="mJl-bD-aVd"/>
+                            <constraint firstItem="fqt-Qe-BUh" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="27" id="p6X-DF-nfM"/>
+                            <constraint firstItem="San-kX-p3o" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="34" id="vDg-Ub-b73"/>
+                            <constraint firstItem="SL1-c2-4ym" firstAttribute="leading" secondItem="apS-Ya-NlQ" secondAttribute="leading" id="wPn-HP-yKS"/>
+                            <constraint firstItem="85K-gc-KNb" firstAttribute="top" secondItem="San-kX-p3o" secondAttribute="bottom" constant="15" id="wlX-Ae-ugz"/>
+                            <constraint firstItem="Ghq-FR-nWX" firstAttribute="leading" secondItem="85K-gc-KNb" secondAttribute="leading" id="zrG-DC-rDF"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="Yyn-MU-TKF" secondAttribute="bottom" constant="-11" id="46x-eC-xYm"/>
+                    <constraint firstAttribute="trailing" secondItem="Yyn-MU-TKF" secondAttribute="trailing" id="gJv-eb-dbk"/>
+                    <constraint firstItem="Yyn-MU-TKF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-19" id="psi-aQ-4kr"/>
+                    <constraint firstItem="Yyn-MU-TKF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="wfJ-xe-BTB"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="-0.5" y="100"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Active.png" width="321" height="64"/>
+        <image name="deActive.png" width="323" height="56"/>
+        <image name="userEditProfile.jpg" width="1030" height="2066"/>
+        <image name="view122.png" width="373" height="225"/>
+    </resources>
+</document>

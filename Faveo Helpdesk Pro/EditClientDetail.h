@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *mobileTextField;
 @property (weak, nonatomic) IBOutlet UIView *userStateChangeView;
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
 
 @end

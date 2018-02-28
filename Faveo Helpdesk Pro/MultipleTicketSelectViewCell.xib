@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MultipleTicketSelectViewCellId" rowHeight="1846" id="KGk-i7-Jjw" customClass="MultipleTicketSelectViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="419" height="1521"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="419" height="1520.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pvb-Ap-AkR">
+                        <rect key="frame" x="1" y="0.0" width="418" height="1521"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0m-T7-ldM">
+                                <rect key="frame" x="18" y="31" width="363" height="87"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="87" id="J43-SD-EBi"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Goto any view like Inbox, My tickets, Unassigned tickets, Closed tickets or Trash tickets.
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="For example">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPS-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">: I goto inbox view, initial it will look like below image
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="937-Pi-MOc">
+                                <rect key="frame" x="24" y="649" width="372" height="81"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="81" id="BUb-sM-NRz"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Now, long press and hold on any one ticket, then multiple ticket select mode will be activated and on more view will appear which contains buttons like merge, assign and change ticket status, see below image</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Inbox2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="gFS-TX-swk">
+                                <rect key="frame" x="81" y="133" width="240" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="E1v-Th-kCG"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="500" id="E8W-d3-eSm"/>
+                                    <constraint firstAttribute="height" constant="500" id="tHo-hK-xJz"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multipleSelect.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hNf-pe-LfS">
+                                <rect key="frame" x="84" y="747" width="253" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="253" id="WOS-7v-XOT"/>
+                                    <constraint firstAttribute="height" constant="500" id="uFQ-aq-ykj"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHC-Q2-QpY">
+                                <rect key="frame" x="17" y="1255" width="380" height="179"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="380" id="cIE-Ed-IJg"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="179" id="qbv-Qm-7Jv"/>
+                                    <constraint firstAttribute="height" constant="179" id="rOJ-pR-Blf"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Here, I selected 4 tickets like that you can any number of tickets. You need to just click on the ticket which you want to select, if want to deselect then again click on that particular ticket, it will be deselected and comes to normal view like first image. Like this way it will work.
+
+Using this features you can do 3 things,
+1. Ticket merge
+2. Multiple ticket assign
+3. Multiple ticket status change.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gFS-TX-swk" secondAttribute="trailing" constant="97" id="3wQ-rB-w8l"/>
+                            <constraint firstAttribute="bottom" secondItem="cHC-Q2-QpY" secondAttribute="bottom" constant="87" id="5M9-03-its"/>
+                            <constraint firstItem="gFS-TX-swk" firstAttribute="top" secondItem="p0m-T7-ldM" secondAttribute="bottom" constant="15" id="6We-ty-k18"/>
+                            <constraint firstItem="gFS-TX-swk" firstAttribute="leading" secondItem="Pvb-Ap-AkR" secondAttribute="leading" constant="81" id="7GI-cC-41h"/>
+                            <constraint firstItem="cHC-Q2-QpY" firstAttribute="top" secondItem="hNf-pe-LfS" secondAttribute="bottom" constant="8" symbolic="YES" id="7dz-kb-bk5"/>
+                            <constraint firstItem="p0m-T7-ldM" firstAttribute="leading" secondItem="Pvb-Ap-AkR" secondAttribute="leading" constant="18" id="CCh-lw-JW6"/>
+                            <constraint firstItem="hNf-pe-LfS" firstAttribute="leading" secondItem="Pvb-Ap-AkR" secondAttribute="leading" constant="84" id="CVe-g3-kMv"/>
+                            <constraint firstItem="937-Pi-MOc" firstAttribute="leading" secondItem="cHC-Q2-QpY" secondAttribute="leading" constant="7" id="HzW-tg-94p"/>
+                            <constraint firstAttribute="trailing" secondItem="p0m-T7-ldM" secondAttribute="trailing" constant="37" id="Ltm-35-RKC"/>
+                            <constraint firstItem="hNf-pe-LfS" firstAttribute="top" secondItem="937-Pi-MOc" secondAttribute="bottom" constant="17" id="RRB-md-VqA"/>
+                            <constraint firstAttribute="trailing" secondItem="937-Pi-MOc" secondAttribute="trailing" constant="22" id="baz-tm-awX"/>
+                            <constraint firstItem="p0m-T7-ldM" firstAttribute="top" secondItem="Pvb-Ap-AkR" secondAttribute="top" constant="31" id="dI3-Y6-2kW"/>
+                            <constraint firstItem="937-Pi-MOc" firstAttribute="centerX" secondItem="hNf-pe-LfS" secondAttribute="centerX" id="fun-pd-MQX"/>
+                            <constraint firstItem="937-Pi-MOc" firstAttribute="leading" secondItem="Pvb-Ap-AkR" secondAttribute="leading" constant="24" id="qsZ-Iz-UBL"/>
+                            <constraint firstItem="937-Pi-MOc" firstAttribute="top" secondItem="gFS-TX-swk" secondAttribute="bottom" constant="16" id="y8Y-Ew-DKi"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Pvb-Ap-AkR" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="5yr-uC-Xpe"/>
+                    <constraint firstAttribute="trailing" secondItem="Pvb-Ap-AkR" secondAttribute="trailing" id="8hh-4R-KId"/>
+                    <constraint firstItem="Pvb-Ap-AkR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QNk-xn-hd6"/>
+                    <constraint firstItem="Pvb-Ap-AkR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mnz-0H-aQH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="17.5" y="54.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Inbox2.jpg" width="1023" height="2093"/>
+        <image name="multipleSelect.jpg" width="1025" height="2082"/>
+    </resources>
+</document>

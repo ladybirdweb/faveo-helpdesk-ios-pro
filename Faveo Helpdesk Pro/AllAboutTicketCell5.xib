@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AllAboutTicketCell5Id" rowHeight="482" id="KGk-i7-Jjw" customClass="AllAboutTicketCell5">
+            <rect key="frame" x="0.0" y="0.0" width="407" height="690"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="407" height="689.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KhB-El-OSn">
+                        <rect key="frame" x="0.0" y="1" width="407" height="686"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtX-6Z-EvU">
+                                <rect key="frame" x="11" y="49" width="381" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="RQ7-1E-Yw3"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Now, if you want to see ticket reply or internal note then click on any row in conversation view. It will show the particular message details.The first row shows the recent ticket reply.</string>
+                                        <attributes>
+                                            <color key="NSBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticket detail page2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zwx-j5-mCm">
+                                <rect key="frame" x="66" y="123" width="258" height="545"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="545" id="LTb-En-9sr"/>
+                                    <constraint firstAttribute="width" constant="258" id="bNl-bO-Dhd"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rtX-6Z-EvU" firstAttribute="centerX" secondItem="zwx-j5-mCm" secondAttribute="centerX" constant="6.5" id="0u8-5i-Jq6"/>
+                            <constraint firstItem="rtX-6Z-EvU" firstAttribute="top" secondItem="KhB-El-OSn" secondAttribute="top" constant="49" id="C0V-gz-ECR"/>
+                            <constraint firstItem="zwx-j5-mCm" firstAttribute="top" secondItem="rtX-6Z-EvU" secondAttribute="bottom" constant="24" id="Psl-aD-zFP"/>
+                            <constraint firstItem="rtX-6Z-EvU" firstAttribute="leading" secondItem="KhB-El-OSn" secondAttribute="leadingMargin" constant="3" id="R4p-by-sOb"/>
+                            <constraint firstAttribute="bottom" secondItem="zwx-j5-mCm" secondAttribute="bottom" constant="18" id="V2B-ei-eYw"/>
+                            <constraint firstItem="rtX-6Z-EvU" firstAttribute="centerX" secondItem="KhB-El-OSn" secondAttribute="centerX" constant="-2" id="m3i-CK-ITO"/>
+                            <constraint firstItem="zwx-j5-mCm" firstAttribute="leading" secondItem="KhB-El-OSn" secondAttribute="leading" constant="66" id="wpT-jd-7SK"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="KhB-El-OSn" secondAttribute="trailing" id="5fy-Dr-8rl"/>
+                    <constraint firstItem="KhB-El-OSn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-30" id="FLp-xY-FLb"/>
+                    <constraint firstItem="KhB-El-OSn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="KWr-P4-1S3"/>
+                    <constraint firstItem="KhB-El-OSn" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="hQZ-9Q-CKs"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="-32.5" y="-77"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ticket detail page2.jpg" width="1058" height="2092"/>
+    </resources>
+</document>

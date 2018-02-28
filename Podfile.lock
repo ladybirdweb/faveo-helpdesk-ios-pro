@@ -1,9 +1,15 @@
 PODS:
   - ActionSheetPicker-3.0 (2.2.0)
   - CNPPopupController (0.3.3)
+  - Crashlytics (3.10.0):
+    - Fabric (~> 1.7.3)
+  - Fabric (1.7.3)
   - Firebase/Core (3.10.0):
     - FirebaseAnalytics (= 3.6.0)
     - FirebaseCore (= 3.4.5)
+  - Firebase/Crash (3.10.0):
+    - Firebase/Core
+    - FirebaseCrash (= 1.1.4)
   - Firebase/Messaging (3.10.0):
     - Firebase/Core
     - FirebaseMessaging (= 1.2.1)
@@ -15,6 +21,13 @@ PODS:
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseCore (3.4.5):
     - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCrash (1.1.4):
+    - FirebaseAnalytics (~> 3.5)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
+    - GoogleToolboxForMac/Logger (~> 2.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.8)
   - FirebaseMessaging (1.2.1):
@@ -48,7 +61,10 @@ PODS:
 DEPENDENCIES:
   - ActionSheetPicker-3.0
   - CNPPopupController
+  - Crashlytics (~> 3.10.0)
+  - Fabric (~> 1.7.3)
   - Firebase/Core
+  - Firebase/Crash
   - Firebase/Messaging
   - HexColors
   - IQKeyboardManager
@@ -62,9 +78,12 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
   CNPPopupController: 59b06290762f68beab5fb0bbfa87eb4dcbefb7de
+  Crashlytics: a989ef242b66605577a425733797f810bd2725eb
+  Fabric: bb495bb9a7a7677c6d03a1f8b83d95bc49b47e41
   Firebase: 387f37c7dca894a02708da9ff35ba147040eae9e
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
   FirebaseCore: 1e383fdfe37b6b5d6ff88e84204bdee30276af0f
+  FirebaseCrash: 34f0349908ec87945a5ae96c402e7201a3f3aede
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   FirebaseMessaging: acf66347e43c5637c697060c3001d25c809a4131
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
@@ -80,6 +99,6 @@ SPEC CHECKSUMS:
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: d4be29f9aa8ad765c83e837f80453046a7969c1a
+PODFILE CHECKSUM: 78857aaf254ad5f571facca133af9138e6a86f6b
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.4.0

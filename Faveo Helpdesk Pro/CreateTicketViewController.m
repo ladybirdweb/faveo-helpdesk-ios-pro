@@ -2,7 +2,7 @@
 //  CreateTicketViewController.m
 //  SideMEnuDemo
 //
-//  Created by Narendra on 19/08/16.
+//  Created  on 19/08/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -318,16 +318,14 @@
         
     }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught in readFromPlist method in CreateTicket ViewController" );
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+        NSLog( @" I am in readFromList method in CreateTicket ViewController" );
         
     }
     
@@ -339,83 +337,96 @@
 }
 
 
-
-//- (IBAction)staffClicked:(id)sender
-//{
-//    [self removeKeyboard];
-//
-//    if (!_staffArray||!_staffArray.count) {
-//        _assignTextField.text=NSLocalizedString(@"Not Available",nil);
-//        staff_id=0;
-//    }else{
-//
-//        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
-//    }
-//
-//}
-
 - (IBAction)staffClicked:(id)sender {
-    [self.view endEditing:YES];
-    if (!_staffArray||!_staffArray.count) {
-        _assignTextField.text=NSLocalizedString(@"Not Available",nil);
-        staff_id=0;
-    }else{
+    @try{
+        [self.view endEditing:YES];
+        if (!_staffArray||!_staffArray.count) {
+            _assignTextField.text=NSLocalizedString(@"Not Available",nil);
+             staff_id=0;
+         }else{
         
-        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+           [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        }
+    }@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in staff clicked method in CrateTicket ViewController" );
+        
     }
 }
 
 - (IBAction)countryCodeClicked:(id)sender {
-    [self.view endEditing:YES];
-    [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+    @try{
+        [self.view endEditing:YES];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+    }@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in country code clicked method in Create ticket ViewController" );
+        
+    }
 }
 
 
 - (IBAction)helpTopicClicked:(id)sender {
+    @try{
     [self.view endEditing:YES];
-    if (!_helptopicsArray||!_helptopicsArray.count) {
-        _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
-        help_topic_id=0;
-    }else{
-        [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+         if (!_helptopicsArray||!_helptopicsArray.count) {
+            _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
+            help_topic_id=0;
+          }else{
+          [ActionSheetStringPicker showPickerWithTitle:@"Select Helptopic" rows:_helptopicsArray initialSelection:0 target:self successAction:@selector(helpTopicWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+          }
+    }@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in HelptopicCLicked method in CreateTicket ViewController" );
+        
     }
 }
 - (IBAction)priorityClicked:(id)sender {
-    [self.view endEditing:YES];
-    if (!_priorityArray||![_priorityArray count]) {
-        _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
-        priority_id=0;
+    @try{
+          [self.view endEditing:YES];
+            if (!_priorityArray||![_priorityArray count]) {
+             _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
+              priority_id=0;
         
-    }else{
-        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Priority",nil) rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+          }else{
+             [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Priority",nil) rows:_priorityArray initialSelection:0 target:self successAction:@selector(priorityWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+              }
+    }@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in PriorityCLicked method in CreateTicket ViewController" );
+        
     }
 }
 
 
-
-- (IBAction)slaClicked:(id)sender {
-    [self removeKeyboard];
-    
-    if (!_slaPlansArray||!_slaPlansArray.count) {
-        _slaTextField.text=NSLocalizedString(@"Not Available",nil);
-        sla_id=0;
-    }else{
-        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select SLA",nil) rows:_slaPlansArray initialSelection:0 target:self successAction:@selector(slaWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
-    }
-    
-}
-
-- (IBAction)deptClicked:(id)sender {
-    [self removeKeyboard];
-    
-    if (!_deptArray||!_deptArray.count) {
-        _deptTextField.text=NSLocalizedString(@"Not Available",nil);
-        dept_id=0;
-    }else{
-        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Department",nil) rows:_deptArray initialSelection:0 target:self successAction:@selector(deptWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
-    }
-    
-}
 
 - (IBAction)submitClicked:(id)sender {
     
@@ -704,16 +715,14 @@
         
     }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught" );
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        //  NSLog( @"In finally block");
+        NSLog( @" I am in submitt button method in Create ticket ViewController" );
         
     }
 }
@@ -745,8 +754,7 @@
             
             staffID=@"0";
         }
-        /* NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&ip=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&helptopic=%@&priority=%@&phone=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],_subjectTextField.text,_msgTextField.text,_firstNameTextField.text,_lastNameTextField.text,_mobileTextField.text,code,_emailTextField.text,help_topic_id,priority_id,@""];
-         */
+        
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID];
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -860,17 +868,14 @@
             }];
         }@catch (NSException *exception)
         {
-            //[utils showAlertWithMessage:@"APP IS STOPPED WORKING" sendViewController:self];
-            // Print exception information
-            NSLog( @"NSException caught in createTicket in CrateTicket ViewController" );
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+            NSLog( @" I am in CreateTicket method in CreateTicket ViewController" );
             
         }
     }
@@ -887,10 +892,6 @@
                         instantiateViewControllerWithIdentifier:@"addRequest"];
     [self.navigationController pushViewController:wc animated:YES];
     
-    // AddRequester *req=[self.storyboard instantiateViewControllerWithIdentifier:@"addRequest"];
-    
-    
-    //[self.navigationController pushViewController:req animated:YES];
 }
 
 
@@ -951,8 +952,6 @@
         if ([text isEqualToString:@" "]) {
             if (!textView.text.length)
                 return NO;
-            //                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
-            //                            return NO;
         }
         
         // allow backspace
@@ -1005,8 +1004,7 @@
         if ([text isEqualToString:@" "]) {
             if (!textView.text.length)
                 return NO;
-            //                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
-            //                            return NO;
+           
         }
         
         // allow backspace
@@ -1221,43 +1219,8 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    //   // [_emailTextField becomeFirstResponder ];
-    ////
-    //    if (textField == _emailTextField) {
-    //        [textField resignFirstResponder];
-    //        [_firstNameTextField becomeFirstResponder];
-    //    } else if (textField == _firstNameTextField) {
-    //
-    //        [textField resignFirstResponder];
-    //        [_lastNameTextField becomeFirstResponder];
-    //    } else if (textField == _lastNameTextField) {
-    //
-    //        [textField resignFirstResponder];
-    //        [_codeTextField becomeFirstResponder];
-    //    } else if (textField == _codeTextField)
-    //    {
-    //        [textField resignFirstResponder];
-    //        [_mobileTextField becomeFirstResponder];
-    //    }else if(textField == _mobileTextField)
-    //    {
-    //        [textField resignFirstResponder];
-    //        [_helpTopicTextField becomeFirstResponder];
-    //    }
-    //    else if (textField == _helpTopicTextField) {
-    //
-    //        [textField resignFirstResponder];
-    //        [_subjectTextField becomeFirstResponder];
-    //    } else if (textField == _subjectTextField) {
-    //
-    //        [textField resignFirstResponder];
-    //        [_textViewMsg becomeFirstResponder];
-    //    }
-    //
-    //
     return YES;
 }
-
-
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu
 {

@@ -62,6 +62,9 @@
     [_cancelLabel addGestureRecognizer:tap];
     [_assignLabel addGestureRecognizer:tap2];
     
+    _cancelLabel.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    _assignLabel.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
@@ -81,6 +84,8 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)readFromPlist{
+    
+@try{
     // Read plist from bundle and get Root Dictionary out of it
     NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0];
@@ -132,13 +137,24 @@
     
         _assignArray=[staffMU copy];
         
-
+}@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in readFromPlist method in MultipleTicketSelect  ViewController" );
+        
+    }
 }
 
 
 
 - (IBAction)selectAssignee:(id)sender {
-    
+@try{
     [self.view endEditing:YES];
     [_assinTextField resignFirstResponder];
     if (!_assignArray||!_assignArray.count) {
@@ -147,14 +163,39 @@
     }else{
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
     }
+}@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in selectAssignee method in MultpleTIcketSelect ViewController" );
+        
+    }
     
 }
 
 - (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
 {
+@try{
     staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
     
     self.assinTextField.text = (_assignArray)[(NSUInteger) [selectedIndex intValue]];
+  }@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in staffSelected method in MultipleTicketAssign ViewController" );
+        
+    }
     
 }
 
@@ -223,7 +264,7 @@
         
          NSLog(@"URL is : %@",url);
         
-        
+@try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -292,7 +333,18 @@
             
                  }];
             
-        
+    }@catch (NSException *exception)
+        {
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+             [utils showAlertWithMessage:exception.name sendViewController:self];
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in assignButton method in MultipleTicketAssign ViewController" );
+            
+        }
     }
 }
 

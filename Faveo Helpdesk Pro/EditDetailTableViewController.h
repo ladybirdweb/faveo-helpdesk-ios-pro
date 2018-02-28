@@ -57,9 +57,7 @@
 - (IBAction)statusClicked:(id)sender;
 - (IBAction)helpTopicClicked:(id)sender;
 
-- (IBAction)slaClicked:(id)sender;
 
-- (IBAction)deptClicked:(id)sender;
 
 - (IBAction)assignClicked:(id)sender;
 

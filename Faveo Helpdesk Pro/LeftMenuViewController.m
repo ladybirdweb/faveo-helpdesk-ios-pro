@@ -2,7 +2,7 @@
 //  LeftMenuViewController.m
 //  SideMEnuDemo
 //
-//  Created by Narendra on 17/08/16.
+//  Created  on 17/08/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -61,20 +61,14 @@
     [self.tableView reloadData];
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-    
-    
-    
-    // Do any additional setup after loading the view from its nib.
-    // Do any additional setup after loading the view from its nib.
+ 
 }
 
 
 
 -(void)viewWillAppear:(BOOL)animated{
-    
     [self.tableView reloadData];
-    //[self.tableView reloadData];
-    
+    //[self.tableView reloadData]
 }
 
 -(void)update{
@@ -266,25 +260,23 @@
                         NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
                     
                 }
-                NSLog(@"Thread-NO5-getDependencies-closed");
+                
             }
              ];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            NSLog( @"In finally block");
+             NSLog( @" I am in getDependencies method in Leftmenu ViewController" );
             
         }
     }
-    NSLog(@"Thread-NO2-getDependencies()-closed");
+   
     [[AppDelegate sharedAppdelegate] hideProgressView];
 }
 
@@ -293,18 +285,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return 0;
-//}
-//
-//// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-//// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return ;
-//}
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -348,17 +328,14 @@
                 break;
                 
             case 10:
-                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"AboutVCID"];
+                 vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"AboutVCID"];
                 break;
+                
                 
                 
             case 11:
                 
                 [self wipeDataInLogout];
-                //[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-                //[[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
-                
-                // [RKDropdownAlert title:@"Faveo Helpdesk" message:@"You've logged out, successfully." backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                 
                 if (self.navigationController.navigationBarHidden) {
                     [self.navigationController setNavigationBarHidden:NO];
@@ -377,37 +354,24 @@
                                                 atPosition:RMessagePositionNavBarOverlay
                                       canBeDismissedByUser:YES];
                 
-                
-                /*[RMessage showNotificationWithTitle:NSLocalizedString(@"Faveo Helpdesk", nil)
-                 subtitle:NSLocalizedString(@"You've logged out, successfully...!", nil)
-                 type:RMessageTypeSuccess
-                 customTypeName:nil
-                 callback:nil]; */
+            
                 vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"Login"];
                 // (vc.view.window!.rootViewController?).dismissViewControllerAnimated(false, completion: nil);
                 break;
-                
-                //        case 3:
-                //            [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-                //            [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
-                //            return;
-                //            break;
-                
+            
             default:
                 break;
         }
     }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught in LeftMenu View Controller" );
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+        NSLog( @" I am in did-deselect method in Leftmenu ViewController" );
         
     }
     
@@ -446,16 +410,14 @@
         }
     }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught in Logout Process in LeftMenu ViewController" );
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+        NSLog( @" I am in LogOut method in Leftmenu ViewController" );
         
     }
     
@@ -492,16 +454,14 @@
         }];
     }@catch (NSException *exception)
     {
-        // Print exception information
-        NSLog( @"NSException caught In sendDeviceToken method in LeftMenu ViewController" );
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
     {
-        // Cleanup, in both success and fail cases
-        NSLog( @"In finally block");
+        NSLog( @" I am in sendDeveiceToken method in Leftmenu ViewController" );
         
     }
 }
@@ -513,11 +473,7 @@
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // rows in section 0 should not be selectable
-    // if ( indexPath.section == 0 ) return nil;
-    
-    
-    
+
     // first 3 rows in any section should not be selectable
     if ( (indexPath.row ==0) || (indexPath.row==2) ) return nil;
     

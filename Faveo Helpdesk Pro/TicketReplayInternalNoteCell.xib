@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TicketReplayInternalNoteCellId" rowHeight="586" id="KGk-i7-Jjw" customClass="TicketReplayInternalNoteCell">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="794"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="400" height="793.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yaA-TV-iN3">
+                        <rect key="frame" x="0.0" y="1" width="400" height="793"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SN-eu-Pje">
+                                <rect key="frame" x="18" y="27" width="253" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="bUh-41-GVk"/>
+                                    <constraint firstAttribute="width" constant="253" id="woR-qk-vBf"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="1. How to give reply to ticket?">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="TimesNewRomanPS-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1q-cb-yR4">
+                                <rect key="frame" x="23" y="55" width="352" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="hd0-Vc-IBr"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Goto ticket detail page, and then click on the plus button which is present at below right side corner. After clicking on that blue plus button again click on reply button then you will get below screen,</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28.299999237060547">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56.650001525878906">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="85">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="113.34999847412109">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="141.69999694824219">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="170.05000305175781">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="198.39999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="226.75">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="255.10000610351562">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="283.45001220703125">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="311.79998779296875">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="340.14999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Replay.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="V6v-MI-Yxr">
+                                <rect key="frame" x="73" y="135" width="253" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="1YZ-cP-tfp"/>
+                                    <constraint firstAttribute="width" constant="253" id="A39-6T-niv"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUg-cG-0jh">
+                                <rect key="frame" x="28" y="649" width="342" height="92"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="92" id="QhF-AQ-8kA"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="92" id="oed-0v-UAp"/>
+                                    <constraint firstAttribute="width" constant="342" id="sfH-74-fdn"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">In this screen, you can enter your reply content and after completing the typing click on Done button, then it will create your reply message.
+Then you can see this replay detail in conversation page which is in ticket detail page.(see below image)</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28.299999237060547">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56.650001525878906">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="85">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="113.34999847412109">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="141.69999694824219">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="170.05000305175781">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="198.39999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="226.75">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="255.10000610351562">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="283.45001220703125">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="311.79998779296875">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="340.14999389648438">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="vUg-cG-0jh" secondAttribute="bottom" constant="52" id="0mS-ZB-tR9"/>
+                            <constraint firstItem="a1q-cb-yR4" firstAttribute="top" secondItem="6SN-eu-Pje" secondAttribute="bottom" constant="9" id="94T-ha-4qz"/>
+                            <constraint firstItem="a1q-cb-yR4" firstAttribute="centerX" secondItem="V6v-MI-Yxr" secondAttribute="centerX" id="Mbl-sZ-9YX"/>
+                            <constraint firstItem="a1q-cb-yR4" firstAttribute="leading" secondItem="yaA-TV-iN3" secondAttribute="leading" constant="23" id="OjQ-hf-CPp"/>
+                            <constraint firstItem="V6v-MI-Yxr" firstAttribute="centerX" secondItem="vUg-cG-0jh" secondAttribute="centerX" id="Pyu-Gr-h3c"/>
+                            <constraint firstItem="a1q-cb-yR4" firstAttribute="centerX" secondItem="yaA-TV-iN3" secondAttribute="centerX" constant="-1" id="Rhb-04-lVg"/>
+                            <constraint firstItem="6SN-eu-Pje" firstAttribute="top" secondItem="yaA-TV-iN3" secondAttribute="top" constant="27" id="Tn3-XM-XZy"/>
+                            <constraint firstItem="6SN-eu-Pje" firstAttribute="leading" secondItem="yaA-TV-iN3" secondAttribute="leading" constant="18" id="Upv-N4-W7z"/>
+                            <constraint firstItem="V6v-MI-Yxr" firstAttribute="leading" secondItem="yaA-TV-iN3" secondAttribute="leading" constant="73" id="dH3-Q5-T4B"/>
+                            <constraint firstItem="vUg-cG-0jh" firstAttribute="top" secondItem="V6v-MI-Yxr" secondAttribute="bottom" constant="14" id="hFr-4b-G8x"/>
+                            <constraint firstItem="V6v-MI-Yxr" firstAttribute="top" secondItem="a1q-cb-yR4" secondAttribute="bottom" constant="12" id="qX1-IW-5sf"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="yaA-TV-iN3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-30" id="4sD-XN-3ja"/>
+                    <constraint firstAttribute="trailing" secondItem="yaA-TV-iN3" secondAttribute="trailing" id="KBm-0d-RY5"/>
+                    <constraint firstItem="yaA-TV-iN3" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="YJX-an-IK0"/>
+                    <constraint firstItem="yaA-TV-iN3" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="sre-Fe-OR5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="30" y="145"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Replay.jpg" width="1029" height="2087"/>
+    </resources>
+</document>

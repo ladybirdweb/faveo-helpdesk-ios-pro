@@ -2,7 +2,7 @@
 //  InboxViewController.m
 //  SideMEnuDemo
 //
-//  Created by Narendra on 19/08/16.
+//  Created on 19/08/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -45,7 +45,7 @@
     // NSMutableArray *mutableArray;
     NSMutableArray *selectedArray;
     NSMutableArray *selectedSubjectArray;
-     NSMutableArray *selectedTicketOwner;
+    NSMutableArray *selectedTicketOwner;
     
     int count1;
     NSString *selectedIDs;
@@ -105,7 +105,7 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
-    //search buitton
+    
 //    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
 //    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
 //    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -122,7 +122,7 @@
     [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    //[rightBarButtonItems addSubview:moreButton];
+  //  [rightBarButtonItems addSubview:moreButton];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
@@ -141,7 +141,7 @@
     
     navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     
- //   UIImage *image1 = [UIImage imageNamed:@"merg111"];
+    UIImage *image1 = [UIImage imageNamed:@"merg111"];
     UIImage *image2 = [UIImage imageNamed:@"x1"];
     
     // UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Assign"];
@@ -157,23 +157,20 @@
     UIGraphicsEndImageContext();
     NSData *imageData = UIImagePNGRepresentation(picture1);
     UIImage *img3=[UIImage imageWithData:imageData];
-
-  //  UIImageView* img = [[UIImageView alloc] initWithImage:img3];
-//
-//    //giving action to image
-//    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
-//    singleTap.numberOfTapsRequired = 1;
-//    [img setUserInteractionEnabled:YES];
-//    [img addGestureRecognizer:singleTap];
-//
-//
-//    navItem.titleView = img;
+    
+    UIImageView* img = [[UIImageView alloc] initWithImage:img3];
+    
+    //giving action to image
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    [img setUserInteractionEnabled:YES];
+    [img addGestureRecognizer:singleTap];
     
     
-//    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStylePlain  target:self action:@selector(MergeButtonClicked)];
-//    navItem.leftBarButtonItem = button1;
+    navItem.titleView = img;
     
-    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:img3 style:UIBarButtonItemStylePlain  target:self action:@selector(tapDetected)];
+    
+    UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStylePlain  target:self action:@selector(MergeButtonClicked)];
     navItem.leftBarButtonItem = button1;
     
     
@@ -183,17 +180,10 @@
     [navbar setItems:@[navItem]];
     [self.view addSubview:navbar];
     
-    
-    //    UIBarButtonItem* status = [[UIBarButtonItem alloc] initWithTitle:@"Change Status" style:UIBarButtonItemStylePlain target:self action:@selector(onNavButtonTapped:event:)];
-    // [navbar setBarTintColor:[UIColor lightGrayColor]];
-    //  [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor]];
-    
-    //    navItem.rightBarButtonItem = status;
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-    
-    [self reload];
     [self getDependencies];
-    
+    [self reload];
+   
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     
 }
 
@@ -419,7 +409,7 @@
 
 -(void)tapDetected{
     
-
+@try{
     NSLog(@"Clicked on Asign");
     if (!selectedArray.count) {
         
@@ -435,7 +425,18 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
-    
+}@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in clickedOnAssignButton method in Inbox ViewController" );
+        
+    }
     
 }
 
@@ -443,11 +444,7 @@
 {
     NSLog(@"Clicked on merge");
     
-    NSString * email1= [selectedTicketOwner objectAtIndex:0];
-    NSString * email2= [selectedTicketOwner objectAtIndex:1];
-    NSLog(@"email 1 is : %@",email1);
-    NSLog(@"email 2 is : %@",email2);
-    
+@try{
     if (!selectedArray.count) {
         
         [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
@@ -455,20 +452,44 @@
     }else if(selectedArray.count<2)
     {
         [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
+    }else{
+        if(selectedArray.count>=2)
+        {
+        NSString * email1= [selectedTicketOwner objectAtIndex:0];
+        NSString * email2= [selectedTicketOwner objectAtIndex:1];
+        NSLog(@"email 1 is : %@",email1);
+        NSLog(@"email 2 is : %@",email2);
+        if(![email1 isEqualToString:email2] || ![email1 isEqualToString:[selectedTicketOwner lastObject]])
+        {
+            [utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
+        }
+        else{
+
+             globalVariables.idList=selectedArray;
+             globalVariables.subjectList=selectedSubjectArray;
+
+           MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
+          [self.navigationController pushViewController:merge animated:YES];
+        }
+
+        }else
+        {
+
+             [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
+        }
     }
-    else if(![email1 isEqualToString:email2])
+}@catch (NSException *exception)
     {
-        [utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+         [utils showAlertWithMessage:exception.name sendViewController:self];
+        return;
     }
-    else{
+    @finally
+    {
+        NSLog( @" I am in mergeButtonCicked method in Inbox ViewController" );
         
-        globalVariables.idList=selectedArray;
-        globalVariables.subjectList=selectedSubjectArray;
-        
-        MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
-        [self.navigationController pushViewController:merge animated:YES];
     }
-    
 }
 
 
@@ -562,8 +583,8 @@
                         }
                         else{
                             
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         }
                         
                     }else if(error)  {
@@ -622,16 +643,14 @@
             }];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            // NSLog( @"NSException caught in reload method in Inbox ViewController " );
-            // NSLog( @"Name: %@", exception.name);
-            // NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+             [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in reload method in Inbox ViewController" );
             
         }
     }
@@ -667,6 +686,7 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/dependency?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
         
+        NSLog(@"URL is : %@",url);
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
@@ -764,16 +784,14 @@
              ];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in getDependencies method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //    NSLog( @"In finally block");
+            NSLog( @" I am in getDependencies method in Inbox ViewController" );
             
         }
     }
@@ -785,6 +803,7 @@
 -(void)EditTableView:(UIGestureRecognizer*)gesture{
     [self.tableView setEditing:YES animated:YES];
     navbar.hidden=NO;
+   // [selectedTicketOwner removeAllObjects];
 }
 
 
@@ -972,7 +991,7 @@
             //     NSLog(@"String is : %@",szResult);
             NSLog(@"Page is : %@",Page);
             NSLog(@"Page is : %@",Page);
-            
+
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices getNextPageURLInbox:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
@@ -1033,16 +1052,14 @@
             }];
         }@catch (NSException *exception)
         {
-            // Print exception information
-            //            NSLog( @"NSException caught in loadMore method in Inbox ViewController" );
-            //            NSLog( @"Name: %@", exception.name);
-            //            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+             [utils showAlertWithMessage:exception.name sendViewController:self];
             return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-            //  NSLog( @"In finally block");
+            NSLog( @" I am in loadMore method in Inobx ViewController" );
             
         }
     }
@@ -1140,7 +1157,7 @@
                 });
                 
             }
-            NSLog(@"Thread-NO5-getInbox-closed");
+          
             
         }];
         
@@ -1513,16 +1530,14 @@
                 
             } @catch (NSException *exception)
             {
-                // Print exception information
-                //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-                //            NSLog( @"Name: %@", exception.name);
-                //            NSLog( @"Reason: %@", exception.reason );
-                return cell;
+                NSLog( @"Name: %@", exception.name);
+                NSLog( @"Reason: %@", exception.reason );
+                [utils showAlertWithMessage:exception.name sendViewController:self];
+               // return;
             }
             @finally
             {
-                // Cleanup, in both success and fail cases
-                //   NSLog( @"In finally block");
+                NSLog( @" I am in cellForRowAtIndexPath method in Leftmenu ViewController" );
                 
             }
             // ______________________________________________________________________________________________________
@@ -1613,15 +1628,15 @@
             // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
             @try{
                 
-//                if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-//                {
-//                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-//
-//                }
-//                else
-//                {
-//                    [cell setUserProfileimage:@"default_pic.png"];
-//                }
+                //                if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+                //                {
+                //                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+                //
+                //                }
+                //                else
+                //                {
+                //                    [cell setUserProfileimage:@"default_pic.png"];
+                //                }
                 
                 
                 if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
@@ -1703,16 +1718,14 @@
                 
             }@catch (NSException *exception)
             {
-                // Print exception information
-                //            NSLog( @"NSException caught in cellForRowAtIndexPath method in Inbox ViewController" );
-                //            NSLog( @"Name: %@", exception.name);
-                //            NSLog( @"Reason: %@", exception.reason );
-                return cell;
+                NSLog( @"Name: %@", exception.name);
+                NSLog( @"Reason: %@", exception.reason );
+                [utils showAlertWithMessage:exception.name sendViewController:self];
+                //return;
             }
             @finally
             {
-                // Cleanup, in both success and fail cases
-                //     NSLog( @"In finally block");
+                NSLog( @" I am in cellForAtIndexPath method in Inobx ViewController" );
                 
             }
             
@@ -1744,7 +1757,7 @@
         
         //taking ticket title from selected rows
         [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
-        
+        //taking email id
         [selectedTicketOwner addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
         
         count1=(int)[selectedArray count];
@@ -1798,6 +1811,8 @@
             
             globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
             
+            globalVariables.ticketStatusBool=@"ticketView";
+            
             [self.navigationController pushViewController:td animated:YES];
             
         }
@@ -1814,17 +1829,17 @@
     
     [selectedSubjectArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
     
+    [selectedTicketOwner removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
     
     count1=(int)[selectedArray count];
     NSLog(@"Selected count is :%i",count1);
     NSLog(@"Slected Id : %@",selectedArray);
     
     selectedIDs = [selectedArray componentsJoinedByString:@","];
+    
     NSLog(@"Slected Ticket Id are : %@",selectedIDs);
     NSLog(@"Slected Ticket Subjects are : %@",selectedSubjectArray);
-    
-    //    globalVariables.idList=selectedArray;
-    //     globalVariables.subjectList=selectedSubjectArray;
+    NSLog(@"Slected Owner Emails are : %@",selectedTicketOwner);
     
     if (!selectedArray.count) {
         [self.tableView setEditing:NO animated:YES];
@@ -1832,6 +1847,7 @@
     }
     
 }
+
 
 #pragma mark - SlideNavigationController Methods -
 
@@ -1888,6 +1904,13 @@
 {
     NSLog(@"11111111*********111111111111");
     
+    if (!selectedArray.count) {
+        
+        [utils showAlertWithMessage:@"Select The Tickets First For Changing Ticket Status" sendViewController:self];
+        
+    }else
+    {
+    
 #ifdef IfMethodOne
     CGRect rect = [self.navigationController.navigationBar convertRect:[event.allTouches.anyObject view].frame toView:[[UIApplication sharedApplication] keyWindow]];
     
@@ -1939,7 +1962,7 @@
                        }];
     
 #endif
-    
+    }
 }
 
 -(void)changeStaus2
@@ -2313,7 +2336,8 @@
                           @[
                               
                               // @[]
-                              @[@"Show Filter",@"Clear All",@"Exit"]
+                           //   @[@"Show Filter",@"Clear All",@"Exit"]
+                              @[@"Show Filter",@"Exit"]
                               
                               
                               ],
@@ -2365,14 +2389,14 @@
         [self.navigationController pushViewController:filter animated:YES];
         
     }
-    if(titleButtonIndex==0 && rightIndex==1 )
-    {
-        NSLog(@"clear All");
-        
-        InboxViewController * vc= [self.storyboard instantiateViewControllerWithIdentifier: @"InboxID"];
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }
+//    if(titleButtonIndex==0 && rightIndex==1 )
+//    {
+//        NSLog(@"clear All");
+//        
+//        InboxViewController * vc= [self.storyboard instantiateViewControllerWithIdentifier: @"InboxID"];
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+//    }
     // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
     {

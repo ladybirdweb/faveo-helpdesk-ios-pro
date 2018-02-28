@@ -79,6 +79,9 @@
     [_cancelLabel addGestureRecognizer:tap];
     [_mergeLabel addGestureRecognizer:tap2];
     
+    _cancelLabel.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    _mergeLabel.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style: UIBarButtonItemStylePlain target:self action:@selector(Back)];
     self.navigationItem.leftBarButtonItem = backButton;
@@ -139,6 +142,7 @@
 {
     [[AppDelegate sharedAppdelegate] showProgressView];
     NSLog(@"Ckicked on merge button");
+   
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         
@@ -207,8 +211,9 @@
       NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/merge?api_key=%@&token=%@&p_id=%@&t_id[]=%@&title=%@&reason=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],subject_id,filteredID,_newtitleTextview.text,_reasonTextView.text];
         
         NSLog(@"Url is : %@",url);
-     //   NSLog(@"Url is : %@",url);
-        
+  
+    
+@try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -254,70 +259,64 @@
                 NSLog(@"JSON-Merge-Function%@",json);
                
                 NSDictionary *dict1= [json objectForKey:@"response"];
-                NSString *msg= [dict1 objectForKey:@"message"];
                 
-                    dispatch_async(dispatch_get_main_queue(), ^{
-           
-                        if([msg isEqualToString:@"merged successfully"])
-                            
+                NSObject * response1=[dict1 objectForKey:@"message"];
+               
+                //checking response is king of dictionary
+                if([response1 isKindOfClass:[NSDictionary class]])
+                {
+                    NSDictionary *dict1= [json objectForKey:@"response"];
+                    
+                    NSDictionary * dict2=[dict1 objectForKey:@"message"];
+                    NSString *str=[dict2 objectForKey:@"message"];
+                    
+                    if([str isEqualToString:@"tickets from different users"])
+                    {
+                        [utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
+                    }
+                    else
+                    {
+                         [utils showAlertWithMessage:@"Something went wrong...!" sendViewController:self];
+                    }
+                }
+                else{
+                    
+                    NSDictionary *dict1= [json objectForKey:@"response"];
+                    
+                    NSString * response1=[dict1 objectForKey:@"message"];
+                    NSString * msg=@"merged successfully";
+                    
+                        if([response1 isEqualToString: msg])
                         {
                             [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Merged Successfully.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                        
-                          InboxViewController *create=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                            
+                            InboxViewController *create=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:create animated:YES];
                         }else
-                        if([msg isEqualToString:@"tickets from different users"])
                         {
-                            
-                        
-                            [RMessage showNotificationInViewController:self.navigationController
-                                                                 title:NSLocalizedString(@"Alert !", nil)
-                                                              subtitle:NSLocalizedString(@"Tickets from different users.", nil)
-                                                             iconImage:nil
-                                                                  type:RMessageTypeWarning
-                                                        customTypeName:nil
-                                                              duration:RMessageDurationAutomatic
-                                                              callback:nil
-                                                           buttonTitle:nil
-                                                        buttonCallback:nil
-                                                            atPosition:RMessagePositionNavBarOverlay
-                                                  canBeDismissedByUser:YES];
-                            
-                        }
-                        else
-                        {
-                            NSDictionary *dict1= [json objectForKey:@"response"];
-                            NSDictionary *dict2= [dict1 objectForKey:@"message"];
-                            NSString * str = [dict2 objectForKey:@"message"];
-                            if([str isEqualToString:@"tickets from different users"])
-                            {
-                                [RMessage showNotificationInViewController:self.navigationController
-                                                                     title:NSLocalizedString(@"Alert !", nil)
-                                                                  subtitle:NSLocalizedString(@"Tickets from different users.", nil)
-                                                                 iconImage:nil
-                                                                      type:RMessageTypeWarning
-                                                            customTypeName:nil
-                                                                  duration:RMessageDurationAutomatic
-                                                                  callback:nil
-                                                               buttonTitle:nil
-                                                            buttonCallback:nil
-                                                                atPosition:RMessagePositionNavBarOverlay
-                                                      canBeDismissedByUser:YES];
-                            }
-                            else
-                            {
-                               [utils showAlertWithMessage:@"Error..!" sendViewController:self];
-                                
-                            }
+                            [utils showAlertWithMessage:@"Something went wrong...!" sendViewController:self];
                         }
                         
-                    });
                     
                     
+                }
             }
             NSLog(@"Thread-NO5-postMerge-closed");
             
         }];
+}@catch (NSException *exception)
+        {
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+             [utils showAlertWithMessage:exception.name sendViewController:self];
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in mergeButton method in MergeViewForm ViewController" );
+            
+        }
+        
     }
 }
 

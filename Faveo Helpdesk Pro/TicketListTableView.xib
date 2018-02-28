@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TicketListTableViewId" rowHeight="85" id="KGk-i7-Jjw" customClass="TicketListTableView">
+            <rect key="frame" x="0.0" y="0.0" width="336" height="85"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="336" height="84.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yO5-1n-doa">
+                        <rect key="frame" x="-4" y="0.0" width="336" height="81"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unAssigned2" translatesAutoresizingMaskIntoConstraints="NO" id="f69-0V-h3m">
+                                <rect key="frame" x="15" y="15" width="55" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="CjR-WJ-HGb"/>
+                                    <constraint firstAttribute="height" constant="55" id="sIi-z9-QXP"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="tp7-Sa-JI6"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uix-0G-aH9">
+                                <rect key="frame" x="92" y="15" width="236" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="vnV-fX-gJC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiF-1T-j1a">
+                                <rect key="frame" x="92" y="41" width="223" height="29"/>
+                                <string key="text">The line of code retrieves the name of images for the specific row. Say, for the first row, indexPath.row property returns 0 and we picks the first image (i.e. egg_benedict.jpg) from the thumbnails array using the “objectAtIndex” method.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="f69-0V-h3m" firstAttribute="leading" secondItem="yO5-1n-doa" secondAttribute="leading" constant="15" id="9bN-Es-Phy"/>
+                            <constraint firstItem="Uix-0G-aH9" firstAttribute="leading" secondItem="f69-0V-h3m" secondAttribute="trailing" constant="22" id="C8A-py-b3A"/>
+                            <constraint firstItem="f69-0V-h3m" firstAttribute="top" secondItem="Uix-0G-aH9" secondAttribute="top" id="DVH-nx-Fh7"/>
+                            <constraint firstItem="Uix-0G-aH9" firstAttribute="leading" secondItem="qiF-1T-j1a" secondAttribute="leading" id="MCr-Rc-hzO"/>
+                            <constraint firstItem="qiF-1T-j1a" firstAttribute="top" secondItem="Uix-0G-aH9" secondAttribute="bottom" constant="5" id="ZCg-DW-YWK"/>
+                            <constraint firstItem="f69-0V-h3m" firstAttribute="top" secondItem="yO5-1n-doa" secondAttribute="top" constant="15" id="aXu-aM-46h"/>
+                            <constraint firstAttribute="trailing" secondItem="qiF-1T-j1a" secondAttribute="trailing" constant="21" id="iRK-Xh-ZiI"/>
+                            <constraint firstAttribute="bottom" secondItem="f69-0V-h3m" secondAttribute="bottom" constant="11" id="pWH-Do-LMm"/>
+                            <constraint firstItem="f69-0V-h3m" firstAttribute="bottom" secondItem="qiF-1T-j1a" secondAttribute="bottom" id="pfS-E0-G6L"/>
+                            <constraint firstItem="Uix-0G-aH9" firstAttribute="trailing" secondItem="yO5-1n-doa" secondAttribute="trailingMargin" id="w9R-7n-nJC"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="yO5-1n-doa" secondAttribute="trailing" constant="-12" id="IXv-O3-rJB"/>
+                    <constraint firstItem="yO5-1n-doa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-20" id="LEI-5L-tw4"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="yO5-1n-doa" secondAttribute="bottom" constant="-7" id="ORn-IG-TdM"/>
+                    <constraint firstItem="yO5-1n-doa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="qKp-eH-wAg"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="headingOneLabel" destination="Uix-0G-aH9" id="V3N-SY-Gpu"/>
+                <outlet property="headingTwoLabel" destination="qiF-1T-j1a" id="JqM-mr-7Zn"/>
+                <outlet property="imageLogo" destination="f69-0V-h3m" id="Vyq-Un-jyp"/>
+            </connections>
+            <point key="canvasLocation" x="40" y="148.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="unAssigned2" width="512" height="512"/>
+    </resources>
+</document>

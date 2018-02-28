@@ -17,7 +17,8 @@
 #import "ClientDetailViewController.h"
 #import "IQKeyboardManager.h"
 
-
+@import Fabric;
+@import Crashlytics;
 @import Firebase;
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
@@ -53,23 +54,26 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-   // [[IQKeyboardManager sharedManager] setEnabled:true];
-  [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
+    // [[IQKeyboardManager sharedManager] setEnabled:true];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
     
     [[IQKeyboardManager sharedManager] setEnable:YES];
     
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
-   
+    
     // it is deprecated
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
+    [FIRApp configure];
+    [Fabric.sharedSDK setDebug:YES];
+    [Fabric with:@[[Crashlytics class]]];
     
-//    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-//    [center removeAllDeliveredNotifications];
-//    [center removeAllPendingNotificationRequests];  // added 3 lines
-
-    //[Fabric with:@[[Crashlytics class]]];
+  //  assert(false);
     
+    FIRCrashLog(@"Cause Crash button clicked");
+ //   assert(NO);
+    
+   
     //firebase FCM
     // Register for remote notifications. This shows a permission dialog on first run, to
     // show the dialog at a more appropriate time move this registration accordingly.
@@ -113,13 +117,6 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
         // [END register_for_notifications]
     }
     
-    // [START configure_firebase]
-    [FIRApp configure];
-    // [END configure_firebase]
-    
-    // [START set_messaging_delegate]
-    //[FIRMessaging messaging].delegate = self;
-    // [END set_messaging_delegate]
     
     // Add observer for InstanceID token refresh callback.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tokenRefreshNotification:)
@@ -278,8 +275,6 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     
     GlobalVariables *globalVariables=[GlobalVariables sharedInstance];
     
-    
-    
     NSString * scenario=[userInfo objectForKey:@"scenario"];
     if ([scenario isEqualToString:@"tickets"])  {
         
@@ -293,12 +288,14 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
                                                                   options:kNilOptions
                                                                     error:&error];
         
-      
+        
         globalVariables.First_name= [requester objectForKey:@"first_name"];
         globalVariables.Last_name= [requester objectForKey:@"last_name"];
-
         
-     //   globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
+        globalVariables.ticketStatusBool=@"AppDeledateNotificationView";
+        globalVariables.Ticket_status=@"Open";
+        
+        //globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
         [(UINavigationController *)self.window.rootViewController pushViewController:td animated:YES];
         ///////////////////////////
         [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -315,6 +312,13 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
         globalVariables.iD=[requester objectForKey:@"id"];
         globalVariables.First_name= [requester objectForKey:@"first_name"];
         globalVariables.Last_name= [requester objectForKey:@"last_name"];
+        
+        globalVariables.emailInUserList= [requester objectForKey:@"email"];
+        
+        globalVariables.mobileCode1= @"";
+        globalVariables.phoneNumberInUserList= @"";
+        globalVariables.mobileNumberInUserList= @"";
+        globalVariables.userRole=@"";
         
         [(UINavigationController *)self.window.rootViewController pushViewController:cd animated:YES];
         ////////////////////
@@ -520,3 +524,4 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 }
 
 @end
+

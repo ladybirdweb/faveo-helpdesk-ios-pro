@@ -10,8 +10,6 @@
 
 @interface ClientFilter : UIViewController<RMessageProtocol,AWNavigationMenuItemDataSource, AWNavigationMenuItemDelegate>{
 
-
-    
 }
 
 @property (nonatomic) NSInteger page;

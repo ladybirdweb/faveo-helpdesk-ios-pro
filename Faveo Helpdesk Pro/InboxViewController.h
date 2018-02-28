@@ -2,7 +2,7 @@
 //  InboxViewController.h
 //  SideMEnuDemo
 //
-//  Created by Narendra on 19/08/16.
+//  Created  on 19/08/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 

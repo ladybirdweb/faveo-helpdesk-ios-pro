@@ -39,6 +39,7 @@
     [super viewDidLoad];
     
     [self split];
+    
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
     
@@ -54,13 +55,11 @@
    
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
-    
+    utils=[[Utils alloc]init];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     
-    utils=[[Utils alloc]init];
     
-    userDefaults=[NSUserDefaults standardUserDefaults];
     
     UIButton *clearButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [clearButton setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
@@ -77,10 +76,7 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
-  //  _submitButton.hidden=YES;
-    
-    //  _titleBar.backgroundColor =  [UIColor hx_colorWithHexRGBAString:@"#F9E9E6"];
-    
+
     self.headerTitleView.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F9E9E6"];
     
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
@@ -307,12 +303,12 @@
     }
     else
     {
-        [self createTicket];
+        [self addRequesterMethod];
         
     }
     
 }
--(void)createTicket{
+-(void)addRequesterMethod{
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
@@ -321,7 +317,7 @@
         
         [[AppDelegate sharedAppdelegate] showProgressView];
         
-        
+@try{
         NSString *url =[NSString stringWithFormat:@"%@helpdesk/register?token=%@&first_name=%@&last_name=%@&email=%@&mobile=%@&code=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],_firstNameView.text,_lastNameView.text,_emailTextView.text,_mobileTextField.text,_codeTextField.text];
         
         
@@ -357,7 +353,7 @@
             
             if ([msg isEqualToString:@"tokenRefreshed"]) {
                 
-                [self createTicket];
+                [self addRequesterMethod];
                 NSLog(@"Thread--NO4-call-postAddRequester");
                 return;
             }
@@ -429,23 +425,31 @@
                 {
                     
                     [utils showAlertWithMessage:NSLocalizedString(@"Email already exist.", nil) sendViewController:self];
-                 //   [utils showAlertWithMessage:NSLocalizedString(@"Integrity constraint violation: 1062 Duplicate entry", nil) sendViewController:self];
+        
                 }
                 
                 else
                 {
                     
                     [utils showAlertWithMessage:NSLocalizedString(@"Email already exist.", nil) sendViewController:self];
-                  //  [utils showAlertWithMessage:NSLocalizedString(@"Integrity constraint violation: 1062 Duplicate entry", nil) sendViewController:self];
                 }
                 
-                
-           
             }
-            NSLog(@"Thread-NO5-postCreateTicket-closed");
             
         }];
-        
+    
+     }@catch (NSException *exception)
+        {
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+             [utils showAlertWithMessage:exception.name sendViewController:self];
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in addRequester method in AddRequester ViewController" );
+            
+        }
     }
 }
 
@@ -567,15 +571,6 @@
     
     return YES;
 }
-
-
-
-
-//#pragma mark - UITextFieldDelegate
-//
-//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-//    return NO;
-//}
 
 
 

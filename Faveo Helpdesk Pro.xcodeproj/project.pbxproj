@@ -7,7 +7,123 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06099CA5203AA14B0060831A /* MultipleTicketSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CA4203AA14B0060831A /* MultipleTicketSelectView.m */; };
+		06099CA8203AA1680060831A /* MultipleTicketAssign.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CA7203AA1680060831A /* MultipleTicketAssign.m */; };
+		06099CAB203AA1900060831A /* MultipleTicketStatusChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CAA203AA1900060831A /* MultipleTicketStatusChange.m */; };
+		06099CAE203AA1A60060831A /* MergeTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CAD203AA1A60060831A /* MergeTicketView.m */; };
+		06099CB2203AA2A30060831A /* MultipleTicketSelectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CB0203AA2A30060831A /* MultipleTicketSelectViewCell.m */; };
+		06099CB3203AA2A30060831A /* MultipleTicketSelectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06099CB1203AA2A30060831A /* MultipleTicketSelectViewCell.xib */; };
+		06099CB7203AA2B70060831A /* MultipleTicketAssignCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CB5203AA2B70060831A /* MultipleTicketAssignCell.m */; };
+		06099CB8203AA2B70060831A /* MultipleTicketAssignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06099CB6203AA2B70060831A /* MultipleTicketAssignCell.xib */; };
+		06099CBC203AA30D0060831A /* MultipleTicketStatusChangeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CBA203AA30D0060831A /* MultipleTicketStatusChangeCell.m */; };
+		06099CBD203AA30D0060831A /* MultipleTicketStatusChangeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06099CBB203AA30D0060831A /* MultipleTicketStatusChangeCell.xib */; };
+		06099CC1203AA3240060831A /* MergeTicketViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CBF203AA3240060831A /* MergeTicketViewCell.m */; };
+		06099CC2203AA3240060831A /* MergeTicketViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06099CC0203AA3240060831A /* MergeTicketViewCell.xib */; };
+		06099CC4203AAA640060831A /* Inbox2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06099CC3203AAA640060831A /* Inbox2.jpg */; };
+		06099CC6203AB2ED0060831A /* view124.png in Resources */ = {isa = PBXBuildFile; fileRef = 06099CC5203AB2ED0060831A /* view124.png */; };
+		06099CC8203AB55D0060831A /* view125.png in Resources */ = {isa = PBXBuildFile; fileRef = 06099CC7203AB55D0060831A /* view125.png */; };
+		06099CCA203AC0D20060831A /* view126.png in Resources */ = {isa = PBXBuildFile; fileRef = 06099CC9203AC0D20060831A /* view126.png */; };
+		06099CCE203AD21A0060831A /* MergeTicketViewCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 06099CCC203AD21A0060831A /* MergeTicketViewCell2.m */; };
+		06099CCF203AD21A0060831A /* MergeTicketViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06099CCD203AD21A0060831A /* MergeTicketViewCell2.xib */; };
+		06099CD1203AD9160060831A /* view127.png in Resources */ = {isa = PBXBuildFile; fileRef = 06099CD0203AD9160060831A /* view127.png */; };
+		0609AD9D20397BDC00DCDC85 /* merge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609AD9C20397BDC00DCDC85 /* merge.jpg */; };
+		0609AD9F20397BE500DCDC85 /* multpleticketassign.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609AD9E20397BE400DCDC85 /* multpleticketassign.jpg */; };
+		0609ADA120397BEC00DCDC85 /* multpleticketstatuschnage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADA020397BEC00DCDC85 /* multpleticketstatuschnage.jpg */; };
+		0609ADA320397C1100DCDC85 /* allUserList.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADA220397C1000DCDC85 /* allUserList.jpg */; };
+		0609ADA520397C4700DCDC85 /* multipleSelect.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADA420397C4700DCDC85 /* multipleSelect.jpg */; };
+		0609ADA720397C6200DCDC85 /* userEditProfile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADA620397C6200DCDC85 /* userEditProfile.jpg */; };
+		0609ADA920397C8B00DCDC85 /* filteredResult.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADA820397C8A00DCDC85 /* filteredResult.jpg */; };
+		0609ADAB20397C9C00DCDC85 /* filterImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADAA20397C9C00DCDC85 /* filterImage.jpg */; };
+		0609ADAD20397E3F00DCDC85 /* usedetails.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADAC20397E3E00DCDC85 /* usedetails.jpg */; };
+		0609ADAF2039805100DCDC85 /* view121.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADAE2039805000DCDC85 /* view121.png */; };
+		0609ADB3203987E000DCDC85 /* UserAndAgentMenuListCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0609ADB1203987E000DCDC85 /* UserAndAgentMenuListCell2.m */; };
+		0609ADB4203987E000DCDC85 /* UserAndAgentMenuListCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB2203987E000DCDC85 /* UserAndAgentMenuListCell2.xib */; };
+		0609ADB620398E2A00DCDC85 /* view122.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB520398E2A00DCDC85 /* view122.png */; };
+		0609ADB920399B8100DCDC85 /* deActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB720399B8000DCDC85 /* deActive.png */; };
+		0609ADBA20399B8100DCDC85 /* Active.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB820399B8100DCDC85 /* Active.png */; };
+		061E30FD2035426800603D22 /* LoginListMenuTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E30FC2035426800603D22 /* LoginListMenuTable.m */; };
+		061E31042035479A00603D22 /* LoginListMenuTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E31022035479A00603D22 /* LoginListMenuTableCell.m */; };
+		061E31052035479A00603D22 /* LoginListMenuTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061E31032035479A00603D22 /* LoginListMenuTableCell.xib */; };
+		061E31082035594500603D22 /* LoginDetailPage1.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E31072035594500603D22 /* LoginDetailPage1.m */; };
+		061E310B2035595B00603D22 /* LoginDetailPage2.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E310A2035595B00603D22 /* LoginDetailPage2.m */; };
+		061E310E20357C0700603D22 /* TicketListMenuTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E310D20357C0700603D22 /* TicketListMenuTable.m */; };
+		061E311120357C4100603D22 /* UserAndAgentMenuList.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E311020357C4100603D22 /* UserAndAgentMenuList.m */; };
+		061E311420357C6400603D22 /* otherFeatureMenuList.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E311320357C6400603D22 /* otherFeatureMenuList.m */; };
+		061E311F2035843C00603D22 /* UserAndAgentMenuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E311D2035843C00603D22 /* UserAndAgentMenuListCell.m */; };
+		061E31202035843C00603D22 /* UserAndAgentMenuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061E311E2035843C00603D22 /* UserAndAgentMenuListCell.xib */; };
+		061E31242035845800603D22 /* otherFeatureMenuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E31222035845800603D22 /* otherFeatureMenuListCell.m */; };
+		061E31252035845800603D22 /* otherFeatureMenuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061E31232035845800603D22 /* otherFeatureMenuListCell.xib */; };
+		061E312920358BAD00603D22 /* TicketListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E312720358BAD00603D22 /* TicketListTableView.m */; };
+		061E312A20358BAD00603D22 /* TicketListTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061E312820358BAD00603D22 /* TicketListTableView.xib */; };
+		061E312E2035A63000603D22 /* LoginDetailPage1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E312C2035A63000603D22 /* LoginDetailPage1Cell.m */; };
+		061E312F2035A63000603D22 /* LoginDetailPage1Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061E312D2035A63000603D22 /* LoginDetailPage1Cell.xib */; };
+		061E313A2035A96300603D22 /* inbox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061E31362035A96100603D22 /* inbox.jpg */; };
+		061E313B2035A96300603D22 /* login.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061E31372035A96200603D22 /* login.jpg */; };
+		061E313C2035A96300603D22 /* url.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061E31382035A96300603D22 /* url.jpg */; };
+		0624A5192034733400F1B030 /* three.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0624A5112034732E00F1B030 /* three.jpeg */; };
+		0624A51A2034733400F1B030 /* HelpSectionHomePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0624A5122034732E00F1B030 /* HelpSectionHomePage.m */; };
+		0624A51B2034733400F1B030 /* HelpSectionHomePageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0624A5132034732F00F1B030 /* HelpSectionHomePageCell.m */; };
+		0624A51C2034733400F1B030 /* one.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0624A5142034733000F1B030 /* one.jpeg */; };
+		0624A51D2034733400F1B030 /* HelpSectionHomePageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0624A5152034733100F1B030 /* HelpSectionHomePageCell.xib */; };
+		0624A51E2034733400F1B030 /* two.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0624A5172034733300F1B030 /* two.jpeg */; };
+		0624A51F2034733400F1B030 /* four.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0624A5182034733400F1B030 /* four.jpeg */; };
+		0634EB352036EA7E002CB4E8 /* AllAboutTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB332036EA7E002CB4E8 /* AllAboutTicketCell.m */; };
+		0634EB362036EA7E002CB4E8 /* AllAboutTicketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB342036EA7E002CB4E8 /* AllAboutTicketCell.xib */; };
+		0634EB392036EBC3002CB4E8 /* AllAboutTicketsInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB382036EBC3002CB4E8 /* AllAboutTicketsInformation.m */; };
+		0634EB3C2036EBE3002CB4E8 /* TicketReplayAndInternalNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB3B2036EBE3002CB4E8 /* TicketReplayAndInternalNote.m */; };
+		0634EB3F2036EBFC002CB4E8 /* TicketSortingAndFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB3E2036EBFC002CB4E8 /* TicketSortingAndFilter.m */; };
+		0634EB432036EE01002CB4E8 /* TicketReplayInternalNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB412036EE01002CB4E8 /* TicketReplayInternalNoteCell.m */; };
+		0634EB442036EE01002CB4E8 /* TicketReplayInternalNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB422036EE01002CB4E8 /* TicketReplayInternalNoteCell.xib */; };
+		0634EB482036EE3D002CB4E8 /* TicketSortingFikterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB462036EE3D002CB4E8 /* TicketSortingFikterCell.m */; };
+		0634EB492036EE3D002CB4E8 /* TicketSortingFikterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB472036EE3D002CB4E8 /* TicketSortingFikterCell.xib */; };
+		0634EB4B2036F27A002CB4E8 /* sidemenu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB4A2036F27A002CB4E8 /* sidemenu.jpg */; };
+		0634EB4D2036F530002CB4E8 /* createTicket1111.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB4C2036F52F002CB4E8 /* createTicket1111.jpg */; };
+		0634EB5120370EC2002CB4E8 /* AllAboutTicketCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB4F20370EC2002CB4E8 /* AllAboutTicketCell2.m */; };
+		0634EB5220370EC2002CB4E8 /* AllAboutTicketCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB5020370EC2002CB4E8 /* AllAboutTicketCell2.xib */; };
+		0634EB5620370ED5002CB4E8 /* AllAboutTicketCell3.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB5420370ED5002CB4E8 /* AllAboutTicketCell3.m */; };
+		0634EB5720370ED5002CB4E8 /* AllAboutTicketCell3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB5520370ED5002CB4E8 /* AllAboutTicketCell3.xib */; };
+		0634EB5B20380359002CB4E8 /* AllAboutTicketCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB5920380359002CB4E8 /* AllAboutTicketCell1.m */; };
+		0634EB5C20380359002CB4E8 /* AllAboutTicketCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB5A20380359002CB4E8 /* AllAboutTicketCell1.xib */; };
+		0634EB61203811D6002CB4E8 /* ticket detail page2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB60203811D6002CB4E8 /* ticket detail page2.jpg */; };
+		0634EB63203811E0002CB4E8 /* Replay.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB62203811E0002CB4E8 /* Replay.jpg */; };
+		0634EB65203811FD002CB4E8 /* internalNote.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB64203811FD002CB4E8 /* internalNote.jpg */; };
+		0634EB6920381579002CB4E8 /* AllAboutTicketCell4.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB6720381579002CB4E8 /* AllAboutTicketCell4.m */; };
+		0634EB6A20381579002CB4E8 /* AllAboutTicketCell4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB6820381579002CB4E8 /* AllAboutTicketCell4.xib */; };
+		0634EB6E2038158D002CB4E8 /* AllAboutTicketCell5.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB6C2038158D002CB4E8 /* AllAboutTicketCell5.m */; };
+		0634EB6F2038158D002CB4E8 /* AllAboutTicketCell5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB6D2038158D002CB4E8 /* AllAboutTicketCell5.xib */; };
+		0634EB712038192D002CB4E8 /* ticket detail page1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB702038192D002CB4E8 /* ticket detail page1.jpg */; };
+		0634EB7520381BE3002CB4E8 /* AllAboutTicketCell6.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB7320381BE3002CB4E8 /* AllAboutTicketCell6.m */; };
+		0634EB7620381BE3002CB4E8 /* AllAboutTicketCell6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB7420381BE3002CB4E8 /* AllAboutTicketCell6.xib */; };
+		0634EB7820381DC2002CB4E8 /* Edit ticket.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB7720381DC2002CB4E8 /* Edit ticket.jpg */; };
+		0634EB7C20382958002CB4E8 /* TicketReplayInternalNoteCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB7A20382958002CB4E8 /* TicketReplayInternalNoteCell2.m */; };
+		0634EB7D20382958002CB4E8 /* TicketReplayInternalNoteCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB7B20382958002CB4E8 /* TicketReplayInternalNoteCell2.xib */; };
+		0634EB8120382985002CB4E8 /* TicketReplayInternalNoteCell3.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB7F20382985002CB4E8 /* TicketReplayInternalNoteCell3.m */; };
+		0634EB8220382985002CB4E8 /* TicketReplayInternalNoteCell3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB8020382985002CB4E8 /* TicketReplayInternalNoteCell3.xib */; };
+		0634EB8720384095002CB4E8 /* FIlterAndSort2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB8520384095002CB4E8 /* FIlterAndSort2.m */; };
+		0634EB8820384095002CB4E8 /* FIlterAndSort2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB8620384095002CB4E8 /* FIlterAndSort2.xib */; };
+		0634EB90203842F9002CB4E8 /* sort121.png in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB8F203842F9002CB4E8 /* sort121.png */; };
+		0634EB9220384411002CB4E8 /* filter1212.png in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB9120384411002CB4E8 /* filter1212.png */; };
+		0634EB94203844DA002CB4E8 /* ticket_filter.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB93203844DA002CB4E8 /* ticket_filter.jpg */; };
+		0634EB962038519B002CB4E8 /* sortCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB952038519B002CB4E8 /* sortCell.png */; };
+		0634EB9B20385767002CB4E8 /* TicketStusChangeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB9920385767002CB4E8 /* TicketStusChangeCell.m */; };
+		0634EB9C20385767002CB4E8 /* TicketStusChangeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB9A20385767002CB4E8 /* TicketStusChangeCell.xib */; };
+		0634EB9F203857A6002CB4E8 /* TicketStusChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB9E203857A6002CB4E8 /* TicketStusChange.m */; };
+		0634EBA120385D64002CB4E8 /* ticketStatus1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0634EBA020385D63002CB4E8 /* ticketStatus1.jpg */; };
+		0634EBA5203866A8002CB4E8 /* UserAgentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EBA3203866A8002CB4E8 /* UserAgentListCell.m */; };
+		0634EBA6203866A8002CB4E8 /* UserAgentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EBA4203866A8002CB4E8 /* UserAgentListCell.xib */; };
+		0634EBAA20386717002CB4E8 /* UserAgentFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EBA820386717002CB4E8 /* UserAgentFilterCell.m */; };
+		0634EBAB20386717002CB4E8 /* UserAgentFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EBA920386717002CB4E8 /* UserAgentFilterCell.xib */; };
+		0634EBAF20386741002CB4E8 /* UserAgentEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EBAD20386741002CB4E8 /* UserAgentEditCell.m */; };
+		0634EBB020386741002CB4E8 /* UserAgentEditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EBAE20386741002CB4E8 /* UserAgentEditCell.xib */; };
+		0634EBB320387536002CB4E8 /* AgentUserListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EBB220387536002CB4E8 /* AgentUserListView.m */; };
+		0634EBB62038755F002CB4E8 /* UserAgentFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EBB52038755F002CB4E8 /* UserAgentFilterView.m */; };
+		0634EBB920387581002CB4E8 /* UserAgentEditProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EBB820387581002CB4E8 /* UserAgentEditProfileView.m */; };
+		0643C9502046AE4C007DC824 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0643C94F2046AE4B007DC824 /* GoogleService-Info.plist */; };
+		067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */; };
+		0689708F20318A3700702313 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0689708E20318A3700702313 /* ConversationTableViewCell.xib */; };
+		06AB96DC2045311500FDE260 /* SupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AB96DB2045311500FDE260 /* SupportViewController.m */; };
 		06B8B01D20287E4300E5E8CA /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */; };
+		06BB2A3B202C3B3F00B33C43 /* systemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06BB2A3A202C3B3E00B33C43 /* systemIcon.png */; };
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
 		D9166B551FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9166B541FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m */; };
 		D9283F9F1FCC3B4E00C6A073 /* ClientFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D9283F9E1FCC3B4E00C6A073 /* ClientFilter.m */; };
@@ -41,9 +157,7 @@
 		D9AE083E200723DE00DD9E94 /* UIView+CFFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AE083D200723DE00DD9E94 /* UIView+CFFrame.m */; };
 		D9AF85311FC421AF005232A0 /* AWNavigationMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF852F1FC421AE005232A0 /* AWNavigationMenuItem.m */; };
 		D9AF85371FC4610E005232A0 /* EditClientDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF85361FC4610E005232A0 /* EditClientDetail.m */; };
-		D9B221AE200772C600607F11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9B221AD200772C600607F11 /* GoogleService-Info.plist */; };
 		D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */; };
-		D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */; };
 		D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */; };
 		D9CF41AD1F4C15320087BBFA /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */; };
 		D9DBD3461E07ACFC00219F93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DBD3451E07ACFC00219F93 /* main.m */; };
@@ -114,9 +228,185 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0643C94D2046AA8B007DC824 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		06099CA3203AA14B0060831A /* MultipleTicketSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketSelectView.h; sourceTree = "<group>"; };
+		06099CA4203AA14B0060831A /* MultipleTicketSelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultipleTicketSelectView.m; sourceTree = "<group>"; };
+		06099CA6203AA1680060831A /* MultipleTicketAssign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketAssign.h; sourceTree = "<group>"; };
+		06099CA7203AA1680060831A /* MultipleTicketAssign.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultipleTicketAssign.m; sourceTree = "<group>"; };
+		06099CA9203AA1900060831A /* MultipleTicketStatusChange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketStatusChange.h; sourceTree = "<group>"; };
+		06099CAA203AA1900060831A /* MultipleTicketStatusChange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultipleTicketStatusChange.m; sourceTree = "<group>"; };
+		06099CAC203AA1A60060831A /* MergeTicketView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MergeTicketView.h; sourceTree = "<group>"; };
+		06099CAD203AA1A60060831A /* MergeTicketView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MergeTicketView.m; sourceTree = "<group>"; };
+		06099CAF203AA2A30060831A /* MultipleTicketSelectViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketSelectViewCell.h; sourceTree = "<group>"; };
+		06099CB0203AA2A30060831A /* MultipleTicketSelectViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultipleTicketSelectViewCell.m; sourceTree = "<group>"; };
+		06099CB1203AA2A30060831A /* MultipleTicketSelectViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultipleTicketSelectViewCell.xib; sourceTree = "<group>"; };
+		06099CB4203AA2B70060831A /* MultipleTicketAssignCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketAssignCell.h; sourceTree = "<group>"; };
+		06099CB5203AA2B70060831A /* MultipleTicketAssignCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultipleTicketAssignCell.m; sourceTree = "<group>"; };
+		06099CB6203AA2B70060831A /* MultipleTicketAssignCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultipleTicketAssignCell.xib; sourceTree = "<group>"; };
+		06099CB9203AA30D0060831A /* MultipleTicketStatusChangeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketStatusChangeCell.h; sourceTree = "<group>"; };
+		06099CBA203AA30D0060831A /* MultipleTicketStatusChangeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultipleTicketStatusChangeCell.m; sourceTree = "<group>"; };
+		06099CBB203AA30D0060831A /* MultipleTicketStatusChangeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultipleTicketStatusChangeCell.xib; sourceTree = "<group>"; };
+		06099CBE203AA3240060831A /* MergeTicketViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MergeTicketViewCell.h; sourceTree = "<group>"; };
+		06099CBF203AA3240060831A /* MergeTicketViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MergeTicketViewCell.m; sourceTree = "<group>"; };
+		06099CC0203AA3240060831A /* MergeTicketViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MergeTicketViewCell.xib; sourceTree = "<group>"; };
+		06099CC3203AAA640060831A /* Inbox2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Inbox2.jpg; sourceTree = "<group>"; };
+		06099CC5203AB2ED0060831A /* view124.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view124.png; sourceTree = "<group>"; };
+		06099CC7203AB55D0060831A /* view125.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view125.png; sourceTree = "<group>"; };
+		06099CC9203AC0D20060831A /* view126.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view126.png; sourceTree = "<group>"; };
+		06099CCB203AD21A0060831A /* MergeTicketViewCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MergeTicketViewCell2.h; sourceTree = "<group>"; };
+		06099CCC203AD21A0060831A /* MergeTicketViewCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MergeTicketViewCell2.m; sourceTree = "<group>"; };
+		06099CCD203AD21A0060831A /* MergeTicketViewCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MergeTicketViewCell2.xib; sourceTree = "<group>"; };
+		06099CD0203AD9160060831A /* view127.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view127.png; sourceTree = "<group>"; };
+		0609AD9C20397BDC00DCDC85 /* merge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = merge.jpg; sourceTree = "<group>"; };
+		0609AD9E20397BE400DCDC85 /* multpleticketassign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = multpleticketassign.jpg; sourceTree = "<group>"; };
+		0609ADA020397BEC00DCDC85 /* multpleticketstatuschnage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = multpleticketstatuschnage.jpg; sourceTree = "<group>"; };
+		0609ADA220397C1000DCDC85 /* allUserList.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = allUserList.jpg; sourceTree = "<group>"; };
+		0609ADA420397C4700DCDC85 /* multipleSelect.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = multipleSelect.jpg; sourceTree = "<group>"; };
+		0609ADA620397C6200DCDC85 /* userEditProfile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = userEditProfile.jpg; sourceTree = "<group>"; };
+		0609ADA820397C8A00DCDC85 /* filteredResult.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = filteredResult.jpg; sourceTree = "<group>"; };
+		0609ADAA20397C9C00DCDC85 /* filterImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = filterImage.jpg; sourceTree = "<group>"; };
+		0609ADAC20397E3E00DCDC85 /* usedetails.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = usedetails.jpg; sourceTree = "<group>"; };
+		0609ADAE2039805000DCDC85 /* view121.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view121.png; sourceTree = "<group>"; };
+		0609ADB0203987E000DCDC85 /* UserAndAgentMenuListCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAndAgentMenuListCell2.h; sourceTree = "<group>"; };
+		0609ADB1203987E000DCDC85 /* UserAndAgentMenuListCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAndAgentMenuListCell2.m; sourceTree = "<group>"; };
+		0609ADB2203987E000DCDC85 /* UserAndAgentMenuListCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserAndAgentMenuListCell2.xib; sourceTree = "<group>"; };
+		0609ADB520398E2A00DCDC85 /* view122.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view122.png; sourceTree = "<group>"; };
+		0609ADB720399B8000DCDC85 /* deActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deActive.png; sourceTree = "<group>"; };
+		0609ADB820399B8100DCDC85 /* Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Active.png; sourceTree = "<group>"; };
+		061E30FB2035426800603D22 /* LoginListMenuTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginListMenuTable.h; sourceTree = "<group>"; };
+		061E30FC2035426800603D22 /* LoginListMenuTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginListMenuTable.m; sourceTree = "<group>"; };
+		061E31012035479A00603D22 /* LoginListMenuTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginListMenuTableCell.h; sourceTree = "<group>"; };
+		061E31022035479A00603D22 /* LoginListMenuTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginListMenuTableCell.m; sourceTree = "<group>"; };
+		061E31032035479A00603D22 /* LoginListMenuTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginListMenuTableCell.xib; sourceTree = "<group>"; };
+		061E31062035594500603D22 /* LoginDetailPage1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginDetailPage1.h; sourceTree = "<group>"; };
+		061E31072035594500603D22 /* LoginDetailPage1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginDetailPage1.m; sourceTree = "<group>"; };
+		061E31092035595B00603D22 /* LoginDetailPage2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginDetailPage2.h; sourceTree = "<group>"; };
+		061E310A2035595B00603D22 /* LoginDetailPage2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginDetailPage2.m; sourceTree = "<group>"; };
+		061E310C20357C0700603D22 /* TicketListMenuTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketListMenuTable.h; sourceTree = "<group>"; };
+		061E310D20357C0700603D22 /* TicketListMenuTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketListMenuTable.m; sourceTree = "<group>"; };
+		061E310F20357C4100603D22 /* UserAndAgentMenuList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAndAgentMenuList.h; sourceTree = "<group>"; };
+		061E311020357C4100603D22 /* UserAndAgentMenuList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAndAgentMenuList.m; sourceTree = "<group>"; };
+		061E311220357C6400603D22 /* otherFeatureMenuList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = otherFeatureMenuList.h; sourceTree = "<group>"; };
+		061E311320357C6400603D22 /* otherFeatureMenuList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = otherFeatureMenuList.m; sourceTree = "<group>"; };
+		061E311C2035843C00603D22 /* UserAndAgentMenuListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAndAgentMenuListCell.h; sourceTree = "<group>"; };
+		061E311D2035843C00603D22 /* UserAndAgentMenuListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAndAgentMenuListCell.m; sourceTree = "<group>"; };
+		061E311E2035843C00603D22 /* UserAndAgentMenuListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserAndAgentMenuListCell.xib; sourceTree = "<group>"; };
+		061E31212035845800603D22 /* otherFeatureMenuListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = otherFeatureMenuListCell.h; sourceTree = "<group>"; };
+		061E31222035845800603D22 /* otherFeatureMenuListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = otherFeatureMenuListCell.m; sourceTree = "<group>"; };
+		061E31232035845800603D22 /* otherFeatureMenuListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = otherFeatureMenuListCell.xib; sourceTree = "<group>"; };
+		061E312620358BAD00603D22 /* TicketListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketListTableView.h; sourceTree = "<group>"; };
+		061E312720358BAD00603D22 /* TicketListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketListTableView.m; sourceTree = "<group>"; };
+		061E312820358BAD00603D22 /* TicketListTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketListTableView.xib; sourceTree = "<group>"; };
+		061E312B2035A63000603D22 /* LoginDetailPage1Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginDetailPage1Cell.h; sourceTree = "<group>"; };
+		061E312C2035A63000603D22 /* LoginDetailPage1Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginDetailPage1Cell.m; sourceTree = "<group>"; };
+		061E312D2035A63000603D22 /* LoginDetailPage1Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginDetailPage1Cell.xib; sourceTree = "<group>"; };
+		061E31362035A96100603D22 /* inbox.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = inbox.jpg; sourceTree = "<group>"; };
+		061E31372035A96200603D22 /* login.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = login.jpg; sourceTree = "<group>"; };
+		061E31382035A96300603D22 /* url.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = url.jpg; sourceTree = "<group>"; };
+		0624A5102034732D00F1B030 /* HelpSectionHomePageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpSectionHomePageCell.h; sourceTree = "<group>"; };
+		0624A5112034732E00F1B030 /* three.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = three.jpeg; sourceTree = "<group>"; };
+		0624A5122034732E00F1B030 /* HelpSectionHomePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpSectionHomePage.m; sourceTree = "<group>"; };
+		0624A5132034732F00F1B030 /* HelpSectionHomePageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpSectionHomePageCell.m; sourceTree = "<group>"; };
+		0624A5142034733000F1B030 /* one.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = one.jpeg; sourceTree = "<group>"; };
+		0624A5152034733100F1B030 /* HelpSectionHomePageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpSectionHomePageCell.xib; sourceTree = "<group>"; };
+		0624A5162034733200F1B030 /* HelpSectionHomePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpSectionHomePage.h; sourceTree = "<group>"; };
+		0624A5172034733300F1B030 /* two.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = two.jpeg; sourceTree = "<group>"; };
+		0624A5182034733400F1B030 /* four.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = four.jpeg; sourceTree = "<group>"; };
+		0634EB322036EA7E002CB4E8 /* AllAboutTicketCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllAboutTicketCell.h; sourceTree = "<group>"; };
+		0634EB332036EA7E002CB4E8 /* AllAboutTicketCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllAboutTicketCell.m; sourceTree = "<group>"; };
+		0634EB342036EA7E002CB4E8 /* AllAboutTicketCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllAboutTicketCell.xib; sourceTree = "<group>"; };
+		0634EB372036EBC3002CB4E8 /* AllAboutTicketsInformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllAboutTicketsInformation.h; sourceTree = "<group>"; };
+		0634EB382036EBC3002CB4E8 /* AllAboutTicketsInformation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllAboutTicketsInformation.m; sourceTree = "<group>"; };
+		0634EB3A2036EBE3002CB4E8 /* TicketReplayAndInternalNote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketReplayAndInternalNote.h; sourceTree = "<group>"; };
+		0634EB3B2036EBE3002CB4E8 /* TicketReplayAndInternalNote.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketReplayAndInternalNote.m; sourceTree = "<group>"; };
+		0634EB3D2036EBFC002CB4E8 /* TicketSortingAndFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketSortingAndFilter.h; sourceTree = "<group>"; };
+		0634EB3E2036EBFC002CB4E8 /* TicketSortingAndFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketSortingAndFilter.m; sourceTree = "<group>"; };
+		0634EB402036EE01002CB4E8 /* TicketReplayInternalNoteCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketReplayInternalNoteCell.h; sourceTree = "<group>"; };
+		0634EB412036EE01002CB4E8 /* TicketReplayInternalNoteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketReplayInternalNoteCell.m; sourceTree = "<group>"; };
+		0634EB422036EE01002CB4E8 /* TicketReplayInternalNoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketReplayInternalNoteCell.xib; sourceTree = "<group>"; };
+		0634EB452036EE3D002CB4E8 /* TicketSortingFikterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketSortingFikterCell.h; sourceTree = "<group>"; };
+		0634EB462036EE3D002CB4E8 /* TicketSortingFikterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketSortingFikterCell.m; sourceTree = "<group>"; };
+		0634EB472036EE3D002CB4E8 /* TicketSortingFikterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketSortingFikterCell.xib; sourceTree = "<group>"; };
+		0634EB4A2036F27A002CB4E8 /* sidemenu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sidemenu.jpg; sourceTree = "<group>"; };
+		0634EB4C2036F52F002CB4E8 /* createTicket1111.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = createTicket1111.jpg; sourceTree = "<group>"; };
+		0634EB4E20370EC2002CB4E8 /* AllAboutTicketCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllAboutTicketCell2.h; sourceTree = "<group>"; };
+		0634EB4F20370EC2002CB4E8 /* AllAboutTicketCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllAboutTicketCell2.m; sourceTree = "<group>"; };
+		0634EB5020370EC2002CB4E8 /* AllAboutTicketCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllAboutTicketCell2.xib; sourceTree = "<group>"; };
+		0634EB5320370ED5002CB4E8 /* AllAboutTicketCell3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllAboutTicketCell3.h; sourceTree = "<group>"; };
+		0634EB5420370ED5002CB4E8 /* AllAboutTicketCell3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllAboutTicketCell3.m; sourceTree = "<group>"; };
+		0634EB5520370ED5002CB4E8 /* AllAboutTicketCell3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllAboutTicketCell3.xib; sourceTree = "<group>"; };
+		0634EB5820380359002CB4E8 /* AllAboutTicketCell1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllAboutTicketCell1.h; sourceTree = "<group>"; };
+		0634EB5920380359002CB4E8 /* AllAboutTicketCell1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllAboutTicketCell1.m; sourceTree = "<group>"; };
+		0634EB5A20380359002CB4E8 /* AllAboutTicketCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllAboutTicketCell1.xib; sourceTree = "<group>"; };
+		0634EB60203811D6002CB4E8 /* ticket detail page2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ticket detail page2.jpg"; sourceTree = "<group>"; };
+		0634EB62203811E0002CB4E8 /* Replay.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Replay.jpg; sourceTree = "<group>"; };
+		0634EB64203811FD002CB4E8 /* internalNote.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = internalNote.jpg; sourceTree = "<group>"; };
+		0634EB6620381579002CB4E8 /* AllAboutTicketCell4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllAboutTicketCell4.h; sourceTree = "<group>"; };
+		0634EB6720381579002CB4E8 /* AllAboutTicketCell4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllAboutTicketCell4.m; sourceTree = "<group>"; };
+		0634EB6820381579002CB4E8 /* AllAboutTicketCell4.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllAboutTicketCell4.xib; sourceTree = "<group>"; };
+		0634EB6B2038158D002CB4E8 /* AllAboutTicketCell5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllAboutTicketCell5.h; sourceTree = "<group>"; };
+		0634EB6C2038158D002CB4E8 /* AllAboutTicketCell5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllAboutTicketCell5.m; sourceTree = "<group>"; };
+		0634EB6D2038158D002CB4E8 /* AllAboutTicketCell5.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllAboutTicketCell5.xib; sourceTree = "<group>"; };
+		0634EB702038192D002CB4E8 /* ticket detail page1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ticket detail page1.jpg"; sourceTree = "<group>"; };
+		0634EB7220381BE3002CB4E8 /* AllAboutTicketCell6.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllAboutTicketCell6.h; sourceTree = "<group>"; };
+		0634EB7320381BE3002CB4E8 /* AllAboutTicketCell6.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllAboutTicketCell6.m; sourceTree = "<group>"; };
+		0634EB7420381BE3002CB4E8 /* AllAboutTicketCell6.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllAboutTicketCell6.xib; sourceTree = "<group>"; };
+		0634EB7720381DC2002CB4E8 /* Edit ticket.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Edit ticket.jpg"; sourceTree = "<group>"; };
+		0634EB7920382958002CB4E8 /* TicketReplayInternalNoteCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketReplayInternalNoteCell2.h; sourceTree = "<group>"; };
+		0634EB7A20382958002CB4E8 /* TicketReplayInternalNoteCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketReplayInternalNoteCell2.m; sourceTree = "<group>"; };
+		0634EB7B20382958002CB4E8 /* TicketReplayInternalNoteCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketReplayInternalNoteCell2.xib; sourceTree = "<group>"; };
+		0634EB7E20382985002CB4E8 /* TicketReplayInternalNoteCell3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketReplayInternalNoteCell3.h; sourceTree = "<group>"; };
+		0634EB7F20382985002CB4E8 /* TicketReplayInternalNoteCell3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketReplayInternalNoteCell3.m; sourceTree = "<group>"; };
+		0634EB8020382985002CB4E8 /* TicketReplayInternalNoteCell3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketReplayInternalNoteCell3.xib; sourceTree = "<group>"; };
+		0634EB8420384095002CB4E8 /* FIlterAndSort2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FIlterAndSort2.h; sourceTree = "<group>"; };
+		0634EB8520384095002CB4E8 /* FIlterAndSort2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FIlterAndSort2.m; sourceTree = "<group>"; };
+		0634EB8620384095002CB4E8 /* FIlterAndSort2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FIlterAndSort2.xib; sourceTree = "<group>"; };
+		0634EB8F203842F9002CB4E8 /* sort121.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort121.png; sourceTree = "<group>"; };
+		0634EB9120384411002CB4E8 /* filter1212.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter1212.png; sourceTree = "<group>"; };
+		0634EB93203844DA002CB4E8 /* ticket_filter.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ticket_filter.jpg; sourceTree = "<group>"; };
+		0634EB952038519B002CB4E8 /* sortCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sortCell.png; sourceTree = "<group>"; };
+		0634EB9820385767002CB4E8 /* TicketStusChangeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketStusChangeCell.h; sourceTree = "<group>"; };
+		0634EB9920385767002CB4E8 /* TicketStusChangeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketStusChangeCell.m; sourceTree = "<group>"; };
+		0634EB9A20385767002CB4E8 /* TicketStusChangeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketStusChangeCell.xib; sourceTree = "<group>"; };
+		0634EB9D203857A6002CB4E8 /* TicketStusChange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketStusChange.h; sourceTree = "<group>"; };
+		0634EB9E203857A6002CB4E8 /* TicketStusChange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketStusChange.m; sourceTree = "<group>"; };
+		0634EBA020385D63002CB4E8 /* ticketStatus1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ticketStatus1.jpg; sourceTree = "<group>"; };
+		0634EBA2203866A8002CB4E8 /* UserAgentListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAgentListCell.h; sourceTree = "<group>"; };
+		0634EBA3203866A8002CB4E8 /* UserAgentListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAgentListCell.m; sourceTree = "<group>"; };
+		0634EBA4203866A8002CB4E8 /* UserAgentListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserAgentListCell.xib; sourceTree = "<group>"; };
+		0634EBA720386717002CB4E8 /* UserAgentFilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAgentFilterCell.h; sourceTree = "<group>"; };
+		0634EBA820386717002CB4E8 /* UserAgentFilterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAgentFilterCell.m; sourceTree = "<group>"; };
+		0634EBA920386717002CB4E8 /* UserAgentFilterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserAgentFilterCell.xib; sourceTree = "<group>"; };
+		0634EBAC20386741002CB4E8 /* UserAgentEditCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAgentEditCell.h; sourceTree = "<group>"; };
+		0634EBAD20386741002CB4E8 /* UserAgentEditCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAgentEditCell.m; sourceTree = "<group>"; };
+		0634EBAE20386741002CB4E8 /* UserAgentEditCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserAgentEditCell.xib; sourceTree = "<group>"; };
+		0634EBB120387536002CB4E8 /* AgentUserListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgentUserListView.h; sourceTree = "<group>"; };
+		0634EBB220387536002CB4E8 /* AgentUserListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgentUserListView.m; sourceTree = "<group>"; };
+		0634EBB42038755F002CB4E8 /* UserAgentFilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAgentFilterView.h; sourceTree = "<group>"; };
+		0634EBB52038755F002CB4E8 /* UserAgentFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAgentFilterView.m; sourceTree = "<group>"; };
+		0634EBB720387581002CB4E8 /* UserAgentEditProfileView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAgentEditProfileView.h; sourceTree = "<group>"; };
+		0634EBB820387581002CB4E8 /* UserAgentEditProfileView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAgentEditProfileView.m; sourceTree = "<group>"; };
+		0643C94F2046AE4B007DC824 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		067605F8202B2C8800D9EFE6 /* ATAppUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAppUpdater.h; sourceTree = "<group>"; };
+		067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATAppUpdater.m; sourceTree = "<group>"; };
+		0689708E20318A3700702313 /* ConversationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationTableViewCell.xib; sourceTree = "<group>"; };
+		06AB96DA2045311500FDE260 /* SupportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupportViewController.h; sourceTree = "<group>"; };
+		06AB96DB2045311500FDE260 /* SupportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupportViewController.m; sourceTree = "<group>"; };
 		06B8B01B20287E4200E5E8CA /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
+		06BB2A3A202C3B3E00B33C43 /* systemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = systemIcon.png; sourceTree = "<group>"; };
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,11 +426,9 @@
 		D92C35D51F7682B5001DD67D /* EditDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDetailTableViewController.h; sourceTree = "<group>"; };
 		D92C35D61F7682B5001DD67D /* EditDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDetailTableViewController.m; sourceTree = "<group>"; };
 		D92CE70C1F3D706600D98708 /* ClientListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientListTableViewCell.xib; sourceTree = "<group>"; };
-		D93D3D4F1EA0BACD00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D501EA0BACE00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D511EA0BACE00C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		D93D3D531EA0BAF500C1EE7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D93D3D541EA0BB1000C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D551EA0BB1000C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D93D3D561EA0BB1000C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		D93D3D581EA0BB1800C1EE7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -191,8 +479,6 @@
 		D9AF85301FC421AF005232A0 /* AWNavigationMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWNavigationMenuItem.h; sourceTree = "<group>"; };
 		D9AF85351FC4610E005232A0 /* EditClientDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditClientDetail.h; sourceTree = "<group>"; };
 		D9AF85361FC4610E005232A0 /* EditClientDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditClientDetail.m; sourceTree = "<group>"; };
-		D9B221AD200772C600607F11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		D9B22209200C628900607F11 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9B2220A200C628A00607F11 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D9B2220B200C628B00607F11 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
 		D9B2220C200C628B00607F11 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -202,11 +488,6 @@
 		D9B6E2DC1E9B8B1C00AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2DE1E9B8B1D00AAB724 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
 		D9B6E2E01E9B8B2100AAB724 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LoadingTableViewCell.strings; sourceTree = "<group>"; };
-		D9B6E2E81E9B8B9400AAB724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ConversationTableViewCell.xib; sourceTree = "<group>"; };
-		D9B6E2EB1E9B8B9600AAB724 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
-		D9B6E2ED1E9B8B9700AAB724 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
-		D9B6E2EF1E9B8B9900AAB724 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
-		D9B6E2F11E9B8B9B00AAB724 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/ConversationTableViewCell.strings; sourceTree = "<group>"; };
 		D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxViewController.m; sourceTree = "<group>"; };
 		D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		D9D66BD41E97B14C000214FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
@@ -341,6 +622,299 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		061E30F82035413000603D22 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0624A5162034733200F1B030 /* HelpSectionHomePage.h */,
+				0624A5122034732E00F1B030 /* HelpSectionHomePage.m */,
+				0634EB2A2036D5DF002CB4E8 /* Login Information */,
+				0634EB2B2036D630002CB4E8 /* Tickets */,
+				0634EB2C2036D641002CB4E8 /* Users and Agent */,
+				0634EB2D2036D68A002CB4E8 /* Other Features */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		061E30F92035414100603D22 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				0624A5102034732D00F1B030 /* HelpSectionHomePageCell.h */,
+				0624A5132034732F00F1B030 /* HelpSectionHomePageCell.m */,
+				0624A5152034733100F1B030 /* HelpSectionHomePageCell.xib */,
+				0634EB2E2036D6B0002CB4E8 /* Login Information */,
+				0634EB2F2036D6BE002CB4E8 /* Tickets */,
+				0634EB302036D6C6002CB4E8 /* Users and Agents */,
+				0634EB312036D6D1002CB4E8 /* Other Features */,
+			);
+			name = Xibs;
+			sourceTree = "<group>";
+		};
+		061E30FA2035417A00603D22 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0634EB952038519B002CB4E8 /* sortCell.png */,
+				0634EB9120384411002CB4E8 /* filter1212.png */,
+				0634EB8F203842F9002CB4E8 /* sort121.png */,
+				0634EB4A2036F27A002CB4E8 /* sidemenu.jpg */,
+				0624A5142034733000F1B030 /* one.jpeg */,
+				0624A5112034732E00F1B030 /* three.jpeg */,
+				0634EBA020385D63002CB4E8 /* ticketStatus1.jpg */,
+				0624A5172034733300F1B030 /* two.jpeg */,
+				0624A5182034733400F1B030 /* four.jpeg */,
+				061E31382035A96300603D22 /* url.jpg */,
+				061E31372035A96200603D22 /* login.jpg */,
+				061E31362035A96100603D22 /* inbox.jpg */,
+				0634EB4C2036F52F002CB4E8 /* createTicket1111.jpg */,
+				0634EB702038192D002CB4E8 /* ticket detail page1.jpg */,
+				0634EB60203811D6002CB4E8 /* ticket detail page2.jpg */,
+				0634EB62203811E0002CB4E8 /* Replay.jpg */,
+				0634EB64203811FD002CB4E8 /* internalNote.jpg */,
+				0634EB7720381DC2002CB4E8 /* Edit ticket.jpg */,
+				0634EB93203844DA002CB4E8 /* ticket_filter.jpg */,
+				0609ADA420397C4700DCDC85 /* multipleSelect.jpg */,
+				0609AD9C20397BDC00DCDC85 /* merge.jpg */,
+				0609AD9E20397BE400DCDC85 /* multpleticketassign.jpg */,
+				0609ADAA20397C9C00DCDC85 /* filterImage.jpg */,
+				0609ADA020397BEC00DCDC85 /* multpleticketstatuschnage.jpg */,
+				0609ADA220397C1000DCDC85 /* allUserList.jpg */,
+				0609ADAC20397E3E00DCDC85 /* usedetails.jpg */,
+				0609ADA620397C6200DCDC85 /* userEditProfile.jpg */,
+				0609ADA820397C8A00DCDC85 /* filteredResult.jpg */,
+				0609ADAE2039805000DCDC85 /* view121.png */,
+				0609ADB520398E2A00DCDC85 /* view122.png */,
+				0609ADB820399B8100DCDC85 /* Active.png */,
+				0609ADB720399B8000DCDC85 /* deActive.png */,
+				06099CC3203AAA640060831A /* Inbox2.jpg */,
+				06099CC5203AB2ED0060831A /* view124.png */,
+				06099CC7203AB55D0060831A /* view125.png */,
+				06099CC9203AC0D20060831A /* view126.png */,
+				06099CD0203AD9160060831A /* view127.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		0624A50F203472AF00F1B030 /* InApp HelpSection */ = {
+			isa = PBXGroup;
+			children = (
+				061E30FA2035417A00603D22 /* Images */,
+				061E30F82035413000603D22 /* ViewControllers */,
+				061E30F92035414100603D22 /* Xibs */,
+			);
+			name = "InApp HelpSection";
+			sourceTree = "<group>";
+		};
+		0634EB2A2036D5DF002CB4E8 /* Login Information */ = {
+			isa = PBXGroup;
+			children = (
+				061E30FB2035426800603D22 /* LoginListMenuTable.h */,
+				061E30FC2035426800603D22 /* LoginListMenuTable.m */,
+				061E31062035594500603D22 /* LoginDetailPage1.h */,
+				061E31072035594500603D22 /* LoginDetailPage1.m */,
+				061E31092035595B00603D22 /* LoginDetailPage2.h */,
+				061E310A2035595B00603D22 /* LoginDetailPage2.m */,
+			);
+			name = "Login Information";
+			sourceTree = "<group>";
+		};
+		0634EB2B2036D630002CB4E8 /* Tickets */ = {
+			isa = PBXGroup;
+			children = (
+				061E310C20357C0700603D22 /* TicketListMenuTable.h */,
+				061E310D20357C0700603D22 /* TicketListMenuTable.m */,
+				0634EB372036EBC3002CB4E8 /* AllAboutTicketsInformation.h */,
+				0634EB382036EBC3002CB4E8 /* AllAboutTicketsInformation.m */,
+				0634EB3A2036EBE3002CB4E8 /* TicketReplayAndInternalNote.h */,
+				0634EB3B2036EBE3002CB4E8 /* TicketReplayAndInternalNote.m */,
+				0634EB3D2036EBFC002CB4E8 /* TicketSortingAndFilter.h */,
+				0634EB3E2036EBFC002CB4E8 /* TicketSortingAndFilter.m */,
+				0634EB9D203857A6002CB4E8 /* TicketStusChange.h */,
+				0634EB9E203857A6002CB4E8 /* TicketStusChange.m */,
+			);
+			name = Tickets;
+			sourceTree = "<group>";
+		};
+		0634EB2C2036D641002CB4E8 /* Users and Agent */ = {
+			isa = PBXGroup;
+			children = (
+				061E310F20357C4100603D22 /* UserAndAgentMenuList.h */,
+				061E311020357C4100603D22 /* UserAndAgentMenuList.m */,
+				0634EBB120387536002CB4E8 /* AgentUserListView.h */,
+				0634EBB220387536002CB4E8 /* AgentUserListView.m */,
+				0634EBB42038755F002CB4E8 /* UserAgentFilterView.h */,
+				0634EBB52038755F002CB4E8 /* UserAgentFilterView.m */,
+				0634EBB720387581002CB4E8 /* UserAgentEditProfileView.h */,
+				0634EBB820387581002CB4E8 /* UserAgentEditProfileView.m */,
+			);
+			name = "Users and Agent";
+			sourceTree = "<group>";
+		};
+		0634EB2D2036D68A002CB4E8 /* Other Features */ = {
+			isa = PBXGroup;
+			children = (
+				061E311220357C6400603D22 /* otherFeatureMenuList.h */,
+				061E311320357C6400603D22 /* otherFeatureMenuList.m */,
+				06099CA3203AA14B0060831A /* MultipleTicketSelectView.h */,
+				06099CA4203AA14B0060831A /* MultipleTicketSelectView.m */,
+				06099CA6203AA1680060831A /* MultipleTicketAssign.h */,
+				06099CA7203AA1680060831A /* MultipleTicketAssign.m */,
+				06099CA9203AA1900060831A /* MultipleTicketStatusChange.h */,
+				06099CAA203AA1900060831A /* MultipleTicketStatusChange.m */,
+				06099CAC203AA1A60060831A /* MergeTicketView.h */,
+				06099CAD203AA1A60060831A /* MergeTicketView.m */,
+			);
+			name = "Other Features";
+			sourceTree = "<group>";
+		};
+		0634EB2E2036D6B0002CB4E8 /* Login Information */ = {
+			isa = PBXGroup;
+			children = (
+				061E31012035479A00603D22 /* LoginListMenuTableCell.h */,
+				061E31022035479A00603D22 /* LoginListMenuTableCell.m */,
+				061E31032035479A00603D22 /* LoginListMenuTableCell.xib */,
+				061E312B2035A63000603D22 /* LoginDetailPage1Cell.h */,
+				061E312C2035A63000603D22 /* LoginDetailPage1Cell.m */,
+				061E312D2035A63000603D22 /* LoginDetailPage1Cell.xib */,
+			);
+			name = "Login Information";
+			sourceTree = "<group>";
+		};
+		0634EB2F2036D6BE002CB4E8 /* Tickets */ = {
+			isa = PBXGroup;
+			children = (
+				061E312620358BAD00603D22 /* TicketListTableView.h */,
+				061E312720358BAD00603D22 /* TicketListTableView.m */,
+				061E312820358BAD00603D22 /* TicketListTableView.xib */,
+				0634EB5D203810A5002CB4E8 /* 1.All About Tickets */,
+				0634EB5E203810C4002CB4E8 /* 2. Internal Note and Reply */,
+				0634EB5F203810D9002CB4E8 /* 3.FIlter and Sort */,
+				0634EB972038572A002CB4E8 /* 4.Ticket Status Change */,
+			);
+			name = Tickets;
+			sourceTree = "<group>";
+		};
+		0634EB302036D6C6002CB4E8 /* Users and Agents */ = {
+			isa = PBXGroup;
+			children = (
+				061E311C2035843C00603D22 /* UserAndAgentMenuListCell.h */,
+				061E311D2035843C00603D22 /* UserAndAgentMenuListCell.m */,
+				061E311E2035843C00603D22 /* UserAndAgentMenuListCell.xib */,
+				0609ADB0203987E000DCDC85 /* UserAndAgentMenuListCell2.h */,
+				0609ADB1203987E000DCDC85 /* UserAndAgentMenuListCell2.m */,
+				0609ADB2203987E000DCDC85 /* UserAndAgentMenuListCell2.xib */,
+				0634EBA2203866A8002CB4E8 /* UserAgentListCell.h */,
+				0634EBA3203866A8002CB4E8 /* UserAgentListCell.m */,
+				0634EBA4203866A8002CB4E8 /* UserAgentListCell.xib */,
+				0634EBA720386717002CB4E8 /* UserAgentFilterCell.h */,
+				0634EBA820386717002CB4E8 /* UserAgentFilterCell.m */,
+				0634EBA920386717002CB4E8 /* UserAgentFilterCell.xib */,
+				0634EBAC20386741002CB4E8 /* UserAgentEditCell.h */,
+				0634EBAD20386741002CB4E8 /* UserAgentEditCell.m */,
+				0634EBAE20386741002CB4E8 /* UserAgentEditCell.xib */,
+			);
+			name = "Users and Agents";
+			sourceTree = "<group>";
+		};
+		0634EB312036D6D1002CB4E8 /* Other Features */ = {
+			isa = PBXGroup;
+			children = (
+				061E31212035845800603D22 /* otherFeatureMenuListCell.h */,
+				061E31222035845800603D22 /* otherFeatureMenuListCell.m */,
+				061E31232035845800603D22 /* otherFeatureMenuListCell.xib */,
+				06099CAF203AA2A30060831A /* MultipleTicketSelectViewCell.h */,
+				06099CB0203AA2A30060831A /* MultipleTicketSelectViewCell.m */,
+				06099CB1203AA2A30060831A /* MultipleTicketSelectViewCell.xib */,
+				06099CB4203AA2B70060831A /* MultipleTicketAssignCell.h */,
+				06099CB5203AA2B70060831A /* MultipleTicketAssignCell.m */,
+				06099CB6203AA2B70060831A /* MultipleTicketAssignCell.xib */,
+				06099CB9203AA30D0060831A /* MultipleTicketStatusChangeCell.h */,
+				06099CBA203AA30D0060831A /* MultipleTicketStatusChangeCell.m */,
+				06099CBB203AA30D0060831A /* MultipleTicketStatusChangeCell.xib */,
+				06099CBE203AA3240060831A /* MergeTicketViewCell.h */,
+				06099CBF203AA3240060831A /* MergeTicketViewCell.m */,
+				06099CC0203AA3240060831A /* MergeTicketViewCell.xib */,
+				06099CCB203AD21A0060831A /* MergeTicketViewCell2.h */,
+				06099CCC203AD21A0060831A /* MergeTicketViewCell2.m */,
+				06099CCD203AD21A0060831A /* MergeTicketViewCell2.xib */,
+			);
+			name = "Other Features";
+			sourceTree = "<group>";
+		};
+		0634EB5D203810A5002CB4E8 /* 1.All About Tickets */ = {
+			isa = PBXGroup;
+			children = (
+				0634EB322036EA7E002CB4E8 /* AllAboutTicketCell.h */,
+				0634EB332036EA7E002CB4E8 /* AllAboutTicketCell.m */,
+				0634EB342036EA7E002CB4E8 /* AllAboutTicketCell.xib */,
+				0634EB5820380359002CB4E8 /* AllAboutTicketCell1.h */,
+				0634EB5920380359002CB4E8 /* AllAboutTicketCell1.m */,
+				0634EB5A20380359002CB4E8 /* AllAboutTicketCell1.xib */,
+				0634EB4E20370EC2002CB4E8 /* AllAboutTicketCell2.h */,
+				0634EB4F20370EC2002CB4E8 /* AllAboutTicketCell2.m */,
+				0634EB5020370EC2002CB4E8 /* AllAboutTicketCell2.xib */,
+				0634EB5320370ED5002CB4E8 /* AllAboutTicketCell3.h */,
+				0634EB5420370ED5002CB4E8 /* AllAboutTicketCell3.m */,
+				0634EB5520370ED5002CB4E8 /* AllAboutTicketCell3.xib */,
+				0634EB6620381579002CB4E8 /* AllAboutTicketCell4.h */,
+				0634EB6720381579002CB4E8 /* AllAboutTicketCell4.m */,
+				0634EB6820381579002CB4E8 /* AllAboutTicketCell4.xib */,
+				0634EB6B2038158D002CB4E8 /* AllAboutTicketCell5.h */,
+				0634EB6C2038158D002CB4E8 /* AllAboutTicketCell5.m */,
+				0634EB6D2038158D002CB4E8 /* AllAboutTicketCell5.xib */,
+				0634EB7220381BE3002CB4E8 /* AllAboutTicketCell6.h */,
+				0634EB7320381BE3002CB4E8 /* AllAboutTicketCell6.m */,
+				0634EB7420381BE3002CB4E8 /* AllAboutTicketCell6.xib */,
+			);
+			name = "1.All About Tickets";
+			sourceTree = "<group>";
+		};
+		0634EB5E203810C4002CB4E8 /* 2. Internal Note and Reply */ = {
+			isa = PBXGroup;
+			children = (
+				0634EB402036EE01002CB4E8 /* TicketReplayInternalNoteCell.h */,
+				0634EB412036EE01002CB4E8 /* TicketReplayInternalNoteCell.m */,
+				0634EB422036EE01002CB4E8 /* TicketReplayInternalNoteCell.xib */,
+				0634EB7920382958002CB4E8 /* TicketReplayInternalNoteCell2.h */,
+				0634EB7A20382958002CB4E8 /* TicketReplayInternalNoteCell2.m */,
+				0634EB7B20382958002CB4E8 /* TicketReplayInternalNoteCell2.xib */,
+				0634EB7E20382985002CB4E8 /* TicketReplayInternalNoteCell3.h */,
+				0634EB7F20382985002CB4E8 /* TicketReplayInternalNoteCell3.m */,
+				0634EB8020382985002CB4E8 /* TicketReplayInternalNoteCell3.xib */,
+			);
+			name = "2. Internal Note and Reply";
+			sourceTree = "<group>";
+		};
+		0634EB5F203810D9002CB4E8 /* 3.FIlter and Sort */ = {
+			isa = PBXGroup;
+			children = (
+				0634EB452036EE3D002CB4E8 /* TicketSortingFikterCell.h */,
+				0634EB462036EE3D002CB4E8 /* TicketSortingFikterCell.m */,
+				0634EB472036EE3D002CB4E8 /* TicketSortingFikterCell.xib */,
+				0634EB8420384095002CB4E8 /* FIlterAndSort2.h */,
+				0634EB8520384095002CB4E8 /* FIlterAndSort2.m */,
+				0634EB8620384095002CB4E8 /* FIlterAndSort2.xib */,
+			);
+			name = "3.FIlter and Sort";
+			sourceTree = "<group>";
+		};
+		0634EB972038572A002CB4E8 /* 4.Ticket Status Change */ = {
+			isa = PBXGroup;
+			children = (
+				0634EB9820385767002CB4E8 /* TicketStusChangeCell.h */,
+				0634EB9920385767002CB4E8 /* TicketStusChangeCell.m */,
+				0634EB9A20385767002CB4E8 /* TicketStusChangeCell.xib */,
+			);
+			name = "4.Ticket Status Change";
+			sourceTree = "<group>";
+		};
+		067605F7202B2C8800D9EFE6 /* ATAppUpdater */ = {
+			isa = PBXGroup;
+			children = (
+				067605F8202B2C8800D9EFE6 /* ATAppUpdater.h */,
+				067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */,
+			);
+			path = ATAppUpdater;
+			sourceTree = "<group>";
+		};
 		06B8B01A20287E4200E5E8CA /* UIImageView+Letters */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +950,8 @@
 		D92C35C71F750F83001DD67D /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				06BB2A3A202C3B3E00B33C43 /* systemIcon.png */,
+				067605F7202B2C8800D9EFE6 /* ATAppUpdater */,
 				06B8B01A20287E4200E5E8CA /* UIImageView+Letters */,
 				D97CA13B1FCC229800A7B982 /* LGFilterView */,
 				D9AF852E1FC4218A005232A0 /* NavigationMenuItem */,
@@ -494,7 +1070,7 @@
 		D9DBD3441E07ACFC00219F93 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D9B221AD200772C600607F11 /* GoogleService-Info.plist */,
+				0643C94F2046AE4B007DC824 /* GoogleService-Info.plist */,
 				D9F954FA1E617BE500DA9B30 /* countries.json */,
 				D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */,
 				D9DBD34D1E07ACFC00219F93 /* Main.storyboard */,
@@ -535,6 +1111,7 @@
 				D9EB9F521E07C2320001115F /* Utils */,
 				D9EB9F501E07C21E0001115F /* Model */,
 				D9EB9F4E1E07C20B0001115F /* Xibs */,
+				0624A50F203472AF00F1B030 /* InApp HelpSection */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -556,7 +1133,7 @@
 				D9EB9F6D1E07C2F00001115F /* ClientTicketTableViewCell.xib */,
 				D9EB9F6E1E07C2F00001115F /* ConversationTableViewCell.h */,
 				D9EB9F6F1E07C2F00001115F /* ConversationTableViewCell.m */,
-				D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */,
+				0689708E20318A3700702313 /* ConversationTableViewCell.xib */,
 				D9EB9F711E07C2F00001115F /* OpenCloseTableViewCell.h */,
 				D9EB9F721E07C2F00001115F /* OpenCloseTableViewCell.m */,
 				D9EB9F731E07C2F00001115F /* OpenCloseTableViewCell.xib */,
@@ -618,6 +1195,8 @@
 				D92C35D61F7682B5001DD67D /* EditDetailTableViewController.m */,
 				D9A2FCAE1F18904000C829DD /* NotificationViewController.h */,
 				D9A2FCAF1F18904000C829DD /* NotificationViewController.m */,
+				06AB96DA2045311500FDE260 /* SupportViewController.h */,
+				06AB96DB2045311500FDE260 /* SupportViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -732,6 +1311,9 @@
 				D9DBD33F1E07ACFC00219F93 /* Resources */,
 				E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */,
 				51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */,
+				0643C94D2046AA8B007DC824 /* CopyFiles */,
+				0643C94E2046AA9A007DC824 /* Crash Analytics Script */,
+				0643C9512046AEBA007DC824 /* Crash Reporting Script */,
 			);
 			buildRules = (
 			);
@@ -789,9 +1371,14 @@
 				TargetAttributes = {
 					D9DBD3401E07ACFC00219F93 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 8VY8B59STG;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -823,6 +1410,8 @@
 				nl,
 				ru,
 				nb,
+				ar,
+				"pt-PT",
 			);
 			mainGroup = D9DBD3381E07ACFC00219F93;
 			productRefGroup = D9DBD3421E07ACFC00219F93 /* Products */;
@@ -841,23 +1430,89 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0634EBA6203866A8002CB4E8 /* UserAgentListCell.xib in Resources */,
+				06099CC8203AB55D0060831A /* view125.png in Resources */,
+				0634EB65203811FD002CB4E8 /* internalNote.jpg in Resources */,
+				0634EB6A20381579002CB4E8 /* AllAboutTicketCell4.xib in Resources */,
+				061E313B2035A96300603D22 /* login.jpg in Resources */,
+				061E31202035843C00603D22 /* UserAndAgentMenuListCell.xib in Resources */,
+				0634EB7620381BE3002CB4E8 /* AllAboutTicketCell6.xib in Resources */,
+				0609AD9F20397BE500DCDC85 /* multpleticketassign.jpg in Resources */,
 				D9CF41AD1F4C15320087BBFA /* NotificationTableViewCell.xib in Resources */,
+				0624A51D2034733400F1B030 /* HelpSectionHomePageCell.xib in Resources */,
 				D9DBD3541E07ACFC00219F93 /* LaunchScreen.storyboard in Resources */,
+				0634EB7D20382958002CB4E8 /* TicketReplayInternalNoteCell2.xib in Resources */,
+				0609ADAF2039805100DCDC85 /* view121.png in Resources */,
 				D9532C131E9CE9090063B318 /* Localizable.strings in Resources */,
-				D9B6E2E71E9B8B9400AAB724 /* ConversationTableViewCell.xib in Resources */,
+				0624A51F2034733400F1B030 /* four.jpeg in Resources */,
+				0609ADA520397C4700DCDC85 /* multipleSelect.jpg in Resources */,
+				0609AD9D20397BDC00DCDC85 /* merge.jpg in Resources */,
+				0634EB492036EE3D002CB4E8 /* TicketSortingFikterCell.xib in Resources */,
 				D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */,
+				0624A5192034733400F1B030 /* three.jpeg in Resources */,
+				06099CCF203AD21A0060831A /* MergeTicketViewCell2.xib in Resources */,
+				061E31252035845800603D22 /* otherFeatureMenuListCell.xib in Resources */,
+				0634EBAB20386717002CB4E8 /* UserAgentFilterCell.xib in Resources */,
 				D955A5511F2A05630045429F /* a.xcassets in Resources */,
+				06099CB3203AA2A30060831A /* MultipleTicketSelectViewCell.xib in Resources */,
+				0634EB7820381DC2002CB4E8 /* Edit ticket.jpg in Resources */,
+				0634EBA120385D64002CB4E8 /* ticketStatus1.jpg in Resources */,
+				0609ADA120397BEC00DCDC85 /* multpleticketstatuschnage.jpg in Resources */,
 				D9F9F13C1FB9B2530044DA27 /* check_mark@2x.png in Resources */,
+				06099CD1203AD9160060831A /* view127.png in Resources */,
+				0624A51E2034733400F1B030 /* two.jpeg in Resources */,
 				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
+				0609ADB920399B8100DCDC85 /* deActive.png in Resources */,
+				0634EB6F2038158D002CB4E8 /* AllAboutTicketCell5.xib in Resources */,
+				06099CC4203AAA640060831A /* Inbox2.jpg in Resources */,
+				0609ADBA20399B8100DCDC85 /* Active.png in Resources */,
+				0609ADAD20397E3F00DCDC85 /* usedetails.jpg in Resources */,
+				0634EB4D2036F530002CB4E8 /* createTicket1111.jpg in Resources */,
+				0634EB8220382985002CB4E8 /* TicketReplayInternalNoteCell3.xib in Resources */,
+				06099CC2203AA3240060831A /* MergeTicketViewCell.xib in Resources */,
+				0609ADB4203987E000DCDC85 /* UserAndAgentMenuListCell2.xib in Resources */,
+				0634EB712038192D002CB4E8 /* ticket detail page1.jpg in Resources */,
+				0634EB8820384095002CB4E8 /* FIlterAndSort2.xib in Resources */,
+				0634EB9C20385767002CB4E8 /* TicketStusChangeCell.xib in Resources */,
 				D9F9F13E1FB9B2530044DA27 /* drop_down@2x.png in Resources */,
 				D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */,
+				0609ADB620398E2A00DCDC85 /* view122.png in Resources */,
+				0634EB5220370EC2002CB4E8 /* AllAboutTicketCell2.xib in Resources */,
+				06099CB8203AA2B70060831A /* MultipleTicketAssignCell.xib in Resources */,
+				06099CCA203AC0D20060831A /* view126.png in Resources */,
+				0609ADA320397C1100DCDC85 /* allUserList.jpg in Resources */,
+				061E312F2035A63000603D22 /* LoginDetailPage1Cell.xib in Resources */,
+				0634EB962038519B002CB4E8 /* sortCell.png in Resources */,
+				0624A51C2034733400F1B030 /* one.jpeg in Resources */,
+				061E313C2035A96300603D22 /* url.jpg in Resources */,
+				0609ADA920397C8B00DCDC85 /* filteredResult.jpg in Resources */,
+				061E312A20358BAD00603D22 /* TicketListTableView.xib in Resources */,
 				D92CE70D1F3D706600D98708 /* ClientListTableViewCell.xib in Resources */,
+				0609ADAB20397C9C00DCDC85 /* filterImage.jpg in Resources */,
+				06099CBD203AA30D0060831A /* MultipleTicketStatusChangeCell.xib in Resources */,
+				06BB2A3B202C3B3F00B33C43 /* systemIcon.png in Resources */,
+				0634EB5720370ED5002CB4E8 /* AllAboutTicketCell3.xib in Resources */,
 				D9AA44471FA890AC00938081 /* BDCustomAlertView.xib in Resources */,
-				D9B221AE200772C600607F11 /* GoogleService-Info.plist in Resources */,
+				0609ADA720397C6200DCDC85 /* userEditProfile.jpg in Resources */,
+				0634EB4B2036F27A002CB4E8 /* sidemenu.jpg in Resources */,
+				0634EB61203811D6002CB4E8 /* ticket detail page2.jpg in Resources */,
+				0689708F20318A3700702313 /* ConversationTableViewCell.xib in Resources */,
+				0634EB63203811E0002CB4E8 /* Replay.jpg in Resources */,
+				06099CC6203AB2ED0060831A /* view124.png in Resources */,
 				D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */,
 				D9F9F13F1FB9B2530044DA27 /* done@2x.png in Resources */,
+				061E31052035479A00603D22 /* LoginListMenuTableCell.xib in Resources */,
+				0634EB442036EE01002CB4E8 /* TicketReplayInternalNoteCell.xib in Resources */,
+				061E313A2035A96300603D22 /* inbox.jpg in Resources */,
+				0634EB5C20380359002CB4E8 /* AllAboutTicketCell1.xib in Resources */,
 				D9EB9F801E07C2F00001115F /* OpenCloseTableViewCell.xib in Resources */,
+				0634EB94203844DA002CB4E8 /* ticket_filter.jpg in Resources */,
+				0634EB9220384411002CB4E8 /* filter1212.png in Resources */,
+				0643C9502046AE4C007DC824 /* GoogleService-Info.plist in Resources */,
 				D9EB9F781E07C2F00001115F /* TicketTableViewCell.xib in Resources */,
+				0634EB90203842F9002CB4E8 /* sort121.png in Resources */,
+				0634EBB020386741002CB4E8 /* UserAgentEditCell.xib in Resources */,
+				0634EB362036EA7E002CB4E8 /* AllAboutTicketCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,15 +1533,68 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */ = {
+		0643C94E2046AA9A007DC824 /* Crash Analytics Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Crash Analytics Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
+		};
+		0643C9512046AEBA007DC824 /* Crash Reporting Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Crash Reporting Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:1:661051343223:ios:1581c2938664109a\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym-util.bash \"key/faveo-helpdesk-pro-6dafa-firebase-crashreporting-s5q0n-f2ef3b6cb1.json\"";
+		};
+		51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro-resources.sh",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
+				"${PODS_ROOT}/RMessage/RMessage/Resources/RMessageView.xib",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationBackgroundErrorIcon.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationBackgroundErrorIcon@2x.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationBackgroundSuccessIcon.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationBackgroundSuccessIcon@2x.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationBackgroundWarningIcon.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationBackgroundWarningIcon@2x.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationButtonBackground.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationButtonBackground@2x.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/RMessageDefaultDesign.json",
+				"${PODS_ROOT}/XLForm/XLForm/XLForm.bundle",
+			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RMessageView.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundErrorIcon.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundErrorIcon@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundSuccessIcon.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundSuccessIcon@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundWarningIcon.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundWarningIcon@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationButtonBackground.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationButtonBackground@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RMessageDefaultDesign.json",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XLForm.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -899,13 +1607,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Faveo Helpdesk Pro-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */ = {
@@ -931,50 +1642,91 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9166B551FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m in Sources */,
+				0634EBA5203866A8002CB4E8 /* UserAgentListCell.m in Sources */,
+				0634EB5B20380359002CB4E8 /* AllAboutTicketCell1.m in Sources */,
 				D9A2FCB01F18904000C829DD /* NotificationViewController.m in Sources */,
+				06099CAE203AA1A60060831A /* MergeTicketView.m in Sources */,
+				0634EBAA20386717002CB4E8 /* UserAgentFilterCell.m in Sources */,
 				D9EB9FBD1E07C4490001115F /* SlideNavigationContorllerAnimatorFade.m in Sources */,
 				D9EB9FA51E07C3270001115F /* MyTicketsViewController.m in Sources */,
 				D9EB9FA81E07C3270001115F /* TicketDetailViewController.m in Sources */,
+				0634EB9B20385767002CB4E8 /* TicketStusChangeCell.m in Sources */,
 				D9EB9FAC1E07C3270001115F /* DetailViewController.m in Sources */,
 				D9AE08342007220600DD9E94 /* CFLabelOnLeftButton.m in Sources */,
 				D9283F9F1FCC3B4E00C6A073 /* ClientFilter.m in Sources */,
 				D9DBD3491E07ACFC00219F93 /* AppDelegate.m in Sources */,
 				D9EB9F641E07C2D00001115F /* GlobalVariables.m in Sources */,
 				D92C35D41F750FDE001DD67D /* LGPlusButtonsViewShared.m in Sources */,
+				0634EB352036EA7E002CB4E8 /* AllAboutTicketCell.m in Sources */,
 				D9AE083E200723DE00DD9E94 /* UIView+CFFrame.m in Sources */,
+				061E312E2035A63000603D22 /* LoginDetailPage1Cell.m in Sources */,
 				D97CA1411FCC229800A7B982 /* LGFilterViewCell.m in Sources */,
+				0624A51A2034733400F1B030 /* HelpSectionHomePage.m in Sources */,
 				D9E57B411EFAA4C1002E4C19 /* UITextField+PasswordField.m in Sources */,
+				0634EBAF20386741002CB4E8 /* UserAgentEditCell.m in Sources */,
+				061E311F2035843C00603D22 /* UserAndAgentMenuListCell.m in Sources */,
+				061E31082035594500603D22 /* LoginDetailPage1.m in Sources */,
 				D9F9F13B1FB9B2530044DA27 /* DropDownListView.m in Sources */,
 				D9CB5FA21F69540E00EE3F9B /* InboxViewController.m in Sources */,
+				06099CB7203AA2B70060831A /* MultipleTicketAssignCell.m in Sources */,
+				0634EB8120382985002CB4E8 /* TicketReplayInternalNoteCell3.m in Sources */,
+				06099CB2203AA2A30060831A /* MultipleTicketSelectViewCell.m in Sources */,
+				0634EB3F2036EBFC002CB4E8 /* TicketSortingAndFilter.m in Sources */,
 				D9AF85371FC4610E005232A0 /* EditClientDetail.m in Sources */,
+				0634EBB920387581002CB4E8 /* UserAgentEditProfileView.m in Sources */,
 				D985BAC81EDC5FAA001EB153 /* Dat.m in Sources */,
 				D9E57B401EFAA4C1002E4C19 /* UIView+Shake.m in Sources */,
 				D9EB9F811E07C2F00001115F /* LoadingTableViewCell.m in Sources */,
 				D9EB9FAA1E07C3270001115F /* ClientDetailViewController.m in Sources */,
+				0634EB6920381579002CB4E8 /* AllAboutTicketCell4.m in Sources */,
 				D9EB9FA31E07C3270001115F /* TrashTicketsViewController.m in Sources */,
 				D9EB9F7F1E07C2F00001115F /* OpenCloseTableViewCell.m in Sources */,
 				D9EB9F9F1E07C3270001115F /* LeftMenuViewController.m in Sources */,
 				D9DBD3461E07ACFC00219F93 /* main.m in Sources */,
 				D92C35D71F7682B5001DD67D /* EditDetailTableViewController.m in Sources */,
+				061E310E20357C0700603D22 /* TicketListMenuTable.m in Sources */,
 				D9AA44461FA890AC00938081 /* BDCustomAlertView.m in Sources */,
 				D9EB9F5B1E07C2A80001115F /* Utils.m in Sources */,
 				D9A2FCB41F18942800C829DD /* NotificationTableViewCell.m in Sources */,
 				D9EB9F7D1E07C2F00001115F /* ConversationTableViewCell.m in Sources */,
+				0634EB3C2036EBE3002CB4E8 /* TicketReplayAndInternalNote.m in Sources */,
 				D9EB9FC51E07C4610001115F /* Reachability.m in Sources */,
 				D9EB9FBF1E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
+				061E30FD2035426800603D22 /* LoginListMenuTable.m in Sources */,
 				D92C35D21F750FDE001DD67D /* LGPlusButtonDescription.m in Sources */,
+				0634EB482036EE3D002CB4E8 /* TicketSortingFikterCell.m in Sources */,
+				0634EB6E2038158D002CB4E8 /* AllAboutTicketCell5.m in Sources */,
+				0634EB9F203857A6002CB4E8 /* TicketStusChange.m in Sources */,
+				06099CA8203AA1680060831A /* MultipleTicketAssign.m in Sources */,
+				0634EB392036EBC3002CB4E8 /* AllAboutTicketsInformation.m in Sources */,
 				D9EB9FA11E07C3270001115F /* UnassignedTicketsViewController.m in Sources */,
 				D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */,
 				D97CA1401FCC229800A7B982 /* LGFilterView.m in Sources */,
+				0634EB7520381BE3002CB4E8 /* AllAboutTicketCell6.m in Sources */,
+				0634EBB320387536002CB4E8 /* AgentUserListView.m in Sources */,
 				D92C35D31F750FDE001DD67D /* LGPlusButtonsView.m in Sources */,
 				D9EB9FA61E07C3270001115F /* CreateTicketViewController.m in Sources */,
 				D9EB9FC01E07C4490001115F /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
+				0634EB432036EE01002CB4E8 /* TicketReplayInternalNoteCell.m in Sources */,
+				061E311120357C4100603D22 /* UserAndAgentMenuList.m in Sources */,
 				D946D6981FA9F519005E5BF1 /* SortingViewController.m in Sources */,
+				0634EBB62038755F002CB4E8 /* UserAgentFilterView.m in Sources */,
+				06099CCE203AD21A0060831A /* MergeTicketViewCell2.m in Sources */,
 				D9AE083B2007236700DD9E94 /* CFMultistageDropdownMenuView.m in Sources */,
+				061E311420357C6400603D22 /* otherFeatureMenuList.m in Sources */,
 				D9AAFAB91F5D475400891CA5 /* FTPopOverMenu.m in Sources */,
 				D9EB9F631E07C2D00001115F /* Data.m in Sources */,
+				0609ADB3203987E000DCDC85 /* UserAndAgentMenuListCell2.m in Sources */,
+				061E31042035479A00603D22 /* LoginListMenuTableCell.m in Sources */,
+				06099CAB203AA1900060831A /* MultipleTicketStatusChange.m in Sources */,
+				06099CA5203AA14B0060831A /* MultipleTicketSelectView.m in Sources */,
+				0634EB5120370EC2002CB4E8 /* AllAboutTicketCell2.m in Sources */,
 				D92C35D11F750FDE001DD67D /* LGPlusButton.m in Sources */,
+				061E310B2035595B00603D22 /* LoginDetailPage2.m in Sources */,
+				0634EB5620370ED5002CB4E8 /* AllAboutTicketCell3.m in Sources */,
+				06099CBC203AA30D0060831A /* MultipleTicketStatusChangeCell.m in Sources */,
 				D9EB9F771E07C2F00001115F /* TicketTableViewCell.m in Sources */,
+				06099CC1203AA3240060831A /* MergeTicketViewCell.m in Sources */,
 				D9EB9FA91E07C3270001115F /* AboutViewController.m in Sources */,
 				D953D53E1FA321420077D519 /* AddRequester.m in Sources */,
 				D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */,
@@ -982,17 +1734,24 @@
 				D9AE08382007231800DD9E94 /* CFMultistageConditionTableView.m in Sources */,
 				D9F9F11A1FB977B40044DA27 /* FilterViewController.m in Sources */,
 				D9AF85311FC421AF005232A0 /* AWNavigationMenuItem.m in Sources */,
+				0634EB7C20382958002CB4E8 /* TicketReplayInternalNoteCell2.m in Sources */,
+				067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */,
 				D9F9F1421FBAE8CC0044DA27 /* FilterLogic.m in Sources */,
 				D9EB9FA41E07C3270001115F /* ClosedTicketsViewController.m in Sources */,
+				06AB96DC2045311500FDE260 /* SupportViewController.m in Sources */,
+				0624A51B2034733400F1B030 /* HelpSectionHomePageCell.m in Sources */,
 				D9EB9FC11E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
 				06B8B01D20287E4300E5E8CA /* UIImageView+Letters.m in Sources */,
 				D9EB9F791E07C2F00001115F /* ClientListTableViewCell.m in Sources */,
 				D9EB9FBE1E07C4490001115F /* SlideNavigationContorllerAnimatorScale.m in Sources */,
 				D99776D71FDAB631004EA9B8 /* MergeViewForm.m in Sources */,
 				D9EB9FAB1E07C3270001115F /* ConversationViewController.m in Sources */,
+				0634EB8720384095002CB4E8 /* FIlterAndSort2.m in Sources */,
+				061E31242035845800603D22 /* otherFeatureMenuListCell.m in Sources */,
 				D9EB9FA01E07C3270001115F /* LoginViewController.m in Sources */,
 				D9EB9FA21E07C3270001115F /* ClientListViewController.m in Sources */,
 				D9EB9FBC1E07C4490001115F /* SlideNavigationController.m in Sources */,
+				061E312920358BAD00603D22 /* TicketListTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1057,21 +1816,6 @@
 				D9B2220A200C628A00607F11 /* nb */,
 			);
 			name = LoadingTableViewCell.xib;
-			sourceTree = "<group>";
-		};
-		D9B6E2E91E9B8B9400AAB724 /* ConversationTableViewCell.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D9B6E2E81E9B8B9400AAB724 /* Base */,
-				D9B6E2EB1E9B8B9600AAB724 /* de */,
-				D9B6E2ED1E9B8B9700AAB724 /* fr */,
-				D9B6E2EF1E9B8B9900AAB724 /* es */,
-				D9B6E2F11E9B8B9B00AAB724 /* it */,
-				D93D3D4F1EA0BACD00C1EE7E /* nl */,
-				D93D3D541EA0BB1000C1EE7E /* ru */,
-				D9B22209200C628900607F11 /* nb */,
-			);
-			name = ConversationTableViewCell.xib;
 			sourceTree = "<group>";
 		};
 		D9DBD34D1E07ACFC00219F93 /* Main.storyboard */ = {
@@ -1218,7 +1962,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMPRESS_PNG_FILES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1287,7 +2032,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMPRESS_PNG_FILES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

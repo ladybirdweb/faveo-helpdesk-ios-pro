@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MergeTicketViewCell2Id" rowHeight="1130" id="KGk-i7-Jjw" customClass="MergeTicketViewCell2">
+            <rect key="frame" x="0.0" y="0.0" width="424" height="1020"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="424" height="1019.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tfF-qc-nP9">
+                        <rect key="frame" x="1" y="-5" width="422" height="1025"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multpleticketassign.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="cT2-SO-dzj">
+                                <rect key="frame" x="74" y="122" width="253" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="6zw-qF-wfq"/>
+                                    <constraint firstAttribute="width" constant="253" id="7Wd-KK-LgA"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="21" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfz-VS-8Th">
+                                <rect key="frame" x="22" y="26" width="356" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="7qj-x2-Qcr"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Once you select one or more than one tickets then click on middle image button i.e assign button, it will navigate to assign ticket page, see below image</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="50" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJk-Db-luG">
+                                <rect key="frame" x="22" y="652" width="380" height="312"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="312" id="3gx-ek-5QE"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="312" id="Cw3-f0-zau"/>
+                                    <constraint firstAttribute="width" constant="380" id="VyQ-H8-5zf"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Click on that view or hold and press long then at bottom picker view appear, it will show list of agents. You can select any one agent from these list of agents. 
+
+Then that agent name will place on that textfield. If you want to change agent then again click on that textfield again picker view will appear then you can select another agent name.
+
+After selecting the agent click on Assign button. After clicking on assign button that ticket will be assigned to that particular agent. You can check in inbox page, see that particular ticket it will show agent name.
+
+If that ticket was unassigned before then it will show new agent name, if that ticket was already assigned to another agent and you changed the agent name it will show new agent name in that particular ticket and its ticket details page.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="27.149999618530273">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Vfz-VS-8Th" firstAttribute="leading" secondItem="oJk-Db-luG" secondAttribute="leading" id="CZw-xg-QcC"/>
+                            <constraint firstItem="Vfz-VS-8Th" firstAttribute="top" secondItem="tfF-qc-nP9" secondAttribute="top" constant="26" id="F30-6S-sx1"/>
+                            <constraint firstItem="Vfz-VS-8Th" firstAttribute="leading" secondItem="tfF-qc-nP9" secondAttribute="leading" constant="22" id="ULX-QK-TTl"/>
+                            <constraint firstItem="oJk-Db-luG" firstAttribute="top" secondItem="cT2-SO-dzj" secondAttribute="bottom" constant="30" id="Yti-Ju-yZB"/>
+                            <constraint firstItem="cT2-SO-dzj" firstAttribute="leading" secondItem="tfF-qc-nP9" secondAttribute="leading" constant="74" id="f2n-tO-VPp"/>
+                            <constraint firstAttribute="bottom" secondItem="oJk-Db-luG" secondAttribute="bottom" constant="61" id="fcZ-kJ-WLe"/>
+                            <constraint firstItem="Vfz-VS-8Th" firstAttribute="centerX" secondItem="cT2-SO-dzj" secondAttribute="centerX" id="hQd-S6-e3K"/>
+                            <constraint firstAttribute="trailing" secondItem="Vfz-VS-8Th" secondAttribute="trailing" constant="44" id="i0I-gh-fhc"/>
+                            <constraint firstItem="cT2-SO-dzj" firstAttribute="top" secondItem="Vfz-VS-8Th" secondAttribute="bottom" constant="22" id="uYJ-EC-fm9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="tfF-qc-nP9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-19" id="2w8-gC-ZL0"/>
+                    <constraint firstItem="tfF-qc-nP9" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Ttf-hi-bBj"/>
+                    <constraint firstItem="tfF-qc-nP9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-36" id="Uuy-Iq-ask"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="tfF-qc-nP9" secondAttribute="bottom" constant="-11" id="bSu-9B-nx3"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="19" y="-378"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="multpleticketassign.jpg" width="1058" height="2093"/>
+    </resources>
+</document>

@@ -2,7 +2,7 @@
 //  NotificationViewController.m
 //  Faveo Helpdesk Pro
 //
-//  Created by Narendra on 14/07/17.
+//  Created on 14/07/17.
 //  Copyright © 2017 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -127,7 +127,7 @@
                         [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                     }else{
                         [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                        NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
+                        NSLog(@"Thread-getNotificationViewController-error == %@",error.localizedDescription);
                     }
                     
                 }else if(error)  {
@@ -168,16 +168,14 @@
         }];
     }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in reload method in Notification ViewController\n" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
-            return ;
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-          //  NSLog( @"In finally block");
+            NSLog( @" I am in reload method in Notification ViewController" );
             
         }
 
@@ -289,7 +287,7 @@
                     
                 }else if(error)  {
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+                    NSLog(@"Thread-NO4-getNotificationViewController-Refresh-error == %@",error.localizedDescription);
                 }
                 return ;
             }
@@ -328,49 +326,20 @@
         }];
     }@catch (NSException *exception)
         {
-            // Print exception information
-//            NSLog( @"NSException caught in load-more methos in Notification ViewController\n" );
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
-            return ;
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
         }
         @finally
         {
-            // Cleanup, in both success and fail cases
-       //    NSLog( @"In finally block");
+            NSLog( @" I am in loadMore method in Notification ViewController" );
             
         }
 
     }
 }
 
-
-/*
-- (NSString *)getKeyForIndex:(int)index
-{
-    return [NSString stringWithFormat:@"KEY%d",index];
-}
-
-- (BOOL) getCheckedForIndex:(int)index
-{
-    if([[[NSUserDefaults standardUserDefaults] valueForKey:[self getKeyForIndex:index]] boolValue]==YES)
-    {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
-}
-
-- (void) checkedCellAtIndex:(int)index
-{
-    BOOL boolChecked = [self getCheckedForIndex:index];
-    
-    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:!boolChecked] forKey:[self getKeyForIndex:index]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-*/
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -404,139 +373,141 @@
         
         }
         
-
-        
-     /*   if([self getCheckedForIndex:(int)indexPath.row]==YES)
-        {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            
-        }
-        else
-        {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        } */
-        
-        
-      //  [self nofificationSeen];
-        
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
         NSLog(@"Dict is : %@", finaldic);
         
     
-        
-        NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
-        
-        NSString * seen=[NSString stringWithFormat:@"%i",1];
-       
-        NSString * str=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"seen"]];
-        
-       
-        [Utils isEmpty:str];
-        
-        if  (![Utils isEmpty:str] && ![str isEqualToString:@""])
+@try{
+    
+    
+    NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
+    
+    NSString * seen=[NSString stringWithFormat:@"%i",1];
+    
+    NSString * str=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"seen"]];
+    
+    
+    [Utils isEmpty:str];
+    
+    if  (![Utils isEmpty:str] && ![str isEqualToString:@""])
+    {
+        if([str isEqualToString:seen])
         {
-               if([str isEqualToString:seen])
-                {
             
-                cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
-                }else
-                {
-                     cell.viewMain.backgroundColor=[UIColor clearColor];
-                    NSLog(@"I am in else condition..!");
-                }
-        }
-        else
+            cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
+        }else
         {
+            cell.viewMain.backgroundColor=[UIColor clearColor];
             NSLog(@"I am in else condition..!");
         }
+    }
+    else
+    {
+        NSLog(@"I am in else condition..!");
+    }
+    
+    
+    // cell.msglbl.text=[finaldic objectForKey:@"message"];
+    
+    if ( ( ![[finaldic objectForKey:@"message"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"message"] length] != 0 ) )
+    {
+        cell.msglbl.text=[finaldic objectForKey:@"message"];
+    }
+    else
+    {
+        cell.msglbl.text= NSLocalizedString(@"Not Available",nil);
+    }
+    
+    
+    // cell.timelbl.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]];
+    
+    if ( ( ![[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]] isEqual:[NSNull null]] ) && ( [[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]] length] != 0 ) )
+    {
+        cell.timelbl.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]];
+    }
+    else
+    {
+        cell.timelbl.text= NSLocalizedString(@"Not Available",nil);
+    }
+    
+    
+    //  NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
+    
+    
+    if(( ![[finaldic objectForKey:@"requester"] isEqual:[NSNull null]] ) )
+    {
+        // [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
         
-
-        // cell.msglbl.text=[finaldic objectForKey:@"message"];
+        // changed_by_user_name
+        NSString *fname= [profileDict objectForKey:@"changed_by_first_name"];
+        NSString *lname= [profileDict objectForKey:@"changed_by_last_name"];
+        NSString *userName= [profileDict objectForKey:@"changed_by_user_name"];
         
-        if ( ( ![[finaldic objectForKey:@"message"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"message"] length] != 0 ) )
+        [Utils isEmpty:fname];
+        [Utils isEmpty:lname];
+        [Utils isEmpty:userName];
+        
+        if (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
         {
-            cell.msglbl.text=[finaldic objectForKey:@"message"];
-        }
-        else
-        {
-            cell.msglbl.text= NSLocalizedString(@"Not Available",nil);
-        }
-       
-
-       // cell.timelbl.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]];
-        
-        if ( ( ![[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]] isEqual:[NSNull null]] ) && ( [[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]] length] != 0 ) )
-        {
-            cell.timelbl.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_utc"]];
-        }
-        else
-        {
-            cell.timelbl.text= NSLocalizedString(@"Not Available",nil);
-        }
-      
-        
-      //  NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
-        
-        
-        if(( ![[finaldic objectForKey:@"requester"] isEqual:[NSNull null]] ) )
-        {
-           // [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
-           
-            // changed_by_user_name
-            NSString *fname= [profileDict objectForKey:@"changed_by_first_name"];
-            NSString *lname= [profileDict objectForKey:@"changed_by_last_name"];
-            NSString *userName= [profileDict objectForKey:@"changed_by_user_name"];
-            
-            [Utils isEmpty:fname];
-            [Utils isEmpty:lname];
-            [Utils isEmpty:userName];
-            
-            if (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+            if(![Utils isEmpty:fname] && ![Utils isEmpty:lname])
             {
-                  if(![Utils isEmpty:fname] && ![Utils isEmpty:lname])
-                  {
-                      cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
-                  }
-                else
-                {
-                    cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
-                }
-            }else if(![Utils isEmpty:userName])
-            {
-                cell.name.text= [profileDict objectForKey:@"changed_by_user_name"];
+                cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
             }
             else
             {
-               // cell.name.text=@"Not Availabel";
-                cell.name.text= NSLocalizedString(@"Not Available",nil);
+                cell.name.text= [NSString stringWithFormat:@"%@ %@",fname,lname];
             }
-            
-            if(![Utils isEmpty:fname])
-            {
-                if([[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".png"] )
-                {
-                    [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
-                }else
-                {
-                    [cell.profilePicView setImageWithString:fname color:nil ];
-                }
-                
-            }
-            else{
-                [cell.profilePicView setImageWithString:userName color:nil ];
-            }
-            
-
-            
-            
-         //   cell.name.text=[NSString stringWithFormat:@"%@ %@",[profileDict objectForKey:@"changed_by_first_name"],[profileDict objectForKey:@"changed_by_last_name"]];
+        }else if(![Utils isEmpty:userName])
+        {
+            cell.name.text= [profileDict objectForKey:@"changed_by_user_name"];
         }
-        else{
-            
-            [cell setUserProfileimage:@"default_pic.png"];
+        else
+        {
+            // cell.name.text=@"Not Availabel";
             cell.name.text= NSLocalizedString(@"Not Available",nil);
         }
+        
+        if(![Utils isEmpty:fname])
+        {
+            if([[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+            {
+                [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
+            }else
+            {
+                [cell.profilePicView setImageWithString:fname color:nil ];
+            }
             
+        }
+        else{
+            [cell.profilePicView setImageWithString:userName color:nil ];
+        }
+        
+        
+        
+        
+        //   cell.name.text=[NSString stringWithFormat:@"%@ %@",[profileDict objectForKey:@"changed_by_first_name"],[profileDict objectForKey:@"changed_by_last_name"]];
+    }
+    else{
+        
+        [cell setUserProfileimage:@"default_pic.png"];
+         cell.name.text= NSLocalizedString(@"Not Available",nil);
+    }
+    
+    
+    
+  }@catch (NSException *exception)
+        {
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            
+        }
+        @finally
+        {
+            NSLog( @" I am in cellForROwAtINdexPAth method in Notification ViewController" );
+            
+        }
+        
             //[[self.tableView didSelectRowAtIndexPath] ];
         
         return cell;
@@ -546,40 +517,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-  /*
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-    //Use checkedCellAtIndex for check or uncheck cell
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    [self checkedCellAtIndex:(int)indexPath.row];
-    
-    if([self getCheckedForIndex:(int)indexPath.row]==YES)
-    {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        
-        
-    }
-    else
-    {
-        //cell.accessoryType = UITableViewCellAccessoryNone;
-    } */
-    
       NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
     NSLog(@"dict issssss : %@",finaldic);
     
          notifyID= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"id"]];
-    
-   // [self nofificationSeen];
-    
     
      NSDictionary *profileDict= [finaldic objectForKey:@"requester"];
     
     TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
     
     ClientDetailViewController *clientDetail=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
-    
+
+@try{
     NSString *sen=[finaldic objectForKey:@"senario"];
     NSLog(@"Senario is : %@",sen);
     
@@ -588,7 +537,7 @@
        
         globalVariables.iD= [finaldic objectForKey:@"row_id"];
         
-        
+        globalVariables.ticketStatusBool=@"notificationView";
         
         
         if(( ![[finaldic objectForKey:@"requester"] isEqual:[NSNull null]] ) )
@@ -596,6 +545,8 @@
         globalVariables.First_name=  [profileDict objectForKey:@"changed_by_first_name"];
         globalVariables.Last_name= [profileDict objectForKey:@"changed_by_last_name"];
 
+        
+            
         [self.navigationController pushViewController:td animated:YES];
         }
         else
@@ -612,115 +563,33 @@
         globalVariables.iD=[profileDict objectForKey:@"id"];
         globalVariables.First_name=  [profileDict objectForKey:@"changed_by_first_name"];
         globalVariables.Last_name= [profileDict objectForKey:@"changed_by_last_name"];
-        
+       
+         globalVariables.customerImage= [profileDict objectForKey:@"profile_pic"];
+         globalVariables.emailInUserList= [profileDict objectForKey:@"email"];
+        globalVariables.mobileCode1=@"";
+        globalVariables.phoneNumberInUserList=@"Not Available";
+        globalVariables.userRole=@"";
+        globalVariables.mobileNumberInUserList=@"";
+        globalVariables.userNameInUserList=[profileDict objectForKey:@"changed_by_user_name"];
         [self.navigationController pushViewController:clientDetail animated:YES];
     }
     
-   // NotificationTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"NotificationCellID"];
-   
-    //[cell stringID:@"1"];
-    
-    //globalVariables.count1=@"1";
-    
-    // count=1;
+}@catch (NSException *exception)
+    {
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        return;
+    }
+    @finally
+    {
+        NSLog( @" I am in didSelectRowMethod method in Notification ViewController" );
+        
+    }
     
 }
 
-/*-(void)nofificationSeen
-{
-    
-    //NSString *url2= [NSString stringWithFormat:@"%@helpdesk/notifications-seen?api_key=%@ip=%@&token=%@&notification_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],notifyID];
-    
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
-                if (self.navigationController.navigationBarHidden) {
-            [self.navigationController setNavigationBarHidden:NO];
-        }
-        
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Error..!", nil)
-                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeError
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionNavBarOverlay
-                              canBeDismissedByUser:YES];
-        
-    }else{
-        
-       // [[AppDelegate sharedAppdelegate] showProgressView];
-        
-    
-        NSString *url2= [NSString stringWithFormat:@"%@helpdesk/notifications-seen?api_key=%@ip=%@&token=%@&notification_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],notifyID];
-        
-        
-        NSLog(@"URL is : %@",url2);
-        
-        
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-            
-            [webservices httpResponsePOST:url2 parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-                
-                
-                
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                
-                if (error || [msg containsString:@"Error"]) {
-                    
-                    if (msg) {
-                        
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                        
-                    }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                        NSLog(@"Thread-NO4== %@",error.localizedDescription);
-                    }
-                    
-                    return ;
-                }
-                
-                if ([msg isEqualToString:@"tokenRefreshed"]) {
-                    
-                    [self nofificationSeen];
-                    NSLog(@"Thread--NO4-call-nofificationSeen-method");
-                    return;
-                }
-                
-                if (json) {
-                    NSLog(@"JSON-CreateTicket-%@",json);
-                    if ([json objectForKey:@"result"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                           // NSLog(@"%@",json);
-                            
-                            NSDictionary *dict=[json objectForKey:@"result"];
-                            NSString *str1= [dict objectForKey:@"message"];
-                            
-                            if([str1 isEqualToString:@"Successfully Updated"])
-                            {
-                               // count=1;
-                            }
-                            
-                            
-                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
-//                            "status": "success",
-//                            "message": "Successfully Updated"
-//
-                            
-                        });
-                    }
-                }
-                NSLog(@"Thread-NO5");
-                
-            }];
-            
-    }
-    
-} 
- */
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];

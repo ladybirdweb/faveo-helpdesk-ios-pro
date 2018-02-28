@@ -24,14 +24,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelwiosiniedwql;delow;ds;nlcsnckldsncxncknzxkcndkncksdncnkdsnckdsncwsdadadbajdbsajdbsjad" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPv-Px-QNx">
-                                <rect key="frame" x="71" y="36" width="226" height="29"/>
+                                <rect key="frame" x="71" y="40" width="226" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ckd-Id-tc5">
-                                <rect key="frame" x="71" y="15" width="111" height="20"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                <rect key="frame" x="71" y="18" width="124" height="20"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -44,7 +44,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yesterday at 1:28pm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGS-gO-zvq">
-                                <rect key="frame" x="165" y="14" width="148" height="20"/>
+                                <rect key="frame" x="165" y="18" width="148" height="17.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="148" id="dcH-uk-Yxf"/>
                                 </constraints>
@@ -55,16 +55,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ckd-Id-tc5" firstAttribute="firstBaseline" secondItem="XGS-gO-zvq" secondAttribute="firstBaseline" constant="1" id="1iy-mG-GKc"/>
-                            <constraint firstItem="LPv-Px-QNx" firstAttribute="top" secondItem="hCG-1y-fMS" secondAttribute="top" constant="36" id="2hl-R3-Kjv"/>
+                            <constraint firstItem="Ckd-Id-tc5" firstAttribute="firstBaseline" secondItem="XGS-gO-zvq" secondAttribute="firstBaseline" constant="2" id="1iy-mG-GKc"/>
+                            <constraint firstItem="LPv-Px-QNx" firstAttribute="top" secondItem="hCG-1y-fMS" secondAttribute="top" constant="40" id="2hl-R3-Kjv"/>
                             <constraint firstAttribute="trailing" secondItem="LPv-Px-QNx" secondAttribute="trailing" constant="23" id="4Ou-Z0-mnw"/>
                             <constraint firstItem="XGS-gO-zvq" firstAttribute="trailing" secondItem="hCG-1y-fMS" secondAttribute="trailingMargin" constant="1" id="ADo-mf-Ocg"/>
                             <constraint firstItem="Ckd-Id-tc5" firstAttribute="leading" secondItem="53O-dF-h8M" secondAttribute="trailing" constant="13" id="VVI-sw-GjK"/>
                             <constraint firstItem="53O-dF-h8M" firstAttribute="leading" secondItem="hCG-1y-fMS" secondAttribute="leadingMargin" id="ad5-FN-fom"/>
-                            <constraint firstItem="Ckd-Id-tc5" firstAttribute="baseline" secondItem="XGS-gO-zvq" secondAttribute="baseline" constant="1" id="apF-Ly-KkP"/>
-                            <constraint firstItem="XGS-gO-zvq" firstAttribute="leading" secondItem="Ckd-Id-tc5" secondAttribute="trailing" constant="-17" id="b4g-n5-7vR"/>
-                            <constraint firstAttribute="bottom" secondItem="Ckd-Id-tc5" secondAttribute="bottom" constant="45" id="jUc-UR-a8K"/>
-                            <constraint firstItem="Ckd-Id-tc5" firstAttribute="top" secondItem="hCG-1y-fMS" secondAttribute="topMargin" constant="7" id="lsp-c0-o7d"/>
+                            <constraint firstItem="Ckd-Id-tc5" firstAttribute="baseline" secondItem="XGS-gO-zvq" secondAttribute="baseline" constant="2" id="apF-Ly-KkP"/>
+                            <constraint firstItem="XGS-gO-zvq" firstAttribute="leading" secondItem="Ckd-Id-tc5" secondAttribute="trailing" constant="-30" id="b4g-n5-7vR"/>
+                            <constraint firstAttribute="bottom" secondItem="Ckd-Id-tc5" secondAttribute="bottom" constant="42" id="jUc-UR-a8K"/>
+                            <constraint firstItem="Ckd-Id-tc5" firstAttribute="top" secondItem="hCG-1y-fMS" secondAttribute="topMargin" constant="10" id="lsp-c0-o7d"/>
                             <constraint firstItem="LPv-Px-QNx" firstAttribute="leading" secondItem="53O-dF-h8M" secondAttribute="trailing" constant="13" id="pRg-yj-Rmm"/>
                             <constraint firstItem="53O-dF-h8M" firstAttribute="centerY" secondItem="hCG-1y-fMS" secondAttribute="centerY" id="r47-Cr-pLN"/>
                         </constraints>
@@ -106,6 +106,6 @@
         </label>
     </objects>
     <resources>
-        <image name="default_pic" width="96" height="96"/>
+        <image name="default_pic" width="512" height="512"/>
     </resources>
 </document>

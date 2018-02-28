@@ -128,7 +128,7 @@
         
     }
 
-    
+    _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
@@ -393,7 +393,7 @@
             [[AppDelegate sharedAppdelegate] showProgressView];
         
             NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/edit/%@?api_key=%@&token=%@&user_name=%@&first_name=%@&last_name=%@&email=%@&phone_number=%@&mobile=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.iD,API_KEY,[userDefaults objectForKey:@"token"],_userNameTextField.text,_firstNameTextField.text,_lastNameTextField.text,_emailTextField.text,_phoneTextField.text,_mobileTextField.text];
-
+    @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
       
@@ -483,6 +483,18 @@
                 NSLog(@"Thread-NO5-EditCustomerDetails-closed");
                 
             }];
+       }@catch (NSException *exception)
+            {
+                [utils showAlertWithMessage:exception.name sendViewController:self];
+                NSLog( @"Name: %@", exception.name);
+                NSLog( @"Reason: %@", exception.reason );
+                return;
+            }
+            @finally
+            {
+                NSLog( @" I am in doneSubmitButton method in EditClientDetails ViewController" );
+                
+            }
             
         }
 }
@@ -492,7 +504,7 @@
     
     if([sender isOn]){
         NSLog(@"User Deactivate Switch Clicked - ON");
-        
+ @try{
         BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
         
         [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Deactivate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
@@ -508,11 +520,24 @@
             _switch1.layer.cornerRadius = 16;
             _switch1.backgroundColor= [UIColor greenColor];
         }];
-        
+     
+     }@catch (NSException *exception)
+        {
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in activate-deactivate cleint method in EditCLientDetails ViewController" );
+            
+        }
         
     } else{
          NSLog(@"User Activate Switch Clicked - OFF");
-        
+    
+  @try{
         BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
         
         [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Activate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
@@ -526,6 +551,18 @@
             [_switch1 setOn:YES];
             _switch1.onTintColor= [UIColor redColor];
         }];
+    }@catch (NSException *exception)
+        {
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in activate-deactivate user method in EditCLiuentDetail ViewController" );
+            
+        }
     }
 }
 
@@ -545,10 +582,9 @@
         NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/status/%@?token=%@&status=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.iD,[userDefaults objectForKey:@"token"],statusDeActivate];
         
         NSLog(@"%@",url);
-        NSLog(@"%@",url);
-        
+     
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
-        
         
         [webservices callPATCHAPIWithAPIName:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
@@ -618,16 +654,21 @@
                 }else
                     
                 {
+                    msg= [json objectForKey:@"error"];
+                    NSLog(@"Message is : %@",msg);
                     
+            
+                    if([msg isEqualToString:@"user not found"])
+                    {
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
                     }
                     
                     [RMessage showNotificationInViewController:self.navigationController
-                                                         title:NSLocalizedString(@"Error", nil)
-                                                      subtitle:NSLocalizedString(@"Something is Wrong.", nil)
+                                                         title:NSLocalizedString(@"This is not user.", nil)
+                                                      subtitle:NSLocalizedString(@"You cant deactivate Agent from here.", nil)
                                                      iconImage:nil
-                                                          type:RMessageTypeSuccess
+                                                          type:RMessageTypeWarning
                                                 customTypeName:nil
                                                       duration:RMessageDurationAutomatic
                                                       callback:nil
@@ -635,14 +676,43 @@
                                                 buttonCallback:nil
                                                     atPosition:RMessagePositionNavBarOverlay
                                           canBeDismissedByUser:YES];
-                    
+                    }else
+                    {
+                        if (self.navigationController.navigationBarHidden) {
+                            [self.navigationController setNavigationBarHidden:NO];
+                        }
+                        
+                        [RMessage showNotificationInViewController:self.navigationController
+                                                             title:NSLocalizedString(@"Error", nil)
+                                                          subtitle:NSLocalizedString(@"Something went wrong.", nil)
+                                                         iconImage:nil
+                                                              type:RMessageTypeWarning
+                                                    customTypeName:nil
+                                                          duration:RMessageDurationAutomatic
+                                                          callback:nil
+                                                       buttonTitle:nil
+                                                    buttonCallback:nil
+                                                        atPosition:RMessagePositionNavBarOverlay
+                                              canBeDismissedByUser:YES];
+                    }
                 }
             } // end if json
             
             NSLog(@"Thread-NO5-EditCustomerDetails-Deactive-closed");
             
         }];
-        
+     }@catch (NSException *exception)
+        {
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in deActivate user method in EditClientDeatil ViewController" );
+            
+        }
     }
     
     
@@ -667,9 +737,8 @@
         NSLog(@"%@",url);
         NSLog(@"%@",url);
         
+  @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
-        
-        
         [webservices callPATCHAPIWithAPIName:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
             
@@ -762,7 +831,20 @@
             NSLog(@"Thread-NO5-EditCustomerDetails-active-closed");
             
         }];
-        
+      
+    }@catch (NSException *exception)
+        {
+            
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in activeUser method in EditCLientDetails ViewController" );
+            
+        }
     }
     
     
