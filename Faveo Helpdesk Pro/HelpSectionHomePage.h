@@ -11,5 +11,8 @@
 
 @interface HelpSectionHomePage : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *DouHaveQuestionButton;
+
+- (IBAction)DouHaveQuestionButtonAction:(id)sender;
 
 @end

@@ -328,15 +328,12 @@
                 break;
                 
             case 10:
-                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"HelpSectionHomePageId"];
+                 vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"AboutVCID"];
                 break;
+                
+                
                 
             case 11:
-                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"AboutVCID"];
-                break;
-                
-                
-            case 12:
                 
                 [self wipeDataInLogout];
                 

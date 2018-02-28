@@ -381,7 +381,7 @@
         _typeTextField.text= [ArryData componentsJoinedByString:@","];
     }
     
-    if([ArryData containsObject:@"email"] || [ArryData containsObject:@"agent"] || [ArryData containsObject:@"facebook"] || [ArryData containsObject:@"twitter"] || [ArryData containsObject:@"call"]|| [ArryData containsObject:@"chat"] || [ArryData containsObject:@"web"])
+    if([ArryData containsObject:@"email"] || [ArryData containsObject:@"agent"] || [ArryData containsObject:@"facebook"] || [ArryData containsObject:@"twitter"] || [ArryData containsObject:@"call"]|| [ArryData containsObject:@"chat"] || [ArryData containsObject:@"web"] || [ArryData containsObject:@"Email"] || [ArryData containsObject:@"Agent"] || [ArryData containsObject:@"Facebook"] || [ArryData containsObject:@"Twitter"] || [ArryData containsObject:@"Call"]|| [ArryData containsObject:@"Chat"] || [ArryData containsObject:@"Web"])
     {
         _sourceTextField.text= [ArryData componentsJoinedByString:@","];
     }

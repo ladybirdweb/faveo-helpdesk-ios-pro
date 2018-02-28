@@ -271,10 +271,11 @@
 //    NSLog(@"String 11111 is : %@",urlString);
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
-    
+    //text/html
     [request addValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Offer-type"];
+    [request addValue:@"text/html" forHTTPHeaderField:@"Accept"];
     [request setTimeoutInterval:45.0];
     
     NSData *postData = nil;

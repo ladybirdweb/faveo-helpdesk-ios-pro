@@ -39,6 +39,7 @@
     [super viewDidLoad];
     
     [self split];
+    
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
     
@@ -54,13 +55,11 @@
    
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
-    
+    utils=[[Utils alloc]init];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     
-    utils=[[Utils alloc]init];
     
-    userDefaults=[NSUserDefaults standardUserDefaults];
     
     UIButton *clearButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [clearButton setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];

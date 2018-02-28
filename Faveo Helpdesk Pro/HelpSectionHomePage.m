@@ -19,7 +19,7 @@
 #import "TicketListMenuTable.h"
 #import "UserAndAgentMenuList.h"
 #import "otherFeatureMenuList.h"
-
+#import "SupportViewController.h"
 @interface HelpSectionHomePage ()<UITableViewDelegate,UITableViewDataSource>
 {
 
@@ -41,6 +41,8 @@
     images=[NSArray arrayWithObjects:@"one.jpeg",@"two.jpeg",@"three.jpeg",@"four.jpeg", nil];
     HeadingName=[NSArray arrayWithObjects:@"Login",@"Tickets",@"Users & Agents",@"Other Features", nil];
     SubHeadingName=[NSArray arrayWithObjects:@"Logging into the iOS app",@"Managing Tickets in iOS App",@"User Directory Help",@"Guide to how use some features in iOS app", nil];
+    
+     _DouHaveQuestionButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
 }
 
 
@@ -110,4 +112,11 @@
 }
 
 
+- (IBAction)DouHaveQuestionButtonAction:(id)sender {
+    
+    SupportViewController *support=[self.storyboard instantiateViewControllerWithIdentifier:@"supportViewId"];
+    support.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:support animated:YES completion:nil];
+    
+}
 @end

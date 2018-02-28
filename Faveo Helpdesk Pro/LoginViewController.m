@@ -22,7 +22,7 @@
 #import "RMessageView.h"
 #import "GlobalVariables.h"
 
-
+@import Crashlytics;
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
 @import Firebase;
@@ -45,7 +45,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
- 
+
+    
     // done button on keyboard was not working so here is solution
     [self.urlTextfield setDelegate:self];
     [self.urlTextfield setReturnKeyType:UIReturnKeyDone];
@@ -80,6 +81,8 @@
     
     
 }
+
+
 
 
 -(void)textFieldFinished:(id)sender

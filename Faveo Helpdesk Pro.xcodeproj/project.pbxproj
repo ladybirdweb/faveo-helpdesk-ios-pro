@@ -118,10 +118,11 @@
 		0634EBB320387536002CB4E8 /* AgentUserListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EBB220387536002CB4E8 /* AgentUserListView.m */; };
 		0634EBB62038755F002CB4E8 /* UserAgentFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EBB52038755F002CB4E8 /* UserAgentFilterView.m */; };
 		0634EBB920387581002CB4E8 /* UserAgentEditProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EBB820387581002CB4E8 /* UserAgentEditProfileView.m */; };
+		0643C9502046AE4C007DC824 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0643C94F2046AE4B007DC824 /* GoogleService-Info.plist */; };
 		067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */; };
 		0689708F20318A3700702313 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0689708E20318A3700702313 /* ConversationTableViewCell.xib */; };
+		06AB96DC2045311500FDE260 /* SupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AB96DB2045311500FDE260 /* SupportViewController.m */; };
 		06B8B01D20287E4300E5E8CA /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */; };
-		06BB2A39202C314C00B33C43 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06BB2A38202C314C00B33C43 /* GoogleService-Info.plist */; };
 		06BB2A3B202C3B3F00B33C43 /* systemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06BB2A3A202C3B3E00B33C43 /* systemIcon.png */; };
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
 		D9166B551FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9166B541FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m */; };
@@ -226,6 +227,18 @@
 			remoteInfo = "Faveo Helpdesk Pro";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0643C94D2046AA8B007DC824 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		06099CA3203AA14B0060831A /* MultipleTicketSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleTicketSelectView.h; sourceTree = "<group>"; };
@@ -385,12 +398,14 @@
 		0634EBB52038755F002CB4E8 /* UserAgentFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAgentFilterView.m; sourceTree = "<group>"; };
 		0634EBB720387581002CB4E8 /* UserAgentEditProfileView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAgentEditProfileView.h; sourceTree = "<group>"; };
 		0634EBB820387581002CB4E8 /* UserAgentEditProfileView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAgentEditProfileView.m; sourceTree = "<group>"; };
+		0643C94F2046AE4B007DC824 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		067605F8202B2C8800D9EFE6 /* ATAppUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAppUpdater.h; sourceTree = "<group>"; };
 		067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATAppUpdater.m; sourceTree = "<group>"; };
 		0689708E20318A3700702313 /* ConversationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationTableViewCell.xib; sourceTree = "<group>"; };
+		06AB96DA2045311500FDE260 /* SupportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupportViewController.h; sourceTree = "<group>"; };
+		06AB96DB2045311500FDE260 /* SupportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupportViewController.m; sourceTree = "<group>"; };
 		06B8B01B20287E4200E5E8CA /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
-		06BB2A38202C314C00B33C43 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		06BB2A3A202C3B3E00B33C43 /* systemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = systemIcon.png; sourceTree = "<group>"; };
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
@@ -1055,7 +1070,7 @@
 		D9DBD3441E07ACFC00219F93 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				06BB2A38202C314C00B33C43 /* GoogleService-Info.plist */,
+				0643C94F2046AE4B007DC824 /* GoogleService-Info.plist */,
 				D9F954FA1E617BE500DA9B30 /* countries.json */,
 				D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */,
 				D9DBD34D1E07ACFC00219F93 /* Main.storyboard */,
@@ -1180,6 +1195,8 @@
 				D92C35D61F7682B5001DD67D /* EditDetailTableViewController.m */,
 				D9A2FCAE1F18904000C829DD /* NotificationViewController.h */,
 				D9A2FCAF1F18904000C829DD /* NotificationViewController.m */,
+				06AB96DA2045311500FDE260 /* SupportViewController.h */,
+				06AB96DB2045311500FDE260 /* SupportViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1294,6 +1311,9 @@
 				D9DBD33F1E07ACFC00219F93 /* Resources */,
 				E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */,
 				51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */,
+				0643C94D2046AA8B007DC824 /* CopyFiles */,
+				0643C94E2046AA9A007DC824 /* Crash Analytics Script */,
+				0643C9512046AEBA007DC824 /* Crash Reporting Script */,
 			);
 			buildRules = (
 			);
@@ -1478,7 +1498,6 @@
 				0634EB61203811D6002CB4E8 /* ticket detail page2.jpg in Resources */,
 				0689708F20318A3700702313 /* ConversationTableViewCell.xib in Resources */,
 				0634EB63203811E0002CB4E8 /* Replay.jpg in Resources */,
-				06BB2A39202C314C00B33C43 /* GoogleService-Info.plist in Resources */,
 				06099CC6203AB2ED0060831A /* view124.png in Resources */,
 				D9EB9F7C1E07C2F00001115F /* ClientTicketTableViewCell.xib in Resources */,
 				D9F9F13F1FB9B2530044DA27 /* done@2x.png in Resources */,
@@ -1489,6 +1508,7 @@
 				D9EB9F801E07C2F00001115F /* OpenCloseTableViewCell.xib in Resources */,
 				0634EB94203844DA002CB4E8 /* ticket_filter.jpg in Resources */,
 				0634EB9220384411002CB4E8 /* filter1212.png in Resources */,
+				0643C9502046AE4C007DC824 /* GoogleService-Info.plist in Resources */,
 				D9EB9F781E07C2F00001115F /* TicketTableViewCell.xib in Resources */,
 				0634EB90203842F9002CB4E8 /* sort121.png in Resources */,
 				0634EBB020386741002CB4E8 /* UserAgentEditCell.xib in Resources */,
@@ -1513,15 +1533,68 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */ = {
+		0643C94E2046AA9A007DC824 /* Crash Analytics Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Crash Analytics Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
+		};
+		0643C9512046AEBA007DC824 /* Crash Reporting Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Crash Reporting Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:1:661051343223:ios:1581c2938664109a\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym-util.bash \"key/faveo-helpdesk-pro-6dafa-firebase-crashreporting-s5q0n-f2ef3b6cb1.json\"";
+		};
+		51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro-resources.sh",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
+				"${PODS_ROOT}/RMessage/RMessage/Resources/RMessageView.xib",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationBackgroundErrorIcon.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationBackgroundErrorIcon@2x.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationBackgroundSuccessIcon.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationBackgroundSuccessIcon@2x.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationBackgroundWarningIcon.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationBackgroundWarningIcon@2x.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationButtonBackground.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/NotificationButtonBackground@2x.png",
+				"${PODS_ROOT}/RMessage/RMessage/Assets/RMessageDefaultDesign.json",
+				"${PODS_ROOT}/XLForm/XLForm/XLForm.bundle",
+			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RMessageView.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundErrorIcon.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundErrorIcon@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundSuccessIcon.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundSuccessIcon@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundWarningIcon.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundWarningIcon@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationButtonBackground.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationButtonBackground@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RMessageDefaultDesign.json",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XLForm.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1534,13 +1607,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Faveo Helpdesk Pro-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */ = {
@@ -1662,6 +1738,7 @@
 				067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */,
 				D9F9F1421FBAE8CC0044DA27 /* FilterLogic.m in Sources */,
 				D9EB9FA41E07C3270001115F /* ClosedTicketsViewController.m in Sources */,
+				06AB96DC2045311500FDE260 /* SupportViewController.m in Sources */,
 				0624A51B2034733400F1B030 /* HelpSectionHomePageCell.m in Sources */,
 				D9EB9FC11E07C4490001115F /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
 				06B8B01D20287E4300E5E8CA /* UIImageView+Letters.m in Sources */,
@@ -1885,6 +1962,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMPRESS_PNG_FILES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
