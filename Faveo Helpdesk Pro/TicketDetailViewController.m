@@ -278,10 +278,10 @@
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-                NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+        
                 if (error || [msg containsString:@"Error"]) {
                     
-                    NSLog(@"Thread-NO4-postCreateTicket-Refresh-error == %@",error.localizedDescription);
+                    NSLog(@"Thread-NO4-getDependecy-Refresh-error == %@",error.localizedDescription);
                     return ;
                 }
                 if([msg isEqualToString:@"Error-402"])
@@ -296,13 +296,13 @@
                     //               });
                     
                     [self getDependencies];
-                    NSLog(@"Thread--NO4-call-getDependecies");
+                 //   NSLog(@"Thread--NO4-call-getDependecies");
                     return;
                 }
                 
                 if (json) {
                     
-                    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                //    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
                     NSDictionary *resultDic = [json objectForKey:@"result"];
                     
                     

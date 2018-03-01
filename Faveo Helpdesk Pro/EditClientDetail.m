@@ -468,12 +468,12 @@
                             globalVariables.phoneNumberInUserList=_phoneTextField.text;
                             globalVariables.mobileNumberInUserList= _mobileTextField.text;
                             
-                            
-                       ClientDetailViewController  *create=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
-                            [self.navigationController pushViewController:create animated:YES];
-                        
-                            [self viewDidLoad];
-                            [self viewWillAppear:YES];
+                            globalVariables=[GlobalVariables sharedInstance];
+
+                
+                        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+
+                           
                             
                         });
                         

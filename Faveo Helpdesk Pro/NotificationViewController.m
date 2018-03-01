@@ -467,18 +467,16 @@
             cell.name.text= NSLocalizedString(@"Not Available",nil);
         }
         
-        if(![Utils isEmpty:fname])
+        if([[profileDict objectForKey:@"profile_pic"] hasSuffix:@"system.png"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".png"] )
         {
-            if([[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[profileDict objectForKey:@"profile_pic"] hasSuffix:@".png"] )
-            {
-                [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
-            }else
-            {
-                [cell.profilePicView setImageWithString:fname color:nil ];
-            }
-            
+            [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
         }
-        else{
+        else if(![Utils isEmpty:fname])
+        {
+            [cell.profilePicView setImageWithString:fname color:nil ];
+        }
+        else
+        {
             [cell.profilePicView setImageWithString:userName color:nil ];
         }
         

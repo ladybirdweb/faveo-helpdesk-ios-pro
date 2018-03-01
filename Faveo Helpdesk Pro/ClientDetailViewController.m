@@ -171,23 +171,21 @@
         }
       
       //Image view
-      if(![Utils isEmpty:fname])
-      {
+      
           if([globalVariables.customerImage hasSuffix:@".jpg"] || [globalVariables.customerImage hasSuffix:@".jpeg"] || [globalVariables.customerImage hasSuffix:@".png"] )
           {
               [self setUserProfileimage:globalVariables.customerImage];
-          }else
+          }else if(![Utils isEmpty:fname])
           {
               // [cell.profilePicView setImageWithString:fname color:nil ];
               
               [_profileImageView setImageWithString:fname color:nil];
-              
           }
-          
-      }
-      else{
-          [_profileImageView setImageWithString:email1 color:nil];
-      }
+         else
+          {
+               [_profileImageView setImageWithString:userName color:nil];
+          }
+      
 
   }@catch (NSException *exception)
     {
@@ -254,9 +252,15 @@
     [_activityIndicatorObject startAnimating];
     [self reload];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
+     [_activityIndicatorObject stopAnimating];
     
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    globalVariables=[GlobalVariables sharedInstance];
+    [self viewDidLoad];
+}
 
 -(void)reload{
     
@@ -294,6 +298,7 @@
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
+             [_activityIndicatorObject stopAnimating];
             if (error || [msg containsString:@"Error"]) {
                 
                 [refresh endRefreshing];

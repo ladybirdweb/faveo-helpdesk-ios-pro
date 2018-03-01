@@ -85,8 +85,7 @@
     
     [_subjectTextView resignFirstResponder];
     [_messageTextView resignFirstResponder];
-    
-    
+
 }
 
 
@@ -96,84 +95,27 @@
     if(self.subjectTextView.text.length==0 && self.messageTextView.text.length==0)
     {
         
+        [utils showAlertWithMessage:NSLocalizedString(@"Please fill all mandatory fields.", nil) sendViewController:self];
         
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Please fill all mandatory fields.", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeWarning
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionTop
-                              canBeDismissedByUser:YES];
     }
     else if (self.subjectTextView.text.length==0){
-        
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Please write the subject.", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeWarning
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionTop
-                              canBeDismissedByUser:YES];
-        
+        [utils showAlertWithMessage:NSLocalizedString(@"Please write the subject.", nil) sendViewController:self];
         
     }else if (self.messageTextView.text.length==0){
         
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Please enter the message details.", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeWarning
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionTop
-                              canBeDismissedByUser:YES];
+        [utils showAlertWithMessage:NSLocalizedString(@"Please enter the message details.", nil) sendViewController:self];
+    
         
+    } else if ((self.subjectTextView.text.length<5) && (self.messageTextView.text.length<5) ) {
         
-    } else if ((self.subjectTextView.text.length<5) || (self.messageTextView.text.length<5) ) {
+        [utils showAlertWithMessage:NSLocalizedString(@"Enter more than 5 characters for Subject or Message.", nil) sendViewController:self];
         
-        
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Enter more than 5 characters.", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeWarning
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionTop
-                              canBeDismissedByUser:YES];
-        
+    
         
     }else if ((self.subjectTextView.text.length>200) || (self.messageTextView.text.length>500) ) {
         
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"You exceeded the character limits.", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeWarning
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionTop
-                              canBeDismissedByUser:YES];
-        
+        [utils showAlertWithMessage:NSLocalizedString(@"You exceeded the character limits.", nil) sendViewController:self];
+    
         
     }
     else

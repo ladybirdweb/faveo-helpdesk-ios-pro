@@ -638,21 +638,18 @@
             }
             
             //Image view
-            if(![Utils isEmpty:fname])
+            if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@"system.png"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
             {
-                if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
-                {
-                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-                }else
-                {
-                    [cell.profilePicView setImageWithString:fname color:nil ];
-                }
-                
+                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
             }
-            else{
+            else if(![Utils isEmpty:fname])
+            {
+                [cell.profilePicView setImageWithString:fname color:nil ];
+            }
+            else
+            {
                 [cell.profilePicView setImageWithString:email1 color:nil ];
             }
-            
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
             
             
