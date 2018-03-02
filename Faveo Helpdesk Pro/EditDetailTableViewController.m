@@ -287,7 +287,7 @@
                             //____________________________________________________________________________________________________
                             
                             if (([[dic objectForKey:@"type_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"type_name"] length] == 0 )) {
-                                
+                                _typeTextField.text=NSLocalizedString(@"Not Available",nil);
                             }else _typeTextField.text=[dic objectForKey:@"type_name"];
                             
                             if (([[dic objectForKey:@"helptopic_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"helptopic_name"] length] == 0 )) {

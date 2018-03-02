@@ -112,11 +112,11 @@
         // http://jamboreebliss.com/sayar/public/api/v2/helpdesk/user/filter?api_key=&token=&role=
         if([globalVariables.userFilterId isEqualToString:@"AGENTUSERS"])
         {
-            tempString=[NSString stringWithFormat:@"%i",1];
+          //  tempString=[NSString stringWithFormat:@"%i",1];
             NSString * str=@"agent";
            // NSString *str= [NSString stringWithFormat:@"%i",1];
             
-            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&role=%@&active=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],str,tempString];
+            url= [NSString stringWithFormat:@"%@api/v2/helpdesk/user/filter?api_key=%@&token=%@&role=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],str];
              globalVariables.userFilterId=@"AGENTUSERS";
             
         }else  if([globalVariables.userFilterId isEqualToString:@"ACTIVEUSERS"])
@@ -503,32 +503,20 @@
                 cell.clientNameLabel.text=NSLocalizedString(@"Not Available",nil);
             }
             
-            if(![Utils isEmpty:clientFirstName])
+            //image view
+            if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@"system.png"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
             {
-                if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
-                {
-                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-                }else
-                {
-                    [cell.profilePicView setImageWithString:clientFirstName color:nil ];
-                }
-                
+                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
             }
-            else{
+            else if(![Utils isEmpty:clientFirstName])
+            {
+                [cell.profilePicView setImageWithString:clientFirstName color:nil ];
+            }
+            else
+            {
                 [cell.profilePicView setImageWithString:userName color:nil ];
             }
-            
-            // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-            
-//            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-//            {
-//                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-//
-//            }
-//            else
-//            {
-//                [cell setUserProfileimage:@"default_pic.png"];
-//            }
+
         }@catch (NSException *exception)
         {
             

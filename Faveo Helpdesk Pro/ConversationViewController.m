@@ -42,7 +42,6 @@
     
      selectedIndex = -1;
     
-    NSLog(@"ConversationVC");
     _activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     _activityIndicatorObject.center =CGPointMake(self.view.frame.size.width/2,(self.view.frame.size.height/2)-100);
     _activityIndicatorObject.color=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
@@ -124,9 +123,9 @@
             if (json) {
                 //NSError *error;
                 mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
-                NSLog(@"Thread-NO4--getConversationAPI--%@",json);
+            //    NSLog(@"Thread-NO4--getConversationAPI--%@",json);
                 mutableArray=[json copy];
-                NSLog(@"Thread-NO4.1getConversation-dic--%@", mutableArray);
+          //      NSLog(@"Thread-NO4.1getConversation-dic--%@", mutableArray);
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
@@ -208,6 +207,7 @@
         cell = [nib objectAtIndex:0];
     }
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
+    NSLog(@"Dinal DIct is : %@",finaldic);
     
 @try{
     cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
@@ -224,7 +224,7 @@
 //        [cell.webView loadRequest:[NSURLRequest requestWithURL:url]];
     
     
-    NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
+   // NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
     //    [self showWebview:@"" body:[finaldic objectForKey:@"body"] popupStyle:CNPPopupStyleActionSheet];/
     
     
@@ -242,9 +242,7 @@
     
     
     
-    
-    
-       
+
    //NSString *system= @"System";
    NSString *fName=[finaldic objectForKey:@"first_name"];
    NSString *lName=[finaldic objectForKey:@"last_name"];
@@ -265,26 +263,27 @@
     }
     else if ((![Utils isEmpty:fName] || ![Utils isEmpty:lName]) || (![Utils isEmpty:fName] && ![Utils isEmpty:lName]))
     {
-        fName=[NSString stringWithFormat:@"%@ %@",fName,lName];
+       NSString * fName12=[NSString stringWithFormat:@"%@ %@",fName,lName];
         
-        cell.clientNameLabel.text=fName;
+        cell.clientNameLabel.text=fName12;
         
     }
-   
-    if(![Utils isEmpty:fName])
-    {
-        if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+  
+// prifile image
+        if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@"system.png"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
         {
             [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-        }else
+        }
+         else if(![Utils isEmpty:fName])
         {
             [cell.profilePicView setImageWithString:fName color:nil ];
         }
+       else
+       {
+           [cell.profilePicView setImageWithString:userName color:nil ];
+       }
         
-    }
-    else{
-        [cell.profilePicView setImageWithString:userName color:nil ];
-    }
+
 
    
 
