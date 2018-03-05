@@ -15,7 +15,7 @@
 @interface LoginListMenuTable ()<UITableViewDataSource,UITableViewDelegate>
 {
     NSArray *subjects;
-    NSArray *images;
+  //  NSArray *images;
     
 }
 @end
@@ -28,13 +28,18 @@
     self.title=@"Login Information";
     
     subjects=[NSArray arrayWithObjects:@"1. Login using Faveo Credentials",@"2. Login via Social Media", nil];
-    images=[NSArray arrayWithObjects:@"call1",@"cc1",@"chat", nil];
+   // images=[NSArray arrayWithObjects:@"call1",@"cc1",@"chat", nil];
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return subjects.count;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

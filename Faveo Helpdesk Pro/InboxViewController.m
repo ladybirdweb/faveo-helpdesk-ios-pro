@@ -106,11 +106,11 @@
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
     
-//    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-//    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
-//    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-//    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
-//    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
+    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
+    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
     
     
     
@@ -122,7 +122,7 @@
     [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-  //  [rightBarButtonItems addSubview:moreButton];
+    [rightBarButtonItems addSubview:moreButton];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];

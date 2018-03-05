@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title=@"User Directory";
      questions=[NSArray arrayWithObjects:@"1. How to see list of all agents and users?",@"2. User or Agent Filter",@"3. Editing the user or agent profiles", nil];
 }
 
@@ -30,6 +31,11 @@
     
     return questions.count;
 }
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UserAndAgentMenuListCell *cell=[tableView dequeueReusableCellWithIdentifier:@"UserAndAgentMenuListCellId"];

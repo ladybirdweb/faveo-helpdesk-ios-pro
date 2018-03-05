@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+   self.title=@"All About Tickets";
     self.tableVIew.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 

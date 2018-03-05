@@ -23,25 +23,17 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yO5-1n-doa">
                         <rect key="frame" x="-4" y="0.0" width="336" height="81"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unAssigned2" translatesAutoresizingMaskIntoConstraints="NO" id="f69-0V-h3m">
-                                <rect key="frame" x="15" y="15" width="55" height="55"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="55" id="CjR-WJ-HGb"/>
-                                    <constraint firstAttribute="height" constant="55" id="sIi-z9-QXP"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="tp7-Sa-JI6"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uix-0G-aH9">
-                                <rect key="frame" x="92" y="15" width="236" height="21"/>
+                                <rect key="frame" x="16" y="15" width="306" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="vnV-fX-gJC"/>
+                                    <constraint firstAttribute="height" constant="21" id="JUR-zL-AAh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiF-1T-j1a">
-                                <rect key="frame" x="92" y="41" width="223" height="29"/>
+                                <rect key="frame" x="32" y="41" width="288" height="29"/>
                                 <string key="text">The line of code retrieves the name of images for the specific row. Say, for the first row, indexPath.row property returns 0 and we picks the first image (i.e. egg_benedict.jpg) from the thumbnails array using the “objectAtIndex” method.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
@@ -50,16 +42,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="f69-0V-h3m" firstAttribute="leading" secondItem="yO5-1n-doa" secondAttribute="leading" constant="15" id="9bN-Es-Phy"/>
-                            <constraint firstItem="Uix-0G-aH9" firstAttribute="leading" secondItem="f69-0V-h3m" secondAttribute="trailing" constant="22" id="C8A-py-b3A"/>
-                            <constraint firstItem="f69-0V-h3m" firstAttribute="top" secondItem="Uix-0G-aH9" secondAttribute="top" id="DVH-nx-Fh7"/>
-                            <constraint firstItem="Uix-0G-aH9" firstAttribute="leading" secondItem="qiF-1T-j1a" secondAttribute="leading" id="MCr-Rc-hzO"/>
-                            <constraint firstItem="qiF-1T-j1a" firstAttribute="top" secondItem="Uix-0G-aH9" secondAttribute="bottom" constant="5" id="ZCg-DW-YWK"/>
-                            <constraint firstItem="f69-0V-h3m" firstAttribute="top" secondItem="yO5-1n-doa" secondAttribute="top" constant="15" id="aXu-aM-46h"/>
-                            <constraint firstAttribute="trailing" secondItem="qiF-1T-j1a" secondAttribute="trailing" constant="21" id="iRK-Xh-ZiI"/>
-                            <constraint firstAttribute="bottom" secondItem="f69-0V-h3m" secondAttribute="bottom" constant="11" id="pWH-Do-LMm"/>
-                            <constraint firstItem="f69-0V-h3m" firstAttribute="bottom" secondItem="qiF-1T-j1a" secondAttribute="bottom" id="pfS-E0-G6L"/>
-                            <constraint firstItem="Uix-0G-aH9" firstAttribute="trailing" secondItem="yO5-1n-doa" secondAttribute="trailingMargin" id="w9R-7n-nJC"/>
+                            <constraint firstItem="qiF-1T-j1a" firstAttribute="top" secondItem="Uix-0G-aH9" secondAttribute="bottom" constant="5" id="53C-W7-35e"/>
+                            <constraint firstAttribute="trailing" secondItem="qiF-1T-j1a" secondAttribute="trailing" constant="16" id="DHC-cC-XXa"/>
+                            <constraint firstAttribute="bottom" secondItem="qiF-1T-j1a" secondAttribute="bottom" constant="11" id="QCy-2J-mfe"/>
+                            <constraint firstItem="Uix-0G-aH9" firstAttribute="leading" secondItem="yO5-1n-doa" secondAttribute="leading" constant="16" id="Waj-y4-db4"/>
+                            <constraint firstItem="Uix-0G-aH9" firstAttribute="top" secondItem="yO5-1n-doa" secondAttribute="top" constant="15" id="ZUy-PZ-vDF"/>
+                            <constraint firstAttribute="trailing" secondItem="Uix-0G-aH9" secondAttribute="trailing" constant="14" id="cDf-ee-dSa"/>
+                            <constraint firstItem="Uix-0G-aH9" firstAttribute="leading" secondItem="qiF-1T-j1a" secondAttribute="leading" constant="-16" id="qUI-Qr-z3L"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -74,12 +63,8 @@
             <connections>
                 <outlet property="headingOneLabel" destination="Uix-0G-aH9" id="V3N-SY-Gpu"/>
                 <outlet property="headingTwoLabel" destination="qiF-1T-j1a" id="JqM-mr-7Zn"/>
-                <outlet property="imageLogo" destination="f69-0V-h3m" id="Vyq-Un-jyp"/>
             </connections>
             <point key="canvasLocation" x="40" y="148.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="unAssigned2" width="512" height="512"/>
-    </resources>
 </document>

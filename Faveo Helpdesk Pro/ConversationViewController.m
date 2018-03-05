@@ -207,7 +207,16 @@
         cell = [nib objectAtIndex:0];
     }
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
-    NSLog(@"Dinal DIct is : %@",finaldic);
+    NSLog(@"Final DIct is : %@",finaldic);
+    
+    
+    NSMutableArray *arr1=[finaldic objectForKey:@"files"];
+     NSLog(@"Arra111  is : %@",arr1);
+//    NSMutableArray *arr2=[arr1 objectAtIndex:indexPath.row];
+//    NSDictionary *fileDictionary=[arr2 objectAtIndex:indexPath.row];
+  //  NSLog(@"Attchemnt dict1111 is : %@",fileDictionary);
+//    NSObject *objectFileAttachment=[fileDictionary objectForKey:@"file"];
+//    NSLog(@"Attachment File is : %@",objectFileAttachment);
     
 @try{
     cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];

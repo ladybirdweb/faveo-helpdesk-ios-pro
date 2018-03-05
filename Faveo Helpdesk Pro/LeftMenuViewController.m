@@ -327,16 +327,16 @@
                 globalVariables.userFilterId=@"ALLUSERS";
                 break;
                 
-//            case 10:
-//                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"HelpSectionHomePageId"];
-//                break;
-                
             case 10:
+                vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"HelpSectionHomePageId"];
+                break;
+                
+            case 11:
                 vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"AboutVCID"];
                 break;
                 
                 
-            case 11:
+            case 12:
                 
                 [self wipeDataInLogout];
                 

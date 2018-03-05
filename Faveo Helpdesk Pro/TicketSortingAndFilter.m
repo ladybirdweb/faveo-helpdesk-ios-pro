@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title=@"Sorting & Filter";
     self.tablview.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 

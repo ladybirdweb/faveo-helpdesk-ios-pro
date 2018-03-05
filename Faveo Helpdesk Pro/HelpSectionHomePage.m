@@ -20,6 +20,8 @@
 #import "UserAndAgentMenuList.h"
 #import "otherFeatureMenuList.h"
 #import "SupportViewController.h"
+#import "test.h"
+
 @interface HelpSectionHomePage ()<UITableViewDelegate,UITableViewDataSource>
 {
 
@@ -37,10 +39,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title=@"Help Section";
-    
-    images=[NSArray arrayWithObjects:@"one.jpeg",@"two.jpeg",@"three.jpeg",@"four.jpeg", nil];
+   
+    images=[NSArray arrayWithObjects:@"loginHelpSection",@"ticket2",@"userHelpSection",@"otherFeatures", nil];
     HeadingName=[NSArray arrayWithObjects:@"Login",@"Tickets",@"Users & Agents",@"Other Features", nil];
-    SubHeadingName=[NSArray arrayWithObjects:@"Logging into the iOS app",@"Managing Tickets in iOS App",@"User Directory Help",@"Guide to how use some features in iOS app", nil];
+    SubHeadingName=[NSArray arrayWithObjects:@"Logging into the iOS app",@"Managing Tickets in iOS App",@"User Directory Help",@"Guide to use features in iOS app", nil];
     
      _DouHaveQuestionButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
 }
@@ -52,19 +54,26 @@
     return HeadingName.count;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        HelpSectionHomePageCell *cell=[tableView dequeueReusableCellWithIdentifier:@"HelpSectionMainPageCell"];
+//        HelpSectionHomePageCell *cell=[tableView dequeueReusableCellWithIdentifier:@"HelpSectionMainPageCell"];
+    test *cell=[tableView dequeueReusableCellWithIdentifier:@"testId"];
         
         if (cell == nil)
         {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"HelpSectionHomePageCell" owner:self options:nil];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"test" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
     
         cell.name.text=[HeadingName objectAtIndex:indexPath.row];
         cell.subName.text=[SubHeadingName objectAtIndex:indexPath.row];
-       // cell.imageView.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
+        cell.imageView.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
 
     return cell;
    

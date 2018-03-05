@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.title=@"Ticket Status Change";
      self.tablview.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
