@@ -17,6 +17,7 @@
 {
     NSArray *questions;
     NSArray *subHeading;
+  //  NSArray *images;
 }
 @end
 
@@ -25,15 +26,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    questions=[NSArray arrayWithObjects:@"1. All about tickets",@"2.Ticket Replay and Internal Note",@"3.Ticket sorting and filtration",@"4. Changing status of ticket", nil];
+    self.title=@"Ticket";
     
-    subHeading=[NSArray arrayWithObjects:@"Some information, malliakrjun hanagandi",@"Some information, malliakrjun hanagandi",@"Some information, malliakrjun hanagandi",@"Some information, malliakrjun hanagandi", nil];
+    questions=[NSArray arrayWithObjects:@"1. All about tickets",@"2. Ticket Replay and Internal Note",@"3. Ticket sorting and filtration",@"4. Changing status of ticket", nil];
+    
+    subHeading=[NSArray arrayWithObjects:@"Ticket create, edit and view ticket",@"Some information, malliakrjun hanagandi",@"Some information, malliakrjun hanagandi",@"Some information, malliakrjun hanagandi", nil];
+   // images=[NSArray arrayWithObjects:@"loginHelpSection",@"ticket2",@"userHelpSection",@"otherFeatures", nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
     return questions.count;
+}
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -48,6 +56,7 @@
     
     cell.headingOneLabel.text=[questions objectAtIndex:indexPath.row];
     cell.headingTwoLabel.text=[subHeading objectAtIndex:indexPath.row];
+  //  cell.imageView.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
     
     return cell;
     

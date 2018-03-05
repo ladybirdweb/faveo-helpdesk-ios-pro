@@ -1,23 +1,18 @@
 //
-//  HelpSectionHomePageCell.m
+//  test.m
 //  Faveo Helpdesk Pro
 //
-//  Created by Mallikarjun on 14/02/18.
+//  Created by Mallikarjun on 05/03/18.
 //  Copyright © 2018 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
-#import "HelpSectionHomePageCell.h"
+#import "test.h"
 
-@implementation HelpSectionHomePageCell
+@implementation test
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
-    CGRect rect = CGRectMake(0,0,20,20);
-    UIGraphicsBeginImageContext( rect.size );
-    [_image drawRect:rect];
-  //  [image drawInRect:rect];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

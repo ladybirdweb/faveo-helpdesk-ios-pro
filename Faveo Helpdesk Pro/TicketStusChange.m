@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title=@"Status Change";
      self.tableview.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 

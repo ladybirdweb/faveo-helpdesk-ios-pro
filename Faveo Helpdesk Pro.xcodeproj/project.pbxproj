@@ -119,6 +119,8 @@
 		0634EBB62038755F002CB4E8 /* UserAgentFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EBB52038755F002CB4E8 /* UserAgentFilterView.m */; };
 		0634EBB920387581002CB4E8 /* UserAgentEditProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EBB820387581002CB4E8 /* UserAgentEditProfileView.m */; };
 		0643C9502046AE4C007DC824 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0643C94F2046AE4B007DC824 /* GoogleService-Info.plist */; };
+		0672AF96204D28CF006D7918 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 0672AF94204D28CF006D7918 /* test.m */; };
+		0672AF97204D28CF006D7918 /* test.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0672AF95204D28CF006D7918 /* test.xib */; };
 		067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */; };
 		0689708F20318A3700702313 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0689708E20318A3700702313 /* ConversationTableViewCell.xib */; };
 		06AB96DC2045311500FDE260 /* SupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AB96DB2045311500FDE260 /* SupportViewController.m */; };
@@ -399,6 +401,9 @@
 		0634EBB720387581002CB4E8 /* UserAgentEditProfileView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAgentEditProfileView.h; sourceTree = "<group>"; };
 		0634EBB820387581002CB4E8 /* UserAgentEditProfileView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAgentEditProfileView.m; sourceTree = "<group>"; };
 		0643C94F2046AE4B007DC824 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0672AF93204D28CF006D7918 /* test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		0672AF94204D28CF006D7918 /* test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
+		0672AF95204D28CF006D7918 /* test.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = test.xib; sourceTree = "<group>"; };
 		067605F8202B2C8800D9EFE6 /* ATAppUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAppUpdater.h; sourceTree = "<group>"; };
 		067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATAppUpdater.m; sourceTree = "<group>"; };
 		0689708E20318A3700702313 /* ConversationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationTableViewCell.xib; sourceTree = "<group>"; };
@@ -641,6 +646,9 @@
 				0624A5102034732D00F1B030 /* HelpSectionHomePageCell.h */,
 				0624A5132034732F00F1B030 /* HelpSectionHomePageCell.m */,
 				0624A5152034733100F1B030 /* HelpSectionHomePageCell.xib */,
+				0672AF93204D28CF006D7918 /* test.h */,
+				0672AF94204D28CF006D7918 /* test.m */,
+				0672AF95204D28CF006D7918 /* test.xib */,
 				0634EB2E2036D6B0002CB4E8 /* Login Information */,
 				0634EB2F2036D6BE002CB4E8 /* Tickets */,
 				0634EB302036D6C6002CB4E8 /* Users and Agents */,
@@ -1463,6 +1471,7 @@
 				0624A51E2034733400F1B030 /* two.jpeg in Resources */,
 				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
 				0609ADB920399B8100DCDC85 /* deActive.png in Resources */,
+				0672AF97204D28CF006D7918 /* test.xib in Resources */,
 				0634EB6F2038158D002CB4E8 /* AllAboutTicketCell5.xib in Resources */,
 				06099CC4203AAA640060831A /* Inbox2.jpg in Resources */,
 				0609ADBA20399B8100DCDC85 /* Active.png in Resources */,
@@ -1690,6 +1699,7 @@
 				D9A2FCB41F18942800C829DD /* NotificationTableViewCell.m in Sources */,
 				D9EB9F7D1E07C2F00001115F /* ConversationTableViewCell.m in Sources */,
 				0634EB3C2036EBE3002CB4E8 /* TicketReplayAndInternalNote.m in Sources */,
+				0672AF96204D28CF006D7918 /* test.m in Sources */,
 				D9EB9FC51E07C4610001115F /* Reachability.m in Sources */,
 				D9EB9FBF1E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
 				061E30FD2035426800603D22 /* LoginListMenuTable.m in Sources */,

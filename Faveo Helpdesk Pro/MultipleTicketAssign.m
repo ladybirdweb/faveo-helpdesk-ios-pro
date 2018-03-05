@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    
+    self.title=@"Multiple Ticket Assign";
      self.tableview.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 

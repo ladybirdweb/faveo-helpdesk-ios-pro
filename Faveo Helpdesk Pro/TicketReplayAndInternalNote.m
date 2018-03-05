@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title=@"Reply and Internal Note";
    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 

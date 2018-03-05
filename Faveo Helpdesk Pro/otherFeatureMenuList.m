@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    self.title=@"Features";
     questions=[NSArray arrayWithObjects:@"1. How to select multiple tickets?",@"2. How to assign multiple tickets to agent?",@"3. How to change status of multilple tickets?",@"4. How to merge tickets?", nil];
     
 }
@@ -34,6 +35,11 @@
     
     return questions.count;
 }
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     otherFeatureMenuListCell *cell=[tableView dequeueReusableCellWithIdentifier:@"otherFeatureMenuListCellId"];

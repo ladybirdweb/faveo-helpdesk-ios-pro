@@ -38,7 +38,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WzY-sw-PQL">
-                                <rect key="frame" x="35" y="35" width="352" height="17"/>
+                                <rect key="frame" x="19" y="35" width="352" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="BhO-45-pne"/>
                                 </constraints>
@@ -59,9 +59,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sidemenu.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="mzC-xe-yxH">
-                                <rect key="frame" x="75" y="72" width="253" height="500"/>
+                                <rect key="frame" x="58" y="72" width="259" height="500"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="253" id="8U4-pb-xyZ"/>
+                                    <constraint firstAttribute="width" constant="259" id="8U4-pb-xyZ"/>
                                     <constraint firstAttribute="height" constant="500" id="RSP-vc-Rr1"/>
                                 </constraints>
                             </imageView>
@@ -83,13 +83,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Jar-zi-iSp" secondAttribute="trailing" constant="44" id="5QC-3d-ixu"/>
-                            <constraint firstItem="mzC-xe-yxH" firstAttribute="leading" secondItem="qs7-JM-ZUk" secondAttribute="leading" constant="75" id="5nK-Ep-Hye"/>
+                            <constraint firstItem="mzC-xe-yxH" firstAttribute="leading" secondItem="qs7-JM-ZUk" secondAttribute="leading" constant="58" id="5nK-Ep-Hye"/>
                             <constraint firstItem="Jar-zi-iSp" firstAttribute="top" secondItem="mzC-xe-yxH" secondAttribute="bottom" constant="4" id="8pO-L0-SRc"/>
                             <constraint firstItem="Jar-zi-iSp" firstAttribute="leading" secondItem="qs7-JM-ZUk" secondAttribute="leading" constant="38" id="CxK-23-F7x"/>
-                            <constraint firstAttribute="trailing" secondItem="mzC-xe-yxH" secondAttribute="trailing" constant="60" id="TQN-X5-2V2"/>
+                            <constraint firstAttribute="trailing" secondItem="mzC-xe-yxH" secondAttribute="trailing" constant="71" id="TQN-X5-2V2"/>
                             <constraint firstItem="ZI4-JI-yMC" firstAttribute="top" secondItem="qs7-JM-ZUk" secondAttribute="top" constant="8" id="TkT-fA-lR3"/>
                             <constraint firstAttribute="bottom" secondItem="Jar-zi-iSp" secondAttribute="bottom" constant="11" id="UmL-oR-KDI"/>
-                            <constraint firstItem="WzY-sw-PQL" firstAttribute="leading" secondItem="qs7-JM-ZUk" secondAttribute="leading" constant="35" id="hEa-PG-Vf4"/>
+                            <constraint firstItem="WzY-sw-PQL" firstAttribute="leading" secondItem="qs7-JM-ZUk" secondAttribute="leading" constant="19" id="hEa-PG-Vf4"/>
                             <constraint firstItem="mzC-xe-yxH" firstAttribute="top" secondItem="WzY-sw-PQL" secondAttribute="bottom" constant="20" id="k6l-U8-Nuf"/>
                             <constraint firstItem="ZI4-JI-yMC" firstAttribute="leading" secondItem="qs7-JM-ZUk" secondAttribute="leading" constant="18" id="lJD-Ly-ped"/>
                             <constraint firstItem="WzY-sw-PQL" firstAttribute="top" secondItem="ZI4-JI-yMC" secondAttribute="bottom" constant="8" symbolic="YES" id="whb-hj-Za7"/>

@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title=@"Multiple Ticket Select";
      self.tablview.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 
