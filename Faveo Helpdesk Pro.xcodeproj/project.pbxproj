@@ -41,6 +41,9 @@
 		0609ADB620398E2A00DCDC85 /* view122.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB520398E2A00DCDC85 /* view122.png */; };
 		0609ADB920399B8100DCDC85 /* deActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB720399B8000DCDC85 /* deActive.png */; };
 		0609ADBA20399B8100DCDC85 /* Active.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB820399B8100DCDC85 /* Active.png */; };
+		0618FA7D204E5367004D2C3F /* ReplyTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0618FA7C204E5367004D2C3F /* ReplyTicketViewController.m */; };
+		0618FA80204E54C9004D2C3F /* InternalNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0618FA7F204E54C9004D2C3F /* InternalNoteViewController.m */; };
+		0618FA83204E9A87004D2C3F /* addCCView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0618FA82204E9A87004D2C3F /* addCCView.m */; };
 		061E30FD2035426800603D22 /* LoginListMenuTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E30FC2035426800603D22 /* LoginListMenuTable.m */; };
 		061E31042035479A00603D22 /* LoginListMenuTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E31022035479A00603D22 /* LoginListMenuTableCell.m */; };
 		061E31052035479A00603D22 /* LoginListMenuTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061E31032035479A00603D22 /* LoginListMenuTableCell.xib */; };
@@ -287,6 +290,13 @@
 		0609ADB520398E2A00DCDC85 /* view122.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view122.png; sourceTree = "<group>"; };
 		0609ADB720399B8000DCDC85 /* deActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deActive.png; sourceTree = "<group>"; };
 		0609ADB820399B8100DCDC85 /* Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Active.png; sourceTree = "<group>"; };
+		0618FA7A204E516D004D2C3F /* AddRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRequester.h; sourceTree = "<group>"; };
+		0618FA7B204E5367004D2C3F /* ReplyTicketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReplyTicketViewController.h; sourceTree = "<group>"; };
+		0618FA7C204E5367004D2C3F /* ReplyTicketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReplyTicketViewController.m; sourceTree = "<group>"; };
+		0618FA7E204E54C9004D2C3F /* InternalNoteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InternalNoteViewController.h; sourceTree = "<group>"; };
+		0618FA7F204E54C9004D2C3F /* InternalNoteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InternalNoteViewController.m; sourceTree = "<group>"; };
+		0618FA81204E9A87004D2C3F /* addCCView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = addCCView.h; sourceTree = "<group>"; };
+		0618FA82204E9A87004D2C3F /* addCCView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = addCCView.m; sourceTree = "<group>"; };
 		061E30FB2035426800603D22 /* LoginListMenuTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginListMenuTable.h; sourceTree = "<group>"; };
 		061E30FC2035426800603D22 /* LoginListMenuTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginListMenuTable.m; sourceTree = "<group>"; };
 		061E31012035479A00603D22 /* LoginListMenuTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginListMenuTableCell.h; sourceTree = "<group>"; };
@@ -444,7 +454,6 @@
 		D9532C171E9CE90E0063B318 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D9532C181E9CE90F0063B318 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D9532C191E9CE9110063B318 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D953D53C1FA321420077D519 /* AddRequester.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRequester.h; sourceTree = "<group>"; };
 		D953D53D1FA321420077D519 /* AddRequester.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRequester.m; sourceTree = "<group>"; };
 		D955A5501F2A05630045429F /* a.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = a.xcassets; sourceTree = "<group>"; };
 		D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Faveo Helpdesk Pro.entitlements"; sourceTree = "<group>"; };
@@ -959,6 +968,8 @@
 			isa = PBXGroup;
 			children = (
 				06BB2A3A202C3B3E00B33C43 /* systemIcon.png */,
+				D9EB9FC21E07C44D0001115F /* Reachability */,
+				D9EB9FAE1E07C4320001115F /* SideMenu */,
 				067605F7202B2C8800D9EFE6 /* ATAppUpdater */,
 				06B8B01A20287E4200E5E8CA /* UIImageView+Letters */,
 				D97CA13B1FCC229800A7B982 /* LGFilterView */,
@@ -1070,7 +1081,6 @@
 			children = (
 				D9EB9F4D1E07C1F70001115F /* Classes */,
 				D9DBD3441E07ACFC00219F93 /* Supporting Files */,
-				D9EB9FAD1E07C41C0001115F /* Library */,
 			);
 			path = "Faveo Helpdesk Pro";
 			sourceTree = "<group>";
@@ -1161,7 +1171,7 @@
 				D9EB9F861E07C3270001115F /* LoginViewController.m */,
 				D9EB9F911E07C3270001115F /* CreateTicketViewController.h */,
 				D9EB9F921E07C3270001115F /* CreateTicketViewController.m */,
-				D953D53C1FA321420077D519 /* AddRequester.h */,
+				0618FA7A204E516D004D2C3F /* AddRequester.h */,
 				D953D53D1FA321420077D519 /* AddRequester.m */,
 				D99776D51FDAB631004EA9B8 /* MergeViewForm.h */,
 				D99776D61FDAB631004EA9B8 /* MergeViewForm.m */,
@@ -1205,6 +1215,12 @@
 				D9A2FCAF1F18904000C829DD /* NotificationViewController.m */,
 				06AB96DA2045311500FDE260 /* SupportViewController.h */,
 				06AB96DB2045311500FDE260 /* SupportViewController.m */,
+				0618FA7B204E5367004D2C3F /* ReplyTicketViewController.h */,
+				0618FA7C204E5367004D2C3F /* ReplyTicketViewController.m */,
+				0618FA81204E9A87004D2C3F /* addCCView.h */,
+				0618FA82204E9A87004D2C3F /* addCCView.m */,
+				0618FA7E204E54C9004D2C3F /* InternalNoteViewController.h */,
+				0618FA7F204E54C9004D2C3F /* InternalNoteViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1252,15 +1268,6 @@
 				D9DBD3481E07ACFC00219F93 /* AppDelegate.m */,
 			);
 			name = OtherClasses;
-			sourceTree = "<group>";
-		};
-		D9EB9FAD1E07C41C0001115F /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				D9EB9FC21E07C44D0001115F /* Reachability */,
-				D9EB9FAE1E07C4320001115F /* SideMenu */,
-			);
-			name = Library;
 			sourceTree = "<group>";
 		};
 		D9EB9FAE1E07C4320001115F /* SideMenu */ = {
@@ -1735,11 +1742,13 @@
 				061E310B2035595B00603D22 /* LoginDetailPage2.m in Sources */,
 				0634EB5620370ED5002CB4E8 /* AllAboutTicketCell3.m in Sources */,
 				06099CBC203AA30D0060831A /* MultipleTicketStatusChangeCell.m in Sources */,
+				0618FA80204E54C9004D2C3F /* InternalNoteViewController.m in Sources */,
 				D9EB9F771E07C2F00001115F /* TicketTableViewCell.m in Sources */,
 				06099CC1203AA3240060831A /* MergeTicketViewCell.m in Sources */,
 				D9EB9FA91E07C3270001115F /* AboutViewController.m in Sources */,
 				D953D53E1FA321420077D519 /* AddRequester.m in Sources */,
 				D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */,
+				0618FA7D204E5367004D2C3F /* ReplyTicketViewController.m in Sources */,
 				D9F9F13D1FB9B2530044DA27 /* DropDownViewCell.m in Sources */,
 				D9AE08382007231800DD9E94 /* CFMultistageConditionTableView.m in Sources */,
 				D9F9F11A1FB977B40044DA27 /* FilterViewController.m in Sources */,
@@ -1760,6 +1769,7 @@
 				061E31242035845800603D22 /* otherFeatureMenuListCell.m in Sources */,
 				D9EB9FA01E07C3270001115F /* LoginViewController.m in Sources */,
 				D9EB9FA21E07C3270001115F /* ClientListViewController.m in Sources */,
+				0618FA83204E9A87004D2C3F /* addCCView.m in Sources */,
 				D9EB9FBC1E07C4490001115F /* SlideNavigationController.m in Sources */,
 				061E312920358BAD00603D22 /* TicketListTableView.m in Sources */,
 			);

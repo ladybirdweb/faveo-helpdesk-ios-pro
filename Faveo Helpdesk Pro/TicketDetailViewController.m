@@ -24,7 +24,7 @@
 #import "LGPlusButtonsView.h"
 #import "ConversationViewController.h"
 #import "EditDetailTableViewController.h"
-
+#import "ReplyTicketViewController.h"
 
 
 
@@ -128,9 +128,13 @@
                                 if(index==1)
                                 {
                                     NSLog(@"One Index : Reply Pressed");
-                                    [self showPopupReply:CNPPopupStyleCentered];
                                     
-                                    plusButtonView.hidden=YES;
+//                                    [self showPopupReply:CNPPopupStyleCentered];
+//                                    plusButtonView.hidden=YES;
+                                    
+                                    ReplyTicketViewController *reply=[self.storyboard instantiateViewControllerWithIdentifier:@"replayId"];
+                                    [self.navigationController pushViewController:reply animated:YES];
+                                    
                                 }
                                 if(index==2)
                                 {

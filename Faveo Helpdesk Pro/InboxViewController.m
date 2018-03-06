@@ -1808,6 +1808,7 @@
             globalVariables.Last_name=[finaldic objectForKey:@"c_lname"];
             
             globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
+            globalVariables.userIdFromInbox=[finaldic objectForKey:@"c_uid"];;
             
             globalVariables.ticketStatusBool=@"ticketView";
             

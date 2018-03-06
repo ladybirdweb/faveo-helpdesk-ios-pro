@@ -45,6 +45,7 @@
     SubHeadingName=[NSArray arrayWithObjects:@"Logging into the iOS app",@"Managing Tickets in iOS App",@"User Directory Help",@"Guide to use features in iOS app", nil];
     
      _DouHaveQuestionButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    
 }
 
 

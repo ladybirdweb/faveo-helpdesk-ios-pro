@@ -195,4 +195,7 @@
 
 @property (strong, nonatomic) NSString *ticketStatusBool;
 
+
+@property (strong, nonatomic) NSString *userIdFromInbox;
+
 @end
