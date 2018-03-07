@@ -130,7 +130,7 @@
                                     NSLog(@"One Index : Reply Pressed");
                                     
 //                                    [self showPopupReply:CNPPopupStyleCentered];
-//                                    plusButtonView.hidden=YES;
+                                    plusButtonView.hidden=YES;
                                     
                                     ReplyTicketViewController *reply=[self.storyboard instantiateViewControllerWithIdentifier:@"replayId"];
                                     [self.navigationController pushViewController:reply animated:YES];
@@ -139,8 +139,10 @@
                                 if(index==2)
                                 {
                                     NSLog(@"Two Index : Internal Pressed");
-                                    [self showPopupInternalNote:CNPPopupStyleCentered];
+                                  //  [self showPopupInternalNote:CNPPopupStyleCentered];
                                     plusButtonView.hidden=YES;
+                                    
+                                
                                 }
                                 
                                 
@@ -1167,7 +1169,9 @@
             errorMessageReply.hidden=NO;
             // Text was empty or only whitespace.
         }else if (textViewReply.text.length > 0 && textViewReply.text != nil && ![textViewReply.text isEqual:@""]) {
-            [self postReply];
+          
+            //  [self postReply];
+            
             errorMessageReply.hidden=YES;
             [self.popupController dismissPopupControllerAnimated:YES];
             NSLog(@"Reply Message: %@, Cc: %@", textViewReply.text,textFieldCc.text);
@@ -1296,108 +1300,106 @@
 
 
         
--(void)postReply{
-    
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
-        //connection unavailable
-        // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
-        if (self.navigationController.navigationBarHidden) {
-            [self.navigationController setNavigationBarHidden:NO];
-        }
-        
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Error..!", nil)
-                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeError
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionNavBarOverlay
-                              canBeDismissedByUser:YES];
-        
-    }else{
-        
-        [[AppDelegate sharedAppdelegate] showProgressView];
-        
-        
-        //   NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,textViewReply.text,[userDefaults objectForKey:@"token"]];
-        
-        // NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,textViewReply.text,[userDefaults objectForKey:@"token"]];
-        
-         NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,textViewReply.text,[userDefaults objectForKey:@"token"]];
-        
-        
-        NSLog(@"URL is : %@",url);
-  @try{
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        
-        [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
-            
-            
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            
-            if (error || [msg containsString:@"Error"]) {
-                
-                if (msg) {
-                    
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    
-                }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
-                }
-                
-                return ;
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                
-                [self postReply];
-                NSLog(@"Thread--NO4-call-postCreateTicket");
-                return;
-            }
-            
-            if (json) {
-                NSLog(@"JSON-CreateTicket-%@",json);
-                if ([json objectForKey:@"result"]) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                         [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your reply.", nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                        
-                        
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
-                        
-                       TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-                       [self.navigationController pushViewController:td animated:YES];
-                        // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
-                    });
-                }
-            }
-            NSLog(@"Thread-NO5-postCreateTicket-closed");
-            
-        }];
-  }@catch (NSException *exception)
-        {
-            [utils showAlertWithMessage:exception.name sendViewController:self];
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
-            return;
-        }
-        @finally
-        {
-            NSLog( @" I am in replatTicket method in TicketDetail ViewController" );
-            
-        }
-
-
-    }
-    
-}
+//-(void)postReply{
+//
+//    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+//    {
+//
+//        if (self.navigationController.navigationBarHidden) {
+//            [self.navigationController setNavigationBarHidden:NO];
+//        }
+//
+//        [RMessage showNotificationInViewController:self.navigationController
+//                                             title:NSLocalizedString(@"Error..!", nil)
+//                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+//                                         iconImage:nil
+//                                              type:RMessageTypeError
+//                                    customTypeName:nil
+//                                          duration:RMessageDurationAutomatic
+//                                          callback:nil
+//                                       buttonTitle:nil
+//                                    buttonCallback:nil
+//                                        atPosition:RMessagePositionNavBarOverlay
+//                              canBeDismissedByUser:YES];
+//
+//    }else{
+//
+//        [[AppDelegate sharedAppdelegate] showProgressView];
+//
+//
+//        //   NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,textViewReply.text,[userDefaults objectForKey:@"token"]];
+//
+//        // NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,textViewReply.text,[userDefaults objectForKey:@"token"]];
+//
+//         NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,textViewReply.text,[userDefaults objectForKey:@"token"]];
+//
+//
+//        NSLog(@"URL is : %@",url);
+//  @try{
+//        MyWebservices *webservices=[MyWebservices sharedInstance];
+//
+//        [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+//
+//
+//
+//            [[AppDelegate sharedAppdelegate] hideProgressView];
+//
+//            if (error || [msg containsString:@"Error"]) {
+//
+//                if (msg) {
+//
+//                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+//
+//                }else if(error)  {
+//                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+//                    NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+//                }
+//
+//                return ;
+//            }
+//
+//            if ([msg isEqualToString:@"tokenRefreshed"]) {
+//
+//                [self postReply];
+//                NSLog(@"Thread--NO4-call-postCreateTicket");
+//                return;
+//            }
+//
+//            if (json) {
+//                NSLog(@"JSON-CreateTicket-%@",json);
+//                if ([json objectForKey:@"result"]) {
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                         [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your reply.", nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+//
+//
+//                        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
+//
+//                       TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+//                       [self.navigationController pushViewController:td animated:YES];
+//                        // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
+//                    });
+//                }
+//            }
+//            NSLog(@"Thread-NO5-postCreateTicket-closed");
+//
+//        }];
+//  }@catch (NSException *exception)
+//        {
+//            [utils showAlertWithMessage:exception.name sendViewController:self];
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
+//            return;
+//        }
+//        @finally
+//        {
+//            NSLog( @" I am in replatTicket method in TicketDetail ViewController" );
+//
+//        }
+//
+//
+//    }
+//
+//}
 
 
 

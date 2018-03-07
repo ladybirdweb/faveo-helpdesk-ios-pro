@@ -197,5 +197,6 @@
 
 
 @property (strong, nonatomic) NSString *userIdFromInbox;
+@property (strong, nonatomic) NSString *ccCount;
 
 @end

@@ -19,5 +19,8 @@
 
 - (IBAction)submitButtonClicked:(id)sender;
 
+
 -(void)FetchCollaboratorAssociatedwithTicket;
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
+
 @end

@@ -13,4 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *userSearchTextField;
 
 - (IBAction)addCCMethod:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+
 @end

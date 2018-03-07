@@ -101,6 +101,8 @@
     
     [self getCCCount];
     
+     _addButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    
 }
 
 -(void)getCCCount
@@ -196,8 +198,8 @@
                 
                 for (NSDictionary *dicc in usersArray) {
                     if ([dicc objectForKey:@"first_name"]) {
-                        [userNameArray addObject:[dicc objectForKey:@"first_name"]];
-                        [userLastNameArray addObject:[dicc objectForKey:@"last_name"]];
+                        [userNameArray addObject:[dicc objectForKey:@"email"]];
+                      //  [userLastNameArray addObject:[dicc objectForKey:@"last_name"]];
                         [staff_idArray addObject:[dicc objectForKey:@"id"]];
                         [profilePicArray addObject:[dicc objectForKey:@"profile_pic"]];
                     }
@@ -212,13 +214,6 @@
                     }
                 }
                 
-                UniqueuserLastNameArray = [NSMutableArray array];
-                
-                for (id obj in userLastNameArray) {
-                    if (![UniqueuserLastNameArray containsObject:obj]) {
-                        [UniqueuserLastNameArray addObject:obj];
-                    }
-                }
                 
             uniqueIdArray = [NSMutableArray array];
                 
@@ -314,7 +309,7 @@
 
     for (NSDictionary *dic in usersArray)
     {
-        NSString *name  = dic[@"first_name"];
+        NSString *name  = dic[@"email"];
 
         if([name isEqual:_userSearchTextField.text])
         {
@@ -322,7 +317,7 @@
             selectedUserEmail=dic[@"email"];
 
             NSLog(@"id is : %@",selectedUserId);
-            NSLog(@"id is : %@",selectedUserEmail);
+            NSLog(@"Email is : %@",selectedUserEmail);
 
         }
     }
@@ -336,6 +331,7 @@
 
 -(void)add
 {
+
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
@@ -387,50 +383,44 @@
             if (json) {
                 NSLog(@"JSON-HelpSupport-%@",json);
                 
-                NSObject *obj=[json objectForKey:@"collaborator"];
+               // NSObject *obj=[json objectForKey:@"collaborator"];
                 
-                if([obj isKindOfClass:[NSDictionary class]])
+                
+                if([[json objectForKey:@"collaborator"] isKindOfClass:[NSDictionary class]])
                 {
-    
-                    
-//                    ReplyTicketViewController *reply=[self.storyboard instantiateViewControllerWithIdentifier:@"replayId"];
-//                    [self.navigationController popToViewController:reply animated:YES];
                     
                     for (UIViewController *controller in self.navigationController.viewControllers)
                     {
                         //Do not forget to import AnOldViewController.h
                         if ([controller isKindOfClass:[ReplyTicketViewController class]])
                         {
+                            [self getCCCount];
                             [self.navigationController popToViewController:controller animated:YES];
+                            
+                            [RKDropdownAlert title:@"Success" message:@"Added cc Successfully" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
                             return;
                         }
                     }
                     
-//                    [RMessage
-//                     showNotificationWithTitle:NSLocalizedString(@"Success", nil)
-//                     subtitle:NSLocalizedString(@"Added Collaborator Successfully.", nil)
-//                     type:RMessageTypeSuccess
-//                     customTypeName:nil
-//                     callback:nil];
+            
                     
-                    if (self.navigationController.navigationBarHidden) {
-                        [self.navigationController setNavigationBarHidden:NO];
+                }else if([[json objectForKey:@"error"] isKindOfClass:[NSDictionary class]])
+                {
+                    
+                    NSDictionary * dict=[json objectForKey:@"error"];
+                    NSObject *obj=[dict objectForKey:@"user_id"];
+                    
+                    if([obj isKindOfClass:[NSArray class]])
+                    {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Entered value is not valid. Please select the proper email."] sendViewController:self];
+                        
                     }
-                    
-                    [RMessage showNotificationInViewController:self.navigationController
-                                                         title:NSLocalizedString(@"Success", nil)
-                                                      subtitle:NSLocalizedString(@"Added Collaborator Successfully.", nil)
-                                                     iconImage:nil
-                                                          type:RMessageTypeSuccess
-                                                customTypeName:nil
-                                                      duration:RMessageDurationAutomatic
-                                                      callback:nil
-                                                   buttonTitle:nil
-                                                buttonCallback:nil
-                                                    atPosition:RMessagePositionBottom
-                                          canBeDismissedByUser:YES];
-                    
+                
+                }
+                else
+                {
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Something wen wrong. Please try again later."] sendViewController:self];
                 }
             }
             
