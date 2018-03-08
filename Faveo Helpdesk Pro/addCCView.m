@@ -101,10 +101,21 @@
     
     [self getCCCount];
     
+    UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
+    
+    UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
+    [self.userSearchTextField setInputAccessoryView:toolBar];
+    
     _addButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     
 }
-
+-(void)removeKeyBoard
+{
+    [_userSearchTextField resignFirstResponder];
+}
 -(void)getCCCount
 {
     
@@ -139,10 +150,7 @@
         [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
-        
-        //  [[AppDelegate sharedAppdelegate] showProgressView];
-        //http://jamboreebliss.com/sayarnew/public/api/v1/helpdesk/collaborator/search?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9qYW1ib3JlZWJsaXNzLmNvbS9zYXlhcm5ldy9wdWJsaWMvYXBpL3YxL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTUyMDMyMjA1MCwiZXhwIjoxNTIwMzIyMjkwLCJuYmYiOjE1MjAzMjIwNTAsImp0aSI6IlBJT2ZGZG8zYWZlUGZYdkIifQ.LWZQWkOOCHI7vBhf9PgKHPHZnCRPZnuiR8NzPpItmO4&term=ar
-        
+    
         
         NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/search?token=%@&term=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],valueFromTextField];
         

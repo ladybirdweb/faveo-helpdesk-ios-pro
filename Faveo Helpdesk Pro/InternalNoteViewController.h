@@ -13,5 +13,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableview1;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 @property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+- (IBAction)addButtonAction:(id)sender;
 
 @end
