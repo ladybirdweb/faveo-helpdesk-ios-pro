@@ -1,4 +1,4 @@
- //
+//
 //  ReplyTicketViewController.m
 //  Faveo Helpdesk Pro
 //
@@ -31,7 +31,7 @@
     Utils *utils;
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
-   // NSString * count1;
+    // NSString * count1;
     NSMutableArray *usersArray;
 }
 @end
@@ -97,14 +97,14 @@
     [self viewDidLoad];
     [self FetchCollaboratorAssociatedwithTicket];
     
-   
+    
     
 }
 -(void)clickedOnCCSubButton
 {
     addCCView *cc1=[self.storyboard instantiateViewControllerWithIdentifier:@"addCCViewId"];
     [self.navigationController pushViewController:cc1 animated:YES];
-
+    
 }
 
 -(void)submitButton1
@@ -114,7 +114,7 @@
     
 }
 - (IBAction)submitButtonClicked:(id)sender {
-     [self ticketReplyMethodCalledHere];
+    [self ticketReplyMethodCalledHere];
 }
 
 -(void)ticketReplyMethodCalledHere
@@ -188,8 +188,8 @@
                             
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
                             
-//                            TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-//                            [self.navigationController pushViewController:td animated:YES];
+                            //                            TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+                            //                            [self.navigationController pushViewController:td animated:YES];
                             
                             [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:0] animated:YES];
                         });
@@ -230,10 +230,10 @@
     }
     
 }
-    
-    
-    
-    
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -291,7 +291,7 @@
             
             if (json) {
                 NSLog(@"JSON-CollaboratorWithTicket-%@",json);
-              //  NSDictionary * dict1=[json objectForKey:@"collaborator"];
+                //  NSDictionary * dict1=[json objectForKey:@"collaborator"];
                 
                 NSArray  * array1=[json objectForKey:@"collaborator"];
                 globalVariables.ccCount=[NSString stringWithFormat:@"%lu",(unsigned long)array1.count];//array1.count;
@@ -345,3 +345,4 @@
 
 
 @end
+

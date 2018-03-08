@@ -53,9 +53,9 @@
     NSString *selectedUserEmail;
     // NSString *selectedUserId;
     
-     NSNumber *user_id1;
+    NSNumber *user_id1;
     
-     NSNumber *selectedUserId;
+    NSNumber *selectedUserId;
     
 }
 @end
@@ -65,7 +65,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-     user_id1=[[NSNumber alloc]init];
+    user_id1=[[NSNumber alloc]init];
     selectedUserId=[[NSNumber alloc]init];
     
     staff_idArray=[[NSMutableArray alloc]init];
@@ -85,15 +85,15 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     utils=[[Utils alloc]init];
     
-     self.tablview.separatorColor=[UIColor clearColor];
+    self.tablview.separatorColor=[UIColor clearColor];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
-   
+    
     self.userSearchTextField.delegate = self;
     self.userSearchTextField.autoSuggestionDataSource = self;
     self.userSearchTextField.fieldIdentifier =@"oneId";
     self.userSearchTextField.showImmediately = true;
     [self.userSearchTextField observeTextFieldChanges];
-//
+    //
     //dismissing view
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     
@@ -101,7 +101,7 @@
     
     [self getCCCount];
     
-     _addButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    _addButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     
 }
 
@@ -189,24 +189,24 @@
                 NSLog(@"JSON-HelpSupport-%@",json);
                 //   NSLog(@"JSON-HelpSupport-%@",json);
                 
-                 usersArray=[json objectForKey:@"users"];
-               // NSIndexPath *indexpath;
+                usersArray=[json objectForKey:@"users"];
+                // NSIndexPath *indexpath;
                 
-              //  NSDictionary *userSearchDictionary=[usersArray objectAtIndex:indexpath.row];
+                //  NSDictionary *userSearchDictionary=[usersArray objectAtIndex:indexpath.row];
                 
                 
                 
                 for (NSDictionary *dicc in usersArray) {
                     if ([dicc objectForKey:@"first_name"]) {
                         [userNameArray addObject:[dicc objectForKey:@"email"]];
-                      //  [userLastNameArray addObject:[dicc objectForKey:@"last_name"]];
+                        //  [userLastNameArray addObject:[dicc objectForKey:@"last_name"]];
                         [staff_idArray addObject:[dicc objectForKey:@"id"]];
                         [profilePicArray addObject:[dicc objectForKey:@"profile_pic"]];
                     }
                     
                 }
                 
-            uniqueNameArray = [NSMutableArray array];
+                uniqueNameArray = [NSMutableArray array];
                 
                 for (id obj in userNameArray) {
                     if (![uniqueNameArray containsObject:obj]) {
@@ -215,7 +215,7 @@
                 }
                 
                 
-            uniqueIdArray = [NSMutableArray array];
+                uniqueIdArray = [NSMutableArray array];
                 
                 for (id obj in staff_idArray) {
                     if (![uniqueIdArray containsObject:obj]) {
@@ -257,7 +257,7 @@
     }
     
     NSArray *months = uniqueNameArray;
-//    NSArray *image = UniqueprofilePicArray;
+    //    NSArray *image = UniqueprofilePicArray;
     
     
     if (text.length > 0) {
@@ -306,19 +306,19 @@
     }
     
     self.userSearchTextField.text =   months[indexPath.row];
-
+    
     for (NSDictionary *dic in usersArray)
     {
         NSString *name  = dic[@"email"];
-
+        
         if([name isEqual:_userSearchTextField.text])
         {
             selectedUserId= dic[@"id"];
             selectedUserEmail=dic[@"email"];
-
+            
             NSLog(@"id is : %@",selectedUserId);
             NSLog(@"Email is : %@",selectedUserEmail);
-
+            
         }
     }
     
@@ -331,7 +331,7 @@
 
 -(void)add
 {
-
+    
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
@@ -383,7 +383,7 @@
             if (json) {
                 NSLog(@"JSON-HelpSupport-%@",json);
                 
-               // NSObject *obj=[json objectForKey:@"collaborator"];
+                // NSObject *obj=[json objectForKey:@"collaborator"];
                 
                 
                 if([[json objectForKey:@"collaborator"] isKindOfClass:[NSDictionary class]])
@@ -403,7 +403,7 @@
                         }
                     }
                     
-            
+                    
                     
                 }else if([[json objectForKey:@"error"] isKindOfClass:[NSDictionary class]])
                 {
@@ -416,7 +416,7 @@
                         [utils showAlertWithMessage:[NSString stringWithFormat:@"Entered value is not valid. Please select the proper email."] sendViewController:self];
                         
                     }
-                
+                    
                 }
                 else
                 {
@@ -439,3 +439,4 @@
 
 
 @end
+

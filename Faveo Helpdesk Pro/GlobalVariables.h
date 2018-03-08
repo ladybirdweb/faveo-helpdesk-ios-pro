@@ -16,7 +16,7 @@
  @brief This class contains Global variable declaration
  
  @discussion It contains variable declaration that are commonly used throughout the app so that accessing and calling is very easy.
-       Also it cointans Singleton class that contains global variables and global functions.It’s an extremely powerful way to share data between different parts of code without having to pass the data around manually.
+ Also it cointans Singleton class that contains global variables and global functions.It’s an extremely powerful way to share data between different parts of code without having to pass the data around manually.
  
  @superclass NSObject
  
@@ -111,9 +111,9 @@
 @property (strong, nonatomic) NSString *mobileAddRequester;
 
 
-@property (strong, nonatomic) NSString *sortingValueId;  
+@property (strong, nonatomic) NSString *sortingValueId;
 
-@property (strong, nonatomic) NSString *check;  
+@property (strong, nonatomic) NSString *check;
 
 @property (strong, nonatomic) NSString *sortCondition;
 
@@ -200,3 +200,4 @@
 @property (strong, nonatomic) NSString *ccCount;
 
 @end
+
