@@ -25,7 +25,6 @@
 #import "ConversationViewController.h"
 #import "EditDetailTableViewController.h"
 #import "ReplyTicketViewController.h"
-#import "InternalNote.h"
 #import "InternalNoteViewController.h"
 
 //#import "ReplyViewController.h"

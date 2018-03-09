@@ -122,7 +122,7 @@ typedef void (^ApiResponse)(NSError* , id);
 
 -(void)getNextPageURLInbox:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;
 
--(void)getNextPageURLInboxSearchResults:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;
+-(void)getNextPageURLInboxSearchResults:(NSString*)url searchString:(NSString*)searchData pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;
 
 -(void)getNextPageURLUnassigned:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;
 

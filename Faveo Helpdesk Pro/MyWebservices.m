@@ -601,17 +601,26 @@
     
 }
 
--(void)getNextPageURLInboxSearchResults:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block
+-(void)getNextPageURLInboxSearchResults:(NSString*)url searchString:(NSString*)searchData pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;
 {
     _userDefaults=[NSUserDefaults standardUserDefaults];
     globalVariables=[GlobalVariables sharedInstance];
     
+    
+    NSLog(@"Search data is : %@",searchData);
+//    _userDefaults=[NSUserDefaults standardUserDefaults];
+    //   // NSString *urll=[NSString stringWithFormat:@"%@&api_key=%@&ip=%@&token=%@",url,API_KEY,IP,[_userDefaults objectForKey:@"token"]];
     NSLog(@"page isssss : %@",pageInt);
     
-    NSString *urlAAA= [url stringByAppendingString:@"&page="];
+    NSString *urlAAA= [url stringByAppendingString:@"?page="];
     NSString *urlBBB= [urlAAA stringByAppendingString:pageInt];
+    NSString *urlccc= [urlBBB stringByAppendingString:[NSString stringWithFormat:@"&search=%@",searchData]];
+   // NSLog(@"url of search next view is 11 : %@",urlccc);
     
-    [self httpResponseGET:urlBBB parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+    NSString *finalUrl=[NSString stringWithFormat:@"%@&token=%@",urlccc,[_userDefaults objectForKey:@"token"]];
+    NSLog(@"FInal 111111111 url : %@",finalUrl);
+    
+    [self httpResponseGET:finalUrl parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
         dispatch_async(dispatch_get_main_queue(), ^{
             block(error,json,msg);
         });

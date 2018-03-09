@@ -5947,24 +5947,6 @@
             </objects>
             <point key="canvasLocation" x="3176.811594202899" y="1972.826086956522"/>
         </scene>
-        <!--Internal Note-->
-        <scene sceneID="G1a-Tc-oTb">
-            <objects>
-                <viewController storyboardIdentifier="InternalNoteId" id="1a0-zr-N2y" customClass="InternalNote" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="L4u-P0-AwO"/>
-                        <viewControllerLayoutGuide type="bottom" id="nHv-EK-fRy"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="JFV-Yi-jeP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.84372562419999997" green="0.67371866449999995" blue="0.29810332719999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jh2-Bk-5Ja" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3639" y="-471"/>
-        </scene>
         <!--AddCC View-->
         <scene sceneID="hmP-Tv-kq6">
             <objects>
@@ -6475,7 +6457,71 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XJg-f6-Apb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4353.623188405797" y="-471.19565217391306"/>
+            <point key="canvasLocation" x="-3562" y="-482"/>
+        </scene>
+        <!--Ticket Search View Controller-->
+        <scene sceneID="gZt-qj-JWW">
+            <objects>
+                <viewController storyboardIdentifier="TicketSearchViewControllerId" id="Ibp-fx-Nzy" customClass="TicketSearchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OmP-Ay-BAI"/>
+                        <viewControllerLayoutGuide type="bottom" id="f0L-pY-i3B"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GuN-xv-tuq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="search here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P8z-pw-3WV">
+                                <rect key="frame" x="20" y="28" width="374" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ibp-fx-Nzy" id="ehW-ux-YXW"/>
+                                </connections>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eek-dO-OGM">
+                                <rect key="frame" x="0.0" y="145" width="414" height="591"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ibp-fx-Nzy" id="GxQ-nZ-B7s"/>
+                                    <outlet property="delegate" destination="Ibp-fx-Nzy" id="Qcu-NZ-GX5"/>
+                                </connections>
+                            </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="JO5-yG-Wzf">
+                                <rect key="frame" x="87" y="84" width="240" height="29"/>
+                                <segments>
+                                    <segment title="Ticket"/>
+                                    <segment title="User"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControlAction:" destination="Ibp-fx-Nzy" eventType="valueChanged" id="mR8-Kf-yFn"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="P8z-pw-3WV" firstAttribute="leading" secondItem="GuN-xv-tuq" secondAttribute="leadingMargin" id="4lK-of-Jeb"/>
+                            <constraint firstItem="P8z-pw-3WV" firstAttribute="top" secondItem="OmP-Ay-BAI" secondAttribute="bottom" constant="8" symbolic="YES" id="5AA-4n-I4I"/>
+                            <constraint firstItem="eek-dO-OGM" firstAttribute="bottom" secondItem="f0L-pY-i3B" secondAttribute="top" id="5kD-AN-sjJ"/>
+                            <constraint firstItem="eek-dO-OGM" firstAttribute="top" secondItem="JO5-yG-Wzf" secondAttribute="bottom" constant="33" id="9Hp-uo-am6"/>
+                            <constraint firstItem="eek-dO-OGM" firstAttribute="leading" secondItem="GuN-xv-tuq" secondAttribute="leading" id="DKp-CA-72r"/>
+                            <constraint firstItem="JO5-yG-Wzf" firstAttribute="centerX" secondItem="eek-dO-OGM" secondAttribute="centerX" id="EDb-JM-Wxy"/>
+                            <constraint firstItem="JO5-yG-Wzf" firstAttribute="leading" secondItem="GuN-xv-tuq" secondAttribute="leadingMargin" constant="67" id="GRy-ZW-Dds"/>
+                            <constraint firstItem="P8z-pw-3WV" firstAttribute="centerX" secondItem="JO5-yG-Wzf" secondAttribute="centerX" id="O6i-lC-TOY"/>
+                            <constraint firstAttribute="trailing" secondItem="eek-dO-OGM" secondAttribute="trailing" id="YE2-KM-8nd"/>
+                            <constraint firstItem="JO5-yG-Wzf" firstAttribute="top" secondItem="P8z-pw-3WV" secondAttribute="bottom" constant="26" id="dhO-YA-wIC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="seachTextField" destination="P8z-pw-3WV" id="qxT-9Q-gf2"/>
+                        <outlet property="segmentedControlObject" destination="JO5-yG-Wzf" id="b70-kY-w0p"/>
+                        <outlet property="tableview1" destination="eek-dO-OGM" id="Feq-K3-6Gq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ozC-iE-J5J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3562.3188405797105" y="404.34782608695656"/>
         </scene>
         <!--Support View Controller-->
         <scene sceneID="eEZ-LL-B54">
