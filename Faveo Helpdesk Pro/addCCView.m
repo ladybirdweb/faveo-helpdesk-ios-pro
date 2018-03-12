@@ -446,5 +446,10 @@
 }
 
 
+- (IBAction)viewCCButton:(id)sender {
+}
+
+- (IBAction)removeCCButton:(id)sender {
+}
 @end
 

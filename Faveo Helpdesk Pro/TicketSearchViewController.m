@@ -19,6 +19,9 @@
 #import "LoadingTableViewCell.h"
 #import "TicketTableViewCell.h"
 #import "ClientListTableViewCell.h"
+#import "userSearchDataCell.h"
+#import "TicketDetailViewController.h"
+#import "ClientDetailViewController.h"
 
 @interface TicketSearchViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 {
@@ -28,6 +31,7 @@
     GlobalVariables *globalVariables;
     NSDictionary *tempDict;
     NSString * dataFromSearchTextField;
+    NSString * ticketidIs;
     
     
 }
@@ -41,6 +45,10 @@
 
 @property (strong, nonatomic) NSMutableArray *sampleDataArray;
 @property (strong, nonatomic) NSMutableArray *filteredSampleDataArray;
+
+@property (strong, nonatomic) NSMutableArray *userDataArray;
+
+
 @end
 
 @implementation TicketSearchViewController
@@ -54,7 +62,10 @@
     
     _mutableArray=[[NSMutableArray alloc]init];
     _filteredSampleDataArray = [[NSMutableArray alloc] init];
+    _userDataArray = [[NSMutableArray alloc] init];
     
+    _tableview1.hidden=YES;
+    _tableview2.hidden=YES;
    
    // [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     
@@ -86,19 +97,30 @@
 - (IBAction)segmentedControlAction:(id)sender {
     if(_segmentedControlObject.selectedSegmentIndex==0)
     {
+        _tableview1.hidden=NO;
+        _tableview2.hidden=YES;
+       
+        
         NSLog(@"Ticket Search API Called.");
         [self ticketSearchApiCall:_seachTextField.text];
+        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Ticket Data",nil)];
     }
     else if(_segmentedControlObject.selectedSegmentIndex==1)
     {
+        _tableview1.hidden=YES;
+        _tableview2.hidden=NO;
+       
+        
         NSLog(@"User Search API Called.");
        [self userSearchApiCall:_seachTextField.text];
+        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting User Data",nil)];
         
     }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [self.seachTextField becomeFirstResponder];
+    
     
 }
 
@@ -193,6 +215,117 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                            [[AppDelegate sharedAppdelegate] hideProgressView];
                     [self.tableview1 reloadData];
+                    
+                });
+            });
+            
+        }
+        
+    }];
+    
+    
+}
+
+- (void)reloadTableView
+{
+    
+    [self.tableview1 reloadData];
+    [self.tableview2 reloadData];
+
+}
+
+
+-(void)userSearchApiCall:(NSString *)searchText
+{
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        [refresh endRefreshing];
+        
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+        
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
+        
+        
+    }else{
+        
+    }
+   
+    NSString * url= [NSString stringWithFormat:@"%@api/v1/helpdesk/ticket-search?token=%@&search=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],searchText];
+    NSLog(@"URL is : %@",url);
+    
+    
+    MyWebservices *webservices=[MyWebservices sharedInstance];
+    [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        
+        
+        
+        if (error || [msg containsString:@"Error"]) {
+            [refresh endRefreshing];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            if (msg) {
+                
+                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                
+            }else if(error)  {
+                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                NSLog(@"Thread-user-Search-Refresh-error == %@",error.localizedDescription);
+            }
+            return ;
+        }
+        
+        if ([msg isEqualToString:@"tokenRefreshed"]) {
+            
+            [self userSearchApiCall:searchText];
+            NSLog(@"Thread-user-Search-call");
+            return;
+        }
+        
+        if (json) {
+            //NSError *error;
+            NSLog(@"Thread-user-SearchAPI-Json-%@",json);
+            
+            _userDataArray=[[NSMutableArray alloc]initWithCapacity:11];
+            
+            NSDictionary * dict1 = [json objectForKey:@"result"];
+            
+            _userDataArray = [dict1 objectForKey:@"data"];
+            
+            NSLog(@"Mutable User Array is--%@",_userDataArray);
+            
+            
+            _nextPageUrl =[dict1 objectForKey:@"next_page_url"];
+            // NSLog(@"Next page url is : %@",_nextPageUrl);
+            
+            _path1=[dict1 objectForKey:@"path"];
+            
+            _currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
+            _totalTickets=[[dict1 objectForKey:@"total"] integerValue];
+            _totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
+            
+            
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                  
+                    [self.tableview2 reloadData];
+                   //  [self.tableview1 reloadData];
                 });
             });
             
@@ -204,24 +337,11 @@
     
 }
 
-- (void)reloadTableView
-{
-    
-    [self.tableview1 reloadData];
-
-}
-
-
--(void)userSearchApiCall:(NSString *)searchText
-{
-    
-    
-}
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 
+    if(tableView==_tableview1){
     NSInteger numOfSections = 0;
     if ([_filteredSampleDataArray count]==0)
     {
@@ -230,7 +350,7 @@
         //CGPointMake(self.view.frame.size.width/2,self.view.frame.size.height/2);
 
 
-      //  noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
+      // noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
         noDataLabel.textColor        = [UIColor blackColor];
         noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = noDataLabel;
@@ -245,27 +365,87 @@
     }
 
     return numOfSections;
+ }
+     
+     NSInteger numOfSections = 0;
+     if ([_userDataArray count]==0)
+     {
+         // CGRectMake(0, -10, tableView.bounds.size.width, tableView.bounds.size.height)
+         UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+         //CGPointMake(self.view.frame.size.width/2,self.view.frame.size.height/2);
+         
+         
+     //    noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
+         noDataLabel.textColor        = [UIColor blackColor];
+         noDataLabel.textAlignment    = NSTextAlignmentCenter;
+         tableView.backgroundView = noDataLabel;
+         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+         
+     }
+     else
+     {
+         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+         numOfSections                = 1;
+         tableView.backgroundView = nil;
+     }
+     
+     return numOfSections;
 
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if(tableView==_tableview1){
+         if (self.currentPage == self.totalPages
+              || self.totalTickets == _filteredSampleDataArray.count) {
+              return _filteredSampleDataArray.count;
+           }
+    
+         return _filteredSampleDataArray.count + 1;
+    }
     if (self.currentPage == self.totalPages
-        || self.totalTickets == _filteredSampleDataArray.count) {
-        return _filteredSampleDataArray.count;
+        || self.totalTickets == _userDataArray.count) {
+        return _userDataArray.count;
     }
     
-    return _filteredSampleDataArray.count + 1;
-
+    return _userDataArray.count + 1;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if(tableView==_tableview1){
     if (indexPath.row == [_filteredSampleDataArray count] - 1 ) {
         NSLog(@"nextURL111  %@",_nextPageUrl);
         
         if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
             
             [self loadMoreforSearchResults];
+            
+            
+        }
+        else{
+            
+            [RMessage showNotificationInViewController:self
+                                                 title:nil
+                                              subtitle:NSLocalizedString(@"All Caught Up", nil)
+                                             iconImage:nil
+                                                  type:RMessageTypeSuccess
+                                        customTypeName:nil
+                                              duration:RMessageDurationAutomatic
+                                              callback:nil
+                                           buttonTitle:nil
+                                        buttonCallback:nil
+                                            atPosition:RMessagePositionBottom
+                                  canBeDismissedByUser:YES];
+        }
+    }
+  }
+    
+    if (indexPath.row == [_userDataArray count] - 1 ) {
+        NSLog(@"nextURL111  %@",_nextPageUrl);
+        
+        if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
+            
+          //  [self loadMoreforSearchResults];
             
             
         }
@@ -292,8 +472,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-// if(_segmentedControlObject.selectedSegmentIndex==0)
-// {
+    if(tableView==_tableview1)
+ {
 //
      if (indexPath.row == [_filteredSampleDataArray count])
      {
@@ -402,11 +582,14 @@
          
          // ticket
          
-         NSArray * ticketThredArray= [searchDictionary objectForKey:@"thread"];
+         NSMutableArray * ticketThredArray= [searchDictionary objectForKey:@"thread"];
          //
          if(( ![[searchDictionary objectForKey:@"thread"] isEqual:[NSNull null]] ) )
          {
              NSDictionary *ticketDict=[ticketThredArray objectAtIndex:0];
+             
+             NSLog(@"ticket dict 111111 is : %@",ticketDict);
+               NSLog(@"ticket dict 111111 is : %@",ticketDict);
              
              if(( ![[ticketDict objectForKey:@"ticket_id"] isEqual:[NSNull null]] ) )
                  
@@ -510,6 +693,77 @@
          return cell;
     }
     
+ }
+    //segmened 1  user
+        userSearchDataCell *cell=[tableView dequeueReusableCellWithIdentifier:@"userSearchDataCellId"];
+        
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"userSearchDataCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        
+        //user name deatils
+        NSDictionary *searchUserDictionary=[_userDataArray objectAtIndex:indexPath.row];
+        NSLog(@"userSearchDictionary is : %@",searchUserDictionary);
+        
+        
+        // first name, last name, user name owner name
+        NSDictionary * userDict= [searchUserDictionary objectForKey:@"user"];
+        
+        NSString *fname= [userDict objectForKey:@"first_name"];
+        
+        NSString *lname= [userDict objectForKey:@"last_name"];
+        
+        NSString*userName=[userDict objectForKey:@"user_name"];
+        
+        NSString*profilPic=[userDict objectForKey:@"profile_pic"];
+        
+        
+        [Utils isEmpty:fname];
+        [Utils isEmpty:lname];
+        [Utils isEmpty:userName];
+        [Utils isEmpty:profilPic];
+        
+        
+        if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+        {
+            if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+            {   cell.userNameLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
+            }
+            else{
+                cell.userNameLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
+            }
+        }
+        else
+        {
+            if(![Utils isEmpty:userName])
+            {
+                cell.userNameLabel.text=userName;
+            }
+            else{
+                cell.userNameLabel.text=NSLocalizedString(@"Not Available", nil);
+            }
+            
+        }
+        
+        
+                if (![Utils isEmpty:profilPic] )
+                {
+                   // cell.userProfileImage.image=[UIImage imageNamed:profilPic];
+                  //  [cell setUserProfileImage:[UIImage imageNamed:profilPic]];
+                    [cell setUserProfileimage:profilPic];
+        
+                }
+                else
+                {
+                   // [cell setUserProfileimage:@"default_pic.png"];
+                  [cell setUserProfileimage:@"default_pic.png"];
+                }
+        
+        
+    return cell;
+    
 }
 
 -(void)loadMoreforSearchResults
@@ -607,5 +861,179 @@
 
 }
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if(tableView==_tableview1)
+    {
+        
+         NSDictionary *searchDictionary=[_filteredSampleDataArray objectAtIndex:indexPath.row];
+        
+        NSDictionary * statusValueDict=[searchDictionary objectForKey:@"statuses"];
+        
+        globalVariables.Ticket_status=[statusValueDict objectForKey:@"name"];
+        
+        NSMutableArray * ticketThredArray= [searchDictionary objectForKey:@"thread"];
+        //
+        if(( ![[searchDictionary objectForKey:@"thread"] isEqual:[NSNull null]] ) )
+        {
+            NSDictionary *ticketDict=[ticketThredArray objectAtIndex:0];
+            
+            if(( ![[ticketDict objectForKey:@"ticket_id"] isEqual:[NSNull null]] ) )
+                
+            {
+                ticketidIs= [NSString stringWithFormat:@"%@",[ticketDict objectForKey:@"ticket_id"]];
+               
+                NSLog(@"Ticket id is : %@",ticketidIs);
+                
+            }
+            
+        }
+        
+        
+        // first name, last name, user name owner name
+        NSDictionary * userDict= [searchDictionary objectForKey:@"user"];
+        
+        NSString *fname= [userDict objectForKey:@"first_name"];
+        
+        NSString *lname= [userDict objectForKey:@"last_name"];
+        
+        NSString*userName=[userDict objectForKey:@"user_name"];
+        
+
+        
+        [Utils isEmpty:fname];
+        [Utils isEmpty:lname];
+        [Utils isEmpty:userName];
+        
+        
+        
+        if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+        {
+            if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+            {    globalVariables.First_name=fname;
+                globalVariables.Last_name=lname;
+            }
+            else if (![Utils isEmpty:fname]){
+                 globalVariables.First_name=[NSString stringWithFormat:@"%@",fname];
+                globalVariables.Last_name=@"";
+            }
+        }
+        else
+        {
+            if(![Utils isEmpty:userName])
+            {
+                 globalVariables.First_name=userName;
+                 globalVariables.Last_name=@"";
+            }
+            else{
+                 globalVariables.First_name=NSLocalizedString(@"", nil);
+                 globalVariables.Last_name=@"";
+            }
+            
+        }
+        
+        
+        // ticket numbner
+        NSString *ticketNumber=[searchDictionary objectForKey:@"ticket_number"];
+        
+        [Utils isEmpty:ticketNumber];
+        if  (![Utils isEmpty:ticketNumber] && ![ticketNumber isEqualToString:@""])
+        {
+            globalVariables.ticket_number=ticketNumber;
+        }
+        else
+        {
+            globalVariables.ticket_number=NSLocalizedString(@"", nil);
+        }
+        
+        
+        
+        globalVariables.iD=(NSNumber*)ticketidIs;
+        
+        TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+        [self.navigationController pushViewController:td animated:YES];
+        
+}
+    else if(tableView==_tableview2)
+    {
+        
+        //user name deatils
+        NSDictionary *searchDictionary=[_userDataArray objectAtIndex:indexPath.row];
+        NSLog(@"searchDictionary is : %@",searchDictionary);
+        
+        
+        // first name, last name, user name owner name
+       NSDictionary * userDict= [searchDictionary objectForKey:@"user"];
+
+        NSString *fname= [userDict objectForKey:@"first_name"];
+
+        NSString *lname= [userDict objectForKey:@"last_name"];
+
+        NSString*userName=[userDict objectForKey:@"user_name"];
+
+        NSString*profilPic=[userDict objectForKey:@"profile_pic"];
+        
+        NSString*userID1=[userDict objectForKey:@"id"];
+
+        NSString*email=[userDict objectForKey:@"email"];
+        
+        [Utils isEmpty:fname];
+        [Utils isEmpty:lname];
+        [Utils isEmpty:userName];
+        [Utils isEmpty:profilPic];
+
+        if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
+        {
+            if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
+            {   globalVariables.First_name=fname;
+                globalVariables.Last_name=lname;
+            }
+            else if (![Utils isEmpty:fname]){
+                globalVariables.First_name=fname;
+                globalVariables.Last_name=@"";
+            }
+        }
+        else
+        {
+            if(![Utils isEmpty:userName])
+            {
+                globalVariables.First_name=userName;
+                globalVariables.Last_name=@"";
+            }
+            else{
+                globalVariables.First_name=@"";
+                globalVariables.Last_name=@"";
+            }
+
+        }
+
+        globalVariables.customerImage=profilPic;
+        globalVariables.customerFromView=@"normalView";
+        globalVariables.userRole=@"";
+        globalVariables.userID=userID1;
+
+        if (![Utils isEmpty:email])
+        {
+            globalVariables.emailInUserList=email;
+        }
+        else
+        {
+            globalVariables.emailInUserList=@"";
+        }
+        globalVariables.phoneNumberInUserList=@"";
+        globalVariables.mobileNumberInUserList=@"";
+        globalVariables.UserState=@"1";
+        globalVariables.mobileCode1=@"";
+//
+        ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
+        [self.navigationController pushViewController:td animated:YES];
+
+        
+        
+        
+    }
+}
 
 @end

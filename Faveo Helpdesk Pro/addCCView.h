@@ -15,6 +15,9 @@
 - (IBAction)addCCMethod:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
+- (IBAction)viewCCButton:(id)sender;
+- (IBAction)removeCCButton:(id)sender;
+
 
 @end
 

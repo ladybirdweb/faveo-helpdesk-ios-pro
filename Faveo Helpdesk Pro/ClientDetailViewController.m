@@ -62,7 +62,7 @@
     utils=[[Utils alloc]init];
     
     globalVariables=[GlobalVariables sharedInstance];
-    _clientId=[NSString stringWithFormat:@"%@",globalVariables.iD];
+    _clientId=[NSString stringWithFormat:@"%@",globalVariables.userID];
     
     userDefaults=[NSUserDefaults standardUserDefaults];
     

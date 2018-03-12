@@ -174,6 +174,7 @@
 -(void)dismissKeyboard12
 {
     [_ccTextField resignFirstResponder];
+
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

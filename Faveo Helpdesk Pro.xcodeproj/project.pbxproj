@@ -67,6 +67,8 @@
 		0624A51A2034733400F1B030 /* HelpSectionHomePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0624A5122034732E00F1B030 /* HelpSectionHomePage.m */; };
 		0624A51B2034733400F1B030 /* HelpSectionHomePageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0624A5132034732F00F1B030 /* HelpSectionHomePageCell.m */; };
 		0624A51D2034733400F1B030 /* HelpSectionHomePageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0624A5152034733100F1B030 /* HelpSectionHomePageCell.xib */; };
+		063013912053AC1B006CD0EC /* userSearchDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0630138F2053AC1B006CD0EC /* userSearchDataCell.m */; };
+		063013922053AC1B006CD0EC /* userSearchDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 063013902053AC1B006CD0EC /* userSearchDataCell.xib */; };
 		0634EB352036EA7E002CB4E8 /* AllAboutTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB332036EA7E002CB4E8 /* AllAboutTicketCell.m */; };
 		0634EB362036EA7E002CB4E8 /* AllAboutTicketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB342036EA7E002CB4E8 /* AllAboutTicketCell.xib */; };
 		0634EB392036EBC3002CB4E8 /* AllAboutTicketsInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB382036EBC3002CB4E8 /* AllAboutTicketsInformation.m */; };
@@ -331,6 +333,9 @@
 		0624A5132034732F00F1B030 /* HelpSectionHomePageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpSectionHomePageCell.m; sourceTree = "<group>"; };
 		0624A5152034733100F1B030 /* HelpSectionHomePageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpSectionHomePageCell.xib; sourceTree = "<group>"; };
 		0624A5162034733200F1B030 /* HelpSectionHomePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpSectionHomePage.h; sourceTree = "<group>"; };
+		0630138E2053AC1B006CD0EC /* userSearchDataCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = userSearchDataCell.h; sourceTree = "<group>"; };
+		0630138F2053AC1B006CD0EC /* userSearchDataCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = userSearchDataCell.m; sourceTree = "<group>"; };
+		063013902053AC1B006CD0EC /* userSearchDataCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = userSearchDataCell.xib; sourceTree = "<group>"; };
 		0634EB322036EA7E002CB4E8 /* AllAboutTicketCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllAboutTicketCell.h; sourceTree = "<group>"; };
 		0634EB332036EA7E002CB4E8 /* AllAboutTicketCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllAboutTicketCell.m; sourceTree = "<group>"; };
 		0634EB342036EA7E002CB4E8 /* AllAboutTicketCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllAboutTicketCell.xib; sourceTree = "<group>"; };
@@ -1259,6 +1264,9 @@
 				D9EB9F741E07C2F00001115F /* LoadingTableViewCell.h */,
 				D9EB9F751E07C2F00001115F /* LoadingTableViewCell.m */,
 				D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */,
+				0630138E2053AC1B006CD0EC /* userSearchDataCell.h */,
+				0630138F2053AC1B006CD0EC /* userSearchDataCell.m */,
+				063013902053AC1B006CD0EC /* userSearchDataCell.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -1555,6 +1563,7 @@
 				0634EB5720370ED5002CB4E8 /* AllAboutTicketCell3.xib in Resources */,
 				D9AA44471FA890AC00938081 /* BDCustomAlertView.xib in Resources */,
 				0609ADA720397C6200DCDC85 /* userEditProfile.jpg in Resources */,
+				063013922053AC1B006CD0EC /* userSearchDataCell.xib in Resources */,
 				0634EB4B2036F27A002CB4E8 /* sidemenu.jpg in Resources */,
 				0634EB61203811D6002CB4E8 /* ticket detail page2.jpg in Resources */,
 				0689708F20318A3700702313 /* ConversationTableViewCell.xib in Resources */,
@@ -1797,6 +1806,7 @@
 				D9F9F13D1FB9B2530044DA27 /* DropDownViewCell.m in Sources */,
 				D9AE08382007231800DD9E94 /* CFMultistageConditionTableView.m in Sources */,
 				D9F9F11A1FB977B40044DA27 /* FilterViewController.m in Sources */,
+				063013912053AC1B006CD0EC /* userSearchDataCell.m in Sources */,
 				D9AF85311FC421AF005232A0 /* AWNavigationMenuItem.m in Sources */,
 				0634EB7C20382958002CB4E8 /* TicketReplayInternalNoteCell2.m in Sources */,
 				067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */,

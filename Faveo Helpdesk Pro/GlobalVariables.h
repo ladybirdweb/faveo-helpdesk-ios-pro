@@ -30,6 +30,7 @@
  */
 @property (strong, nonatomic) NSNumber *iD;
 
+
 /*!
  @property ticket_number
  
@@ -198,6 +199,8 @@
 
 @property (strong, nonatomic) NSString *userIdFromInbox;
 @property (strong, nonatomic) NSString *ccCount;
+
+@property (strong, nonatomic) NSString *userID;
 
 @end
 

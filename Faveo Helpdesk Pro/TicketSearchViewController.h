@@ -19,5 +19,7 @@
 @property (nonatomic, strong) NSString *path1;
 
 @property (nonatomic) NSInteger page;
+@property (weak, nonatomic) IBOutlet UITableView *tableview2;
+
 
 @end

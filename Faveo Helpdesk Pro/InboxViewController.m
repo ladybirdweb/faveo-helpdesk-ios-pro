@@ -1099,7 +1099,7 @@
                 cell = [nib objectAtIndex:0];
             }
             
-            //agent name deatils
+            //user name deatils
             NSDictionary *searchDictionary=[_filteredSampleDataArray objectAtIndex:indexPath.row];
             NSLog(@"searchDictionary is : %@",searchDictionary);
             

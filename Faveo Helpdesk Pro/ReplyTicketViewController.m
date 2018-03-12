@@ -297,6 +297,7 @@
                 globalVariables.ccCount=[NSString stringWithFormat:@"%lu",(unsigned long)array1.count];//array1.count;
                 //NSLog(@"Array count is : %lu",(unsigned long)array1.count);
                 NSLog(@"Array count is : %@",globalVariables.ccCount);
+                [self viewDidLoad];
             }
             
         }];
