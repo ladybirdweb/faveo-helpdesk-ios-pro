@@ -53,11 +53,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="50" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJk-Db-luG">
-                                <rect key="frame" x="22" y="652" width="380" height="312"/>
+                                <rect key="frame" x="22" y="652" width="355" height="340"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="312" id="3gx-ek-5QE"/>
+                                    <constraint firstAttribute="height" constant="340" id="3gx-ek-5QE"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="312" id="Cw3-f0-zau"/>
-                                    <constraint firstAttribute="width" constant="380" id="VyQ-H8-5zf"/>
+                                    <constraint firstAttribute="width" constant="355" id="VyQ-H8-5zf"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -91,7 +91,7 @@ If that ticket was unassigned before then it will show new agent name, if that t
                             <constraint firstItem="Vfz-VS-8Th" firstAttribute="leading" secondItem="tfF-qc-nP9" secondAttribute="leading" constant="22" id="ULX-QK-TTl"/>
                             <constraint firstItem="oJk-Db-luG" firstAttribute="top" secondItem="cT2-SO-dzj" secondAttribute="bottom" constant="30" id="Yti-Ju-yZB"/>
                             <constraint firstItem="cT2-SO-dzj" firstAttribute="leading" secondItem="tfF-qc-nP9" secondAttribute="leading" constant="74" id="f2n-tO-VPp"/>
-                            <constraint firstAttribute="bottom" secondItem="oJk-Db-luG" secondAttribute="bottom" constant="61" id="fcZ-kJ-WLe"/>
+                            <constraint firstAttribute="bottom" secondItem="oJk-Db-luG" secondAttribute="bottom" constant="33" id="fcZ-kJ-WLe"/>
                             <constraint firstItem="Vfz-VS-8Th" firstAttribute="centerX" secondItem="cT2-SO-dzj" secondAttribute="centerX" id="hQd-S6-e3K"/>
                             <constraint firstAttribute="trailing" secondItem="Vfz-VS-8Th" secondAttribute="trailing" constant="44" id="i0I-gh-fhc"/>
                             <constraint firstItem="cT2-SO-dzj" firstAttribute="top" secondItem="Vfz-VS-8Th" secondAttribute="bottom" constant="22" id="uYJ-EC-fm9"/>

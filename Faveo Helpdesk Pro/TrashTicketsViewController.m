@@ -1175,7 +1175,7 @@
     
     [FTPopOverMenu showFromEvent:event
                    withMenuArray:@[NSLocalizedString(@"Change Ticket Status", nil),NSLocalizedString(@"Open", nil),NSLocalizedString(@"Closed", nil),NSLocalizedString(@"Resolved", nil),NSLocalizedString(@"Delete forever", nil)]
-                      imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"folderIcon"],[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"resolvedIcon"]]
+                      imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"folderIcon"],[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
                        doneBlock:^(NSInteger selectedIndex) {
                            
                            if(selectedIndex==0)

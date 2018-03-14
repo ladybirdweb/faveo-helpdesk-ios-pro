@@ -48,10 +48,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upq-B7-Xao">
-                                <rect key="frame" x="13" y="916" width="363" height="88"/>
+                                <rect key="frame" x="13" y="916" width="358" height="88"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="HlA-og-ULc"/>
-                                    <constraint firstAttribute="width" constant="363" id="b9D-Ms-kwc"/>
+                                    <constraint firstAttribute="width" constant="358" id="b9D-Ms-kwc"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="88" id="sNl-VF-LnX"/>
                                 </constraints>
                                 <attributedString key="attributedText">
@@ -158,11 +158,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQQ-7W-xFK">
-                                <rect key="frame" x="29" y="1530" width="347" height="48"/>
+                                <rect key="frame" x="25" y="1530" width="340" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="5AH-3x-mwI"/>
                                     <constraint firstAttribute="height" constant="48" id="Hnb-35-edc"/>
-                                    <constraint firstAttribute="width" constant="347" id="gbN-tx-n4p"/>
+                                    <constraint firstAttribute="width" constant="340" id="gbN-tx-n4p"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="Like this you can filter with any options like Agent users, Inactive users, Banned users …etc.">
@@ -185,7 +185,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="KQQ-7W-xFK" firstAttribute="leading" secondItem="OxY-cV-DMF" secondAttribute="leading" id="0b8-35-Ic9"/>
+                            <constraint firstItem="KQQ-7W-xFK" firstAttribute="leading" secondItem="OxY-cV-DMF" secondAttribute="leading" constant="-4" id="0b8-35-Ic9"/>
                             <constraint firstItem="ums-oI-QWL" firstAttribute="centerX" secondItem="RPV-Cb-68V" secondAttribute="centerX" id="3xj-0r-qAt"/>
                             <constraint firstItem="Lw2-bF-DCV" firstAttribute="top" secondItem="th0-hX-VWC" secondAttribute="top" constant="28" id="5X2-OB-Pfv"/>
                             <constraint firstItem="ums-oI-QWL" firstAttribute="leading" secondItem="th0-hX-VWC" secondAttribute="leading" constant="29" id="5Y5-LP-Gwh"/>

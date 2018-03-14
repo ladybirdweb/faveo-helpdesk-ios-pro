@@ -24,7 +24,7 @@
                         <rect key="frame" x="1" y="-5" width="417" height="752"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="16" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWA-VI-8zp">
-                                <rect key="frame" x="17" y="42" width="380" height="213"/>
+                                <rect key="frame" x="17" y="42" width="365" height="213"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="213" id="pz6-az-9rr"/>
                                 </constraints>
@@ -76,9 +76,9 @@ See below image one more view appeared which contains three image buttons. First
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7v0-zX-g3X">
-                                <rect key="frame" x="17" y="395" width="380" height="73"/>
+                                <rect key="frame" x="17" y="395" width="360" height="89"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="73" id="YrP-13-xt0"/>
+                                    <constraint firstAttribute="height" constant="89" id="YrP-13-xt0"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -98,15 +98,15 @@ See below image one more view appeared which contains three image buttons. First
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view124.png" translatesAutoresizingMaskIntoConstraints="NO" id="Smb-Sc-nEr">
-                                <rect key="frame" x="17" y="268" width="380" height="104"/>
+                                <rect key="frame" x="17" y="268" width="362" height="104"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="104" id="7y5-i7-zi8"/>
-                                    <constraint firstAttribute="width" constant="380" id="AvR-4T-3tn"/>
+                                    <constraint firstAttribute="width" constant="362" id="AvR-4T-3tn"/>
                                     <constraint firstAttribute="height" constant="104" id="U2K-hb-kup"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view126.png" translatesAutoresizingMaskIntoConstraints="NO" id="0vX-qQ-DOm">
-                                <rect key="frame" x="40" y="495" width="321" height="227"/>
+                                <rect key="frame" x="40" y="515" width="321" height="227"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="321" id="4wP-7t-JWe"/>
                                     <constraint firstAttribute="height" constant="227" id="5VA-aM-9yq"/>
@@ -118,13 +118,13 @@ See below image one more view appeared which contains three image buttons. First
                             <constraint firstItem="7v0-zX-g3X" firstAttribute="top" secondItem="Smb-Sc-nEr" secondAttribute="bottom" constant="23" id="5Pj-o0-q0v"/>
                             <constraint firstItem="Smb-Sc-nEr" firstAttribute="leading" secondItem="7v0-zX-g3X" secondAttribute="leading" id="8Si-Cu-m6n"/>
                             <constraint firstAttribute="trailing" secondItem="0vX-qQ-DOm" secondAttribute="trailing" constant="56" id="ARj-ZH-NhB"/>
-                            <constraint firstItem="Smb-Sc-nEr" firstAttribute="trailing" secondItem="7v0-zX-g3X" secondAttribute="trailing" id="Cc9-0d-NBL"/>
-                            <constraint firstAttribute="bottom" secondItem="0vX-qQ-DOm" secondAttribute="bottom" constant="30" id="NSa-Zd-GJv"/>
+                            <constraint firstItem="Smb-Sc-nEr" firstAttribute="trailing" secondItem="7v0-zX-g3X" secondAttribute="trailing" constant="2" id="Cc9-0d-NBL"/>
+                            <constraint firstAttribute="bottom" secondItem="0vX-qQ-DOm" secondAttribute="bottom" constant="10" id="NSa-Zd-GJv"/>
                             <constraint firstItem="nWA-VI-8zp" firstAttribute="top" secondItem="Wan-Tv-Eaq" secondAttribute="top" constant="42" id="bTH-XN-PpA"/>
                             <constraint firstItem="0vX-qQ-DOm" firstAttribute="leading" secondItem="Wan-Tv-Eaq" secondAttribute="leading" constant="40" id="duK-19-z1p"/>
                             <constraint firstItem="nWA-VI-8zp" firstAttribute="leading" secondItem="Wan-Tv-Eaq" secondAttribute="leading" constant="17" id="h9Q-5a-2yB"/>
-                            <constraint firstItem="nWA-VI-8zp" firstAttribute="trailing" secondItem="Smb-Sc-nEr" secondAttribute="trailing" id="jXf-Fu-oM5"/>
-                            <constraint firstItem="0vX-qQ-DOm" firstAttribute="top" secondItem="7v0-zX-g3X" secondAttribute="bottom" constant="27" id="jf1-1d-T4m"/>
+                            <constraint firstItem="nWA-VI-8zp" firstAttribute="trailing" secondItem="Smb-Sc-nEr" secondAttribute="trailing" constant="3" id="jXf-Fu-oM5"/>
+                            <constraint firstItem="0vX-qQ-DOm" firstAttribute="top" secondItem="7v0-zX-g3X" secondAttribute="bottom" constant="31" id="jf1-1d-T4m"/>
                             <constraint firstItem="Smb-Sc-nEr" firstAttribute="top" secondItem="nWA-VI-8zp" secondAttribute="bottom" constant="13" id="liP-WN-Bus"/>
                             <constraint firstItem="nWA-VI-8zp" firstAttribute="leading" secondItem="Smb-Sc-nEr" secondAttribute="leading" id="w2i-bK-8l5"/>
                         </constraints>

@@ -41,6 +41,15 @@
 		0609ADB620398E2A00DCDC85 /* view122.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB520398E2A00DCDC85 /* view122.png */; };
 		0609ADB920399B8100DCDC85 /* deActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB720399B8000DCDC85 /* deActive.png */; };
 		0609ADBA20399B8100DCDC85 /* Active.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB820399B8100DCDC85 /* Active.png */; };
+		06171515205901BC00E3E14D /* BIZPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06171510205901B700E3E14D /* BIZPopupViewController.m */; };
+		06171516205901BC00E3E14D /* UIViewController+BIZChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06171514205901BC00E3E14D /* UIViewController+BIZChildViewController.m */; };
+		0617151C2059033300E3E14D /* SampleTableCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061715182059032F00E3E14D /* SampleTableCellTableViewCell.xib */; };
+		0617151D2059033300E3E14D /* SampleTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 061715192059033100E3E14D /* SampleTable.m */; };
+		0617151E2059033300E3E14D /* SampleTableCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0617151B2059033300E3E14D /* SampleTableCellTableViewCell.m */; };
+		061715282059049700E3E14D /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 061715212059049700E3E14D /* TPKeyboardAvoidingCollectionView.m */; };
+		061715292059049700E3E14D /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 061715232059049700E3E14D /* TPKeyboardAvoidingScrollView.m */; };
+		0617152A2059049700E3E14D /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 061715252059049700E3E14D /* TPKeyboardAvoidingTableView.m */; };
+		0617152B2059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 061715272059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		0618FA7D204E5367004D2C3F /* ReplyTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0618FA7C204E5367004D2C3F /* ReplyTicketViewController.m */; };
 		0618FA80204E54C9004D2C3F /* InternalNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0618FA7F204E54C9004D2C3F /* InternalNoteViewController.m */; };
 		0618FA83204E9A87004D2C3F /* addCCView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0618FA82204E9A87004D2C3F /* addCCView.m */; };
@@ -289,6 +298,24 @@
 		0609ADB520398E2A00DCDC85 /* view122.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view122.png; sourceTree = "<group>"; };
 		0609ADB720399B8000DCDC85 /* deActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deActive.png; sourceTree = "<group>"; };
 		0609ADB820399B8100DCDC85 /* Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Active.png; sourceTree = "<group>"; };
+		06171510205901B700E3E14D /* BIZPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIZPopupViewController.m; sourceTree = "<group>"; };
+		06171511205901B900E3E14D /* UIViewController+BIZChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BIZChildViewController.h"; sourceTree = "<group>"; };
+		06171512205901BA00E3E14D /* BIZPopupViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIZPopupViewControllerDelegate.h; sourceTree = "<group>"; };
+		06171513205901BB00E3E14D /* BIZPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIZPopupViewController.h; sourceTree = "<group>"; };
+		06171514205901BC00E3E14D /* UIViewController+BIZChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BIZChildViewController.m"; sourceTree = "<group>"; };
+		061715172059032E00E3E14D /* SampleTableCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleTableCellTableViewCell.h; sourceTree = "<group>"; };
+		061715182059032F00E3E14D /* SampleTableCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleTableCellTableViewCell.xib; sourceTree = "<group>"; };
+		061715192059033100E3E14D /* SampleTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleTable.m; sourceTree = "<group>"; };
+		0617151A2059033200E3E14D /* SampleTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleTable.h; sourceTree = "<group>"; };
+		0617151B2059033300E3E14D /* SampleTableCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleTableCellTableViewCell.m; sourceTree = "<group>"; };
+		061715202059049700E3E14D /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
+		061715212059049700E3E14D /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
+		061715222059049700E3E14D /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		061715232059049700E3E14D /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		061715242059049700E3E14D /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		061715252059049700E3E14D /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		061715262059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		061715272059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		0618FA7A204E516D004D2C3F /* AddRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRequester.h; sourceTree = "<group>"; };
 		0618FA7B204E5367004D2C3F /* ReplyTicketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReplyTicketViewController.h; sourceTree = "<group>"; };
 		0618FA7C204E5367004D2C3F /* ReplyTicketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReplyTicketViewController.m; sourceTree = "<group>"; };
@@ -745,6 +772,39 @@
 			path = "TextField Kit";
 			sourceTree = "<group>";
 		};
+		0617150F2059018A00E3E14D /* TableViewPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				0617151F2059049700E3E14D /* TPKeyboardAvoiding */,
+				06171513205901BB00E3E14D /* BIZPopupViewController.h */,
+				06171510205901B700E3E14D /* BIZPopupViewController.m */,
+				06171512205901BA00E3E14D /* BIZPopupViewControllerDelegate.h */,
+				06171511205901B900E3E14D /* UIViewController+BIZChildViewController.h */,
+				06171514205901BC00E3E14D /* UIViewController+BIZChildViewController.m */,
+				0617151A2059033200E3E14D /* SampleTable.h */,
+				061715192059033100E3E14D /* SampleTable.m */,
+				061715172059032E00E3E14D /* SampleTableCellTableViewCell.h */,
+				0617151B2059033300E3E14D /* SampleTableCellTableViewCell.m */,
+				061715182059032F00E3E14D /* SampleTableCellTableViewCell.xib */,
+			);
+			path = TableViewPopUp;
+			sourceTree = "<group>";
+		};
+		0617151F2059049700E3E14D /* TPKeyboardAvoiding */ = {
+			isa = PBXGroup;
+			children = (
+				061715202059049700E3E14D /* TPKeyboardAvoidingCollectionView.h */,
+				061715212059049700E3E14D /* TPKeyboardAvoidingCollectionView.m */,
+				061715222059049700E3E14D /* TPKeyboardAvoidingScrollView.h */,
+				061715232059049700E3E14D /* TPKeyboardAvoidingScrollView.m */,
+				061715242059049700E3E14D /* TPKeyboardAvoidingTableView.h */,
+				061715252059049700E3E14D /* TPKeyboardAvoidingTableView.m */,
+				061715262059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				061715272059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+			);
+			path = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
 		061E30F82035413000603D22 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1072,6 +1132,7 @@
 		D92C35C71F750F83001DD67D /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0617150F2059018A00E3E14D /* TableViewPopUp */,
 				06BB2A3A202C3B3E00B33C43 /* systemIcon.png */,
 				060DE577205162BA005EFB6E /* TextField Kit */,
 				D9EB9FC21E07C44D0001115F /* Reachability */,
@@ -1530,6 +1591,7 @@
 				0609ADA120397BEC00DCDC85 /* multpleticketstatuschnage.jpg in Resources */,
 				D9F9F13C1FB9B2530044DA27 /* check_mark@2x.png in Resources */,
 				06099CD1203AD9160060831A /* view127.png in Resources */,
+				0617151C2059033300E3E14D /* SampleTableCellTableViewCell.xib in Resources */,
 				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
 				0609ADB920399B8100DCDC85 /* deActive.png in Resources */,
 				0672AF97204D28CF006D7918 /* test.xib in Resources */,
@@ -1713,9 +1775,11 @@
 			files = (
 				D9166B551FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m in Sources */,
 				0634EBA5203866A8002CB4E8 /* UserAgentListCell.m in Sources */,
+				061715282059049700E3E14D /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				0634EB5B20380359002CB4E8 /* AllAboutTicketCell1.m in Sources */,
 				D9A2FCB01F18904000C829DD /* NotificationViewController.m in Sources */,
 				06099CAE203AA1A60060831A /* MergeTicketView.m in Sources */,
+				061715292059049700E3E14D /* TPKeyboardAvoidingScrollView.m in Sources */,
 				0634EBAA20386717002CB4E8 /* UserAgentFilterCell.m in Sources */,
 				D9EB9FBD1E07C4490001115F /* SlideNavigationContorllerAnimatorFade.m in Sources */,
 				D9EB9FA51E07C3270001115F /* MyTicketsViewController.m in Sources */,
@@ -1731,6 +1795,7 @@
 				D9AE083E200723DE00DD9E94 /* UIView+CFFrame.m in Sources */,
 				061E312E2035A63000603D22 /* LoginDetailPage1Cell.m in Sources */,
 				D97CA1411FCC229800A7B982 /* LGFilterViewCell.m in Sources */,
+				0617151E2059033300E3E14D /* SampleTableCellTableViewCell.m in Sources */,
 				0624A51A2034733400F1B030 /* HelpSectionHomePage.m in Sources */,
 				D9E57B411EFAA4C1002E4C19 /* UITextField+PasswordField.m in Sources */,
 				0634EBAF20386741002CB4E8 /* UserAgentEditCell.m in Sources */,
@@ -1757,10 +1822,12 @@
 				061E310E20357C0700603D22 /* TicketListMenuTable.m in Sources */,
 				D9AA44461FA890AC00938081 /* BDCustomAlertView.m in Sources */,
 				D9EB9F5B1E07C2A80001115F /* Utils.m in Sources */,
+				0617152A2059049700E3E14D /* TPKeyboardAvoidingTableView.m in Sources */,
 				D9A2FCB41F18942800C829DD /* NotificationTableViewCell.m in Sources */,
 				D9EB9F7D1E07C2F00001115F /* ConversationTableViewCell.m in Sources */,
 				0634EB3C2036EBE3002CB4E8 /* TicketReplayAndInternalNote.m in Sources */,
 				0672AF96204D28CF006D7918 /* test.m in Sources */,
+				0617152B2059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				D9EB9FC51E07C4610001115F /* Reachability.m in Sources */,
 				D9EB9FBF1E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
 				061E30FD2035426800603D22 /* LoginListMenuTable.m in Sources */,
@@ -1770,6 +1837,7 @@
 				0634EB9F203857A6002CB4E8 /* TicketStusChange.m in Sources */,
 				06099CA8203AA1680060831A /* MultipleTicketAssign.m in Sources */,
 				0634EB392036EBC3002CB4E8 /* AllAboutTicketsInformation.m in Sources */,
+				06171515205901BC00E3E14D /* BIZPopupViewController.m in Sources */,
 				D9EB9FA11E07C3270001115F /* UnassignedTicketsViewController.m in Sources */,
 				D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */,
 				D97CA1401FCC229800A7B982 /* LGFilterView.m in Sources */,
@@ -1793,6 +1861,7 @@
 				06099CA5203AA14B0060831A /* MultipleTicketSelectView.m in Sources */,
 				0634EB5120370EC2002CB4E8 /* AllAboutTicketCell2.m in Sources */,
 				D92C35D11F750FDE001DD67D /* LGPlusButton.m in Sources */,
+				06171516205901BC00E3E14D /* UIViewController+BIZChildViewController.m in Sources */,
 				061E310B2035595B00603D22 /* LoginDetailPage2.m in Sources */,
 				0634EB5620370ED5002CB4E8 /* AllAboutTicketCell3.m in Sources */,
 				06099CBC203AA30D0060831A /* MultipleTicketStatusChangeCell.m in Sources */,
@@ -1807,6 +1876,7 @@
 				D9AE08382007231800DD9E94 /* CFMultistageConditionTableView.m in Sources */,
 				D9F9F11A1FB977B40044DA27 /* FilterViewController.m in Sources */,
 				063013912053AC1B006CD0EC /* userSearchDataCell.m in Sources */,
+				0617151D2059033300E3E14D /* SampleTable.m in Sources */,
 				D9AF85311FC421AF005232A0 /* AWNavigationMenuItem.m in Sources */,
 				0634EB7C20382958002CB4E8 /* TicketReplayInternalNoteCell2.m in Sources */,
 				067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */,

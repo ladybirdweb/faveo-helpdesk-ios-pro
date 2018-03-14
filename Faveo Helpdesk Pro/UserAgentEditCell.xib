@@ -47,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userEditProfile.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NQ5-5i-kLu">
-                                <rect key="frame" x="76" y="445" width="253" height="500"/>
+                                <rect key="frame" x="75.5" y="445" width="253" height="500"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="500" id="4mY-5a-xuQ"/>
                                     <constraint firstAttribute="width" constant="253" id="GbS-35-LO1"/>
@@ -59,7 +59,7 @@
                                     <constraint firstAttribute="height" constant="36" id="xcF-Kb-Mki"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="1. How to edit agent and users profile details?">
+                                    <fragment content="1. How to edit agent and users profile?">
                                         <attributes>
                                             <font key="NSFont" size="17" name="TimesNewRomanPS-BoldMT"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -83,7 +83,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view122.png" translatesAutoresizingMaskIntoConstraints="NO" id="San-kX-p3o">
-                                <rect key="frame" x="34" y="132" width="353" height="234"/>
+                                <rect key="frame" x="33.5" y="132" width="353" height="234"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="353" id="Xzb-e6-gZ8"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="234" id="bQF-gF-YKd"/>
@@ -91,9 +91,9 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Guy-lK-Sve">
-                                <rect key="frame" x="21" y="960" width="363" height="119"/>
+                                <rect key="frame" x="30" y="960" width="358" height="119"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="363" id="CZr-vx-ien"/>
+                                    <constraint firstAttribute="width" constant="358" id="CZr-vx-ien"/>
                                     <constraint firstAttribute="height" constant="119" id="MlL-2v-QId"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="119" id="q5V-Ug-sma"/>
                                 </constraints>
@@ -120,7 +120,7 @@ After editing details click on submit button or click on right arrow which is pl
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmb-Jy-ekW">
-                                <rect key="frame" x="21" y="1100" width="335" height="36"/>
+                                <rect key="frame" x="30" y="1100" width="335" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="335" id="YHT-9m-gyY"/>
                                     <constraint firstAttribute="height" constant="36" id="hu0-Pp-4I7"/>
@@ -150,15 +150,15 @@ After editing details click on submit button or click on right arrow which is pl
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Active.png" translatesAutoresizingMaskIntoConstraints="NO" id="SL1-c2-4ym">
-                                <rect key="frame" x="21" y="1200" width="363" height="74"/>
+                                <rect key="frame" x="50" y="1200" width="310" height="65"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="363" id="DgP-WI-Zay"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="74" id="OM4-Q0-73i"/>
-                                    <constraint firstAttribute="height" constant="74" id="g7R-3W-uep"/>
+                                    <constraint firstAttribute="width" constant="310" id="DgP-WI-Zay"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="65" id="OM4-Q0-73i"/>
+                                    <constraint firstAttribute="height" constant="65" id="g7R-3W-uep"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apS-Ya-NlQ">
-                                <rect key="frame" x="21" y="1280" width="368" height="161"/>
+                                <rect key="frame" x="40" y="1280" width="368" height="161"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="368" id="UHa-nS-58u"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="161" id="a6i-f8-gbL"/>
@@ -188,17 +188,17 @@ If you go edit profile option again of that particular agent or user then it sho
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="deActive.png" translatesAutoresizingMaskIntoConstraints="NO" id="ivL-5n-r0n">
-                                <rect key="frame" x="18" y="1450" width="371" height="71"/>
+                                <rect key="frame" x="25" y="1450" width="340" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="71" id="aRT-Uv-buC"/>
-                                    <constraint firstAttribute="height" constant="71" id="h0Y-cZ-lye"/>
-                                    <constraint firstAttribute="width" constant="371" id="rzD-et-3LU"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="aRT-Uv-buC"/>
+                                    <constraint firstAttribute="height" constant="60" id="h0Y-cZ-lye"/>
+                                    <constraint firstAttribute="width" constant="340" id="rzD-et-3LU"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2k-wE-m7w">
-                                <rect key="frame" x="19" y="1540" width="368" height="91"/>
+                                <rect key="frame" x="30" y="1540" width="362" height="91"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="368" id="FDr-mw-JHT"/>
+                                    <constraint firstAttribute="width" constant="362" id="FDr-mw-JHT"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="91" id="WM1-H8-fAe"/>
                                     <constraint firstAttribute="height" constant="91" id="zAH-7R-FI1"/>
                                 </constraints>
@@ -225,38 +225,38 @@ If you go edit profile option again of that particular agent or user then it sho
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ghq-FR-nWX" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="29" id="2IL-C6-kPg"/>
-                            <constraint firstItem="SL1-c2-4ym" firstAttribute="centerX" secondItem="e2k-wE-m7w" secondAttribute="centerX" id="4hP-vS-U8J"/>
-                            <constraint firstItem="SL1-c2-4ym" firstAttribute="leading" secondItem="fmb-Jy-ekW" secondAttribute="leading" id="8Lm-hF-Bkq"/>
+                            <constraint firstItem="SL1-c2-4ym" firstAttribute="centerX" secondItem="e2k-wE-m7w" secondAttribute="centerX" constant="-6" id="4hP-vS-U8J"/>
+                            <constraint firstItem="SL1-c2-4ym" firstAttribute="leading" secondItem="fmb-Jy-ekW" secondAttribute="leading" constant="20" id="8Lm-hF-Bkq"/>
                             <constraint firstAttribute="bottom" secondItem="e2k-wE-m7w" secondAttribute="bottom" constant="143" id="A8N-IJ-JAN"/>
                             <constraint firstItem="fmb-Jy-ekW" firstAttribute="top" secondItem="Guy-lK-Sve" secondAttribute="bottom" constant="21" id="C5c-No-UIo"/>
-                            <constraint firstItem="ivL-5n-r0n" firstAttribute="centerX" secondItem="e2k-wE-m7w" secondAttribute="centerX" id="E4V-aV-bMC"/>
+                            <constraint firstItem="ivL-5n-r0n" firstAttribute="centerX" secondItem="e2k-wE-m7w" secondAttribute="centerX" constant="-16" id="E4V-aV-bMC"/>
                             <constraint firstItem="Ghq-FR-nWX" firstAttribute="top" secondItem="fqt-Qe-BUh" secondAttribute="bottom" constant="8" symbolic="YES" id="Hey-ck-z11"/>
                             <constraint firstItem="NQ5-5i-kLu" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="76" id="IoY-A4-FLx"/>
                             <constraint firstItem="Guy-lK-Sve" firstAttribute="top" secondItem="NQ5-5i-kLu" secondAttribute="bottom" constant="15" id="MBV-86-Lex"/>
-                            <constraint firstItem="ivL-5n-r0n" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="18" id="Nv6-66-YVp"/>
+                            <constraint firstItem="ivL-5n-r0n" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="25" id="Nv6-66-YVp"/>
                             <constraint firstItem="SL1-c2-4ym" firstAttribute="top" secondItem="bhH-oX-TH5" secondAttribute="bottom" constant="2" id="RzD-xD-G6x"/>
                             <constraint firstItem="fqt-Qe-BUh" firstAttribute="top" secondItem="Yyn-MU-TKF" secondAttribute="top" constant="28" id="TiA-FI-1v8"/>
-                            <constraint firstItem="bhH-oX-TH5" firstAttribute="trailing" secondItem="fmb-Jy-ekW" secondAttribute="trailing" id="WtW-nx-YYY"/>
-                            <constraint firstItem="apS-Ya-NlQ" firstAttribute="top" secondItem="SL1-c2-4ym" secondAttribute="bottom" constant="6" id="Xpo-wL-UlI"/>
+                            <constraint firstItem="bhH-oX-TH5" firstAttribute="trailing" secondItem="fmb-Jy-ekW" secondAttribute="trailing" constant="-9" id="WtW-nx-YYY"/>
+                            <constraint firstItem="apS-Ya-NlQ" firstAttribute="top" secondItem="SL1-c2-4ym" secondAttribute="bottom" constant="15" id="Xpo-wL-UlI"/>
                             <constraint firstItem="bhH-oX-TH5" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="34" id="aDt-QY-Mx3"/>
-                            <constraint firstItem="e2k-wE-m7w" firstAttribute="top" secondItem="ivL-5n-r0n" secondAttribute="bottom" constant="19" id="aZV-LV-qW1"/>
+                            <constraint firstItem="e2k-wE-m7w" firstAttribute="top" secondItem="ivL-5n-r0n" secondAttribute="bottom" constant="30" id="aZV-LV-qW1"/>
                             <constraint firstItem="NQ5-5i-kLu" firstAttribute="top" secondItem="85K-gc-KNb" secondAttribute="bottom" constant="17" id="bdf-fm-Xqd"/>
-                            <constraint firstItem="85K-gc-KNb" firstAttribute="trailing" secondItem="apS-Ya-NlQ" secondAttribute="trailing" id="d5g-sA-2Qw"/>
+                            <constraint firstItem="85K-gc-KNb" firstAttribute="trailing" secondItem="apS-Ya-NlQ" secondAttribute="trailing" constant="-19" id="d5g-sA-2Qw"/>
                             <constraint firstItem="San-kX-p3o" firstAttribute="top" secondItem="Ghq-FR-nWX" secondAttribute="bottom" constant="8" symbolic="YES" id="dCd-9i-29M"/>
-                            <constraint firstItem="Guy-lK-Sve" firstAttribute="trailing" secondItem="SL1-c2-4ym" secondAttribute="trailing" id="f7M-LK-sfp"/>
+                            <constraint firstItem="Guy-lK-Sve" firstAttribute="trailing" secondItem="SL1-c2-4ym" secondAttribute="trailing" constant="28" id="f7M-LK-sfp"/>
                             <constraint firstAttribute="trailing" secondItem="fqt-Qe-BUh" secondAttribute="trailing" constant="57" id="fer-e7-lGV"/>
                             <constraint firstItem="San-kX-p3o" firstAttribute="centerX" secondItem="NQ5-5i-kLu" secondAttribute="centerX" constant="8" id="fhe-jE-qit"/>
-                            <constraint firstItem="apS-Ya-NlQ" firstAttribute="trailing" secondItem="ivL-5n-r0n" secondAttribute="trailing" id="gXg-XA-OI4"/>
+                            <constraint firstItem="apS-Ya-NlQ" firstAttribute="trailing" secondItem="ivL-5n-r0n" secondAttribute="trailing" constant="43" id="gXg-XA-OI4"/>
                             <constraint firstItem="bhH-oX-TH5" firstAttribute="top" secondItem="Guy-lK-Sve" secondAttribute="bottom" constant="51" id="gf7-0f-dQX"/>
                             <constraint firstItem="fqt-Qe-BUh" firstAttribute="centerX" secondItem="bhH-oX-TH5" secondAttribute="centerX" id="gkd-RH-oI1"/>
                             <constraint firstItem="Guy-lK-Sve" firstAttribute="leading" secondItem="fmb-Jy-ekW" secondAttribute="leading" id="i4d-Gu-fp3"/>
                             <constraint firstItem="ivL-5n-r0n" firstAttribute="top" secondItem="apS-Ya-NlQ" secondAttribute="bottom" constant="9" id="idY-Rx-VHQ"/>
                             <constraint firstItem="85K-gc-KNb" firstAttribute="centerX" secondItem="Yyn-MU-TKF" secondAttribute="centerX" id="j3p-kM-WNg"/>
-                            <constraint firstItem="Ghq-FR-nWX" firstAttribute="centerX" secondItem="apS-Ya-NlQ" secondAttribute="centerX" id="lNt-0G-gIv"/>
-                            <constraint firstItem="NQ5-5i-kLu" firstAttribute="centerX" secondItem="Guy-lK-Sve" secondAttribute="centerX" id="mJl-bD-aVd"/>
+                            <constraint firstItem="Ghq-FR-nWX" firstAttribute="centerX" secondItem="apS-Ya-NlQ" secondAttribute="centerX" constant="-19" id="lNt-0G-gIv"/>
+                            <constraint firstItem="NQ5-5i-kLu" firstAttribute="centerX" secondItem="Guy-lK-Sve" secondAttribute="centerX" constant="-7" id="mJl-bD-aVd"/>
                             <constraint firstItem="fqt-Qe-BUh" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="27" id="p6X-DF-nfM"/>
                             <constraint firstItem="San-kX-p3o" firstAttribute="leading" secondItem="Yyn-MU-TKF" secondAttribute="leading" constant="34" id="vDg-Ub-b73"/>
-                            <constraint firstItem="SL1-c2-4ym" firstAttribute="leading" secondItem="apS-Ya-NlQ" secondAttribute="leading" id="wPn-HP-yKS"/>
+                            <constraint firstItem="SL1-c2-4ym" firstAttribute="leading" secondItem="apS-Ya-NlQ" secondAttribute="leading" constant="10" id="wPn-HP-yKS"/>
                             <constraint firstItem="85K-gc-KNb" firstAttribute="top" secondItem="San-kX-p3o" secondAttribute="bottom" constant="15" id="wlX-Ae-ugz"/>
                             <constraint firstItem="Ghq-FR-nWX" firstAttribute="leading" secondItem="85K-gc-KNb" secondAttribute="leading" id="zrG-DC-rDF"/>
                         </constraints>

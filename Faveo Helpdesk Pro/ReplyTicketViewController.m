@@ -25,6 +25,7 @@
 #import "GlobalVariables.h"
 #import "BDCustomAlertView.h"
 #import "addCCView.h"
+#import "BIZPopupViewController.h"
 
 @interface ReplyTicketViewController ()<UITextFieldDelegate>
 {
@@ -62,9 +63,15 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     
     _addCCLabelButton.userInteractionEnabled=YES;
+    _viewCCandRemoveCCLabel.userInteractionEnabled=YES;
+    
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickedOnCCSubButton)];
+    _addCCLabelButton.userInteractionEnabled=YES;
+    UITapGestureRecognizer *tapGesture2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewCCorRemoceCCButton)];
     
     [_addCCLabelButton addGestureRecognizer:tapGesture];
+    [_viewCCandRemoveCCLabel addGestureRecognizer:tapGesture2];
+    
     
     if(globalVariables.ccCount==0)
     {
@@ -107,6 +114,17 @@
     
 }
 
+-(void)viewCCorRemoceCCButton
+{
+    
+    NSLog(@"Clicked");
+          
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *smallViewController = [storyboard instantiateViewControllerWithIdentifier:@"SampleTableCellTableViewCellId"];
+    
+    BIZPopupViewController *popupViewController = [[BIZPopupViewController alloc] initWithContentViewController:smallViewController contentSize:CGSizeMake(250, 300)];
+    [self presentViewController:popupViewController animated:NO completion:nil];
+}
 -(void)submitButton1
 {
     NSLog(@"CLicked");
