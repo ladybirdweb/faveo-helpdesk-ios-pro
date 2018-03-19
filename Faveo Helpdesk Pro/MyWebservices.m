@@ -11,11 +11,13 @@
 #import "AppDelegate.h"
 #import "GlobalVariables.h"
 #import "Utils.h"
+#import "InboxViewController.h"
 
 @interface MyWebservices(){
     
     NSString *tokenRefreshed;
     GlobalVariables *globalVariables;
+    InboxViewController * vc;
     Utils *utils;
 }
 
@@ -75,6 +77,30 @@
             if (statusCode != 200) {
                 NSLog(@"Thread--refreshToken--dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                 return ;
+            }
+            
+            if(statusCode == 400)
+            {
+                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                [utils showAlertWithMessage:@"The request could not be understood by the server due to malformed syntax." sendViewController:vc];
+            }
+            else if(statusCode == 404)
+            {
+                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:vc];
+            }
+            else if(statusCode == 405)
+            {
+                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                [utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:vc];
+            }else if(statusCode == 500)
+            {
+                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                [utils showAlertWithMessage:@"T Internal Server Error.Something has gone wrong on the website's server." sendViewController:vc];
             }
             
             NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -186,6 +212,25 @@
                     
                     
                 }
+
+                else if(statusCode == 404)
+                {
+                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:vc];
+                }
+                else if(statusCode == 405)
+                {
+                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:vc];
+                }else if(statusCode == 500)
+                {
+                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [utils showAlertWithMessage:@"T Internal Server Error.Something has gone wrong on the website's server." sendViewController:vc];
+                }
+                
                 else
                     dispatch_async(dispatch_get_main_queue(), ^{
                         block(nil, nil,[NSString stringWithFormat:@"Error-%ld",(long)statusCode]);
@@ -337,7 +382,26 @@
                     }
 
                     
-                }else
+                }
+                
+                else if(statusCode == 404)
+                {
+                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:vc];
+                }
+                else if(statusCode == 405)
+                {
+                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:vc];
+                }else if(statusCode == 500)
+                {
+                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [utils showAlertWithMessage:@"T Internal Server Error.Something has gone wrong on the website's server." sendViewController:vc];
+                }
+                else
                 if (statusCode==429)
                 {
                     if ([[self refreshToken] isEqualToString:@"tokenRefreshed"]) {
@@ -453,7 +517,9 @@
                     }
                 }else if (statusCode==401){
                     
+                    
                     if ([[self refreshToken] isEqualToString:@"tokenRefreshed"]) {
+                
                         dispatch_async(dispatch_get_main_queue(), ^{
                             block(nil,nil,@"tokenRefreshed");
                         });

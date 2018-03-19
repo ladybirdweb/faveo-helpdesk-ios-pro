@@ -68,6 +68,8 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     [Fabric.sharedSDK setDebug:YES];
     [Fabric with:@[[Crashlytics class]]];
     
+    //[FIRCrash sharedInstance].crashCollectionEnabled = NO;
+    
   //  assert(false);
     
     FIRCrashLog(@"Cause Crash button clicked");
