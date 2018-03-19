@@ -809,7 +809,17 @@
             staffID=@"0";
         }
         
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@&cc[]=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID,selectedUserId];
+        [Utils isEmpty:_ccTextField.text];
+        
+        NSString *url;
+        if(![Utils isEmpty:_ccTextField.text])
+        {
+            url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@&cc[]=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID,selectedUserId];
+        }
+        else
+        {
+            url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID];
+        }
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
@@ -827,7 +837,33 @@
                         {
                             NSLog(@"Message is : %@",msg);
                             [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                        }else{
+                        }
+                       else if([msg isEqualToString:@"Error-422"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-404"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
+                        {
+                             NSLog(@"Message is : %@",msg);
+                          [utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                        }
+                        else{
                             [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                             NSLog(@"Error is : %@",msg);
                         }

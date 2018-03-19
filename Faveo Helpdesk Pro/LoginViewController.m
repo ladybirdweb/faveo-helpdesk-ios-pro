@@ -21,7 +21,7 @@
 #import "RMessage.h"
 #import "RMessageView.h"
 #import "GlobalVariables.h"
-#import <Crashlytics/Crashlytics.h>
+
 
 
 @import Crashlytics;
@@ -48,14 +48,7 @@
     [super viewDidLoad];
     
 
-    UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake(20, 50, 100, 30);
-    [button setTitle:@"Crash" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(crashButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
-
-    
-    
+  
     // done button on keyboard was not working so here is solution
     [self.urlTextfield setDelegate:self];
     [self.urlTextfield setReturnKeyType:UIReturnKeyDone];
@@ -93,9 +86,7 @@
 
 
 
-- (IBAction)crashButtonTapped:(id)sender {
-    [[Crashlytics sharedInstance] crash];
-}
+
 
 
 -(void)textFieldFinished:(id)sender

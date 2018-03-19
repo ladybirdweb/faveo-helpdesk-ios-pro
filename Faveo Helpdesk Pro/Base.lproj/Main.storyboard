@@ -1689,7 +1689,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version: 1.8.3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkk-3v-jiw">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version: 1.8.4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkk-3v-jiw">
                                                 <rect key="frame" x="123" y="61" width="73" height="15"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -6367,32 +6367,33 @@
                                                             <rect key="frame" x="126" y="50" width="165" height="1"/>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Internal Note" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DrZ-JS-zNs">
+                                                            <rect key="frame" x="117" y="20" width="180" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="180" id="vGq-r1-Ara"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="18"/>
+                                                            <color key="textColor" red="1" green="0.4336371933" blue="0.78928040759999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="rD3-YK-PMa" secondAttribute="bottom" constant="11" id="8RA-Jl-Ejm"/>
-                                                        <constraint firstItem="rD3-YK-PMa" firstAttribute="leading" secondItem="9u7-cc-N81" secondAttribute="leading" constant="126" id="hyb-8V-GzS"/>
-                                                        <constraint firstAttribute="trailing" secondItem="rD3-YK-PMa" secondAttribute="trailing" constant="123" id="p1l-Gg-gyZ"/>
-                                                        <constraint firstItem="rD3-YK-PMa" firstAttribute="top" secondItem="9u7-cc-N81" secondAttribute="top" constant="50" id="yk1-FF-8jT"/>
+                                                        <constraint firstAttribute="bottom" secondItem="rD3-YK-PMa" secondAttribute="bottom" constant="11" id="G0u-fN-LBe"/>
+                                                        <constraint firstItem="rD3-YK-PMa" firstAttribute="top" secondItem="DrZ-JS-zNs" secondAttribute="bottom" constant="10" id="GQY-Ff-5VI"/>
+                                                        <constraint firstItem="DrZ-JS-zNs" firstAttribute="top" secondItem="9u7-cc-N81" secondAttribute="top" constant="20" id="Jqs-IW-ICn"/>
+                                                        <constraint firstItem="rD3-YK-PMa" firstAttribute="leading" secondItem="9u7-cc-N81" secondAttribute="leading" constant="126" id="e8h-1A-dGW"/>
+                                                        <constraint firstItem="DrZ-JS-zNs" firstAttribute="centerX" secondItem="9u7-cc-N81" secondAttribute="centerX" id="hp6-Z3-z2K"/>
+                                                        <constraint firstAttribute="trailing" secondItem="rD3-YK-PMa" secondAttribute="trailing" constant="123" id="mRW-Cr-Ret"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Internal Note" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DrZ-JS-zNs">
-                                                    <rect key="frame" x="117" y="8" width="180" height="43"/>
-                                                    <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="18"/>
-                                                    <color key="textColor" red="1" green="0.4336371933" blue="0.78928040759999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="1" green="0.66357792844815544" blue="0.63707504122325953" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstItem="DrZ-JS-zNs" firstAttribute="top" secondItem="vCu-nf-ZyV" secondAttribute="topMargin" constant="-3" id="1fp-qa-lFh"/>
-                                                <constraint firstItem="DrZ-JS-zNs" firstAttribute="bottom" secondItem="vCu-nf-ZyV" secondAttribute="bottomMargin" id="6XN-Pd-XJu"/>
                                                 <constraint firstAttribute="trailing" secondItem="9u7-cc-N81" secondAttribute="trailing" id="Mqo-Ma-XDm"/>
                                                 <constraint firstItem="9u7-cc-N81" firstAttribute="centerY" secondItem="vCu-nf-ZyV" secondAttribute="centerY" id="WEJ-Zw-fFq"/>
                                                 <constraint firstItem="9u7-cc-N81" firstAttribute="leading" secondItem="vCu-nf-ZyV" secondAttribute="leading" id="jWE-JV-b3w"/>
-                                                <constraint firstItem="DrZ-JS-zNs" firstAttribute="centerX" secondItem="9u7-cc-N81" secondAttribute="centerX" id="lpa-US-EDx"/>
                                                 <constraint firstItem="9u7-cc-N81" firstAttribute="top" secondItem="vCu-nf-ZyV" secondAttribute="top" id="oxq-oi-U7B"/>
-                                                <constraint firstItem="DrZ-JS-zNs" firstAttribute="leading" secondItem="vCu-nf-ZyV" secondAttribute="leadingMargin" constant="97" id="wuC-uB-Pmp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

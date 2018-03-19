@@ -548,7 +548,7 @@
     
     NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
  //   NSString *client_id=[finaldic objectForKey:@"id"];
-    
+    //userID
     globalVariables.userID=[finaldic objectForKey:@"id"];
     
     globalVariables.First_name=[finaldic objectForKey:@"first_name"];

@@ -557,8 +557,9 @@
         }
     }
     else if ([sen isEqualToString:@"users"]){
-    
-        globalVariables.iD=[profileDict objectForKey:@"id"];
+    //globalVariables.userID
+     //  globalVariables.iD=[profileDict objectForKey:@"id"];
+        globalVariables.userID=[profileDict objectForKey:@"id"];
         globalVariables.First_name=  [profileDict objectForKey:@"changed_by_first_name"];
         globalVariables.Last_name= [profileDict objectForKey:@"changed_by_last_name"];
        

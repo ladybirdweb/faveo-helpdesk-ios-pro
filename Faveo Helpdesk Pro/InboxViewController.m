@@ -107,11 +107,11 @@
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
     
-    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
-    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
-    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
+//    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+//    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
+//    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+//    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
+//    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
     
     
     
@@ -123,7 +123,7 @@
     [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    [rightBarButtonItems addSubview:moreButton];
+  //  [rightBarButtonItems addSubview:moreButton];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
@@ -585,6 +585,31 @@
                         {
                             [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                        else if([msg isEqualToString:@"Error-422"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-404"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
                         }
                         else{
                             

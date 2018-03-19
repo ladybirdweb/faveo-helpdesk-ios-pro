@@ -185,7 +185,33 @@
                     if (msg) {
                         [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         
-                    }else if(error)  {
+                    }else if([msg isEqualToString:@"Error-422"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-404"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                    }
+                    
+                    else if(error)  {
                         [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
                     }
