@@ -1445,8 +1445,7 @@
 				E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */,
 				51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */,
 				0643C94D2046AA8B007DC824 /* CopyFiles */,
-				0643C94E2046AA9A007DC824 /* Crash Analytics Script */,
-				0643C9512046AEBA007DC824 /* Crash Reporting Script */,
+				06B2068D205FBE3F00FF03BE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1665,33 +1664,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0643C94E2046AA9A007DC824 /* Crash Analytics Script */ = {
+		06B2068D205FBE3F00FF03BE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Crash Analytics Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
-		};
-		0643C9512046AEBA007DC824 /* Crash Reporting Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Crash Reporting Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:1:661051343223:ios:1581c2938664109a\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym-util.bash \"key/faveo-helpdesk-pro-6dafa-firebase-crashreporting-s5q0n-f2ef3b6cb1.json\"";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 3d31c3fca25cb228d17bfa05856d933d97e90db1 67564a3dc39ee26711efe06322fa00b99e69a63e26e5d755afe7339b6f22ceb1";
 		};
 		51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

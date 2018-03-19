@@ -16,6 +16,8 @@
 #import "MyWebservices.h"
 #import "ClientDetailViewController.h"
 #import "IQKeyboardManager.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @import Fabric;
 @import Crashlytics;
