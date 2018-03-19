@@ -16,6 +16,8 @@
 #import "MyWebservices.h"
 #import "ClientDetailViewController.h"
 #import "IQKeyboardManager.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @import Fabric;
 @import Crashlytics;
@@ -67,6 +69,8 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     [FIRApp configure];
     [Fabric.sharedSDK setDebug:YES];
     [Fabric with:@[[Crashlytics class]]];
+    
+    //[FIRCrash sharedInstance].crashCollectionEnabled = NO;
     
   //  assert(false);
     

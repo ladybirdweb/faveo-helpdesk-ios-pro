@@ -23,10 +23,10 @@
 #import "RMessageView.h"
 #import "AddRequester.h"
 #import "GlobalVariables.h"
+#import "UITextField+AutoSuggestion.h"
 
 
-
-@interface CreateTicketViewController ()<RMessageProtocol>{
+@interface CreateTicketViewController ()<RMessageProtocol,UITextFieldDelegate,UITextFieldAutoSuggestionDataSource>{
     
     Utils *utils;
     NSUserDefaults *userDefaults;
@@ -44,6 +44,25 @@
     
     GlobalVariables *globalVariables;
     NSDictionary *priDicc1;
+    
+    
+    NSMutableArray *usersArray;
+    NSMutableArray *uniqueNameArray;
+    NSMutableArray *uniqueIdArray;
+    NSMutableArray *UniqueuserLastNameArray;
+    
+    NSMutableArray *userNameArray;
+    NSMutableArray *userLastNameArray;
+    NSMutableArray * staff1_idArray;
+    
+    NSMutableArray *profilePicArray;
+    NSMutableArray * UniqueprofilePicArray;
+    
+     NSString *selectedUserEmail;
+    
+    NSNumber *user_id1;
+    
+    NSNumber *selectedUserId;
 }
 
 - (void)helpTopicWasSelected:(NSNumber *)selectedIndex element:(id)element;
@@ -116,12 +135,47 @@
         _mobileView.text=globalVariables.mobileAddRequester;
         _codeTextField.text=globalVariables.mobileCode;
     
+    [_ccTextField endEditing:NO ];
+    [_priorityTextField endEditing:YES];
+    [_helpTopicTextField endEditing:YES];
+    
+    self.ccTextField.delegate = self;
+    self.ccTextField.autoSuggestionDataSource = self;
+    self.ccTextField.fieldIdentifier =@"oneId";
+    self.ccTextField.showImmediately = true;
+    [self.ccTextField observeTextFieldChanges];
+    
+    user_id1=[[NSNumber alloc]init];
+    selectedUserId=[[NSNumber alloc]init];
+    
+    staff_idArray=[[NSMutableArray alloc]init];
+    userNameArray=[[NSMutableArray alloc]init];
+    
+    userLastNameArray=[[NSMutableArray alloc]init];
+    //UniqueuserLastNameArray
+    uniqueNameArray=[[NSMutableArray alloc]init];
+    UniqueuserLastNameArray=[[NSMutableArray alloc]init];
+    uniqueIdArray=[[NSMutableArray alloc]init];
+    
+    profilePicArray=[[NSMutableArray alloc]init];
+    UniqueprofilePicArray=[[NSMutableArray alloc]init];
+    
+    //dismissing view
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard12)];
+    
+    [self.view addGestureRecognizer:tap];
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
 }
 
+-(void)dismissKeyboard12
+{
+    [_ccTextField resignFirstResponder];
+
+}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
@@ -755,7 +809,17 @@
             staffID=@"0";
         }
         
-        NSString *url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID];
+        [Utils isEmpty:_ccTextField.text];
+        
+        NSString *url;
+        if(![Utils isEmpty:_ccTextField.text])
+        {
+            url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@&cc[]=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID,selectedUserId];
+        }
+        else
+        {
+            url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID];
+        }
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
@@ -773,7 +837,33 @@
                         {
                             NSLog(@"Message is : %@",msg);
                             [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                        }else{
+                        }
+                       else if([msg isEqualToString:@"Error-422"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-404"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
+                        {
+                             NSLog(@"Message is : %@",msg);
+                          [utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                        }
+                        else{
                             [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                             NSLog(@"Error is : %@",msg);
                         }
@@ -1090,128 +1180,216 @@
     return YES;
 }
 
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//
-//
-//    // verify the text field you wanna validate
-//    if (textField == _subjectTextField) {
-//
-//        // do not allow the first character to be space | do not allow more than one space
-//        if ([string isEqualToString:@" "]) {
-//            if (!textField.text.length)
-//                return NO;
-////            if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
-////                return NO;
-//        }
-//
-//        // allow backspace
-//        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
-//            return YES;
-//        }
-//
-//        ///NARENDRA-SUBJECT-100 char
-//        // in case you need to limit the max number of characters
-//        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 100) {
-//            return NO;
-//        }
-//
-//        // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-//        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.&?,()*&:;' "];
-//
-//        if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
-//            return NO;
-//        }
-//
-//    }else  if (textField == _mobileTextField) {
-//
-//             //do not allow the first character to be space | do not allow more than one space
-//                    if ([string isEqualToString:@" "]) {
-//                        if (!textField.text.length)
-//                            return NO;
-////                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
-////                            return NO;
-//                    }
-//
-//            // allow backspace
-//            if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
-//                return YES;
-//            }
-//
-//            // in case you need to limit the max number of characters
-//             if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 15) {
-//                 return NO;
-//            }
-//
-//            // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-//            NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"1234567890"];
-//
-//            if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
-//                return NO;
-//            }
-//
-//    } else  if (textField == _emailTextField) {
-//
-//        //do not allow the first character to be space | do not allow more than one space
-//        if ([string isEqualToString:@" "]) {
-//            if (!textField.text.length)
-//                return NO;
-//            //                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
-//            //                            return NO;
-//        }
-//
-//        // allow backspace
-//        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
-//            return YES;
-//        }
-//
-//        // in case you need to limit the max number of characters
-//        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 40) {
-//            return NO;
-//        }
-//
-//        // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-//        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@. "];
-//
-//        if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
-//            return NO;
-//        }
-//
-//    }/*else if(textField==_firstNameTextField || textField==_lastNameTextField || textField==_emailTextField|| textField==_msgTextField){ */
-//    else if(textField==_firstNameTextField || textField==_lastNameTextField || textField==_emailTextField){
-//
-//        //do not allow the first character to be space | do not allow more than one space
-//        if ([string isEqualToString:@" "]) {
-//            if (!textField.text.length)
-//                return NO;
-//        }
-//        // allow backspace
-//        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
-//            return YES;
-//        }
-//
-//        if (textField==_firstNameTextField || textField==_lastNameTextField) {
-//            // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-//
-//            //        // in case you need to limit the max number of characters
-//                    if ([textField.text stringByReplacingCharactersInRange:range withString:string].length > 15) {
-//                        return NO;
-//                    }
-//
-//            NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "];
-//
-//            if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
-//                return NO;
-//            }
-//        }
-//
-//    }
-//
-//    return YES;
-//}
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSLog(@"Data is : %@",_ccTextField.text);
+    [self collaboratorApiMethod:_ccTextField.text];
+    return YES;
+}
+
+-(void)collaboratorApiMethod:(NSString*)valueFromTextField
+{
+    
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+    }else{
+        
+        //  [[AppDelegate sharedAppdelegate] showProgressView];
+        //http://jamboreebliss.com/sayarnew/public/api/v1/helpdesk/collaborator/search?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9qYW1ib3JlZWJsaXNzLmNvbS9zYXlhcm5ldy9wdWJsaWMvYXBpL3YxL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTUyMDMyMjA1MCwiZXhwIjoxNTIwMzIyMjkwLCJuYmYiOjE1MjAzMjIwNTAsImp0aSI6IlBJT2ZGZG8zYWZlUGZYdkIifQ.LWZQWkOOCHI7vBhf9PgKHPHZnCRPZnuiR8NzPpItmO4&term=ar
+        
+        
+        NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/search?token=%@&term=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],valueFromTextField];
+        
+        MyWebservices *webservices=[MyWebservices sharedInstance];
+        [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+            
+            if (error || [msg containsString:@"Error"]) {
+                
+                if (msg) {
+                    if([msg isEqualToString:@"Error-403"])
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-402"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                    }else if([msg isEqualToString:@"Error-422"]){
+                        
+                        NSLog(@"Message is : %@",msg);
+                    }else{
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        NSLog(@"Error is11 : %@",msg);
+                    }
+                    
+                }else if(error)  {
+                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    NSLog(@"Thread-NO4-Collaborator-Refresh-error == %@",error.localizedDescription);
+                }
+                
+                return ;
+            }
+            
+            if ([msg isEqualToString:@"tokenRefreshed"]) {
+                
+                [self collaboratorApiMethod:valueFromTextField];
+                NSLog(@"Thread--NO4-call-Collaborator");
+                return;
+            }
+            
+            if (json) {
+                NSLog(@"JSON-HelpSupport-%@",json);
+                //   NSLog(@"JSON-HelpSupport-%@",json);
+                
+                usersArray=[json objectForKey:@"users"];
+                // NSIndexPath *indexpath;
+                
+                //  NSDictionary *userSearchDictionary=[usersArray objectAtIndex:indexpath.row];
+                
+                
+                
+                for (NSDictionary *dicc in usersArray) {
+                    if ([dicc objectForKey:@"first_name"]) {
+                        [userNameArray addObject:[dicc objectForKey:@"email"]];
+                        //  [userLastNameArray addObject:[dicc objectForKey:@"last_name"]];
+                        [staff1_idArray addObject:[dicc objectForKey:@"id"]];
+                        [profilePicArray addObject:[dicc objectForKey:@"profile_pic"]];
+                    }
+                    
+                }
+                
+                uniqueNameArray = [NSMutableArray array];
+                
+                for (id obj in userNameArray) {
+                    if (![uniqueNameArray containsObject:obj]) {
+                        [uniqueNameArray addObject:obj];
+                    }
+                }
+                
+                
+                uniqueIdArray = [NSMutableArray array];
+                
+                for (id obj in staff1_idArray) {
+                    if (![uniqueIdArray containsObject:obj]) {
+                        [uniqueIdArray addObject:obj];
+                    }
+                }
+                
+                UniqueprofilePicArray = [NSMutableArray array];
+                
+                for (id obj in profilePicArray) {
+                    if (![UniqueprofilePicArray containsObject:obj]) {
+                        [UniqueprofilePicArray addObject:obj];
+                    }
+                }
+                
+                
+                NSLog(@"Names are : %@",uniqueNameArray);
+                NSLog(@"Id are : %@",uniqueIdArray);
+                
+                
+            }
+            
+        }];
+    }
+    
+}
+
+#pragma mark - UITextFieldAutoSuggestionDataSource
+
+- (UITableViewCell *)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath forText:(NSString *)text {
+    
+    static NSString *cellIdentifier = @"MonthAutoSuggestionCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    NSArray *months = uniqueNameArray;
+    //    NSArray *image = UniqueprofilePicArray;
+    
+    
+    if (text.length > 0) {
+        NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", text];
+        months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
+    }
+    
+    cell.textLabel.text = months[indexPath.row];
+    //cell.imageView.image = [UIImage imageNamed:[image objectAtIndex:indexPath.row]];
+    
+    
+    
+    
+    // NSLog(@"id is : %@",staff_idArray[indexPath.row ]);
+    
+    return cell;
+    
+}
+
+- (NSInteger)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section forText:(NSString *)text {
+    
+    if (text.length == 0) {
+        return uniqueNameArray.count;
+    }
+    
+    NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", text];
+    NSInteger count = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate].count;
+    return count;
+    
+}
+
+
+- (CGFloat)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath forText:(NSString *)text {
+    return 50;
+}
+
+
+- (void)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath forText:(NSString *)text {
+    // NSLog(@"Selected suggestion at index row - %ld", (long)indexPath.row);
+    
+    NSArray *months = userNameArray;
+    
+    if (text.length > 0) {
+        NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", text];
+        months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
+    }
+    
+    self.ccTextField.text =   months[indexPath.row];
+    
+    for (NSDictionary *dic in usersArray)
+    {
+        NSString *name  = dic[@"email"];
+        
+        if([name isEqual:_ccTextField.text])
+        {
+            selectedUserId= dic[@"id"];
+            selectedUserEmail=dic[@"email"];
+            
+            NSLog(@"id is : %@",selectedUserId);
+            NSLog(@"Email is : %@",selectedUserEmail);
+            
+        }
+    }
+    
+}
+
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if(textField==_ccTextField)
+    {
+        return YES;
+    }else{
     return NO;
+    }
 }
 
 

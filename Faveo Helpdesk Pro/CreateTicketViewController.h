@@ -265,5 +265,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *addReqImg;
 
 
+@property (weak, nonatomic) IBOutlet UITextField *ccTextField;
+
+
 
 @end

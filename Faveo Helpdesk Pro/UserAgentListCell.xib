@@ -83,9 +83,9 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vI3-d3-NaF">
-                                <rect key="frame" x="14" y="1187" width="386" height="77"/>
+                                <rect key="frame" x="25" y="1187" width="369" height="77"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="386" id="Kxk-3K-gcb"/>
+                                    <constraint firstAttribute="width" constant="369" id="Kxk-3K-gcb"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="77" id="SwO-K3-4W3"/>
                                     <constraint firstAttribute="height" constant="77" id="nV6-AO-zEd"/>
                                 </constraints>
@@ -128,8 +128,8 @@
                             <constraint firstItem="4Ml-XD-FeU" firstAttribute="top" secondItem="JMa-WG-d0r" secondAttribute="top" constant="31" id="Unj-ze-Q6y"/>
                             <constraint firstItem="4Ml-XD-FeU" firstAttribute="centerX" secondItem="mYR-88-RSp" secondAttribute="centerX" constant="-6.5" id="aZh-GL-DM9"/>
                             <constraint firstItem="uM6-5v-PKz" firstAttribute="leading" secondItem="JMa-WG-d0r" secondAttribute="leading" constant="81" id="f6r-m2-cBu"/>
-                            <constraint firstItem="vI3-d3-NaF" firstAttribute="centerX" secondItem="JMa-WG-d0r" secondAttribute="centerX" id="htc-8A-uya"/>
-                            <constraint firstItem="uM6-5v-PKz" firstAttribute="centerX" secondItem="vI3-d3-NaF" secondAttribute="centerX" id="i4j-de-Qe0"/>
+                            <constraint firstItem="vI3-d3-NaF" firstAttribute="centerX" secondItem="JMa-WG-d0r" secondAttribute="centerX" constant="2" id="htc-8A-uya"/>
+                            <constraint firstItem="uM6-5v-PKz" firstAttribute="centerX" secondItem="vI3-d3-NaF" secondAttribute="centerX" constant="-2" id="i4j-de-Qe0"/>
                             <constraint firstItem="4Ml-XD-FeU" firstAttribute="leading" secondItem="Hnu-WR-1vM" secondAttribute="leading" id="ltR-xf-5pL"/>
                             <constraint firstItem="vI3-d3-NaF" firstAttribute="top" secondItem="uM6-5v-PKz" secondAttribute="bottom" constant="23" id="qKg-RY-ss3"/>
                         </constraints>

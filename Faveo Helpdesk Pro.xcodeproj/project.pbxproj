@@ -41,6 +41,19 @@
 		0609ADB620398E2A00DCDC85 /* view122.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB520398E2A00DCDC85 /* view122.png */; };
 		0609ADB920399B8100DCDC85 /* deActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB720399B8000DCDC85 /* deActive.png */; };
 		0609ADBA20399B8100DCDC85 /* Active.png in Resources */ = {isa = PBXBuildFile; fileRef = 0609ADB820399B8100DCDC85 /* Active.png */; };
+		06171515205901BC00E3E14D /* BIZPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06171510205901B700E3E14D /* BIZPopupViewController.m */; };
+		06171516205901BC00E3E14D /* UIViewController+BIZChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06171514205901BC00E3E14D /* UIViewController+BIZChildViewController.m */; };
+		0617151C2059033300E3E14D /* SampleTableCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061715182059032F00E3E14D /* SampleTableCellTableViewCell.xib */; };
+		0617151D2059033300E3E14D /* SampleTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 061715192059033100E3E14D /* SampleTable.m */; };
+		0617151E2059033300E3E14D /* SampleTableCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0617151B2059033300E3E14D /* SampleTableCellTableViewCell.m */; };
+		061715282059049700E3E14D /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 061715212059049700E3E14D /* TPKeyboardAvoidingCollectionView.m */; };
+		061715292059049700E3E14D /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 061715232059049700E3E14D /* TPKeyboardAvoidingScrollView.m */; };
+		0617152A2059049700E3E14D /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 061715252059049700E3E14D /* TPKeyboardAvoidingTableView.m */; };
+		0617152B2059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 061715272059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		0618FA7D204E5367004D2C3F /* ReplyTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0618FA7C204E5367004D2C3F /* ReplyTicketViewController.m */; };
+		0618FA80204E54C9004D2C3F /* InternalNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0618FA7F204E54C9004D2C3F /* InternalNoteViewController.m */; };
+		0618FA83204E9A87004D2C3F /* addCCView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0618FA82204E9A87004D2C3F /* addCCView.m */; };
+		061CAA3B20525281007EA8B6 /* TicketSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061CAA3A20525281007EA8B6 /* TicketSearchViewController.m */; };
 		061E30FD2035426800603D22 /* LoginListMenuTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E30FC2035426800603D22 /* LoginListMenuTable.m */; };
 		061E31042035479A00603D22 /* LoginListMenuTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E31022035479A00603D22 /* LoginListMenuTableCell.m */; };
 		061E31052035479A00603D22 /* LoginListMenuTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061E31032035479A00603D22 /* LoginListMenuTableCell.xib */; };
@@ -60,13 +73,11 @@
 		061E313A2035A96300603D22 /* inbox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061E31362035A96100603D22 /* inbox.jpg */; };
 		061E313B2035A96300603D22 /* login.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061E31372035A96200603D22 /* login.jpg */; };
 		061E313C2035A96300603D22 /* url.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061E31382035A96300603D22 /* url.jpg */; };
-		0624A5192034733400F1B030 /* three.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0624A5112034732E00F1B030 /* three.jpeg */; };
 		0624A51A2034733400F1B030 /* HelpSectionHomePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0624A5122034732E00F1B030 /* HelpSectionHomePage.m */; };
 		0624A51B2034733400F1B030 /* HelpSectionHomePageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0624A5132034732F00F1B030 /* HelpSectionHomePageCell.m */; };
-		0624A51C2034733400F1B030 /* one.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0624A5142034733000F1B030 /* one.jpeg */; };
 		0624A51D2034733400F1B030 /* HelpSectionHomePageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0624A5152034733100F1B030 /* HelpSectionHomePageCell.xib */; };
-		0624A51E2034733400F1B030 /* two.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0624A5172034733300F1B030 /* two.jpeg */; };
-		0624A51F2034733400F1B030 /* four.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0624A5182034733400F1B030 /* four.jpeg */; };
+		063013912053AC1B006CD0EC /* userSearchDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0630138F2053AC1B006CD0EC /* userSearchDataCell.m */; };
+		063013922053AC1B006CD0EC /* userSearchDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 063013902053AC1B006CD0EC /* userSearchDataCell.xib */; };
 		0634EB352036EA7E002CB4E8 /* AllAboutTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB332036EA7E002CB4E8 /* AllAboutTicketCell.m */; };
 		0634EB362036EA7E002CB4E8 /* AllAboutTicketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0634EB342036EA7E002CB4E8 /* AllAboutTicketCell.xib */; };
 		0634EB392036EBC3002CB4E8 /* AllAboutTicketsInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB382036EBC3002CB4E8 /* AllAboutTicketsInformation.m */; };
@@ -287,6 +298,33 @@
 		0609ADB520398E2A00DCDC85 /* view122.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view122.png; sourceTree = "<group>"; };
 		0609ADB720399B8000DCDC85 /* deActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deActive.png; sourceTree = "<group>"; };
 		0609ADB820399B8100DCDC85 /* Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Active.png; sourceTree = "<group>"; };
+		06171510205901B700E3E14D /* BIZPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIZPopupViewController.m; sourceTree = "<group>"; };
+		06171511205901B900E3E14D /* UIViewController+BIZChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BIZChildViewController.h"; sourceTree = "<group>"; };
+		06171512205901BA00E3E14D /* BIZPopupViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIZPopupViewControllerDelegate.h; sourceTree = "<group>"; };
+		06171513205901BB00E3E14D /* BIZPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIZPopupViewController.h; sourceTree = "<group>"; };
+		06171514205901BC00E3E14D /* UIViewController+BIZChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BIZChildViewController.m"; sourceTree = "<group>"; };
+		061715172059032E00E3E14D /* SampleTableCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleTableCellTableViewCell.h; sourceTree = "<group>"; };
+		061715182059032F00E3E14D /* SampleTableCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleTableCellTableViewCell.xib; sourceTree = "<group>"; };
+		061715192059033100E3E14D /* SampleTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleTable.m; sourceTree = "<group>"; };
+		0617151A2059033200E3E14D /* SampleTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleTable.h; sourceTree = "<group>"; };
+		0617151B2059033300E3E14D /* SampleTableCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleTableCellTableViewCell.m; sourceTree = "<group>"; };
+		061715202059049700E3E14D /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
+		061715212059049700E3E14D /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
+		061715222059049700E3E14D /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		061715232059049700E3E14D /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		061715242059049700E3E14D /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		061715252059049700E3E14D /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		061715262059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		061715272059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		0618FA7A204E516D004D2C3F /* AddRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRequester.h; sourceTree = "<group>"; };
+		0618FA7B204E5367004D2C3F /* ReplyTicketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReplyTicketViewController.h; sourceTree = "<group>"; };
+		0618FA7C204E5367004D2C3F /* ReplyTicketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReplyTicketViewController.m; sourceTree = "<group>"; };
+		0618FA7E204E54C9004D2C3F /* InternalNoteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InternalNoteViewController.h; sourceTree = "<group>"; };
+		0618FA7F204E54C9004D2C3F /* InternalNoteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InternalNoteViewController.m; sourceTree = "<group>"; };
+		0618FA81204E9A87004D2C3F /* addCCView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = addCCView.h; sourceTree = "<group>"; };
+		0618FA82204E9A87004D2C3F /* addCCView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = addCCView.m; sourceTree = "<group>"; };
+		061CAA3920525281007EA8B6 /* TicketSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketSearchViewController.h; sourceTree = "<group>"; };
+		061CAA3A20525281007EA8B6 /* TicketSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketSearchViewController.m; sourceTree = "<group>"; };
 		061E30FB2035426800603D22 /* LoginListMenuTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginListMenuTable.h; sourceTree = "<group>"; };
 		061E30FC2035426800603D22 /* LoginListMenuTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginListMenuTable.m; sourceTree = "<group>"; };
 		061E31012035479A00603D22 /* LoginListMenuTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginListMenuTableCell.h; sourceTree = "<group>"; };
@@ -318,14 +356,13 @@
 		061E31372035A96200603D22 /* login.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = login.jpg; sourceTree = "<group>"; };
 		061E31382035A96300603D22 /* url.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = url.jpg; sourceTree = "<group>"; };
 		0624A5102034732D00F1B030 /* HelpSectionHomePageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpSectionHomePageCell.h; sourceTree = "<group>"; };
-		0624A5112034732E00F1B030 /* three.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = three.jpeg; sourceTree = "<group>"; };
 		0624A5122034732E00F1B030 /* HelpSectionHomePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpSectionHomePage.m; sourceTree = "<group>"; };
 		0624A5132034732F00F1B030 /* HelpSectionHomePageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpSectionHomePageCell.m; sourceTree = "<group>"; };
-		0624A5142034733000F1B030 /* one.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = one.jpeg; sourceTree = "<group>"; };
 		0624A5152034733100F1B030 /* HelpSectionHomePageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpSectionHomePageCell.xib; sourceTree = "<group>"; };
 		0624A5162034733200F1B030 /* HelpSectionHomePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpSectionHomePage.h; sourceTree = "<group>"; };
-		0624A5172034733300F1B030 /* two.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = two.jpeg; sourceTree = "<group>"; };
-		0624A5182034733400F1B030 /* four.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = four.jpeg; sourceTree = "<group>"; };
+		0630138E2053AC1B006CD0EC /* userSearchDataCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = userSearchDataCell.h; sourceTree = "<group>"; };
+		0630138F2053AC1B006CD0EC /* userSearchDataCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = userSearchDataCell.m; sourceTree = "<group>"; };
+		063013902053AC1B006CD0EC /* userSearchDataCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = userSearchDataCell.xib; sourceTree = "<group>"; };
 		0634EB322036EA7E002CB4E8 /* AllAboutTicketCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllAboutTicketCell.h; sourceTree = "<group>"; };
 		0634EB332036EA7E002CB4E8 /* AllAboutTicketCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllAboutTicketCell.m; sourceTree = "<group>"; };
 		0634EB342036EA7E002CB4E8 /* AllAboutTicketCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllAboutTicketCell.xib; sourceTree = "<group>"; };
@@ -444,7 +481,6 @@
 		D9532C171E9CE90E0063B318 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D9532C181E9CE90F0063B318 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D9532C191E9CE9110063B318 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D953D53C1FA321420077D519 /* AddRequester.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRequester.h; sourceTree = "<group>"; };
 		D953D53D1FA321420077D519 /* AddRequester.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRequester.m; sourceTree = "<group>"; };
 		D955A5501F2A05630045429F /* a.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = a.xcassets; sourceTree = "<group>"; };
 		D97B13771E07FBA8007F46DA /* Faveo Helpdesk Pro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Faveo Helpdesk Pro.entitlements"; sourceTree = "<group>"; };
@@ -627,6 +663,148 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		060DE57120516070005EFB6E /* Ticket */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9F911E07C3270001115F /* CreateTicketViewController.h */,
+				D9EB9F921E07C3270001115F /* CreateTicketViewController.m */,
+				0618FA7A204E516D004D2C3F /* AddRequester.h */,
+				D953D53D1FA321420077D519 /* AddRequester.m */,
+				D9EB9F931E07C3270001115F /* InboxViewController.h */,
+				D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */,
+				D9F9F1401FBAE8CB0044DA27 /* FilterLogic.h */,
+				D9F9F1411FBAE8CB0044DA27 /* FilterLogic.m */,
+				D9F9F1181FB977B40044DA27 /* FilterViewController.h */,
+				D9F9F1191FB977B40044DA27 /* FilterViewController.m */,
+				D946D6961FA9F519005E5BF1 /* SortingViewController.h */,
+				D946D6971FA9F519005E5BF1 /* SortingViewController.m */,
+				D99776D51FDAB631004EA9B8 /* MergeViewForm.h */,
+				D99776D61FDAB631004EA9B8 /* MergeViewForm.m */,
+				D9166B531FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.h */,
+				D9166B541FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m */,
+				D9EB9F8F1E07C3270001115F /* MyTicketsViewController.h */,
+				D9EB9F901E07C3270001115F /* MyTicketsViewController.m */,
+				D9EB9F871E07C3270001115F /* UnassignedTicketsViewController.h */,
+				D9EB9F881E07C3270001115F /* UnassignedTicketsViewController.m */,
+				D9EB9F8D1E07C3270001115F /* ClosedTicketsViewController.h */,
+				D9EB9F8E1E07C3270001115F /* ClosedTicketsViewController.m */,
+				D9EB9F8B1E07C3270001115F /* TrashTicketsViewController.h */,
+				D9EB9F8C1E07C3270001115F /* TrashTicketsViewController.m */,
+				D9EB9F9B1E07C3270001115F /* ConversationViewController.h */,
+				D9EB9F9C1E07C3270001115F /* ConversationViewController.m */,
+				D9EB9F951E07C3270001115F /* TicketDetailViewController.h */,
+				D9EB9F961E07C3270001115F /* TicketDetailViewController.m */,
+				D9EB9F9D1E07C3270001115F /* DetailViewController.h */,
+				D9EB9F9E1E07C3270001115F /* DetailViewController.m */,
+				D92C35D51F7682B5001DD67D /* EditDetailTableViewController.h */,
+				D92C35D61F7682B5001DD67D /* EditDetailTableViewController.m */,
+				0618FA7B204E5367004D2C3F /* ReplyTicketViewController.h */,
+				0618FA7C204E5367004D2C3F /* ReplyTicketViewController.m */,
+				0618FA81204E9A87004D2C3F /* addCCView.h */,
+				0618FA82204E9A87004D2C3F /* addCCView.m */,
+				0618FA7E204E54C9004D2C3F /* InternalNoteViewController.h */,
+				0618FA7F204E54C9004D2C3F /* InternalNoteViewController.m */,
+				061CAA3920525281007EA8B6 /* TicketSearchViewController.h */,
+				061CAA3A20525281007EA8B6 /* TicketSearchViewController.m */,
+			);
+			name = Ticket;
+			sourceTree = "<group>";
+		};
+		060DE5722051607B005EFB6E /* User */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9F891E07C3270001115F /* ClientListViewController.h */,
+				D9EB9F8A1E07C3270001115F /* ClientListViewController.m */,
+				D9EB9F991E07C3270001115F /* ClientDetailViewController.h */,
+				D9EB9F9A1E07C3270001115F /* ClientDetailViewController.m */,
+				D9283F9D1FCC3B4E00C6A073 /* ClientFilter.h */,
+				D9283F9E1FCC3B4E00C6A073 /* ClientFilter.m */,
+				D9AF85351FC4610E005232A0 /* EditClientDetail.h */,
+				D9AF85361FC4610E005232A0 /* EditClientDetail.m */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		060DE5732051608F005EFB6E /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				D9A2FCAE1F18904000C829DD /* NotificationViewController.h */,
+				D9A2FCAF1F18904000C829DD /* NotificationViewController.m */,
+			);
+			name = Notification;
+			sourceTree = "<group>";
+		};
+		060DE574205160AD005EFB6E /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9F851E07C3270001115F /* LoginViewController.h */,
+				D9EB9F861E07C3270001115F /* LoginViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		060DE57520516244005EFB6E /* About Us */ = {
+			isa = PBXGroup;
+			children = (
+				D9EB9F971E07C3270001115F /* AboutViewController.h */,
+				D9EB9F981E07C3270001115F /* AboutViewController.m */,
+			);
+			name = "About Us";
+			sourceTree = "<group>";
+		};
+		060DE57620516257005EFB6E /* Feedback Form */ = {
+			isa = PBXGroup;
+			children = (
+				06AB96DA2045311500FDE260 /* SupportViewController.h */,
+				06AB96DB2045311500FDE260 /* SupportViewController.m */,
+			);
+			name = "Feedback Form";
+			sourceTree = "<group>";
+		};
+		060DE577205162BA005EFB6E /* TextField Kit */ = {
+			isa = PBXGroup;
+			children = (
+				D9E57B3C1EFAA4C1002E4C19 /* UIView+Shake.h */,
+				D9E57B3D1EFAA4C1002E4C19 /* UIView+Shake.m */,
+				D9E57B3E1EFAA4C1002E4C19 /* UITextField+PasswordField.h */,
+				D9E57B3F1EFAA4C1002E4C19 /* UITextField+PasswordField.m */,
+			);
+			path = "TextField Kit";
+			sourceTree = "<group>";
+		};
+		0617150F2059018A00E3E14D /* TableViewPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				0617151F2059049700E3E14D /* TPKeyboardAvoiding */,
+				06171513205901BB00E3E14D /* BIZPopupViewController.h */,
+				06171510205901B700E3E14D /* BIZPopupViewController.m */,
+				06171512205901BA00E3E14D /* BIZPopupViewControllerDelegate.h */,
+				06171511205901B900E3E14D /* UIViewController+BIZChildViewController.h */,
+				06171514205901BC00E3E14D /* UIViewController+BIZChildViewController.m */,
+				0617151A2059033200E3E14D /* SampleTable.h */,
+				061715192059033100E3E14D /* SampleTable.m */,
+				061715172059032E00E3E14D /* SampleTableCellTableViewCell.h */,
+				0617151B2059033300E3E14D /* SampleTableCellTableViewCell.m */,
+				061715182059032F00E3E14D /* SampleTableCellTableViewCell.xib */,
+			);
+			path = TableViewPopUp;
+			sourceTree = "<group>";
+		};
+		0617151F2059049700E3E14D /* TPKeyboardAvoiding */ = {
+			isa = PBXGroup;
+			children = (
+				061715202059049700E3E14D /* TPKeyboardAvoidingCollectionView.h */,
+				061715212059049700E3E14D /* TPKeyboardAvoidingCollectionView.m */,
+				061715222059049700E3E14D /* TPKeyboardAvoidingScrollView.h */,
+				061715232059049700E3E14D /* TPKeyboardAvoidingScrollView.m */,
+				061715242059049700E3E14D /* TPKeyboardAvoidingTableView.h */,
+				061715252059049700E3E14D /* TPKeyboardAvoidingTableView.m */,
+				061715262059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				061715272059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+			);
+			path = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
 		061E30F82035413000603D22 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -664,11 +842,7 @@
 				0634EB9120384411002CB4E8 /* filter1212.png */,
 				0634EB8F203842F9002CB4E8 /* sort121.png */,
 				0634EB4A2036F27A002CB4E8 /* sidemenu.jpg */,
-				0624A5142034733000F1B030 /* one.jpeg */,
-				0624A5112034732E00F1B030 /* three.jpeg */,
 				0634EBA020385D63002CB4E8 /* ticketStatus1.jpg */,
-				0624A5172034733300F1B030 /* two.jpeg */,
-				0624A5182034733400F1B030 /* four.jpeg */,
 				061E31382035A96300603D22 /* url.jpg */,
 				061E31372035A96200603D22 /* login.jpg */,
 				061E31362035A96100603D22 /* inbox.jpg */,
@@ -701,14 +875,14 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		0624A50F203472AF00F1B030 /* InApp HelpSection */ = {
+		0624A50F203472AF00F1B030 /* HelpSection */ = {
 			isa = PBXGroup;
 			children = (
 				061E30FA2035417A00603D22 /* Images */,
 				061E30F82035413000603D22 /* ViewControllers */,
 				061E30F92035414100603D22 /* Xibs */,
 			);
-			name = "InApp HelpSection";
+			name = HelpSection;
 			sourceTree = "<group>";
 		};
 		0634EB2A2036D5DF002CB4E8 /* Login Information */ = {
@@ -958,7 +1132,11 @@
 		D92C35C71F750F83001DD67D /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0617150F2059018A00E3E14D /* TableViewPopUp */,
 				06BB2A3A202C3B3E00B33C43 /* systemIcon.png */,
+				060DE577205162BA005EFB6E /* TextField Kit */,
+				D9EB9FC21E07C44D0001115F /* Reachability */,
+				D9EB9FAE1E07C4320001115F /* SideMenu */,
 				067605F7202B2C8800D9EFE6 /* ATAppUpdater */,
 				06B8B01A20287E4200E5E8CA /* UIImageView+Letters */,
 				D97CA13B1FCC229800A7B982 /* LGFilterView */,
@@ -1070,7 +1248,6 @@
 			children = (
 				D9EB9F4D1E07C1F70001115F /* Classes */,
 				D9DBD3441E07ACFC00219F93 /* Supporting Files */,
-				D9EB9FAD1E07C41C0001115F /* Library */,
 			);
 			path = "Faveo Helpdesk Pro";
 			sourceTree = "<group>";
@@ -1119,7 +1296,7 @@
 				D9EB9F521E07C2320001115F /* Utils */,
 				D9EB9F501E07C21E0001115F /* Model */,
 				D9EB9F4E1E07C20B0001115F /* Xibs */,
-				0624A50F203472AF00F1B030 /* InApp HelpSection */,
+				0624A50F203472AF00F1B030 /* HelpSection */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1148,6 +1325,9 @@
 				D9EB9F741E07C2F00001115F /* LoadingTableViewCell.h */,
 				D9EB9F751E07C2F00001115F /* LoadingTableViewCell.m */,
 				D9B6E2D81E9B8B1600AAB724 /* LoadingTableViewCell.xib */,
+				0630138E2053AC1B006CD0EC /* userSearchDataCell.h */,
+				0630138F2053AC1B006CD0EC /* userSearchDataCell.m */,
+				063013902053AC1B006CD0EC /* userSearchDataCell.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -1157,54 +1337,12 @@
 			children = (
 				D9EB9F831E07C3270001115F /* LeftMenuViewController.h */,
 				D9EB9F841E07C3270001115F /* LeftMenuViewController.m */,
-				D9EB9F851E07C3270001115F /* LoginViewController.h */,
-				D9EB9F861E07C3270001115F /* LoginViewController.m */,
-				D9EB9F911E07C3270001115F /* CreateTicketViewController.h */,
-				D9EB9F921E07C3270001115F /* CreateTicketViewController.m */,
-				D953D53C1FA321420077D519 /* AddRequester.h */,
-				D953D53D1FA321420077D519 /* AddRequester.m */,
-				D99776D51FDAB631004EA9B8 /* MergeViewForm.h */,
-				D99776D61FDAB631004EA9B8 /* MergeViewForm.m */,
-				D9166B531FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.h */,
-				D9166B541FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m */,
-				D9EB9F931E07C3270001115F /* InboxViewController.h */,
-				D9CB5FA11F69540E00EE3F9B /* InboxViewController.m */,
-				D9F9F1181FB977B40044DA27 /* FilterViewController.h */,
-				D9F9F1191FB977B40044DA27 /* FilterViewController.m */,
-				D9F9F1401FBAE8CB0044DA27 /* FilterLogic.h */,
-				D9F9F1411FBAE8CB0044DA27 /* FilterLogic.m */,
-				D946D6961FA9F519005E5BF1 /* SortingViewController.h */,
-				D946D6971FA9F519005E5BF1 /* SortingViewController.m */,
-				D9EB9F8F1E07C3270001115F /* MyTicketsViewController.h */,
-				D9EB9F901E07C3270001115F /* MyTicketsViewController.m */,
-				D9EB9F871E07C3270001115F /* UnassignedTicketsViewController.h */,
-				D9EB9F881E07C3270001115F /* UnassignedTicketsViewController.m */,
-				D9EB9F8D1E07C3270001115F /* ClosedTicketsViewController.h */,
-				D9EB9F8E1E07C3270001115F /* ClosedTicketsViewController.m */,
-				D9EB9F8B1E07C3270001115F /* TrashTicketsViewController.h */,
-				D9EB9F8C1E07C3270001115F /* TrashTicketsViewController.m */,
-				D9EB9F891E07C3270001115F /* ClientListViewController.h */,
-				D9EB9F8A1E07C3270001115F /* ClientListViewController.m */,
-				D9283F9D1FCC3B4E00C6A073 /* ClientFilter.h */,
-				D9283F9E1FCC3B4E00C6A073 /* ClientFilter.m */,
-				D9EB9F991E07C3270001115F /* ClientDetailViewController.h */,
-				D9EB9F9A1E07C3270001115F /* ClientDetailViewController.m */,
-				D9AF85351FC4610E005232A0 /* EditClientDetail.h */,
-				D9AF85361FC4610E005232A0 /* EditClientDetail.m */,
-				D9EB9F971E07C3270001115F /* AboutViewController.h */,
-				D9EB9F981E07C3270001115F /* AboutViewController.m */,
-				D9EB9F9B1E07C3270001115F /* ConversationViewController.h */,
-				D9EB9F9C1E07C3270001115F /* ConversationViewController.m */,
-				D9EB9F951E07C3270001115F /* TicketDetailViewController.h */,
-				D9EB9F961E07C3270001115F /* TicketDetailViewController.m */,
-				D9EB9F9D1E07C3270001115F /* DetailViewController.h */,
-				D9EB9F9E1E07C3270001115F /* DetailViewController.m */,
-				D92C35D51F7682B5001DD67D /* EditDetailTableViewController.h */,
-				D92C35D61F7682B5001DD67D /* EditDetailTableViewController.m */,
-				D9A2FCAE1F18904000C829DD /* NotificationViewController.h */,
-				D9A2FCAF1F18904000C829DD /* NotificationViewController.m */,
-				06AB96DA2045311500FDE260 /* SupportViewController.h */,
-				06AB96DB2045311500FDE260 /* SupportViewController.m */,
+				060DE574205160AD005EFB6E /* Login */,
+				060DE57120516070005EFB6E /* Ticket */,
+				060DE5722051607B005EFB6E /* User */,
+				060DE57520516244005EFB6E /* About Us */,
+				060DE57620516257005EFB6E /* Feedback Form */,
+				060DE5732051608F005EFB6E /* Notification */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1218,10 +1356,6 @@
 				D9EB9F621E07C2D00001115F /* GlobalVariables.m */,
 				D985BAC61EDC5FAA001EB153 /* Dat.h */,
 				D985BAC71EDC5FAA001EB153 /* Dat.m */,
-				D9E57B3C1EFAA4C1002E4C19 /* UIView+Shake.h */,
-				D9E57B3D1EFAA4C1002E4C19 /* UIView+Shake.m */,
-				D9E57B3E1EFAA4C1002E4C19 /* UITextField+PasswordField.h */,
-				D9E57B3F1EFAA4C1002E4C19 /* UITextField+PasswordField.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1252,15 +1386,6 @@
 				D9DBD3481E07ACFC00219F93 /* AppDelegate.m */,
 			);
 			name = OtherClasses;
-			sourceTree = "<group>";
-		};
-		D9EB9FAD1E07C41C0001115F /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				D9EB9FC21E07C44D0001115F /* Reachability */,
-				D9EB9FAE1E07C4320001115F /* SideMenu */,
-			);
-			name = Library;
 			sourceTree = "<group>";
 		};
 		D9EB9FAE1E07C4320001115F /* SideMenu */ = {
@@ -1320,8 +1445,7 @@
 				E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */,
 				51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */,
 				0643C94D2046AA8B007DC824 /* CopyFiles */,
-				0643C94E2046AA9A007DC824 /* Crash Analytics Script */,
-				0643C9512046AEBA007DC824 /* Crash Reporting Script */,
+				06B2068D205FBE3F00FF03BE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1452,12 +1576,10 @@
 				0634EB7D20382958002CB4E8 /* TicketReplayInternalNoteCell2.xib in Resources */,
 				0609ADAF2039805100DCDC85 /* view121.png in Resources */,
 				D9532C131E9CE9090063B318 /* Localizable.strings in Resources */,
-				0624A51F2034733400F1B030 /* four.jpeg in Resources */,
 				0609ADA520397C4700DCDC85 /* multipleSelect.jpg in Resources */,
 				0609AD9D20397BDC00DCDC85 /* merge.jpg in Resources */,
 				0634EB492036EE3D002CB4E8 /* TicketSortingFikterCell.xib in Resources */,
 				D9B6E2D61E9B8B1600AAB724 /* LoadingTableViewCell.xib in Resources */,
-				0624A5192034733400F1B030 /* three.jpeg in Resources */,
 				06099CCF203AD21A0060831A /* MergeTicketViewCell2.xib in Resources */,
 				061E31252035845800603D22 /* otherFeatureMenuListCell.xib in Resources */,
 				0634EBAB20386717002CB4E8 /* UserAgentFilterCell.xib in Resources */,
@@ -1468,7 +1590,7 @@
 				0609ADA120397BEC00DCDC85 /* multpleticketstatuschnage.jpg in Resources */,
 				D9F9F13C1FB9B2530044DA27 /* check_mark@2x.png in Resources */,
 				06099CD1203AD9160060831A /* view127.png in Resources */,
-				0624A51E2034733400F1B030 /* two.jpeg in Resources */,
+				0617151C2059033300E3E14D /* SampleTableCellTableViewCell.xib in Resources */,
 				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
 				0609ADB920399B8100DCDC85 /* deActive.png in Resources */,
 				0672AF97204D28CF006D7918 /* test.xib in Resources */,
@@ -1492,7 +1614,6 @@
 				0609ADA320397C1100DCDC85 /* allUserList.jpg in Resources */,
 				061E312F2035A63000603D22 /* LoginDetailPage1Cell.xib in Resources */,
 				0634EB962038519B002CB4E8 /* sortCell.png in Resources */,
-				0624A51C2034733400F1B030 /* one.jpeg in Resources */,
 				061E313C2035A96300603D22 /* url.jpg in Resources */,
 				0609ADA920397C8B00DCDC85 /* filteredResult.jpg in Resources */,
 				061E312A20358BAD00603D22 /* TicketListTableView.xib in Resources */,
@@ -1503,6 +1624,7 @@
 				0634EB5720370ED5002CB4E8 /* AllAboutTicketCell3.xib in Resources */,
 				D9AA44471FA890AC00938081 /* BDCustomAlertView.xib in Resources */,
 				0609ADA720397C6200DCDC85 /* userEditProfile.jpg in Resources */,
+				063013922053AC1B006CD0EC /* userSearchDataCell.xib in Resources */,
 				0634EB4B2036F27A002CB4E8 /* sidemenu.jpg in Resources */,
 				0634EB61203811D6002CB4E8 /* ticket detail page2.jpg in Resources */,
 				0689708F20318A3700702313 /* ConversationTableViewCell.xib in Resources */,
@@ -1542,33 +1664,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0643C94E2046AA9A007DC824 /* Crash Analytics Script */ = {
+		06B2068D205FBE3F00FF03BE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Crash Analytics Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
-		};
-		0643C9512046AEBA007DC824 /* Crash Reporting Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Crash Reporting Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:1:661051343223:ios:1581c2938664109a\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym-util.bash \"key/faveo-helpdesk-pro-6dafa-firebase-crashreporting-s5q0n-f2ef3b6cb1.json\"";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 3d31c3fca25cb228d17bfa05856d933d97e90db1 67564a3dc39ee26711efe06322fa00b99e69a63e26e5d755afe7339b6f22ceb1";
 		};
 		51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1652,9 +1759,11 @@
 			files = (
 				D9166B551FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m in Sources */,
 				0634EBA5203866A8002CB4E8 /* UserAgentListCell.m in Sources */,
+				061715282059049700E3E14D /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				0634EB5B20380359002CB4E8 /* AllAboutTicketCell1.m in Sources */,
 				D9A2FCB01F18904000C829DD /* NotificationViewController.m in Sources */,
 				06099CAE203AA1A60060831A /* MergeTicketView.m in Sources */,
+				061715292059049700E3E14D /* TPKeyboardAvoidingScrollView.m in Sources */,
 				0634EBAA20386717002CB4E8 /* UserAgentFilterCell.m in Sources */,
 				D9EB9FBD1E07C4490001115F /* SlideNavigationContorllerAnimatorFade.m in Sources */,
 				D9EB9FA51E07C3270001115F /* MyTicketsViewController.m in Sources */,
@@ -1670,6 +1779,7 @@
 				D9AE083E200723DE00DD9E94 /* UIView+CFFrame.m in Sources */,
 				061E312E2035A63000603D22 /* LoginDetailPage1Cell.m in Sources */,
 				D97CA1411FCC229800A7B982 /* LGFilterViewCell.m in Sources */,
+				0617151E2059033300E3E14D /* SampleTableCellTableViewCell.m in Sources */,
 				0624A51A2034733400F1B030 /* HelpSectionHomePage.m in Sources */,
 				D9E57B411EFAA4C1002E4C19 /* UITextField+PasswordField.m in Sources */,
 				0634EBAF20386741002CB4E8 /* UserAgentEditCell.m in Sources */,
@@ -1696,10 +1806,12 @@
 				061E310E20357C0700603D22 /* TicketListMenuTable.m in Sources */,
 				D9AA44461FA890AC00938081 /* BDCustomAlertView.m in Sources */,
 				D9EB9F5B1E07C2A80001115F /* Utils.m in Sources */,
+				0617152A2059049700E3E14D /* TPKeyboardAvoidingTableView.m in Sources */,
 				D9A2FCB41F18942800C829DD /* NotificationTableViewCell.m in Sources */,
 				D9EB9F7D1E07C2F00001115F /* ConversationTableViewCell.m in Sources */,
 				0634EB3C2036EBE3002CB4E8 /* TicketReplayAndInternalNote.m in Sources */,
 				0672AF96204D28CF006D7918 /* test.m in Sources */,
+				0617152B2059049700E3E14D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				D9EB9FC51E07C4610001115F /* Reachability.m in Sources */,
 				D9EB9FBF1E07C4490001115F /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
 				061E30FD2035426800603D22 /* LoginListMenuTable.m in Sources */,
@@ -1709,6 +1821,7 @@
 				0634EB9F203857A6002CB4E8 /* TicketStusChange.m in Sources */,
 				06099CA8203AA1680060831A /* MultipleTicketAssign.m in Sources */,
 				0634EB392036EBC3002CB4E8 /* AllAboutTicketsInformation.m in Sources */,
+				06171515205901BC00E3E14D /* BIZPopupViewController.m in Sources */,
 				D9EB9FA11E07C3270001115F /* UnassignedTicketsViewController.m in Sources */,
 				D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */,
 				D97CA1401FCC229800A7B982 /* LGFilterView.m in Sources */,
@@ -1732,17 +1845,22 @@
 				06099CA5203AA14B0060831A /* MultipleTicketSelectView.m in Sources */,
 				0634EB5120370EC2002CB4E8 /* AllAboutTicketCell2.m in Sources */,
 				D92C35D11F750FDE001DD67D /* LGPlusButton.m in Sources */,
+				06171516205901BC00E3E14D /* UIViewController+BIZChildViewController.m in Sources */,
 				061E310B2035595B00603D22 /* LoginDetailPage2.m in Sources */,
 				0634EB5620370ED5002CB4E8 /* AllAboutTicketCell3.m in Sources */,
 				06099CBC203AA30D0060831A /* MultipleTicketStatusChangeCell.m in Sources */,
+				0618FA80204E54C9004D2C3F /* InternalNoteViewController.m in Sources */,
 				D9EB9F771E07C2F00001115F /* TicketTableViewCell.m in Sources */,
 				06099CC1203AA3240060831A /* MergeTicketViewCell.m in Sources */,
 				D9EB9FA91E07C3270001115F /* AboutViewController.m in Sources */,
 				D953D53E1FA321420077D519 /* AddRequester.m in Sources */,
 				D9EB9F7B1E07C2F00001115F /* ClientTicketTableViewCell.m in Sources */,
+				0618FA7D204E5367004D2C3F /* ReplyTicketViewController.m in Sources */,
 				D9F9F13D1FB9B2530044DA27 /* DropDownViewCell.m in Sources */,
 				D9AE08382007231800DD9E94 /* CFMultistageConditionTableView.m in Sources */,
 				D9F9F11A1FB977B40044DA27 /* FilterViewController.m in Sources */,
+				063013912053AC1B006CD0EC /* userSearchDataCell.m in Sources */,
+				0617151D2059033300E3E14D /* SampleTable.m in Sources */,
 				D9AF85311FC421AF005232A0 /* AWNavigationMenuItem.m in Sources */,
 				0634EB7C20382958002CB4E8 /* TicketReplayInternalNoteCell2.m in Sources */,
 				067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */,
@@ -1756,10 +1874,12 @@
 				D9EB9FBE1E07C4490001115F /* SlideNavigationContorllerAnimatorScale.m in Sources */,
 				D99776D71FDAB631004EA9B8 /* MergeViewForm.m in Sources */,
 				D9EB9FAB1E07C3270001115F /* ConversationViewController.m in Sources */,
+				061CAA3B20525281007EA8B6 /* TicketSearchViewController.m in Sources */,
 				0634EB8720384095002CB4E8 /* FIlterAndSort2.m in Sources */,
 				061E31242035845800603D22 /* otherFeatureMenuListCell.m in Sources */,
 				D9EB9FA01E07C3270001115F /* LoginViewController.m in Sources */,
 				D9EB9FA21E07C3270001115F /* ClientListViewController.m in Sources */,
+				0618FA83204E9A87004D2C3F /* addCCView.m in Sources */,
 				D9EB9FBC1E07C4490001115F /* SlideNavigationController.m in Sources */,
 				061E312920358BAD00603D22 /* TicketListTableView.m in Sources */,
 			);

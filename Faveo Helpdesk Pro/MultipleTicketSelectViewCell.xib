@@ -110,9 +110,9 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHC-Q2-QpY">
-                                <rect key="frame" x="17" y="1255" width="380" height="179"/>
+                                <rect key="frame" x="17" y="1255" width="374" height="179"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="380" id="cIE-Ed-IJg"/>
+                                    <constraint firstAttribute="width" constant="374" id="cIE-Ed-IJg"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="179" id="qbv-Qm-7Jv"/>
                                     <constraint firstAttribute="height" constant="179" id="rOJ-pR-Blf"/>
                                 </constraints>

@@ -16,5 +16,6 @@ pod "RMessage"
 pod 'Fabric', '~> 1.7.3'
 pod 'Crashlytics', '~> 3.10.0'
 pod 'Firebase/Crash'
+pod "UITextField_AutoSuggestion"
 
 end

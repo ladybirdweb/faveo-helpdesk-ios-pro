@@ -164,11 +164,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBB-9W-iZK">
-                                <rect key="frame" x="15" y="717" width="386" height="238"/>
+                                <rect key="frame" x="15" y="717" width="369" height="238"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="238" id="Ile-jI-1vv"/>
                                     <constraint firstAttribute="height" constant="238" id="Maq-dJ-D9Y"/>
-                                    <constraint firstAttribute="width" constant="386" id="Uco-id-yil"/>
+                                    <constraint firstAttribute="width" constant="369" id="Uco-id-yil"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment>

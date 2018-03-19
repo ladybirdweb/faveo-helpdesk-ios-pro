@@ -225,15 +225,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfQ-yB-5Hn">
-                                <rect key="frame" x="11" y="1102" width="386" height="311"/>
+                                <rect key="frame" x="24" y="1102" width="370" height="311"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="370" id="G1V-CN-RRZ"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="311" id="IZv-k9-pbQ"/>
                                     <constraint firstAttribute="height" constant="311" id="OUV-uV-ePh"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="311" id="hJu-Tr-c3X"/>
-                                    <constraint firstAttribute="width" constant="386" id="ilj-GR-p8l"/>
+                                    <constraint firstAttribute="width" constant="370" id="ilj-GR-p8l"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <mutableString key="content">In this screen, there are so many option for filtering a ticket.
+                                        <string key="content">In this screen, there are so many option for filtering a ticket.
 Click on specific field depend on your requirements. After clicking on any option it will show one pop-up view, here you can select option. 
 
 You select multiple values and after selecting click on done button which is on pop-up view.
@@ -241,7 +243,7 @@ You select multiple values and after selecting click on done button which is on 
 Same like other fields, you add multiple values to any fields.
 If you want to clear the data whichever you entered, there is clear button at top right corner, after clicking on that button all filled data will be erased.
 
-Now, click on submit button to filter ticket. After clicking on submit button it will navigate inbox page if you entered to filter view from Inbox page like similar to other view also it will work like this.</mutableString>
+Now, click on submit button to filter ticket. After clicking on submit button it will navigate inbox page if you entered to filter view from Inbox page like similar to other view also it will work like this.</string>
                                         <attributes>
                                             <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
@@ -307,7 +309,7 @@ Now, click on submit button to filter ticket. After clicking on submit button it
                             <constraint firstItem="V1F-CK-d35" firstAttribute="leading" secondItem="2TG-ul-phF" secondAttribute="leading" constant="22" id="Zyu-Hm-cU1"/>
                             <constraint firstItem="Uuu-Mm-f2F" firstAttribute="leading" secondItem="2TG-ul-phF" secondAttribute="leading" constant="25" id="dF5-lC-aC2"/>
                             <constraint firstItem="Uuu-Mm-f2F" firstAttribute="top" secondItem="r6C-7P-bWa" secondAttribute="bottom" constant="15" id="dgR-B1-BVT"/>
-                            <constraint firstItem="kfQ-yB-5Hn" firstAttribute="centerX" secondItem="2TG-ul-phF" secondAttribute="centerX" id="gat-ZE-0i4"/>
+                            <constraint firstItem="kfQ-yB-5Hn" firstAttribute="centerX" secondItem="2TG-ul-phF" secondAttribute="centerX" constant="4.5" id="gat-ZE-0i4"/>
                             <constraint firstItem="cEK-Rm-XPm" firstAttribute="top" secondItem="AER-cU-xIb" secondAttribute="bottom" constant="8" symbolic="YES" id="kR8-y8-fD0"/>
                             <constraint firstItem="rA4-5u-Jdo" firstAttribute="top" secondItem="Uuu-Mm-f2F" secondAttribute="bottom" constant="20" id="m5r-Hd-T18"/>
                             <constraint firstItem="V1F-CK-d35" firstAttribute="centerX" secondItem="AER-cU-xIb" secondAttribute="centerX" id="nAQ-Ky-XUZ"/>

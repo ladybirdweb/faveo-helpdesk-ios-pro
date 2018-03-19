@@ -31,6 +31,7 @@
 #import "MergeViewForm.h"
 #import "MultpleTicketAssignTableViewController.h"
 #import "UIImageView+Letters.h"
+#import "TicketSearchViewController.h"
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
@@ -106,11 +107,11 @@
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
     
-    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
-    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
-    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
+//    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+//    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
+//    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+//    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
+//    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
     
     
     
@@ -122,7 +123,7 @@
     [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    [rightBarButtonItems addSubview:moreButton];
+  //  [rightBarButtonItems addSubview:moreButton];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
@@ -191,14 +192,18 @@
 
 
 - (IBAction)searchButtonClicked {
-    self.navigationItem.rightBarButtonItem = nil;
-    _searchBar = [[UISearchBar alloc] init];
-    _searchBar.delegate = self;
-    _searchBar.placeholder = @"Search Data";
-    [_searchBar sizeToFit];
-    self.navigationItem.titleView = _searchBar;
-    [_searchBar becomeFirstResponder];
-    [_searchBar.window makeKeyAndVisible];
+    
+    TicketSearchViewController * search=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketSearchViewControllerId"];
+    [self.navigationController pushViewController:search animated:YES];
+    
+//    self.navigationItem.rightBarButtonItem = nil;
+//    _searchBar = [[UISearchBar alloc] init];
+//    _searchBar.delegate = self;
+//    _searchBar.placeholder = @"Search Data";
+//    [_searchBar sizeToFit];
+//    self.navigationItem.titleView = _searchBar;
+//    [_searchBar becomeFirstResponder];
+//    [_searchBar.window makeKeyAndVisible];
     
     
     
@@ -581,6 +586,31 @@
                             [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
+                        else if([msg isEqualToString:@"Error-422"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-404"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                        }
                         else{
                             
                             NSLog(@"Message is : %@",msg);
@@ -903,7 +933,7 @@
             
             if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
                 
-                [self loadMoreforSearchResults];
+             //   [self loadMoreforSearchResults];
                 
                 
             }
@@ -1066,105 +1096,7 @@
 }
 
 
--(void)loadMoreforSearchResults
-{
-    
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
-        //connection unavailable
-        if (self.navigationController.navigationBarHidden) {
-            [self.navigationController setNavigationBarHidden:NO];
-        }
-        
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Error..!", nil)
-                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeError
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionNavBarOverlay
-                              canBeDismissedByUser:YES];
-        
-        
-    }else{
-        
-        self.page = _page + 1;
-        // NSLog(@"Page is : %ld",(long)_page);
-        
-        NSString *str=_nextPageUrl;
-        NSString *Page = [str substringFromIndex:[str length] - 1];
-        
-        //     NSLog(@"String is : %@",szResult);
-        NSLog(@"Page is : %@",Page);
-        NSLog(@"Page is : %@",Page);
-        
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        
-        
-        [webservices getNextPageURLInboxSearchResults:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
-            if (error || [msg containsString:@"Error"]) {
-                
-                if (msg) {
-                    
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    
-                }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
-                }
-                return ;
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                
-                [self loadMore];
-                //NSLog(@"Thread--NO4-call-getInbox");
-                return;
-            }
-            
-            if (json) {
-                NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-                //_indexPaths=[[NSArray alloc]init];
-                //_indexPaths = [json objectForKey:@"data"];
-                _nextPageUrl =[json objectForKey:@"next_page_url"];
-                _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[json objectForKey:@"total"] integerValue];
-                _totalPages=[[json objectForKey:@"last_page"] integerValue];
-                
-                
-                _mutableArray= [_mutableArray mutableCopy];
-                
-                
-                [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
-                
-                //                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        // [self.tableView reloadData];
-                        
-                        [self reloadTableView];
-                        
-                        //                        [self.tableView beginUpdates];
-                        //                        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[_mutableArray count]-[_indexPaths count] inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
-                        //                        [self.tableView endUpdates];
-                    });
-                });
-                
-            }
-          
-            
-        }];
-        
-    }
-    
-    
-}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if(searching)
@@ -1192,7 +1124,7 @@
                 cell = [nib objectAtIndex:0];
             }
             
-            //agent name deatils
+            //user name deatils
             NSDictionary *searchDictionary=[_filteredSampleDataArray objectAtIndex:indexPath.row];
             NSLog(@"searchDictionary is : %@",searchDictionary);
             
@@ -1808,6 +1740,7 @@
             globalVariables.Last_name=[finaldic objectForKey:@"c_lname"];
             
             globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
+            globalVariables.userIdFromInbox=[finaldic objectForKey:@"c_uid"];;
             
             globalVariables.ticketStatusBool=@"ticketView";
             

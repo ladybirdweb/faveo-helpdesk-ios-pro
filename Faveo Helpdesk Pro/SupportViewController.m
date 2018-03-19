@@ -38,8 +38,8 @@
     [super viewDidLoad];
     
     //arindam.ladybird@gmail.com
-    //  _emailTextView.text=@"mallikarjun.h@ladybirdweb.com";
-    _emailTextView.text=@"arindam.ladybird@gmail.com";
+     _emailTextView.text=@"nikita.iphone9@gmail.com";
+  //  _emailTextView.text=@"arindam.ladybird@gmail.com";
     
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];

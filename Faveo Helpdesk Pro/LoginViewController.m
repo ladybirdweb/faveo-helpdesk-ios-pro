@@ -22,6 +22,8 @@
 #import "RMessageView.h"
 #import "GlobalVariables.h"
 
+
+
 @import Crashlytics;
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
@@ -46,7 +48,7 @@
     [super viewDidLoad];
     
 
-    
+  
     // done button on keyboard was not working so here is solution
     [self.urlTextfield setDelegate:self];
     [self.urlTextfield setReturnKeyType:UIReturnKeyDone];
@@ -81,6 +83,8 @@
     
     
 }
+
+
 
 
 
@@ -205,7 +209,7 @@
                             if (statusCode == 404) {
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                                [utils showAlertWithMessage:@"Invalid URL..!" sendViewController:self];
+                                [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self];
                                 return;
                             }else if(statusCode == 402)
                             {
@@ -357,7 +361,32 @@
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
-                        }else{
+                        }
+                       else if(statusCode == 404)
+                        {
+                            NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self];
+                        }
+                        else if(statusCode == 400)
+                        {
+                            NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            [utils showAlertWithMessage:@"The request could not be understood by the server due to malformed syntax." sendViewController:self];
+                        }
+                        else if(statusCode == 405)
+                        {
+                            NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            [utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:self];
+                        }
+                        else if(statusCode == 500)
+                        {
+                            NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            [utils showAlertWithMessage:@"Internal Server Error. Something has gone wrong on the website's server." sendViewController:self];
+                        }
+                        else{
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             [utils showAlertWithMessage:NSLocalizedString(@"Unknown Error !", nil)sendViewController:self];
@@ -470,7 +499,8 @@
                 {
                     NSLog(@"Message is : %@",msg);
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                }else{
+                }
+                else{
                     [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                     NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
                 }

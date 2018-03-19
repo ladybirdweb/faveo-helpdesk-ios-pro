@@ -24,11 +24,11 @@
                         <rect key="frame" x="1" y="-11" width="417" height="1803"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="16" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9u3-uJ-Tv5">
-                                <rect key="frame" x="17" y="42" width="363" height="213"/>
+                                <rect key="frame" x="17" y="42" width="358" height="213"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="213" id="0H9-Rh-g2f"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="213" id="EZn-vn-zX3"/>
-                                    <constraint firstAttribute="width" constant="363" id="LgQ-2H-BOh"/>
+                                    <constraint firstAttribute="width" constant="358" id="LgQ-2H-BOh"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -78,10 +78,10 @@ See below image one more view appeared which contains three image buttons. First
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daN-jk-mju">
-                                <rect key="frame" x="17" y="383" width="380" height="140"/>
+                                <rect key="frame" x="17" y="383" width="370" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="140" id="E64-BJ-oNb"/>
-                                    <constraint firstAttribute="width" constant="380" id="Ree-ZE-vLQ"/>
+                                    <constraint firstAttribute="width" constant="370" id="Ree-ZE-vLQ"/>
                                     <constraint firstAttribute="height" constant="140" id="yHV-bW-uPI"/>
                                 </constraints>
                                 <attributedString key="attributedText">
@@ -101,7 +101,7 @@ See below image one more view appeared which contains three image buttons. First
                                         <string key="content"> : For merging tickets some condition is there.
 
 1. For merging ticket, you need to select two or more than two tickets.
-2. You can’t merge tickets from different users (ticket owners), they must be from same users otherwise you will get one error message pop view which shows that "You can't merge these tickets, because it is from different users."</string>
+2. You can’t merge tickets from different users (ticket owners), they must be from same users otherwise you will get one error message pop. </string>
                                         <attributes>
                                             <font key="NSFont" size="15" name="TimesNewRomanPSMT"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="27.149999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
@@ -124,10 +124,10 @@ See below image one more view appeared which contains three image buttons. First
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view124.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xxx-1G-xUg">
-                                <rect key="frame" x="17" y="262" width="380" height="104"/>
+                                <rect key="frame" x="17" y="262" width="360" height="104"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="104" id="6H0-7c-maM"/>
-                                    <constraint firstAttribute="width" constant="380" id="KR4-gR-bKb"/>
+                                    <constraint firstAttribute="width" constant="360" id="KR4-gR-bKb"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="104" id="WS2-hj-XQK"/>
                                 </constraints>
                             </imageView>
@@ -140,11 +140,11 @@ See below image one more view appeared which contains three image buttons. First
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="21" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6nb-GZ-r2X">
-                                <rect key="frame" x="19" y="779" width="379" height="95"/>
+                                <rect key="frame" x="24" y="779" width="370" height="95"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="95" id="6FQ-L5-LbM"/>
                                     <constraint firstAttribute="height" constant="95" id="XHU-Nn-vat"/>
-                                    <constraint firstAttribute="width" constant="379" id="rxp-cQ-cPd"/>
+                                    <constraint firstAttribute="width" constant="370" id="rxp-cQ-cPd"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -164,10 +164,10 @@ See below image one more view appeared which contains three image buttons. First
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="50" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVt-xw-W7t">
-                                <rect key="frame" x="19" y="1400" width="380" height="390"/>
+                                <rect key="frame" x="24" y="1400" width="370" height="390"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="390" id="84b-9o-sWr"/>
-                                    <constraint firstAttribute="width" constant="380" id="ain-jX-dQr"/>
+                                    <constraint firstAttribute="width" constant="370" id="ain-jX-dQr"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="390" id="jz8-BB-6hH"/>
                                 </constraints>
                                 <attributedString key="attributedText">
@@ -284,7 +284,7 @@ Here you can see the new title or changes in inbox page or in conversation page 
                             <constraint firstItem="dVt-xw-W7t" firstAttribute="top" secondItem="6kT-hY-Vuu" secondAttribute="bottom" constant="20" id="KXp-b3-IUz"/>
                             <constraint firstItem="6kT-hY-Vuu" firstAttribute="leading" secondItem="l7N-Wr-qL8" secondAttribute="leading" constant="74" id="MJE-sJ-Iec"/>
                             <constraint firstItem="9u3-uJ-Tv5" firstAttribute="leading" secondItem="Xxx-1G-xUg" secondAttribute="leading" id="P40-uM-7LW"/>
-                            <constraint firstItem="Xxx-1G-xUg" firstAttribute="trailing" secondItem="daN-jk-mju" secondAttribute="trailing" id="Q8H-Yz-TMZ"/>
+                            <constraint firstItem="Xxx-1G-xUg" firstAttribute="trailing" secondItem="daN-jk-mju" secondAttribute="trailing" constant="-10" id="Q8H-Yz-TMZ"/>
                             <constraint firstAttribute="trailing" secondItem="pkE-uC-KcE" secondAttribute="trailing" constant="56" id="TWr-iq-efX"/>
                             <constraint firstAttribute="bottom" secondItem="dVt-xw-W7t" secondAttribute="bottom" constant="13" id="fgO-Pk-SsB"/>
                             <constraint firstItem="9u3-uJ-Tv5" firstAttribute="leading" secondItem="l7N-Wr-qL8" secondAttribute="leading" constant="17" id="h2K-1i-nBY"/>
@@ -293,7 +293,7 @@ Here you can see the new title or changes in inbox page or in conversation page 
                             <constraint firstItem="Xxx-1G-xUg" firstAttribute="top" secondItem="9u3-uJ-Tv5" secondAttribute="bottom" constant="7" id="peJ-es-Gfc"/>
                             <constraint firstItem="6kT-hY-Vuu" firstAttribute="top" secondItem="6nb-GZ-r2X" secondAttribute="bottom" constant="6" id="qBp-8X-WaK"/>
                             <constraint firstItem="pkE-uC-KcE" firstAttribute="leading" secondItem="l7N-Wr-qL8" secondAttribute="leading" constant="40" id="sr9-Ze-Le1"/>
-                            <constraint firstItem="6nb-GZ-r2X" firstAttribute="centerX" secondItem="l7N-Wr-qL8" secondAttribute="centerX" id="tHV-S5-riQ"/>
+                            <constraint firstItem="6nb-GZ-r2X" firstAttribute="centerX" secondItem="l7N-Wr-qL8" secondAttribute="centerX" constant="0.5" id="tHV-S5-riQ"/>
                             <constraint firstItem="9u3-uJ-Tv5" firstAttribute="top" secondItem="l7N-Wr-qL8" secondAttribute="top" constant="42" id="zom-JY-IxN"/>
                         </constraints>
                     </view>

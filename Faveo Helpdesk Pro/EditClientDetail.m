@@ -414,7 +414,11 @@
                             NSLog(@"Message is : %@",msg);
                             [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                         }
-                        
+                        else if([msg isEqualToString:@"Error-422"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                        }
                         else{
                             [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                             NSLog(@"Error is : %@",msg);
