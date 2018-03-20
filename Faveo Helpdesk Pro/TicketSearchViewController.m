@@ -22,6 +22,7 @@
 #import "userSearchDataCell.h"
 #import "TicketDetailViewController.h"
 #import "ClientDetailViewController.h"
+#import "UIImageView+Letters.h"
 
 @interface TicketSearchViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 {
@@ -158,7 +159,11 @@
     }
  //a   NSString *numberOFRecord=@"100";
    // NSString * url= [NSString stringWithFormat:@"%@api/v1/helpdesk/ticket-search?token=%@&search=%@&records_per_page=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],searchText,numberOFRecord];
-    NSString * url= [NSString stringWithFormat:@"%@api/v1/helpdesk/ticket-search?token=%@&search=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],searchText];
+    
+   // NSString *urlString = [searchText stringByReplacingOccurancesOfString:@" " withString:@"%20"];
+    NSString *urlString=[searchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    
+    NSString * url= [NSString stringWithFormat:@"%@api/v1/helpdesk/ticket-search?token=%@&search=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],urlString];
     NSLog(@"URL is : %@",url);
  
     
@@ -266,8 +271,10 @@
     }else{
         
     }
-   
-    NSString * url= [NSString stringWithFormat:@"%@api/v1/helpdesk/ticket-search?token=%@&search=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],searchText];
+    
+    NSString *urlString=[searchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    
+    NSString * url= [NSString stringWithFormat:@"%@api/v1/helpdesk/ticket-search?token=%@&search=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],urlString];
     NSLog(@"URL is : %@",url);
     
     
@@ -553,17 +560,31 @@
              cell.ticketIdLabel.text=NSLocalizedString(@"Not Available", nil);
          }
 
-         //profile picture
-         if (  ![profilPic isEqual:[NSNull null]]   )
+//         //profile picture
+//         if (  ![profilPic isEqual:[NSNull null]]   )
+//         {
+//             [cell setUserProfileimage:profilPic];
+//
+//         }
+//         else
+//         {
+//             [cell setUserProfileimage:@"default_pic.png"];
+//         }
+         
+         //Image view
+         if([profilPic hasSuffix:@"system.png"] || [profilPic hasSuffix:@".jpg"] || [profilPic hasSuffix:@".jpeg"] || [profilPic hasSuffix:@".png"] )
          {
              [cell setUserProfileimage:profilPic];
-
+         }
+         else if(![Utils isEmpty:fname])
+         {
+             [cell.profilePicView setImageWithString:fname color:nil ];
          }
          else
          {
-             [cell setUserProfileimage:@"default_pic.png"];
+             [cell.profilePicView setImageWithString:userName color:nil ];
          }
-
+         
          
          //priority
       //   if(( ![[searchDictionary objectForKey:@"priority"] isEqual:[NSNull null]] ) )
@@ -775,11 +796,12 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"userSearchDataCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
-        
+    
+    
         //user name deatils
         NSDictionary *searchUserDictionary=[_userDataArray objectAtIndex:indexPath.row];
         NSLog(@"userSearchDictionary is : %@",searchUserDictionary);
-        
+    
         
         // first name, last name, user name owner name
         NSDictionary * userDict= [searchUserDictionary objectForKey:@"user"];
@@ -819,21 +841,35 @@
             }
             
         }
+    
+    
+    //Image view
+    if([profilPic hasSuffix:@"system.png"] || [profilPic hasSuffix:@".jpg"] || [profilPic hasSuffix:@".jpeg"] || [profilPic hasSuffix:@".png"] )
+    {
+        [cell setUserProfileimage:profilPic];
+    }
+    else if(![Utils isEmpty:fname])
+    {
+        [cell.userProfileImage setImageWithString:fname color:nil ];
+    }
+    else
+    {
+        [cell.userProfileImage setImageWithString:userName color:nil ];
+    }
         
-        
-                if (![Utils isEmpty:profilPic] )
-                {
-                   // cell.userProfileImage.image=[UIImage imageNamed:profilPic];
-                  //  [cell setUserProfileImage:[UIImage imageNamed:profilPic]];
-                    [cell setUserProfileimage:profilPic];
-        
-                }
-                else
-                {
-                   // [cell setUserProfileimage:@"default_pic.png"];
-                  [cell setUserProfileimage:@"default_pic.png"];
-                }
-        
+//                if (![Utils isEmpty:profilPic] )
+//                {
+//                   // cell.userProfileImage.image=[UIImage imageNamed:profilPic];
+//                  //  [cell setUserProfileImage:[UIImage imageNamed:profilPic]];
+//                    [cell setUserProfileimage:profilPic];
+//
+//                }
+//                else
+//                {
+//                   // [cell setUserProfileimage:@"default_pic.png"];
+//                  [cell setUserProfileimage:@"default_pic.png"];
+//                }
+    
         
     return cell;
     
