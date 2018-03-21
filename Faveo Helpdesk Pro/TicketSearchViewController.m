@@ -357,7 +357,7 @@
         //CGPointMake(self.view.frame.size.width/2,self.view.frame.size.height/2);
 
 
-      // noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
+       noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
         noDataLabel.textColor        = [UIColor blackColor];
         noDataLabel.textAlignment    = NSTextAlignmentCenter;
         tableView.backgroundView = noDataLabel;
@@ -382,7 +382,7 @@
          //CGPointMake(self.view.frame.size.width/2,self.view.frame.size.height/2);
          
          
-     //    noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
+         noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
          noDataLabel.textColor        = [UIColor blackColor];
          noDataLabel.textAlignment    = NSTextAlignmentCenter;
          tableView.backgroundView = noDataLabel;
@@ -813,12 +813,15 @@
         NSString*userName=[userDict objectForKey:@"user_name"];
         
         NSString*profilPic=[userDict objectForKey:@"profile_pic"];
+    
+        NSString*emailId=[userDict objectForKey:@"email"];
         
         
-        [Utils isEmpty:fname];
+        [Utils isEmpty:fname]; //email
         [Utils isEmpty:lname];
         [Utils isEmpty:userName];
         [Utils isEmpty:profilPic];
+        [Utils isEmpty:emailId];
         
         
         if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
@@ -842,6 +845,15 @@
             
         }
     
+     if(![Utils isEmpty:emailId])
+     {
+         
+         cell.emalLabel.text=emailId;
+     }
+    else
+    {
+        cell.emalLabel.text=@"";
+    }
     
     //Image view
     if([profilPic hasSuffix:@"system.png"] || [profilPic hasSuffix:@".jpg"] || [profilPic hasSuffix:@".jpeg"] || [profilPic hasSuffix:@".png"] )

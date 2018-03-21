@@ -12,5 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *emalLabel;
+
 -(void)setUserProfileimage:(NSString*)imageUrl;
 @end

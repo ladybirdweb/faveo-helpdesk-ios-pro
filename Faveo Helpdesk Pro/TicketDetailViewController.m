@@ -60,6 +60,9 @@
     [self addSubview:self.currentViewController.view toView:self.containerView];
     utils=[[Utils alloc]init];
     
+  //  self.view.translatesAutoresizingMaskIntoConstraints = NO;
+
+    
     globalVariables=[GlobalVariables sharedInstance];
     
     userDefaults=[NSUserDefaults standardUserDefaults];

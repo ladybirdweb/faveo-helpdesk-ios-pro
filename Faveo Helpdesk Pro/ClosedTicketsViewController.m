@@ -30,6 +30,7 @@
 #import "MergeViewForm.h"
 #import "MultpleTicketAssignTableViewController.h"
 #import "UIImageView+Letters.h"
+#import "TicketSearchViewController.h"
 
 @interface ClosedTicketsViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
     
@@ -72,6 +73,13 @@
     [self.view addSubview:self.multistageDropdownMenuView];
     
     /* [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnPressed)]]; */
+    
+    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
+    [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
+    
     UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
     [NotificationBtn addTarget:self action:@selector(NotificationBtnPressed) forControlEvents:UIControlEventTouchUpInside];
@@ -79,7 +87,7 @@
     [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    // [rightBarButtonItems addSubview:moreButton];
+     [rightBarButtonItems addSubview:moreButton];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
@@ -145,6 +153,14 @@
     [self getDependencies];
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+    
+}
+
+- (IBAction)searchButtonClicked {
+    
+    TicketSearchViewController * search=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketSearchViewControllerId"];
+    [self.navigationController pushViewController:search animated:YES];
+    
     
 }
 

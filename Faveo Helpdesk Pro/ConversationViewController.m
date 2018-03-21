@@ -29,6 +29,7 @@
     NSMutableArray *mutableArray;
     GlobalVariables *globalVariable;
     int selectedIndex;
+    NSMutableArray *attachmentArray;
     
 }
 @property(nonatomic,strong) UILabel *noDataLabel;
@@ -51,6 +52,9 @@
     utils=[[Utils alloc]init];
     globalVariable=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
+    
+    attachmentArray=[[NSMutableArray alloc]init];
+    
     //[_activityIndicatorObject startAnimating];
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
@@ -148,7 +152,9 @@
             
             if (json) {
                 //NSError *error;
-                mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
+                
+                 mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
+                
             //    NSLog(@"Thread-NO4--getConversationAPI--%@",json);
                 mutableArray=[json copy];
           //      NSLog(@"Thread-NO4.1getConversation-dic--%@", mutableArray);
@@ -233,18 +239,36 @@
         cell = [nib objectAtIndex:0];
     }
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
-    NSLog(@"Final DIct is : %@",finaldic);
+  //  NSLog(@"Ticket Thread Dict is : %@",finaldic);
+  
     
     
-    NSMutableArray *arr1=[finaldic objectForKey:@"files"];
-     NSLog(@"Arra111  is : %@",arr1);
-//    NSMutableArray *arr2=[arr1 objectAtIndex:indexPath.row];
-//    NSDictionary *fileDictionary=[arr2 objectAtIndex:indexPath.row];
-  //  NSLog(@"Attchemnt dict1111 is : %@",fileDictionary);
-//    NSObject *objectFileAttachment=[fileDictionary objectForKey:@"file"];
-//    NSLog(@"Attachment File is : %@",objectFileAttachment);
     
 @try{
+    
+    
+    attachmentArray=[finaldic objectForKey:@"attach"];
+    
+    if ([attachmentArray count] != 0){
+        
+        NSIndexPath *path;
+        NSDictionary *attachDictionary=[attachmentArray objectAtIndex:path.row];
+        //   NSLog(@"Attchment Dict is: %@",attachDictionary);
+        
+        NSString *numStr = [NSString stringWithFormat:@"%@", [attachDictionary objectForKey:@"file"]];
+        //  NSString * fileName=[attachDictionary objectForKey:@"file"];
+        // NSString *fileSize=[attachDictionary objectForKey:@"size"];
+        //NSLog(@"Fina Name is : %@",numStr);
+        
+        printf("base64 String : %s\n", [numStr UTF8String]);
+        
+    }else
+    {
+        NSLog(@"EMpty aaray");
+    }
+
+    
+    
     cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
   
     NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
@@ -272,8 +296,8 @@
         NSString *style = [NSString stringWithFormat:@"<style>div {max-width: %fpx;}</style>", self.view.bounds.size.width - inset];
         body = [NSString stringWithFormat:@"%@%@%@", [body substringToIndex:range.location], style, [body substringFromIndex:range.location]];
     }
+    cell.webView.translatesAutoresizingMaskIntoConstraints = NO;
     [cell.webView loadHTMLString:body baseURL:nil];
-    
     
     
     
@@ -281,10 +305,9 @@
    //NSString *system= @"System";
    NSString *fName=[finaldic objectForKey:@"first_name"];
    NSString *lName=[finaldic objectForKey:@"last_name"];
-    
    NSString *userName=[finaldic objectForKey:@"user_name"];
     
-    [Utils isEmpty:fName];
+   [Utils isEmpty:fName];
    [Utils isEmpty:lName];
    [Utils isEmpty:userName];
    

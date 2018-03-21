@@ -407,8 +407,15 @@
                         
                         NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                         
+    
+                        
+                        
                         [userdefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
+                       
                         NSDictionary *jsonData1=[jsonData objectForKey:@"user_id"];
+                        
+                        NSString * userRole=[jsonData1 objectForKey:@"role"];
+                        
                         [userdefaults setObject:[jsonData1 objectForKey:@"id"] forKey:@"user_id"];
                         [userdefaults setObject:[jsonData1 objectForKey:@"profile_pic"] forKey:@"profile_pic"];
                         NSLog(@"Role : %@",[jsonData1 objectForKey:@"role"]);
@@ -436,6 +443,7 @@
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
+                            if([userRole isEqualToString:@"admin"] || [userRole isEqualToString:@"agent"]){
                            [RKDropdownAlert title:NSLocalizedString(@"Welcome.",nil) message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
                     
@@ -446,6 +454,12 @@
                             [self.navigationController pushViewController:inboxVC animated:YES];
                             //[self.navigationController popViewControllerAnimated:YES];
                             [[self navigationController] setNavigationBarHidden:NO];
+                            }else
+                            {
+                                
+                                [utils showAlertWithMessage:@"Invalid entry for user. This app is used by Agent and Admin only." sendViewController:self];
+                                 [[AppDelegate sharedAppdelegate] hideProgressView];
+                            }
                         });
                     }
                     @catch (NSException *exception)
