@@ -5209,6 +5209,54 @@
             </objects>
             <point key="canvasLocation" x="-3534" y="1076"/>
         </scene>
+        <!--Attachment View Controller-->
+        <scene sceneID="Lsv-bt-mSV">
+            <objects>
+                <viewController storyboardIdentifier="attachId" id="ADp-8S-Kbu" customClass="AttachmentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4oe-oD-o4U"/>
+                        <viewControllerLayoutGuide type="bottom" id="8hr-Or-ixm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="u3V-Tu-a9Y">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="attachment 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Huq-ev-hRW">
+                                <rect key="frame" x="33" y="20" width="322" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="attachembt 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7d-Fj-jVu">
+                                <rect key="frame" x="33" y="62" width="322" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="attachembt 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gj-GE-gwL">
+                                <rect key="frame" x="33" y="103" width="322" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="attachembt 4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pt6-2e-K5B">
+                                <rect key="frame" x="33" y="144" width="322" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vSe-aM-3dz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3534.7826086956525" y="1605.163043478261"/>
+        </scene>
         <!--Multple Ticket Assign Table View Controller-->
         <scene sceneID="QRO-1P-oir">
             <objects>
@@ -6180,7 +6228,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add cc" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtS-aO-RXa">
                                                             <rect key="frame" x="8" y="7" width="226" height="30"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="226" id="eSb-UN-9wf"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="226" id="eSb-UN-9wf"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="15"/>
                                                             <color key="textColor" red="0.97905264250000001" green="0.77521144320000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -6370,7 +6418,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Internal Note" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DrZ-JS-zNs">
                                                             <rect key="frame" x="117" y="20" width="180" height="20"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="180" id="vGq-r1-Ara"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="vGq-r1-Ara"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="18"/>
                                                             <color key="textColor" red="1" green="0.4336371933" blue="0.78928040759999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

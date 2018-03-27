@@ -18,7 +18,7 @@
 #import "IQKeyboardManager.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-
+#import "Utils.h"
 @import Fabric;
 @import Crashlytics;
 @import Firebase;
@@ -278,20 +278,20 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     TicketDetailViewController *td=[mainStoryboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
     
     GlobalVariables *globalVariables=[GlobalVariables sharedInstance];
+   
+    Utils *utils=[[Utils alloc]init];
     
+@try{
     NSString * scenario=[userInfo objectForKey:@"scenario"];
     if ([scenario isEqualToString:@"tickets"])  {
-        
-        
+     
         globalVariables.iD=[userInfo objectForKey:@"id"];
-        
         
         NSError *error;
         NSData *data = [[userInfo objectForKey:@"requester"] dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *requester = [NSJSONSerialization JSONObjectWithData:data
                                                                   options:kNilOptions
                                                                     error:&error];
-        
         
         globalVariables.First_name= [requester objectForKey:@"first_name"];
         globalVariables.Last_name= [requester objectForKey:@"last_name"];
@@ -304,8 +304,6 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
         ///////////////////////////
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }else {
-        
-        
         ClientDetailViewController *cd=[mainStoryboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
         NSError *error;
         NSData *data = [[userInfo objectForKey:@"requester"] dataUsingEncoding:NSUTF8StringEncoding];
@@ -327,9 +325,21 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
         [(UINavigationController *)self.window.rootViewController pushViewController:cd animated:YES];
         ////////////////////
         [[AppDelegate sharedAppdelegate] hideProgressView];
+        
     }
     
-    
+  }@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        //[utils showAlertWithMessage:exception.name sendViewController:self];
+        //return;
+    }
+    @finally
+    {
+        NSLog( @" I am in cellForAtIndexPath method in Inobx ViewController" );
+        
+    }
 }
 #endif
 // [END ios_10_message_handling]

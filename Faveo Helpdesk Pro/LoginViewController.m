@@ -211,6 +211,13 @@
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
                                 [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self];
                                 return;
+                            }
+                            if (statusCode == 401) {
+                                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                                [[AppDelegate sharedAppdelegate] hideProgressView];
+                                [utils showAlertWithMessage: NSLocalizedString(@"The request has not been applied because it lacks valid authentication credentials for the target resource.", nil) sendViewController:self];
+                                //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
+                                return;
                             }else if(statusCode == 402)
                             {
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
@@ -398,48 +405,66 @@
                 
                 NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 
-                NSLog(@"Get your response == %@", replyStr);
+        
                 
         
-                if ([replyStr containsString:@"token"]) {
+                if ([replyStr containsString:@"success"] || [replyStr containsString:@"data"]) {
                     
                     @try{
                         
                         NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                         
-    
+                        NSLog(@"JSON is : %@",jsonData);
+                        NSLog(@"JSON is : %@",jsonData);
                         
-                        
-                        [userdefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
+                        // [userdefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
                        
-                        NSDictionary *jsonData1=[jsonData objectForKey:@"user_id"];
+                        NSDictionary *userDataDict=[jsonData objectForKey:@"data"];
+                        NSString *tokenString=[NSString stringWithFormat:@"%@",[userDataDict objectForKey:@"token"]];
+                        NSLog(@"Token is : %@",tokenString);
                         
-                        NSString * userRole=[jsonData1 objectForKey:@"role"];
+                        [userdefaults setObject:[userDataDict objectForKey:@"token"] forKey:@"token"];
                         
-                        [userdefaults setObject:[jsonData1 objectForKey:@"id"] forKey:@"user_id"];
-                        [userdefaults setObject:[jsonData1 objectForKey:@"profile_pic"] forKey:@"profile_pic"];
-                        NSLog(@"Role : %@",[jsonData1 objectForKey:@"role"]);
-                        [userdefaults setObject:[jsonData1 objectForKey:@"role"] forKey:@"role"];
+                        NSDictionary *userDetailsDict=[userDataDict objectForKey:@"user"];
                         
-                        NSString *clientName=[jsonData1 objectForKey:@"first_name"];
+                        NSString * userId=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"id"]];
                         
-                        if ([clientName isEqualToString:@""]) {
-                            clientName=[jsonData1 objectForKey:@"user_name"];
+                        NSString * firstName=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"first_name"]];
+                        
+                        NSString * lastName=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"last_name"]];
+                        
+                        NSString * userName=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"user_name"]];
+                        
+                      //  NSString * userEmail=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"email"]];
+                        
+                        NSString * userProfilePic=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"profile_pic"]];
+                        
+                         NSString * userRole=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"role"]];
+                        
+                        
+                        
+                        
+                        [userdefaults setObject:userId forKey:@"user_id"];
+                        [userdefaults setObject:userProfilePic forKey:@"profile_pic"];
+                        [userdefaults setObject:userRole forKey:@"role"];
+                        
+                        NSString *profileName;
+                        if ([userName isEqualToString:@""]) {
+                            profileName=userName;
                         }else{
-                            clientName=[NSString stringWithFormat:@"%@ %@",clientName,[jsonData1 objectForKey:@"last_name"]];
+                            profileName=[NSString stringWithFormat:@"%@ %@",firstName,lastName];
                         }
                         
                         
-                        
-                        [userdefaults setObject:clientName forKey:@"profile_name"];
+                        [userdefaults setObject:profileName forKey:@"profile_name"];
                         [userdefaults setObject:baseURL forKey:@"baseURL"];
                         [userdefaults setObject:self.userNameTextField.text forKey:@"username"];
+                        
                         [userdefaults setObject:self.passcodeTextField.text forKey:@"password"];
                         [userdefaults setBool:YES forKey:@"loginSuccess"];
                         [userdefaults synchronize];
                         
-                        NSLog(@"token--%@",[jsonData objectForKey:@"token"]);
-                        NSLog(@"JSON is  ::::: %@",jsonData);
+                
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
                             

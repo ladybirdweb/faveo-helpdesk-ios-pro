@@ -137,6 +137,8 @@
 		06AB96DC2045311500FDE260 /* SupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AB96DB2045311500FDE260 /* SupportViewController.m */; };
 		06B8B01D20287E4300E5E8CA /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */; };
 		06BB2A3B202C3B3F00B33C43 /* systemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06BB2A3A202C3B3E00B33C43 /* systemIcon.png */; };
+		06CB597320639398001680AD /* tools.png in Resources */ = {isa = PBXBuildFile; fileRef = 06CB597220639397001680AD /* tools.png */; };
+		06CB597620639817001680AD /* AttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CB597520639817001680AD /* AttachmentViewController.m */; };
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
 		D9166B551FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9166B541FFDF5AB005B4776 /* MultpleTicketAssignTableViewController.m */; };
 		D9283F9F1FCC3B4E00C6A073 /* ClientFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D9283F9E1FCC3B4E00C6A073 /* ClientFilter.m */; };
@@ -449,6 +451,9 @@
 		06B8B01B20287E4200E5E8CA /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
 		06BB2A3A202C3B3E00B33C43 /* systemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = systemIcon.png; sourceTree = "<group>"; };
+		06CB597220639397001680AD /* tools.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tools.png; sourceTree = "<group>"; };
+		06CB597420639817001680AD /* AttachmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachmentViewController.h; sourceTree = "<group>"; };
+		06CB597520639817001680AD /* AttachmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachmentViewController.m; sourceTree = "<group>"; };
 		71F1AA09E61335E4CF8D374D /* Pods-Faveo Helpdesk Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		87E5D942FD9E5161BA42FBBC /* Pods-Faveo Helpdesk Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faveo Helpdesk Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro.release.xcconfig"; sourceTree = "<group>"; };
 		CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Faveo Helpdesk Pro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -706,6 +711,8 @@
 				0618FA7F204E54C9004D2C3F /* InternalNoteViewController.m */,
 				061CAA3920525281007EA8B6 /* TicketSearchViewController.h */,
 				061CAA3A20525281007EA8B6 /* TicketSearchViewController.m */,
+				06CB597420639817001680AD /* AttachmentViewController.h */,
+				06CB597520639817001680AD /* AttachmentViewController.m */,
 			);
 			name = Ticket;
 			sourceTree = "<group>";
@@ -1304,9 +1311,10 @@
 		D9EB9F4E1E07C20B0001115F /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
+				06CB597220639397001680AD /* tools.png */,
 				D9A2FCB11F18942800C829DD /* NotificationTableViewCell.h */,
-				D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */,
 				D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */,
+				D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */,
 				D9EB9F651E07C2F00001115F /* TicketTableViewCell.h */,
 				D9EB9F661E07C2F00001115F /* TicketTableViewCell.m */,
 				D9EB9F671E07C2F00001115F /* TicketTableViewCell.xib */,
@@ -1589,6 +1597,7 @@
 				0634EBA120385D64002CB4E8 /* ticketStatus1.jpg in Resources */,
 				0609ADA120397BEC00DCDC85 /* multpleticketstatuschnage.jpg in Resources */,
 				D9F9F13C1FB9B2530044DA27 /* check_mark@2x.png in Resources */,
+				06CB597320639398001680AD /* tools.png in Resources */,
 				06099CD1203AD9160060831A /* view127.png in Resources */,
 				0617151C2059033300E3E14D /* SampleTableCellTableViewCell.xib in Resources */,
 				D9F954FB1E617BE500DA9B30 /* countries.json in Resources */,
@@ -1824,6 +1833,7 @@
 				06171515205901BC00E3E14D /* BIZPopupViewController.m in Sources */,
 				D9EB9FA11E07C3270001115F /* UnassignedTicketsViewController.m in Sources */,
 				D9EB9F5E1E07C2B70001115F /* MyWebservices.m in Sources */,
+				06CB597620639817001680AD /* AttachmentViewController.m in Sources */,
 				D97CA1401FCC229800A7B982 /* LGFilterView.m in Sources */,
 				0634EB7520381BE3002CB4E8 /* AllAboutTicketCell6.m in Sources */,
 				0634EBB320387536002CB4E8 /* AgentUserListView.m in Sources */,

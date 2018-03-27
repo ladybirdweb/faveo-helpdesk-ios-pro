@@ -100,23 +100,37 @@
             {
                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                [utils showAlertWithMessage:@"T Internal Server Error.Something has gone wrong on the website's server." sendViewController:vc];
+                [utils showAlertWithMessage:@"Internal Server Error.Something has gone wrong on the website's server." sendViewController:vc];
             }
             
             NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
             NSLog(@"Thread--refreshToken--Get your response == %@", replyStr);
             
-            if ([replyStr containsString:@"token"]) {
+             if ([replyStr containsString:@"success"] || [replyStr containsString:@"data"]) {
                 
                 NSError *error=nil;
                 NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                 if (error) {
                     return;
                 }
-                [_userDefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
-                NSDictionary *jsonData1=[jsonData objectForKey:@"user_id"];
-                [_userDefaults setObject:[jsonData1 objectForKey:@"id"] forKey:@"user_id"];
+                 
+                 NSDictionary *userDataDict=[jsonData objectForKey:@"data"];
+                 NSString *tokenString=[NSString stringWithFormat:@"%@",[userDataDict objectForKey:@"token"]];
+                 NSLog(@"Token is : %@",tokenString);
+                 
+                 [_userDefaults setObject:tokenString forKey:@"token"];
+                 
+               // [_userDefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
+//                NSDictionary *jsonData1=[jsonData objectForKey:@"user_id"];
+//                [_userDefaults setObject:[jsonData1 objectForKey:@"id"] forKey:@"user_id"];
+                 
+                 NSDictionary *userDetailsDict=[userDataDict objectForKey:@"user"];
+                 
+                 NSString * userId=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"id"]];
+                 
+                [_userDefaults setObject:userId forKey:@"user_id"];
+                 
                 [_userDefaults synchronize];
                 
                 result=@"tokenRefreshed";

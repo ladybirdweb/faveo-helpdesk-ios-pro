@@ -97,7 +97,7 @@
     
     NSLog(@"Ticket is isssss : %@",globalVariables.iD);
     
-    [self getDependencies];
+ //   [self getDependencies];
     
 }
 

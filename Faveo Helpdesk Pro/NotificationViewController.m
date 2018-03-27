@@ -301,6 +301,7 @@
             
             if (json) {
                 NSLog(@"Thread-NO4--getNotifictionAPI--%@",json);
+                
                 //_indexPaths=[[NSArray alloc]init];
                 //_indexPaths = [json objectForKey:@"data"];
                 _nextPageUrl =[json objectForKey:@"next_page_url"];

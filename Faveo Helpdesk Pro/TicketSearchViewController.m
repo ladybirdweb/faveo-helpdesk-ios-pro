@@ -195,7 +195,7 @@
         
         if (json) {
             //NSError *error;
-            NSLog(@"Thread-Ticket-SearchAPI-Json-%@",json);
+         //   NSLog(@"Thread-Ticket-SearchAPI-Json-%@",json);
             
              _filteredSampleDataArray=[[NSMutableArray alloc]initWithCapacity:11];
             
@@ -203,7 +203,7 @@
           
             _filteredSampleDataArray = [dict1 objectForKey:@"data"];
             
-            NSLog(@"Mutable Array is--%@",_filteredSampleDataArray);
+          //  NSLog(@"Mutable Array is--%@",_filteredSampleDataArray);
             
             
             _nextPageUrl =[dict1 objectForKey:@"next_page_url"];
@@ -308,13 +308,14 @@
             //NSError *error;
             NSLog(@"Thread-user-SearchAPI-Json-%@",json);
             
-            _userDataArray=[[NSMutableArray alloc]initWithCapacity:11];
+        
+            _userDataArray=[[NSMutableArray alloc]initWithCapacity:100];
             
             NSDictionary * dict1 = [json objectForKey:@"result"];
             
             _userDataArray = [dict1 objectForKey:@"data"];
             
-            NSLog(@"Mutable User Array is--%@",_userDataArray);
+          //  NSLog(@"Mutable User Array is--%@",_userDataArray);
             
             
             _nextPageUrl =[dict1 objectForKey:@"next_page_url"];
@@ -409,12 +410,18 @@
     
          return _filteredSampleDataArray.count + 1;
     }
+   
+    if(tableView==_tableview1){
     if (self.currentPage == self.totalPages
         || self.totalTickets == _userDataArray.count) {
         return _userDataArray.count;
     }
     
     return _userDataArray.count + 1;
+    }
+    
+    else
+        return 1;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -447,31 +454,31 @@
     }
   }
     
-    if (indexPath.row == [_userDataArray count] - 1 ) {
-        NSLog(@"nextURL111  %@",_nextPageUrl);
-        
-        if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
-            
-          //  [self loadMoreforSearchResults];
-            
-            
-        }
-        else{
-            
-            [RMessage showNotificationInViewController:self
-                                                 title:nil
-                                              subtitle:NSLocalizedString(@"All Caught Up", nil)
-                                             iconImage:nil
-                                                  type:RMessageTypeSuccess
-                                        customTypeName:nil
-                                              duration:RMessageDurationAutomatic
-                                              callback:nil
-                                           buttonTitle:nil
-                                        buttonCallback:nil
-                                            atPosition:RMessagePositionBottom
-                                  canBeDismissedByUser:YES];
-        }
-    }
+//    if (indexPath.row == [_userDataArray count] - 1 ) {
+//        NSLog(@"nextURL111  %@",_nextPageUrl);
+//
+//        if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
+//
+//         // [self loadMoreforSearchResults2];
+//
+//
+//        }
+//        else{
+//
+//            [RMessage showNotificationInViewController:self
+//                                                 title:nil
+//                                              subtitle:NSLocalizedString(@"All Caught Up", nil)
+//                                             iconImage:nil
+//                                                  type:RMessageTypeSuccess
+//                                        customTypeName:nil
+//                                              duration:RMessageDurationAutomatic
+//                                              callback:nil
+//                                           buttonTitle:nil
+//                                        buttonCallback:nil
+//                                            atPosition:RMessagePositionBottom
+//                                  canBeDismissedByUser:YES];
+//        }
+//    }
     
 }
 
@@ -480,7 +487,7 @@
 {
 
     if(tableView==_tableview1)
- {
+   {
 //
      if (indexPath.row == [_filteredSampleDataArray count])
      {
@@ -504,10 +511,11 @@
              NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TicketTableViewCell" owner:self options:nil];
              cell = [nib objectAtIndex:0];
          }
-         
+      
+  @try{
          //user name deatils
          NSDictionary *searchDictionary=[_filteredSampleDataArray objectAtIndex:indexPath.row];
-         NSLog(@"searchDictionary is : %@",searchDictionary);
+       //  NSLog(@"searchDictionary is : %@",searchDictionary);
          
          
          // first name, last name, user name owner name
@@ -559,17 +567,6 @@
          {
              cell.ticketIdLabel.text=NSLocalizedString(@"Not Available", nil);
          }
-
-//         //profile picture
-//         if (  ![profilPic isEqual:[NSNull null]]   )
-//         {
-//             [cell setUserProfileimage:profilPic];
-//
-//         }
-//         else
-//         {
-//             [cell setUserProfileimage:@"default_pic.png"];
-//         }
          
          //Image view
          if([profilPic hasSuffix:@"system.png"] || [profilPic hasSuffix:@".jpg"] || [profilPic hasSuffix:@".jpeg"] || [profilPic hasSuffix:@".png"] )
@@ -782,7 +779,18 @@
          }
          }
        } //end userDict
-         
+    }@catch (NSException *exception)
+         {
+             NSLog( @"Name: %@", exception.name);
+             NSLog( @"Reason: %@", exception.reason );
+             [utils showAlertWithMessage:exception.name sendViewController:self];
+            // return;
+         }
+         @finally
+         {
+             NSLog( @" I am in CellForRowAtIndexPath method for Ticket Search ViewController" );
+             
+         }
        
          return cell;
     }
@@ -797,10 +805,10 @@
             cell = [nib objectAtIndex:0];
         }
     
-    
+    @try{
         //user name deatils
         NSDictionary *searchUserDictionary=[_userDataArray objectAtIndex:indexPath.row];
-        NSLog(@"userSearchDictionary is : %@",searchUserDictionary);
+       // NSLog(@"userSearchDictionary is : %@",searchUserDictionary);
     
         
         // first name, last name, user name owner name
@@ -869,20 +877,19 @@
         [cell.userProfileImage setImageWithString:userName color:nil ];
     }
         
-//                if (![Utils isEmpty:profilPic] )
-//                {
-//                   // cell.userProfileImage.image=[UIImage imageNamed:profilPic];
-//                  //  [cell setUserProfileImage:[UIImage imageNamed:profilPic]];
-//                    [cell setUserProfileimage:profilPic];
-//
-//                }
-//                else
-//                {
-//                   // [cell setUserProfileimage:@"default_pic.png"];
-//                  [cell setUserProfileimage:@"default_pic.png"];
-//                }
     
+    }@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+        //return;
+    }
+    @finally
+    {
+        NSLog( @" I am in CellForRowAtIndexPath method for User Search ViewController" );
         
+    }
     return cell;
     
 }
@@ -981,6 +988,105 @@
 
 
 }
+
+//-(void)loadMoreforSearchResults2
+//{
+//
+//    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+//    {
+//        //connection unavailable
+//        if (self.navigationController.navigationBarHidden) {
+//            [self.navigationController setNavigationBarHidden:NO];
+//        }
+//
+//        [RMessage showNotificationInViewController:self.navigationController
+//                                             title:NSLocalizedString(@"Error..!", nil)
+//                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+//                                         iconImage:nil
+//                                              type:RMessageTypeError
+//                                    customTypeName:nil
+//                                          duration:RMessageDurationAutomatic
+//                                          callback:nil
+//                                       buttonTitle:nil
+//                                    buttonCallback:nil
+//                                        atPosition:RMessagePositionNavBarOverlay
+//                              canBeDismissedByUser:YES];
+//
+//
+//    }else{
+//
+//        self.page = _page + 1;
+//        // NSLog(@"Page is : %ld",(long)_page);
+//
+//        NSString *str=_nextPageUrl;
+//        NSString *Page = [str substringFromIndex:[str length] - 1];
+//
+//        //     NSLog(@"String is : %@",szResult);
+//        NSLog(@"Page is : %@",Page);
+//        NSLog(@"Page is : %@",Page);
+//
+//        MyWebservices *webservices=[MyWebservices sharedInstance];
+//
+//
+//        [webservices getNextPageURLInboxSearchResults:_path1 searchString:_seachTextField.text  pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+//
+//            if (error || [msg containsString:@"Error"]) {
+//
+//                if (msg) {
+//
+//                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+//
+//                }else if(error)  {
+//                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+//                    NSLog(@"Thread-userSearch-Load-more-Refresh-error == %@",error.localizedDescription);
+//                }
+//                return ;
+//            }
+//
+//            if ([msg isEqualToString:@"tokenRefreshed"]) {
+//
+//                [self loadMoreforSearchResults2];
+//                //NSLog(@"Thread--NO4-call-getInbox");
+//                return;
+//            }
+//
+//            if (json) {
+//              //  NSLog(@"Thread-TicketSearch-Load-more-jSON--%@",json);
+//
+//                NSDictionary * dict1 = [json objectForKey:@"result"];
+//
+//                _nextPageUrl =[dict1 objectForKey:@"next_page_url"];
+//                _currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
+//                _totalTickets=[[dict1 objectForKey:@"total"] integerValue];
+//                _totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
+//                _path1=[dict1 objectForKey:@"path"];
+//
+//
+//
+//                _userDataArray= [dict1 objectForKey:@"data"];
+//                [_userDataArray addObjectsFromArray:[dict1 objectForKey:@"data"]];
+//                //   _filteredSampleDataArray = [dict1 objectForKey:@"data"];
+//
+//
+//                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        // [self.tableview reloadData];
+//                        //                        [self reloadTableView];
+//                        [self.tableview2 reloadData];
+//
+//                    });
+//                });
+//
+//            }
+//
+//
+//        }];
+//
+//    }
+//
+//
+//}
+
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

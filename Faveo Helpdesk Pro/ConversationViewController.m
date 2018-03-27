@@ -21,8 +21,9 @@
 #import "RMessage.h"
 #import "RMessageView.h"
 #import "UIImageView+Letters.h"
+#import "AttachmentViewController.h"
 
-@interface ConversationViewController ()<CNPPopupControllerDelegate,UIWebViewDelegate,RMessageProtocol>{
+@interface ConversationViewController ()<ConversationTableViewCellDelegate,CNPPopupControllerDelegate,UIWebViewDelegate,RMessageProtocol>{
     
     Utils *utils;
     NSUserDefaults *userDefaults;
@@ -56,7 +57,8 @@
     attachmentArray=[[NSMutableArray alloc]init];
     
     //[_activityIndicatorObject startAnimating];
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Conversations",nil)];
+ 
     [self reload];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadd) name:@"reload_data" object:nil];
@@ -193,6 +195,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger numOfSections = 0;
@@ -238,6 +241,8 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ConversationTableViewCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
+     [cell setDelegate:self];
+    
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
   //  NSLog(@"Ticket Thread Dict is : %@",finaldic);
   
@@ -251,6 +256,9 @@
     
     if ([attachmentArray count] != 0){
         
+        cell.attachImage.hidden=NO;
+        cell.attachButtonLabel.hidden=NO;
+        
         NSIndexPath *path;
         NSDictionary *attachDictionary=[attachmentArray objectAtIndex:path.row];
         //   NSLog(@"Attchment Dict is: %@",attachDictionary);
@@ -260,11 +268,13 @@
         // NSString *fileSize=[attachDictionary objectForKey:@"size"];
         //NSLog(@"Fina Name is : %@",numStr);
         
-        printf("base64 String : %s\n", [numStr UTF8String]);
+      //  printf("base64 String : %s\n", [numStr UTF8String]);
         
     }else
     {
         NSLog(@"EMpty aaray");
+        cell.attachImage.hidden=YES;
+        cell.attachButtonLabel.hidden=YES;
     }
 
     
@@ -373,6 +383,16 @@
 
     return cell;
 }
+
+
+- (void) buttonTouchedForCell:(ConversationTableViewCell *)cell {
+    
+  //  NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    AttachmentViewController *attach=[self.storyboard instantiateViewControllerWithIdentifier:@"attachId"];
+    [self.navigationController pushViewController:attach animated:YES];
+}
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

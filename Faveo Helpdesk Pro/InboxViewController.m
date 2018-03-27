@@ -181,7 +181,7 @@
     [self getDependencies];
     [self reload];
    
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
     
 }
 
@@ -438,27 +438,24 @@
                 if (json) {
                     //NSError *error;
                     NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-                    _mutableArray = [json objectForKey:@"data"];
+                    NSDictionary *data1Dict=[json objectForKey:@"data"];
                     
-                    _nextPageUrl =[json objectForKey:@"next_page_url"];
-                    NSLog(@"bexr page url is : %@",_nextPageUrl);
+                    _mutableArray = [data1Dict objectForKey:@"data"];
                     
-                    _path1=[json objectForKey:@"path"];
+                    _nextPageUrl =[data1Dict objectForKey:@"next_page_url"];
+                    _path1=[data1Dict objectForKey:@"path"];
+                    _currentPage=[[data1Dict objectForKey:@"current_page"] integerValue];
+                    _totalTickets=[[data1Dict objectForKey:@"total"] integerValue];
+                    _totalPages=[[data1Dict objectForKey:@"last_page"] integerValue];
                     
-                    _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                    _totalTickets=[[json objectForKey:@"total"] integerValue];
-                    _totalPages=[[json objectForKey:@"last_page"] integerValue];
-                    NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
+                  
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             [refresh endRefreshing];
-                            //  [self.tableView reloadData];
+                            
                             [self reloadTableView];
-                            //                        [selectedArray removeAllObjects];
-                            //                        if (!selectedArray.count) {
-                            //                            [self.tableView setEditing:NO animated:YES];
-                            //                        }
+                            
                         });
                     });
                     
@@ -541,8 +538,8 @@
                 
                 if (json) {
                     
-                    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
-                    NSDictionary *resultDic = [json objectForKey:@"result"];
+                //    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    NSDictionary *resultDic = [json objectForKey:@"data"];
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
                     
                     for (int i = 0; i < ticketCountArray.count; i++) {
@@ -851,12 +848,12 @@
             
             NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
             
-            tempDict= [_mutableArray objectAtIndex:indexPath.row];
-            //cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+           // tempDict= [_mutableArray objectAtIndex:indexPath.row];
+          
             
             @try{
                 
-                
+                //last replier
                 NSString *replyer12=[finaldic objectForKey:@"last_replier"];
                 [Utils isEmpty:replyer12];
                 
@@ -876,7 +873,7 @@
                 }
                 
                 
-                
+                //ticket number
                 NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
                 
                 [Utils isEmpty:ticketNumber];
@@ -891,9 +888,13 @@
                     cell.ticketIdLabel.text=NSLocalizedString(@"Not Available", nil);
                 }
                 
-                NSString *assigneeFirstName= [finaldic objectForKey:@"a_fname"];
-                NSString *assigneeLaststName= [finaldic objectForKey:@"a_lname"];
-                NSString *assigneeUserName= [finaldic objectForKey:@"a_uname"];
+                
+                //agent info
+                NSDictionary *assigneeDict=[finaldic objectForKey:@"assignee"];
+                
+                NSString *assigneeFirstName= [assigneeDict objectForKey:@"first_name"];
+                NSString *assigneeLaststName= [assigneeDict objectForKey:@"last_name"];
+                NSString *assigneeUserName= [assigneeDict objectForKey:@"user_name"];
                 
                 [Utils isEmpty:assigneeFirstName];
                 [Utils isEmpty:assigneeLaststName];
@@ -903,26 +904,28 @@
                 {
                     if  (![Utils isEmpty:assigneeFirstName] && ![Utils isEmpty:assigneeLaststName])
                     {
-                        cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"a_fname"],[finaldic objectForKey:@"a_lname"]];
+                        cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",assigneeFirstName,assigneeLaststName];
                     }
                     else
                     {
-                        cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"a_fname"],[finaldic objectForKey:@"a_lname"]];
+                        cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",assigneeFirstName,assigneeLaststName];
                     }
                 }  else if(![Utils isEmpty:assigneeUserName])
                 {
-                    cell.agentLabel.text= [finaldic objectForKey:@"a_uname"];
+                    cell.agentLabel.text= assigneeUserName;
                 }else
                 {
                     cell.agentLabel.text= NSLocalizedString(@"Unassigned", nil);
                 }
                 
                 
-                NSString *fname= [finaldic objectForKey:@"c_fname"];
+                //ticket owner/customer info
                 
-                NSString *lname= [finaldic objectForKey:@"c_lname"];
-                //  NSString *userName= [finaldic objectForKey:@"c_uname"];
-                NSString*email1=[finaldic objectForKey:@"c_uname"];
+                NSDictionary *customerDict=[finaldic objectForKey:@"from"];
+                
+                NSString *fname= [customerDict objectForKey:@"first_name"];
+                NSString *lname= [customerDict objectForKey:@"last_name"];
+                NSString*email1=[finaldic objectForKey:@"user_name"];
                 
                 [Utils isEmpty:fname];
                 [Utils isEmpty:lname];
@@ -932,22 +935,18 @@
                 if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
                 {
                     if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
-                    {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"c_fname"],[finaldic objectForKey:@"c_lname"]];
+                    {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
                     }
                     else{
-                        cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"c_fname"],[finaldic objectForKey:@"c_lname"]];
+                        cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
                     }
                 }
                 else
                 {
-                    //                if(![Utils isEmpty:userName])
-                    //               {
-                    //                cell.mailIdLabel.text=[finaldic objectForKey:@"user_name"];
-                    //               }
-                    
+                
                     if(![Utils isEmpty:email1])
                     {
-                        cell.mailIdLabel.text=[finaldic objectForKey:@"c_uname"];
+                        cell.mailIdLabel.text=email1;
                     }
                     else{
                         cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
@@ -956,9 +955,9 @@
                 }
                 
                 //Image view
-                if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@"system.png"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+                if([[customerDict objectForKey:@"profile_pic"] hasSuffix:@"system.png"] || [[customerDict objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[customerDict objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[customerDict objectForKey:@"profile_pic"] hasSuffix:@".png"] )
                 {
-                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+                    [cell setUserProfileimage:[customerDict objectForKey:@"profile_pic"]];
                 }
                 else if(![Utils isEmpty:fname])
                 {
@@ -970,6 +969,7 @@
                 }
                 
                 
+                //updated time of ticket
                 cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
                 
                 
@@ -997,8 +997,9 @@
             
             
             
-            NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
+           // NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
             
+            NSString *encodedString =@"Sample Ticket Titile";
             
             [Utils isEmpty:encodedString];
             
@@ -1056,12 +1057,12 @@
                     NSLog(@"Decoded string = %@", decodedString);
                     
                     //   cell.ticketSubLabel.text= decodedString; //countthread
-                    cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",decodedString,[finaldic objectForKey:@"countthread"]];
+                    cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",decodedString,[finaldic objectForKey:@"thread_count"]];
                 }
                 else{
                     
                     // cell.ticketSubLabel.text= encodedString;
-                    cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",encodedString,[finaldic objectForKey:@"countthread"]];
+                    cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",encodedString,[finaldic objectForKey:@"thread_count"]];
                     
                 }
                 
@@ -1105,10 +1106,12 @@
                 }
                 
                 
+                
                 NSString * source1=[finaldic objectForKey:@"source"];
                 
                 NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countcollaborator"]];
-                NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countattachment"]];
+                
+                NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
                 
                 
                 if([source1 isEqualToString:@"web"] || [source1 isEqualToString:@"Web"])
@@ -1155,9 +1158,9 @@
                     
                 }
                 
-                
-                
-                cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"color"]] CGColor];
+                //priority color
+                NSDictionary *priorityDict=[finaldic objectForKey:@"priority"];
+                cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[priorityDict objectForKey:@"color"]] CGColor];
                 
                 
                 
@@ -1201,9 +1204,12 @@
         [selectedArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
         
         //taking ticket title from selected rows
-        [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
+      //  [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
+        
+         [selectedSubjectArray addObject:@"Sample Ticket Tilte in Did Select"];
+        
         //taking email id
-        [selectedTicketOwner addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
+        [selectedTicketOwner addObject:[[[_mutableArray objectAtIndex:indexPath.row] objectForKey:@"from"] valueForKey:@"email"]];
         
         count1=(int)[selectedArray count];
         NSLog(@"Selected count is :%i",count1);
@@ -1215,26 +1221,28 @@
         
         NSLog(@"Slected Ticket Subjects are : %@",selectedSubjectArray);
         
-        //        globalVariables.idList=selectedArray;
-        //        globalVariables.subjectList=selectedSubjectArray;
         
     }else{
         
         
             TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-            
+        
+        
             NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
-            
+        
+        
             globalVariables.iD=[finaldic objectForKey:@"id"];
+            globalVariables.Ticket_status=[finaldic objectForKey:@"status"];
             globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
-            
-            globalVariables.First_name=[finaldic objectForKey:@"c_fname"];
-            globalVariables.Last_name=[finaldic objectForKey:@"c_lname"];
-            
-            globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
-            globalVariables.userIdFromInbox=[finaldic objectForKey:@"c_uid"];;
-            
             globalVariables.ticketStatusBool=@"ticketView";
+        
+        
+            NSDictionary *customerDict=[finaldic objectForKey:@"from"];
+        
+            globalVariables.First_name=[customerDict objectForKey:@"first_name"];
+            globalVariables.Last_name=[customerDict objectForKey:@"last_name"];
+            globalVariables.userIdFromInbox=[customerDict objectForKey:@"id"];
+    
             
             [self.navigationController pushViewController:td animated:YES];
             
@@ -1250,9 +1258,14 @@
     //   [selectedArray removeObject:[_mutableArray objectAtIndex:indexPath.row]];
     [selectedArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
     
-    [selectedSubjectArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
+   // [selectedSubjectArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
     
-    [selectedTicketOwner removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
+  //  [selectedTicketOwner removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
+    
+    [selectedSubjectArray addObject:@"Sample Ticket Tilte in Did Select"];
+    
+    //taking email id
+    [selectedTicketOwner addObject:[[[_mutableArray objectAtIndex:indexPath.row] objectForKey:@"from"] valueForKey:@"id"]];
     
     count1=(int)[selectedArray count];
     NSLog(@"Selected count is :%i",count1);
@@ -1451,16 +1464,10 @@
                 }
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
-                    if ([json objectForKey:@"response"]) {
-                        
-                        id object;
-                        NSDictionary * dict1= [json objectForKey:@"response"];
-                        object = [dict1 objectForKey:@"message"];
-                        
-                        NSLog(@"object is :%@",object);
-                        NSLog(@"object is :%@",object);
-                        
-                        if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Closed"]){
+                    
+                    NSString * msg=[json objectForKey:@"message"];
+                    
+                        if([msg isEqualToString:@"Status changed to Closed"]){
                             
                             [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
@@ -1473,21 +1480,9 @@
                             [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
                             
                         }
-                        
-                    }
+        
                 }
-                //                if (json) {
-                //                    NSLog(@"JSON-CreateTicket-%@",json);
-                //                    if ([json objectForKey:@"response"]) {
-                //                        dispatch_async(dispatch_get_main_queue(), ^{
-                //
-                //                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                //
-                //                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                //                            [self.navigationController pushViewController:inboxVC animated:YES];
-                //                        });
-                //                    }
-                //                }// end json
+             
                 NSLog(@"Thread-NO5-postTicketStatusChange-closed");
                 
             }];
@@ -1560,17 +1555,11 @@
                 
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
-                    if ([json objectForKey:@"response"]) {
+                    
+                    NSString * msg=[json objectForKey:@"message"];
+                    
+                    if([msg isEqualToString:@"Status changed to Resolved"]){
                         
-                        id object;
-                        NSDictionary * dict1= [json objectForKey:@"response"];
-                        object = [dict1 objectForKey:@"message"];
-                        
-                        NSLog(@"object is :%@",object);
-                        NSLog(@"object is :%@",object);
-                        
-                        if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Resolved"]){
-                            
                             [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
@@ -1584,24 +1573,7 @@
                         }
                         
                     }
-                    
-                    
-                } // end json
                 
-                //                if (json) {
-                //                    NSLog(@"JSON-CreateTicket-%@",json);
-                //                    if ([json objectForKey:@"response"]) {
-                //                        dispatch_async(dispatch_get_main_queue(), ^{
-                //
-                //                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                //
-                //
-                //
-                //                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                //                            [self.navigationController pushViewController:inboxVC animated:YES];
-                //                        });
-                //                    }
-                //                }
                 NSLog(@"Thread-NO5-postTicketStatusChange-closed");
                 
             }];
@@ -1672,16 +1644,11 @@
                 
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
-                    if ([json objectForKey:@"response"]) {
-                        
-                        id object;
-                        NSDictionary * dict1= [json objectForKey:@"response"];
-                        object = [dict1 objectForKey:@"message"];
-                        
-                        NSLog(@"object is :%@",object);
-                        NSLog(@"object is :%@",object);
-                        
-                        if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Deleted"]){
+                    
+                    NSString * msg=[json objectForKey:@"message"];
+                    
+                    if([msg isEqualToString:@"Status changed to Deleted"]){
+            
                             
                             [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
@@ -1694,27 +1661,9 @@
                             [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
                             
                         }
-                        
-                    }
                     
-                    
-                    //                }
-                } // end json
+                  }
                 
-                
-                //                if (json) {
-                //                    NSLog(@"JSON-CreateTicket-%@",json);
-                //                    if ([json objectForKey:@"response"]) {
-                //                        dispatch_async(dispatch_get_main_queue(), ^{
-                //
-                //                            [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                //
-                //
-                //                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                //                            [self.navigationController pushViewController:inboxVC animated:YES];
-                //                        });
-                //                    }
-                //                }
                 NSLog(@"Thread-NO5-postTicketStatusChange-closed");
                 
             }];

@@ -333,12 +333,13 @@
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
                 
-               //NSString * str=[json objectForKey:@"success"];
-                NSDictionary * dic1=[json objectForKey:@"message"];
+    
+                NSString * str=[json objectForKey:@"message"];
+                //NSString * str2=[json objectForKey:@"1"];
                 
-                NSString * str=[dic1 objectForKey:@"success"];
+               
                 
-                    if ([[json objectForKey:@"success"] isEqualToString:@"assigned successfully"] || [str isEqualToString:@"assigned successfully"] || [str isEqualToString:@"Assigned successfully"])
+                    if ([str isEqualToString:@"Assigned successfully"])
                     {
                         dispatch_async(dispatch_get_main_queue(), ^{
 
