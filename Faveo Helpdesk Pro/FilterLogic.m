@@ -843,14 +843,22 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/dependency?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
         
+        NSLog(@"URL is : %@",url);
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
                 NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
                 if (error || [msg containsString:@"Error"]) {
                     
-                    NSLog(@"Thread-NO4-postCreateTicket-Refresh-error == %@",error.localizedDescription);
-                    return ;
+                    if( [msg containsString:@"Error-429"])
+                        
+                    {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
+                        
+                    }else{
+                        NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
+                        return ;
+                    }
                 }
                 
                 if ([msg isEqualToString:@"tokenRefreshed"]) {
@@ -865,8 +873,8 @@
                 
                 if (json) {
                     
-                    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
-                    NSDictionary *resultDic = [json objectForKey:@"result"];
+                    //    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    NSDictionary *resultDic = [json objectForKey:@"data"];
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
                     
                     for (int i = 0; i < ticketCountArray.count; i++) {
@@ -940,12 +948,13 @@
         }
         @finally
         {
-            NSLog( @" I am in getDependecncies method in FilterLogic ViewController" );
+            NSLog( @" I am in getDependencies method in Inbox ViewController" );
             
         }
     }
-
+    NSLog(@"Thread-NO2-getDependencies()-closed");
 }
+
 
 
 -(void)EditTableView:(UIGestureRecognizer*)gesture{
@@ -1586,7 +1595,9 @@
         
         // NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
         
-        NSString *encodedString =@"Sample Ticket Titile";
+        //NSString *encodedString =@"Sample Ticket Titile";
+        
+         NSString *encodedString =[finaldic objectForKey:@"title"];
         
         [Utils isEmpty:encodedString];
         

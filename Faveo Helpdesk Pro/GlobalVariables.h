@@ -202,5 +202,7 @@
 
 @property (strong, nonatomic) NSString *userID;
 
+@property (strong, nonatomic) NSMutableArray *assigneeIdArrayListToTicketCreate;
+
 @end
 

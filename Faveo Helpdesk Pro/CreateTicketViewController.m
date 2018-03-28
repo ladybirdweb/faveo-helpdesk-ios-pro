@@ -104,6 +104,7 @@
     utils=[[Utils alloc]init];
     userDefaults=[NSUserDefaults standardUserDefaults];
     globalVariables=[GlobalVariables sharedInstance];
+    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     
     
@@ -374,6 +375,7 @@
         
         NSLog(@"Staff Name Array : %@",_staffArray);
         NSLog(@"STaff id Array : %@",staff_idArray);
+        globalVariables.assigneeIdArrayListToTicketCreate=staff_idArray;
         
     }@catch (NSException *exception)
     {
@@ -997,13 +999,19 @@
 
 - (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
 {
-    if(staff_idArray.count >0){
+//    NSLog(@"Id Array is : %@",globalVariables.assigneeIdArrayListToTicketCreate);
+//    NSLog(@"Id Array is : %@",globalVariables.assigneeIdArrayListToTicketCreate);
+    
+    staff_idArray=globalVariables.assigneeIdArrayListToTicketCreate;
+    
+//    if(staff_idArray.count >0){
     staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
-        NSLog(@"Staff is is : %@",staff_id);
-    }else
-    {
-        NSLog(@"Empty array");
-    }
+    NSLog(@"Staff id is : %@",staff_id);
+//        NSLog(@"Staff is is : %@",staff_id);
+//    }else
+//    {
+//        NSLog(@"Empty array");
+//    }
     self.assignTextField.text = (_staffArray)[(NSUInteger) [selectedIndex intValue]];
      NSLog(@"data in textfield is is : %@",_assignTextField.text);
 }

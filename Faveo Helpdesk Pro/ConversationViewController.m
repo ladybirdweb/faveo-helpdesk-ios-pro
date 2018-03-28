@@ -289,13 +289,13 @@
     cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
   
     //internal note label
- //   NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
-//    if (i==0) {
-//        [cell.internalNoteLabel setHidden:YES];
-//    }
-//    if(i==1){
-//        [cell.internalNoteLabel setHidden:NO];
-//    }
+    NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
+    if (i==0) {
+        [cell.internalNoteLabel setHidden:YES];
+    }
+    if(i==1){
+        [cell.internalNoteLabel setHidden:NO];
+    }
     
     
     

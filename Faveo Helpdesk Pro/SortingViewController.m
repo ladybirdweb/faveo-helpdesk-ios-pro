@@ -1605,12 +1605,13 @@
         }
         @finally
         {
-            NSLog( @" I am in getDependencies method in sorting ViewController" );
+            NSLog( @" I am in getDependencies method in Inbox ViewController" );
             
         }
     }
     NSLog(@"Thread-NO2-getDependencies()-closed");
 }
+
 
 
 -(void)EditTableView:(UIGestureRecognizer*)gesture{
@@ -2219,7 +2220,9 @@
         
         // NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
         
-        NSString *encodedString =@"Sample Ticket Titile";
+       // NSString *encodedString =@"Sample Ticket Titile";
+        
+         NSString *encodedString =[finaldic objectForKey:@"title"];
         
         [Utils isEmpty:encodedString];
         

@@ -569,7 +569,7 @@
 
      globalVariables.ActiveDeactiveStateOfUser1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"is_delete"]];
     
-    globalVariables.userRole=@"";
+    globalVariables.userRole=[finaldic objectForKey:@"role"];
     
     ClientDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
     [self.navigationController pushViewController:td animated:YES];

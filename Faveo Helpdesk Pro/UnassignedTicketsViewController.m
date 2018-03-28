@@ -772,7 +772,8 @@
         
         // NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
         
-        NSString *encodedString =@"Sample Ticket Titile";
+      //  NSString *encodedString =@"Sample Ticket Titile";
+         NSString *encodedString =[finaldic objectForKey:@"title"];
         
         [Utils isEmpty:encodedString];
         

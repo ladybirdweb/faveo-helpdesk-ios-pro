@@ -992,9 +992,9 @@
             
             
             
-           // NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
+            NSString *encodedString =[finaldic objectForKey:@"title"];
             
-            NSString *encodedString =@"Sample Ticket Titile";
+         //   NSString *encodedString =@"Sample Ticket Titile";
             
             [Utils isEmpty:encodedString];
             

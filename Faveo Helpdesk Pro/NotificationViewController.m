@@ -543,6 +543,7 @@
         {
         globalVariables.First_name=  [profileDict objectForKey:@"changed_by_first_name"];
         globalVariables.Last_name= [profileDict objectForKey:@"changed_by_last_name"];
+            globalVariables.Ticket_status=@"Open";
 
         
             
