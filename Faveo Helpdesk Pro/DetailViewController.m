@@ -87,8 +87,7 @@
     self.subjectTextView.layer.cornerRadius = 3;
     
     [self reload];
-    
-    [self readFromPlist];
+
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
 }
@@ -198,25 +197,29 @@
             
             if (json) {
                 //NSError *error;
-                
                 NSLog(@"Thread-NO4--getDetailAPI--%@",json);
-                NSDictionary *dic= [json objectForKey:@"result"];
+                
+                NSDictionary *dic= [json objectForKey:@"data"];
+                NSDictionary * ticketDict=[dic objectForKey:@"ticket"];
+                
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                     
-                        _createdDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"created_at"]];
+                        _createdDateTextField.text= [utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"created_at"]];
                         
-                        if (([[dic objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"first_name"] length] == 0 )) {
+                        NSDictionary *userData=[ticketDict objectForKey:@"from"];
+                        
+                        if (([[userData objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( [[userData objectForKey:@"first_name"] length] == 0 )) {
                             _firstnameTextField.text=NSLocalizedString(@"Not Available",nil);
-                        }else _firstnameTextField.text=[dic objectForKey:@"first_name"];
+                        }else _firstnameTextField.text=[userData objectForKey:@"first_name"];
                         
                         
-                        globalVariables.ticket_number=[dic objectForKey:@"ticket_number"];
+                        globalVariables.ticket_number=[ticketDict objectForKey:@"ticket_number"];
                         //______________________________________________________________________________________________________
                         ////////////////for UTF-8 data encoding ///////
         
-                        NSString *encodedString =[dic objectForKey:@"title"];
+                        NSString *encodedString =[ticketDict objectForKey:@"title"];
                         
                         
                         [Utils isEmpty:encodedString];
@@ -288,49 +291,59 @@
                         //____________________________________________________________________________________________________
                         
                         
-                        _emailTextField.text=[dic objectForKey:@"email"];
+                        _emailTextField.text=[userData objectForKey:@"email"];
                        
                         // cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
                         
-                        _lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[dic objectForKey:@"updated_at"]];
+                        _lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"updated_at"]];
                       
                         
-                        // _deptTextField.text= [dic objectForKey:@"dept_name"];
-                        // _slaTextField.text=[dic objectForKey:@"sla_name"];
-                        
-                        if (([[dic objectForKey:@"type_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"type_name"] length] == 0 )) {
+                        if (([[ticketDict objectForKey:@"type_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"type_name"] length] == 0 )) {
                             _typeTextField.text= NSLocalizedString(@"Not Available",nil);
-                        }else _typeTextField.text=[dic objectForKey:@"type_name"];
+                        }else _typeTextField.text=[ticketDict objectForKey:@"type_name"];
                         
-                        if (([[dic objectForKey:@"helptopic_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"helptopic_name"] length] == 0 )) {
+                        if (([[ticketDict objectForKey:@"helptopic_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"helptopic_name"] length] == 0 )) {
                             _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
                             
-                        }else _helpTopicTextField.text=[dic objectForKey:@"helptopic_name"];
+                        }else _helpTopicTextField.text=[ticketDict objectForKey:@"helptopic_name"];
                         
                         
-                        if (([[dic objectForKey:@"source_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"source_name"] length] == 0 )) {
+                        if (([[ticketDict objectForKey:@"source_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"source_name"] length] == 0 )) {
                            _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
                             
-                        }else _sourceTextField.text=[dic objectForKey:@"source_name"];
+                        }else _sourceTextField.text=[ticketDict objectForKey:@"source_name"];
                         
-                        if (([[dic objectForKey:@"priority_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"priority_name"] length] == 0 )) {
+                        if (([[ticketDict objectForKey:@"priority_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"priority_name"] length] == 0 )) {
                            _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
                             
-                        }else _priorityTextField.text=[dic objectForKey:@"priority_name"];
+                        }else _priorityTextField.text=[ticketDict objectForKey:@"priority_name"];
                         
                        
-                        if (([[dic objectForKey:@"assignee_email"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"assignee_email"] length] == 0 )) {
-                            // _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-                            _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-                        }else{
-                            NSString * name= [NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"assignee_first_name"],[dic objectForKey:@"assignee_last_name"]];
+                       
+                        
+                        if([NSNull null] != [ticketDict objectForKey:@"assignee"])
+                        {
+                          NSDictionary *assinee=[ticketDict objectForKey:@"assignee"];
                             
-                            _assinTextField.text=name;
-                        // _assinTextField.text= [dic objectForKey:@"assignee_email"];
+                            
+                            if (([[assinee objectForKey:@"email"] isEqual:[NSNull null]] ) || ( [[assinee objectForKey:@"email"] length] == 0 )) {
+                            
+                                _assinTextField.text=NSLocalizedString(@"Not Available",nil);
+                            }else{
+                                NSString * name= [NSString stringWithFormat:@"%@ %@",[assinee objectForKey:@"first_name"],[assinee objectForKey:@"last_name"]];
+                                
+                                _assinTextField.text=name;
+                            }
+                            
+                            
+                        }else
+                        {
+                             _assinTextField.text=NSLocalizedString(@"Not Available",nil);
                         }
+                        
                     
                         
-                        _dueDateTextField.text= [utils getLocalDateTimeFromUTC:[dic objectForKey:@"duedate"]];
+                        _dueDateTextField.text= [utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"duedate"]];
                         
                        
                         
@@ -362,140 +375,6 @@
 
     }
 }
-
-
--(void)readFromPlist{
-    // Read plist from bundle and get Root Dictionary out of it
-    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0];
-    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
-    
-@try{
-    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
-    {
-        plistPath = [[NSBundle mainBundle] pathForResource:@"faveoData" ofType:@"plist"];
-    }
-    NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    //    NSLog(@"resultDic--%@",resultDic);
-    NSArray *deptArray=[resultDic objectForKey:@"departments"];
-    NSArray *helpTopicArray=[resultDic objectForKey:@"helptopics"];
-    NSArray *prioritiesArray=[resultDic objectForKey:@"priorities"];
-    NSArray *slaArray=[resultDic objectForKey:@"sla"];
-    NSArray *sourcesArray=[resultDic objectForKey:@"sources"];
-    NSMutableArray *staffsArray=[resultDic objectForKey:@"staffs"];
-    NSArray *statusArray=[resultDic objectForKey:@"status"];
-    NSArray *typeArray=[resultDic objectForKey:@"type"];
-    
-    //    NSLog(@"resultDic2--%@,%@,%@,%@,%@,%@,%@,%@",deptArray,helpTopicArray,prioritiesArray,slaArray,sourcesArray,staffsArray,statusArray,teamArray);
-    
-    NSMutableArray *deptMU=[[NSMutableArray alloc]init];
-    NSMutableArray *slaMU=[[NSMutableArray alloc]init];
-    NSMutableArray *helptopicMU=[[NSMutableArray alloc]init];
-    NSMutableArray *priMU=[[NSMutableArray alloc]init];
-    NSMutableArray *statusMU=[[NSMutableArray alloc]init];
-    NSMutableArray *sourceMU=[[NSMutableArray alloc]init];
-    NSMutableArray *typeMU=[[NSMutableArray alloc]init];
-     NSMutableArray *staffMU=[[NSMutableArray alloc]init];
-    
-    
-    dept_idArray=[[NSMutableArray alloc]init];
-    sla_idArray=[[NSMutableArray alloc]init];
-    helpTopic_idArray=[[NSMutableArray alloc]init];
-    pri_idArray=[[NSMutableArray alloc]init];
-    status_idArray=[[NSMutableArray alloc]init];
-    source_idArray=[[NSMutableArray alloc]init];
-    type_idArray=[[NSMutableArray alloc]init];
-     staff_idArray=[[NSMutableArray alloc]init];
-    
-    
-    [staffMU insertObject:@"Select Assignee" atIndex:0];
-    [staff_idArray insertObject:@"" atIndex:0];
-    
-    for (NSMutableDictionary *dicc in staffsArray) {
-        if ([dicc objectForKey:@"email"]) {
-            [staffMU addObject:[dicc objectForKey:@"email"]];
-            [staff_idArray addObject:[dicc objectForKey:@"id"]];
-        }
-        
-    }
-    
-    for (NSDictionary *dicc in deptArray) {
-        if ([dicc objectForKey:@"name"]) {
-            [deptMU addObject:[dicc objectForKey:@"name"]];
-            [dept_idArray addObject:[dicc objectForKey:@"id"]];
-        }
-        
-    }
-    
-    for (NSDictionary *dicc in prioritiesArray) {
-        if ([dicc objectForKey:@"priority"]) {
-            [priMU addObject:[dicc objectForKey:@"priority"]];
-            [pri_idArray addObject:[dicc objectForKey:@"priority_id"]];
-        }
-        
-    }
-    
-    for (NSDictionary *dicc in slaArray) {
-        if ([dicc objectForKey:@"name"]) {
-            [slaMU addObject:[dicc objectForKey:@"name"]];
-            [sla_idArray addObject:[dicc objectForKey:@"id"]];
-        }
-        
-    }
-    
-    for (NSDictionary *dicc in helpTopicArray) {
-        if ([dicc objectForKey:@"topic"]) {
-            [helptopicMU addObject:[dicc objectForKey:@"topic"]];
-            [helpTopic_idArray addObject:[dicc objectForKey:@"id"]];
-        }
-    }
-    
-    for (NSDictionary *dicc in typeArray) {
-        if ([dicc objectForKey:@"name"]) {
-            [typeMU addObject:[dicc objectForKey:@"name"]];
-            [type_idArray addObject:[dicc objectForKey:@"id"]];
-        }
-    }
-    
-    for (NSDictionary *dicc in statusArray) {
-        if ([dicc objectForKey:@"name"]) {
-            [statusMU addObject:[dicc objectForKey:@"name"]];
-            [status_idArray addObject:[dicc objectForKey:@"id"]];
-        }
-    }
-    
-    for (NSDictionary *dicc in sourcesArray) {
-        if ([dicc objectForKey:@"name"]) {
-            [sourceMU addObject:[dicc objectForKey:@"name"]];
-            [source_idArray addObject:[dicc objectForKey:@"id"]];
-        }
-    }
-    
-    _deptArray=[deptMU copy];
-    _helptopicsArray=[helptopicMU copy];
-    _slaPlansArray=[slaMU copy];
-    _priorityArray=[priMU copy];
-    _statusArray=[statusMU copy];
-    _sourceArray=[sourceMU copy];
-    _typeArray=[typeMU copy];
-     _assignArray=[staffMU copy];
-    
-}@catch (NSException *exception)
-    {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
-        NSLog( @"Name: %@", exception.name);
-        NSLog( @"Reason: %@", exception.reason );
-        return;
-    }
-    @finally
-    {
-        NSLog( @" I am in readFromPlist method in TicketDetail ViewController" );
-        
-    }
-
-
-}
-
 
 
 #pragma mark - UITextFieldDelegate
@@ -551,30 +430,7 @@
         return NO;
     }
     
-    
-    // verify the text field you wanna validate
-    if (textField == _subjectTextField) {
-        
-        // do not allow the first character to be space | do not allow more than one space
-        if ([string isEqualToString:@" "]) {
-            if (!textField.text.length)
-                return NO;
-        }
-        
-        // allow backspace
-        if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
-            return YES;
-        }
-        
-        // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"];
-        
-        if ([string rangeOfCharacterFromSet:set].location == NSNotFound) {
-            return NO;
-        }
-        
-    }
-    
+
     return YES;
 }
 

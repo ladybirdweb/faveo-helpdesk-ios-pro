@@ -32,6 +32,10 @@
     int selectedIndex;
     NSMutableArray *attachmentArray;
     
+    NSString *fName;
+    NSString *lName;
+    NSString *userName;
+    
 }
 @property(nonatomic,strong) UILabel *noDataLabel;
 @property (nonatomic, strong) CNPPopupController *popupController;
@@ -157,9 +161,11 @@
                 
                  mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
                 
-            //    NSLog(@"Thread-NO4--getConversationAPI--%@",json);
-                mutableArray=[json copy];
-          //      NSLog(@"Thread-NO4.1getConversation-dic--%@", mutableArray);
+                NSDictionary *dataConversationDict=[json objectForKey:@"data"];
+                
+                mutableArray=[dataConversationDict objectForKey:@"threads"];
+                
+          
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
@@ -244,13 +250,9 @@
      [cell setDelegate:self];
     
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
-  //  NSLog(@"Ticket Thread Dict is : %@",finaldic);
+    //NSLog(@"Ticket Thread Dict is : %@",finaldic);
   
-    
-    
-    
-@try{
-    
+
     
     attachmentArray=[finaldic objectForKey:@"attach"];
     
@@ -261,16 +263,21 @@
         
         NSIndexPath *path;
         NSDictionary *attachDictionary=[attachmentArray objectAtIndex:path.row];
-        //   NSLog(@"Attchment Dict is: %@",attachDictionary);
+//        //   NSLog(@"Attchment Dict is: %@",attachDictionary);
+
+         NSString *numStr = [NSString stringWithFormat:@"%@", [attachDictionary objectForKey:@"file"]];
         
-        NSString *numStr = [NSString stringWithFormat:@"%@", [attachDictionary objectForKey:@"file"]];
-        //  NSString * fileName=[attachDictionary objectForKey:@"file"];
-        // NSString *fileSize=[attachDictionary objectForKey:@"size"];
-        //NSLog(@"Fina Name is : %@",numStr);
+         NSString *fileName=[attachDictionary objectForKey:@"name"];
+         NSString *fileSize=[NSString stringWithFormat:@"%@",[attachDictionary objectForKey:@"size"]];
+         NSString *fileType=[attachDictionary objectForKey:@"type"];
+
+         NSLog(@"File Name : %@",fileName);
+         NSLog(@"File size : %@",fileSize);
+         NSLog(@"File Type : %@",fileType);
         
-      //  printf("base64 String : %s\n", [numStr UTF8String]);
+         printf("File Attachemnt(base64 String) : %s\n", [numStr UTF8String]);
         
-    }else
+    } else
     {
         NSLog(@"EMpty aaray");
         cell.attachImage.hidden=YES;
@@ -278,16 +285,19 @@
     }
 
     
-    
+    //created at time
     cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
   
-    NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
-    if (i==0) {
-        [cell.internalNoteLabel setHidden:YES];
-    }
-    if(i==1){
-        [cell.internalNoteLabel setHidden:NO];
-    }
+    //internal note label
+ //   NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
+//    if (i==0) {
+//        [cell.internalNoteLabel setHidden:YES];
+//    }
+//    if(i==1){
+//        [cell.internalNoteLabel setHidden:NO];
+//    }
+    
+    
     
 //         NSURL *url = [NSURL URLWithString:@"http://www.amazon.com"];
 //        [cell.webView loadRequest:[NSURLRequest requestWithURL:url]];
@@ -311,76 +321,59 @@
     
     
     
-
-   //NSString *system= @"System";
-   NSString *fName=[finaldic objectForKey:@"first_name"];
-   NSString *lName=[finaldic objectForKey:@"last_name"];
-   NSString *userName=[finaldic objectForKey:@"user_name"];
-    
-   [Utils isEmpty:fName];
-   [Utils isEmpty:lName];
-   [Utils isEmpty:userName];
-   
-    
-        
-     if  ([Utils isEmpty:fName] && [Utils isEmpty:lName]){
-         if(![Utils isEmpty:userName]){
-        userName=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"user_name"]];
-             cell.clientNameLabel.text=userName;
-         }else cell.clientNameLabel.text=@"System";
-    }
-    else if ((![Utils isEmpty:fName] || ![Utils isEmpty:lName]) || (![Utils isEmpty:fName] && ![Utils isEmpty:lName]))
+    if([NSNull null] != [finaldic objectForKey:@"user"])
     {
-       NSString * fName12=[NSString stringWithFormat:@"%@ %@",fName,lName];
+         NSDictionary *userData=[finaldic objectForKey:@"user"];
         
-        cell.clientNameLabel.text=fName12;
+        fName=[userData objectForKey:@"first_name"];
+        lName=[userData objectForKey:@"last_name"];
+        userName=[userData objectForKey:@"user_name"];
+        NSString *userProfilePic=[userData objectForKey:@"profile_pic"];
         
-    }
-  
-// prifile image
-        if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@"system.png"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
-        {
-            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        [Utils isEmpty:fName];
+        [Utils isEmpty:lName];
+        [Utils isEmpty:userName];
+        [Utils isEmpty:userProfilePic];
+        
+        
+        if  ([Utils isEmpty:fName] && [Utils isEmpty:lName]){
+            if(![Utils isEmpty:userName]){
+                userName=[NSString stringWithFormat:@"%@",userName];
+                cell.clientNameLabel.text=userName;
+            }else cell.clientNameLabel.text=@"System";
         }
-         else if(![Utils isEmpty:fName])
+        else if ((![Utils isEmpty:fName] || ![Utils isEmpty:lName]) || (![Utils isEmpty:fName] && ![Utils isEmpty:lName]))
+        {
+            NSString * fName12=[NSString stringWithFormat:@"%@ %@",fName,lName];
+            
+            cell.clientNameLabel.text=fName12;
+            
+        }
+        
+        
+        
+        if([userProfilePic hasSuffix:@"system.png"] || [userProfilePic hasSuffix:@".jpg"] || [userProfilePic hasSuffix:@".jpeg"] || [userProfilePic hasSuffix:@".png"] )
+        {
+            [cell setUserProfileimage:userProfilePic];
+        }
+        else if(![Utils isEmpty:fName])
         {
             [cell.profilePicView setImageWithString:fName color:nil ];
         }
-       else
-       {
-           [cell.profilePicView setImageWithString:userName color:nil ];
-       }
+        else if(![Utils isEmpty:userName])
+        {
+            [cell.profilePicView setImageWithString:userName color:nil ];
+        }
+    
         
-
-
+    }
+    else
+    {
+        cell.clientNameLabel.text=@"System";
+        [cell.profilePicView setImageWithString:@"System" color:nil ];
+    }
    
-
-   // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
     
-//    if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-//    {
-//        [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-//
-//    }
-//    else
-//    {
-//        [cell setUserProfileimage:@"default_pic.png"];
-//    }
-    
-}@catch (NSException *exception)
-    {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
-        NSLog( @"Name: %@", exception.name);
-        NSLog( @"Reason: %@", exception.reason );
-       // return;
-    }
-    @finally
-    {
-        NSLog( @" I am in cellForROwAtIndexPath method in Conversation ViewController" );
-        
-    }
-
-
     return cell;
 }
 
@@ -444,19 +437,6 @@
 }
 
 
-
-//- (void)webViewDidFinishLoad:(UIWebView *)theWebView
-//{
-//    CGSize contentSize = theWebView.scrollView.contentSize;
-//    CGSize viewSize = theWebView.bounds.size;
-//
-//    float rw = viewSize.width / contentSize.width;
-//
-//    theWebView.scrollView.minimumZoomScale = rw;
-//    theWebView.scrollView.maximumZoomScale = rw;
-//    theWebView.scrollView.zoomScale = rw;
-//
-//}
 
 -(void)showWebview:(NSString*)tittle body:(NSString*)body popupStyle:(CNPPopupStyle)popupStyle{
     

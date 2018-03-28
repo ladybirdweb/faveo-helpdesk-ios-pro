@@ -335,20 +335,17 @@
                 
     
                 NSString * str=[json objectForKey:@"message"];
-                //NSString * str2=[json objectForKey:@"1"];
-                
-               
-                
+            
                     if ([str isEqualToString:@"Assigned successfully"])
                     {
-                        dispatch_async(dispatch_get_main_queue(), ^{
+                       
 
                             [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Assigned Successfully.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
 
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:inboxVC animated:YES];
 
-                        });
+                
 
                     }else{
                         

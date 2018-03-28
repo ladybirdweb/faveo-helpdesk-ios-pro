@@ -230,18 +230,44 @@
                     //NSError *error;
                     
                     NSLog(@"Thread-NO4--getDetailAPI--%@",json);
-                    NSDictionary *dic= [json objectForKey:@"result"];
+                   
+                    NSDictionary *dic= [json objectForKey:@"data"];
+                    NSDictionary * ticketDict=[dic objectForKey:@"ticket"];
+                    
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
                     
                             
-                            globalVariables.ticket_number=[dic objectForKey:@"ticket_number"];
+                            globalVariables.ticket_number=[ticketDict objectForKey:@"ticket_number"];
             
-                            AssignID=[NSString stringWithFormat:@"%@", [dic objectForKey:@"assignee_id"]];
+                            if([NSNull null] != [ticketDict objectForKey:@"assignee"])
+                            {
+                                NSDictionary *assinee=[ticketDict objectForKey:@"assignee"];
+                                
+                                AssignID=[NSString stringWithFormat:@"%@", [assinee objectForKey:@"id"]];
+                                
+                                
+                                if (([[assinee objectForKey:@"email"] isEqual:[NSNull null]] ) || ( [[assinee objectForKey:@"email"] length] == 0 )) {
+                                    // _assinTextField.text=NSLocalizedString(@"Not Available",nil);
+                                    _assinTextField.text=NSLocalizedString(@"Not Available",nil);
+                                }else{
+                                    NSString * name= [NSString stringWithFormat:@"%@ %@",[assinee objectForKey:@"first_name"],[assinee objectForKey:@"last_name"]];
+                                    
+                                    _assinTextField.text=name;
+                                    // _assinTextField.text= [dic objectForKey:@"assignee_email"];
+                                }
+                            }
+                            else
+                            {
+                                 _assinTextField.text=NSLocalizedString(@"Not Available",nil);
+                                
+                            }
+                            
+                
                             //______________________________________________________________________________________________________
                             ////////////////for UTF-8 data encoding ///////
                             
-                            NSString *encodedString =[dic objectForKey:@"title"];
+                            NSString *encodedString =[ticketDict objectForKey:@"title"];
                             
                             
                             [Utils isEmpty:encodedString];
@@ -312,46 +338,33 @@
                             ///////////////////////////////////////////////////
                             //____________________________________________________________________________________________________
                             
-                            if (([[dic objectForKey:@"type_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"type_name"] length] == 0 )) {
+                            if (([[ticketDict objectForKey:@"type_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"type_name"] length] == 0 )) {
                                 _typeTextField.text=NSLocalizedString(@"Not Available",nil);
-                            }else _typeTextField.text=[dic objectForKey:@"type_name"];
+                            }else _typeTextField.text=[ticketDict objectForKey:@"type_name"];
                             
-                            if (([[dic objectForKey:@"helptopic_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"helptopic_name"] length] == 0 )) {
+                            if (([[ticketDict objectForKey:@"helptopic_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"helptopic_name"] length] == 0 )) {
                                 _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
                                 
-                            }else _helpTopicTextField.text=[dic objectForKey:@"helptopic_name"];
+                            }else _helpTopicTextField.text=[ticketDict objectForKey:@"helptopic_name"];
                             
                             
-                            if (([[dic objectForKey:@"source_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"source_name"] length] == 0 )) {
+                            if (([[ticketDict objectForKey:@"source_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"source_name"] length] == 0 )) {
                                 _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
                                 
-                            }else _sourceTextField.text=[dic objectForKey:@"source_name"];
-                               SourceID=[dic objectForKey:@"source"];
+                            }else _sourceTextField.text=[ticketDict objectForKey:@"source_name"];
+      //pending                //   SourceID=[dic objectForKey:@"source"];
                             
                             
-                            if (([[dic objectForKey:@"priority_name"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"priority_name"] length] == 0 )) {
+                            if (([[ticketDict objectForKey:@"priority_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"priority_name"] length] == 0 )) {
                                 _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
                                 
-                            }else _priorityTextField.text=[dic objectForKey:@"priority_name"];
+                            }else _priorityTextField.text=[ticketDict objectForKey:@"priority_name"];
                             
-                            
-                            if (([[dic objectForKey:@"assignee_email"] isEqual:[NSNull null]] ) || ( [[dic objectForKey:@"assignee_email"] length] == 0 )) {
-                                // _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-                                _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-                            }else{
-                                NSString * name= [NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"assignee_first_name"],[dic objectForKey:@"assignee_last_name"]];
-                                
-                                _assinTextField.text=name;
-                                // _assinTextField.text= [dic objectForKey:@"assignee_email"];
-                            }
-                            
-                            // _statusTextField.text= [dic objectForKey:@"status_name"];
-                            
-                            //_dueDateTextField.text= [utils getLocalDateTimeFromUTCDueDate:[dic objectForKey:@"duedate"]];
-                            
+                        
+                
                             [self.refreshControl endRefreshing];
                             [_imgViewLoading setHidden:YES];
-                            //[_activityIndicatorObject stopAnimating];
+                        
                             [self.tableView reloadData];
                             
                         });

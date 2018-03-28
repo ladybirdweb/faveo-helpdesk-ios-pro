@@ -270,6 +270,7 @@
         }
         NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
         NSLog(@"resultDic--%@",resultDic);
+        
         NSArray *deptArray=[resultDic objectForKey:@"departments"];
         NSArray *helpTopicArray=[resultDic objectForKey:@"helptopics"];
         NSArray *prioritiesArray=[resultDic objectForKey:@"priorities"];
@@ -369,6 +370,10 @@
         _slaPlansArray=[slaMU copy];
         _priorityArray=[priMU copy];
         _staffArray=[staffMU copy];
+        
+        
+        NSLog(@"Staff Name Array : %@",_staffArray);
+        NSLog(@"STaff id Array : %@",staff_idArray);
         
     }@catch (NSException *exception)
     {
@@ -992,8 +997,15 @@
 
 - (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
 {
+    if(staff_idArray.count >0){
     staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
+        NSLog(@"Staff is is : %@",staff_id);
+    }else
+    {
+        NSLog(@"Empty array");
+    }
     self.assignTextField.text = (_staffArray)[(NSUInteger) [selectedIndex intValue]];
+     NSLog(@"data in textfield is is : %@",_assignTextField.text);
 }
 
 

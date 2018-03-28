@@ -195,7 +195,7 @@
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self reload];
-    [self getDependencies];
+//    [self getDependencies];
     
 }
 
@@ -1429,27 +1429,29 @@
                 if (json) {
                     //NSError *error;
                     NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-                    _mutableArray = [json objectForKey:@"data"];
-                    _nextPageUrl =[json objectForKey:@"next_page_url"];
-                    NSLog(@"bexr page url is : %@",_nextPageUrl);
+                    NSDictionary *data1Dict=[json objectForKey:@"data"];
                     
-                    _path1=[json objectForKey:@"path"];
+                    _mutableArray = [data1Dict objectForKey:@"data"];
                     
-                    _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                    _totalTickets=[[json objectForKey:@"total"] integerValue];
-                    _totalPages=[[json objectForKey:@"last_page"] integerValue];
-                    NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
+                    _nextPageUrl =[data1Dict objectForKey:@"next_page_url"];
+                    _path1=[data1Dict objectForKey:@"path"];
+                    _currentPage=[[data1Dict objectForKey:@"current_page"] integerValue];
+                    _totalTickets=[[data1Dict objectForKey:@"total"] integerValue];
+                    _totalPages=[[data1Dict objectForKey:@"last_page"] integerValue];
+                    
+                    
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             [refresh endRefreshing];
-                            //  [self.tableView reloadData];
+                            
                             [self reloadTableView];
+                            
                         });
                     });
                     
                 }
-                NSLog(@"Thread-NO5-getInbox-closed");
+                NSLog(@"Thread-Sorting-closed");
                 
             }];
         }@catch (NSException *exception)
@@ -1498,14 +1500,22 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/dependency?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
         
+        NSLog(@"URL is : %@",url);
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
                 NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
                 if (error || [msg containsString:@"Error"]) {
                     
-                    NSLog(@"Thread-NO4-postCreateTicket-Refresh-error == %@",error.localizedDescription);
-                    return ;
+                    if( [msg containsString:@"Error-429"])
+                        
+                    {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
+                        
+                    }else{
+                        NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
+                        return ;
+                    }
                 }
                 
                 if ([msg isEqualToString:@"tokenRefreshed"]) {
@@ -1520,8 +1530,8 @@
                 
                 if (json) {
                     
-                    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
-                    NSDictionary *resultDic = [json objectForKey:@"result"];
+                    //    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    NSDictionary *resultDic = [json objectForKey:@"data"];
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
                     
                     for (int i = 0; i < ticketCountArray.count; i++) {
@@ -1583,7 +1593,7 @@
                         NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
                     
                 }
-    
+                NSLog(@"Thread-NO5-getDependencies-closed");
             }
              ];
         }@catch (NSException *exception)
@@ -1595,13 +1605,13 @@
         }
         @finally
         {
-            NSLog( @" I am in getDependencies method in SortingTickets ViewController" );
+            NSLog( @" I am in getDependencies method in sorting ViewController" );
             
         }
-
     }
-
+    NSLog(@"Thread-NO2-getDependencies()-closed");
 }
+
 
 -(void)EditTableView:(UIGestureRecognizer*)gesture{
     [self.tableView setEditing:YES animated:YES];
@@ -1738,21 +1748,23 @@
                 
                 if (json) {
                     NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-                    //_indexPaths=[[NSArray alloc]init];
-                    //_indexPaths = [json objectForKey:@"data"];
-                    _nextPageUrl =[json objectForKey:@"next_page_url"];
-                    _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                    _totalTickets=[[json objectForKey:@"total"] integerValue];
-                    _totalPages=[[json objectForKey:@"last_page"] integerValue];
                     
+                    NSDictionary *data1Dict=[json objectForKey:@"data"];
+                    
+                    _nextPageUrl =[data1Dict objectForKey:@"next_page_url"];
+                    _path1=[data1Dict objectForKey:@"path"];
+                    _currentPage=[[data1Dict objectForKey:@"current_page"] integerValue];
+                    _totalTickets=[[data1Dict objectForKey:@"total"] integerValue];
+                    _totalPages=[[data1Dict objectForKey:@"last_page"] integerValue];
                     
                     _mutableArray= [_mutableArray mutableCopy];
                     
-                    [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
+                    [_mutableArray addObjectsFromArray:[data1Dict objectForKey:@"data"]];
+                    
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            // [self.tableView reloadData];
+                            
                             [self reloadTableView];
                             
                         });
@@ -2037,11 +2049,13 @@
         {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingTableViewCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
+            
         }
         UIActivityIndicatorView *activityIndicator = (UIActivityIndicatorView *)[cell.contentView viewWithTag:1];
         [activityIndicator startAnimating];
         return cell;
     }else{
+        
         
         TicketTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"TableViewCellID"];
         
@@ -2051,20 +2065,35 @@
             cell = [nib objectAtIndex:0];
         }
         
+        
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
         
-        tempDict= [_mutableArray objectAtIndex:indexPath.row];
-        //cell.ticketIdLabel.text=[finaldic objectForKey:@"ticket_number"];
+        // tempDict= [_mutableArray objectAtIndex:indexPath.row];
+        
         
         @try{
             
+            //last replier
             NSString *replyer12=[finaldic objectForKey:@"last_replier"];
+            [Utils isEmpty:replyer12];
             
-            if([replyer12 isEqualToString:@"client"])
+            if  (![Utils isEmpty:replyer12] || ![replyer12 isEqualToString:@""])
             {
-                cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
+                if([replyer12 isEqualToString:@"client"])
+                {
+                    cell.viewMain.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#F2F2F2"];
+                }else
+                {
+                    NSLog(@"I am in else condition..!");
+                }
+                
+            }else
+            {
+                NSLog(@"I am in else condition..!");
             }
             
+            
+            //ticket number
             NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
             
             [Utils isEmpty:ticketNumber];
@@ -2079,37 +2108,65 @@
                 cell.ticketIdLabel.text=NSLocalizedString(@"Not Available", nil);
             }
             
-            NSString *fname= [finaldic objectForKey:@"c_fname"];
-            NSString *lname= [finaldic objectForKey:@"c_lname"];
-            //  NSString *userName= [finaldic objectForKey:@"c_uname"];
-            NSString*email1=[finaldic objectForKey:@"c_uname"];
+            
+            //agent info
+            NSDictionary *assigneeDict=[finaldic objectForKey:@"assignee"];
+            
+            NSString *assigneeFirstName= [assigneeDict objectForKey:@"first_name"];
+            NSString *assigneeLaststName= [assigneeDict objectForKey:@"last_name"];
+            NSString *assigneeUserName= [assigneeDict objectForKey:@"user_name"];
+            
+            [Utils isEmpty:assigneeFirstName];
+            [Utils isEmpty:assigneeLaststName];
+            [Utils isEmpty:assigneeUserName];
+            
+            if (![Utils isEmpty:assigneeFirstName] || ![Utils isEmpty:assigneeLaststName])
+            {
+                if  (![Utils isEmpty:assigneeFirstName] && ![Utils isEmpty:assigneeLaststName])
+                {
+                    cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",assigneeFirstName,assigneeLaststName];
+                }
+                else
+                {
+                    cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",assigneeFirstName,assigneeLaststName];
+                }
+            }  else if(![Utils isEmpty:assigneeUserName])
+            {
+                cell.agentLabel.text= assigneeUserName;
+            }else
+            {
+                cell.agentLabel.text= NSLocalizedString(@"Unassigned", nil);
+            }
+            
+            
+            //ticket owner/customer info
+            
+            NSDictionary *customerDict=[finaldic objectForKey:@"from"];
+            
+            NSString *fname= [customerDict objectForKey:@"first_name"];
+            NSString *lname= [customerDict objectForKey:@"last_name"];
+            NSString*email1=[finaldic objectForKey:@"user_name"];
             
             [Utils isEmpty:fname];
             [Utils isEmpty:lname];
             [Utils isEmpty:email1];
             
             
-            
-            
             if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
             {
                 if (![Utils isEmpty:fname] && ![Utils isEmpty:lname])
-                {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"c_fname"],[finaldic objectForKey:@"c_lname"]];
+                {   cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
                 }
                 else{
-                    cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"c_fname"],[finaldic objectForKey:@"c_lname"]];
+                    cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
                 }
             }
             else
             {
-                //                if(![Utils isEmpty:userName])
-                //               {
-                //                cell.mailIdLabel.text=[finaldic objectForKey:@"user_name"];
-                //               }
                 
                 if(![Utils isEmpty:email1])
                 {
-                    cell.mailIdLabel.text=[finaldic objectForKey:@"c_uname"];
+                    cell.mailIdLabel.text=email1;
                 }
                 else{
                     cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
@@ -2118,9 +2175,9 @@
             }
             
             //Image view
-            if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@"system.png"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
+            if([[customerDict objectForKey:@"profile_pic"] hasSuffix:@"system.png"] || [[customerDict objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[customerDict objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[customerDict objectForKey:@"profile_pic"] hasSuffix:@".png"] )
             {
-                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+                [cell setUserProfileimage:[customerDict objectForKey:@"profile_pic"]];
             }
             else if(![Utils isEmpty:fname])
             {
@@ -2131,48 +2188,23 @@
                 [cell.profilePicView setImageWithString:email1 color:nil ];
             }
             
+            
+            //updated time of ticket
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
             
-            
-            NSString *assigneeFirstName= [finaldic objectForKey:@"a_fname"];
-            NSString *assigneeLaststName= [finaldic objectForKey:@"a_lname"];
-            NSString *assigneeUserName= [finaldic objectForKey:@"a_uname"];
-            
-            [Utils isEmpty:assigneeFirstName];
-            [Utils isEmpty:assigneeLaststName];
-            [Utils isEmpty:assigneeUserName];
-            
-            if (![Utils isEmpty:assigneeFirstName] || ![Utils isEmpty:assigneeLaststName])
-            {
-                if  (![Utils isEmpty:assigneeFirstName] && ![Utils isEmpty:assigneeLaststName])
-                {
-                    cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"a_fname"],[finaldic objectForKey:@"a_lname"]];
-                }
-                else
-                {
-                    cell.agentLabel.text=[NSString stringWithFormat:@"%@ %@",[finaldic objectForKey:@"a_fname"],[finaldic objectForKey:@"a_lname"]];
-                }
-            }  else if(![Utils isEmpty:assigneeUserName])
-            {
-                cell.agentLabel.text= [finaldic objectForKey:@"a_uname"];
-            }else
-            {
-                cell.agentLabel.text= NSLocalizedString(@"Unassigned", nil);
-            }
             
         } @catch (NSException *exception)
         {
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
             [utils showAlertWithMessage:exception.name sendViewController:self];
-           // return;
+            // return;
         }
         @finally
         {
-            NSLog( @" I am in cellForRowAtIndexPath method in SortingTickets ViewController" );
+            NSLog( @" I am in cellForRowAtIndexPath method in Leftmenu ViewController" );
             
         }
-
         // ______________________________________________________________________________________________________
         ////////////////for UTF-8 data encoding ///////
         //   cell.ticketSubLabel.text=[finaldic objectForKey:@"title"];
@@ -2185,8 +2217,9 @@
         
         
         
-        NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
+        // NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
         
+        NSString *encodedString =@"Sample Ticket Titile";
         
         [Utils isEmpty:encodedString];
         
@@ -2244,12 +2277,12 @@
                 NSLog(@"Decoded string = %@", decodedString);
                 
                 //   cell.ticketSubLabel.text= decodedString; //countthread
-                cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",decodedString,[finaldic objectForKey:@"countthread"]];
+                cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",decodedString,[finaldic objectForKey:@"thread_count"]];
             }
             else{
                 
                 // cell.ticketSubLabel.text= encodedString;
-                cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",encodedString,[finaldic objectForKey:@"countthread"]];
+                cell.ticketSubLabel.text= [NSString stringWithFormat:@"%@ (%@)",encodedString,[finaldic objectForKey:@"thread_count"]];
                 
             }
             
@@ -2258,22 +2291,18 @@
         //____________________________________________________________________________________________________
         
         
-        
-        
-        
-        
         // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         @try{
             
-            //            if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-            //            {
-            //                [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+            //                if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
+            //                {
+            //                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
             //
-            //            }
-            //            else
-            //            {
-            //                [cell setUserProfileimage:@"default_pic.png"];
-            //            }
+            //                }
+            //                else
+            //                {
+            //                    [cell setUserProfileimage:@"default_pic.png"];
+            //                }
             
             
             if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
@@ -2296,10 +2325,13 @@
                 
             }
             
+            
+            
             NSString * source1=[finaldic objectForKey:@"source"];
             
             NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countcollaborator"]];
-            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countattachment"]];
+            
+            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
             
             
             if([source1 isEqualToString:@"web"] || [source1 isEqualToString:@"Web"])
@@ -2325,6 +2357,10 @@
                 cell.sourceImgView.image=[UIImage imageNamed:@"chat"];
             }
             
+            
+            
+            
+            
             if(![cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
             {
                 cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
@@ -2342,7 +2378,9 @@
                 
             }
             
-            cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[finaldic objectForKey:@"color"]] CGColor];
+            //priority color
+            NSDictionary *priorityDict=[finaldic objectForKey:@"priority"];
+            cell.indicationView.layer.backgroundColor=[[UIColor hx_colorWithHexRGBAString:[priorityDict objectForKey:@"color"]] CGColor];
             
             
             
@@ -2355,11 +2393,11 @@
         }
         @finally
         {
-            NSLog( @" I am in cellForRowAtIndexPath method in SortingTickets ViewController" );
+            NSLog( @" I am in cellForAtIndexPath method in Inobx ViewController" );
             
         }
-
         
+        // }
         return cell;
     }
 }
@@ -2380,12 +2418,16 @@
         
         //  [selectedArray addObject:[_mutableArray objectAtIndex:indexPath.row]];
         
+        //taking id from selected rows
         [selectedArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
         
         //taking ticket title from selected rows
-        [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
+        //  [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
+        
+        [selectedSubjectArray addObject:@"Sample Ticket Tilte in Did Select"];
+        
         //taking email id
-        [selectedTicketOwner addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
+        [selectedTicketOwner addObject:[[[_mutableArray objectAtIndex:indexPath.row] objectForKey:@"from"] valueForKey:@"email"]];
         
         count1=(int)[selectedArray count];
         NSLog(@"Selected count is :%i",count1);
@@ -2397,25 +2439,32 @@
         
         NSLog(@"Slected Ticket Subjects are : %@",selectedSubjectArray);
         
-        //        globalVariables.idList=selectedArray;
-        //        globalVariables.subjectList=selectedSubjectArray;
-        
         
     }else{
         
+        
         TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+        
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
         
+        
         globalVariables.iD=[finaldic objectForKey:@"id"];
+        globalVariables.Ticket_status=[finaldic objectForKey:@"status"];
         globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
+        globalVariables.ticketStatusBool=@"ticketView";
         
-        globalVariables.First_name=[finaldic objectForKey:@"c_fname"];
-        globalVariables.Last_name=[finaldic objectForKey:@"c_lname"];
         
-        globalVariables.Ticket_status=[finaldic objectForKey:@"ticket_status_name"];
+        NSDictionary *customerDict=[finaldic objectForKey:@"from"];
+        
+        globalVariables.First_name=[customerDict objectForKey:@"first_name"];
+        globalVariables.Last_name=[customerDict objectForKey:@"last_name"];
+        globalVariables.userIdFromInbox=[customerDict objectForKey:@"id"];
+        
         
         [self.navigationController pushViewController:td animated:YES];
+        
+        
     }
 }
 
@@ -2427,15 +2476,21 @@
     //   [selectedArray removeObject:[_mutableArray objectAtIndex:indexPath.row]];
     [selectedArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
     
-    [selectedSubjectArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
+    // [selectedSubjectArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
     
-    [selectedTicketOwner removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
+    //  [selectedTicketOwner removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
+    
+    [selectedSubjectArray addObject:@"Sample Ticket Tilte in Did Select"];
+    
+    //taking email id
+    [selectedTicketOwner addObject:[[[_mutableArray objectAtIndex:indexPath.row] objectForKey:@"from"] valueForKey:@"id"]];
     
     count1=(int)[selectedArray count];
     NSLog(@"Selected count is :%i",count1);
     NSLog(@"Slected Id : %@",selectedArray);
     
     selectedIDs = [selectedArray componentsJoinedByString:@","];
+    
     NSLog(@"Slected Ticket Id are : %@",selectedIDs);
     NSLog(@"Slected Ticket Subjects are : %@",selectedSubjectArray);
     NSLog(@"Slected Owner Emails are : %@",selectedTicketOwner);
@@ -2866,89 +2921,82 @@
         
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
-            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!",nil) sendViewController:self];
+            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
-        }else{
+        }
+        else{
             NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ClosedStausId];
+            NSLog(@"URL is : %@",url);
             
-            if([globalVariables.Ticket_status isEqualToString:@"Closed"])
-            {
-                [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Closed",nil) sendViewController:self];
+            
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            
+            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 
-            }else{
-                
-                
-                MyWebservices *webservices=[MyWebservices sharedInstance];
-                
-                [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                if (error || [msg containsString:@"Error"]) {
                     
-                    if (error || [msg containsString:@"Error"]) {
+                    if (msg) {
                         
-                        if (msg) {
+                        if([msg isEqualToString:@"Error-403"])
+                        {
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                        }
+                        else{
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        }
+                        //  NSLog(@"Message is : %@",msg);
+                        
+                    }else if(error)  {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getTicketStausChange-Refresh-error == %@",error.localizedDescription);
+                    }
+                    
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self changeStaus2];
+                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                    return;
+                }
+                if (json) {
+                    NSLog(@"JSON-Status-Change-Close-%@",json);
+                    
+                    
+                    if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                        
+                    }
+                    else{
+                        
+                        NSString * msg=[json objectForKey:@"message"];
+                        
+                        if([msg isEqualToString:@"Status changed to Closed"]){
                             
-                            if([msg isEqualToString:@"Error-403"])
-                            {
-                                [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
-                            }
-                            else{
-                                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                            }
-                            //  NSLog(@"Message is : %@",msg);
+                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
-                        }else if(error)  {
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                            NSLog(@"Thread-NO4-getTicketStausChange-Refresh-error == %@",error.localizedDescription);
+                            SortingViewController *sortView=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+                            [self.navigationController pushViewController:sortView animated:YES];
+                            
+                        }else
+                        {
+                            
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                            
                         }
                         
-                        return ;
                     }
-                    
-                    if ([msg isEqualToString:@"tokenRefreshed"]) {
-                        
-                        [self changeStaus2];
-                        NSLog(@"Thread--NO4-call-postTicketStatusChange");
-                        return;
-                    }
-                    
-                    if (json) {
-                        NSLog(@"JSON-CreateTicket-%@",json);
-                        if ([json objectForKey:@"response"]) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                
-                                [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                                
-                                
-                                
-                                
-                                /* if (self.navigationController.navigationBarHidden) {
-                                 [self.navigationController setNavigationBarHidden:NO];
-                                 }
-                                 
-                                 [RMessage showNotificationInViewController:self.navigationController
-                                 title:NSLocalizedString(@"Sucess.", nil)
-                                 subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                                 iconImage:nil
-                                 type:RMessageTypeSuccess
-                                 customTypeName:nil
-                                 duration:RMessageDurationAutomatic
-                                 callback:nil
-                                 buttonTitle:nil
-                                 buttonCallback:nil
-                                 atPosition:RMessagePositionNavBarOverlay
-                                 canBeDismissedByUser:YES]; */
-                                
-                                SortingViewController *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-                                [self.navigationController pushViewController:sort animated:YES];
-                            });
-                        }
-                    }
-                    NSLog(@"Thread-NO5-postTicketStatusChange-closed");
-                    
-                }];
-            }
-        } }
+                }
+                
+                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                
+            }];
+            // }
+        }
+    }
 }
 
 -(void)changeStaus3
@@ -2966,89 +3014,87 @@
         
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
-            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!",nil) sendViewController:self];
+            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
-        }else{
+        }
+        else{
             NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ResolvedStausId];
             
             
-            if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
-            {
-                [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Resolved",nil) sendViewController:self];
+            //        if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
+            //        {
+            //            [utils showAlertWithMessage:@"Ticket is Already Resolved" sendViewController:self];
+            //            [[AppDelegate sharedAppdelegate] hideProgressView];
+            //
+            //        }else{
+            //
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            
+            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 
-            }else{
-                
-                MyWebservices *webservices=[MyWebservices sharedInstance];
-                
-                [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                if (error || [msg containsString:@"Error"]) {
                     
-                    if (error || [msg containsString:@"Error"]) {
+                    if (msg) {
                         
-                        if (msg) {
+                        if([msg isEqualToString:@"Error-403"])
+                        {
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Resolve a ticket", nil) sendViewController:self];
+                        }
+                        else{
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        }
+                        //  NSLog(@"Message is : %@",msg);
+                        
+                    }else if(error)  {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                    }
+                    
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self changeStaus3];
+                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                    return;
+                }
+                
+                if (json) {
+                    NSLog(@"JSON-CreateTicket-%@",json);
+                    
+                    if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolved a ticket", nil) sendViewController:self];
+                        
+                    }
+                    else{
+                        NSString * msg=[json objectForKey:@"message"];
+                        
+                        if([msg isEqualToString:@"Status changed to Resolved"]){
                             
-                            if([msg isEqualToString:@"Error-403"])
-                            {
-                                [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Resolve a ticket", nil) sendViewController:self];
-                            }
-                            else{
-                                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                            }
-                            //  NSLog(@"Message is : %@",msg);
+                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
-                        }else if(error)  {
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                            NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                            SortingViewController *sortView=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+                            [self.navigationController pushViewController:sortView animated:YES];
+                            
+                        }else
+                        {
+                            
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
+                            
                         }
                         
-                        return ;
                     }
-                    
-                    if ([msg isEqualToString:@"tokenRefreshed"]) {
-                        
-                        [self changeStaus3];
-                        NSLog(@"Thread--NO4-call-postTicketStatusChange");
-                        return;
-                    }
-                    
-                    if (json) {
-                        NSLog(@"JSON-CreateTicket-%@",json);
-                        if ([json objectForKey:@"response"]) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                
-                                [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                                
-                                
-                                
-                                
-                                /*  if (self.navigationController.navigationBarHidden) {
-                                 [self.navigationController setNavigationBarHidden:NO];
-                                 }
-                                 
-                                 [RMessage showNotificationInViewController:self.navigationController
-                                 title:NSLocalizedString(@"Sucess.", nil)
-                                 subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                                 iconImage:nil
-                                 type:RMessageTypeSuccess
-                                 customTypeName:nil
-                                 duration:RMessageDurationAutomatic
-                                 callback:nil
-                                 buttonTitle:nil
-                                 buttonCallback:nil
-                                 atPosition:RMessagePositionNavBarOverlay
-                                 canBeDismissedByUser:YES]; */
-                                
-                                SortingViewController *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-                                [self.navigationController pushViewController:sort animated:YES];
-                            });
-                        }
-                    }
-                    NSLog(@"Thread-NO5-postTicketStatusChange-closed");
-                    
-                }];
-            }
+                }
+                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                
+            }];
+            // }
         } }
+    
+
 }
 
 -(void)changeStaus4
@@ -3066,93 +3112,81 @@
         
         if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
         {
-            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!",nil) sendViewController:self];
+            [utils showAlertWithMessage:@"Please Select The Tickets.!" sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
-        }else{
-            
+        }
+        else{
             NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.DeletedStausId];
             
-            if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
-            {
-                [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Deleted",nil) sendViewController:self];
+            
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            
+            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 
-            }else{
-                
-                MyWebservices *webservices=[MyWebservices sharedInstance];
-                
-                [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                if (error || [msg containsString:@"Error"]) {
                     
-                    if (error || [msg containsString:@"Error"]) {
+                    if (msg) {
                         
-                        if (msg) {
-                            
-                            if([msg isEqualToString:@"Error-403"])
-                            {
-                                [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Delete a ticket", nil) sendViewController:self];
-                            }
-                            else{
-                                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                            }
-                            //  NSLog(@"Message is : %@",msg);
-                            
-                        }else if(error)  {
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                            NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+                        if([msg isEqualToString:@"Error-403"])
+                        {
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Delete a ticket", nil) sendViewController:self];
                         }
+                        else{
+                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        }
+                        //  NSLog(@"Message is : %@",msg);
                         
-                        return ;
+                    }else if(error)  {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
                     }
                     
-                    if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self changeStaus4];
+                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                    return;
+                }
+                
+                if (json) {
+                    NSLog(@"JSON-CreateTicket-%@",json);
+                    
+                    if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
                         
-                        [self changeStaus4];
-                        NSLog(@"Thread--NO4-call-postTicketStatusChange");
-                        return;
                     }
-                    
-                    
-                    
-                    
-                    if (json) {
-                        NSLog(@"JSON-CreateTicket-%@",json);
-                        if ([json objectForKey:@"response"]) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                
-                                [RKDropdownAlert title: NSLocalizedString(@"Sucess.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                                
-                                
-                                
-                                
-                                /*   if (self.navigationController.navigationBarHidden) {
-                                 [self.navigationController setNavigationBarHidden:NO];
-                                 }
-                                 
-                                 [RMessage showNotificationInViewController:self.navigationController
-                                 title:NSLocalizedString(@"Sucess.", nil)
-                                 subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
-                                 iconImage:nil
-                                 type:RMessageTypeSuccess
-                                 customTypeName:nil
-                                 duration:RMessageDurationAutomatic
-                                 callback:nil
-                                 buttonTitle:nil
-                                 buttonCallback:nil
-                                 atPosition:RMessagePositionNavBarOverlay
-                                 canBeDismissedByUser:YES]; */
-                                
-                                
-                                SortingViewController *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
-                                [self.navigationController pushViewController:sort animated:YES];
-                            });
+                    else{
+                        
+                        NSString * msg=[json objectForKey:@"message"];
+                        
+                        if([msg isEqualToString:@"Status changed to Deleted"]){
+                            
+                            
+                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                            SortingViewController *sortView=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
+                            [self.navigationController pushViewController:sortView animated:YES];
+                            
+                        }else
+                        {
+                            
+                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
+                            
                         }
                     }
-                    NSLog(@"Thread-NO5-postTicketStatusChange-closed");
-                    
-                }];
-            }
+                }
+                
+                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                
+            }];
+            //  }
         } }
+
 }
 
 #pragma mark - lazy

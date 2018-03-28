@@ -152,9 +152,12 @@
         _c2.text=@(my_tickets).stringValue;
     
     [self.tableView reloadData];
+     [[AppDelegate sharedAppdelegate] hideProgressView];
     
 }
 -(void)getDependencies{
+    
+     [[AppDelegate sharedAppdelegate] hideProgressView];
     
     NSLog(@"Thread-NO1-getDependencies()-start");
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -183,16 +186,22 @@
         
         NSString *url=[NSString stringWithFormat:@"%@helpdesk/dependency?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
         
-        [[AppDelegate sharedAppdelegate] hideProgressView];
-        
+        NSLog(@"URL is : %@",url);
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
                 NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
                 if (error || [msg containsString:@"Error"]) {
                     
-                    NSLog(@"Thread-NO4-postCreateTicket-Refresh-error == %@",error.localizedDescription);
-                    return ;
+                    if( [msg containsString:@"Error-429"])
+                        
+                    {
+                        [utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
+                        
+                    }else{
+                        NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
+                        return ;
+                    }
                 }
                 
                 if ([msg isEqualToString:@"tokenRefreshed"]) {
@@ -201,18 +210,17 @@
                     //               });
                     
                     [self getDependencies];
-                    
                     NSLog(@"Thread--NO4-call-getDependecies");
                     return;
                 }
                 
                 if (json) {
                     
-                    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
-                    NSDictionary *resultDic = [json objectForKey:@"result"];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    
+                    //    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    NSDictionary *resultDic = [json objectForKey:@"data"];
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
-                    
-                    
                     
                     for (int i = 0; i < ticketCountArray.count; i++) {
                         NSString *name = [[ticketCountArray objectAtIndex:i]objectForKey:@"name"];
@@ -230,13 +238,26 @@
                         }
                     }
                     
-                    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [refresh endRefreshing];
-                            [self.tableView reloadData];
-                        });
-                    });
+                    NSArray *ticketStatusArray=[resultDic objectForKey:@"status"];
+                    
+                    for (int i = 0; i < ticketStatusArray.count; i++) {
+                        NSString *statusName = [[ticketStatusArray objectAtIndex:i]objectForKey:@"name"];
+                        NSString *statusId = [[ticketStatusArray objectAtIndex:i]objectForKey:@"id"];
+                        
+                        if ([statusName isEqualToString:@"Open"]) {
+                            globalVariables.OpenStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Resolved"]) {
+                            globalVariables.ResolvedStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Closed"]) {
+                            globalVariables.ClosedStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Deleted"]) {
+                            globalVariables.DeletedStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Request for close"]) {
+                            globalVariables.RequestCloseStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Spam"]) {
+                            globalVariables.SpamStausId=statusId;
+                        }
+                    }
                     
                     
                     NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
@@ -260,7 +281,7 @@
                         NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
                     
                 }
-                
+                NSLog(@"Thread-NO5-getDependencies-closed");
             }
              ];
         }@catch (NSException *exception)
@@ -272,12 +293,11 @@
         }
         @finally
         {
-             NSLog( @" I am in getDependencies method in Leftmenu ViewController" );
+            NSLog( @" I am in getDependencies method in LeftMenu ViewController" );
             
         }
     }
-   
-    [[AppDelegate sharedAppdelegate] hideProgressView];
+    NSLog(@"Thread-NO2-getDependencies()-closed");
 }
 
 
@@ -452,6 +472,7 @@
             if (json) {
                 
                 NSLog(@"Thread-sendAPNS-token-json-%@",json);
+                 [[AppDelegate sharedAppdelegate] hideProgressView];
             }
             
         }];
@@ -509,6 +530,7 @@
     [self.tableView reloadData];
     
     [refresh endRefreshing];
+     [[AppDelegate sharedAppdelegate] hideProgressView];
 }
 
 

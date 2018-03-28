@@ -770,30 +770,25 @@
                 
                 if (json) {
                     NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-                    //_indexPaths=[[NSArray alloc]init];
-                    //_indexPaths = [json objectForKey:@"data"];
-                    _nextPageUrl =[json objectForKey:@"next_page_url"];
-                    _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                    _totalTickets=[[json objectForKey:@"total"] integerValue];
-                    _totalPages=[[json objectForKey:@"last_page"] integerValue];
+                 
+                      NSDictionary *data1Dict=[json objectForKey:@"data"];
                     
-                    
+                    _nextPageUrl =[data1Dict objectForKey:@"next_page_url"];
+                    _path1=[data1Dict objectForKey:@"path"];
+                    _currentPage=[[data1Dict objectForKey:@"current_page"] integerValue];
+                    _totalTickets=[[data1Dict objectForKey:@"total"] integerValue];
+                    _totalPages=[[data1Dict objectForKey:@"last_page"] integerValue];
+
                     _mutableArray= [_mutableArray mutableCopy];
                     
+                     [_mutableArray addObjectsFromArray:[data1Dict objectForKey:@"data"]];
                     
-                    [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
-                    
-                    //                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
+            
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            // [self.tableView reloadData];
-                            
                             [self reloadTableView];
                             
-                            //                        [self.tableView beginUpdates];
-                            //                        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[_mutableArray count]-[_indexPaths count] inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
-                            //                        [self.tableView endUpdates];
                         });
                     });
                     
@@ -1422,13 +1417,7 @@
         else{
             NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.ClosedStausId];
             NSLog(@"URL is : %@",url);
-            //        if([globalVariables.Ticket_status isEqualToString:@"Closed"])
-            //        {
-            //            [utils showAlertWithMessage:@"Ticket is Already Closed" sendViewController:self];
-            //            [[AppDelegate sharedAppdelegate] hideProgressView];
-            //
-            //        }else{
-            
+           
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
@@ -1463,11 +1452,19 @@
                     return;
                 }
                 if (json) {
-                    NSLog(@"JSON-CreateTicket-%@",json);
+                    NSLog(@"JSON-Status-Change-Close-%@",json);
                     
-                    NSString * msg=[json objectForKey:@"message"];
                     
-                        if([msg isEqualToString:@"Status changed to Closed"]){
+                    if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
+                    {
+                         [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                        
+                    }
+                    else{
+                        
+                         NSString * msg=[json objectForKey:@"message"];
+                    
+                         if([msg isEqualToString:@"Status changed to Closed"]){
                             
                             [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
@@ -1481,6 +1478,7 @@
                             
                         }
         
+                }
                 }
              
                 NSLog(@"Thread-NO5-postTicketStatusChange-closed");
@@ -1556,6 +1554,12 @@
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
                     
+                    if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolved a ticket", nil) sendViewController:self];
+                        
+                    }
+                    else{
                     NSString * msg=[json objectForKey:@"message"];
                     
                     if([msg isEqualToString:@"Status changed to Resolved"]){
@@ -1573,7 +1577,7 @@
                         }
                         
                     }
-                
+                }
                 NSLog(@"Thread-NO5-postTicketStatusChange-closed");
                 
             }];
@@ -1602,12 +1606,6 @@
         else{
             NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],selectedIDs,globalVariables.DeletedStausId];
             
-            //        if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
-            //        {
-            //            [utils showAlertWithMessage:@"Ticket is Already Deleted" sendViewController:self];
-            //            [[AppDelegate sharedAppdelegate] hideProgressView];
-            //
-            //        }else{
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
@@ -1645,6 +1643,13 @@
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
                     
+                    if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
+                    {
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
+                        
+                    }
+                    else{
+                        
                     NSString * msg=[json objectForKey:@"message"];
                     
                     if([msg isEqualToString:@"Status changed to Deleted"]){
@@ -1661,7 +1666,7 @@
                             [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
                             
                         }
-                    
+                    }
                   }
                 
                 NSLog(@"Thread-NO5-postTicketStatusChange-closed");
