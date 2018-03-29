@@ -4596,102 +4596,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="55" id="bwZ-P3-CvC">
-                                        <rect key="frame" x="0.0" y="230" width="414" height="55"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bwZ-P3-CvC" id="eyb-r8-UbU">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="54.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ing-tl-uiQ">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="55"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7j-C5-RZB">
-                                                            <rect key="frame" x="7" y="4" width="109" height="15"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="109" id="a26-A2-KdY"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                            <color key="textColor" red="0.0" green="0.68235294120000001" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g 02306418817" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZMh-JL-4Z6">
-                                                            <rect key="frame" x="7" y="20" width="351" height="30"/>
-                                                            <nil key="textColor"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="tel"/>
-                                                            <connections>
-                                                                <outlet property="delegate" destination="QIn-H5-RBr" id="eGB-ub-A9H"/>
-                                                            </connections>
-                                                        </textField>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="ZMh-JL-4Z6" secondAttribute="bottom" constant="5" id="5hE-l6-39j"/>
-                                                        <constraint firstAttribute="trailing" secondItem="ZMh-JL-4Z6" secondAttribute="trailing" constant="16" id="EIZ-GV-R4C"/>
-                                                        <constraint firstItem="ZMh-JL-4Z6" firstAttribute="leading" secondItem="ing-tl-uiQ" secondAttribute="leading" constant="7" id="IYg-O2-mqK"/>
-                                                        <constraint firstItem="Q7j-C5-RZB" firstAttribute="leading" secondItem="ing-tl-uiQ" secondAttribute="leading" constant="7" id="QWX-TP-TxX"/>
-                                                        <constraint firstItem="ZMh-JL-4Z6" firstAttribute="top" secondItem="Q7j-C5-RZB" secondAttribute="bottom" constant="1" id="ZYY-Rt-lxG"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ing-tl-uiQ" firstAttribute="trailing" secondItem="eyb-r8-UbU" secondAttribute="trailingMargin" id="GFQ-4d-aDj"/>
-                                                <constraint firstItem="ing-tl-uiQ" firstAttribute="leading" secondItem="eyb-r8-UbU" secondAttribute="leadingMargin" id="t3f-WS-ehs"/>
-                                                <constraint firstItem="ing-tl-uiQ" firstAttribute="top" secondItem="eyb-r8-UbU" secondAttribute="top" id="v2B-m1-lKt"/>
-                                                <constraint firstAttribute="bottom" secondItem="ing-tl-uiQ" secondAttribute="bottom" id="zhD-qv-hAW"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="55" id="Xdm-VB-HZ0">
-                                        <rect key="frame" x="0.0" y="285" width="414" height="55"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xdm-VB-HZ0" id="HFI-Ik-xbm">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="54.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HoN-jE-vBj">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="55"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Frf-Th-NDZ">
-                                                            <rect key="frame" x="7" y="4" width="109" height="15"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="109" id="DVA-O9-yEg"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                            <color key="textColor" red="0.0" green="0.68235294120000001" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g 9158010101" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B5H-Hb-bxG">
-                                                            <rect key="frame" x="7" y="20" width="351" height="30"/>
-                                                            <nil key="textColor"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="tel"/>
-                                                            <connections>
-                                                                <outlet property="delegate" destination="QIn-H5-RBr" id="zMo-cW-m6J"/>
-                                                            </connections>
-                                                        </textField>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstItem="B5H-Hb-bxG" firstAttribute="leading" secondItem="HoN-jE-vBj" secondAttribute="leading" constant="7" id="2pd-ip-htp"/>
-                                                        <constraint firstItem="Frf-Th-NDZ" firstAttribute="leading" secondItem="HoN-jE-vBj" secondAttribute="leading" constant="7" id="Vgz-PV-yXX"/>
-                                                        <constraint firstItem="B5H-Hb-bxG" firstAttribute="top" secondItem="Frf-Th-NDZ" secondAttribute="bottom" constant="1" id="cq1-Ug-wex"/>
-                                                        <constraint firstAttribute="trailing" secondItem="B5H-Hb-bxG" secondAttribute="trailing" constant="16" id="d0K-ud-3kO"/>
-                                                        <constraint firstAttribute="bottom" secondItem="B5H-Hb-bxG" secondAttribute="bottom" constant="5" id="j90-k6-O4z"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="HoN-jE-vBj" firstAttribute="trailing" secondItem="HFI-Ik-xbm" secondAttribute="trailingMargin" id="5sL-Vc-ldI"/>
-                                                <constraint firstItem="HoN-jE-vBj" firstAttribute="top" secondItem="HFI-Ik-xbm" secondAttribute="top" id="8JU-0N-5eU"/>
-                                                <constraint firstItem="HoN-jE-vBj" firstAttribute="leading" secondItem="HFI-Ik-xbm" secondAttribute="leadingMargin" id="HHf-Pk-4Cg"/>
-                                                <constraint firstAttribute="bottom" secondItem="HoN-jE-vBj" secondAttribute="bottom" id="s7x-OW-rJw"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="55" id="cM5-vG-FX4">
-                                        <rect key="frame" x="0.0" y="340" width="414" height="55"/>
+                                        <rect key="frame" x="0.0" y="230" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cM5-vG-FX4" id="ec3-XU-qra">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="54.666666666666664"/>
@@ -4734,7 +4640,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="119" id="mQl-yo-CCk">
-                                        <rect key="frame" x="0.0" y="395" width="414" height="119"/>
+                                        <rect key="frame" x="0.0" y="285" width="414" height="119"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mQl-yo-CCk" id="bf2-NR-knF">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="118.66666666666667"/>
@@ -4778,8 +4684,6 @@
                         <outlet property="emailTextField" destination="pFh-RR-fGj" id="DKv-9a-Rpr"/>
                         <outlet property="firstNameTextField" destination="pHw-NS-yQW" id="1Z5-et-XFl"/>
                         <outlet property="lastNameTextField" destination="TE8-6U-t8w" id="XaJ-td-RtR"/>
-                        <outlet property="mobileTextField" destination="B5H-Hb-bxG" id="TSC-v4-GZK"/>
-                        <outlet property="phoneTextField" destination="ZMh-JL-4Z6" id="fqz-hT-Ve5"/>
                         <outlet property="submitButton" destination="jNk-s8-29n" id="gfv-ag-uBa"/>
                         <outlet property="switch1" destination="rMJ-ig-B6v" id="dmE-mb-PbV"/>
                         <outlet property="userNameTextField" destination="GRB-yE-1jc" id="Yqw-YW-pZI"/>

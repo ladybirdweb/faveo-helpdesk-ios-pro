@@ -94,23 +94,19 @@
     [self.firstNameTextField setInputAccessoryView:toolBar];
     [self.lastNameTextField setInputAccessoryView:toolBar];
     [self.emailTextField setInputAccessoryView:toolBar];
-    [self.phoneTextField setInputAccessoryView:toolBar];
-    [self.mobileTextField setInputAccessoryView:toolBar];
+ 
     
     _userNameTextField.delegate=self;
     _firstNameTextField.delegate=self;
     _lastNameTextField.delegate=self;
     _emailTextField.delegate=self;
-    _phoneTextField.delegate=self;
-    _mobileTextField.delegate=self;
+    
     
     _userNameTextField.text= [NSString stringWithFormat:@"%@",globalVariables.userNameInUserList];
     _firstNameTextField.text= [NSString stringWithFormat:@"%@",globalVariables.First_name];
     _lastNameTextField.text= [NSString stringWithFormat:@"%@",globalVariables.Last_name];
     _emailTextField.text= [NSString stringWithFormat:@"%@",globalVariables.emailInUserList];
-    _phoneTextField.text= [NSString stringWithFormat:@"%@",globalVariables.phoneNumberInUserList];
-    _mobileTextField.text= [NSString stringWithFormat:@"%@",globalVariables.mobileNumberInUserList];
-    
+   
     NSString *str= [NSString stringWithFormat:@"%@",globalVariables.ActiveDeactiveStateOfUser1];
    
    
@@ -159,8 +155,7 @@
     [_firstNameTextField resignFirstResponder];
     [_lastNameTextField resignFirstResponder];
     [_emailTextField resignFirstResponder];
-    [_phoneTextField resignFirstResponder];
-    [_mobileTextField resignFirstResponder];
+   
     
 }
 - (IBAction)submitButton:(id)sender {
@@ -392,7 +387,7 @@
             
             [[AppDelegate sharedAppdelegate] showProgressView];
         
-            NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/edit/%@?api_key=%@&token=%@&user_name=%@&first_name=%@&last_name=%@&email=%@&phone_number=%@&mobile=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.iD,API_KEY,[userDefaults objectForKey:@"token"],_userNameTextField.text,_firstNameTextField.text,_lastNameTextField.text,_emailTextField.text,_phoneTextField.text,_mobileTextField.text];
+            NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user-edit/%@?api_key=%@&token=%@&user_name=%@&first_name=%@&last_name=%@&email=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.userID,API_KEY,[userDefaults objectForKey:@"token"],_userNameTextField.text,_firstNameTextField.text,_lastNameTextField.text,_emailTextField.text];
     @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
@@ -443,9 +438,12 @@
                 if (json) {
                     NSLog(@"JSON-EditCustomerDetails-%@",json);
                         
+                    NSDictionary *userData=[json objectForKey:@"data"];
+                    NSString *msg=[userData objectForKey:@"message"];
+            
+                          
+                    if([msg isEqualToString:@"Updated successfully"]){
                         
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            
                             if (self.navigationController.navigationBarHidden) {
                                 [self.navigationController setNavigationBarHidden:NO];
                             }
@@ -469,17 +467,18 @@
                             globalVariables.First_name= _firstNameTextField.text;
                             globalVariables.Last_name=_lastNameTextField.text;
                             globalVariables.emailInUserList= _emailTextField.text;
-                            globalVariables.phoneNumberInUserList=_phoneTextField.text;
-                            globalVariables.mobileNumberInUserList= _mobileTextField.text;
+                        
                             
                             globalVariables=[GlobalVariables sharedInstance];
 
                 
                         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
 
-                           
-                            
-                        });
+                    }else
+                    {
+                        [utils showAlertWithMessage:@"Something went wrong. Please try again later." sendViewController:self];
+                        
+                    }
                         
                         
                     }

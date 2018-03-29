@@ -232,6 +232,7 @@
     _priorityTextField.text=@"";
     _assignTextField.text=@"";
     _textViewMsg.text=@"";
+    _ccTextField.text=@"";
     
     globalVariables.emailAddRequester=@"";
     globalVariables.firstNameAddRequester=@"";
@@ -1217,10 +1218,7 @@
         [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
-        
-        //  [[AppDelegate sharedAppdelegate] showProgressView];
-        //http://jamboreebliss.com/sayarnew/public/api/v1/helpdesk/collaborator/search?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9qYW1ib3JlZWJsaXNzLmNvbS9zYXlhcm5ldy9wdWJsaWMvYXBpL3YxL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTUyMDMyMjA1MCwiZXhwIjoxNTIwMzIyMjkwLCJuYmYiOjE1MjAzMjIwNTAsImp0aSI6IlBJT2ZGZG8zYWZlUGZYdkIifQ.LWZQWkOOCHI7vBhf9PgKHPHZnCRPZnuiR8NzPpItmO4&term=ar
-        
+    
         
         NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/search?token=%@&term=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],valueFromTextField];
         
@@ -1265,14 +1263,12 @@
             
             if (json) {
                 NSLog(@"JSON-HelpSupport-%@",json);
-                //   NSLog(@"JSON-HelpSupport-%@",json);
-                
+            
                 usersArray=[json objectForKey:@"users"];
                 // NSIndexPath *indexpath;
                 
                 //  NSDictionary *userSearchDictionary=[usersArray objectAtIndex:indexpath.row];
-                
-                
+            
                 
                 for (NSDictionary *dicc in usersArray) {
                     if ([dicc objectForKey:@"first_name"]) {
@@ -1301,14 +1297,14 @@
                     }
                 }
                 
-                UniqueprofilePicArray = [NSMutableArray array];
-                
-                for (id obj in profilePicArray) {
-                    if (![UniqueprofilePicArray containsObject:obj]) {
-                        [UniqueprofilePicArray addObject:obj];
-                    }
-                }
-                
+//                UniqueprofilePicArray = [NSMutableArray array];
+//
+//                for (id obj in profilePicArray) {
+//                    if (![UniqueprofilePicArray containsObject:obj]) {
+//                        [UniqueprofilePicArray addObject:obj];
+//                    }
+//                }
+//
                 
                 NSLog(@"Names are : %@",uniqueNameArray);
                 NSLog(@"Id are : %@",uniqueIdArray);
