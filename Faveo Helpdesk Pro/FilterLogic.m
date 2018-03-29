@@ -901,12 +901,16 @@
                         
                         if ([statusName isEqualToString:@"Open"]) {
                             globalVariables.OpenStausId=statusId;
+                            globalVariables.OpenStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Resolved"]) {
                             globalVariables.ResolvedStausId=statusId;
+                            globalVariables.ResolvedStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Closed"]) {
                             globalVariables.ClosedStausId=statusId;
+                            globalVariables.ClosedStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Deleted"]) {
                             globalVariables.DeletedStausId=statusId;
+                            globalVariables.DeletedStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Request for close"]) {
                             globalVariables.RequestCloseStausId=statusId;
                         }else if ([statusName isEqualToString:@"Spam"]) {

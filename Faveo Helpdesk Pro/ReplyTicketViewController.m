@@ -132,7 +132,14 @@
     
 }
 - (IBAction)submitButtonClicked:(id)sender {
-    [self ticketReplyMethodCalledHere];
+    
+    if([_messageTextView.text isEqualToString:@""] || [_messageTextView.text length]==0)
+    {
+        [utils showAlertWithMessage:@"Enter the reply content.It can not be empty." sendViewController:self];
+    }else
+    {
+       [self ticketReplyMethodCalledHere];
+    }
 }
 
 -(void)ticketReplyMethodCalledHere
@@ -197,38 +204,34 @@
                 }
                 
                 if (json) {
-                    NSLog(@"JSON-CreateTicket-%@",json);
+                    NSLog(@"JSON-Reply-Ticket-%@",json);
                     
-                    if ([json objectForKey:@"result"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your reply.", nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
-                            
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
-                            
-                            //                            TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-                            //                            [self.navigationController pushViewController:td animated:YES];
-                            
-                            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-                        });
-                    }
-                    else  if ([json objectForKey:@"error"])
+                   // NSString * msg=[json objectForKey:@"message"];
+                    NSString * successMsg=[NSString stringWithFormat:@"%@",[json objectForKey:@"success"]];
+                    
+                    if([successMsg isEqualToString:@"1"])
                     {
-                        NSDictionary *dict=[json objectForKey:@"error"];
-                        NSObject *obj=[dict objectForKey:@"reply_content"];
                         
-                        if([obj isKindOfClass:[NSArray class]])
-                        {
-                            [utils showAlertWithMessage:@"Enter the reply content.It can not be empty." sendViewController:self];
-                            
-                        }
+                        [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your reply.", nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        
+                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
+                        
+                        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+                        
+                        
                     }
+                    else
+                         if([successMsg isEqualToString:@"false"])
+                       {
+                        
+                            [utils showAlertWithMessage:@"Enter the reply content.It can not be empty." sendViewController:self];
+                      }
                 }
                 else
                 {
                     [utils showAlertWithMessage:@"Something went wrong. Please try again." sendViewController:self];
                 }
-                NSLog(@"Thread-NO5-postCreateTicket-closed");
+                NSLog(@"Thread-Ticket-Reply-closed");
                 
             }];
         }@catch (NSException *exception)

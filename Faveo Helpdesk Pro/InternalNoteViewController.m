@@ -44,7 +44,13 @@
 
 - (IBAction)addButtonAction:(id)sender {
     
-    [self addInternalNoteApiMethodCall];
+    if([_contentTextView.text isEqualToString:@""] || [_contentTextView.text length]==0)
+    {
+        [utils showAlertWithMessage:@"The body field is required.It can not be empty." sendViewController:self];
+    }else
+    {
+        [self addInternalNoteApiMethodCall];
+    }
 }
 
 -(void)addInternalNoteApiMethodCall
@@ -114,17 +120,24 @@
                             [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your note.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
-                            
-//                            TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-//                            [self.navigationController pushViewController:td animated:YES];
+
                             
                             [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
                             
-                            
-                            // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
+        
                         });
                     }
-                }
+                    else if([json objectForKey:@"error"]) {
+                        
+                        [utils showAlertWithMessage:@"The body field is required.It can not be empty." sendViewController:self];
+                        
+                    }
+                    else
+                    {
+                        
+                        [utils showAlertWithMessage:@"Something Went Wrong. Please try again later." sendViewController:self];
+                    }
+                }//end josn
                 NSLog(@"Thread-InternalNote-closed");
                 
             }];

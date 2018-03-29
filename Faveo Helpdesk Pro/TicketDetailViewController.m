@@ -343,12 +343,16 @@
                         
                         if ([statusName isEqualToString:@"Open"]) {
                             globalVariables.OpenStausId=statusId;
+                            globalVariables.OpenStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Resolved"]) {
                             globalVariables.ResolvedStausId=statusId;
+                            globalVariables.ResolvedStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Closed"]) {
                             globalVariables.ClosedStausId=statusId;
+                           globalVariables.ClosedStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Deleted"]) {
                             globalVariables.DeletedStausId=statusId;
+                            globalVariables.DeletedStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Request for close"]) {
                             globalVariables.RequestCloseStausId=statusId;
                         }else if ([statusName isEqualToString:@"Spam"]) {
@@ -530,33 +534,23 @@
             
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
-                if ([json objectForKey:@"response"]) {
+                
+                NSString *str=[json objectForKey:@"message"];
+                
+                if([str isEqualToString:@"Status changed to Open"]){
                     
-                    id object;
-                    NSDictionary * dict1= [json objectForKey:@"response"];
-                    object = [dict1 objectForKey:@"message"];
+                    [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                     
-                    NSLog(@"object is :%@",object);
-                    NSLog(@"object is :%@",object);
+                    InboxViewController *inbox=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                    [self.navigationController pushViewController:inbox animated:YES];
                     
-                    if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Open"]){
-                        
-                        [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                        
-                        InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                        [self.navigationController pushViewController:inboxVC animated:YES];
-                        
-                    }else
-                    {
-                        
-                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Open a ticket", nil) sendViewController:self];
-                        
-                    }
+                }else
+                {
+                    
+                    [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Open a ticket", nil) sendViewController:self];
                     
                 }
-                
-                
-            } // end json
+            }
             
             NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
@@ -640,17 +634,19 @@
            //NSSingleObjectArrayI
             
             if (json) {
-                NSLog(@"JSON-CreateTicket-%@",json);
-                if ([json objectForKey:@"response"]) {
+                NSLog(@"JSON-Status-Change-Close-%@",json);
+                
+                
+                if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
+                {
+                    [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
                     
-                    id object;
-                    NSDictionary * dict1= [json objectForKey:@"response"];
-                    object = [dict1 objectForKey:@"message"];
-               
-                    NSLog(@"object is :%@",object);
-                    NSLog(@"object is :%@",object);
+                }
+                else{
                     
-                    if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Closed"]){
+                    NSString * msg=[json objectForKey:@"message"];
+                    
+                    if([msg isEqualToString:@"Status changed to Closed"]){
                         
                         [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
@@ -660,14 +656,12 @@
                     }else
                     {
                         
-                          [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
                         
                     }
                     
                 }
-                   
-
-            } // end json
+            }
             
             NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
@@ -747,16 +741,16 @@
             
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
-                if ([json objectForKey:@"response"]) {
+                
+                if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
+                {
+                    [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolved a ticket", nil) sendViewController:self];
                     
-                    id object;
-                    NSDictionary * dict1= [json objectForKey:@"response"];
-                    object = [dict1 objectForKey:@"message"];
+                }
+                else{
+                    NSString * msg=[json objectForKey:@"message"];
                     
-                    NSLog(@"object is :%@",object);
-                    NSLog(@"object is :%@",object);
-                    
-                    if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Resolved"]){
+                    if([msg isEqualToString:@"Status changed to Resolved"]){
                         
                         [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
@@ -771,10 +765,7 @@
                     }
                     
                 }
-                
-                
-            } // end json
-            
+            }
             NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             
         }]; // end webservice call
@@ -856,16 +847,18 @@
             
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
-                if ([json objectForKey:@"response"]) {
+                
+                if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
+                {
+                    [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
                     
-                    id object;
-                    NSDictionary * dict1= [json objectForKey:@"response"];
-                    object = [dict1 objectForKey:@"message"];
+                }
+                else{
                     
-                    NSLog(@"object is :%@",object);
-                    NSLog(@"object is :%@",object);
+                    NSString * msg=[json objectForKey:@"message"];
                     
-                    if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Deleted"]){
+                    if([msg isEqualToString:@"Status changed to Deleted"]){
+                        
                         
                         [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                         
@@ -878,12 +871,8 @@
                         [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
                         
                     }
-                    
                 }
-                
-                
-                //                }
-            } // end json
+            }
             
             NSLog(@"Thread-NO5-postTicketStatusChange-closed");
             

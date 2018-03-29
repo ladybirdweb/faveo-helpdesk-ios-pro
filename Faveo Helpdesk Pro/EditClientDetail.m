@@ -583,7 +583,7 @@
         
         NSString *statusDeActivate= [NSString stringWithFormat:@"%i",1];
         
-        NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/status/%@?token=%@&status=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.iD,[userDefaults objectForKey:@"token"],statusDeActivate];
+        NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/status/%@?token=%@&status=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.userID,[userDefaults objectForKey:@"token"],statusDeActivate];
         
         NSLog(@"%@",url);
      
@@ -736,7 +736,7 @@
         
         NSString *statusActivate= [NSString stringWithFormat:@"%i",0];
         
-       NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/status/%@?token=%@&status=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.iD,[userDefaults objectForKey:@"token"],statusActivate];
+       NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/status/%@?token=%@&status=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.userID,[userDefaults objectForKey:@"token"],statusActivate];
         
         NSLog(@"%@",url);
         NSLog(@"%@",url);
