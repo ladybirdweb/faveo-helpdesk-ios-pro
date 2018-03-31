@@ -204,5 +204,7 @@
 
 @property (strong, nonatomic) NSMutableArray *assigneeIdArrayListToTicketCreate;
 
+@property (strong, nonatomic) NSMutableArray *attachArrayFromConversation;
+
 @end
 

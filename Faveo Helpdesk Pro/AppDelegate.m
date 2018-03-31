@@ -279,7 +279,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     
     GlobalVariables *globalVariables=[GlobalVariables sharedInstance];
    
-    Utils *utils=[[Utils alloc]init];
+   // Utils *utils=[[Utils alloc]init];
     
 @try{
     NSString * scenario=[userInfo objectForKey:@"scenario"];

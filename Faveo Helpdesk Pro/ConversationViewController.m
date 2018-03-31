@@ -59,8 +59,7 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     
     attachmentArray=[[NSMutableArray alloc]init];
-    
-    //[_activityIndicatorObject startAnimating];
+
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Conversations",nil)];
  
     [self reload];
@@ -165,7 +164,8 @@
                 
                 mutableArray=[dataConversationDict objectForKey:@"threads"];
                 
-          
+              //  [[AppDelegate sharedAppdelegate] hideProgressView];
+                
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
@@ -256,26 +256,52 @@
     
     attachmentArray=[finaldic objectForKey:@"attach"];
     
+    
+//    globalVariable=[GlobalVariables sharedInstance];
+//    globalVariable.attachmentListFromConversationView=attachmentArray;
+    
     if ([attachmentArray count] != 0){
         
         cell.attachImage.hidden=NO;
         cell.attachButtonLabel.hidden=NO;
+       
+       
         
-        NSIndexPath *path;
-        NSDictionary *attachDictionary=[attachmentArray objectAtIndex:path.row];
-//        //   NSLog(@"Attchment Dict is: %@",attachDictionary);
-
-         NSString *numStr = [NSString stringWithFormat:@"%@", [attachDictionary objectForKey:@"file"]];
+        for (int i = 0; i < attachmentArray.count; i++) {
+             globalVariable.attachArrayFromConversation=attachmentArray;
+            
+             NSDictionary *attachDictionary=[attachmentArray objectAtIndex:i];
+            
+            
+         //    NSString *numStr = [NSString stringWithFormat:@"%@", [attachDictionary objectForKey:@"file"]];
+            
+            NSString *fileName=[attachDictionary objectForKey:@"name"];
+            NSString *fileSize=[NSString stringWithFormat:@"%@",[attachDictionary objectForKey:@"size"]];
+            NSString *fileType=[attachDictionary objectForKey:@"type"];
+            
+            NSLog(@"File Name : %@",fileName);
+            NSLog(@"File size : %@",fileSize);
+            NSLog(@"File Type : %@",fileType);
+            
+          //  printf("File Attachemnt(base64 String) : %s\n", [numStr UTF8String]);
+        }
         
-         NSString *fileName=[attachDictionary objectForKey:@"name"];
-         NSString *fileSize=[NSString stringWithFormat:@"%@",[attachDictionary objectForKey:@"size"]];
-         NSString *fileType=[attachDictionary objectForKey:@"type"];
-
-         NSLog(@"File Name : %@",fileName);
-         NSLog(@"File size : %@",fileSize);
-         NSLog(@"File Type : %@",fileType);
-        
-         printf("File Attachemnt(base64 String) : %s\n", [numStr UTF8String]);
+//        NSIndexPath *path;
+//        NSDictionary *attachDictionary=[attachmentArray objectAtIndex:path.row];
+////        //   NSLog(@"Attchment Dict is: %@",attachDictionary);
+//
+//
+//         NSString *numStr = [NSString stringWithFormat:@"%@", [attachDictionary objectForKey:@"file"]];
+//
+//         NSString *fileName=[attachDictionary objectForKey:@"name"];
+//         NSString *fileSize=[NSString stringWithFormat:@"%@",[attachDictionary objectForKey:@"size"]];
+//         NSString *fileType=[attachDictionary objectForKey:@"type"];
+//
+//         NSLog(@"File Name : %@",fileName);
+//         NSLog(@"File size : %@",fileSize);
+//         NSLog(@"File Type : %@",fileType);
+//
+//         printf("File Attachemnt(base64 String) : %s\n", [numStr UTF8String]);
         
     } else
     {
@@ -380,8 +406,9 @@
 
 - (void) buttonTouchedForCell:(ConversationTableViewCell *)cell {
     
-  //  NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
+ [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Please Wait...!",nil)];
+    //NSLog(@"1111111111%@",globalVariable.attachArrayFromConversation);
+    globalVariable.attachArrayFromConversation=globalVariable.attachArrayFromConversation;
     AttachmentViewController *attach=[self.storyboard instantiateViewControllerWithIdentifier:@"attachId"];
     [self.navigationController pushViewController:attach animated:YES];
 }

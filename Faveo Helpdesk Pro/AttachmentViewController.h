@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AttachmentViewController : UIViewController
+@interface AttachmentViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableview1;
+
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

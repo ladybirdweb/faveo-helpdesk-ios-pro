@@ -437,7 +437,7 @@
                 
                 if (json) {
                     //NSError *error;
-                    NSLog(@"Thread-NO4--getInboxAPI--%@",json);
+                  //  NSLog(@"Thread-NO4--getInboxAPI--%@",json);
                     NSDictionary *data1Dict=[json objectForKey:@"data"];
                     
                     _mutableArray = [data1Dict objectForKey:@"data"];
@@ -512,7 +512,7 @@
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-                NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+              //  NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
                 if (error || [msg containsString:@"Error"]) {
                     
                     if( [msg containsString:@"Error-429"])
@@ -774,7 +774,7 @@
                 }
                 
                 if (json) {
-                    NSLog(@"Thread-NO4--getInboxAPI--%@",json);
+                //    NSLog(@"Thread-NO4--getInboxAPI--%@",json);
                  
                       NSDictionary *data1Dict=[json objectForKey:@"data"];
                     
