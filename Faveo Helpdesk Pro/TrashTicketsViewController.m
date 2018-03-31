@@ -41,7 +41,7 @@
     NSDictionary *tempDict;
     NSMutableArray *selectedArray;
     NSMutableArray *selectedSubjectArray;
-     NSMutableArray *selectedTicketOwner;
+    NSMutableArray *selectedTicketOwner;
     
     int count1;
     NSString *selectedIDs;
@@ -397,7 +397,7 @@
             NSLog( @" I am in reload method in TrashTicket ViewController" );
             
         }
-
+        
     }
 }
 
@@ -718,7 +718,7 @@
             NSLog( @" I am in LoadMore method in TrashTickets ViewController" );
             
         }
-
+        
         
     }
 }
@@ -831,11 +831,11 @@
             
             NSString *fname= [customerDict objectForKey:@"first_name"];
             NSString *lname= [customerDict objectForKey:@"last_name"];
-            NSString*email1=[finaldic objectForKey:@"user_name"];
+            NSString*userName=[customerDict objectForKey:@"user_name"];
             
             [Utils isEmpty:fname];
             [Utils isEmpty:lname];
-            [Utils isEmpty:email1];
+            [Utils isEmpty:userName];
             
             
             if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
@@ -847,17 +847,13 @@
                     cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
                 }
             }
+            else if(![Utils isEmpty:userName])
+            {
+                cell.mailIdLabel.text=userName;
+            }
             else
             {
-                
-                if(![Utils isEmpty:email1])
-                {
-                    cell.mailIdLabel.text=email1;
-                }
-                else{
-                    cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
-                }
-                
+                cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
             }
             
             //Image view
@@ -871,7 +867,7 @@
             }
             else
             {
-                [cell.profilePicView setImageWithString:email1 color:nil ];
+                [cell.profilePicView setImageWithString:userName color:nil ];
             }
             
             
@@ -905,9 +901,9 @@
         
         // NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
         
-       // NSString *encodedString =@"Sample Ticket Titile";
+        // NSString *encodedString =@"Sample Ticket Titile";
         
-         NSString *encodedString =[finaldic objectForKey:@"title"];
+        NSString *encodedString =[finaldic objectForKey:@"title"];
         
         [Utils isEmpty:encodedString];
         
@@ -1102,20 +1098,18 @@
     
     self.selectedPath = indexPath;
     
+    NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
+    
     if ([tableView isEditing]) {
         
-        //  [selectedArray addObject:[_mutableArray objectAtIndex:indexPath.row]];
-        
         //taking id from selected rows
-        [selectedArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
+        [selectedArray addObject:[finaldic objectForKey:@"id"]];
         
         //taking ticket title from selected rows
-        //  [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
-        
-        [selectedSubjectArray addObject:@"Sample Ticket Tilte in Did Select"];
+        [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"title"]];
         
         //taking email id
-        [selectedTicketOwner addObject:[[[_mutableArray objectAtIndex:indexPath.row] objectForKey:@"from"] valueForKey:@"id"]];
+        [selectedTicketOwner addObject:[[[_mutableArray objectAtIndex:indexPath.row] objectForKey:@"from"] valueForKey:@"email"]];
         
         count1=(int)[selectedArray count];
         NSLog(@"Selected count is :%i",count1);
@@ -1136,7 +1130,7 @@
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
         
-        
+        //iD  ticket id
         globalVariables.iD=[finaldic objectForKey:@"id"];
         globalVariables.Ticket_status=[finaldic objectForKey:@"status"];
         globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
@@ -1160,18 +1154,18 @@
     
     self.selectedPath = indexPath;
     
+    NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
     
-    //   [selectedArray removeObject:[_mutableArray objectAtIndex:indexPath.row]];
-    [selectedArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
     
-    // [selectedSubjectArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
+    //removing id from selected rows
+    [selectedArray removeObject:[finaldic objectForKey:@"id"]];
     
-    //  [selectedTicketOwner removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
+    //removing ticket title from selected rows
+    [selectedSubjectArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"title"]];
     
-    [selectedSubjectArray addObject:@"Sample Ticket Tilte in Did Select"];
+    //removing email id
+    [selectedTicketOwner removeObject:[[[_mutableArray objectAtIndex:indexPath.row] objectForKey:@"from"] valueForKey:@"email"]];
     
-    //taking email id
-    [selectedTicketOwner addObject:[[[_mutableArray objectAtIndex:indexPath.row] objectForKey:@"from"] valueForKey:@"id"]];
     
     count1=(int)[selectedArray count];
     NSLog(@"Selected count is :%i",count1);
@@ -1189,7 +1183,6 @@
     }
     
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -1391,7 +1384,7 @@
                     NSLog(@"Thread--NO4-call-postTicketStatusChange");
                     return;
                 }
-            
+                
                 
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
@@ -1516,7 +1509,7 @@
             // }
         }
     }
-
+    
 }
 
 -(void)changeStaus3
@@ -1613,7 +1606,7 @@
             }];
             // }
         } }
-
+    
 }
 
 
@@ -1711,40 +1704,17 @@
                     NSLog(@"Thread--NO4-call-postTicketStatusChange");
                     return;
                 }
-        @try{
-                if (json) {
-                    NSLog(@"JSON-CreateTicket-%@",json);
-                    //  NSLog(@"JSON-CreateTicket-%@",json);
-                    
-                    if ([json objectForKey:@"success"]) {
+                @try{
+                    if (json) {
+                        NSLog(@"JSON-CreateTicket-%@",json);
+                        //  NSLog(@"JSON-CreateTicket-%@",json);
                         
-                        NSString *str=[json objectForKey:@"success"];
-                        
-                        if([str isEqualToString:@"deleted successfully"])
-                        {
-                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        if ([json objectForKey:@"success"]) {
                             
-                            TrashTicketsViewController *trash=[self.storyboard instantiateViewControllerWithIdentifier:@"TrashTicketsID"];
-                            [self.navigationController pushViewController:trash animated:YES];
+                            NSString *str=[json objectForKey:@"success"];
                             
-                        }else
-                        {
-                            
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
-                        }
-                        
-                    }else
-                        if ([json objectForKey:@"response"]) {
-                            
-                            id object;
-                            NSDictionary * dict1= [json objectForKey:@"response"];
-                            object = [dict1 objectForKey:@"message"];
-                            
-                            NSLog(@"object is :%@",object);
-                            NSLog(@"object is :%@",object);
-                            
-                            if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Resolved"]){
-                                
+                            if([str isEqualToString:@"deleted successfully"])
+                            {
                                 [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                                 
                                 TrashTicketsViewController *trash=[self.storyboard instantiateViewControllerWithIdentifier:@"TrashTicketsID"];
@@ -1754,14 +1724,37 @@
                             {
                                 
                                 [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
-                                
                             }
                             
-                        }
-                    
-                    
-                } // end json
-        }@catch (NSException *exception)
+                        }else
+                            if ([json objectForKey:@"response"]) {
+                                
+                                id object;
+                                NSDictionary * dict1= [json objectForKey:@"response"];
+                                object = [dict1 objectForKey:@"message"];
+                                
+                                NSLog(@"object is :%@",object);
+                                NSLog(@"object is :%@",object);
+                                
+                                if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Resolved"]){
+                                    
+                                    [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                                    
+                                    TrashTicketsViewController *trash=[self.storyboard instantiateViewControllerWithIdentifier:@"TrashTicketsID"];
+                                    [self.navigationController pushViewController:trash animated:YES];
+                                    
+                                }else
+                                {
+                                    
+                                    [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
+                                    
+                                }
+                                
+                            }
+                        
+                        
+                    } // end json
+                }@catch (NSException *exception)
                 {
                     NSLog( @"Name: %@", exception.name);
                     NSLog( @"Reason: %@", exception.reason );
@@ -1861,14 +1854,14 @@
         [self.navigationController pushViewController:filter animated:YES];
         
     }
-//    if(titleButtonIndex==0 && rightIndex==1 )
-//    {
-//        NSLog(@"clear All");
-//
-//        TrashTicketsViewController * trash=[self.storyboard instantiateViewControllerWithIdentifier:@"TrashTicketsID"];
-//        [self.navigationController pushViewController:trash animated:YES];
-//
-//    }
+    //    if(titleButtonIndex==0 && rightIndex==1 )
+    //    {
+    //        NSLog(@"clear All");
+    //
+    //        TrashTicketsViewController * trash=[self.storyboard instantiateViewControllerWithIdentifier:@"TrashTicketsID"];
+    //        [self.navigationController pushViewController:trash animated:YES];
+    //
+    //    }
     
     // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )

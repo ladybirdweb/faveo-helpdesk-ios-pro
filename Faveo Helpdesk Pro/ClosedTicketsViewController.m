@@ -41,7 +41,7 @@
     NSDictionary *tempDict;
     NSMutableArray *selectedArray;
     NSMutableArray *selectedSubjectArray;
-     NSMutableArray *selectedTicketOwner;
+    NSMutableArray *selectedTicketOwner;
     
     int count1;
     NSString *selectedIDs;
@@ -87,7 +87,7 @@
     [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)];
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-     [rightBarButtonItems addSubview:moreButton];
+    [rightBarButtonItems addSubview:moreButton];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
@@ -166,23 +166,23 @@
 
 -(void)assignMethod{
     
-@try{
-    NSLog(@"Clicked on Asign");
-    if (!selectedArray.count) {
+    @try{
+        NSLog(@"Clicked on Asign");
+        if (!selectedArray.count) {
+            
+            [utils showAlertWithMessage:@"Select The Tickets for Assign" sendViewController:self];
+            
+        }
+        else{
+            //selectedIDs
+            
+            globalVariables.ticketIDListForAssign=selectedIDs;
+            
+            MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
         
-        [utils showAlertWithMessage:@"Select The Tickets for Assign" sendViewController:self];
-        
-    }
-    else{
-        //selectedIDs
-        
-        globalVariables.ticketIDListForAssign=selectedIDs;
-        
-        MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    
-}@catch (NSException *exception)
+    }@catch (NSException *exception)
     {
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
@@ -194,7 +194,7 @@
         NSLog( @" I am in assignMethod method in ClosedTicket ViewController" );
         
     }
-
+    
     
 }
 
@@ -202,34 +202,34 @@
 {
     NSLog(@"Clicked on merge");
     
-@try{
-    if (!selectedArray.count) {
-        
-        [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
-        
-    }else if(selectedArray.count<2)
-    {
-        [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
-    }else{
-        
-        NSString * email1= [selectedTicketOwner objectAtIndex:0];
-        NSString * email2= [selectedTicketOwner objectAtIndex:1];
-        NSLog(@"email 1 is : %@",email1);
-        NSLog(@"email 2 is : %@",email2);
-        if(![email1 isEqualToString:email2] || ![email1 isEqualToString:[selectedTicketOwner lastObject]])
+    @try{
+        if (!selectedArray.count) {
+            
+            [utils showAlertWithMessage:@"Select The Tickets for Merge" sendViewController:self];
+            
+        }else if(selectedArray.count<2)
         {
-            [utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
-        }
-        else{
+            [utils showAlertWithMessage:@"Select 2 or more Tickets for Merge" sendViewController:self];
+        }else{
             
-            globalVariables.idList=selectedArray;
-            globalVariables.subjectList=selectedSubjectArray;
-            
-            MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
-            [self.navigationController pushViewController:merge animated:YES];
+            NSString * email1= [selectedTicketOwner objectAtIndex:0];
+            NSString * email2= [selectedTicketOwner objectAtIndex:1];
+            NSLog(@"email 1 is : %@",email1);
+            NSLog(@"email 2 is : %@",email2);
+            if(![email1 isEqualToString:email2] || ![email1 isEqualToString:[selectedTicketOwner lastObject]])
+            {
+                [utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
+            }
+            else{
+                
+                globalVariables.idList=selectedArray;
+                globalVariables.subjectList=selectedSubjectArray;
+                
+                MergeViewForm * merge=[self.storyboard instantiateViewControllerWithIdentifier:@"mergeViewID1"];
+                [self.navigationController pushViewController:merge animated:YES];
+            }
         }
-    }
-}@catch (NSException *exception)
+    }@catch (NSException *exception)
     {
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
@@ -241,7 +241,7 @@
         NSLog( @" I am in mergeButtonCliecked method in ClosedTickets ViewController" );
         
     }
-
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -411,7 +411,7 @@
             NSLog( @" I am in reload method in ClosedTickets ViewController" );
             
         }
-
+        
     }
 }
 
@@ -726,7 +726,7 @@
             NSLog( @" I am in loadMore method in ClosedTicket ViewController" );
             
         }
-
+        
     }
 }
 
@@ -837,11 +837,11 @@
             
             NSString *fname= [customerDict objectForKey:@"first_name"];
             NSString *lname= [customerDict objectForKey:@"last_name"];
-            NSString*email1=[finaldic objectForKey:@"user_name"];
+            NSString*userName=[customerDict objectForKey:@"user_name"];
             
             [Utils isEmpty:fname];
             [Utils isEmpty:lname];
-            [Utils isEmpty:email1];
+            [Utils isEmpty:userName];
             
             
             if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
@@ -853,17 +853,13 @@
                     cell.mailIdLabel.text=[NSString stringWithFormat:@"%@ %@",fname,lname];
                 }
             }
+            else if(![Utils isEmpty:userName])
+            {
+                cell.mailIdLabel.text=userName;
+            }
             else
             {
-                
-                if(![Utils isEmpty:email1])
-                {
-                    cell.mailIdLabel.text=email1;
-                }
-                else{
-                    cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
-                }
-                
+                cell.mailIdLabel.text=NSLocalizedString(@"Not Available", nil);
             }
             
             //Image view
@@ -877,7 +873,7 @@
             }
             else
             {
-                [cell.profilePicView setImageWithString:email1 color:nil ];
+                [cell.profilePicView setImageWithString:userName color:nil ];
             }
             
             
@@ -911,9 +907,9 @@
         
         // NSString *encodedString =[finaldic objectForKey:@"ticket_title"];
         
-      //  NSString *encodedString =@"Sample Ticket Titile";
+        //  NSString *encodedString =@"Sample Ticket Titile";
         
-         NSString *encodedString =[finaldic objectForKey:@"title"];
+        NSString *encodedString =[finaldic objectForKey:@"title"];
         
         [Utils isEmpty:encodedString];
         
@@ -1108,20 +1104,18 @@
     
     self.selectedPath = indexPath;
     
+    NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
+    
     if ([tableView isEditing]) {
         
-        //  [selectedArray addObject:[_mutableArray objectAtIndex:indexPath.row]];
-        
         //taking id from selected rows
-        [selectedArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
+        [selectedArray addObject:[finaldic objectForKey:@"id"]];
         
         //taking ticket title from selected rows
-        //  [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
-        
-        [selectedSubjectArray addObject:@"Sample Ticket Tilte in Did Select"];
+        [selectedSubjectArray addObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"title"]];
         
         //taking email id
-        [selectedTicketOwner addObject:[[[_mutableArray objectAtIndex:indexPath.row] objectForKey:@"from"] valueForKey:@"id"]];
+        [selectedTicketOwner addObject:[[[_mutableArray objectAtIndex:indexPath.row] objectForKey:@"from"] valueForKey:@"email"]];
         
         count1=(int)[selectedArray count];
         NSLog(@"Selected count is :%i",count1);
@@ -1142,7 +1136,7 @@
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
         
-        
+        //iD  ticket id
         globalVariables.iD=[finaldic objectForKey:@"id"];
         globalVariables.Ticket_status=[finaldic objectForKey:@"status"];
         globalVariables.ticket_number=[finaldic objectForKey:@"ticket_number"];
@@ -1166,18 +1160,18 @@
     
     self.selectedPath = indexPath;
     
+    NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
     
-    //   [selectedArray removeObject:[_mutableArray objectAtIndex:indexPath.row]];
-    [selectedArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
     
-    // [selectedSubjectArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"ticket_title"]];
+    //removing id from selected rows
+    [selectedArray removeObject:[finaldic objectForKey:@"id"]];
     
-    //  [selectedTicketOwner removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"c_email"]];
+    //removing ticket title from selected rows
+    [selectedSubjectArray removeObject:[[_mutableArray objectAtIndex:indexPath.row] valueForKey:@"title"]];
     
-    [selectedSubjectArray addObject:@"Sample Ticket Tilte in Did Select"];
+    //removing email id
+    [selectedTicketOwner removeObject:[[[_mutableArray objectAtIndex:indexPath.row] objectForKey:@"from"] valueForKey:@"email"]];
     
-    //taking email id
-    [selectedTicketOwner addObject:[[[_mutableArray objectAtIndex:indexPath.row] objectForKey:@"from"] valueForKey:@"id"]];
     
     count1=(int)[selectedArray count];
     NSLog(@"Selected count is :%i",count1);
@@ -1410,20 +1404,20 @@
                     NSLog(@"JSON-CreateTicket-%@",json);
                     
                     NSString *str=[json objectForKey:@"message"];
-                        
+                    
                     if([str isEqualToString:@"Status changed to Open"]){
-                            
-                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
-                            ClosedTicketsViewController *closed=[self.storyboard instantiateViewControllerWithIdentifier:@"ClosedTicketsID"];
-                            [self.navigationController pushViewController:closed animated:YES];
-                            
-                        }else
-                        {
-                            
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Open a ticket", nil) sendViewController:self];
-                            
-                        }
+                        
+                        [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        
+                        ClosedTicketsViewController *closed=[self.storyboard instantiateViewControllerWithIdentifier:@"ClosedTicketsID"];
+                        [self.navigationController pushViewController:closed animated:YES];
+                        
+                    }else
+                    {
+                        
+                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Open a ticket", nil) sendViewController:self];
+                        
+                    }
                     
                     
                     
@@ -1534,7 +1528,7 @@
             }];
             // }
         } }
-
+    
 }
 
 -(void)changeStaus4
@@ -1626,7 +1620,7 @@
             }];
             //  }
         } }
-
+    
 }
 
 
@@ -1709,14 +1703,14 @@
         
     }
     
-//    if(titleButtonIndex==0 && rightIndex==1 )
-//    {
-//        NSLog(@"clear All");
-//
-//        ClosedTicketsViewController * close=[self.storyboard instantiateViewControllerWithIdentifier:@"ClosedTicketsID"];
-//        [self.navigationController pushViewController:close animated:YES];
-//
-//    }
+    //    if(titleButtonIndex==0 && rightIndex==1 )
+    //    {
+    //        NSLog(@"clear All");
+    //
+    //        ClosedTicketsViewController * close=[self.storyboard instantiateViewControllerWithIdentifier:@"ClosedTicketsID"];
+    //        [self.navigationController pushViewController:close animated:YES];
+    //
+    //    }
     
     // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
