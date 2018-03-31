@@ -22,7 +22,9 @@
      NSUserDefaults *userDefaults;
     NSMutableArray *fileAttachmentArray;
     NSString *fileName;
+    
     AVPlayer *playr;
+    NSString *audioData;
     
 }
 @end
@@ -173,32 +175,25 @@
     {
         typeMime=@"text/html";
     }
-//    else if([fileName hasSuffix:@".mp3"])
+//    else if([fileName hasSuffix:@".mp3"])  //video/mp4
 //    {
 //
-//        // NSData from the Base64 encoded str
-//        NSData *nsdataFromBase64String = [[NSData alloc]
-//                                          initWithBase64EncodedString:numStr options:0];
-//
-//        // Decoded NSString from the NSData
-//        NSString *base64Decoded = [[NSString alloc]
-//                                   initWithData:nsdataFromBase64String encoding:NSUTF8StringEncoding];
-//        NSLog(@"Decoded: %@", base64Decoded);
-//
-////        //typeMime=@"audio/x-mpeg-3";
-////        NSString *str=@"data:application/pdf;base64,";
-////        NSString *str2=[str stringByAppendingString:numStr];
-////
-////         NSURL *url = [NSURL URLWithString:str2];
-////        // NSData *imageData = [NSData dataWithContentsOfURL:url];
-////
-////        AVPlayerItem *item=[AVPlayerItem playerItemWithURL:[NSURL URLWithString:url]];
-////        playr=[AVPlayer playerWithPlayerItem:item];
-////        [playr play];
+//        typeMime=@"audio/mp3";
+//        
+//        NSString *str=@"data:audio/mp3;base64,";
+//        audioData=[str stringByAppendingString:numStr];
+//        
+//    }
+//    else if([fileName hasSuffix:@".mp4"])
+//    {
+//        typeMime=@"video/mp4";
+//        NSString *str=@"data:video/mp4;base64,";
+//        audioData=[str stringByAppendingString:numStr];
 //    }
     else
     {
-        typeMime=@"audio/mp3";
+        typeMime=@"video/quicktime";
+    
         
     }
     
