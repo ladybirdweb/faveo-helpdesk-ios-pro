@@ -80,7 +80,7 @@
         NSDictionary *attachDictionary=[fileAttachmentArray objectAtIndex:indexPath.row];
         
         
-    //    NSString *numStr = [NSString stringWithFormat:@"%@", [attachDictionary objectForKey:@"file"]];
+       NSString *numStr = [NSString stringWithFormat:@"%@", [attachDictionary objectForKey:@"file"]];
         
         fileName=[attachDictionary objectForKey:@"name"];
         cell.attachmentName.text=fileName;
@@ -95,7 +95,7 @@
         NSLog(@"File size : %@",fileSize);
         NSLog(@"File Type : %@",fileType);
         
-      //  printf("File Attachemnt(base64 String) : %s\n", [numStr UTF8String]);
+        printf("File Attachemnt(base64 String) : %s\n", [numStr UTF8String]);
         
   //  }
     
@@ -159,6 +159,10 @@
     {
         typeMime=@"image/jpeg";
     }
+    else if([fileName hasSuffix:@".jpg"])
+    {
+        typeMime=@"image/jpg";
+    }
     else if([fileName hasSuffix:@".png"])
     {
         typeMime=@"image/png";
@@ -175,42 +179,70 @@
     {
         typeMime=@"text/html";
     }
-//    else if([fileName hasSuffix:@".mp3"])  //video/mp4
-//    {
+    else if([fileName hasSuffix:@".mp3"])  //video/mp4
+    {
+
+        typeMime=@"audio/mpeg";
+        
+//        NSURL *URL = [NSURL URLWithString:
+//                      [NSString stringWithFormat:@"data:audio/mp3;base64,%@",
+//                       numStr]];
 //
-//        typeMime=@"audio/mp3";
-//        
-//        NSString *str=@"data:audio/mp3;base64,";
-//        audioData=[str stringByAppendingString:numStr];
-//        
-//    }
-//    else if([fileName hasSuffix:@".mp4"])
-//    {
-//        typeMime=@"video/mp4";
+//              //   NSURL *url = [NSURL URLWithString:URL];
+//                [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+        
+    }
+    else if([fileName hasSuffix:@".mp4"])
+    {
+        typeMime=@"video/mp4";
 //        NSString *str=@"data:video/mp4;base64,";
 //        audioData=[str stringByAppendingString:numStr];
-//    }
+    }
     else
     {
-        typeMime=@"video/quicktime";
+        //typeMime=@"video/quicktime";
+        
+//        NSData *audioData = [NSData dataFromBase64String:numStr];
+//        NSError *error;
+//        AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithData:audioData error:&error];
+//        if (error)
+//        {
+//            NSLog(@"Error in audioPlayer: %@",[error localizedDescription]);
+//        } else
+//        {
+//            //player.delegate = self;
+//            [player prepareToPlay];
+//        }
     
         
     }
     
-    // dataFromBase64String from NSData+Base64.h file
-    NSData* myData = [NSData dataFromBase64String: numStr];
+    if([fileName hasSuffix:@".mp3"])
+    {
+        NSURL *URL = [NSURL URLWithString:
+                              [NSString stringWithFormat:@"data:audio/mp3;base64,%@",
+                               numStr]];
+        
+      //   NSURL *url = [NSURL URLWithString:URL];
+        [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+
+    }
+   else{
+      // dataFromBase64String from NSData+Base64.h file
+           NSData* myData = [NSData dataFromBase64String: numStr];
     
-    
-    [_webView loadData:myData
-             //MIMEType:@"application/pdf"
-              MIMEType:typeMime
-     textEncodingName:@"NSUTF8StringEncoding"
-              baseURL:[NSURL URLWithString:@"https://www.google.co.in/"]];
+         [_webView loadData:myData
+                 //MIMEType:@"application/pdf"
+                 MIMEType:typeMime
+                 textEncodingName:@"NSUTF8StringEncoding"
+                   baseURL:[NSURL URLWithString:@"https://www.google.co.in/"]];
+
+     }
     
     // zoom karnya sathi
     _webView.scalesPageToFit = YES;
     _webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    
+
     [self.view addSubview:_webView];
     _webView.mediaPlaybackRequiresUserAction = NO;
     

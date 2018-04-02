@@ -38,8 +38,9 @@
     [super viewDidLoad];
     
     //arindam.ladybird@gmail.com
-     _emailTextView.text=@"test00478@gmail.com";
-  //  _emailTextView.text=@"arindam.ladybird@gmail.com";
+   // _emailTextView.text=@"mallikarjun.h@ladybirdweb.com";
+    // _emailTextView.text=@"test00478@gmail.com";
+    _emailTextView.text=@"arindam.ladybird@gmail.com";
     
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
@@ -134,9 +135,15 @@
         
         [[AppDelegate sharedAppdelegate] showProgressView];
         
+        NSString *string0=@"<br> </br>";
+        NSString *string1=[NSString stringWithFormat:@"<br><b>From: </b>%@</br>",[userDefaults objectForKey:@"profile_name"]];
+        NSString *string2=[NSString stringWithFormat:@"<br><b>Domain URL: </b>%@</br>",[userDefaults objectForKey:@"baseURL"]];
         
+        NSString *finalString=[NSString stringWithFormat:@"%@\n%@\n%@\n\n%@",_messageTextView.text,string0,string1,string2];
         
-        NSString *url =[NSString stringWithFormat:@"%@helpdesk/helpsection/mails?token=%@&help_email=%@&help_subject=%@&help_massage=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],_emailTextView.text,_subjectTextView.text,_messageTextView.text];
+        NSString *url =[NSString stringWithFormat:@"%@helpdesk/helpsection/mails?token=%@&help_email=%@&help_subject=%@&help_massage=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],_emailTextView.text,_subjectTextView.text,finalString];
+        
+    
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
@@ -178,16 +185,13 @@
             if (json) {
                 NSLog(@"JSON-HelpSupport-%@",json);
                 
-                NSString *resultMessage=[json objectForKey:@"result"];
+                NSString *resultMessage=[json objectForKey:@"message"];
                 
                 if([resultMessage isEqualToString:@"Message Sent! Thanks for reaching out! Someone from our team will get back to you soon."] || [resultMessage hasPrefix:@"Message Sent!"])
                 {
                     NSLog(@"I am here..!");
                     
                     [self dismissViewControllerAnimated:YES completion:nil];
-                    
-                    //                        HelpSectionHomePage *view2=[self.storyboard instantiateViewControllerWithIdentifier:@"HelpSectionHomePageId"];
-                    //                        [self.navigationController pushViewController:view2 animated:YES];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -219,9 +223,9 @@
 }
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    
+
     if(textView==_subjectTextView || textView==_messageTextView){
-        
+
         //do not allow the first character to be space | do not allow more than one space
         if ([text isEqualToString:@" "]) {
             if (!textView.text.length)
@@ -231,26 +235,26 @@
         if ([textView.text stringByReplacingCharactersInRange:range withString:text].length < textView.text.length) {
             return YES;
         }
-        
+
         if (textView==_subjectTextView || textView==_messageTextView) {
             // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
-            
+
             //        // in case you need to limit the max number of characters
             if ([textView.text stringByReplacingCharactersInRange:range withString:text].length > 500) {
                 return NO;
             }
-            
+
             NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@" 1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.?<>:[]{}-_=+*&%$#@!|"];
-            
+
             if ([text rangeOfCharacterFromSet:set].location == NSNotFound) {
                 return NO;
             }
         }
         
     }
-    
+
     return YES;
-    
+
 }
 @end
 

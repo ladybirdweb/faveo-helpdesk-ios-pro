@@ -225,7 +225,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     
     // Print message ID.
     if (userInfo[kGCMMessageIDKey]) {
-        NSLog(@"Message ID: %@", userInfo[kGCMMessageIDKey]);
+        NSLog(@"Message ID1: %@", userInfo[kGCMMessageIDKey]);
     }
     
     // Print full message.
@@ -272,7 +272,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     // Print full message.
     NSLog(@"data messages555 %@", userInfo);
     
-    NSLog(@"%@",userInfo);
+    NSLog(@"Data121 : %@",userInfo);
     completionHandler();
     
     TicketDetailViewController *td=[mainStoryboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
@@ -311,7 +311,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
                                                                   options:kNilOptions
                                                                     error:&error];
         
-        globalVariables.iD=[requester objectForKey:@"id"];
+        globalVariables.userID=[requester objectForKey:@"id"];
         globalVariables.First_name= [requester objectForKey:@"first_name"];
         globalVariables.Last_name= [requester objectForKey:@"last_name"];
         
