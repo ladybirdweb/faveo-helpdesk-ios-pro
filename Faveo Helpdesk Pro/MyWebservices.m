@@ -85,6 +85,13 @@
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 [utils showAlertWithMessage:@"The request could not be understood by the server due to malformed syntax." sendViewController:vc];
             }
+            else if(statusCode == 403)
+            {
+                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                [utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:vc];
+            }
+            
             else if(statusCode == 404)
             {
                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
@@ -233,6 +240,13 @@
                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:vc];
                 }
+                else if(statusCode == 403)
+                {
+                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:vc];
+                }
+                
                 else if(statusCode == 405)
                 {
                     NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
@@ -398,12 +412,20 @@
                     
                 }
                 
+                else if(statusCode == 403)
+                {
+                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:vc];
+                }
+                
                 else if(statusCode == 404)
                 {
                     NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:vc];
                 }
+                
                 else if(statusCode == 405)
                 {
                     NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
@@ -544,7 +566,14 @@
                         });
                         NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
                     }
-                } else
+                }
+                else if(statusCode == 403)
+                {
+                    NSLog(@"dataTaskWithRequest HTTP1 status code: %ld", (long)statusCode);
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:vc];
+                }
+                else
                     dispatch_async(dispatch_get_main_queue(), ^{
                         block(nil, nil,[NSString stringWithFormat:@"Error-%ld",(long)statusCode]);
                     });

@@ -309,7 +309,7 @@
             NSLog(@"Thread-user-SearchAPI-Json-%@",json);
             
             
-            _userDataArray=[[NSMutableArray alloc]initWithCapacity:100];
+            _userDataArray=[[NSMutableArray alloc]initWithCapacity:11];
             
             NSDictionary * dict1 = [json objectForKey:@"result"];
             

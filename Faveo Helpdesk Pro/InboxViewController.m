@@ -512,7 +512,8 @@
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-                //  NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+                 NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+              
                 if (error || [msg containsString:@"Error"]) {
                     
                     if( [msg containsString:@"Error-429"])
@@ -538,7 +539,7 @@
                 
                 if (json) {
                     
-                    //    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                  //  NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
                     NSDictionary *resultDic = [json objectForKey:@"data"];
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
                     
