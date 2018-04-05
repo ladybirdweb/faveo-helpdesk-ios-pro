@@ -184,22 +184,22 @@
                     if ([[error domain] isEqualToString:NSURLErrorDomain]) {
                         switch ([error code]) {
                             case NSURLErrorCannotFindHost:
-                                errorMsg = NSLocalizedString(@"Cannot find specified host. Retype URL.", nil);
+                                self->errorMsg = NSLocalizedString(@"Cannot find specified host. Retype URL.", nil);
                                 break;
                             case NSURLErrorCannotConnectToHost:
-                                errorMsg = NSLocalizedString(@"Cannot connect to specified host. Server may be down.", nil);
+                                self->errorMsg = NSLocalizedString(@"Cannot connect to specified host. Server may be down.", nil);
                                 break;
                             case NSURLErrorNotConnectedToInternet:
-                                errorMsg = NSLocalizedString(@"Cannot connect to the internet. Service may not be available.", nil);
+                                self->errorMsg = NSLocalizedString(@"Cannot connect to the internet. Service may not be available.", nil);
                                 break;
                             default:
-                                errorMsg = [error localizedDescription];
+                                self->errorMsg = [error localizedDescription];
                                 break;
                         }
                         [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [utils showAlertWithMessage:errorMsg sendViewController:self];
+                        [self->utils showAlertWithMessage:self->errorMsg sendViewController:self];
                         
-                        NSLog(@"dataTaskWithRequest error: %@", errorMsg);
+                        NSLog(@"dataTaskWithRequest error: %@", self->errorMsg);
                         return;
                     }else if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                         
@@ -209,25 +209,25 @@
                             if (statusCode == 404) {
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                                [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self];
+                                [self->utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self];
                                 return;
                             }
                             if (statusCode == 401) {
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                                [utils showAlertWithMessage: NSLocalizedString(@"The request has not been applied because it lacks valid authentication credentials for the target resource.", nil) sendViewController:self];
+                                [self->utils showAlertWithMessage: NSLocalizedString(@"The request has not been applied because it lacks valid authentication credentials for the target resource.", nil) sendViewController:self];
                                 //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                                 return;
                             }else if(statusCode == 402)
                             {
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                                [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+                                [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
                             }
                             else{
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                                [utils showAlertWithMessage:@"Unknown Error!" sendViewController:self];
+                                [self->utils showAlertWithMessage:@"Unknown Error!" sendViewController:self];
                                 return;
                             }
                         }
@@ -257,13 +257,13 @@
                             
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             //  [utils showAlertWithMessage:NSLocalizedString(@"Error verifying URL",nil)sendViewController:self];
-                            [utils showAlertWithMessage:NSLocalizedString(@"Error - Please Check Your Helpdesk URL",nil)sendViewController:self];
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Error - Please Check Your Helpdesk URL",nil)sendViewController:self];
                         }
                     }@catch (NSException *exception)
                     {
                         NSLog( @"Name: %@", exception.name);
                         NSLog( @"Reason: %@", exception.reason );
-                        [utils showAlertWithMessage:exception.name sendViewController:self];
+                        [self->utils showAlertWithMessage:exception.name sendViewController:self];
 
                         return;
                     }
@@ -360,43 +360,43 @@
                         if (statusCode == 401) {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [utils showAlertWithMessage: NSLocalizedString(@"Incorrect Username or Password!", nil) sendViewController:self];
+                            [self->utils showAlertWithMessage: NSLocalizedString(@"Incorrect Username or Password!", nil) sendViewController:self];
                             //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                             return;
                         }else if(statusCode == 402)
                         {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+                            [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
                         }
                        else if(statusCode == 404)
                         {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self];
+                            [self->utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self];
                         }
                         else if(statusCode == 400)
                         {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [utils showAlertWithMessage:@"The request could not be understood by the server due to malformed syntax." sendViewController:self];
+                            [self->utils showAlertWithMessage:@"The request could not be understood by the server due to malformed syntax." sendViewController:self];
                         }
                         else if(statusCode == 405)
                         {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:self];
+                            [self->utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:self];
                         }
                         else if(statusCode == 500)
                         {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [utils showAlertWithMessage:@"Internal Server Error. Something has gone wrong on the website's server." sendViewController:self];
+                            [self->utils showAlertWithMessage:@"Internal Server Error. Something has gone wrong on the website's server." sendViewController:self];
                         }
                         else{
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [utils showAlertWithMessage:NSLocalizedString(@"Unknown Error !", nil)sendViewController:self];
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Unknown Error !", nil)sendViewController:self];
                             return;
                         }
                     }
@@ -423,7 +423,7 @@
                         NSString *tokenString=[NSString stringWithFormat:@"%@",[userDataDict objectForKey:@"token"]];
                         NSLog(@"Token is : %@",tokenString);
                         
-                        [userdefaults setObject:[userDataDict objectForKey:@"token"] forKey:@"token"];
+                        [self->userdefaults setObject:[userDataDict objectForKey:@"token"] forKey:@"token"];
                         
                         NSDictionary *userDetailsDict=[userDataDict objectForKey:@"user"];
                         
@@ -444,9 +444,9 @@
                         
                         
                         
-                        [userdefaults setObject:userId forKey:@"user_id"];
-                        [userdefaults setObject:userProfilePic forKey:@"profile_pic"];
-                        [userdefaults setObject:userRole forKey:@"role"];
+                        [self->userdefaults setObject:userId forKey:@"user_id"];
+                        [self->userdefaults setObject:userProfilePic forKey:@"profile_pic"];
+                        [self->userdefaults setObject:userRole forKey:@"role"];
                         
                         NSString *profileName;
                         if ([userName isEqualToString:@""]) {
@@ -456,13 +456,13 @@
                         }
                         
                         
-                        [userdefaults setObject:profileName forKey:@"profile_name"];
-                        [userdefaults setObject:baseURL forKey:@"baseURL"];
-                        [userdefaults setObject:self.userNameTextField.text forKey:@"username"];
+                        [self->userdefaults setObject:profileName forKey:@"profile_name"];
+                        [self->userdefaults setObject:self->baseURL forKey:@"baseURL"];
+                        [self->userdefaults setObject:self.userNameTextField.text forKey:@"username"];
                         
-                        [userdefaults setObject:self.passcodeTextField.text forKey:@"password"];
-                        [userdefaults setBool:YES forKey:@"loginSuccess"];
-                        [userdefaults synchronize];
+                        [self->userdefaults setObject:self.passcodeTextField.text forKey:@"password"];
+                        [self->userdefaults setBool:YES forKey:@"loginSuccess"];
+                        [self->userdefaults synchronize];
                         
                 
                         
@@ -482,7 +482,7 @@
                             }else
                             {
                                 
-                                [utils showAlertWithMessage:@"Invalid entry for user. This app is used by Agent and Admin only." sendViewController:self];
+                                [self->utils showAlertWithMessage:@"Invalid entry for user. This app is used by Agent and Admin only." sendViewController:self];
                                  [[AppDelegate sharedAppdelegate] hideProgressView];
                             }
                         });
@@ -491,7 +491,7 @@
                     {
                         NSLog( @"Name: %@", exception.name);
                         NSLog( @"Reason: %@", exception.reason );
-                        [utils showAlertWithMessage:exception.name sendViewController:self];
+                        [self->utils showAlertWithMessage:exception.name sendViewController:self];
 
                         return;
                     }
@@ -506,10 +506,10 @@
                     
                     if ([replyStr containsString:@"invalid_credentials"]) {
                         
-                        [utils showAlertWithMessage:@"Enter valid username or password" sendViewController:self];
+                        [self->utils showAlertWithMessage:@"Enter valid username or password" sendViewController:self];
                     }else{
                         
-                        [utils showAlertWithMessage:@"invalid_credentials" sendViewController:self];
+                        [self->utils showAlertWithMessage:@"invalid_credentials" sendViewController:self];
                     }
                 }
                 
@@ -537,15 +537,15 @@
                 if([msg isEqualToString:@"Error-402"])
                 {
                     NSLog(@"Message is : %@",msg);
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                 }
                 else{
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                     NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
                 }
                 
             }else if(error)  {
-                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                 NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
             }
             return ;
@@ -568,10 +568,10 @@
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 [self.companyURLview setHidden:YES];
                 [self.loginView setHidden:NO];
-                [utils viewSlideInFromRightToLeft:self.loginView];
+                [self->utils viewSlideInFromRightToLeft:self.loginView];
             });
-            [userdefaults setObject:[baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
-            [userdefaults synchronize];
+            [self->userdefaults setObject:[self->baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
+            [self->userdefaults synchronize];
         
             
         }
@@ -659,14 +659,14 @@
                     if([msg isEqualToString:@"Error-402"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                     }else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Thread-verifySocialFacebook-error == %@",error.localizedDescription);
                     }
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-verifySocialFacebook-error == %@",error.localizedDescription);
                 }
                 return ;
@@ -681,7 +681,7 @@
                     if([str isEqualToString:@"success"])
                     {
                         
-                        NSString *str2=[baseURL stringByAppendingString:@"social/login/facebook"];
+                        NSString *str2=[self->baseURL stringByAppendingString:@"social/login/facebook"];
                    NSURL *url = [NSURL URLWithString:str2];
                     if ([[UIApplication sharedApplication] canOpenURL:url])
                        {

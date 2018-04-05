@@ -118,20 +118,20 @@
             
             
             if (error || [msg containsString:@"Error"]) {
-                [refresh endRefreshing];
+                [self->refresh endRefreshing];
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 if (msg) {
                     if([msg isEqualToString:@"Error-402"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                     }else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Thread-getNotificationViewController-error == %@",error.localizedDescription);
                     }
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-getNotificationViewController-Refresh-error == %@",error.localizedDescription);
                 }
                 return ;
@@ -147,17 +147,17 @@
             if (json) {
                 //NSError *error;
                 NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-                _mutableArray = [json objectForKey:@"data"];
+                self->_mutableArray = [json objectForKey:@"data"];
                 
-                _nextPageUrl =[json objectForKey:@"next_page_url"];
-                _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[json objectForKey:@"total"] integerValue];
-                _totalPages=[[json objectForKey:@"last_page"] integerValue];
-                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
+                self->_nextPageUrl =[json objectForKey:@"next_page_url"];
+                self->_currentPage=[[json objectForKey:@"current_page"] integerValue];
+                self->_totalTickets=[[json objectForKey:@"total"] integerValue];
+                self->_totalPages=[[json objectForKey:@"last_page"] integerValue];
+                NSLog(@"Thread-NO4.1getInbox-dic--%@", self->_mutableArray);
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [refresh endRefreshing];
+                        [self->refresh endRefreshing];
                         [self.tableView reloadData];
                     });
                 });
@@ -283,10 +283,10 @@
                 
                 if (msg) {
                     
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-getNotificationViewController-Refresh-error == %@",error.localizedDescription);
                 }
                 return ;
@@ -304,15 +304,15 @@
                 
                 //_indexPaths=[[NSArray alloc]init];
                 //_indexPaths = [json objectForKey:@"data"];
-                _nextPageUrl =[json objectForKey:@"next_page_url"];
-                _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[json objectForKey:@"total"] integerValue];
-                _totalPages=[[json objectForKey:@"last_page"] integerValue];
+                self->_nextPageUrl =[json objectForKey:@"next_page_url"];
+                self->_currentPage=[[json objectForKey:@"current_page"] integerValue];
+                self->_totalTickets=[[json objectForKey:@"total"] integerValue];
+                self->_totalPages=[[json objectForKey:@"last_page"] integerValue];
                 
                 
-                _mutableArray= [_mutableArray mutableCopy];
+                self->_mutableArray= [self->_mutableArray mutableCopy];
                 
-                [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
+                [self->_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
                 
             
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -462,6 +462,7 @@
         {
             cell.name.text= [profileDict objectForKey:@"changed_by_user_name"];
         }
+        
         else
         {
             // cell.name.text=@"Not Availabel";
@@ -476,20 +477,26 @@
         {
             [cell.profilePicView setImageWithString:fname color:nil ];
         }
-        else
+        else if( [Utils isEmpty:fname] && [Utils isEmpty:lname] && [Utils isEmpty:userName])//userName
         {
-            [cell.profilePicView setImageWithString:userName color:nil ];
+           [cell setUserProfileimage:@"systemIcon.png"];
         }
-        
-        
         
         
         //   cell.name.text=[NSString stringWithFormat:@"%@ %@",[profileDict objectForKey:@"changed_by_first_name"],[profileDict objectForKey:@"changed_by_last_name"]];
     }
     else{
         
-        [cell setUserProfileimage:@"default_pic.png"];
+        if([[finaldic objectForKey:@"by"] isEqualToString:@"System"])
+        {
+            [cell setUserProfileimage:@"systemIcon.png"];
+            cell.name.text= NSLocalizedString(@"System",nil);//robot
+        }
+        else{
+            
+         [cell setUserProfileimage:@"default_pic.png"];
          cell.name.text= NSLocalizedString(@"Not Available",nil);
+        }
     }
     
     
@@ -553,6 +560,7 @@
         {
             globalVariables.First_name= @"";
             globalVariables.Last_name=@"";
+            globalVariables.Ticket_status=@"Open";
             
             [self.navigationController pushViewController:td animated:YES];
             

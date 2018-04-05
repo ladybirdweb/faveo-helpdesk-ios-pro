@@ -186,10 +186,10 @@
                     
                     if (msg) {
                         
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         
                     }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-ticketReply-Refresh-error == %@",error.localizedDescription);
                     }
                     
@@ -224,12 +224,12 @@
                          if([successMsg isEqualToString:@"false"])
                        {
                         
-                            [utils showAlertWithMessage:@"Enter the reply content.It can not be empty." sendViewController:self];
+                           [self->utils showAlertWithMessage:@"Enter the reply content.It can not be empty." sendViewController:self];
                       }
                 }
                 else
                 {
-                    [utils showAlertWithMessage:@"Something went wrong. Please try again." sendViewController:self];
+                    [self->utils showAlertWithMessage:@"Something went wrong. Please try again." sendViewController:self];
                 }
                 NSLog(@"Thread-Ticket-Reply-closed");
                 
@@ -281,22 +281,22 @@
                 if (msg) {
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-402"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                     }else if([msg isEqualToString:@"Error-422"]){
                         
                         NSLog(@"Message is : %@",msg);
                     }else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Error is11 : %@",msg);
                     }
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-CollaboratorFetch-Refresh-error == %@",error.localizedDescription);
                 }
                 
@@ -315,9 +315,9 @@
                 //  NSDictionary * dict1=[json objectForKey:@"collaborator"];
                 
                 NSArray  * array1=[json objectForKey:@"collaborator"];
-                globalVariables.ccCount=[NSString stringWithFormat:@"%lu",(unsigned long)array1.count];//array1.count;
+                self->globalVariables.ccCount=[NSString stringWithFormat:@"%lu",(unsigned long)array1.count];//array1.count;
                 //NSLog(@"Array count is : %lu",(unsigned long)array1.count);
-                NSLog(@"Array count is : %@",globalVariables.ccCount);
+                NSLog(@"Array count is : %@",self->globalVariables.ccCount);
                 [self viewDidLoad];
             }
             

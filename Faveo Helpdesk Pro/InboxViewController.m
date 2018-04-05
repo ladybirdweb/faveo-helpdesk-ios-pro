@@ -324,6 +324,10 @@
 -(void)reload{
     
     
+    if([globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
+    {
+        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"564645456456 Error"] sendViewController:self];
+    }
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
@@ -368,53 +372,53 @@
                 
                 
                 if (error || [msg containsString:@"Error"]) {
-                    [refresh endRefreshing];
+                    [self->refresh endRefreshing];
                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     if (msg) {
                         if([msg isEqualToString:@"Error-402"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                         }
                         else if([msg isEqualToString:@"Error-403"])
                         {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else if([msg isEqualToString:@"Error-422"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
                         }
                         else if([msg isEqualToString:@"Error-404"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
                         }
                         else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
                         }
                         else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
                         }
                         else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
                         }
                         else{
                             
                             NSLog(@"Message is : %@",msg);
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         }
                         
                     }else if(error)  {
                         NSLog(@"Error is : %@",error);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
                     }
                     return ;
@@ -431,7 +435,7 @@
                 if ([msg isEqualToString:@"tokenNotRefreshed"]) {
                     
                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [utils showAlertWithMessage:@"Your account credentials were changed, contact to Admin and please log back in." sendViewController:self];
+                    [self->utils showAlertWithMessage:@"Your account credentials were changed, contact to Admin and please log back in." sendViewController:self];
                     return;
                 }
                 
@@ -440,19 +444,19 @@
                     //  NSLog(@"Thread-NO4--getInboxAPI--%@",json);
                     NSDictionary *data1Dict=[json objectForKey:@"data"];
                     
-                    _mutableArray = [data1Dict objectForKey:@"data"];
+                    self->_mutableArray = [data1Dict objectForKey:@"data"];
                     
-                    _nextPageUrl =[data1Dict objectForKey:@"next_page_url"];
-                    _path1=[data1Dict objectForKey:@"path"];
-                    _currentPage=[[data1Dict objectForKey:@"current_page"] integerValue];
-                    _totalTickets=[[data1Dict objectForKey:@"total"] integerValue];
-                    _totalPages=[[data1Dict objectForKey:@"last_page"] integerValue];
+                    self->_nextPageUrl =[data1Dict objectForKey:@"next_page_url"];
+                    self->_path1=[data1Dict objectForKey:@"path"];
+                    self->_currentPage=[[data1Dict objectForKey:@"current_page"] integerValue];
+                    self->_totalTickets=[[data1Dict objectForKey:@"total"] integerValue];
+                    self->_totalPages=[[data1Dict objectForKey:@"last_page"] integerValue];
                     
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [refresh endRefreshing];
+                            [self->refresh endRefreshing];
                             
                             [self reloadTableView];
                             
@@ -512,14 +516,14 @@
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-                 NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+              //   NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
               
                 if (error || [msg containsString:@"Error"]) {
                     
                     if( [msg containsString:@"Error-429"])
                         
                     {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
                         
                     }else{
                         NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
@@ -547,16 +551,16 @@
                         NSString *name = [[ticketCountArray objectAtIndex:i]objectForKey:@"name"];
                         NSString *count = [[ticketCountArray objectAtIndex:i]objectForKey:@"count"];
                         if ([name isEqualToString:@"Open"]) {
-                            globalVariables.OpenCount=count;
+                            self->globalVariables.OpenCount=count;
                             
                         }else if ([name isEqualToString:@"Closed"]) {
-                            globalVariables.ClosedCount=count;
+                            self->globalVariables.ClosedCount=count;
                         }else if ([name isEqualToString:@"Deleted"]) {
-                            globalVariables.DeletedCount=count;
+                            self->globalVariables.DeletedCount=count;
                         }else if ([name isEqualToString:@"unassigned"]) {
-                            globalVariables.UnassignedCount=count;
+                            self->globalVariables.UnassignedCount=count;
                         }else if ([name isEqualToString:@"mytickets"]) {
-                            globalVariables.MyticketsCount=count;
+                            self->globalVariables.MyticketsCount=count;
                         }
                     }
                     
@@ -567,21 +571,21 @@
                         NSString *statusId = [[ticketStatusArray objectAtIndex:i]objectForKey:@"id"];
                         
                         if ([statusName isEqualToString:@"Open"]) {
-                            globalVariables.OpenStausId=statusId;
-                            globalVariables.OpenStausLabel=statusName;
+                            self->globalVariables.OpenStausId=statusId;
+                            self->globalVariables.OpenStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Resolved"]) {
-                            globalVariables.ResolvedStausId=statusId;
-                            globalVariables.ResolvedStausLabel=statusName;
+                            self->globalVariables.ResolvedStausId=statusId;
+                            self->globalVariables.ResolvedStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Closed"]) {
-                            globalVariables.ClosedStausId=statusId;
-                            globalVariables.ClosedStausLabel=statusName;
+                            self->globalVariables.ClosedStausId=statusId;
+                            self->globalVariables.ClosedStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Deleted"]) {
-                            globalVariables.DeletedStausId=statusId;
-                            globalVariables.DeletedStausLabel=statusName;
+                            self->globalVariables.DeletedStausId=statusId;
+                            self->globalVariables.DeletedStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Request for close"]) {
-                            globalVariables.RequestCloseStausId=statusId;
+                            self->globalVariables.RequestCloseStausId=statusId;
                         }else if ([statusName isEqualToString:@"Spam"]) {
-                            globalVariables.SpamStausId=statusId;
+                            self->globalVariables.SpamStausId=statusId;
                         }
                     }
                     
@@ -758,10 +762,10 @@
                     
                     if (msg) {
                         
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         
                     }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
                     }
                     return ;
@@ -779,15 +783,15 @@
                     
                     NSDictionary *data1Dict=[json objectForKey:@"data"];
                     
-                    _nextPageUrl =[data1Dict objectForKey:@"next_page_url"];
-                    _path1=[data1Dict objectForKey:@"path"];
-                    _currentPage=[[data1Dict objectForKey:@"current_page"] integerValue];
-                    _totalTickets=[[data1Dict objectForKey:@"total"] integerValue];
-                    _totalPages=[[data1Dict objectForKey:@"last_page"] integerValue];
+                    self->_nextPageUrl =[data1Dict objectForKey:@"next_page_url"];
+                    self->_path1=[data1Dict objectForKey:@"path"];
+                    self->_currentPage=[[data1Dict objectForKey:@"current_page"] integerValue];
+                    self->_totalTickets=[[data1Dict objectForKey:@"total"] integerValue];
+                    self->_totalPages=[[data1Dict objectForKey:@"last_page"] integerValue];
                     
-                    _mutableArray= [_mutableArray mutableCopy];
+                    self->_mutableArray= [self->_mutableArray mutableCopy];
                     
-                    [_mutableArray addObjectsFromArray:[data1Dict objectForKey:@"data"]];
+                    [self->_mutableArray addObjectsFromArray:[data1Dict objectForKey:@"data"]];
                     
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -1430,15 +1434,15 @@
                         
                         if([msg isEqualToString:@"Error-403"])
                         {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
                         }
                         else{
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         }
                         //  NSLog(@"Message is : %@",msg);
                         
                     }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-NO4-getTicketStausChange-Refresh-error == %@",error.localizedDescription);
                     }
                     
@@ -1457,7 +1461,7 @@
                     
                     if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
                         
                     }
                     else{
@@ -1474,7 +1478,7 @@
                         }else
                         {
                             
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
                             
                         }
                         
@@ -1529,15 +1533,15 @@
                         
                         if([msg isEqualToString:@"Error-403"])
                         {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Resolve a ticket", nil) sendViewController:self];
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Resolve a ticket", nil) sendViewController:self];
                         }
                         else{
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         }
                         //  NSLog(@"Message is : %@",msg);
                         
                     }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
                     }
                     
@@ -1556,7 +1560,7 @@
                     
                     if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolved a ticket", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolved a ticket", nil) sendViewController:self];
                         
                     }
                     else{
@@ -1572,7 +1576,7 @@
                         }else
                         {
                             
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
+                             [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
                             
                         }
                         
@@ -1618,15 +1622,15 @@
                         
                         if([msg isEqualToString:@"Error-403"])
                         {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Delete a ticket", nil) sendViewController:self];
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Delete a ticket", nil) sendViewController:self];
                         }
                         else{
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         }
                         //  NSLog(@"Message is : %@",msg);
                         
                     }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
                     }
                     
@@ -1645,7 +1649,7 @@
                     
                     if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
                         
                     }
                     else{
@@ -1663,7 +1667,7 @@
                         }else
                         {
                             
-                            [utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
                             
                         }
                     }

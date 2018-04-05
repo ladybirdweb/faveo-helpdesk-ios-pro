@@ -83,31 +83,31 @@
             {
                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                [utils showAlertWithMessage:@"The request could not be understood by the server due to malformed syntax." sendViewController:vc];
+                [self->utils showAlertWithMessage:@"The request could not be understood by the server due to malformed syntax." sendViewController:self->vc];
             }
             else if(statusCode == 403)
             {
                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                [utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:vc];
+                [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:self->vc];
             }
             
             else if(statusCode == 404)
             {
                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:vc];
+                [self->utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self->vc];
             }
             else if(statusCode == 405)
             {
                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                [utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:vc];
+                [self->utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:self->vc];
             }else if(statusCode == 500)
             {
                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                [utils showAlertWithMessage:@"Internal Server Error.Something has gone wrong on the website's server." sendViewController:vc];
+                [self->utils showAlertWithMessage:@"Internal Server Error.Something has gone wrong on the website's server." sendViewController:self->vc];
             }
             
             NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -123,22 +123,30 @@
                 }
                  
                  NSDictionary *userDataDict=[jsonData objectForKey:@"data"];
+                 
+                 
                  NSString *tokenString=[NSString stringWithFormat:@"%@",[userDataDict objectForKey:@"token"]];
                  NSLog(@"Token is : %@",tokenString);
                  
-                 [_userDefaults setObject:tokenString forKey:@"token"];
+                 [self->_userDefaults setObject:tokenString forKey:@"token"];
                  
                // [_userDefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
 //                NSDictionary *jsonData1=[jsonData objectForKey:@"user_id"];
 //                [_userDefaults setObject:[jsonData1 objectForKey:@"id"] forKey:@"user_id"];
                  
                  NSDictionary *userDetailsDict=[userDataDict objectForKey:@"user"];
+                 NSLog(@"Data is: %@",userDetailsDict);
                  
                  NSString * userId=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"id"]];
                  
-                [_userDefaults setObject:userId forKey:@"user_id"];
+                NSString *role1=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"role"]];//role
                  
-                [_userDefaults synchronize];
+                 self->globalVariables.roleFromAuthenticateAPI=role1;
+                 
+                 
+                 [self->_userDefaults setObject:userId forKey:@"user_id"];
+                 
+                 [self->_userDefaults synchronize];
                 
                 result=@"tokenRefreshed";
                 NSLog(@"Thread--refreshToken-tokenRefreshed");
@@ -238,25 +246,25 @@
                 {
                     NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:vc];
+                    [self->utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self->vc];
                 }
                 else if(statusCode == 403)
                 {
                     NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:vc];
+                    [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:self->vc];
                 }
                 
                 else if(statusCode == 405)
                 {
                     NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:vc];
+                    [self->utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:self->vc];
                 }else if(statusCode == 500)
                 {
                     NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [utils showAlertWithMessage:@"T Internal Server Error.Something has gone wrong on the website's server." sendViewController:vc];
+                    [self->utils showAlertWithMessage:@"T Internal Server Error.Something has gone wrong on the website's server." sendViewController:self->vc];
                 }
                 
                 else
@@ -416,26 +424,26 @@
                 {
                     NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:vc];
+                    [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:self->vc];
                 }
                 
                 else if(statusCode == 404)
                 {
                     NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:vc];
+                    [self->utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self->vc];
                 }
                 
                 else if(statusCode == 405)
                 {
                     NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:vc];
+                    [self->utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:self->vc];
                 }else if(statusCode == 500)
                 {
                     NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [utils showAlertWithMessage:@"T Internal Server Error.Something has gone wrong on the website's server." sendViewController:vc];
+                    [self->utils showAlertWithMessage:@"T Internal Server Error.Something has gone wrong on the website's server." sendViewController:self->vc];
                 }
                 else
                 if (statusCode==429)
@@ -571,7 +579,7 @@
                 {
                     NSLog(@"dataTaskWithRequest HTTP1 status code: %ld", (long)statusCode);
                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:vc];
+                    [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:self->vc];
                 }
                 else
                     dispatch_async(dispatch_get_main_queue(), ^{

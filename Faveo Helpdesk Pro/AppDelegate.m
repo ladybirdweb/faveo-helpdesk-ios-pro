@@ -287,14 +287,22 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
      
         globalVariables.iD=[userInfo objectForKey:@"id"];
         
-        NSError *error;
+        NSError *error; // by = System;
+        if([[userInfo objectForKey:@"by"] isEqualToString:@"System"])
+        {
+            globalVariables.First_name=@"";
+            globalVariables.Last_name=@"";
+        }
+        else{
         NSData *data = [[userInfo objectForKey:@"requester"] dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *requester = [NSJSONSerialization JSONObjectWithData:data
                                                                   options:kNilOptions
                                                                     error:&error];
         
-        globalVariables.First_name= [requester objectForKey:@"first_name"];
-        globalVariables.Last_name= [requester objectForKey:@"last_name"];
+    
+              globalVariables.First_name= [requester objectForKey:@"first_name"];
+              globalVariables.Last_name= [requester objectForKey:@"last_name"];
+        }
         
         globalVariables.ticketStatusBool=@"AppDeledateNotificationView";
         globalVariables.Ticket_status=@"Open";

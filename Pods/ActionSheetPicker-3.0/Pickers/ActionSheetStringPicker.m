@@ -90,8 +90,12 @@
 
 - (void)notifyTarget:(id)target didSucceedWithAction:(SEL)successAction origin:(id)origin {
     if (self.onActionSheetDone) {
-        id selectedObject = (self.data.count > 0) ? (self.data)[(NSUInteger) self.selectedIndex] : nil;
-        _onActionSheetDone(self, self.selectedIndex, selectedObject);
+        if (@available(iOS 6.0, *)) {
+            id selectedObject = (self.data.count > 0) ? (self.data)[(NSUInteger) self.selectedIndex] : nil;
+            _onActionSheetDone(self, self.selectedIndex, selectedObject);
+        } else {
+            // Fallback on earlier versions
+        }
         return;
     }
     else if (target && [target respondsToSelector:successAction]) {

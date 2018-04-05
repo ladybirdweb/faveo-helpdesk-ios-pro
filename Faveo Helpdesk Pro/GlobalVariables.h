@@ -206,5 +206,7 @@
 
 @property (strong, nonatomic) NSMutableArray *attachArrayFromConversation;
 
+@property (strong, nonatomic) NSString *roleFromAuthenticateAPI;
+
 @end
 

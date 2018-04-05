@@ -402,25 +402,25 @@
                     if (msg) {
                         if([msg isEqualToString:@"Error-403"])
                         {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                         }
                         else if([msg isEqualToString:@"Error-402"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                         }
                         else if([msg isEqualToString:@"Error-422"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
                         }
                         else{
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                             NSLog(@"Error is : %@",msg);
                         }
                         
                     }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-EditCustomerDetails-Refresh-error == %@",error.localizedDescription);
                     }
                     
@@ -463,20 +463,20 @@
                             
 
                             
-                            globalVariables.userNameInUserList= _userNameTextField.text;
-                            globalVariables.First_name= _firstNameTextField.text;
-                            globalVariables.Last_name=_lastNameTextField.text;
-                            globalVariables.emailInUserList= _emailTextField.text;
+                            self->globalVariables.userNameInUserList= self->_userNameTextField.text;
+                            self->globalVariables.First_name= self->_firstNameTextField.text;
+                           self-> globalVariables.Last_name=self->_lastNameTextField.text;
+                            self->globalVariables.emailInUserList=self-> _emailTextField.text;
                         
                             
-                            globalVariables=[GlobalVariables sharedInstance];
+                            self->globalVariables=[GlobalVariables sharedInstance];
 
                 
                         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
 
                     }else
                     {
-                        [utils showAlertWithMessage:@"Something went wrong. Please try again later." sendViewController:self];
+                        [self->utils showAlertWithMessage:@"Something went wrong. Please try again later." sendViewController:self];
                         
                     }
                         
@@ -512,16 +512,16 @@
         
         [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Deactivate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
             
-            globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
-            [_switch1 setOn:YES];
-            _switch1.onTintColor= [UIColor redColor];
+            self->globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
+            [self->_switch1 setOn:YES];
+            self->_switch1.onTintColor= [UIColor redColor];
             [self deactivateUser];
         } cancelBlock:^{
             
-            [_switch1 setOn:NO];
+            [self->_switch1 setOn:NO];
             //   _switch1.tintColor = [UIColor greenColor];
-            _switch1.layer.cornerRadius = 16;
-            _switch1.backgroundColor= [UIColor greenColor];
+            self->_switch1.layer.cornerRadius = 16;
+            self->_switch1.backgroundColor= [UIColor greenColor];
         }];
      
      }@catch (NSException *exception)
@@ -545,14 +545,14 @@
         
         [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Activate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
             
-            [_switch1 setOn:NO];
+            [self->_switch1 setOn:NO];
             //   _switch1.tintColor = [UIColor greenColor];
-            _switch1.layer.cornerRadius = 16;
-            _switch1.backgroundColor= [UIColor greenColor];
+            self->_switch1.layer.cornerRadius = 16;
+            self->_switch1.backgroundColor= [UIColor greenColor];
          [self activeUser];
         } cancelBlock:^{
-            [_switch1 setOn:YES];
-            _switch1.onTintColor= [UIColor redColor];
+            [self->_switch1 setOn:YES];
+            self->_switch1.onTintColor= [UIColor redColor];
         }];
     }@catch (NSException *exception)
         {
@@ -599,14 +599,14 @@
                 if (msg) {
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                     }else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Error is : %@",msg);
                     }
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-EditCustomerDetails-DeactivateUser-Refresh-error == %@",error.localizedDescription);
                 }
                 
@@ -648,7 +648,7 @@
                                                     atPosition:RMessagePositionNavBarOverlay
                                           canBeDismissedByUser:YES];
             
-                        globalVariables.ActiveDeactiveStateOfUser=@"deactivated";
+                        self->globalVariables.ActiveDeactiveStateOfUser=@"deactivated";
                         
                      ClientListViewController *list=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientListID"];
                     [self.navigationController pushViewController:list animated:YES];
@@ -752,14 +752,14 @@
                 if (msg) {
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                     }else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Error is : %@",msg);
                     }
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-EditCustomerDetails-DeactivateUser-Refresh-error == %@",error.localizedDescription);
                 }
                 
@@ -801,7 +801,7 @@
                                                         atPosition:RMessagePositionNavBarOverlay
                                               canBeDismissedByUser:YES];
                         
-                       globalVariables.ActiveDeactiveStateOfUser=@"activated";
+                        self->globalVariables.ActiveDeactiveStateOfUser=@"activated";
                         
                         ClientListViewController *list=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientListID"];
                         [self.navigationController pushViewController:list animated:YES];

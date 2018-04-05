@@ -173,14 +173,14 @@
         
         
         if (error || [msg containsString:@"Error"]) {
-            [refresh endRefreshing];
+            [self->refresh endRefreshing];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             if (msg) {
                 
-                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                 
             }else if(error)  {
-                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                 NSLog(@"Thread-Ticket-Search-Refresh-error == %@",error.localizedDescription);
             }
             return ;
@@ -197,23 +197,23 @@
             //NSError *error;
             //   NSLog(@"Thread-Ticket-SearchAPI-Json-%@",json);
             
-            _filteredSampleDataArray=[[NSMutableArray alloc]initWithCapacity:11];
+            self->_filteredSampleDataArray=[[NSMutableArray alloc]initWithCapacity:11];
             
             NSDictionary * dict1 = [json objectForKey:@"result"];
             
-            _filteredSampleDataArray = [dict1 objectForKey:@"data"];
+            self->_filteredSampleDataArray = [dict1 objectForKey:@"data"];
             
             //  NSLog(@"Mutable Array is--%@",_filteredSampleDataArray);
             
             
-            _nextPageUrl =[dict1 objectForKey:@"next_page_url"];
+            self->_nextPageUrl =[dict1 objectForKey:@"next_page_url"];
             // NSLog(@"Next page url is : %@",_nextPageUrl);
             
-            _path1=[dict1 objectForKey:@"path"];
+            self->_path1=[dict1 objectForKey:@"path"];
             
-            _currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
-            _totalTickets=[[dict1 objectForKey:@"total"] integerValue];
-            _totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
+            self->_currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
+            self->_totalTickets=[[dict1 objectForKey:@"total"] integerValue];
+            self->_totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
             
             
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -284,14 +284,14 @@
         
         
         if (error || [msg containsString:@"Error"]) {
-            [refresh endRefreshing];
+            [self->refresh endRefreshing];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             if (msg) {
                 
-                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                 
             }else if(error)  {
-                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                 NSLog(@"Thread-user-Search-Refresh-error == %@",error.localizedDescription);
             }
             return ;
@@ -309,23 +309,23 @@
             NSLog(@"Thread-user-SearchAPI-Json-%@",json);
             
             
-            _userDataArray=[[NSMutableArray alloc]initWithCapacity:11];
+            self->_userDataArray=[[NSMutableArray alloc]initWithCapacity:11];
             
             NSDictionary * dict1 = [json objectForKey:@"result"];
             
-            _userDataArray = [dict1 objectForKey:@"data"];
+            self->_userDataArray = [dict1 objectForKey:@"data"];
             
             //  NSLog(@"Mutable User Array is--%@",_userDataArray);
             
             
-            _nextPageUrl =[dict1 objectForKey:@"next_page_url"];
+            self->_nextPageUrl =[dict1 objectForKey:@"next_page_url"];
             // NSLog(@"Next page url is : %@",_nextPageUrl);
             
-            _path1=[dict1 objectForKey:@"path"];
+            self->_path1=[dict1 objectForKey:@"path"];
             
-            _currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
-            _totalTickets=[[dict1 objectForKey:@"total"] integerValue];
-            _totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
+            self->_currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
+            self->_totalTickets=[[dict1 objectForKey:@"total"] integerValue];
+            self->_totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
             
             
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -939,10 +939,10 @@
                 
                 if (msg) {
                     
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-TicketSearch-Load-more-Refresh-error == %@",error.localizedDescription);
                 }
                 return ;
@@ -960,14 +960,14 @@
                 
                 NSDictionary * dict1 = [json objectForKey:@"result"];
                 
-                _nextPageUrl =[dict1 objectForKey:@"next_page_url"];
-                _currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[dict1 objectForKey:@"total"] integerValue];
-                _totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
-                _path1=[dict1 objectForKey:@"path"];
+                self->_nextPageUrl =[dict1 objectForKey:@"next_page_url"];
+                self->_currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
+                self->_totalTickets=[[dict1 objectForKey:@"total"] integerValue];
+                self->_totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
+                self->_path1=[dict1 objectForKey:@"path"];
                 
-                _filteredSampleDataArray= [_filteredSampleDataArray mutableCopy];
-                [_filteredSampleDataArray addObjectsFromArray:[dict1 objectForKey:@"data"]];
+                self->_filteredSampleDataArray= [self->_filteredSampleDataArray mutableCopy];
+                [self->_filteredSampleDataArray addObjectsFromArray:[dict1 objectForKey:@"data"]];
                 //   _filteredSampleDataArray = [dict1 objectForKey:@"data"];
                 
                 
@@ -1035,10 +1035,10 @@
 
                 if (msg) {
 
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
 
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-userSearch-Load-more-Refresh-error == %@",error.localizedDescription);
                 }
                 return ;
@@ -1056,16 +1056,16 @@
 
                 NSDictionary * dict1 = [json objectForKey:@"result"];
 
-                _nextPageUrl =[dict1 objectForKey:@"next_page_url"];
-                _currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[dict1 objectForKey:@"total"] integerValue];
-                _totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
-                _path1=[dict1 objectForKey:@"path"];
+                self->_nextPageUrl =[dict1 objectForKey:@"next_page_url"];
+                self->_currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
+                self->_totalTickets=[[dict1 objectForKey:@"total"] integerValue];
+                self->_totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
+                self->_path1=[dict1 objectForKey:@"path"];
 
 
-                _userDataArray= [_userDataArray mutableCopy];
+                self->_userDataArray= [self->_userDataArray mutableCopy];
                 
-                [_userDataArray addObjectsFromArray:[dict1 objectForKey:@"data"]];
+                [self->_userDataArray addObjectsFromArray:[dict1 objectForKey:@"data"]];
 
 
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{

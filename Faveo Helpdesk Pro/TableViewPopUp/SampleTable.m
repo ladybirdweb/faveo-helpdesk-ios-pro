@@ -184,22 +184,22 @@
                 if (msg) {
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-402"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                     }else if([msg isEqualToString:@"Error-422"]){
                         
                         NSLog(@"Message is : %@",msg);
                     }else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Error is11 : %@",msg);
                     }
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-CollaboratorFetch-Refresh-error == %@",error.localizedDescription);
                 }
                 
@@ -218,10 +218,10 @@
                 //  NSDictionary * dict1=[json objectForKey:@"collaborator"];
                 
                 NSMutableArray  * ccArray=[json objectForKey:@"collaborator"];
-                globalVariables.ccCount=[NSString stringWithFormat:@"%lu",(unsigned long)ccArray.count];//array1.count;
+                self->globalVariables.ccCount=[NSString stringWithFormat:@"%lu",(unsigned long)ccArray.count];//array1.count;
                 
-               NSDictionary *tempDict= [ccArray objectAtIndex:_selectedPath.row];
-                emailArray=[tempDict objectForKey:@"email"];
+                NSDictionary *tempDict= [ccArray objectAtIndex:self->_selectedPath.row];
+                self->emailArray=[tempDict objectForKey:@"email"];
                 
             }
             

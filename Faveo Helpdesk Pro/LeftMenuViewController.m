@@ -55,8 +55,10 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
+  
     [self update];
     [self getDependencies];
+
     
     [self.tableView reloadData];
     
@@ -64,6 +66,9 @@
  
 }
 
+
+
+//
 
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -157,6 +162,7 @@
 }
 -(void)getDependencies{
     
+   
      [[AppDelegate sharedAppdelegate] hideProgressView];
     
     NSLog(@"Thread-NO1-getDependencies()-start");
@@ -196,7 +202,7 @@
                     if( [msg containsString:@"Error-429"])
                         
                     {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
                         
                     }else{
                         NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
@@ -226,15 +232,15 @@
                         NSString *name = [[ticketCountArray objectAtIndex:i]objectForKey:@"name"];
                         NSString *count = [[ticketCountArray objectAtIndex:i]objectForKey:@"count"];
                         if ([name isEqualToString:@"Open"]) {
-                            globalVariables.OpenCount=count;
+                            self->globalVariables.OpenCount=count;
                         }else if ([name isEqualToString:@"Closed"]) {
-                            globalVariables.ClosedCount=count;
+                            self->globalVariables.ClosedCount=count;
                         }else if ([name isEqualToString:@"Deleted"]) {
-                            globalVariables.DeletedCount=count;
+                            self->globalVariables.DeletedCount=count;
                         }else if ([name isEqualToString:@"unassigned"]) {
-                            globalVariables.UnassignedCount=count;
+                            self->globalVariables.UnassignedCount=count;
                         }else if ([name isEqualToString:@"mytickets"]) {
-                            globalVariables.MyticketsCount=count;
+                            self->globalVariables.MyticketsCount=count;
                         }
                     }
                     
@@ -245,21 +251,21 @@
                         NSString *statusId = [[ticketStatusArray objectAtIndex:i]objectForKey:@"id"];
                         
                         if ([statusName isEqualToString:@"Open"]) {
-                            globalVariables.OpenStausId=statusId;
-                            globalVariables.OpenStausLabel=statusName;
+                            self->globalVariables.OpenStausId=statusId;
+                            self->globalVariables.OpenStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Resolved"]) {
-                            globalVariables.ResolvedStausId=statusId;
-                            globalVariables.ResolvedStausLabel=statusName;
+                            self->globalVariables.ResolvedStausId=statusId;
+                           self-> globalVariables.ResolvedStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Closed"]) {
-                            globalVariables.ClosedStausId=statusId;
-                            globalVariables.ClosedStausLabel=statusName;
+                            self->globalVariables.ClosedStausId=statusId;
+                            self->globalVariables.ClosedStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Deleted"]) {
-                            globalVariables.DeletedStausId=statusId;
-                            globalVariables.DeletedStausLabel=statusName;
+                           self-> globalVariables.DeletedStausId=statusId;
+                            self->globalVariables.DeletedStausLabel=statusName;
                         }else if ([statusName isEqualToString:@"Request for close"]) {
-                            globalVariables.RequestCloseStausId=statusId;
+                            self->globalVariables.RequestCloseStausId=statusId;
                         }else if ([statusName isEqualToString:@"Spam"]) {
-                            globalVariables.SpamStausId=statusId;
+                            self->globalVariables.SpamStausId=statusId;
                         }
                     }
                     

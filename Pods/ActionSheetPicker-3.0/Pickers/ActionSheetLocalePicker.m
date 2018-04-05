@@ -131,35 +131,43 @@
 
             if ( [array count] == 2)
             {
-                if ( continentsDict[array[0]] ) //if continent exists
-                {
-                    NSMutableArray *citys = continentsDict[array[0]];
-                    [citys addObject:array[1]];
-                }
-                else //it's new continent
-                {
-                    NSMutableArray *mutableArray = [@[array[1]] mutableCopy];
-                    continentsDict[array[0]] = mutableArray;
-                    [_continents addObject:array[0]];
+                if (@available(iOS 6.0, *)) {
+                    if (continentsDict[array[0]] ) //if continent exists
+                    {
+                        NSMutableArray *citys = continentsDict[array[0]];
+                        [citys addObject:array[1]];
+                    }
+                    else //it's new continent
+                    {
+                        NSMutableArray *mutableArray = [@[array[1]] mutableCopy];
+                        continentsDict[array[0]] = mutableArray;
+                        [self->_continents addObject:array[0]];
+                    }
+                } else {
+                    // Fallback on earlier versions
                 }
             }
             else if (array.count == 3)
             {
-                NSString *string0 = array[0];
-                NSString *string1 = array[1];
-                NSString *string2 = array[2];
-                NSString *string3 = [string1 stringByAppendingFormat:@"/%@", string2];
-
-                if ( continentsDict[string0] ) //if continent exists
-                {
-                    NSMutableArray *citys = continentsDict[string0];
-                    [citys addObject:string3];
-                }
-                else //it's new continent
-                {
-                    NSMutableArray *mutableArray = [@[string3] mutableCopy];
-                    continentsDict[string0] = mutableArray;
-                    [_continents addObject:string0];
+                if (@available(iOS 6.0, *)) {
+                    NSString *string0 = array[0];
+                    NSString *string1 = array[1];
+                    NSString *string2 = array[2];
+                    NSString *string3 = [string1 stringByAppendingFormat:@"/%@", string2];
+                    
+                    if ( continentsDict[string0] ) //if continent exists
+                    {
+                        NSMutableArray *citys = continentsDict[string0];
+                        [citys addObject:string3];
+                    }
+                    else //it's new continent
+                    {
+                        NSMutableArray *mutableArray = [@[string3] mutableCopy];
+                        continentsDict[string0] = mutableArray;
+                        [self->_continents addObject:string0];
+                    }
+                } else {
+                    // Fallback on earlier versions
                 }
             }
         }
@@ -181,13 +189,29 @@
     if (array.count == 1)
     {
         // Unknown time zone - appeared only in travis builds.
-        self.selectedContinent = _continents[0];
-        self.selectedCity = [self getCitiesByContinent:self.selectedContinent][0];
+        if (@available(iOS 6.0, *)) {
+            self.selectedContinent = _continents[0];
+        } else {
+            // Fallback on earlier versions
+        }
+        if (@available(iOS 6.0, *)) {
+            self.selectedCity = [self getCitiesByContinent:self.selectedContinent][0];
+        } else {
+            // Fallback on earlier versions
+        }
     }
     else if (array.count == 2)
     {
-        self.selectedContinent = array[0];
-        self.selectedCity = array[1];
+        if (@available(iOS 6.0, *)) {
+            self.selectedContinent = array[0];
+        } else {
+            // Fallback on earlier versions
+        }
+        if (@available(iOS 6.0, *)) {
+            self.selectedCity = array[1];
+        } else {
+            // Fallback on earlier versions
+        }
     }
     else
     {
@@ -310,9 +334,17 @@
         }
 
         pickerLabel = [[UILabel alloc] initWithFrame:frame];
-        [pickerLabel setTextAlignment:NSTextAlignmentCenter];
+        if (@available(iOS 6.0, *)) {
+            [pickerLabel setTextAlignment:NSTextAlignmentCenter];
+        } else {
+            // Fallback on earlier versions
+        }
         if ([pickerLabel respondsToSelector:@selector(setMinimumScaleFactor:)])
-            [pickerLabel setMinimumScaleFactor:0.5];
+            if (@available(iOS 6.0, *)) {
+                [pickerLabel setMinimumScaleFactor:0.5];
+            } else {
+                // Fallback on earlier versions
+            }
         [pickerLabel setAdjustsFontSizeToFitWidth:YES];
         [pickerLabel setBackgroundColor:[UIColor clearColor]];
         [pickerLabel setFont:[UIFont systemFontOfSize:20]];
@@ -324,14 +356,18 @@
             break;
         case 1:
         {
-            NSString *cityTitle = [self getCitiesByContinent:self.selectedContinent][(NSUInteger) row];
-            NSString *timeZoneId = [NSString stringWithFormat:@"%@/%@", self.selectedContinent, cityTitle];
-            NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:timeZoneId];
-
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setTimeZone:timeZone];
-            [dateFormatter setDateFormat:@"z"];
-            text = [cityTitle stringByAppendingString:[NSString stringWithFormat: @" (%@)", [dateFormatter stringFromDate:[NSDate date]]]];
+            if (@available(iOS 6.0, *)) {
+                NSString *cityTitle = [self getCitiesByContinent:self.selectedContinent][(NSUInteger) row];
+                NSString *timeZoneId = [NSString stringWithFormat:@"%@/%@", self.selectedContinent, cityTitle];
+                NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:timeZoneId];
+                
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setTimeZone:timeZone];
+                [dateFormatter setDateFormat:@"z"];
+                text = [cityTitle stringByAppendingString:[NSString stringWithFormat: @" (%@)", [dateFormatter stringFromDate:[NSDate date]]]];
+            } else {
+                // Fallback on earlier versions
+            }
 
             break;
         }
@@ -351,14 +387,26 @@
     switch (component) {
         case 0:
         {
-            self.selectedContinent = (self.continents)[(NSUInteger) row];
+            if (@available(iOS 6.0, *)) {
+                self.selectedContinent = (self.continents)[(NSUInteger) row];
+            } else {
+                // Fallback on earlier versions
+            }
             [pickerView reloadComponent:1];
-            self.selectedCity = [self getCitiesByContinent:self.selectedContinent][(NSUInteger) [pickerView selectedRowInComponent:1]];
+            if (@available(iOS 6.0, *)) {
+                self.selectedCity = [self getCitiesByContinent:self.selectedContinent][(NSUInteger) [pickerView selectedRowInComponent:1]];
+            } else {
+                // Fallback on earlier versions
+            }
             return;
         }
 
         case 1:
-            self.selectedCity = [self getCitiesByContinent:self.selectedContinent][(NSUInteger) row];
+            if (@available(iOS 6.0, *)) {
+                self.selectedCity = [self getCitiesByContinent:self.selectedContinent][(NSUInteger) row];
+            } else {
+                // Fallback on earlier versions
+            }
             return;
         default:break;
     }
@@ -376,30 +424,34 @@
     NSInteger index = button.tag;
     NSAssert((index >= 0 && index < self.customButtons.count), @"Bad custom button tag: %ld, custom button count: %lu", (long)index, (unsigned long)self.customButtons.count);
     
-    NSDictionary *buttonDetails = (self.customButtons)[(NSUInteger) index];
-    NSAssert(buttonDetails != NULL, @"Custom button dictionary is invalid");
-    
-    ActionType actionType = (ActionType) [buttonDetails[kActionType] intValue];
-    switch (actionType) {
-        case ActionTypeValue: {
-            id itemValue = buttonDetails[kButtonValue];
-            if ( [itemValue isKindOfClass:[NSTimeZone class]] )
-            {
-                NSTimeZone *timeZone = (NSTimeZone *) itemValue;
-                self.initialTimeZone = timeZone;
-                [self setSelectedRows];
-                [self selectCurrentLocale:(UIPickerView *) self.pickerView];
+    if (@available(iOS 6.0, *)) {
+        NSDictionary *buttonDetails = (self.customButtons)[(NSUInteger) index];
+        NSAssert(buttonDetails != NULL, @"Custom button dictionary is invalid");
+        
+        ActionType actionType = (ActionType) [buttonDetails[kActionType] intValue];
+        switch (actionType) {
+            case ActionTypeValue: {
+                id itemValue = buttonDetails[kButtonValue];
+                if ( [itemValue isKindOfClass:[NSTimeZone class]] )
+                {
+                    NSTimeZone *timeZone = (NSTimeZone *) itemValue;
+                    self.initialTimeZone = timeZone;
+                    [self setSelectedRows];
+                    [self selectCurrentLocale:(UIPickerView *) self.pickerView];
+                }
+                break;
             }
-            break;
+                
+            case ActionTypeBlock:
+            case ActionTypeSelector:
+                [super customButtonPressed:sender];
+                break;
+            default:
+                NSAssert(false, @"Unknown action type");
+                break;
         }
-            
-        case ActionTypeBlock:
-        case ActionTypeSelector:
-            [super customButtonPressed:sender];
-            break;
-        default:
-            NSAssert(false, @"Unknown action type");
-            break;
+    } else {
+        // Fallback on earlier versions
     }
 }
 

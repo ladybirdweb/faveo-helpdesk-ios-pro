@@ -132,7 +132,7 @@
             
             if (error) {
                 
-                [utils showAlertWithMessage:@"Error" sendViewController:self];
+                [self->utils showAlertWithMessage:@"Error" sendViewController:self];
                 NSLog(@"Thread-NO4-getDetail-Refresh-error == %@",error.localizedDescription);
                 
                 return ;
@@ -141,47 +141,47 @@
                 
                 [self.refreshControl endRefreshing];
                 //[_activityIndicatorObject stopAnimating];
-                [_imgViewLoading setHidden:YES];
+                [self->_imgViewLoading setHidden:YES];
                 
                 if (msg) {
                     if([msg isEqualToString:@"Error-402"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-422"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-404"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
                     }
                     
                     else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                     }
                     
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
                 }
                 
@@ -206,16 +206,16 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                     
-                        _createdDateTextField.text= [utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"created_at"]];
+                        self->_createdDateTextField.text= [self->utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"created_at"]];
                         
                         NSDictionary *userData=[ticketDict objectForKey:@"from"];
                         
                         if (([[userData objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( [[userData objectForKey:@"first_name"] length] == 0 )) {
-                            _firstnameTextField.text=NSLocalizedString(@"Not Available",nil);
-                        }else _firstnameTextField.text=[userData objectForKey:@"first_name"];
+                            self->_firstnameTextField.text=NSLocalizedString(@"Not Available",nil);
+                        }else self->_firstnameTextField.text=[userData objectForKey:@"first_name"];
                         
                         
-                        globalVariables.ticket_number=[ticketDict objectForKey:@"ticket_number"];
+                        self->globalVariables.ticket_number=[ticketDict objectForKey:@"ticket_number"];
                         //______________________________________________________________________________________________________
                         ////////////////for UTF-8 data encoding ///////
         
@@ -226,7 +226,7 @@
                         
                         if  ([Utils isEmpty:encodedString]){
                            // _subjectTextField.text =@"No Title";
-                            _subjectTextView.text= NSLocalizedString(@"Not Available",nil);
+                            self->_subjectTextView.text= NSLocalizedString(@"Not Available",nil);
                         }
                         else
                         {
@@ -278,11 +278,11 @@
                                 
                                 NSLog(@"Decoded string = %@", decodedString);
                                 
-                                 _subjectTextView.text= decodedString;
+                                self->_subjectTextView.text= decodedString;
                             }
                             else{
                                 
-                                 _subjectTextView.text= encodedString;
+                                self->_subjectTextView.text= encodedString;
                                 
                             }
                             
@@ -291,32 +291,32 @@
                         //____________________________________________________________________________________________________
                         
                         
-                        _emailTextField.text=[userData objectForKey:@"email"];
+                        self->_emailTextField.text=[userData objectForKey:@"email"];
                        
                         // cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
                         
-                        _lastResponseDateTextField.text=[utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"updated_at"]];
+                        self->_lastResponseDateTextField.text=[self->utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"updated_at"]];
                       
                         
                         if (([[ticketDict objectForKey:@"type_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"type_name"] length] == 0 )) {
-                            _typeTextField.text= NSLocalizedString(@"Not Available",nil);
-                        }else _typeTextField.text=[ticketDict objectForKey:@"type_name"];
+                            self->_typeTextField.text= NSLocalizedString(@"Not Available",nil);
+                        }else self->_typeTextField.text=[ticketDict objectForKey:@"type_name"];
                         
                         if (([[ticketDict objectForKey:@"helptopic_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"helptopic_name"] length] == 0 )) {
-                            _helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
+                            self->_helpTopicTextField.text=NSLocalizedString(@"Not Available",nil);
                             
-                        }else _helpTopicTextField.text=[ticketDict objectForKey:@"helptopic_name"];
+                        }else self->_helpTopicTextField.text=[ticketDict objectForKey:@"helptopic_name"];
                         
                         
                         if (([[ticketDict objectForKey:@"source_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"source_name"] length] == 0 )) {
-                           _sourceTextField.text=NSLocalizedString(@"Not Available",nil);
+                            self->_sourceTextField.text=NSLocalizedString(@"Not Available",nil);
                             
-                        }else _sourceTextField.text=[ticketDict objectForKey:@"source_name"];
+                        }else self->_sourceTextField.text=[ticketDict objectForKey:@"source_name"];
                         
                         if (([[ticketDict objectForKey:@"priority_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"priority_name"] length] == 0 )) {
-                           _priorityTextField.text=NSLocalizedString(@"Not Available",nil);
+                            self->_priorityTextField.text=NSLocalizedString(@"Not Available",nil);
                             
-                        }else _priorityTextField.text=[ticketDict objectForKey:@"priority_name"];
+                        }else self->_priorityTextField.text=[ticketDict objectForKey:@"priority_name"];
                         
                        
                        
@@ -328,27 +328,27 @@
                             
                             if (([[assinee objectForKey:@"email"] isEqual:[NSNull null]] ) || ( [[assinee objectForKey:@"email"] length] == 0 )) {
                             
-                                _assinTextField.text=NSLocalizedString(@"Not Available",nil);
+                                self->_assinTextField.text=NSLocalizedString(@"Not Available",nil);
                             }else{
                                 NSString * name= [NSString stringWithFormat:@"%@ %@",[assinee objectForKey:@"first_name"],[assinee objectForKey:@"last_name"]];
                                 
-                                _assinTextField.text=name;
+                                self->_assinTextField.text=name;
                             }
                             
                             
                         }else
                         {
-                             _assinTextField.text=NSLocalizedString(@"Not Available",nil);
+                            self->_assinTextField.text=NSLocalizedString(@"Not Available",nil);
                         }
                         
                     
                         
-                        _dueDateTextField.text= [utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"duedate"]];
+                        self->_dueDateTextField.text= [self->utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"duedate"]];
                         
                        
                         
                         [self.refreshControl endRefreshing];
-                        [_imgViewLoading setHidden:YES];
+                        [self->_imgViewLoading setHidden:YES];
                         //[_activityIndicatorObject stopAnimating];
                         [self.tableView reloadData];
                         

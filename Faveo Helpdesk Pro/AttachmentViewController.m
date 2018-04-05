@@ -159,6 +159,18 @@
     {
         typeMime=@"image/jpeg";
     }
+    else if([fileName hasSuffix:@".docx"])
+    {
+        typeMime=@"application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    }
+    else if([fileName hasSuffix:@".pps"])
+    {
+        typeMime=@"application/vnd.ms-powerpoint";
+    }
+    else if([fileName hasSuffix:@".pptx"])
+    {
+        typeMime=@"application/vnd.openxmlformats-officedocument.presentationml.presentation";
+    }
     else if([fileName hasSuffix:@".jpg"])
     {
         typeMime=@"image/jpg";

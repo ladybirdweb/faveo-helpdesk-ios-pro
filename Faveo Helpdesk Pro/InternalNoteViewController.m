@@ -95,10 +95,10 @@
                     
                     if (msg) {
                         
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         
                     }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-InternalNote-Refresh-error == %@",error.localizedDescription);
                     }
                     
@@ -129,13 +129,13 @@
                     }
                     else if([json objectForKey:@"error"]) {
                         
-                        [utils showAlertWithMessage:@"The body field is required.It can not be empty." sendViewController:self];
+                        [self->utils showAlertWithMessage:@"The body field is required.It can not be empty." sendViewController:self];
                         
                     }
                     else
                     {
                         
-                        [utils showAlertWithMessage:@"Something Went Wrong. Please try again later." sendViewController:self];
+                        [self->utils showAlertWithMessage:@"Something Went Wrong. Please try again later." sendViewController:self];
                     }
                 }//end josn
                 NSLog(@"Thread-InternalNote-closed");
