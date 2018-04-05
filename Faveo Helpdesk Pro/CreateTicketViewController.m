@@ -53,6 +53,12 @@
     NSMutableArray *UniqueuserLastNameArray;
     
     NSMutableArray *userNameArray;
+    
+     NSMutableArray *firstNameArray;
+    NSMutableArray *lastNameArray;
+    NSMutableArray *uniquefirstNameArray;
+    NSMutableArray *uniquelastNameArray;
+    
     NSMutableArray *userLastNameArray;
     NSMutableArray * staff1_idArray;
     
@@ -60,6 +66,7 @@
     NSMutableArray * UniqueprofilePicArray;
     
      NSString *selectedUserEmail;
+    NSString *selectedFirstName;
     
     NSNumber *user_id1;
     
@@ -158,6 +165,11 @@
     uniqueNameArray=[[NSMutableArray alloc]init];
     UniqueuserLastNameArray=[[NSMutableArray alloc]init];
     uniqueIdArray=[[NSMutableArray alloc]init];
+    
+    firstNameArray=[[NSMutableArray alloc]init];
+    lastNameArray=[[NSMutableArray alloc]init];
+    uniquefirstNameArray=[[NSMutableArray alloc]init];
+    uniquelastNameArray=[[NSMutableArray alloc]init];
     
     profilePicArray=[[NSMutableArray alloc]init];
     UniqueprofilePicArray=[[NSMutableArray alloc]init];
@@ -1220,8 +1232,8 @@
         
     }else{
     
-        
-        NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/search?token=%@&term=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],valueFromTextField];
+        NSString *searchString=[valueFromTextField stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+        NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/search?token=%@&term=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],searchString];
         
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
@@ -1274,7 +1286,8 @@
                 for (NSDictionary *dicc in self->usersArray) {
                     if ([dicc objectForKey:@"first_name"]) {
                         [self->userNameArray addObject:[dicc objectForKey:@"email"]];
-                        //  [userLastNameArray addObject:[dicc objectForKey:@"last_name"]];
+                        [self->firstNameArray addObject:[NSString stringWithFormat:@"%@ %@",[dicc objectForKey:@"first_name"],[dicc objectForKey:@"last_name"]]];
+                     //   [self->lastNameArray addObject:[dicc objectForKey:@"last_name"]];
                         [self->staff1_idArray addObject:[dicc objectForKey:@"id"]];
                         [self->profilePicArray addObject:[dicc objectForKey:@"profile_pic"]];
                     }
@@ -1307,9 +1320,20 @@
                 }
 //
                 
+                self->uniquefirstNameArray = [NSMutableArray array];
+                
+                for (id obj in self->firstNameArray) {
+                    if (![self->uniquefirstNameArray containsObject:obj]) {
+                        [self->uniquefirstNameArray addObject:obj];
+                    }
+                }
+                
+                
+                
                 NSLog(@"Names are : %@",self->uniqueNameArray);
                 NSLog(@"Id are : %@",self->uniqueIdArray);
-                NSLog(@"Picskaran are : %@",self->UniqueprofilePicArray);
+                 NSLog(@"Profiles Names are : %@",self->uniquefirstNameArray);
+                NSLog(@"Profiles IMages are : %@",self->UniqueprofilePicArray);
                 
                 
             }
@@ -1341,6 +1365,7 @@
     
     
     NSArray *months = uniqueNameArray;
+    NSArray *firstName=uniquefirstNameArray;
     NSArray *image = UniqueprofilePicArray;
     
     
@@ -1349,7 +1374,7 @@
         months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
     }
     
-    cell.userNameLabel.text = months[indexPath.row];
+    cell.userNameLabel.text = firstName[indexPath.row];
     cell.emalLabel.text=months[indexPath.row];
     [cell setUserProfileimage:[image objectAtIndex:indexPath.row]];
     
@@ -1402,8 +1427,10 @@
         {
             selectedUserId= dic[@"id"];
             selectedUserEmail=dic[@"email"];
+            selectedFirstName=dic[@"first_name"];
             
             NSLog(@"id is : %@",selectedUserId);
+             NSLog(@"Email is : %@",selectedFirstName);
             NSLog(@"Email is : %@",selectedUserEmail);
             
         }
