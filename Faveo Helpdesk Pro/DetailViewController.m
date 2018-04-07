@@ -144,10 +144,23 @@
                 [self->_imgViewLoading setHidden:YES];
                 
                 if (msg) {
+                    
+                    if([msg isEqualToString:@"Error-401"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                    }
+                    else
+                        
                     if([msg isEqualToString:@"Error-402"])
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-403"] || [msg isEqualToString:@"403"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been changed or You are not an Agent/Admin." sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-422"])
                     {

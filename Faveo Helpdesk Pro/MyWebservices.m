@@ -11,13 +11,11 @@
 #import "AppDelegate.h"
 #import "GlobalVariables.h"
 #import "Utils.h"
-#import "InboxViewController.h"
 
 @interface MyWebservices(){
     
     NSString *tokenRefreshed;
     GlobalVariables *globalVariables;
-    InboxViewController * vc;
     Utils *utils;
 }
 
@@ -43,7 +41,9 @@
     dispatch_semaphore_t sem;
     __block NSString *result=nil;
     sem = dispatch_semaphore_create(0);
+    
     _userDefaults=[NSUserDefaults standardUserDefaults];
+     globalVariables=[GlobalVariables sharedInstance];
     
     NSString *url=[NSString stringWithFormat:@"%@authenticate",[_userDefaults objectForKey:@"companyURL"]];
     
@@ -79,74 +79,45 @@
                 return ;
             }
             
-            if(statusCode == 400)
-            {
-                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                [self->utils showAlertWithMessage:@"The request could not be understood by the server due to malformed syntax." sendViewController:self->vc];
-            }
-            else if(statusCode == 403)
-            {
-                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:self->vc];
-            }
-            
-            else if(statusCode == 404)
-            {
-                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                [self->utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self->vc];
-            }
-            else if(statusCode == 405)
-            {
-                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                [self->utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:self->vc];
-            }else if(statusCode == 500)
-            {
-                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                [self->utils showAlertWithMessage:@"Internal Server Error.Something has gone wrong on the website's server." sendViewController:self->vc];
-            }
-            
+        
             NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
             NSLog(@"Thread--refreshToken--Get your response == %@", replyStr);
             
-             if ([replyStr containsString:@"success"] || [replyStr containsString:@"data"]) {
+            if ([replyStr containsString:@"success"] || [replyStr containsString:@"data"]) {
                 
                 NSError *error=nil;
                 NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                 if (error) {
                     return;
                 }
-                 
-                 NSDictionary *userDataDict=[jsonData objectForKey:@"data"];
-                 
-                 
-                 NSString *tokenString=[NSString stringWithFormat:@"%@",[userDataDict objectForKey:@"token"]];
-                 NSLog(@"Token is : %@",tokenString);
-                 
-                 [self->_userDefaults setObject:tokenString forKey:@"token"];
-                 
-               // [_userDefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
-//                NSDictionary *jsonData1=[jsonData objectForKey:@"user_id"];
-//                [_userDefaults setObject:[jsonData1 objectForKey:@"id"] forKey:@"user_id"];
-                 
-                 NSDictionary *userDetailsDict=[userDataDict objectForKey:@"user"];
-                 NSLog(@"Data is: %@",userDetailsDict);
-                 
-                 NSString * userId=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"id"]];
-                 
-                NSString *role1=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"role"]];//role
-                 
-                 self->globalVariables.roleFromAuthenticateAPI=role1;
-                 
-                 
-                 [self->_userDefaults setObject:userId forKey:@"user_id"];
-                 
-                 [self->_userDefaults synchronize];
+                
+                NSDictionary *userDataDict=[jsonData objectForKey:@"data"];
+                
+                
+                NSString *tokenString=[NSString stringWithFormat:@"%@",[userDataDict objectForKey:@"token"]];
+                NSLog(@"Token is : %@",tokenString);
+                
+                [self->_userDefaults setObject:tokenString forKey:@"token"];
+                
+                // [_userDefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
+                //                NSDictionary *jsonData1=[jsonData objectForKey:@"user_id"];
+                //                [_userDefaults setObject:[jsonData1 objectForKey:@"id"] forKey:@"user_id"];
+                
+                NSDictionary *userDetailsDict=[userDataDict objectForKey:@"user"];
+                NSLog(@"Data is: %@",userDetailsDict);
+                
+                NSString * userId=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"id"]];
+                
+                NSString *role123=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"role"]];//role
+                NSLog(@"Role from Web Services class : %@",role123);
+                
+                self->globalVariables.roleFromAuthenticateAPI=role123;
+                
+                [self->_userDefaults setObject:userId forKey:@"user_id"];
+                
+                [self->_userDefaults synchronize];
+                self->globalVariables=[GlobalVariables sharedInstance];
                 
                 result=@"tokenRefreshed";
                 NSLog(@"Thread--refreshToken-tokenRefreshed");
@@ -162,9 +133,10 @@
 }
 
 
+
 -(void)callPATCHAPIWithAPIName:(NSString *)urlString
-              parameter:(id)parameter
-        callbackHandler:(callbackHandler)block{
+                     parameter:(id)parameter
+               callbackHandler:(callbackHandler)block{
     NSError *err;
     //urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
@@ -172,7 +144,7 @@
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     
-
+    
     
     [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)request] forHTTPHeaderField:@"Content-Length"];
     [request addValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
@@ -241,32 +213,6 @@
                     
                     
                 }
-
-                else if(statusCode == 404)
-                {
-                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self->utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self->vc];
-                }
-                else if(statusCode == 403)
-                {
-                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:self->vc];
-                }
-                
-                else if(statusCode == 405)
-                {
-                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self->utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:self->vc];
-                }else if(statusCode == 500)
-                {
-                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self->utils showAlertWithMessage:@"T Internal Server Error.Something has gone wrong on the website's server." sendViewController:self->vc];
-                }
-                
                 else
                     dispatch_async(dispatch_get_main_queue(), ^{
                         block(nil, nil,[NSString stringWithFormat:@"Error-%ld",(long)statusCode]);
@@ -347,24 +293,23 @@
     
     urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
     
-//    urlString = [urlString stringByReplacingOccurrencesOfString:@"%5B%5D"
-//                                         withString:@"[]"];
-//    NSLog(@"String 11111 is : %@",urlString);
+    //    urlString = [urlString stringByReplacingOccurrencesOfString:@"%5B%5D"
+    //                                         withString:@"[]"];
+    //    NSLog(@"String 11111 is : %@",urlString);
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
-    //text/html
+    
     [request addValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Offer-type"];
-    [request addValue:@"text/html" forHTTPHeaderField:@"Accept"];
     [request setTimeoutInterval:45.0];
     
     NSData *postData = nil;
     if ([parameter isKindOfClass:[NSString class]]) {
         postData = [((NSString *)parameter) dataUsingEncoding:NSUTF8StringEncoding];
     } else {
-       // postData = [NSJSONSerialization dataWithJSONObject:parameter options:0 error:&err];
-
+        // postData = [NSJSONSerialization dataWithJSONObject:parameter options:0 error:&err];
+        
         postData = [NSJSONSerialization dataWithJSONObject:parameter options:kNilOptions error:&err];
     }
     [request setHTTPBody:postData];
@@ -416,56 +361,29 @@
                         });
                         NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
                     }
-
                     
-                }
-                
-                else if(statusCode == 403)
-                {
-                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:self->vc];
-                }
-                
-                else if(statusCode == 404)
-                {
-                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self->utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self->vc];
-                }
-                
-                else if(statusCode == 405)
-                {
-                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self->utils showAlertWithMessage:@"The request method is known by the server but has been disabled and cannot be used." sendViewController:self->vc];
-                }else if(statusCode == 500)
-                {
-                    NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self->utils showAlertWithMessage:@"T Internal Server Error.Something has gone wrong on the website's server." sendViewController:self->vc];
-                }
-                else
-                if (statusCode==429)
-                {
-                    if ([[self refreshToken] isEqualToString:@"tokenRefreshed"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            block(nil,nil,@"tokenRefreshed");
-                        });
-                        NSLog(@"Thread--httpResponsePOST--tokenRefreshed");
-                    }else {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            block(nil,nil,@"tokenNotRefreshed");
-                        });
-                        NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
+                    
+                }else
+                    if (statusCode==429)
+                    {
+                        if ([[self refreshToken] isEqualToString:@"tokenRefreshed"]) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                block(nil,nil,@"tokenRefreshed");
+                            });
+                            NSLog(@"Thread--httpResponsePOST--tokenRefreshed");
+                        }else {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                block(nil,nil,@"tokenNotRefreshed");
+                            });
+                            NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
+                        }
+                        
+                        
                     }
-                    
-                    
-                }
-                else
-                       dispatch_async(dispatch_get_main_queue(), ^{
-                        block(nil, nil,[NSString stringWithFormat:@"Error-%ld",(long)statusCode]);
-                    });
+                    else
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(nil, nil,[NSString stringWithFormat:@"Error-%ld",(long)statusCode]);
+                        });
                 return ;
             }
             
@@ -541,9 +459,9 @@
             
             NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
             NSLog(@"Status code is : %ld",(long)statusCode);
-           
             
-        
+            
+            
             if (statusCode != 200) {
                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                 
@@ -561,9 +479,7 @@
                     }
                 }else if (statusCode==401){
                     
-                    
                     if ([[self refreshToken] isEqualToString:@"tokenRefreshed"]) {
-                
                         dispatch_async(dispatch_get_main_queue(), ^{
                             block(nil,nil,@"tokenRefreshed");
                         });
@@ -574,14 +490,7 @@
                         });
                         NSLog(@"Thread--httpResponsePOST--tokenNotRefreshed");
                     }
-                }
-                else if(statusCode == 403)
-                {
-                    NSLog(@"dataTaskWithRequest HTTP1 status code: %ld", (long)statusCode);
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been chnaged or You are not an Agent/Admin." sendViewController:self->vc];
-                }
-                else
+                } else
                     dispatch_async(dispatch_get_main_queue(), ^{
                         block(nil, nil,[NSString stringWithFormat:@"Error-%ld",(long)statusCode]);
                     });
@@ -625,16 +534,16 @@
     NSLog(@"URL from inbox : %@",url);
     
     NSString *urll=[NSString stringWithFormat:@"%@&api_key=%@&ip=%@&token=%@",url,API_KEY,IP,[_userDefaults objectForKey:@"token"]];
-   
+    
     NSLog(@"URL 11111 is : %@",urll);
-
+    
     [self httpResponseGET:urll parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
         dispatch_async(dispatch_get_main_queue(), ^{
             block(error,json,msg);
         });
-
+        
     }];
-
+    
 }
 
 //-(void)getNextPageURL:(NSString*)url callbackHandler:(callbackHandler)block{
@@ -656,10 +565,10 @@
 -(void)getNextPageURLInbox:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
     
     _userDefaults=[NSUserDefaults standardUserDefaults];
-     globalVariables=[GlobalVariables sharedInstance];
+    globalVariables=[GlobalVariables sharedInstance];
     
     NSLog(@"page isssss : %@",pageInt);
-  
+    
     if([globalVariables.filterId isEqualToString:@"INBOXFilter"])
     {
         NSString *urlAAA= [url stringByAppendingString:@"&page="];
@@ -718,6 +627,26 @@
     
 }
 
+-(void)getNextPageURLInboxSearchResults:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block
+{
+    _userDefaults=[NSUserDefaults standardUserDefaults];
+    globalVariables=[GlobalVariables sharedInstance];
+    
+    NSLog(@"page isssss : %@",pageInt);
+    
+    NSString *urlAAA= [url stringByAppendingString:@"&page="];
+    NSString *urlBBB= [urlAAA stringByAppendingString:pageInt];
+    
+    [self httpResponseGET:urlBBB parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(error,json,msg);
+        });
+        
+    }];
+    
+    
+}
+
 -(void)getNextPageURLInboxSearchResults:(NSString*)url searchString:(NSString*)searchData pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;
 {
     _userDefaults=[NSUserDefaults standardUserDefaults];
@@ -725,14 +654,14 @@
     
     
     NSLog(@"Search data is : %@",searchData);
-//    _userDefaults=[NSUserDefaults standardUserDefaults];
+    //    _userDefaults=[NSUserDefaults standardUserDefaults];
     //   // NSString *urll=[NSString stringWithFormat:@"%@&api_key=%@&ip=%@&token=%@",url,API_KEY,IP,[_userDefaults objectForKey:@"token"]];
     NSLog(@"page isssss : %@",pageInt);
     
     NSString *urlAAA= [url stringByAppendingString:@"?page="];
     NSString *urlBBB= [urlAAA stringByAppendingString:pageInt];
     NSString *urlccc= [urlBBB stringByAppendingString:[NSString stringWithFormat:@"&search=%@",searchData]];
-   // NSLog(@"url of search next view is 11 : %@",urlccc);
+    // NSLog(@"url of search next view is 11 : %@",urlccc);
     
     NSString *finalUrl=[NSString stringWithFormat:@"%@&token=%@",urlccc,[_userDefaults objectForKey:@"token"]];
     NSLog(@"FInal 111111111 url : %@",finalUrl);
@@ -746,9 +675,10 @@
     
     
 }
+
 -(void)getNextPageURLUnassigned:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
     _userDefaults=[NSUserDefaults standardUserDefaults];
-     globalVariables=[GlobalVariables sharedInstance];
+    globalVariables=[GlobalVariables sharedInstance];
     
     NSLog(@"page isssss : %@",pageInt);
     
@@ -818,7 +748,7 @@
 
 -(void)getNextPageURLMyTickets:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
     _userDefaults=[NSUserDefaults standardUserDefaults];
-     globalVariables=[GlobalVariables sharedInstance];
+    globalVariables=[GlobalVariables sharedInstance];
     
     NSLog(@"page isssss : %@",pageInt);
     
@@ -883,7 +813,7 @@
 
 -(void)getNextPageURLClosed:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
     _userDefaults=[NSUserDefaults standardUserDefaults];
-     globalVariables=[GlobalVariables sharedInstance];
+    globalVariables=[GlobalVariables sharedInstance];
     
     NSLog(@"page isssss : %@",pageInt);
     
@@ -941,14 +871,14 @@
     }
     
     
-   
+    
     
 }
 
 
 -(void)getNextPageURLTrash:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block{
     _userDefaults=[NSUserDefaults standardUserDefaults];
-     globalVariables=[GlobalVariables sharedInstance];
+    globalVariables=[GlobalVariables sharedInstance];
     
     NSLog(@"page isssss : %@",pageInt);
     
@@ -999,30 +929,30 @@
             
         }];
     }
-
+    
     
 } // getNextPageURLTrash
 
 
 
 -(void)getNextPageUSERFilter:(NSString*)url callbackHandler:(callbackHandler)block{
-  
+    
     globalVariables=[GlobalVariables sharedInstance];
     _userDefaults=[NSUserDefaults standardUserDefaults];
     
-   
+    
     
     NSString *urll=[NSString stringWithFormat:@"%@&api_key=%@&ip=%@&token=%@",url,API_KEY,IP,[_userDefaults objectForKey:@"token"]];
     
     NSLog(@"Old url is : %@",urll);
     
-   
+    
     if([globalVariables.userFilterId isEqualToString:@"AGENTUSERS"])
         
     {
         
-    //    NSString *appendedURL;
-      //  appendedURL = [urll stringByAppendingString:@"&active=1"];
+        //    NSString *appendedURL;
+        //  appendedURL = [urll stringByAppendingString:@"&active=1"];
         
         [self httpResponseGET:urll parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -1121,3 +1051,4 @@
 }
 
 @end
+

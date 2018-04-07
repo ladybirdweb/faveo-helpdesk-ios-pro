@@ -1377,6 +1377,25 @@
                     [self->refresh endRefreshing];
                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     if (msg) {
+                        
+                        if([msg isEqualToString:@"Error-401"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-403"])
+                        {
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                        else if([msg isEqualToString:@"Error-403"] && [self->globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
+                        {
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                        
+                        else
+                            
                         if([msg isEqualToString:@"Error-402"])
                         {
                             NSLog(@"Message is : %@",msg);
@@ -1510,8 +1529,19 @@
                     if( [msg containsString:@"Error-429"])
                         
                     {
+                        if([msg isEqualToString:@"Error-403"])
+                        {
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                        else if([msg isEqualToString:@"Error-403"] && [self->globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
+                        {
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                        else{
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
-                        
+                        }
                     }else{
                         NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
                         return ;
@@ -1735,7 +1765,19 @@
                     
                     if (msg) {
                         
+                        if([msg isEqualToString:@"Error-403"])
+                        {
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                        else if([msg isEqualToString:@"Error-403"] && [self->globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
+                        {
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                        else{
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        }
                         
                     }else if(error)  {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];

@@ -125,7 +125,18 @@
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                    }else{
+                    }
+                    else if([msg isEqualToString:@"Error-403"] || [msg isEqualToString:@"403"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been changed or You are not an Agent/Admin." sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-403"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been changed or You are not an Agent/Admin." sendViewController:self];
+                    }
+                    else{
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Thread-getNotificationViewController-error == %@",error.localizedDescription);
                     }

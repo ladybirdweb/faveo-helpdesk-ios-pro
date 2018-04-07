@@ -78,6 +78,10 @@
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
     
+    
+    NSLog(@"Role is in Inbox1111111 : %@",globalVariables.roleFromAuthenticateAPI);
+    NSLog(@"Role is in Inbox1111111 : %@",globalVariables.roleFromAuthenticateAPI);
+    
     /*  [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnPressed)]]; */
     
     self.view.backgroundColor=[UIColor grayColor];
@@ -308,6 +312,23 @@
                     
                     if (msg) {
                         
+                        if([msg isEqualToString:@"Error-401"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                        }
+                        if([msg isEqualToString:@"Error-403"])
+                        {
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                        else if([msg isEqualToString:@"Error-403"] && [self->globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
+                        {
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                        else
+                            
                         if([msg isEqualToString:@"Error-402"])
                         {
                             NSLog(@"Message is : %@",msg);
@@ -442,7 +463,18 @@
                     {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
                         
-                    }else{
+                    }
+                    if([msg isEqualToString:@"Error-403"])
+                    {
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                    }
+                    else if([msg isEqualToString:@"Error-403"] && [self->globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
+                    {
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                    }
+                    else{
                         NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
                         return ;
                     }

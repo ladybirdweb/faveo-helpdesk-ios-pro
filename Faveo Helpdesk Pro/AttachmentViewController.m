@@ -115,7 +115,7 @@
     
      NSString *typeMime;
     
-    if([fileName hasSuffix:@".doc"])
+    if([fileName hasSuffix:@".doc"] || [fileName hasSuffix:@".DOC"])
     {
         typeMime=@"application/msword";
     }
@@ -123,31 +123,31 @@
         {
            typeMime=@"application/pdf";
         }
-    else if([fileName hasSuffix:@".css"])
+    else if([fileName hasSuffix:@".css"] || [fileName hasSuffix:@".CSS"])
     {
         typeMime=@"text/css";
     }
-    else if([fileName hasSuffix:@".csv"])
+    else if([fileName hasSuffix:@".csv"] || [fileName hasSuffix:@".CSV"])
     {
         typeMime=@"text/csv";
     }
-    else if([fileName hasSuffix:@".xls"])
+    else if([fileName hasSuffix:@".xls"] || [fileName hasSuffix:@".XLS"])
     {
         typeMime=@"application/vnd.ms-excel";
     }
-    else if([fileName hasSuffix:@".xls"])
+    else if([fileName hasSuffix:@".xls"] || [fileName hasSuffix:@".XLS"])
     {
         typeMime=@"application/vnd.ms-excel";
     }
-    else if([fileName hasSuffix:@".rtf"])
+    else if([fileName hasSuffix:@".rtf"] || [fileName hasSuffix:@".RTF"])
     {
         typeMime=@"text/richtext";
     }
-    else if([fileName hasSuffix:@".sql"])
+    else if([fileName hasSuffix:@".sql"] || [fileName hasSuffix:@".SQL"])
     {
         typeMime=@"text/sql";
     }
-    else if([fileName hasSuffix:@".gif"])
+    else if([fileName hasSuffix:@".gif"] || [fileName hasSuffix:@".GIF"])
     {
         typeMime=@"image/gif";
     }
@@ -155,39 +155,39 @@
     {
         typeMime=@"application/mspowerpoint";
     }
-    else if([fileName hasSuffix:@".jpeg"])
+    else if([fileName hasSuffix:@".jpeg"] || [fileName hasSuffix:@".JPEG"])
     {
         typeMime=@"image/jpeg";
     }
-    else if([fileName hasSuffix:@".docx"])
+    else if([fileName hasSuffix:@".docx"] || [fileName hasSuffix:@".DOCX"])
     {
         typeMime=@"application/vnd.openxmlformats-officedocument.wordprocessingml.document";
     }
-    else if([fileName hasSuffix:@".pps"])
+    else if([fileName hasSuffix:@".pps"] || [fileName hasSuffix:@".PPS"])
     {
         typeMime=@"application/vnd.ms-powerpoint";
     }
-    else if([fileName hasSuffix:@".pptx"])
+    else if([fileName hasSuffix:@".pptx"] || [fileName hasSuffix:@".PPTX"])
     {
         typeMime=@"application/vnd.openxmlformats-officedocument.presentationml.presentation";
     }
-    else if([fileName hasSuffix:@".jpg"])
+    else if([fileName hasSuffix:@".jpg"] || [fileName hasSuffix:@".JPG"])
     {
         typeMime=@"image/jpg";
     }
-    else if([fileName hasSuffix:@".png"])
+    else if([fileName hasSuffix:@".png"] || [fileName hasSuffix:@".PNG"])
     {
         typeMime=@"image/png";
     }
-    else if([fileName hasSuffix:@".ico"])
+    else if([fileName hasSuffix:@".ico"] || [fileName hasSuffix:@".ICO"])
     {
         typeMime=@"image/x-icon";
     }
-    else if([fileName hasSuffix:@".txt"] || [fileName hasSuffix:@".text"])
+    else if([fileName hasSuffix:@".txt"] || [fileName hasSuffix:@".text"] || [fileName hasSuffix:@".TEXT"] || [fileName hasSuffix:@".TXT"])
     {
         typeMime=@"text/plain";
     }
-    else if([fileName hasSuffix:@".html"] || [fileName hasSuffix:@".htm"] || [fileName hasSuffix:@".htmls"])
+    else if([fileName hasSuffix:@".html"] || [fileName hasSuffix:@".htm"] || [fileName hasSuffix:@".htmls"] || [fileName hasSuffix:@".HTML"] || [fileName hasSuffix:@".HTM"])
     {
         typeMime=@"text/html";
     }

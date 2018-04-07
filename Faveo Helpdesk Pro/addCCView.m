@@ -394,6 +394,13 @@
             if (error || [msg containsString:@"Error"]) {
                 
                 if (msg) {
+                    
+                    if([msg isEqualToString:@"Error-401"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                    }
+                    else
                     if([msg isEqualToString:@"Error-403"])
                     {
                         [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];

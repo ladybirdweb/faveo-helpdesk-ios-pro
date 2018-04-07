@@ -108,6 +108,13 @@
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 if (msg) {
                     
+                    if([msg isEqualToString:@"Error-401"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                    }
+                    else
+                        
                     if([msg isEqualToString:@"Error-402"])
                     {
                         NSLog(@"Message is : %@",msg);
@@ -137,6 +144,15 @@
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-403"] || [msg isEqualToString:@"403"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been changed or You are not an Agent/Admin." sendViewController:self];
+                    }
+                    else{
+                        
+                        [self->utils showAlertWithMessage:msg sendViewController:self];
                     }
                     
                     
