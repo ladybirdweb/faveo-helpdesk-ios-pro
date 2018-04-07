@@ -25,7 +25,7 @@
 #import "GlobalVariables.h"
 #import "UITextField+AutoSuggestion.h"
 #import "userSearchDataCell.h"
-
+#import "UIImageView+Letters.h"
 
 @interface CreateTicketViewController ()<RMessageProtocol,UITextFieldDelegate,UITextFieldAutoSuggestionDataSource>{
     
@@ -55,9 +55,9 @@
     NSMutableArray *userNameArray;
     
      NSMutableArray *firstNameArray;
+     NSMutableArray *uniquefirstNameArray;
     NSMutableArray *lastNameArray;
-    NSMutableArray *uniquefirstNameArray;
-    NSMutableArray *uniquelastNameArray;
+   NSMutableArray *uniquelastNameArray;
     
     NSMutableArray *userLastNameArray;
     NSMutableArray * staff1_idArray;
@@ -1219,7 +1219,11 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSLog(@"Data is : %@",_ccTextField.text);
-    [self collaboratorApiMethod:_ccTextField.text];
+    
+    if(_ccTextField.text.length >=2 )
+    {
+       [self collaboratorApiMethod:_ccTextField.text];
+    }
     return YES;
 }
 
@@ -1366,24 +1370,21 @@
     
     NSArray *months = uniqueNameArray;
     NSArray *firstName=uniquefirstNameArray;
-    NSArray *image = UniqueprofilePicArray;
+   // NSArray *image = UniqueprofilePicArray;
     
     
     if (text.length > 0) {
         NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", text];
         months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
+        firstName = [uniquefirstNameArray filteredArrayUsingPredicate:filterPredictate];
+       //  image = [UniqueprofilePicArray filteredArrayUsingPredicate:filterPredictate];
     }
     
     cell.userNameLabel.text = firstName[indexPath.row];
     cell.emalLabel.text=months[indexPath.row];
-    [cell setUserProfileimage:[image objectAtIndex:indexPath.row]];
-    
-  // cell.userProfileImage.image = [UIImage imageNamed:[image objectAtIndex:indexPath.row]];      //[UIImage imageNamed:image[indexPath.row]];//[UIImage imageNamed:[image objectAtIndex:indexPath.row]];//[UIImage imageNamed:@"systemIcon.png"];
-    
-    
-    
-    
-    // NSLog(@"id is : %@",staff_idArray[indexPath.row ]);
+   // [cell setUserProfileimage:[image objectAtIndex:indexPath.row]];
+     [cell.userProfileImage setImageWithString:firstName[indexPath.row] color:nil ];
+
     
     return cell;
     
