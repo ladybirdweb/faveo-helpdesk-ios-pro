@@ -55,7 +55,7 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
-  
+   
     [self update];
     [self getDependencies];
 
@@ -67,8 +67,6 @@
 }
 
 
-
-//
 
 
 -(void)viewWillAppear:(BOOL)animated{

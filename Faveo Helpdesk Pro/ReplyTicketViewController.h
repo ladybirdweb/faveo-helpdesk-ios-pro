@@ -26,5 +26,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *viewCCandRemoveCCLabel;
 
 
+
+
+
 @end
 

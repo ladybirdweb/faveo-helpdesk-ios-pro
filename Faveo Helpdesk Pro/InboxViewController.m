@@ -181,8 +181,11 @@
     [navbar setItems:@[navItem]];
     [self.view addSubview:navbar];
     
-    [self getDependencies];
+    
+    
     [self reload];
+    [self getDependencies];
+   
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
     
@@ -326,6 +329,7 @@
 
 -(void)reload{
     
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
     
     if([globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
     {
@@ -335,8 +339,7 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [refresh endRefreshing];
-        
-        [[AppDelegate sharedAppdelegate] hideProgressView];
+    
         
         
         if (self.navigationController.navigationBarHidden) {
@@ -372,11 +375,13 @@
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
-                [[AppDelegate sharedAppdelegate] hideProgressView];
+               
+               
                 
                 if (error || [msg containsString:@"Error"]) {
                     [self->refresh endRefreshing];
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    // [[AppDelegate sharedAppdelegate] hideProgressView];
+                    
                     if (msg) {
                         
                         if([msg isEqualToString:@"Error-401"])
@@ -393,12 +398,12 @@
                         else if([msg isEqualToString:@"Error-403"])
                         {
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
                         }
                         else if([msg isEqualToString:@"Error-403"] && [self->globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
                         {
                              [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                           
                         }
                         
                         else if([msg isEqualToString:@"Error-422"])
@@ -450,11 +455,12 @@
                 
                 if ([msg isEqualToString:@"tokenNotRefreshed"]) {
                     
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                   // [[AppDelegate sharedAppdelegate] hideProgressView];
                     [self->utils showAlertWithMessage:@"Your account credentials were changed, contact to Admin and please log back in." sendViewController:self];
                     return;
                 }
                 
+               
                 if (json) {
                     //NSError *error;
                     //  NSLog(@"Thread-NO4--getInboxAPI--%@",json);
@@ -471,10 +477,12 @@
                     
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
+                        
                             [self->refresh endRefreshing];
                             
                             [self reloadTableView];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                             
                         });
                     });
@@ -493,6 +501,7 @@
         @finally
         {
             NSLog( @" I am in reload method in Inbox ViewController" );
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }
     }
@@ -540,7 +549,6 @@
 
                     {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Your Credential Has been changed"] sendViewController:self];
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
 
                     }
                     else
@@ -548,7 +556,6 @@
                         
                     {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                     }
             
@@ -556,33 +563,31 @@
                         
                     {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
-                        
+                       
                     }
                     
                     else if( [msg containsString:@"Error-403"])
                         
                     {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
-                        
+                      
                     }
+                    
                     
                     
                     else{
                         NSLog(@"Error message is %@",msg);
                         NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
                         [self->utils showAlertWithMessage:msg sendViewController:self];
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                       
                         return ;
                     }
                 }
                 
+                
+               // [[AppDelegate sharedAppdelegate] hideProgressView];
                 if ([msg isEqualToString:@"tokenRefreshed"]) {
-                    //               dispatch_async(dispatch_get_main_queue(), ^{
-                    //                  [self getDependencies];
-                    //               });
-                    
+
                     [self getDependencies];
                     NSLog(@"Thread--NO4-call-getDependecies");
                     return;
@@ -671,6 +676,7 @@
         @finally
         {
             NSLog( @" I am in getDependencies method in Inbox ViewController" );
+             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }
     }
@@ -812,12 +818,12 @@
                         if([msg isEqualToString:@"Error-403"])
                         {
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                           // [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else if([msg isEqualToString:@"Error-403"] && [self->globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
                         {
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                          //  [[AppDelegate sharedAppdelegate] hideProgressView];
                         }else{
                         
                              [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -856,6 +862,7 @@
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                             [self reloadTableView];
                             
                         });

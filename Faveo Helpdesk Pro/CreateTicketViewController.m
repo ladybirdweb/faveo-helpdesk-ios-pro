@@ -1220,10 +1220,9 @@
 {
     NSLog(@"Data is : %@",_ccTextField.text);
     
-    if(_ccTextField.text.length >=2 )
-    {
-       [self collaboratorApiMethod:_ccTextField.text];
-    }
+   
+    [self collaboratorApiMethod:_ccTextField.text];
+    
     return YES;
 }
 
@@ -1238,7 +1237,7 @@
     
         NSString *searchString=[valueFromTextField stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
         NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/search?token=%@&term=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],searchString];
-        
+@try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -1343,6 +1342,19 @@
             }
             
         }];
+    
+  }@catch (NSException *exception)
+        {
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+        }
+        @finally
+        {
+            NSLog( @" I am in add cc for row method in ticket create ViewController" );
+            
+        }
+        
     }
     
 }
@@ -1367,14 +1379,14 @@
         cell = [nib objectAtIndex:0];
     }
     
-    
+@try{
     NSArray *months = uniqueNameArray;
     NSArray *firstName=uniquefirstNameArray;
    // NSArray *image = UniqueprofilePicArray;
     
     
     if (text.length > 0) {
-        NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", text];
+        NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@",text];
         months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
         firstName = [uniquefirstNameArray filteredArrayUsingPredicate:filterPredictate];
        //  image = [UniqueprofilePicArray filteredArrayUsingPredicate:filterPredictate];
@@ -1385,7 +1397,17 @@
    // [cell setUserProfileimage:[image objectAtIndex:indexPath.row]];
      [cell.userProfileImage setImageWithString:firstName[indexPath.row] color:nil ];
 
-    
+}@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
+    }
+    @finally
+    {
+        NSLog( @" I am in add cc for row method in create ticket ViewController" );
+        
+    }
     return cell;
     
 }
@@ -1397,7 +1419,7 @@
     }
     
     NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", text];
-    NSInteger count = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate].count;
+     NSInteger count = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate].count;
     return count;
     
 }
@@ -1436,6 +1458,7 @@
             
         }
     }
+
     
 }
 
@@ -1789,6 +1812,72 @@
             @"239", @"ST", @"252", @"SO", @"47", @"SJ", @"963", @"SY",
             @"886", @"TW", @"255", @"TZ", @"670", @"TL", @"58", @"VE",
             @"84", @"VN", @"1", @"VG", @"1", @"VI", nil];
+}
+
+
+
+
+
+
+
+
+-(void)post1
+{
+    
+    // Dictionary that holds post parameters. You can set your post parameters that your server accepts or programmed to accept.
+    NSString *url121=[NSString stringWithFormat:@"%@helpdesk/create",[userDefaults objectForKey:@"companyURL"]];
+    
+    NSString *code=@"";
+    if(_codeTextField.text.length>0){
+        code=[_codeTextField.text substringFromIndex:1];
+    }
+    
+    NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
+    NSLog(@"Stffid1111 is : %@",staffID);
+    NSLog(@"Stffid1111 is : %@",staffID);
+    
+    if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
+    {
+        
+        staffID=@"0";
+    }
+    
+    NSDictionary *params=[NSDictionary dictionaryWithObjectsAndKeys:[userDefaults objectForKey:@"token"],@"token",API_KEY,@"api_key",IP,@"ip",_subjectView.text,@"subject",_textViewMsg.text,@"body",_firstNameView.text,@"first_name",_lastNameView.text,@"last_name",_mobileView.text,@"mobile",code,@"code",_emailTextView.text,@"email",help_topic_id,@"help_topic",priority_id,@"priority",staffID,@"assigned",nil];
+    
+    
+    // the boundary string : a random string, that will not repeat in post data, to separate post data fields.
+    NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6jy";
+    
+    // string constant for the post parameter 'file'. My server uses this name: `file`. Your's may differ
+    NSString* FileParamConstant = @"media_attachment[]";
+    
+    // the server url to which the image (or the media) is uploaded. Use your server url here
+    NSURL* requestURL = [NSURL URLWithString:url121];
+    
+    // create request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [request setHTTPShouldHandleCookies:NO];
+    [request setTimeoutInterval:30];
+    [request setHTTPMethod:@"POST"];
+    
+    
+    // set Content-Type in HTTP header
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
+    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    // post body
+    NSMutableData *body = [NSMutableData data];
+    
+    // add params (all params are strings)
+    for (NSString *param in params) {
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", param] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"%@\r\n", [params objectForKey:param]] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+
+    
+    
 }
 
 @end

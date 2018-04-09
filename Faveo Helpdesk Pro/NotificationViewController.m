@@ -490,17 +490,17 @@
         }
         else if( [Utils isEmpty:fname] && [Utils isEmpty:lname] && [Utils isEmpty:userName])//userName
         {
-           [cell setUserProfileimage:@"systemIcon.png"];
+          // [cell setUserProfileimage:@"systemIcon.png"];
+            cell.profilePicView.image=[UIImage imageNamed:@"systemIcon.png"];
         }
         
-        
-        //   cell.name.text=[NSString stringWithFormat:@"%@ %@",[profileDict objectForKey:@"changed_by_first_name"],[profileDict objectForKey:@"changed_by_last_name"]];
     }
     else{
         
         if([[finaldic objectForKey:@"by"] isEqualToString:@"System"])
         {
-            [cell setUserProfileimage:@"systemIcon.png"];
+           // [cell setUserProfileimage:@"systemIcon.png"];
+            cell.profilePicView.image=[UIImage imageNamed:@"systemIcon.png"];
             cell.name.text= NSLocalizedString(@"System",nil);//robot
         }
         else{

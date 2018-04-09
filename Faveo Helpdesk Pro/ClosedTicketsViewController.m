@@ -425,6 +425,7 @@
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
             [utils showAlertWithMessage:exception.name sendViewController:self];
+             //[[AppDelegate sharedAppdelegate] hideProgressView];
             return;
         }
         @finally

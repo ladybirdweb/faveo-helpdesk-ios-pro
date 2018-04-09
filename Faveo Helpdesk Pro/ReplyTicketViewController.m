@@ -27,13 +27,17 @@
 #import "addCCView.h"
 #import "BIZPopupViewController.h"
 
-@interface ReplyTicketViewController ()<UITextFieldDelegate>
+
+
+@interface ReplyTicketViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     Utils *utils;
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
     // NSString * count1;
     NSMutableArray *usersArray;
+    
+    NSArray  * ccListArray;
 }
 @end
 
@@ -42,6 +46,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title=@"Reply Ticket";
+    
+    
     self.tableview1.separatorColor=[UIColor clearColor];
     
     
@@ -322,8 +328,8 @@
                 NSLog(@"JSON-CollaboratorWithTicket-%@",json);
                 //  NSDictionary * dict1=[json objectForKey:@"collaborator"];
                 
-                NSArray  * array1=[json objectForKey:@"collaborator"];
-                self->globalVariables.ccCount=[NSString stringWithFormat:@"%lu",(unsigned long)array1.count];//array1.count;
+                self->ccListArray=[json objectForKey:@"collaborator"];
+                self->globalVariables.ccCount=[NSString stringWithFormat:@"%lu",(unsigned long)self->ccListArray.count];//array1.count;
                 //NSLog(@"Array count is : %lu",(unsigned long)array1.count);
                 NSLog(@"Array count is : %@",self->globalVariables.ccCount);
                 [self viewDidLoad];
@@ -333,6 +339,7 @@
     }
     
 }
+
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
@@ -371,6 +378,7 @@
     
     return YES;
 }
+
 
 
 

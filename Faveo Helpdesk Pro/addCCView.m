@@ -146,7 +146,10 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSLog(@"Data is : %@",_userSearchTextField.text);
+    
+    
     [self collaboratorApiMethod:_userSearchTextField.text];
+
     return YES;
 }
 
@@ -162,7 +165,8 @@
         
         NSString *searchString=[valueFromTextField stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
         NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/search?token=%@&term=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],searchString];
-        
+      
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -257,7 +261,6 @@
                 }
                 
                 
-                
                 NSLog(@"Names are : %@",self->uniqueNameArray);
                 NSLog(@"Id are : %@",self->uniqueIdArray);
                 NSLog(@"Profiles Names are : %@",self->uniquefirstNameArray);
@@ -267,6 +270,19 @@
             }
             
         }];
+        
+     }@catch (NSException *exception)
+        {
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in Add CC method in CC ViewController" );
+            
+        }
     }
 }
 
@@ -294,35 +310,47 @@
         cell = [nib objectAtIndex:0];
     }
     
+ @try{
+       NSArray *months = uniqueNameArray;
+       NSArray *firstName=uniquefirstNameArray;
+     // NSArray *image = UniqueprofilePicArray;
     
-    NSArray *months = uniqueNameArray;
-    NSArray *firstName=uniquefirstNameArray;
-    // NSArray *image = UniqueprofilePicArray;
+    
+      if (text.length > 0) {
+          NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", text];
+          months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
+          firstName = [uniquefirstNameArray filteredArrayUsingPredicate:filterPredictate];
+          //  image = [UniqueprofilePicArray filteredArrayUsingPredicate:filterPredictate];
+        }
     
     
-    if (text.length > 0) {
-        NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", text];
-        months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
-        firstName = [uniquefirstNameArray filteredArrayUsingPredicate:filterPredictate];
-        //  image = [UniqueprofilePicArray filteredArrayUsingPredicate:filterPredictate];
+       cell.userNameLabel.text = firstName[indexPath.row];
+       cell.emalLabel.text=months[indexPath.row];
+      // [cell setUserProfileimage:[image objectAtIndex:indexPath.row]];
+       [cell.userProfileImage setImageWithString:firstName[indexPath.row] color:nil ];
+    
+   }@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
     }
-    
-    cell.userNameLabel.text = firstName[indexPath.row];
-    cell.emalLabel.text=months[indexPath.row];
-    // [cell setUserProfileimage:[image objectAtIndex:indexPath.row]];
-    [cell.userProfileImage setImageWithString:firstName[indexPath.row] color:nil ];
-    
-    
+    @finally
+    {
+        NSLog( @" I am in cell for row method in CC ViewController" );
+        
+    }
     return cell;
     
 }
 
 - (NSInteger)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section forText:(NSString *)text {
     
+    
     if (text.length == 0) {
         return uniqueNameArray.count;
     }
-    
+
     NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", text];
     NSInteger count = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate].count;
     return count;

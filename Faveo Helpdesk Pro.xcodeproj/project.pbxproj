@@ -1147,10 +1147,10 @@
 		D92C35C71F750F83001DD67D /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				06BB2A3A202C3B3E00B33C43 /* systemIcon.png */,
 				064D64FA206F5A52004202CB /* NSData+Base64.h */,
 				064D64FB206F5A54004202CB /* NSData+Base64.m */,
 				0617150F2059018A00E3E14D /* TableViewPopUp */,
-				06BB2A3A202C3B3E00B33C43 /* systemIcon.png */,
 				060DE577205162BA005EFB6E /* TextField Kit */,
 				D9EB9FC21E07C44D0001115F /* Reachability */,
 				D9EB9FAE1E07C4320001115F /* SideMenu */,
