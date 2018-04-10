@@ -380,7 +380,7 @@
                 
                 if (error || [msg containsString:@"Error"]) {
                     [self->refresh endRefreshing];
-                    // [[AppDelegate sharedAppdelegate] hideProgressView];
+                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (msg) {
                         
@@ -439,6 +439,7 @@
                         
                     }else if(error)  {
                         NSLog(@"Error is : %@",error);
+                        
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
                     }

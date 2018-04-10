@@ -26,8 +26,9 @@
 #import "UITextField+AutoSuggestion.h"
 #import "userSearchDataCell.h"
 #import "UIImageView+Letters.h"
+#import <HSAttachmentPicker/HSAttachmentPicker.h>
 
-@interface CreateTicketViewController ()<RMessageProtocol,UITextFieldDelegate,UITextFieldAutoSuggestionDataSource>{
+@interface CreateTicketViewController ()<RMessageProtocol,UITextFieldDelegate,UITextFieldAutoSuggestionDataSource,HSAttachmentPickerDelegate>{
     
     Utils *utils;
     NSUserDefaults *userDefaults;
@@ -71,6 +72,9 @@
     NSNumber *user_id1;
     
     NSNumber *selectedUserId;
+    
+    HSAttachmentPicker *_menu;
+    NSData *attachNSData;
 }
 
 - (void)helpTopicWasSelected:(NSNumber *)selectedIndex element:(id)element;
@@ -120,15 +124,23 @@
     
     [self setTitle:NSLocalizedString(@"CreateTicket",nil)];
     
-    UIButton *clearButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [clearButton setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
-    [clearButton addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
-    [clearButton setFrame:CGRectMake(44, 0, 32, 32)];
+    
+    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [moreButton setImage:[UIImage imageNamed:@"attach"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(addAttachmentPickerButton) forControlEvents:UIControlEventTouchUpInside];
+    [moreButton setFrame:CGRectMake(15, 8, 17, 17)];
+    
+    UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [NotificationBtn setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
+    [NotificationBtn addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
+    [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)]; //clearAll  //flipView
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    [rightBarButtonItems addSubview: clearButton];
+    [rightBarButtonItems addSubview:moreButton];
+    [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
+
     
     
     
@@ -1816,69 +1828,91 @@
 
 
 
-
-
-
-
-
--(void)post1
+-(void)addAttachmentPickerButton
 {
-    
-    // Dictionary that holds post parameters. You can set your post parameters that your server accepts or programmed to accept.
-    NSString *url121=[NSString stringWithFormat:@"%@helpdesk/create",[userDefaults objectForKey:@"companyURL"]];
-    
-    NSString *code=@"";
-    if(_codeTextField.text.length>0){
-        code=[_codeTextField.text substringFromIndex:1];
-    }
-    
-    NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
-    NSLog(@"Stffid1111 is : %@",staffID);
-    NSLog(@"Stffid1111 is : %@",staffID);
-    
-    if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
-    {
-        
-        staffID=@"0";
-    }
-    
-    NSDictionary *params=[NSDictionary dictionaryWithObjectsAndKeys:[userDefaults objectForKey:@"token"],@"token",API_KEY,@"api_key",IP,@"ip",_subjectView.text,@"subject",_textViewMsg.text,@"body",_firstNameView.text,@"first_name",_lastNameView.text,@"last_name",_mobileView.text,@"mobile",code,@"code",_emailTextView.text,@"email",help_topic_id,@"help_topic",priority_id,@"priority",staffID,@"assigned",nil];
-    
-    
-    // the boundary string : a random string, that will not repeat in post data, to separate post data fields.
-    NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6jy";
-    
-    // string constant for the post parameter 'file'. My server uses this name: `file`. Your's may differ
-    NSString* FileParamConstant = @"media_attachment[]";
-    
-    // the server url to which the image (or the media) is uploaded. Use your server url here
-    NSURL* requestURL = [NSURL URLWithString:url121];
-    
-    // create request
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    [request setHTTPShouldHandleCookies:NO];
-    [request setTimeoutInterval:30];
-    [request setHTTPMethod:@"POST"];
-    
-    
-    // set Content-Type in HTTP header
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
-    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
-    
-    // post body
-    NSMutableData *body = [NSMutableData data];
-    
-    // add params (all params are strings)
-    for (NSString *param in params) {
-        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", param] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"%@\r\n", [params objectForKey:param]] dataUsingEncoding:NSUTF8StringEncoding]];
-    }
-
-    
+    _menu = [[HSAttachmentPicker alloc] init];
+    _menu.delegate = self;
+    [_menu showAttachmentMenu];
     
 }
+- (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu showController:(UIViewController * _Nonnull)controller completion:(void (^ _Nullable)(void))completion {
+    UIPopoverPresentationController *popover = controller.popoverPresentationController;
+    if (popover != nil) {
+        popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
+      //  popover.sourceView = self.openPickerButton;
+    }
+    [self presentViewController:controller animated:true completion:completion];
+}
+
+- (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu showErrorMessage:(NSString * _Nonnull)errorMessage {
+    NSLog(@"%@", errorMessage);
+}
+
+- (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu upload:(NSData * _Nonnull)data filename:(NSString * _Nonnull)filename image:(UIImage * _Nullable)image {
+    NSLog(@"File Name : %@", filename);
+    
+    //printf("NSDATA Attachemnt : %s\n", [data UTF8String]);
+    NSLog(@"File name : %@",filename);
+    NSLog(@"Uploade File NSData : %@",data);
+    attachNSData=data;
+
+    
+}
+
+
+
+//-(void)post1
+//{
+//
+//    NSString *code=@"";
+//    if(_codeTextField.text.length>0){
+//        code=[_codeTextField.text substringFromIndex:1];
+//    }
+//
+//    NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
+//    NSLog(@"Stffid1111 is : %@",staffID);
+//    NSLog(@"Stffid1111 is : %@",staffID);
+//
+//    if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
+//    {
+//
+//        staffID=@"0";
+//    }
+//
+//    NSString *url121=[NSString stringWithFormat:@"%@helpdesk/create",[userDefaults objectForKey:@"companyURL"]];
+//
+//    NSString *post = [NSString stringWithFormat:@"token=%@&api_key=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@&media_attachment[]=%@",[userDefaults objectForKey:@"token"],API_KEY,_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID,attachNSData];
+//
+//
+//    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+//
+//    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+//
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//
+//    [request setURL:[NSURL URLWithString:url121]];
+//
+//    [request setHTTPMethod:@"POST"];
+//
+//    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//
+//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//
+//    [request setHTTPBody:postData];
+//
+//    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+//
+//    if(conn) {
+//        NSLog(@"Connection Successful");
+//    } else {
+//        NSLog(@"Connection could not be made");
+//    }
+//
+//    NSData *returnData = [NSURLConnection sendSynchronousRequest: request returningResponse: nil error: nil];
+//    NSLog(@"%@",returnData); //doesn't work
+//
+//
+//}
 
 @end
 

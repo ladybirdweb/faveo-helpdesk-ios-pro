@@ -45,6 +45,7 @@ PODS:
   - GoogleToolboxForMac/NSData+zlib (2.1.0):
     - GoogleToolboxForMac/Defines (= 2.1.0)
   - HexColors (4.0.0)
+  - HSAttachmentPicker (1.0.2)
   - IQKeyboardManager (5.0.7)
   - MBProgressHUD (1.0.0)
   - NSDate-Time-Ago (1.0.1)
@@ -68,6 +69,7 @@ DEPENDENCIES:
   - Firebase/Crash
   - Firebase/Messaging
   - HexColors
+  - HSAttachmentPicker
   - IQKeyboardManager
   - MBProgressHUD (~> 1.0.0)
   - NSDate-Time-Ago
@@ -92,6 +94,7 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   HexColors: 5f95843ef89aff6a72e1fd3a8ebabf205cc43379
+  HSAttachmentPicker: bb96437cb83ec25af06269883de7ea87c484f71d
   IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   NSDate-Time-Ago: e9de167d0659ebe465c273e833e7b582f061fc41
@@ -102,6 +105,6 @@ SPEC CHECKSUMS:
   UITextField_AutoSuggestion: dca08de21c8de3f6054dda085087a04b5b326208
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: 0c98ff3d3f78f6c43164f274584cc6e9b8e66b79
+PODFILE CHECKSUM: 0ba30de4ec47fc8e38b79d18deed73b4e7ddea8b
 
 COCOAPODS: 1.4.0

@@ -113,7 +113,7 @@
     NSString *fileName=[attachDictionary objectForKey:@"name"];
   //  NSString *fileType=[attachDictionary objectForKey:@"type"];
     
-     NSString *typeMime;
+    NSString *typeMime;
     
     if([fileName hasSuffix:@".doc"] || [fileName hasSuffix:@".DOC"])
     {
