@@ -28,6 +28,8 @@
 #import "UIImageView+Letters.h"
 #import <HSAttachmentPicker/HSAttachmentPicker.h>
 
+@import MobileCoreServices;
+
 @interface CreateTicketViewController ()<RMessageProtocol,UITextFieldDelegate,UITextFieldAutoSuggestionDataSource,HSAttachmentPickerDelegate>{
     
     Utils *utils;
@@ -75,6 +77,8 @@
     
     HSAttachmentPicker *_menu;
     NSData *attachNSData;
+    NSString *file123;
+    NSString *base64Encoded;
 }
 
 - (void)helpTopicWasSelected:(NSNumber *)selectedIndex element:(id)element;
@@ -796,7 +800,7 @@
                                                         atPosition:RMessagePositionNavBarOverlay
                                               canBeDismissedByUser:YES];
                         
-                    }else  [self createTicket];
+                    }else [self postTicketCreate]; //[self createTicket];
                     
                 }
         
@@ -1853,66 +1857,170 @@
     
     //printf("NSDATA Attachemnt : %s\n", [data UTF8String]);
     NSLog(@"File name : %@",filename);
-    NSLog(@"Uploade File NSData : %@",data);
+    file123=filename;
+  //  NSLog(@"Uploade File NSData : %@",data);
     attachNSData=data;
+    base64Encoded = [data base64EncodedStringWithOptions:0];
+   // printf("NSDATA Attachemnt : %s\n", [base64Encoded UTF8String]);
 
     
 }
 
+-(void)postTicketCreate
+{
+            NSString *code=@"";
+            if(_codeTextField.text.length>0){
+                code=[_codeTextField.text substringFromIndex:1];
+            }
+    
+            NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
+            NSLog(@"Stffid1111 is : %@",staffID);
+            NSLog(@"Stffid1111 is : %@",staffID);
+    
+            if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
+            {
+    
+                staffID=@"0";
+            }
+    
+    
+    
+    //NSString *urlString = @"http://www.jamboreebliss.com/sayar/public/api/v1/helpdesk/create";
+    
+    NSString *urlString=[NSString stringWithFormat:@"http://www.jamboreebliss.com/sayar/public/api/v1/helpdesk/create?token=%@",[userDefaults objectForKey:@"token"]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    
+    NSMutableData *body = [NSMutableData data];
+    
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    
+    //[body addPartWithName:@"string" string:@"value"];
 
+    
+    // attachment parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"Content-Disposition:form-data; name=\"media_attachment[]\"; filename=\"file123\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+   // [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+     [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[NSData dataWithData:attachNSData]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // api key parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"api_key\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[API_KEY dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+//    NSString *token1 =@"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly93d3cuamFtYm9yZWVibGlzcy5jb20vc2F5YXIvcHVibGljL2FwaS92MS9hdXRoZW50aWNhdGUiLCJpYXQiOjE1MjM0Mzk2NjAsImV4cCI6MTUyMzQzOTkwMCwibmJmIjoxNTIzNDM5NjYwLCJqdGkiOiJEdWJNN1poZmZqTXdQNVl1In0.fgarLkHHqn0-8V1mhuc18nFovOSM2IQhuMOmXrKm7NA";
+//    // token parameter
+//    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+//    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"token\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+//    [body appendData:[token1 dataUsingEncoding:NSUTF8StringEncoding]];
+//    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // subject parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"subject\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[_subjectView.text dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    // message body parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"body\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[_textViewMsg.text dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    
+    // forst name parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"first_name\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[_firstNameView.text dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    // last name parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"last_name\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[_lastNameView.text dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    // mobile number parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"mobile\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[_mobileView.text dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    // mobile code parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"code\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[code dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    
+    // email parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"email\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[_emailTextView.text dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    NSString * help_id=[NSString stringWithFormat:@"%@",help_topic_id];
+     NSString * prio_id=[NSString stringWithFormat:@"%@",priority_id];
+    
+    // help topic parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"help_topic\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[help_id dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // priority id parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"priority\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[prio_id dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // assignee id parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"assigned\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[staffID dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
 
-//-(void)post1
-//{
-//
-//    NSString *code=@"";
-//    if(_codeTextField.text.length>0){
-//        code=[_codeTextField.text substringFromIndex:1];
-//    }
-//
-//    NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
-//    NSLog(@"Stffid1111 is : %@",staffID);
-//    NSLog(@"Stffid1111 is : %@",staffID);
-//
-//    if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
-//    {
-//
-//        staffID=@"0";
-//    }
-//
-//    NSString *url121=[NSString stringWithFormat:@"%@helpdesk/create",[userDefaults objectForKey:@"companyURL"]];
-//
-//    NSString *post = [NSString stringWithFormat:@"token=%@&api_key=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@&media_attachment[]=%@",[userDefaults objectForKey:@"token"],API_KEY,_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID,attachNSData];
-//
-//
-//    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-//
-//    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
-//
-//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-//
-//    [request setURL:[NSURL URLWithString:url121]];
-//
-//    [request setHTTPMethod:@"POST"];
-//
-//    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-//
-//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//
-//    [request setHTTPBody:postData];
-//
-//    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-//
-//    if(conn) {
-//        NSLog(@"Connection Successful");
-//    } else {
-//        NSLog(@"Connection could not be made");
-//    }
-//
-//    NSData *returnData = [NSURLConnection sendSynchronousRequest: request returningResponse: nil error: nil];
-//    NSLog(@"%@",returnData); //doesn't work
-//
-//
-//}
+    // close form
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // set request body
+    [request setHTTPBody:body];
+    
+    //return and test
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"ReturnString : %@", returnString);
+    
+    NSError *error=nil;
+    NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:returnData options:kNilOptions error:&error];
+    if (error) {
+        return;
+    }
+   
+    NSLog(@"Dictionary is : %@",jsonData);
+    
+    
+}
+
 
 @end
 

@@ -78,6 +78,7 @@
 		0624A51D2034733400F1B030 /* HelpSectionHomePageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0624A5152034733100F1B030 /* HelpSectionHomePageCell.xib */; };
 		062D213A206E41E200520C6F /* attachmentListShowTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 062D2138206E41E200520C6F /* attachmentListShowTableCell.m */; };
 		062D213B206E41E200520C6F /* attachmentListShowTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 062D2139206E41E200520C6F /* attachmentListShowTableCell.xib */; };
+		062D85EA207DE57F00D9079F /* IMG_0222.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 062D85E9207DE57E00D9079F /* IMG_0222.PNG */; };
 		063013912053AC1B006CD0EC /* userSearchDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0630138F2053AC1B006CD0EC /* userSearchDataCell.m */; };
 		063013922053AC1B006CD0EC /* userSearchDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 063013902053AC1B006CD0EC /* userSearchDataCell.xib */; };
 		0634EB352036EA7E002CB4E8 /* AllAboutTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EB332036EA7E002CB4E8 /* AllAboutTicketCell.m */; };
@@ -368,6 +369,7 @@
 		062D2137206E41E200520C6F /* attachmentListShowTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = attachmentListShowTableCell.h; sourceTree = "<group>"; };
 		062D2138206E41E200520C6F /* attachmentListShowTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = attachmentListShowTableCell.m; sourceTree = "<group>"; };
 		062D2139206E41E200520C6F /* attachmentListShowTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = attachmentListShowTableCell.xib; sourceTree = "<group>"; };
+		062D85E9207DE57E00D9079F /* IMG_0222.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_0222.PNG; sourceTree = "<group>"; };
 		0630138E2053AC1B006CD0EC /* userSearchDataCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = userSearchDataCell.h; sourceTree = "<group>"; };
 		0630138F2053AC1B006CD0EC /* userSearchDataCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = userSearchDataCell.m; sourceTree = "<group>"; };
 		063013902053AC1B006CD0EC /* userSearchDataCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = userSearchDataCell.xib; sourceTree = "<group>"; };
@@ -736,6 +738,7 @@
 				D9283F9E1FCC3B4E00C6A073 /* ClientFilter.m */,
 				D9AF85351FC4610E005232A0 /* EditClientDetail.h */,
 				D9AF85361FC4610E005232A0 /* EditClientDetail.m */,
+				062D85E9207DE57E00D9079F /* IMG_0222.PNG */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -1629,6 +1632,7 @@
 				0609ADB4203987E000DCDC85 /* UserAndAgentMenuListCell2.xib in Resources */,
 				0634EB712038192D002CB4E8 /* ticket detail page1.jpg in Resources */,
 				0634EB8820384095002CB4E8 /* FIlterAndSort2.xib in Resources */,
+				062D85EA207DE57F00D9079F /* IMG_0222.PNG in Resources */,
 				0634EB9C20385767002CB4E8 /* TicketStusChangeCell.xib in Resources */,
 				D9F9F13E1FB9B2530044DA27 /* drop_down@2x.png in Resources */,
 				D9DBD34F1E07ACFC00219F93 /* Main.storyboard in Resources */,
