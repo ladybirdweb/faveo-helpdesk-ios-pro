@@ -380,7 +380,7 @@
                 
                 if (error || [msg containsString:@"Error"]) {
                     [self->refresh endRefreshing];
-                     [[AppDelegate sharedAppdelegate] hideProgressView];
+                   //  [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (msg) {
                         
