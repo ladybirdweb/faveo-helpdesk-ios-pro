@@ -311,23 +311,26 @@
     }
     
  @try{
-       NSArray *months = uniqueNameArray;
-       NSArray *firstName=uniquefirstNameArray;
+      NSArray *months = uniqueNameArray;
+     //  NSArray *firstName=uniquefirstNameArray;
      // NSArray *image = UniqueprofilePicArray;
-    
-    
-      if (text.length > 0) {
-          NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", text];
-          months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
-          firstName = [uniquefirstNameArray filteredArrayUsingPredicate:filterPredictate];
-          //  image = [UniqueprofilePicArray filteredArrayUsingPredicate:filterPredictate];
-        }
-    
-    
-       cell.userNameLabel.text = firstName[indexPath.row];
-       cell.emalLabel.text=months[indexPath.row];
-      // [cell setUserProfileimage:[image objectAtIndex:indexPath.row]];
-       [cell.userProfileImage setImageWithString:firstName[indexPath.row] color:nil ];
+     
+     
+     if (text.length > 0) {
+         NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@",text];
+         months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
+         //  firstName = [uniquefirstNameArray filteredArrayUsingPredicate:filterPredictate];
+         //  image = [UniqueprofilePicArray filteredArrayUsingPredicate:filterPredictate];
+     }
+     
+     //    cell.userNameLabel.text = firstName[indexPath.row];
+     //    cell.emalLabel.text=months[indexPath.row];
+     
+     cell.userNameLabel.text = months[indexPath.row];
+     cell.emalLabel.text=@"";
+     
+     // [cell setUserProfileimage:[image objectAtIndex:indexPath.row]];
+     [cell.userProfileImage setImageWithString:months[indexPath.row] color:nil ];
     
    }@catch (NSException *exception)
     {
@@ -386,7 +389,7 @@
             selectedFirstName=dic[@"first_name"];
             
             NSLog(@"id is : %@",selectedUserId);
-            NSLog(@"Email is : %@",selectedFirstName);
+            NSLog(@"Name is : %@",selectedFirstName);
             NSLog(@"Email is : %@",selectedUserEmail);
             
         }

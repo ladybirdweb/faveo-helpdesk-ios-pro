@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="TimesNewRoman.ttf">
-            <string>TimesNewRomanPSMT</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -37,7 +32,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8Q-go-Fr8">
-                                <rect key="frame" x="85" y="16" width="214" height="17"/>
+                                <rect key="frame" x="85" y="16" width="270" height="17"/>
                                 <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -53,7 +48,7 @@
                         <constraints>
                             <constraint firstItem="Fwr-A1-oWE" firstAttribute="leading" secondItem="K8Q-go-Fr8" secondAttribute="leading" id="4zd-Mv-cmR"/>
                             <constraint firstAttribute="trailing" secondItem="Fwr-A1-oWE" secondAttribute="trailing" constant="53" id="7bi-IF-rL4"/>
-                            <constraint firstAttribute="trailing" secondItem="K8Q-go-Fr8" secondAttribute="trailing" constant="71" id="R4s-FR-mWR"/>
+                            <constraint firstAttribute="trailing" secondItem="K8Q-go-Fr8" secondAttribute="trailing" constant="15" id="R4s-FR-mWR"/>
                             <constraint firstItem="K8Q-go-Fr8" firstAttribute="leading" secondItem="k5I-Nc-07T" secondAttribute="trailing" constant="20" id="WCd-Zg-afG"/>
                             <constraint firstItem="Fwr-A1-oWE" firstAttribute="top" secondItem="K8Q-go-Fr8" secondAttribute="bottom" constant="5" id="hfW-dD-WKT"/>
                             <constraint firstAttribute="bottom" secondItem="k5I-Nc-07T" secondAttribute="bottom" constant="12" id="m5y-MD-8je"/>

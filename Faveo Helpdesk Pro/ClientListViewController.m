@@ -23,6 +23,7 @@
 #import "AWNavigationMenuItem.h"
 #import "ClientFilter.h"
 #import "UIImageView+Letters.h"
+#import "TicketSearchViewController.h"
 
 @interface ClientListViewController ()<RMessageProtocol,AWNavigationMenuItemDataSource, AWNavigationMenuItemDelegate>{
 
@@ -74,7 +75,14 @@
     self.menuItem.dataSource = self;
     self.menuItem.delegate = self;
     
+    UIButton *search =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [search setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
+    [search addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [search setFrame:CGRectMake(46, 0, 32, 32)];
+    UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
+    [rightBarButtonItems addSubview:search];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
     
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
@@ -83,6 +91,13 @@
     // Do any additional setup after loading the view.
 }
 
+- (IBAction)searchButtonClicked {
+    
+    TicketSearchViewController * search=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketSearchViewControllerId"];
+    [self.navigationController pushViewController:search animated:YES];
+    
+    
+}
 
 -(void)reload{
     

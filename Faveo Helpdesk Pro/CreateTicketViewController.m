@@ -1398,7 +1398,7 @@
     
 @try{
     NSArray *months = uniqueNameArray;
-    NSArray *firstName=uniquefirstNameArray;
+  //  NSArray *firstName=uniquefirstNameArray;
    // NSArray *image = UniqueprofilePicArray;
     
     
@@ -1409,10 +1409,14 @@
        //  image = [UniqueprofilePicArray filteredArrayUsingPredicate:filterPredictate];
     }
     
-    cell.userNameLabel.text = firstName[indexPath.row];
-    cell.emalLabel.text=months[indexPath.row];
+//    cell.userNameLabel.text = firstName[indexPath.row];
+//    cell.emalLabel.text=months[indexPath.row];
+    
+    cell.userNameLabel.text = months[indexPath.row];
+    cell.emalLabel.text=@"";
+    
    // [cell setUserProfileimage:[image objectAtIndex:indexPath.row]];
-     [cell.userProfileImage setImageWithString:firstName[indexPath.row] color:nil ];
+     [cell.userProfileImage setImageWithString:months[indexPath.row] color:nil ];
 
 }@catch (NSException *exception)
     {
