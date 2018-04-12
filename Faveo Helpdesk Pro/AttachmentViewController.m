@@ -87,7 +87,7 @@
         
     
         NSString *fileSize=[NSString stringWithFormat:@"%@",[attachDictionary objectForKey:@"size"]];
-    cell.sizeLabel.text=[NSString stringWithFormat:@"%@ KB",fileSize];
+        cell.sizeLabel.text=[NSString stringWithFormat:@"%@ KB",fileSize];
     
         NSString *fileType=[attachDictionary objectForKey:@"type"];
         
@@ -98,6 +98,120 @@
     //    printf("File Attachemnt(base64 String) : %s\n", [numStr UTF8String]);
         
   //  }
+    
+    if([fileName hasSuffix:@".doc"] || [fileName hasSuffix:@".DOC"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"doc"];
+    }
+    else if([fileName hasSuffix:@".pdf"] || [fileName hasSuffix:@".PDF"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"pdf"];
+    }
+    else if([fileName hasSuffix:@".css"] || [fileName hasSuffix:@".CSS"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"css"];
+    }
+    else if([fileName hasSuffix:@".csv"] || [fileName hasSuffix:@".CSV"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"csv"];
+    }
+    else if([fileName hasSuffix:@".xls"] || [fileName hasSuffix:@".XLS"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"xls"];
+    }
+    else if([fileName hasSuffix:@".rtf"] || [fileName hasSuffix:@".RTF"])
+    {
+       cell.attachmentImage.image=[UIImage imageNamed:@"rtf"];
+    }
+    else if([fileName hasSuffix:@".sql"] || [fileName hasSuffix:@".SQL"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"sql"];
+    }
+    else if([fileName hasSuffix:@".gif"] || [fileName hasSuffix:@".GIF"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"gif2"];
+    }
+    else if([fileName hasSuffix:@".ppt"] || [fileName hasSuffix:@".PPT"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"ppt"];
+    }
+    else if([fileName hasSuffix:@".jpeg"] || [fileName hasSuffix:@".JPEG"])
+    {
+       cell.attachmentImage.image=[UIImage imageNamed:@"jpg"];
+    }
+    else if([fileName hasSuffix:@".docx"] || [fileName hasSuffix:@".DOCX"])
+    {
+       cell.attachmentImage.image=[UIImage imageNamed:@"doc"];
+    }
+    else if([fileName hasSuffix:@".pps"] || [fileName hasSuffix:@".PPS"])
+    {
+       cell.attachmentImage.image=[UIImage imageNamed:@"ppt"];
+    }
+    else if([fileName hasSuffix:@".pptx"] || [fileName hasSuffix:@".PPTX"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"ppt"];
+    }
+    else if([fileName hasSuffix:@".jpg"] || [fileName hasSuffix:@".JPG"])
+    {
+       cell.attachmentImage.image=[UIImage imageNamed:@"jpg"];
+    }
+    else if([fileName hasSuffix:@".png"] || [fileName hasSuffix:@".PNG"])
+    {
+       cell.attachmentImage.image=[UIImage imageNamed:@"png"];
+    }
+    else if([fileName hasSuffix:@".zip"] || [fileName hasSuffix:@".ZIP"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"zip"];
+    }
+    
+    else if([fileName hasSuffix:@".ico"] || [fileName hasSuffix:@".ICO"])
+    {
+       cell.attachmentImage.image=[UIImage imageNamed:@"ico"];
+    }
+    else if([fileName hasSuffix:@".txt"] || [fileName hasSuffix:@".text"] || [fileName hasSuffix:@".TEXT"] || [fileName hasSuffix:@".TXT"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"txt"];
+    }
+    else if([fileName hasSuffix:@".html"] || [fileName hasSuffix:@".htm"] || [fileName hasSuffix:@".htmls"] || [fileName hasSuffix:@".HTML"] || [fileName hasSuffix:@".HTM"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"html"];
+    }
+    else if([fileName hasSuffix:@".mp3"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"mp3"];
+    }
+    else if([fileName hasSuffix:@".wav"] || [fileName hasSuffix:@".aac"] || [fileName hasSuffix:@".aiff"] || [fileName hasSuffix:@".aif"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"audioCommon"];
+    }
+    else if([fileName hasSuffix:@".avi"]){
+        cell.attachmentImage.image=[UIImage imageNamed:@"avi"];
+    }
+    else if([fileName hasSuffix:@".mkv"]){
+        cell.attachmentImage.image=[UIImage imageNamed:@"mkv"];
+    }
+    else if([fileName hasSuffix:@".mov"]){
+        cell.attachmentImage.image=[UIImage imageNamed:@"mov"];
+    }
+    else if([fileName hasSuffix:@".wmv"]){
+        cell.attachmentImage.image=[UIImage imageNamed:@"wmv"];
+    }
+    else if([fileName hasSuffix:@".flv"]){
+        cell.attachmentImage.image=[UIImage imageNamed:@"flv"];
+    }
+    else if([fileName hasSuffix:@".mpeg"] || [fileName hasSuffix:@".mpg"]){
+        cell.attachmentImage.image=[UIImage imageNamed:@"mpeg1"];
+    }
+    
+    else if([fileName hasSuffix:@".webm"] || [fileName hasSuffix:@".3gp"] || [fileName hasSuffix:@".vob"] || [fileName hasSuffix:@".m4p"])
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"mp4"];
+    }
+    else
+    {
+        cell.attachmentImage.image=[UIImage imageNamed:@"commonImage"];
+    }
+    
     
     return cell;
 

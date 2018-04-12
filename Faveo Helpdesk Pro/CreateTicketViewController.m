@@ -1405,7 +1405,7 @@
     if (text.length > 0) {
         NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@",text];
         months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
-        firstName = [uniquefirstNameArray filteredArrayUsingPredicate:filterPredictate];
+      //  firstName = [uniquefirstNameArray filteredArrayUsingPredicate:filterPredictate];
        //  image = [UniqueprofilePicArray filteredArrayUsingPredicate:filterPredictate];
     }
     
@@ -1859,135 +1859,188 @@
     NSLog(@"File name : %@",filename);
     file123=filename;
     attachNSData=data;
+    
+    _fileSize123.text=[NSString stringWithFormat:@" %.2f MB",(float)data.length/1024.0f/1024.0f];
+    
   //  base64Encoded = [data base64EncodedStringWithOptions:0];
    // printf("NSDATA Attachemnt : %s\n", [base64Encoded UTF8String]);
     
+    _fileName123.text=filename;
     
     if([filename hasSuffix:@".doc"] || [filename hasSuffix:@".DOC"])
     {
         typeMime=@"application/msword";
+        _fileImage.image=[UIImage imageNamed:@"doc"];
     }
     else if([filename hasSuffix:@".pdf"] || [filename hasSuffix:@".PDF"])
     {
         typeMime=@"application/pdf";
+         _fileImage.image=[UIImage imageNamed:@"pdf"];
     }
     else if([filename hasSuffix:@".css"] || [filename hasSuffix:@".CSS"])
     {
         typeMime=@"text/css";
+         _fileImage.image=[UIImage imageNamed:@"css"];
     }
     else if([filename hasSuffix:@".csv"] || [filename hasSuffix:@".CSV"])
     {
         typeMime=@"text/csv";
+         _fileImage.image=[UIImage imageNamed:@"csv"];
     }
     else if([filename hasSuffix:@".xls"] || [filename hasSuffix:@".XLS"])
     {
         typeMime=@"application/vnd.ms-excel";
+         _fileImage.image=[UIImage imageNamed:@"xls"];
     }
-    else if([filename hasSuffix:@".xls"] || [filename hasSuffix:@".XLS"])
-    {
-        typeMime=@"application/vnd.ms-excel";
-    }
+   
     else if([filename hasSuffix:@".rtf"] || [filename hasSuffix:@".RTF"])
     {
         typeMime=@"text/richtext";
+         _fileImage.image=[UIImage imageNamed:@"rtf"];
     }
     else if([filename hasSuffix:@".sql"] || [filename hasSuffix:@".SQL"])
     {
         typeMime=@"text/sql";
+         _fileImage.image=[UIImage imageNamed:@"sql"];
     }
     else if([filename hasSuffix:@".gif"] || [filename hasSuffix:@".GIF"])
     {
         typeMime=@"image/gif";
+         _fileImage.image=[UIImage imageNamed:@"gif2"];
     }
     else if([filename hasSuffix:@".ppt"] || [filename hasSuffix:@".PPT"])
     {
         typeMime=@"application/mspowerpoint";
+         _fileImage.image=[UIImage imageNamed:@"ppt"];
     }
     else if([filename hasSuffix:@".jpeg"] || [filename hasSuffix:@".JPEG"])
     {
         typeMime=@"image/jpeg";
+         _fileImage.image=[UIImage imageNamed:@"jpg"];
     }
     else if([filename hasSuffix:@".docx"] || [filename hasSuffix:@".DOCX"])
     {
         typeMime=@"application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+         _fileImage.image=[UIImage imageNamed:@"doc"];
     }
     else if([filename hasSuffix:@".pps"] || [filename hasSuffix:@".PPS"])
     {
         typeMime=@"application/vnd.ms-powerpoint";
+         _fileImage.image=[UIImage imageNamed:@"ppt"];
     }
     else if([filename hasSuffix:@".pptx"] || [filename hasSuffix:@".PPTX"])
     {
         typeMime=@"application/vnd.openxmlformats-officedocument.presentationml.presentation";
+         _fileImage.image=[UIImage imageNamed:@"ppt"];
     }
     else if([filename hasSuffix:@".jpg"] || [filename hasSuffix:@".JPG"])
     {
         typeMime=@"image/jpg";
+         _fileImage.image=[UIImage imageNamed:@"jpg"];
     }
     else if([filename hasSuffix:@".png"] || [filename hasSuffix:@".PNG"])
     {
         typeMime=@"image/png";
+         _fileImage.image=[UIImage imageNamed:@"png"];
     }
     else if([filename hasSuffix:@".ico"] || [filename hasSuffix:@".ICO"])
     {
         typeMime=@"image/x-icon";
+         _fileImage.image=[UIImage imageNamed:@"ico"];
     }
-    else if([filename hasSuffix:@".txt"] || [filename hasSuffix:@".text"] || [filename hasSuffix:@".TEXT"] || [filename hasSuffix:@".TXT"])
+    else if([filename hasSuffix:@".txt"] || [filename hasSuffix:@".text"] || [filename hasSuffix:@".TEXT"] || [filename hasSuffix:@".com"] || [filename hasSuffix:@".f"] || [filename hasSuffix:@".hh"]  || [filename hasSuffix:@".conf"]  || [filename hasSuffix:@".f90"]  || [filename hasSuffix:@".idc"] || [filename hasSuffix:@".cxx"] || [filename hasSuffix:@".h"] || [filename hasSuffix:@".java"] || [filename hasSuffix:@".def"] || [filename hasSuffix:@".g"] || [filename hasSuffix:@".c"] || [filename hasSuffix:@".c++"] || [filename hasSuffix:@".cc"] || [filename hasSuffix:@".list"]|| [filename hasSuffix:@".log"]|| [filename hasSuffix:@".lst"] || [filename hasSuffix:@".m"] || [filename hasSuffix:@".mar"] || [filename hasSuffix:@".pl"] || [filename hasSuffix:@".sdml"])
     {
         typeMime=@"text/plain";
+         _fileImage.image=[UIImage imageNamed:@"txt"];
+    }
+    else if([filename hasPrefix:@".bmp"])
+    {
+        typeMime=@"image/bmp";
+        _fileImage.image=[UIImage imageNamed:@"commonImage"];
+    }
+    else if([filename hasPrefix:@".java"])
+    {
+        typeMime=@"application/java";
+        _fileImage.image=[UIImage imageNamed:@"commonImage"];
     }
     else if([filename hasSuffix:@".html"] || [filename hasSuffix:@".htm"] || [filename hasSuffix:@".htmls"] || [filename hasSuffix:@".HTML"] || [filename hasSuffix:@".HTM"])
     {
         typeMime=@"text/html";
+         _fileImage.image=[UIImage imageNamed:@"html"];
     }
     else  if([filename hasSuffix:@".mp3"])
     {
         typeMime=@"audio/mp3";
+         _fileImage.image=[UIImage imageNamed:@"mp3"];
     }
     else  if([filename hasSuffix:@".wav"])
     {
         typeMime=@"audio/wav";
+          _fileImage.image=[UIImage imageNamed:@"audioCommon"];
     }
     else  if([filename hasSuffix:@".aac"])
     {
         typeMime=@"audio/aac";
+        _fileImage.image=[UIImage imageNamed:@"audioCommon"];
     }
     else  if([filename hasSuffix:@".aiff"] || [filename hasSuffix:@".aif"])
     {
         typeMime=@"audio/aiff";
+        _fileImage.image=[UIImage imageNamed:@"audioCommon"];
     }
     else  if([filename hasSuffix:@".m4p"])
     {
         typeMime=@"audio/m4p";
+        _fileImage.image=[UIImage imageNamed:@"audioCommon"];
     }
     else  if([filename hasSuffix:@".mp4"])
     {
         typeMime=@"video/mp4";
+        _fileImage.image=[UIImage imageNamed:@"mp4"];
     }
     else if([filename hasSuffix:@".mov"])
     {
         typeMime=@"video/quicktime";
+        _fileImage.image=[UIImage imageNamed:@"audioCommon"];
     }
-    else if([filename hasSuffix:@".vob"])
+    else if([filename hasSuffix:@".mov"])
     {
         typeMime=@"video/mpeg";
     }
     else  if([filename hasSuffix:@".wmv"])
     {
         typeMime=@"video/x-ms-wmv";
+        _fileImage.image=[UIImage imageNamed:@"wmv"];
     }
     else if([filename hasSuffix:@".flv"])
     {
         typeMime=@"video/x-msvideo";
+        _fileImage.image=[UIImage imageNamed:@"flv"];
     }
     else if([filename hasSuffix:@".mkv"])
     {
         typeMime=@"video/mkv";
+        _fileImage.image=[UIImage imageNamed:@"mkv"];
     }
     else if([filename hasSuffix:@".avi"])
     {
         typeMime=@"video/avi";
+        _fileImage.image=[UIImage imageNamed:@"avi"];
     }
-    
+    else if([filename hasSuffix:@".zip"])
+    {
+        typeMime=@"application/zip";
+        _fileImage.image=[UIImage imageNamed:@"zip"];
+    }
+    else if([filename hasSuffix:@".rar"])
+    {
+        typeMime=@"application/x-rar-compressed";
+        _fileImage.image=[UIImage imageNamed:@"commonImage"];
+    }
+    else
+    {
+          _fileImage.image=[UIImage imageNamed:@"commonImage"];
+    }
     
     
 }
@@ -2031,22 +2084,23 @@
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
-    //[body addPartWithName:@"string" string:@"value"];
+   
 
     // attachment parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
-  //  [body appendData:[@"Content-Disposition:form-data; name=\"media_attachment[]\"; filename=\"image/x-icon\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+  //static  [body appendData:[@"Content-Disposition:form-data; name=\"media_attachment[]\"; filename=\"image/x-icon\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
      [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"media_attachment[]\"; filename=\"%@\"\r\n", file123] dataUsingEncoding:NSUTF8StringEncoding]];
     
-  //  [body appendData:[@"Content-Type: ico_sys_netservice.ico\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+  //static  [body appendData:[@"Content-Type: ico_sys_netservice.ico\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 
     [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", typeMime] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSLog(@"Content-Type: ico_sys_netservice.ico\r\n\r\n");
-    NSLog(@"Data  444444 is : %@",[NSString stringWithFormat:@"Content-Type: %@\r\n", typeMime]);
-    NSLog(@"Data 444444 is : %@",[NSString stringWithFormat:@"Content-Type: \"%@\"\r\n", typeMime]);
+  
+    //testing purpose
+//    NSLog(@"Content-Type: ico_sys_netservice.ico\r\n\r\n");
+//    NSLog(@"Data  444444 is : %@",[NSString stringWithFormat:@"Content-Type: %@\r\n", typeMime]);
+//    NSLog(@"Data 444444 is : %@",[NSString stringWithFormat:@"Content-Type: \"%@\"\r\n", typeMime]);
     
     [body appendData:[NSData dataWithData:attachNSData]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -2079,9 +2133,15 @@
     [body appendData:[_textViewMsg.text dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
+    // collaborator parameter
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"cc[]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[selectedUserEmail dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
     
-    // forst name parameter
+    
+    // first name parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"first_name\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[_firstNameView.text dataUsingEncoding:NSUTF8StringEncoding]];

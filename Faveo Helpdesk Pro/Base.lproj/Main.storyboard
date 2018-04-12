@@ -1504,6 +1504,61 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="55" id="eB0-l9-oOb">
+                                        <rect key="frame" x="0.0" y="670" width="414" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eB0-l9-oOb" id="siI-2Z-bsE">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="54.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nuQ-MX-hMv">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="55"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qLV-yi-4sF">
+                                                            <rect key="frame" x="9" y="11" width="40" height="35"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="Mqz-Qn-Wog"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fST-Bn-yr7">
+                                                            <rect key="frame" x="61" y="10" width="300" height="16"/>
+                                                            <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAn-zG-ldr">
+                                                            <rect key="frame" x="61" y="28" width="120" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="120" id="L86-om-nYY"/>
+                                                                <constraint firstAttribute="height" constant="18" id="Wrv-6L-bew"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="11"/>
+                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="highlightedColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="fST-Bn-yr7" secondAttribute="trailing" constant="13" id="2Ru-i9-FYO"/>
+                                                        <constraint firstItem="qLV-yi-4sF" firstAttribute="top" secondItem="fST-Bn-yr7" secondAttribute="top" constant="1" id="54q-E7-L0o"/>
+                                                        <constraint firstAttribute="bottom" secondItem="CAn-zG-ldr" secondAttribute="bottom" constant="9" id="79j-jP-jWB"/>
+                                                        <constraint firstItem="qLV-yi-4sF" firstAttribute="top" secondItem="nuQ-MX-hMv" secondAttribute="top" constant="11" id="AsD-ls-ZtJ"/>
+                                                        <constraint firstItem="fST-Bn-yr7" firstAttribute="leading" secondItem="CAn-zG-ldr" secondAttribute="leading" id="T1f-Dm-aVy"/>
+                                                        <constraint firstAttribute="bottom" secondItem="qLV-yi-4sF" secondAttribute="bottom" constant="9" id="fLp-Fy-g9L"/>
+                                                        <constraint firstItem="qLV-yi-4sF" firstAttribute="leading" secondItem="nuQ-MX-hMv" secondAttribute="leading" constant="9" id="lSd-Ge-CDa"/>
+                                                        <constraint firstItem="fST-Bn-yr7" firstAttribute="leading" secondItem="qLV-yi-4sF" secondAttribute="trailing" constant="12" id="tqD-eA-JZ2"/>
+                                                        <constraint firstItem="CAn-zG-ldr" firstAttribute="top" secondItem="fST-Bn-yr7" secondAttribute="bottom" constant="2" id="u4j-6A-MkR"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nuQ-MX-hMv" firstAttribute="trailing" secondItem="siI-2Z-bsE" secondAttribute="trailingMargin" id="1UD-EN-b5O"/>
+                                                <constraint firstAttribute="bottom" secondItem="nuQ-MX-hMv" secondAttribute="bottom" id="6l4-ZZ-k34"/>
+                                                <constraint firstItem="nuQ-MX-hMv" firstAttribute="leading" secondItem="siI-2Z-bsE" secondAttribute="leadingMargin" id="DyL-ba-3AJ"/>
+                                                <constraint firstItem="nuQ-MX-hMv" firstAttribute="top" secondItem="siI-2Z-bsE" secondAttribute="top" id="V5P-m0-zF4"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -1520,6 +1575,9 @@
                         <outlet property="ccTextField" destination="1kO-W7-Ixz" id="L1V-Vf-f95"/>
                         <outlet property="codeTextField" destination="ist-CM-MqC" id="7sv-DZ-hLR"/>
                         <outlet property="emailTextView" destination="Zhe-eG-U3F" id="NZC-0c-pqb"/>
+                        <outlet property="fileImage" destination="qLV-yi-4sF" id="SBM-Ql-kTb"/>
+                        <outlet property="fileName123" destination="fST-Bn-yr7" id="7ba-MU-gwF"/>
+                        <outlet property="fileSize123" destination="CAn-zG-ldr" id="7e1-Ym-TFf"/>
                         <outlet property="firstNameView" destination="CkP-EO-xnu" id="zkg-4E-aSj"/>
                         <outlet property="helpTopicTextField" destination="vCW-en-No4" id="vJf-oA-DGo"/>
                         <outlet property="lastNameView" destination="VbQ-e7-dvK" id="jsS-wL-LT7"/>
@@ -1532,7 +1590,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2qn-3T-EO1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1243" y="353"/>
+            <point key="canvasLocation" x="1242.0289855072465" y="352.98913043478262"/>
         </scene>
         <!--Ticket Detail View Controller-->
         <scene sceneID="5LZ-jy-au0">

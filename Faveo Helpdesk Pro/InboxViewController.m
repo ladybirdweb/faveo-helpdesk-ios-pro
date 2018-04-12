@@ -186,7 +186,7 @@
     [self reload];
     [self getDependencies];
    
-    [[AppDelegate sharedAppdelegate] hideProgressView];
+   // [[AppDelegate sharedAppdelegate] hideProgressView];
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
     
 }
@@ -1177,7 +1177,12 @@
             
             NSString * source1=[finaldic objectForKey:@"source"];
             
-            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countcollaborator"]];  //collaborator_count
+            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"collaborator_count"]];  //collaborator_count
+            
+            NSLog(@"CC is : %@",cc);
+             NSLog(@"CC is : %@",cc);
+             NSLog(@"CC is : %@",cc);
+             NSLog(@"CC is : %@",cc);
             
             NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
             
@@ -1206,25 +1211,21 @@
             }
             
             
-            
-            
-            
-            if(![cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+            if(![cc isEqualToString:@"<null>"] && ![attachment1 isEqualToString:@"0"])
             {
                 cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
                 cell.attachImgView.image=[UIImage imageNamed:@"attach"];
             }
-            else if(![cc isEqualToString:@"0"] && [attachment1 isEqualToString:@"0"])
+            else if(![cc isEqualToString:@"<null>"] && [attachment1 isEqualToString:@"0"])
             {
-                cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
+                 cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
             }
-            else if([cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+            else if([cc isEqualToString:@"<null>"] && ![attachment1 isEqualToString:@"0"])
             {
                 cell.ccImgView.image=[UIImage imageNamed:@"attach"];
-            }else
-            {
-                
             }
+            
+            
             
             //priority color
             NSDictionary *priorityDict=[finaldic objectForKey:@"priority"];

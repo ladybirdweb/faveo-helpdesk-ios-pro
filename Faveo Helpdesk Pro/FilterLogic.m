@@ -1771,22 +1771,20 @@
             
             
             
-            if(![cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+            if(![cc isEqualToString:@"<null>"] && ![attachment1 isEqualToString:@"0"])
             {
                 cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
                 cell.attachImgView.image=[UIImage imageNamed:@"attach"];
             }
-            else if(![cc isEqualToString:@"0"] && [attachment1 isEqualToString:@"0"])
+            else if(![cc isEqualToString:@"<null>"] && [attachment1 isEqualToString:@"0"])
             {
                 cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
             }
-            else if([cc isEqualToString:@"0"] && ![attachment1 isEqualToString:@"0"])
+            else if([cc isEqualToString:@"<null>"] && ![attachment1 isEqualToString:@"0"])
             {
                 cell.ccImgView.image=[UIImage imageNamed:@"attach"];
-            }else
-            {
-                
             }
+            
             
             //priority color
             NSDictionary *priorityDict=[finaldic objectForKey:@"priority"];
