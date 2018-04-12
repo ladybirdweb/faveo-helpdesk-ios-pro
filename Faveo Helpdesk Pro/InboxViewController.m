@@ -186,7 +186,7 @@
     [self reload];
     [self getDependencies];
    
-    
+    [[AppDelegate sharedAppdelegate] hideProgressView];
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
     
 }

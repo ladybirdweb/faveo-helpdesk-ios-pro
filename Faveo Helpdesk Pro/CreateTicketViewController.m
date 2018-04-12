@@ -1859,7 +1859,7 @@
     NSLog(@"File name : %@",filename);
     file123=filename;
     attachNSData=data;
-    base64Encoded = [data base64EncodedStringWithOptions:0];
+  //  base64Encoded = [data base64EncodedStringWithOptions:0];
    // printf("NSDATA Attachemnt : %s\n", [base64Encoded UTF8String]);
     
     
@@ -1994,7 +1994,8 @@
 
 -(void)postTicketCreate
 {
-     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Please wait",nil)];
+    [[AppDelegate sharedAppdelegate] showProgressView];
+    
             NSString *code=@"";
             if(_codeTextField.text.length>0){
                 code=[_codeTextField.text substringFromIndex:1];
@@ -2010,7 +2011,11 @@
                 staffID=@"0";
             }
     
+    NSLog(@"MEME111111111111 is : %@",typeMime);
+    NSLog(@"MEME111111111111 is : %@",typeMime);
     
+    NSLog(@"MEME22222222222 is : %@",file123);
+    NSLog(@"MEME22222222222 is : %@",file123);
     
     //NSString *urlString = @"http://www.jamboreebliss.com/sayar/public/api/v1/helpdesk/create";
     
@@ -2028,11 +2033,20 @@
     
     //[body addPartWithName:@"string" string:@"value"];
 
-
     // attachment parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Disposition:form-data; name=\"media_attachment[]\"; filename=\"1EAD8E4.jpg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Type: image/jpg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+  //  [body appendData:[@"Content-Disposition:form-data; name=\"media_attachment[]\"; filename=\"image/x-icon\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"media_attachment[]\"; filename=\"%@\"\r\n", file123] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+  //  [body appendData:[@"Content-Type: ico_sys_netservice.ico\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+
+    [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", typeMime] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSLog(@"Content-Type: ico_sys_netservice.ico\r\n\r\n");
+    NSLog(@"Data  444444 is : %@",[NSString stringWithFormat:@"Content-Type: %@\r\n", typeMime]);
+    NSLog(@"Data 444444 is : %@",[NSString stringWithFormat:@"Content-Type: \"%@\"\r\n", typeMime]);
     
     [body appendData:[NSData dataWithData:attachNSData]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -2149,7 +2163,7 @@
     NSLog(@"Dictionary is : %@",jsonData);
     
     if ([jsonData objectForKey:@"response"])
-        
+    
     {
         NSDictionary * dict1=[jsonData objectForKey:@"response"];
         NSString *str= [dict1 objectForKey:@"message"];
@@ -2175,6 +2189,8 @@
                                             atPosition:RMessagePositionBottom
                                   canBeDismissedByUser:YES];
             
+            
+           // [[AppDelegate sharedAppdelegate] hideProgressView];
             
             self->_emailTextView.text=@"";
             self-> _firstNameView.text=@"";

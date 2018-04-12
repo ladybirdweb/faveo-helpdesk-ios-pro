@@ -5129,7 +5129,7 @@
                                 </connections>
                             </tableView>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="quz-gI-gcC">
-                                <rect key="frame" x="7" y="232" width="401" height="410"/>
+                                <rect key="frame" x="7" y="232" width="401" height="470"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="ADp-8S-Kbu" id="WeN-WJ-3Ue"/>
@@ -5138,7 +5138,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="8hr-Or-ixm" firstAttribute="top" secondItem="quz-gI-gcC" secondAttribute="bottom" constant="94" id="7vu-pK-iGf"/>
+                            <constraint firstItem="8hr-Or-ixm" firstAttribute="top" secondItem="quz-gI-gcC" secondAttribute="bottom" constant="34" id="7vu-pK-iGf"/>
                             <constraint firstItem="jPb-n6-YDy" firstAttribute="top" secondItem="u3V-Tu-a9Y" secondAttribute="top" constant="13" id="Dln-cQ-3Cv"/>
                             <constraint firstItem="quz-gI-gcC" firstAttribute="leading" secondItem="u3V-Tu-a9Y" secondAttribute="leadingMargin" constant="-13" id="JL5-lo-rGd"/>
                             <constraint firstAttribute="trailing" secondItem="jPb-n6-YDy" secondAttribute="trailing" constant="20" id="Mpu-Oo-VO2"/>
