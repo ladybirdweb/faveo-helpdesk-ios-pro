@@ -1178,13 +1178,15 @@
             NSString * source1=[finaldic objectForKey:@"source"];
             
             NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"collaborator_count"]];  //collaborator_count
+             NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
+//             NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
+//            NSLog(@"CC is : %@",cc);
+//             NSLog(@"CC is : %@",cc);
+//             NSLog(@"COunbt is : %@",attachment1);
+//             NSLog(@"Count is : %@",attachment1);
+//            NSLog(@"Ticket Numbert is : %@",ticketNumber);
             
-            NSLog(@"CC is : %@",cc);
-             NSLog(@"CC is : %@",cc);
-             NSLog(@"CC is : %@",cc);
-             NSLog(@"CC is : %@",cc);
-            
-            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
+           
             
             
             if([source1 isEqualToString:@"web"] || [source1 isEqualToString:@"Web"])
