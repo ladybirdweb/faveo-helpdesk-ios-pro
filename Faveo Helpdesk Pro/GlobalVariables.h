@@ -208,5 +208,8 @@
 
 @property (strong, nonatomic) NSString *roleFromAuthenticateAPI;
 
+@property (strong, nonatomic) NSString *statusIdFor401Error;
+
+
 @end
 

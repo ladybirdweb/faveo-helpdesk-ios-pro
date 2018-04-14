@@ -756,6 +756,7 @@
                 {
                     NSLog(@"Message is : %@",msg);
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
                     else if([msg isEqualToString:@"Error-403"])
                     {
@@ -771,16 +772,19 @@
                 {
                     NSLog(@"Message is : %@",msg);
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
                 else
                 {
                     NSLog(@"Error msg is : %@",msg);
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
                 
             }else if(error)  {
                 [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                 NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+                [[AppDelegate sharedAppdelegate] hideProgressView];
             }
             return ;
         }
@@ -862,6 +866,7 @@
                         
                     {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                     }
                     else if([msg isEqualToString:@"Error-403"])
@@ -877,6 +882,7 @@
                     else{
                         NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
                         return ;
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                 }
                 
@@ -967,6 +973,7 @@
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
             [utils showAlertWithMessage:exception.name sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             return;
         }
         @finally

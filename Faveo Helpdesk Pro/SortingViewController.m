@@ -1382,6 +1382,7 @@
                         {
                             NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else if([msg isEqualToString:@"Error-403"])
                         {
@@ -1400,40 +1401,48 @@
                         {
                             NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else if([msg isEqualToString:@"Error-422"])
                         {
                             NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else if([msg isEqualToString:@"Error-404"])
                         {
                             NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
                         {
                             NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
                         {
                             NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
                         {
                             NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         
                         else{
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         
                     }else if(error)  {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-sortingpage-Refresh-error == %@",error.localizedDescription);
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     return ;
                 }
@@ -1541,10 +1550,13 @@
                         }
                         else{
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                     }else{
                         NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                         return ;
+                        
                     }
                 }
                 

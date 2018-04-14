@@ -2051,7 +2051,7 @@
 
 -(void)postTicketCreate
 {
-    [[AppDelegate sharedAppdelegate] showProgressView];
+  //  [[AppDelegate sharedAppdelegate] showProgressView];
     
             NSString *code=@"";
             if(_codeTextField.text.length>0){

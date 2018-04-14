@@ -72,13 +72,23 @@
         }
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
             
-            NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+          //  NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
             
-            if (statusCode != 200) {
-                NSLog(@"Thread--refreshToken--dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                return ;
-            }
-            
+//            if (statusCode != 200) {
+//                
+//                if(statusCode==401)
+//                {
+//                    NSLog(@"status111 : %ld",(long)statusCode);
+//                    NSLog(@"status111 : %ld",(long)statusCode);
+//                    self->globalVariables.statusIdFor401Error=@"401";
+//                    NSLog(@"glob status111 : %@",self->globalVariables.statusIdFor401Error);
+//                    NSLog(@"glob status111 : %@",self->globalVariables.statusIdFor401Error);
+//                    
+//                }
+//                NSLog(@"Thread--refreshToken--dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+//                return ;
+//            }
+//            
         
             NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
@@ -92,6 +102,22 @@
                     return;
                 }
                 
+                if([replyStr containsString:@"message"])
+                {
+                    NSString *msg=[jsonData objectForKey:@"message"];
+                    
+                    
+                    if([msg isEqualToString:@"Invalid credentials"])
+                    {
+                        [self->_userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+                    }
+                    
+                    else if([msg isEqualToString:@"API disabled"])
+                    {
+                        [self->_userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+                    }
+                }
+                else{
                 NSDictionary *userDataDict=[jsonData objectForKey:@"data"];
                 
                 
@@ -123,6 +149,7 @@
                 NSLog(@"Thread--refreshToken-tokenRefreshed");
             }
         }
+      }
         
         dispatch_semaphore_signal(sem);
     }] resume];

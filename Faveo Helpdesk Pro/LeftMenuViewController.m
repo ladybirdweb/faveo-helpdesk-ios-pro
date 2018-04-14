@@ -79,11 +79,27 @@
     
     userDefaults=[NSUserDefaults standardUserDefaults];
     globalVariables=[GlobalVariables sharedInstance];
+    
+    if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
+    {
+        NSString *msg=@"";
+        [utils showAlertWithMessage:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"API disabled"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    
     NSLog(@"Role : %@",[userDefaults objectForKey:@"role"]);
     _user_role.text=[[userDefaults objectForKey:@"role"] uppercaseString];
     
     _user_nameLabel.text=[userDefaults objectForKey:@"profile_name"];
     _url_label.text=[userDefaults objectForKey:@"baseURL"];
+    
     
     if([[userDefaults objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[userDefaults objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[userDefaults objectForKey:@"profile_pic"] hasSuffix:@".png"] )
     {
@@ -160,7 +176,7 @@
 }
 -(void)getDependencies{
     
-   
+
      [[AppDelegate sharedAppdelegate] hideProgressView];
     
     NSLog(@"Thread-NO1-getDependencies()-start");
@@ -194,7 +210,8 @@
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-                NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+              //  NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+               
                 if (error || [msg containsString:@"Error"]) {
                     
                     if([msg isEqualToString:@"Error-401"])

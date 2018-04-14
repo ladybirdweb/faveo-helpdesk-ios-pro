@@ -6,7 +6,7 @@
 
 #import "MBProgressHUD.h"
 #import <tgmath.h>
-
+#import <UIKit/UIKit.h>
 
 #ifndef kCFCoreFoundationVersionNumber_iOS_7_0
     #define kCFCoreFoundationVersionNumber_iOS_7_0 847.20
@@ -138,7 +138,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
 #pragma mark - Show & hide
 
 - (void)showAnimated:(BOOL)animated {
-    MBMainThreadAssert();
+     MBMainThreadAssert();
     [self.minShowTimer invalidate];
     self.useAnimation = animated;
     self.finished = NO;
