@@ -233,6 +233,12 @@
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
                         
                     }
+                    else if([msg isEqualToString:@"Error-404"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                    }
+                    
                     else{
                         
                         NSLog(@"Message Error in Left-Menu View : %@",msg); //Error-403

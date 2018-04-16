@@ -499,7 +499,13 @@
                     {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
                         
-                    }else{
+                    }
+                    else if([msg isEqualToString:@"Error-404"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                    }
+                    else{
                         NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
                         return ;
                     }

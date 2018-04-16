@@ -609,6 +609,12 @@
                       
                     }
                     
+                    else if([msg isEqualToString:@"Error-404"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                    }
                     
                     
                     else{
