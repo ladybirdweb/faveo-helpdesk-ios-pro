@@ -151,6 +151,8 @@
 
 - (IBAction)submitButtonClicked:(id)sender {
     
+     [[AppDelegate sharedAppdelegate] showProgressViewWithText:@"Please wait"];
+     
     
     if([_messageTextView.text isEqualToString:@""] || [_messageTextView.text length]==0)
     {
@@ -158,8 +160,10 @@
       
     }else
     {
+       
         //   [self ticketReplyMethodCalledHere];
         [self replyTicketMethodCall];
+        
         
     }
 }
@@ -613,6 +617,8 @@
 
 -(void)replyTicketMethodCall
 {
+    
+    
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         
@@ -682,6 +688,8 @@
             
             NSLog(@"Dictionary is : %@",jsonData);
             // "message": "Successfully replied"
+            
+           
             
             if ([jsonData objectForKey:@"message"]){
                 

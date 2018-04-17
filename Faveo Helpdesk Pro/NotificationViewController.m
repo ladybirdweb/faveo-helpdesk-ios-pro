@@ -69,7 +69,23 @@
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-    [self reload];
+    
+    if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
+    {
+        NSString *msg=@"";
+        [utils showAlertWithMessage:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"API disabled"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    {
+        [self reload];
+    }
     
 }
 

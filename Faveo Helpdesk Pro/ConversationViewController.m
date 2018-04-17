@@ -60,12 +60,30 @@
     
     attachmentArray=[[NSMutableArray alloc]init];
 
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Conversations",nil)];
- 
-    [self reload];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadd) name:@"reload_data" object:nil];
-    // Do any additional setup after loading the view.
+    
+    
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Conversations",nil)];
+   
+    if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
+    {
+        NSString *msg=@"";
+        [utils showAlertWithMessage:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"API disabled"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else{
+       [self reload];
+        
+    }
+    
 }
 
 -(void)reload{

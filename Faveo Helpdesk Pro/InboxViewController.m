@@ -483,13 +483,13 @@
                     return;
                 }
                 
-//                if ([msg isEqualToString:@"tokenNotRefreshed"]) {
-//
-//                   // [[AppDelegate sharedAppdelegate] hideProgressView];
-//                    [self->utils showAlertWithMessage:@"Your account credentials were changed, contact to Admin and please log back in." sendViewController:self];
-//
-//                    return;
-//                }
+                if ([msg isEqualToString:@"tokenNotRefreshed"]) {
+
+                   // [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [self->utils showAlertWithMessage:@"Your account credentials were changed, contact to Admin and please log back in." sendViewController:self];
+
+                    return;
+                }
                 
                
                 if (json) {
@@ -533,7 +533,7 @@
         @finally
         {
             NSLog( @" I am in reload method in Inbox ViewController" );
-           // [[AppDelegate sharedAppdelegate] hideProgressView];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }
     }

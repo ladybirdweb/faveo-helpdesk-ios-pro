@@ -1531,7 +1531,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAn-zG-ldr">
                                                             <rect key="frame" x="61" y="28" width="150" height="18"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="150" id="L86-om-nYY"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="L86-om-nYY"/>
                                                                 <constraint firstAttribute="height" constant="18" id="Wrv-6L-bew"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="11"/>
@@ -6336,7 +6336,7 @@
                                                             <rect key="frame" x="61" y="28" width="150" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="cC4-1q-W1v"/>
-                                                                <constraint firstAttribute="width" constant="150" id="mMc-6c-es5"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="mMc-6c-es5"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="11"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

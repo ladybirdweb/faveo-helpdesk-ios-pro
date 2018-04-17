@@ -212,17 +212,12 @@
                                 [self->utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self];
                                 return;
                             }
-                            if (statusCode == 401) {
+                           else if (statusCode == 401) {
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                                [self->utils showAlertWithMessage: NSLocalizedString(@"The request has not been applied because it lacks valid authentication credentials for the target resource.", nil) sendViewController:self];
+                                [self->utils showAlertWithMessage: NSLocalizedString(@"API is disabled in web, please enable it from Admin panel.", nil) sendViewController:self];
                                 //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                                 return;
-                            }else if(statusCode == 402)
-                            {
-                                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                                [[AppDelegate sharedAppdelegate] hideProgressView];
-                                [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
                             }
                             else{
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
@@ -355,16 +350,14 @@
                 }else if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                     
                     NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+                    NSLog(@"Status code in Login : %ld",(long)statusCode);
+                    NSLog(@"Status code in Login : %ld",(long)statusCode);
                     
                     if (statusCode != 200) {
-                        if (statusCode == 401) {
+                         if (statusCode == 401) {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                        
-                                [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
-    
-                            //else
-                            //[self->utils showAlertWithMessage: NSLocalizedString(@"Incorrect Username or Password!", nil) sendViewController:self];
+                            [self->utils showAlertWithMessage: NSLocalizedString(@"API is disabled in web, please enable it from Admin panel.", nil) sendViewController:self];
                             //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                             return;
                         }else if(statusCode == 402)
@@ -472,8 +465,9 @@
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            if([userRole isEqualToString:@"admin"] || [userRole isEqualToString:@"agent"]){
-                           [RKDropdownAlert title:NSLocalizedString(@"Welcome.",nil) message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        if([userRole isEqualToString:@"admin"] || [userRole isEqualToString:@"agent"]){
+                          
+                                [RKDropdownAlert title:NSLocalizedString(@"Welcome.",nil) message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
                     
                             
@@ -483,9 +477,8 @@
                             [self.navigationController pushViewController:inboxVC animated:YES];
                             //[self.navigationController popViewControllerAnimated:YES];
                             [[self navigationController] setNavigationBarHidden:NO];
-                            }else
+                        }else
                             {
-                                
                                 [self->utils showAlertWithMessage:@"Invalid entry for user. This app is used by Agent and Admin only." sendViewController:self];
                                  [[AppDelegate sharedAppdelegate] hideProgressView];
                             }

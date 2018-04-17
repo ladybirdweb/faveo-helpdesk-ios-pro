@@ -104,6 +104,7 @@
         
         NSLog(@"Ticket Search API Called.");
         [self ticketSearchApiCall:_seachTextField.text];
+        [_seachTextField resignFirstResponder];
         [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Ticket Data",nil)];
     }
     else if(_segmentedControlObject.selectedSegmentIndex==1)
@@ -114,6 +115,7 @@
         
         NSLog(@"User Search API Called.");
         [self userSearchApiCall:_seachTextField.text];
+        [_seachTextField resignFirstResponder];
         [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting User Data",nil)];
         
     }

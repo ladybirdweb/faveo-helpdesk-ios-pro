@@ -27,6 +27,7 @@
 #import "userSearchDataCell.h"
 #import "UIImageView+Letters.h"
 #import <HSAttachmentPicker/HSAttachmentPicker.h>
+#import <QuartzCore/QuartzCore.h>
 
 @import MobileCoreServices;
 
@@ -80,6 +81,8 @@
     NSString *file123;
     NSString *base64Encoded;
      NSString *typeMime;
+    UIActivityIndicatorView *activityIndicator;
+   
 }
 
 - (void)helpTopicWasSelected:(NSNumber *)selectedIndex element:(id)element;
@@ -96,6 +99,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     [self split];
     
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
@@ -522,6 +527,8 @@
 
 - (IBAction)submitClicked:(id)sender {
     
+    
+    
     @try{
         
         
@@ -572,7 +579,7 @@
                                         buttonCallback:nil
                                             atPosition:RMessagePositionNavBarOverlay
                                   canBeDismissedByUser:YES];
-            
+          
             
         }else if (self.emailTextView.text.length==0){
             //[RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter EMAIL-ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
@@ -634,7 +641,7 @@
                                                 atPosition:RMessagePositionNavBarOverlay
                                       canBeDismissedByUser:YES];
                 
-                
+               
             }else if ( self.firstNameView.text.length<2) {
                 
                 if (self.navigationController.navigationBarHidden) {
@@ -676,7 +683,7 @@
                                                     atPosition:RMessagePositionNavBarOverlay
                                           canBeDismissedByUser:YES];
                     
-                    
+                   
                 }else if (self.subjectView.text.length==0) {
                     // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter SUBJECT",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
                     
@@ -735,7 +742,7 @@
                                                 buttonCallback:nil
                                                     atPosition:RMessagePositionNavBarOverlay
                                           canBeDismissedByUser:YES];
-                    
+                  
                 }else if (self.textViewMsg.text.length<10){
                     // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"MESSAGE requires at least 10 characters" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
                     
@@ -755,7 +762,7 @@
                                                 buttonCallback:nil
                                                     atPosition:RMessagePositionNavBarOverlay
                                           canBeDismissedByUser:YES];
-                    
+                   
                 }
                 else if (self.priorityTextField.text.length==0){
                     // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select PRIORITY" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
@@ -776,7 +783,7 @@
                                                 buttonCallback:nil
                                                     atPosition:RMessagePositionNavBarOverlay
                                           canBeDismissedByUser:YES];
-                    
+                   
                 }
                 else {
                     NSLog(@"ticketCreated dept_id-%@, help_id-%@ ,sla_id-%@, pri_id-%@, staff_id-%@",dept_id,help_topic_id,sla_id,priority_id,staff_id);
@@ -821,6 +828,9 @@
 
 
 -(void)createTicket{
+    
+   
+    
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
@@ -829,7 +839,8 @@
         
     }else{
         
-        [[AppDelegate sharedAppdelegate] showProgressView];
+    //    [[AppDelegate sharedAppdelegate] showProgressView];
+       
         
         
         NSString *code=@"";
@@ -923,6 +934,7 @@
                 
                 if (json) {
                     NSLog(@"JSON-CreateTicket-%@",json);
+                   
                     
                     NSString * str= [json objectForKey:@"message"];
                     
@@ -2007,9 +2019,10 @@
         typeMime=@"video/quicktime";
         _fileImage.image=[UIImage imageNamed:@"audioCommon"];
     }
-    else if([filename hasSuffix:@".mov"])
+    else if([filename hasSuffix:@".mov"]) //[UIImage imageNamed:@"mov"];
     {
         typeMime=@"video/mpeg";
+         _fileImage.image=[UIImage imageNamed:@"mov"];
     }
     else  if([filename hasSuffix:@".wmv"])
     {
@@ -2041,6 +2054,7 @@
         typeMime=@"application/x-rar-compressed";
         _fileImage.image=[UIImage imageNamed:@"commonImage"];
     }
+
     else
     {
           _fileImage.image=[UIImage imageNamed:@"commonImage"];
@@ -2051,195 +2065,228 @@
 
 -(void)postTicketCreate
 {
-  //  [[AppDelegate sharedAppdelegate] showProgressView];
+   
+    
+//    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//        activityIndicator.frame = CGRectMake(35.0, 0.0, 50.0, 50.0);
+//        activityIndicator.center = self.view.center;
+//        [self.view addSubview: activityIndicator];
+//    
+//        [activityIndicator startAnimating];
+//
+//    
     
             NSString *code=@"";
             if(_codeTextField.text.length>0){
                 code=[_codeTextField.text substringFromIndex:1];
             }
-    
+
             NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
             NSLog(@"Stffid1111 is : %@",staffID);
             NSLog(@"Stffid1111 is : %@",staffID);
-    
+
             if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
             {
-    
+
                 staffID=@"0";
             }
-    
+//
     NSLog(@"MEME111111111111 is : %@",typeMime);
     NSLog(@"MEME111111111111 is : %@",typeMime);
-    
+
     NSLog(@"MEME22222222222 is : %@",file123);
     NSLog(@"MEME22222222222 is : %@",file123);
-    
-    //NSString *urlString = @"http://www.jamboreebliss.com/sayar/public/api/v1/helpdesk/create";
-    
-    NSString *urlString=[NSString stringWithFormat:@"http://www.jamboreebliss.com/sayar/public/api/v1/helpdesk/create?token=%@",[userDefaults objectForKey:@"token"]];
-    
+
+//    //NSString *urlString = @"http://www.jamboreebliss.com/sayar/public/api/v1/helpdesk/create";
+//
+    NSString *urlString=[NSString stringWithFormat:@"%@helpdesk/create?token=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"]];
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"POST"];
-    
+
     NSMutableData *body = [NSMutableData data];
-    
+
     NSString *boundary = @"---------------------------14737809831466499882746641449";
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
-    
-   
+
 
     // attachment parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
   //static  [body appendData:[@"Content-Disposition:form-data; name=\"media_attachment[]\"; filename=\"image/x-icon\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"media_attachment[]\"; filename=\"%@\"\r\n", file123] dataUsingEncoding:NSUTF8StringEncoding]];
-    
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"media_attachment[]\"; filename=\"%@\"\r\n", file123] dataUsingEncoding:NSUTF8StringEncoding]];
   //static  [body appendData:[@"Content-Type: ico_sys_netservice.ico\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-
     [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", typeMime] dataUsingEncoding:NSUTF8StringEncoding]];
-  
+
     //testing purpose
 //    NSLog(@"Content-Type: ico_sys_netservice.ico\r\n\r\n");
 //    NSLog(@"Data  444444 is : %@",[NSString stringWithFormat:@"Content-Type: %@\r\n", typeMime]);
 //    NSLog(@"Data 444444 is : %@",[NSString stringWithFormat:@"Content-Type: \"%@\"\r\n", typeMime]);
-    
+
     [body appendData:[NSData dataWithData:attachNSData]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
+
+
     // api key parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"api_key\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[API_KEY dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
+
+
 //    NSString *token1 =@"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly93d3cuamFtYm9yZWVibGlzcy5jb20vc2F5YXIvcHVibGljL2FwaS92MS9hdXRoZW50aWNhdGUiLCJpYXQiOjE1MjM0Mzk2NjAsImV4cCI6MTUyMzQzOTkwMCwibmJmIjoxNTIzNDM5NjYwLCJqdGkiOiJEdWJNN1poZmZqTXdQNVl1In0.fgarLkHHqn0-8V1mhuc18nFovOSM2IQhuMOmXrKm7NA";
 //    // token parameter
 //    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 //    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"token\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
 //    [body appendData:[token1 dataUsingEncoding:NSUTF8StringEncoding]];
 //    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
+
     // subject parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"subject\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[_subjectView.text dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
+
+
     // message body parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"body\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[_textViewMsg.text dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
+
     // collaborator parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"cc[]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[selectedUserEmail dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
-    
+
+
+
     // first name parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"first_name\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[_firstNameView.text dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
+
+
     // last name parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"last_name\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[_lastNameView.text dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
+
+
     // mobile number parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"mobile\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[_mobileView.text dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
+
+
     // mobile code parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"code\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[code dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
-    
+
+
+
     // email parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"email\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[_emailTextView.text dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
     NSString * help_id=[NSString stringWithFormat:@"%@",help_topic_id];
      NSString * prio_id=[NSString stringWithFormat:@"%@",priority_id];
-    
+
     // help topic parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"help_topic\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[help_id dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
+
     // priority id parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"priority\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[prio_id dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
+
     // assignee id parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"assigned\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[staffID dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
 
+    
     // close form
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
+
     // set request body
     [request setHTTPBody:body];
-    
+
     NSLog(@"Request is : %@",request);
-    
+//
     //return and test
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    
+
     NSLog(@"ReturnString : %@", returnString);
-    
+
     NSError *error=nil;
     NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:returnData options:kNilOptions error:&error];
     if (error) {
         return;
     }
-   
+
     NSLog(@"Dictionary is : %@",jsonData);
-    
-    if ([jsonData objectForKey:@"response"])
-    
+
+     if([jsonData objectForKey:@"message"])
+         
+     {
+         NSString *str= [jsonData objectForKey:@"message"];
+         
+         if([str isEqualToString:@"Permission denied, you do not have permission to access the requested page."] || [str hasPrefix:@"Permission denied"])
+         {
+             
+             [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+             
+         }
+         else{
+               NSString *str=[jsonData objectForKey:@"message"];
+         
+               if([str isEqualToString:@"Token expired"])
+                {
+          
+                  MyWebservices *web=[[MyWebservices alloc]init];
+                  [web refreshToken];
+                  [self postTicketCreate];
+             
+            }
+         
+         }
+         
+     }//end first if
+    else if ([jsonData objectForKey:@"response"])
+
     {
-        NSDictionary * dict1=[jsonData objectForKey:@"response"];
-        NSString *str= [dict1 objectForKey:@"message"];
-        
-        
-        if([str isEqualToString:@"Permission denied, you do not have permission to access the requested page."] || [str hasPrefix:@"Permission denied"])
-        {
-            
-            [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-            
-        }else{
-            
+            self->_emailTextView.text=@"";
+            self-> _firstNameView.text=@"";
+            self->_lastNameView.text=@"";
+            self->_mobileView.text=@"";
+            self->_codeTextField.text=@"";
+            self->_helpTopicTextField.text=@"";
+            self-> _subjectView.text=@"";
+            self-> _priorityTextField.text=@"";
+            self->_assignTextField.text=@"";
+            self->_textViewMsg.text=@"";
+
+            self->globalVariables.emailAddRequester=@"";
+            self-> globalVariables.firstNameAddRequester=@"";
+            self-> globalVariables.lastAddRequester=@"";
+            self->globalVariables.mobileAddRequester=@"";
+            self-> globalVariables.mobileCode=@"";
+
             [RMessage showNotificationInViewController:self.navigationController
                                                  title:NSLocalizedString(@"success", nil)
                                               subtitle:NSLocalizedString(@"Ticket created successfully.", nil)
@@ -2252,53 +2299,20 @@
                                         buttonCallback:nil
                                             atPosition:RMessagePositionBottom
                                   canBeDismissedByUser:YES];
-            
-            
-           // [[AppDelegate sharedAppdelegate] hideProgressView];
-            
-            self->_emailTextView.text=@"";
-            self-> _firstNameView.text=@"";
-            self->_lastNameView.text=@"";
-            self->_mobileView.text=@"";
-            self->_codeTextField.text=@"";
-            self->_helpTopicTextField.text=@"";
-            self-> _subjectView.text=@"";
-            self-> _priorityTextField.text=@"";
-            self->_assignTextField.text=@"";
-            self->_textViewMsg.text=@"";
-            
-            self->globalVariables.emailAddRequester=@"";
-            self-> globalVariables.firstNameAddRequester=@"";
-            self-> globalVariables.lastAddRequester=@"";
-            self->globalVariables.mobileAddRequester=@"";
-            self-> globalVariables.mobileCode=@"";
-            
-            
+
             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
             [self.navigationController pushViewController:inboxVC animated:YES];
-        
-        
-       }
 
-    }else if ([jsonData objectForKey:@"message"])
-    {
+
+       
         
-        NSString *str=[jsonData objectForKey:@"message"];
-        
-        if([str isEqualToString:@"Token expired"])
-        {
-            MyWebservices *web=[[MyWebservices alloc]init];
-            [web refreshToken];
-            [self postTicketCreate];
-            // do se=omething
-        }
     }
     else{
-        
+
         [self->utils showAlertWithMessage:NSLocalizedString(@"Something Went Wrong.", nil) sendViewController:self];
-        
+
     }
-    
+
 }
 
 

@@ -207,6 +207,7 @@
     {
         cell.attachmentImage.image=[UIImage imageNamed:@"mp4"];
     }
+    
     else
     {
         cell.attachmentImage.image=[UIImage imageNamed:@"commonImage"];
@@ -293,6 +294,10 @@
     {
         typeMime=@"image/png";
     }
+    else if([fileName hasSuffix:@".bmp"] || [fileName hasSuffix:@".BMP"] ||  [fileName hasSuffix:@".bm"])
+    {
+        typeMime=@"image/bmp";
+    }
     else if([fileName hasSuffix:@".ico"] || [fileName hasSuffix:@".ICO"])
     {
         typeMime=@"image/x-icon";
@@ -301,9 +306,21 @@
     {
         typeMime=@"text/plain";
     }
-    else if([fileName hasSuffix:@".html"] || [fileName hasSuffix:@".htm"] || [fileName hasSuffix:@".htmls"] || [fileName hasSuffix:@".HTML"] || [fileName hasSuffix:@".HTM"])
+    else if([fileName hasSuffix:@".c"] || [fileName hasSuffix:@".c++"] || [fileName hasSuffix:@".C"] || [fileName hasSuffix:@".C++"] || [fileName hasSuffix:@".com"] || [fileName hasSuffix:@".conf"] || [fileName hasSuffix:@".cxx"])
+    {
+        typeMime=@"text/plain";
+    }
+    else if([fileName hasSuffix:@".def"] || [fileName hasSuffix:@".f90"] || [fileName hasSuffix:@".for"] || [fileName hasSuffix:@".h"] || [fileName hasSuffix:@".hh"] || [fileName hasSuffix:@".idc"] || [fileName hasSuffix:@".jav"] ||[fileName hasSuffix:@".java"] || [fileName hasSuffix:@".list"] || [fileName hasSuffix:@".m"] || [fileName hasSuffix:@".mar"] || [fileName hasSuffix:@".lst"] || [fileName hasSuffix:@".log"])
+    {
+        typeMime=@"text/plain";
+    }
+    else if([fileName hasSuffix:@".html"] || [fileName hasSuffix:@".htm"] || [fileName hasSuffix:@".htmls"] || [fileName hasSuffix:@".HTML"] || [fileName hasSuffix:@".HTM"] || [fileName hasSuffix:@".htx"])
     {
         typeMime=@"text/html";
+    }
+    else if([fileName hasSuffix:@".class"])
+    {
+        typeMime=@"application/java";
     }
     else
     {
