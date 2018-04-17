@@ -136,7 +136,7 @@
     
     
     UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [moreButton setImage:[UIImage imageNamed:@"attach"] forState:UIControlStateNormal];
+    [moreButton setImage:[UIImage imageNamed:@"attach1"] forState:UIControlStateNormal];
     [moreButton addTarget:self action:@selector(addAttachmentPickerButton) forControlEvents:UIControlEventTouchUpInside];
     [moreButton setFrame:CGRectMake(15, 8, 17, 17)];
     

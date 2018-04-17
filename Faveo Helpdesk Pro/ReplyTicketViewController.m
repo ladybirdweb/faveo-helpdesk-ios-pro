@@ -63,7 +63,7 @@
     
     
     UIButton *attachmentButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [attachmentButton setImage:[UIImage imageNamed:@"attach"] forState:UIControlStateNormal];
+    [attachmentButton setImage:[UIImage imageNamed:@"attach1"] forState:UIControlStateNormal];
     [attachmentButton addTarget:self action:@selector(addAttachmentPickerButton) forControlEvents:UIControlEventTouchUpInside];
     [attachmentButton setFrame:CGRectMake(15, 8, 17, 17)];
     

@@ -210,6 +210,8 @@
 
 @property (strong, nonatomic) NSString *statusIdFor401Error;
 
+@property (strong, nonatomic) NSArray *collaboratorListArray;
+
 
 @end
 

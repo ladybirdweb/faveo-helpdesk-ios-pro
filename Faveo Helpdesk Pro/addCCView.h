@@ -9,14 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface addCCView : UITableViewController
+
 @property (strong, nonatomic) IBOutlet UITableView *tablview;
 @property (weak, nonatomic) IBOutlet UITextField *userSearchTextField;
 
 - (IBAction)addCCMethod:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
-- (IBAction)viewCCButton:(id)sender;
-- (IBAction)removeCCButton:(id)sender;
+
+
 
 
 @end
