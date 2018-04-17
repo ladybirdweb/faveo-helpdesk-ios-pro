@@ -251,6 +251,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 // Receive displayed notifications for iOS 10 devices.
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 // Handle incoming notification messages while app is in the foreground.
+
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
        willPresentNotification:(UNNotification *)notification
          withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {

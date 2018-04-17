@@ -212,6 +212,12 @@
                                 [self->utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self];
                                 return;
                             }
+                            else if(statusCode == 400)
+                            {
+                                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                                [[AppDelegate sharedAppdelegate] hideProgressView];
+                                [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+                            }
                            else if (statusCode == 401) {
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -360,7 +366,7 @@
                             [self->utils showAlertWithMessage: NSLocalizedString(@"API is disabled in web, please enable it from Admin panel.", nil) sendViewController:self];
                             //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                             return;
-                        }else if(statusCode == 402)
+                        }else if(statusCode == 400)
                         {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];

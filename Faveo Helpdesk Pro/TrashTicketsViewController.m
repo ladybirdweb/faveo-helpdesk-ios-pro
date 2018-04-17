@@ -47,6 +47,16 @@
     NSString *selectedIDs;
     NSString *selectedIDsForDeleteForever;
     UINavigationBar*  navbar;
+    
+    
+    NSArray *ticketStatusArray;
+    
+    
+    NSMutableArray *statusArrayforChange;
+    NSMutableArray *statusIdforChange;
+    NSMutableArray *uniqueStatusNameArray;
+    NSString *selectedStatusName;
+    NSString *selectedStatusId;
 }
 
 @property (strong,nonatomic) NSIndexPath *selectedPath;
@@ -77,6 +87,10 @@
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
+    
+    statusArrayforChange = [[NSMutableArray alloc] init];
+    statusIdforChange = [[NSMutableArray alloc] init];
+    uniqueStatusNameArray = [[NSMutableArray alloc] init];
     
     
     NSLog(@"Role is in Inbox1111111 : %@",globalVariables.roleFromAuthenticateAPI);
