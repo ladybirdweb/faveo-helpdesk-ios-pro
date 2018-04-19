@@ -38,9 +38,28 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
    
     self.tableView.separatorColor=[UIColor clearColor];
+    
+    
+    
+    UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
+    
+    UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
+    [self.contentTextView setInputAccessoryView:toolBar];
+    
     _addButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     
 }
+
+
+-(void)removeKeyBoard
+{
+    
+    [_contentTextView resignFirstResponder];
+}
+
 
 - (IBAction)addButtonAction:(id)sender {
     
@@ -99,9 +118,11 @@
                             NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
                         }
-                        else
+                        else{
                         
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
                         
                     }else if(error)  {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
@@ -136,12 +157,15 @@
                     else if([json objectForKey:@"error"]) {
                         
                         [self->utils showAlertWithMessage:@"The body field is required.It can not be empty." sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                     }
                     else
                     {
                         
                         [self->utils showAlertWithMessage:@"Something Went Wrong. Please try again later." sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
                     }
                 }//end josn
                 NSLog(@"Thread-InternalNote-closed");

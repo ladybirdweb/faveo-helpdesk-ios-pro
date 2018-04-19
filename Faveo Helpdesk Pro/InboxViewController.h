@@ -58,5 +58,7 @@
 @property (strong, nonatomic) NSMutableArray *sampleDataArray;
 @property (strong, nonatomic) NSMutableArray *filteredSampleDataArray;
 
+
+-(void)hideTableViewEditMode;
 @end
 

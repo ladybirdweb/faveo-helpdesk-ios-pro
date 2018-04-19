@@ -6264,6 +6264,10 @@
                                                         <outlet property="delegate" destination="Ohi-Ft-6Qm" id="NNC-LO-KaL"/>
                                                     </connections>
                                                 </textView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LxJ-l4-Wcb">
+                                                    <rect key="frame" x="197" y="50" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="mZ8-cE-1JO" secondAttribute="bottom" constant="-4" id="6Sp-pc-HUw"/>
@@ -6303,10 +6307,10 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="GtM-ZM-Z9R" secondAttribute="bottom" constant="13" id="6BD-UG-tyf"/>
-                                                <constraint firstItem="GtM-ZM-Z9R" firstAttribute="leading" secondItem="zBW-Fc-nFz" secondAttribute="leadingMargin" constant="87" id="Gh4-80-Ad9"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="GtM-ZM-Z9R" secondAttribute="trailing" constant="64" id="Rhl-8U-nCU"/>
-                                                <constraint firstItem="GtM-ZM-Z9R" firstAttribute="centerY" secondItem="zBW-Fc-nFz" secondAttribute="centerY" id="a0V-3s-oJa"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="GtM-ZM-Z9R" secondAttribute="trailing" constant="64" id="32i-fa-hCR"/>
+                                                <constraint firstItem="GtM-ZM-Z9R" firstAttribute="centerY" secondItem="zBW-Fc-nFz" secondAttribute="centerY" id="6MQ-5v-zgi"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="GtM-ZM-Z9R" secondAttribute="bottom" constant="13" id="UKd-s9-sXX"/>
+                                                <constraint firstItem="GtM-ZM-Z9R" firstAttribute="leading" secondItem="zBW-Fc-nFz" secondAttribute="leadingMargin" constant="87" id="v25-nU-uFB"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -6373,6 +6377,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="736"/>
                     <connections>
+                        <outlet property="activityIndicatorOutlet" destination="LxJ-l4-Wcb" id="2L8-PZ-pfq"/>
                         <outlet property="addCCLabelButton" destination="VtS-aO-RXa" id="0MN-4Z-13N"/>
                         <outlet property="fileImage" destination="qg4-Rr-ijd" id="2lp-39-1T8"/>
                         <outlet property="fileName123" destination="Yly-J1-Xj5" id="53j-6u-TOJ"/>

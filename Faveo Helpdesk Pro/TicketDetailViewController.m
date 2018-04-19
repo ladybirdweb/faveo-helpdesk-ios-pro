@@ -38,6 +38,16 @@
     UILabel *errorMessageReply;
      UILabel *errorMessageNote;
     GlobalVariables *globalVariables;
+    
+    
+    NSArray *ticketStatusArray;
+    
+    
+    NSMutableArray *statusArrayforChange;
+    NSMutableArray *statusIdforChange;
+    NSMutableArray *uniqueStatusNameArray;
+    NSString *selectedStatusName;
+    NSString *selectedStatusId;
 }
 
 //-(void)replyBtnPressed;
@@ -67,6 +77,10 @@
     
     userDefaults=[NSUserDefaults standardUserDefaults];
     
+    statusArrayforChange = [[NSMutableArray alloc] init];
+    statusIdforChange = [[NSMutableArray alloc] init];
+    uniqueStatusNameArray = [[NSMutableArray alloc] init];
+    
     self.segmentedControl.tintColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     
    // [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleDone target:self action:@selector(onNavButtonTapped:event:)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(replyBtnPressed)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(internalNotePressed)], nil] animated:YES];
@@ -95,7 +109,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
 
     
-    NSLog(@"Ticket is isssss : %@",globalVariables.iD);
+    NSLog(@"Ticket Id isssss : %@",globalVariables.iD);
     
     if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
     {
@@ -112,6 +126,7 @@
     }
     else{
     
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting data",nil)];
     [self getDependencies];
     }
     
@@ -273,7 +288,6 @@
 }
 
 -(void)getDependencies{
-
     
     NSLog(@"Thread-NO1-getDependencies()-start");
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -306,30 +320,63 @@
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-              //  NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+                //   NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+                
                 if (error || [msg containsString:@"Error"]) {
                     
-                    if([msg isEqualToString:@"Error-401"])
+                    if( [msg containsString:@"Error-401"])
+                        
                     {
-                        NSLog(@"Message is : %@",msg);
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Your Credential Has been changed"] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
                     }
                     else
-                    if( [msg containsString:@"Error-429"])
-                        
-                    {
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
-                        
-                    }else{
-                        NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
-                        return ;
-                    }
+                        if( [msg containsString:@"Error-429"])
+                            
+                        {
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
+                        }
+                    
+                        else if( [msg isEqualToString:@"Error-403"] && [self->globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
+                            
+                        {
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
+                        }
+                    
+                        else if( [msg containsString:@"Error-403"])
+                            
+                        {
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
+                        }
+                    
+                        else if([msg isEqualToString:@"Error-404"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                    
+                    
+                        else{
+                            NSLog(@"Error message is %@",msg);
+                            NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
+                            [self->utils showAlertWithMessage:msg sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
+                            return ;
+                        }
                 }
                 
+                
+                // [[AppDelegate sharedAppdelegate] hideProgressView];
                 if ([msg isEqualToString:@"tokenRefreshed"]) {
-                    //               dispatch_async(dispatch_get_main_queue(), ^{
-                    //                  [self getDependencies];
-                    //               });
                     
                     [self getDependencies];
                     NSLog(@"Thread--NO4-call-getDependecies");
@@ -338,7 +385,7 @@
                 
                 if (json) {
                     
-                    //    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    //  NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
                     NSDictionary *resultDic = [json objectForKey:@"data"];
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
                     
@@ -347,6 +394,7 @@
                         NSString *count = [[ticketCountArray objectAtIndex:i]objectForKey:@"count"];
                         if ([name isEqualToString:@"Open"]) {
                             self->globalVariables.OpenCount=count;
+                            
                         }else if ([name isEqualToString:@"Closed"]) {
                             self->globalVariables.ClosedCount=count;
                         }else if ([name isEqualToString:@"Deleted"]) {
@@ -358,11 +406,11 @@
                         }
                     }
                     
-                    NSArray *ticketStatusArray=[resultDic objectForKey:@"status"];
+                    self->ticketStatusArray=[resultDic objectForKey:@"status"];
                     
-                    for (int i = 0; i < ticketStatusArray.count; i++) {
-                        NSString *statusName = [[ticketStatusArray objectAtIndex:i]objectForKey:@"name"];
-                        NSString *statusId = [[ticketStatusArray objectAtIndex:i]objectForKey:@"id"];
+                    for (int i = 0; i < self->ticketStatusArray.count; i++) {
+                        NSString *statusName = [[self->ticketStatusArray objectAtIndex:i]objectForKey:@"name"];
+                        NSString *statusId = [[self->ticketStatusArray objectAtIndex:i]objectForKey:@"id"];
                         
                         if ([statusName isEqualToString:@"Open"]) {
                             self->globalVariables.OpenStausId=statusId;
@@ -413,11 +461,13 @@
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
             [utils showAlertWithMessage:exception.name sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             return;
         }
         @finally
         {
             NSLog( @" I am in getDependencies method in Inbox ViewController" );
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }
     }
@@ -427,178 +477,91 @@
 
 -(void)onNavButtonTapped:(UIBarButtonItem *)sender event:(UIEvent *)event
 {
-    
-    // provide two methods to deal with the barbuttonitems
-    // comment this fowowing line and see how the other way of dealing with barbuttonitems
-    
-    //#define IfMethodOne
-    
-    
-#ifdef IfMethodOne
-    CGRect rect = [self.navigationController.navigationBar convertRect:[event.allTouches.anyObject view].frame toView:[[UIApplication sharedApplication] keyWindow]];
-    
-    [FTPopOverMenu showFromSenderFrame:rect
-                         withMenuArray:@[@"MenuOne",@"MenuTwo",@"MenuThree",@"MenuFour"]
-                            imageArray:@[@"Pokemon_Go_01",@"Pokemon_Go_02",@"Pokemon_Go_03",@"Pokemon_Go_04",]
-                             doneBlock:^(NSInteger selectedIndex) {
-                                 NSLog(@"done");
-                             } dismissBlock:^{
-                                 NSLog(@"cancel");
-                             }];
-    
-    
-#else
-    
-//    [FTPopOverMenu showFromEvent:event
-//                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
-    
-    [FTPopOverMenu showFromEvent:event
-                   withMenuArray:@[@"Change Ticket Status",globalVariables.OpenStausLabel,globalVariables.ClosedStausLabel,globalVariables.ResolvedStausLabel,globalVariables.DeletedStausLabel]
-                      imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"folderIcon"],[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
-                       doneBlock:^(NSInteger selectedIndex) {
-                           
-                           if(selectedIndex==0)
-                           {
-                               NSLog(@"Index 0 clicked");
-                              
-                           }else if(selectedIndex==1)
-                           {
-                               NSLog(@"Clicked on Open");
-                               
-                                [self changeStaus1];
-                           }else if(selectedIndex==2)
-                           {
-                               NSLog(@"Clicked on Closed");
-                                [self changeStaus2];
-                           }else if(selectedIndex==3)
-                           {
-                               NSLog(@"Clicked on Resolved");
-                                [self changeStaus3];
-                           } else if(selectedIndex==4)
-                           {
-                               NSLog(@"Clicked on Deleted");
-                                [self changeStaus4];
-                           }
-                
 
-                       } dismissBlock:^{
-                           
-                       }];
-    
+#ifdef IfMethodOne
+        CGRect rect = [self.navigationController.navigationBar convertRect:[event.allTouches.anyObject view].frame toView:[[UIApplication sharedApplication] keyWindow]];
+        
+        [FTPopOverMenu showFromSenderFrame:rect
+                             withMenuArray:@[@"MenuOne",@"MenuTwo",@"MenuThree",@"MenuFour"]
+                                imageArray:@[@"Pokemon_Go_01",@"Pokemon_Go_02",@"Pokemon_Go_03",@"Pokemon_Go_04",]
+                                 doneBlock:^(NSInteger selectedIndex) {
+                                     NSLog(@"done");
+                                 } dismissBlock:^{
+                                     NSLog(@"cancel");
+                                 }];
+        
+        
+#else
+        
+        
+        //taking status names array for dependecy api
+        for (NSDictionary *dicc in self->ticketStatusArray) {
+            if ([dicc objectForKey:@"name"]) {
+                [self->statusArrayforChange addObject:[dicc objectForKey:@"name"]];
+                [self->statusIdforChange addObject:[dicc objectForKey:@"id"]];
+            }
+            
+        }
+        
+        
+        //removing duplicated status names
+        for (id obj in self->statusArrayforChange) {
+            if (![uniqueStatusNameArray containsObject:obj]) {
+                [uniqueStatusNameArray addObject:obj];
+            }
+        }
+        
+        [FTPopOverMenu showFromEvent:event
+                       withMenuArray:uniqueStatusNameArray
+                          imageArray:uniqueStatusNameArray
+                           doneBlock:^(NSInteger selectedIndex) {
+                               
+                               
+                               self->selectedStatusName=[self->uniqueStatusNameArray objectAtIndex:selectedIndex];
+                               NSLog(@"Status is : %@",self->selectedStatusName);
+                               
+                               
+                               for (NSDictionary *dic in self->ticketStatusArray)
+                               {
+                                   NSString *idOfStatus = dic[@"name"];
+                                   
+                                   if([idOfStatus isEqual:self->selectedStatusName])
+                                   {
+                                       self->selectedStatusId= dic[@"id"];
+                                       
+                                       NSLog(@"id is : %@",self->selectedStatusId);
+                                   }
+                               }
+                               
+                               if([self->selectedStatusName isEqualToString:self->globalVariables.Ticket_status])
+                               {
+                                   NSString * msg=[NSString stringWithFormat:@"Ticket is Already %@.",self->globalVariables.Ticket_status];
+                                   [self->utils showAlertWithMessage:msg sendViewController:self];
+                                   [[AppDelegate sharedAppdelegate] hideProgressView];
+                               }
+                        
+                               else{
+                                   [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
+                               }
+                               
+                           }
+                        dismissBlock:^{
+                            
+                        }];
+        
 #endif
     
+}
+
+
+
+
+-(void)changeStatusMethod:(NSString *)nameOfStatus idIs:(NSString *)idOfStatus
+{
     
-}
-
--(void)changeStaus1
-{
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
-        //connection unavailable
-        
-           [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
-        
-    }else{
-        
-        [[AppDelegate sharedAppdelegate] showProgressView];
-        
-        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],globalVariables.iD,globalVariables.OpenStausId];
-        
-       
-        if([globalVariables.Ticket_status isEqualToString:@"Open"])
-        {
-            //
-            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Open", nil) sendViewController:self];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            
-        }
-        else{
-      //   NSLog(@"URL is : %@",url);
-        
-  @try{
-            MyWebservices *webservices=[MyWebservices sharedInstance];
-        
-        [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            
-            if (error || [msg containsString:@"Error"]) {
-                
-                if (msg) {
-                    
-                    if([msg isEqualToString:@"Error-403"])
-                    {
-                        [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Open a ticket", nil) sendViewController:self];
-                    }
-                    else{
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    }
-                    //  NSLog(@"Message is : %@",msg);
-                    
-                }else if(error)  {
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
-                }
-                
-                return ;
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                
-                [self changeStaus1];
-                NSLog(@"Thread--NO4-call-postTicketStatusChange");
-                return;
-            }
-
-            // [utils showAlertWithMessage:@"Kindly Refresh!!" sendViewController:self];
-            
-            // message = "Status changed to Open";
-            
-            
-            if (json) {
-                NSLog(@"JSON-CreateTicket-%@",json);
-                
-                NSString *str=[json objectForKey:@"message"];
-                
-                if([str isEqualToString:@"Status changed to Open"]){
-                    
-                    [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                    
-                    InboxViewController *inbox=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                    [self.navigationController pushViewController:inbox animated:YES];
-                    
-                }else
-                {
-                    
-                    [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Open a ticket", nil) sendViewController:self];
-                    
-                }
-            }
-            
-            NSLog(@"Thread-NO5-postTicketStatusChange-closed");
-            
-        }]; // end webservice call
-     }@catch (NSException *exception)
-            {
-                [utils showAlertWithMessage:exception.name sendViewController:self];
-                NSLog( @"Name: %@", exception.name);
-                NSLog( @"Reason: %@", exception.reason );
-                return;
-            }
-            @finally
-            {
-                NSLog( @" I am in changeStatus1 method in TicketDetail ViewController" );
-                
-            }
-
-        }
-            
-    }//end rechability
-}
-
-
--(void)changeStaus2
-{
+    NSLog(@"Status Name is : %@",nameOfStatus);
+    NSLog(@"Id is : %@",idOfStatus);
+    
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
@@ -610,314 +573,79 @@
         
         [[AppDelegate sharedAppdelegate] showProgressView];
         
-        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],globalVariables.iD,globalVariables.ClosedStausId];
-        
-        NSLog(@"API call is : %@",url);
-        if([globalVariables.Ticket_status isEqualToString:@"Closed"])
-        {
-            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Closed", nil) sendViewController:self];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+    
+            NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],globalVariables.iD,idOfStatus];
+            NSLog(@"URL is : %@",url);
             
-        }else{
-        
-    @try{
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        
-        [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+            MyWebservices *webservices=[MyWebservices sharedInstance];
             
-            if (error || [msg containsString:@"Error"]) {
+            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                [[AppDelegate sharedAppdelegate] hideProgressView];
                 
-                if (msg) {
+                if (error || [msg containsString:@"Error"]) {
                     
-                    if([msg isEqualToString:@"Error-403"])
+                    if (msg) {
+                        
+                        if([msg isEqualToString:@"Error-403"])
                         {
-                            [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change status. ", nil) sendViewController:self];
                         }
                         else{
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         }
-                  //  NSLog(@"Message is : %@",msg);
-                    
-                }else if(error)  {
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getTicketStausChange-Refresh-error == %@",error.localizedDescription);
-                }
-                
-                return ;
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                
-                [self changeStaus2];
-                NSLog(@"Thread--NO4-call-postTicketStatusChange");
-                return;
-            }
-            
-           //NSSingleObjectArrayI
-            
-            if (json) {
-                NSLog(@"JSON-Status-Change-Close-%@",json);
-                
-                
-                if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
-                {
-                    [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
-                    
-                }
-                else{
-                    
-                    NSString * msg=[json objectForKey:@"message"];
-                    
-                    if([msg isEqualToString:@"Status changed to Closed"]){
+                        //  NSLog(@"Message is : %@",msg);
                         
-                        [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                        
-                        InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                        [self.navigationController pushViewController:inboxVC animated:YES];
-                        
-                    }else
-                    {
-                        
-                        [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Close a ticket", nil) sendViewController:self];
-                        
+                    }else if(error)  {
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-getTicketStausChange-Refresh-error == %@",error.localizedDescription);
                     }
                     
+                    return ;
                 }
-            }
-            
-            NSLog(@"Thread-NO5-postTicketStatusChange-closed");
-            
-        }]; // end webservice call
-    }@catch (NSException *exception)
-            {
-                [utils showAlertWithMessage:exception.name sendViewController:self];
-                NSLog( @"Name: %@", exception.name);
-                NSLog( @"Reason: %@", exception.reason );
-                return;
-            }
-            @finally
-            {
-                NSLog( @" I am in chnageStatus2 method in TicketDetail ViewController" );
                 
-            }
-
-        }
-    }//end rechability
-}
-
--(void)changeStaus3
-{
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
-        //connection unavailable
-        
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
-        
-    }else{
-        
-        [[AppDelegate sharedAppdelegate] showProgressView];
-        
-        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],globalVariables.iD,globalVariables.ResolvedStausId];
-        
-        
-        if([globalVariables.Ticket_status isEqualToString:@"Resolved"])
-        {
-            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Resolved", nil) sendViewController:self];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            
-        }else{
-    @try{
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        
-        [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            
-            if (error || [msg containsString:@"Error"]) {
-                
-                if (msg) {
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
                     
-                    if([msg isEqualToString:@"Error-403"])
+                    [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
+                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                    return;
+                }
+                
+                if (json) {
+                    NSLog(@"JSON-Status-Change-Close-%@",json);
+                    
+                    
+                    if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
                     {
-                        [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Resolve a ticket", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change status. ", nil) sendViewController:self];
+                        
                     }
                     else{
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    }
-                    //  NSLog(@"Message is : %@",msg);
-                    
-                }else if(error)  {
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
-                }
-                
-                return ;
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                
-                [self changeStaus3];
-                NSLog(@"Thread--NO4-call-postTicketStatusChange");
-                return;
-            }
-            
-            if (json) {
-                NSLog(@"JSON-CreateTicket-%@",json);
-                
-                if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
-                {
-                    [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolved a ticket", nil) sendViewController:self];
-                    
-                }
-                else{
-                    NSString * msg=[json objectForKey:@"message"];
-                    
-                    if([msg isEqualToString:@"Status changed to Resolved"]){
                         
-                        [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        NSString * msg=[json objectForKey:@"message"];
                         
-                        InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                        [self.navigationController pushViewController:inboxVC animated:YES];
-                        
-                    }else
-                    {
-                        
-                        [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
+                        if([msg hasPrefix:@"Status changed"]){
+                            
+                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                            InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                            [self.navigationController pushViewController:inboxVC animated:YES];
+                            
+                        }else
+                        {
+                            
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change status. ", nil) sendViewController:self];
+                            
+                        }
                         
                     }
-                    
                 }
-            }
-            NSLog(@"Thread-NO5-postTicketStatusChange-closed");
-            
-        }]; // end webservice call
-    }@catch (NSException *exception)
-            {
-                [utils showAlertWithMessage:exception.name sendViewController:self];
-                NSLog( @"Name: %@", exception.name);
-                NSLog( @"Reason: %@", exception.reason );
-                return;
-            }
-            @finally
-            {
-                NSLog( @" I am in changeStatus3 method in TicketDetail ViewController" );
                 
-            }
-
+                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                
+            }];
         }
-    }//end rechability
+    
 }
-
-
--(void)changeStaus4
-{
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
-        //connection unavailable
-        
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
-        
-    }else{
-        
-        [[AppDelegate sharedAppdelegate] showProgressView];
-        
-        NSString *url= [NSString stringWithFormat:@"%@api/v2/helpdesk/status/change?api_key=%@&token=%@&ticket_id=%@&status_id=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],globalVariables.iD,globalVariables.DeletedStausId];
-        
-        if([globalVariables.Ticket_status isEqualToString:@"Deleted"])
-        {
-            [utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Deleted", nil) sendViewController:self];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            
-        }else{
-    @try{
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        
-        [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            
-            if (error || [msg containsString:@"Error"]) {
-                
-                if (msg) {
-                    
-                    if([msg isEqualToString:@"Error-403"])
-                    {
-                        [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Delete a ticket", nil) sendViewController:self];
-                    }
-                    else{
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    }
-                    //  NSLog(@"Message is : %@",msg);
-                    
-                }else if(error)  {
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
-                }
-                
-                return ;
-            }
-            
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                
-                [self changeStaus4];
-                NSLog(@"Thread--NO4-call-postTicketStatusChange");
-                return;
-            }
-            
-        
-            
-            
-            if (json) {
-                NSLog(@"JSON-CreateTicket-%@",json);
-                
-                if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
-                {
-                    [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
-                    
-                }
-                else{
-                    
-                    NSString * msg=[json objectForKey:@"message"];
-                    
-                    if([msg isEqualToString:@"Status changed to Deleted"]){
-                        
-                        
-                        [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                        
-                        InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                        [self.navigationController pushViewController:inboxVC animated:YES];
-                        
-                    }else
-                    {
-                        
-                        [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Delete a ticket", nil) sendViewController:self];
-                        
-                    }
-                }
-            }
-            
-            NSLog(@"Thread-NO5-postTicketStatusChange-closed");
-            
-        }]; // end webservice call
-    }@catch (NSException *exception)
-            {
-                [utils showAlertWithMessage:exception.name sendViewController:self];
-                NSLog( @"Name: %@", exception.name);
-                NSLog( @"Reason: %@", exception.reason );
-                return;
-            }
-            @finally
-            {
-                NSLog( @" I am in chnageStatus4 method in TicketDetail ViewController" );
-                
-            }
-
-        }
-    }//end rechability
-}
-
-
 
 
 

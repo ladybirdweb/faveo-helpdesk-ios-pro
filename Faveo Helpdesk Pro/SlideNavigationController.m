@@ -36,6 +36,7 @@
 #import "RMessage.h"
 #import "RMessageView.h"
 #import "AppDelegate.h"
+#import "InboxViewController.h"
 
 
 typedef enum {
@@ -129,6 +130,7 @@ static SlideNavigationController *singletonInstance;
 
 - (void)setup
 {
+    
 	if (singletonInstance)
 		NSLog(@"Singleton instance already exists. You can only instantiate one instance of SlideNavigationController. This could cause major issues");
 	
@@ -625,11 +627,15 @@ static SlideNavigationController *singletonInstance;
 
 - (void)prepareMenuForReveal:(Menu)menu
 {
+    
+    
 	// Only prepare menu if it has changed (ex: from MenuLeft to MenuRight or vice versa)
     if (self.lastRevealedMenu && menu == self.lastRevealedMenu)
         return;
     
  //  [self getDependencies];
+    
+    
     
     LeftMenuViewController *lmenu=[[LeftMenuViewController alloc]init];
     [lmenu reloadd];

@@ -23,9 +23,11 @@
 #import "RMessage.h"
 #import "RMessageView.h"
 #import "UIImageView+Letters.h"
+#import "InboxViewController.h"
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
+
 
 
 @interface NotificationViewController ()<RMessageProtocol>
@@ -35,7 +37,7 @@
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
     NSString *notifyID;
-    
+
 }
 
 @property (nonatomic, strong) NSMutableArray *mutableArray;
@@ -52,23 +54,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"Naa-Inbox");
-    
-    
-       
+
     NSString *refreshedToken = [[FIRInstanceID instanceID] token];
     NSLog(@"refreshed token  %@",refreshedToken);
     
     [self setTitle:NSLocalizedString(@"Notifications",nil)];
     [self addUIRefresh];
-   // NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
+   
     _mutableArray=[[NSMutableArray alloc]init];
     
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
-    NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
-    
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+  
     
     if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
     {
@@ -84,6 +82,7 @@
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }
     {
+        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Please wait",nil)];
         [self reload];
     }
     
@@ -173,6 +172,15 @@
                 
                 [self reload];
                 NSLog(@"Thread--NO4-call-getNotificationViewController");
+                return;
+            }
+            
+            if ([msg isEqualToString:@"tokenNotRefreshed"]) {
+                
+                // [[AppDelegate sharedAppdelegate] hideProgressView];
+                [self->utils showAlertWithMessage:@"Your HELPDESK URL or your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                
                 return;
             }
             
@@ -634,6 +642,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    
   //  [[self navigationController] setNavigationBarHidden:NO];
     
 }

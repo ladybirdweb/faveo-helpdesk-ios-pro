@@ -218,13 +218,20 @@
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
                                 [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
                             }
-                           else if (statusCode == 401) {
+                           else if (statusCode == 401 || statusCode == 400) {
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
                                 [self->utils showAlertWithMessage: NSLocalizedString(@"API is disabled in web, please enable it from Admin panel.", nil) sendViewController:self];
                                 //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                                 return;
                             }
+                           else if (statusCode == 500) {
+                               NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                               [[AppDelegate sharedAppdelegate] hideProgressView];
+                               [self->utils showAlertWithMessage: NSLocalizedString(@"Internal Server Error. Something has gone wrong on the website's server", nil) sendViewController:self];
+                               //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
+                               return;
+                           }
                             else{
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -542,6 +549,7 @@
                     NSLog(@"Message is : %@",msg);
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                 }
+                
                 else{
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                     NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);

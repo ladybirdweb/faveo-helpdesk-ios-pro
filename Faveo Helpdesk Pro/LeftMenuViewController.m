@@ -21,6 +21,7 @@
 #import "UIImageView+Letters.h"
 
 @import Firebase;
+
 @interface LeftMenuViewController ()<RMessageProtocol>{
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
@@ -56,14 +57,14 @@
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
    
-    [self update];
-    [self getDependencies];
-
-    
-    [self.tableView reloadData];
-    
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
- 
+   
+    [self getDependencies];
+    [self.tableView reloadData];
+    [self update];
+    
+    
+    
 }
 
 
@@ -75,6 +76,8 @@
 }
 
 -(void)update{
+    
+    
     
     
     userDefaults=[NSUserDefaults standardUserDefaults];
@@ -254,6 +257,15 @@
                     
                     [self getDependencies];
                     NSLog(@"Thread--NO4-call-getDependecies");
+                    return;
+                }
+                
+                if ([msg isEqualToString:@"tokenNotRefreshed"]) {
+                    
+                    // [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [self->utils showAlertWithMessage:@"Your HELPDESK URL or your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    
                     return;
                 }
                 

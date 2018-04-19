@@ -135,10 +135,10 @@
     [self setTitle:NSLocalizedString(@"CreateTicket",nil)];
     
     
-    UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [moreButton setImage:[UIImage imageNamed:@"attach1"] forState:UIControlStateNormal];
-    [moreButton addTarget:self action:@selector(addAttachmentPickerButton) forControlEvents:UIControlEventTouchUpInside];
-    [moreButton setFrame:CGRectMake(15, 8, 17, 17)];
+    UIButton *attachmentButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [attachmentButton setImage:[UIImage imageNamed:@"attach1"] forState:UIControlStateNormal];
+    [attachmentButton addTarget:self action:@selector(addAttachmentPickerButton) forControlEvents:UIControlEventTouchUpInside];
+    [attachmentButton setFrame:CGRectMake(12, 7, 22, 22)];
     
     UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     [NotificationBtn setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
@@ -146,7 +146,7 @@
     [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)]; //clearAll  //flipView
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    [rightBarButtonItems addSubview:moreButton];
+    [rightBarButtonItems addSubview:attachmentButton];
     [rightBarButtonItems addSubview:NotificationBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
@@ -827,199 +827,199 @@
 }
 
 
--(void)createTicket{
-    
-   
-    
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
-        //connection unavailable
-        //[utils showAlertWithMessage:NO_INTERNET sendViewController:self];
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
-    }else{
-        
-    //    [[AppDelegate sharedAppdelegate] showProgressView];
-       
-        
-        
-        NSString *code=@"";
-        if(_codeTextField.text.length>0){
-            code=[_codeTextField.text substringFromIndex:1];
-        }
-        
-        NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
-        NSLog(@"Stffid1111 is : %@",staffID);
-        NSLog(@"Stffid1111 is : %@",staffID);
-        
-        if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
-        {
-            
-            staffID=@"0";
-        }
-        
-        [Utils isEmpty:_ccTextField.text];
-        
-        NSString *url;
-        if(![Utils isEmpty:_ccTextField.text])
-        {
-            url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@&cc[]=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID,selectedUserEmail];
-        }
-        else
-        {
-            url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID];
-        }
-        @try{
-            MyWebservices *webservices=[MyWebservices sharedInstance];
-            
-            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                
-                if (error || [msg containsString:@"Error"]) {
-                    
-                    if (msg) {
-                        if([msg isEqualToString:@"Error-403"])
-                        {
-                            [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-                        }
-                        else if([msg isEqualToString:@"Error-402"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                        }
-                       else if([msg isEqualToString:@"Error-422"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
-                        }
-                        else if([msg isEqualToString:@"Error-404"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-                        }
-                        else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-                        }
-                        else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
-                        }
-                        else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
-                        {
-                             NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
-                        }
-                        else{
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                            NSLog(@"Error is : %@",msg);
-                        }
-                        
-                    }else if(error)  {
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                        NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
-                    }
-                    
-                    return ;
-                }
-                
-                if ([msg isEqualToString:@"tokenRefreshed"]) {
-                    
-                    [self createTicket];
-                    NSLog(@"Thread--NO4-call-postCreateTicket");
-                    return;
-                }
-                
-                if (json) {
-                    NSLog(@"JSON-CreateTicket-%@",json);
-                   
-                    
-                    NSString * str= [json objectForKey:@"message"];
-                    
-                    if([[json objectForKey:@"error"] isEqualToString:@"Undefined variable: user_id"] || [json containsObject:@"error"] || [json containsObject:@"file"])
-                    {
-                        
-                        [self->utils showAlertWithMessage:NSLocalizedString(@"Something Went Wrong.", nil) sendViewController:self];
-                    }
-                    
-                    if([str isEqualToString:@"Permission denied, you do not have permission to access the requested page.;"] || [str hasPrefix:@"Permission denied"] )
-                        
-                    {
-                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-                    }
-                    else if ([json objectForKey:@"response"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
-                            
-                            NSDictionary * dict1=[json objectForKey:@"response"];
-                            NSString *str= [dict1 objectForKey:@"message"];
-                            
-                            
-                            if([str isEqualToString:@"Permission denied, you do not have permission to access the requested page."] || [str hasPrefix:@"Permission denied"])
-                            {
-                                
-                                [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-                                
-                            }else{
-                                
-                                [RMessage showNotificationInViewController:self.navigationController
-                                                                     title:NSLocalizedString(@"success", nil)
-                                                                  subtitle:NSLocalizedString(@"Ticket created successfully.", nil)
-                                                                 iconImage:nil
-                                                                      type:RMessageTypeSuccess
-                                                            customTypeName:nil
-                                                                  duration:RMessageDurationAutomatic
-                                                                  callback:nil
-                                                               buttonTitle:nil
-                                                            buttonCallback:nil
-                                                                atPosition:RMessagePositionBottom
-                                                      canBeDismissedByUser:YES];
-                                
-                                
-                                self->_emailTextView.text=@"";
-                               self-> _firstNameView.text=@"";
-                                self->_lastNameView.text=@"";
-                                self->_mobileView.text=@"";
-                                self->_codeTextField.text=@"";
-                                self->_helpTopicTextField.text=@"";
-                               self-> _subjectView.text=@"";
-                               self-> _priorityTextField.text=@"";
-                                self->_assignTextField.text=@"";
-                                self->_textViewMsg.text=@"";
-                                
-                                self->globalVariables.emailAddRequester=@"";
-                               self-> globalVariables.firstNameAddRequester=@"";
-                               self-> globalVariables.lastAddRequester=@"";
-                                self->globalVariables.mobileAddRequester=@"";
-                               self-> globalVariables.mobileCode=@"";
-                                
-                                
-                                InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                                [self.navigationController pushViewController:inboxVC animated:YES];
-                            }
-                        });
-                    }
-                }
-                NSLog(@"Thread-NO5-postCreateTicket-closed");
-                
-            }];
-        }@catch (NSException *exception)
-        {
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
-            [utils showAlertWithMessage:exception.name sendViewController:self];
-            return;
-        }
-        @finally
-        {
-            NSLog( @" I am in CreateTicket method in CreateTicket ViewController" );
-            
-        }
-    }
-}
+//-(void)createTicket{
+//
+//
+//
+//    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+//    {
+//        //connection unavailable
+//        //[utils showAlertWithMessage:NO_INTERNET sendViewController:self];
+//        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+//
+//    }else{
+//
+//    //    [[AppDelegate sharedAppdelegate] showProgressView];
+//
+//
+//
+//        NSString *code=@"";
+//        if(_codeTextField.text.length>0){
+//            code=[_codeTextField.text substringFromIndex:1];
+//        }
+//
+//        NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
+//        NSLog(@"Stffid1111 is : %@",staffID);
+//        NSLog(@"Stffid1111 is : %@",staffID);
+//
+//        if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
+//        {
+//
+//            staffID=@"0";
+//        }
+//
+//        [Utils isEmpty:_ccTextField.text];
+//
+//        NSString *url;
+//        if(![Utils isEmpty:_ccTextField.text])
+//        {
+//            url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@&cc[]=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID,selectedUserEmail];
+//        }
+//        else
+//        {
+//            url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID];
+//        }
+//        @try{
+//            MyWebservices *webservices=[MyWebservices sharedInstance];
+//
+//            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+//                [[AppDelegate sharedAppdelegate] hideProgressView];
+//
+//                if (error || [msg containsString:@"Error"]) {
+//
+//                    if (msg) {
+//                        if([msg isEqualToString:@"Error-403"])
+//                        {
+//                            [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+//                        }
+//                        else if([msg isEqualToString:@"Error-402"])
+//                        {
+//                            NSLog(@"Message is : %@",msg);
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+//                        }
+//                       else if([msg isEqualToString:@"Error-422"])
+//                        {
+//                            NSLog(@"Message is : %@",msg);
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+//                        }
+//                        else if([msg isEqualToString:@"Error-404"])
+//                        {
+//                            NSLog(@"Message is : %@",msg);
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+//                        }
+//                        else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
+//                        {
+//                            NSLog(@"Message is : %@",msg);
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+//                        }
+//                        else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
+//                        {
+//                            NSLog(@"Message is : %@",msg);
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+//                        }
+//                        else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
+//                        {
+//                             NSLog(@"Message is : %@",msg);
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+//                        }
+//                        else{
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+//                            NSLog(@"Error is : %@",msg);
+//                        }
+//
+//                    }else if(error)  {
+//                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+//                        NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+//                    }
+//
+//                    return ;
+//                }
+//
+//                if ([msg isEqualToString:@"tokenRefreshed"]) {
+//
+//                    [self createTicket];
+//                    NSLog(@"Thread--NO4-call-postCreateTicket");
+//                    return;
+//                }
+//
+//                if (json) {
+//                    NSLog(@"JSON-CreateTicket-%@",json);
+//
+//
+//                    NSString * str= [json objectForKey:@"message"];
+//
+//                    if([[json objectForKey:@"error"] isEqualToString:@"Undefined variable: user_id"] || [json containsObject:@"error"] || [json containsObject:@"file"])
+//                    {
+//
+//                        [self->utils showAlertWithMessage:NSLocalizedString(@"Something Went Wrong.", nil) sendViewController:self];
+//                    }
+//
+//                    if([str isEqualToString:@"Permission denied, you do not have permission to access the requested page.;"] || [str hasPrefix:@"Permission denied"] )
+//
+//                    {
+//                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+//                    }
+//                    else if ([json objectForKey:@"response"]) {
+//                        dispatch_async(dispatch_get_main_queue(), ^{
+//                            // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+//
+//
+//                            NSDictionary * dict1=[json objectForKey:@"response"];
+//                            NSString *str= [dict1 objectForKey:@"message"];
+//
+//
+//                            if([str isEqualToString:@"Permission denied, you do not have permission to access the requested page."] || [str hasPrefix:@"Permission denied"])
+//                            {
+//
+//                                [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+//
+//                            }else{
+//
+//                                [RMessage showNotificationInViewController:self.navigationController
+//                                                                     title:NSLocalizedString(@"success", nil)
+//                                                                  subtitle:NSLocalizedString(@"Ticket created successfully.", nil)
+//                                                                 iconImage:nil
+//                                                                      type:RMessageTypeSuccess
+//                                                            customTypeName:nil
+//                                                                  duration:RMessageDurationAutomatic
+//                                                                  callback:nil
+//                                                               buttonTitle:nil
+//                                                            buttonCallback:nil
+//                                                                atPosition:RMessagePositionBottom
+//                                                      canBeDismissedByUser:YES];
+//
+//
+//                                self->_emailTextView.text=@"";
+//                               self-> _firstNameView.text=@"";
+//                                self->_lastNameView.text=@"";
+//                                self->_mobileView.text=@"";
+//                                self->_codeTextField.text=@"";
+//                                self->_helpTopicTextField.text=@"";
+//                               self-> _subjectView.text=@"";
+//                               self-> _priorityTextField.text=@"";
+//                                self->_assignTextField.text=@"";
+//                                self->_textViewMsg.text=@"";
+//
+//                                self->globalVariables.emailAddRequester=@"";
+//                               self-> globalVariables.firstNameAddRequester=@"";
+//                               self-> globalVariables.lastAddRequester=@"";
+//                                self->globalVariables.mobileAddRequester=@"";
+//                               self-> globalVariables.mobileCode=@"";
+//
+//
+//                                InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+//                                [self.navigationController pushViewController:inboxVC animated:YES];
+//                            }
+//                        });
+//                    }
+//                }
+//                NSLog(@"Thread-NO5-postCreateTicket-closed");
+//
+//            }];
+//        }@catch (NSException *exception)
+//        {
+//            NSLog( @"Name: %@", exception.name);
+//            NSLog( @"Reason: %@", exception.reason );
+//            [utils showAlertWithMessage:exception.name sendViewController:self];
+//            return;
+//        }
+//        @finally
+//        {
+//            NSLog( @" I am in CreateTicket method in CreateTicket ViewController" );
+//
+//        }
+//    }
+//}
 
 
 
@@ -1870,199 +1870,198 @@
 }
 
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu upload:(NSData * _Nonnull)data filename:(NSString * _Nonnull)filename image:(UIImage * _Nullable)image {
-    NSLog(@"File Name : %@", filename);
     
+    NSLog(@"File Name : %@", filename);
     NSLog(@"File name : %@",filename);
+    
     file123=filename;
     attachNSData=data;
     
-    _fileSize123.text=[NSString stringWithFormat:@" %.2f MB",(float)data.length/1024.0f/1024.0f];
-    
-  //  base64Encoded = [data base64EncodedStringWithOptions:0];
-   // printf("NSDATA Attachemnt : %s\n", [base64Encoded UTF8String]);
-    
-    _fileName123.text=filename;
-    
-    if([filename hasSuffix:@".doc"] || [filename hasSuffix:@".DOC"])
-    {
-        typeMime=@"application/msword";
-        _fileImage.image=[UIImage imageNamed:@"doc"];
-    }
-    else if([filename hasSuffix:@".pdf"] || [filename hasSuffix:@".PDF"])
-    {
-        typeMime=@"application/pdf";
-         _fileImage.image=[UIImage imageNamed:@"pdf"];
-    }
-    else if([filename hasSuffix:@".css"] || [filename hasSuffix:@".CSS"])
-    {
-        typeMime=@"text/css";
-         _fileImage.image=[UIImage imageNamed:@"css"];
-    }
-    else if([filename hasSuffix:@".csv"] || [filename hasSuffix:@".CSV"])
-    {
-        typeMime=@"text/csv";
-         _fileImage.image=[UIImage imageNamed:@"csv"];
-    }
-    else if([filename hasSuffix:@".xls"] || [filename hasSuffix:@".XLS"])
-    {
-        typeMime=@"application/vnd.ms-excel";
-         _fileImage.image=[UIImage imageNamed:@"xls"];
-    }
-   
-    else if([filename hasSuffix:@".rtf"] || [filename hasSuffix:@".RTF"])
-    {
-        typeMime=@"text/richtext";
-         _fileImage.image=[UIImage imageNamed:@"rtf"];
-    }
-    else if([filename hasSuffix:@".sql"] || [filename hasSuffix:@".SQL"])
-    {
-        typeMime=@"text/sql";
-         _fileImage.image=[UIImage imageNamed:@"sql"];
-    }
-    else if([filename hasSuffix:@".gif"] || [filename hasSuffix:@".GIF"])
-    {
-        typeMime=@"image/gif";
-         _fileImage.image=[UIImage imageNamed:@"gif2"];
-    }
-    else if([filename hasSuffix:@".ppt"] || [filename hasSuffix:@".PPT"])
-    {
-        typeMime=@"application/mspowerpoint";
-         _fileImage.image=[UIImage imageNamed:@"ppt"];
-    }
-    else if([filename hasSuffix:@".jpeg"] || [filename hasSuffix:@".JPEG"])
-    {
-        typeMime=@"image/jpeg";
-         _fileImage.image=[UIImage imageNamed:@"jpg"];
-    }
-    else if([filename hasSuffix:@".docx"] || [filename hasSuffix:@".DOCX"])
-    {
-        typeMime=@"application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-         _fileImage.image=[UIImage imageNamed:@"doc"];
-    }
-    else if([filename hasSuffix:@".pps"] || [filename hasSuffix:@".PPS"])
-    {
-        typeMime=@"application/vnd.ms-powerpoint";
-         _fileImage.image=[UIImage imageNamed:@"ppt"];
-    }
-    else if([filename hasSuffix:@".pptx"] || [filename hasSuffix:@".PPTX"])
-    {
-        typeMime=@"application/vnd.openxmlformats-officedocument.presentationml.presentation";
-         _fileImage.image=[UIImage imageNamed:@"ppt"];
-    }
-    else if([filename hasSuffix:@".jpg"] || [filename hasSuffix:@".JPG"])
-    {
-        typeMime=@"image/jpg";
-         _fileImage.image=[UIImage imageNamed:@"jpg"];
-    }
-    else if([filename hasSuffix:@".png"] || [filename hasSuffix:@".PNG"])
-    {
-        typeMime=@"image/png";
-         _fileImage.image=[UIImage imageNamed:@"png"];
-    }
-    else if([filename hasSuffix:@".ico"] || [filename hasSuffix:@".ICO"])
-    {
-        typeMime=@"image/x-icon";
-         _fileImage.image=[UIImage imageNamed:@"ico"];
-    }
-    else if([filename hasSuffix:@".txt"] || [filename hasSuffix:@".text"] || [filename hasSuffix:@".TEXT"] || [filename hasSuffix:@".com"] || [filename hasSuffix:@".f"] || [filename hasSuffix:@".hh"]  || [filename hasSuffix:@".conf"]  || [filename hasSuffix:@".f90"]  || [filename hasSuffix:@".idc"] || [filename hasSuffix:@".cxx"] || [filename hasSuffix:@".h"] || [filename hasSuffix:@".java"] || [filename hasSuffix:@".def"] || [filename hasSuffix:@".g"] || [filename hasSuffix:@".c"] || [filename hasSuffix:@".c++"] || [filename hasSuffix:@".cc"] || [filename hasSuffix:@".list"]|| [filename hasSuffix:@".log"]|| [filename hasSuffix:@".lst"] || [filename hasSuffix:@".m"] || [filename hasSuffix:@".mar"] || [filename hasSuffix:@".pl"] || [filename hasSuffix:@".sdml"])
-    {
-        typeMime=@"text/plain";
-         _fileImage.image=[UIImage imageNamed:@"txt"];
-    }
-    else if([filename hasPrefix:@".bmp"])
-    {
-        typeMime=@"image/bmp";
-        _fileImage.image=[UIImage imageNamed:@"commonImage"];
-    }
-    else if([filename hasPrefix:@".java"])
-    {
-        typeMime=@"application/java";
-        _fileImage.image=[UIImage imageNamed:@"commonImage"];
-    }
-    else if([filename hasSuffix:@".html"] || [filename hasSuffix:@".htm"] || [filename hasSuffix:@".htmls"] || [filename hasSuffix:@".HTML"] || [filename hasSuffix:@".HTM"])
-    {
-        typeMime=@"text/html";
-         _fileImage.image=[UIImage imageNamed:@"html"];
-    }
-    else  if([filename hasSuffix:@".mp3"])
-    {
-        typeMime=@"audio/mp3";
-         _fileImage.image=[UIImage imageNamed:@"mp3"];
-    }
-    else  if([filename hasSuffix:@".wav"])
-    {
-        typeMime=@"audio/wav";
-          _fileImage.image=[UIImage imageNamed:@"audioCommon"];
-    }
-    else  if([filename hasSuffix:@".aac"])
-    {
-        typeMime=@"audio/aac";
-        _fileImage.image=[UIImage imageNamed:@"audioCommon"];
-    }
-    else  if([filename hasSuffix:@".aiff"] || [filename hasSuffix:@".aif"])
-    {
-        typeMime=@"audio/aiff";
-        _fileImage.image=[UIImage imageNamed:@"audioCommon"];
-    }
-    else  if([filename hasSuffix:@".m4p"])
-    {
-        typeMime=@"audio/m4p";
-        _fileImage.image=[UIImage imageNamed:@"audioCommon"];
-    }
-    else  if([filename hasSuffix:@".mp4"])
-    {
-        typeMime=@"video/mp4";
-        _fileImage.image=[UIImage imageNamed:@"mp4"];
-    }
-    else if([filename hasSuffix:@".mov"])
-    {
-        typeMime=@"video/quicktime";
-        _fileImage.image=[UIImage imageNamed:@"audioCommon"];
-    }
-    else if([filename hasSuffix:@".mov"]) //[UIImage imageNamed:@"mov"];
-    {
-        typeMime=@"video/mpeg";
-         _fileImage.image=[UIImage imageNamed:@"mov"];
-    }
-    else  if([filename hasSuffix:@".wmv"])
-    {
-        typeMime=@"video/x-ms-wmv";
-        _fileImage.image=[UIImage imageNamed:@"wmv"];
-    }
-    else if([filename hasSuffix:@".flv"])
-    {
-        typeMime=@"video/x-msvideo";
-        _fileImage.image=[UIImage imageNamed:@"flv"];
-    }
-    else if([filename hasSuffix:@".mkv"])
-    {
-        typeMime=@"video/mkv";
-        _fileImage.image=[UIImage imageNamed:@"mkv"];
-    }
-    else if([filename hasSuffix:@".avi"])
-    {
-        typeMime=@"video/avi";
-        _fileImage.image=[UIImage imageNamed:@"avi"];
-    }
-    else if([filename hasSuffix:@".zip"])
-    {
-        typeMime=@"application/zip";
-        _fileImage.image=[UIImage imageNamed:@"zip"];
-    }
-    else if([filename hasSuffix:@".rar"])
-    {
-        typeMime=@"application/x-rar-compressed";
-        _fileImage.image=[UIImage imageNamed:@"commonImage"];
-    }
-
-    else
-    {
-          _fileImage.image=[UIImage imageNamed:@"commonImage"];
-    }
-    
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self->_fileSize123.text=[NSString stringWithFormat:@" %.2f MB",(float)data.length/1024.0f/1024.0f];
+        
+        
+        
+        //  base64Encoded = [data base64EncodedStringWithOptions:0];
+        // printf("NSDATA Attachemnt : %s\n", [base64Encoded UTF8String]);
+        
+        
+        self->_fileName123.text=filename;
+        
+        if([filename hasSuffix:@".doc"] || [filename hasSuffix:@".DOC"])
+        {
+            self->typeMime=@"application/msword";
+            self->_fileImage.image=[UIImage imageNamed:@"doc"];
+        }
+        else if([filename hasSuffix:@".pdf"] || [filename hasSuffix:@".PDF"])
+        {
+            self->typeMime=@"application/pdf";
+            self->_fileImage.image=[UIImage imageNamed:@"pdf"];
+        }
+        else if([filename hasSuffix:@".css"] || [filename hasSuffix:@".CSS"])
+        {
+            self->typeMime=@"text/css";
+            self->_fileImage.image=[UIImage imageNamed:@"css"];
+        }
+        else if([filename hasSuffix:@".csv"] || [filename hasSuffix:@".CSV"])
+        {
+            self->typeMime=@"text/csv";
+            self->_fileImage.image=[UIImage imageNamed:@"csv"];
+        }
+        else if([filename hasSuffix:@".xls"] || [filename hasSuffix:@".XLS"])
+        {
+            self->typeMime=@"application/vnd.ms-excel";
+            self->_fileImage.image=[UIImage imageNamed:@"xls"];
+        }
+        
+        else if([filename hasSuffix:@".rtf"] || [filename hasSuffix:@".RTF"])
+        {
+            self->typeMime=@"text/richtext";
+            self->_fileImage.image=[UIImage imageNamed:@"rtf"];
+        }
+        else if([filename hasSuffix:@".sql"] || [filename hasSuffix:@".SQL"])
+        {
+            self->typeMime=@"text/sql";
+            self->_fileImage.image=[UIImage imageNamed:@"sql"];
+        }
+        else if([filename hasSuffix:@".gif"] || [filename hasSuffix:@".GIF"])
+        {
+            self->typeMime=@"image/gif";
+            self->_fileImage.image=[UIImage imageNamed:@"gif2"];
+        }
+        else if([filename hasSuffix:@".ppt"] || [filename hasSuffix:@".PPT"])
+        {
+            self->typeMime=@"application/mspowerpoint";
+            self->_fileImage.image=[UIImage imageNamed:@"ppt"];
+        }
+        else if([filename hasSuffix:@".jpeg"] || [filename hasSuffix:@".JPEG"])
+        {
+            self->typeMime=@"image/jpeg";
+            self->_fileImage.image=[UIImage imageNamed:@"jpg"];
+        }
+        else if([filename hasSuffix:@".docx"] || [filename hasSuffix:@".DOCX"])
+        {
+            self->typeMime=@"application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+            self->_fileImage.image=[UIImage imageNamed:@"doc"];
+        }
+        else if([filename hasSuffix:@".pps"] || [filename hasSuffix:@".PPS"])
+        {
+            self->typeMime=@"application/vnd.ms-powerpoint";
+            self->_fileImage.image=[UIImage imageNamed:@"ppt"];
+        }
+        else if([filename hasSuffix:@".pptx"] || [filename hasSuffix:@".PPTX"])
+        {
+            self->typeMime=@"application/vnd.openxmlformats-officedocument.presentationml.presentation";
+            self->_fileImage.image=[UIImage imageNamed:@"ppt"];
+        }
+        else if([filename hasSuffix:@".jpg"] || [filename hasSuffix:@".JPG"])
+        {
+            self->typeMime=@"image/jpg";
+            self->_fileImage.image=[UIImage imageNamed:@"jpg"];
+        }
+        else if([filename hasSuffix:@".png"] || [filename hasSuffix:@".PNG"])
+        {
+            self->typeMime=@"image/png";
+            self->_fileImage.image=[UIImage imageNamed:@"png"];
+        }
+        else if([filename hasSuffix:@".ico"] || [filename hasSuffix:@".ICO"])
+        {
+            self->typeMime=@"image/x-icon";
+            self->_fileImage.image=[UIImage imageNamed:@"ico"];
+        }
+        else if([filename hasSuffix:@".txt"] || [filename hasSuffix:@".text"] || [filename hasSuffix:@".TEXT"] || [filename hasSuffix:@".com"] || [filename hasSuffix:@".f"] || [filename hasSuffix:@".hh"]  || [filename hasSuffix:@".conf"]  || [filename hasSuffix:@".f90"]  || [filename hasSuffix:@".idc"] || [filename hasSuffix:@".cxx"] || [filename hasSuffix:@".h"] || [filename hasSuffix:@".java"] || [filename hasSuffix:@".def"] || [filename hasSuffix:@".g"] || [filename hasSuffix:@".c"] || [filename hasSuffix:@".c++"] || [filename hasSuffix:@".cc"] || [filename hasSuffix:@".list"]|| [filename hasSuffix:@".log"]|| [filename hasSuffix:@".lst"] || [filename hasSuffix:@".m"] || [filename hasSuffix:@".mar"] || [filename hasSuffix:@".pl"] || [filename hasSuffix:@".sdml"])
+        {
+            self->typeMime=@"text/plain";
+            self->_fileImage.image=[UIImage imageNamed:@"txt"];
+        }
+        else if([filename hasPrefix:@".bmp"])
+        {
+            self->typeMime=@"image/bmp";
+            self->_fileImage.image=[UIImage imageNamed:@"commonImage"];
+        }
+        else if([filename hasPrefix:@".java"])
+        {
+            self->typeMime=@"application/java";
+            self->_fileImage.image=[UIImage imageNamed:@"commonImage"];
+        }
+        else if([filename hasSuffix:@".html"] || [filename hasSuffix:@".htm"] || [filename hasSuffix:@".htmls"] || [filename hasSuffix:@".HTML"] || [filename hasSuffix:@".HTM"])
+        {
+            self->typeMime=@"text/html";
+            self->_fileImage.image=[UIImage imageNamed:@"html"];
+        }
+        else  if([filename hasSuffix:@".mp3"])
+        {
+            self->typeMime=@"audio/mp3";
+            self->_fileImage.image=[UIImage imageNamed:@"mp3"];
+        }
+        else  if([filename hasSuffix:@".wav"])
+        {
+            self->typeMime=@"audio/wav";
+            self->_fileImage.image=[UIImage imageNamed:@"audioCommon"];
+        }
+        else  if([filename hasSuffix:@".aac"])
+        {
+            self->typeMime=@"audio/aac";
+            self->_fileImage.image=[UIImage imageNamed:@"audioCommon"];
+        }
+        else  if([filename hasSuffix:@".aiff"] || [filename hasSuffix:@".aif"])
+        {
+            self->typeMime=@"audio/aiff";
+            self->_fileImage.image=[UIImage imageNamed:@"audioCommon"];
+        }
+        else  if([filename hasSuffix:@".m4p"])
+        {
+            self->typeMime=@"audio/m4p";
+            self->_fileImage.image=[UIImage imageNamed:@"audioCommon"];
+        }
+        else  if([filename hasSuffix:@".mp4"])
+        {
+            self->typeMime=@"video/mp4";
+            self->_fileImage.image=[UIImage imageNamed:@"mp4"];
+        }
+        else if([filename hasSuffix:@".mov"])
+        {
+            self->typeMime=@"video/quicktime";
+            self->_fileImage.image=[UIImage imageNamed:@"audioCommon"];
+        }
+        
+        else  if([filename hasSuffix:@".wmv"])
+        {
+            self->typeMime=@"video/x-ms-wmv";
+            self->_fileImage.image=[UIImage imageNamed:@"wmv"];
+        }
+        else if([filename hasSuffix:@".flv"])
+        {
+            self->typeMime=@"video/x-msvideo";
+            self->_fileImage.image=[UIImage imageNamed:@"flv"];
+        }
+        else if([filename hasSuffix:@".mkv"])
+        {
+            self->typeMime=@"video/mkv";
+            self->_fileImage.image=[UIImage imageNamed:@"mkv"];
+        }
+        else if([filename hasSuffix:@".avi"])
+        {
+            self->typeMime=@"video/avi";
+            self->_fileImage.image=[UIImage imageNamed:@"avi"];
+        }
+        else if([filename hasSuffix:@".zip"])
+        {
+            self->typeMime=@"application/zip";
+            self->_fileImage.image=[UIImage imageNamed:@"zip"];
+        }
+        else if([filename hasSuffix:@".rar"])
+        {
+            self->typeMime=@"application/x-rar-compressed";
+            self->_fileImage.image=[UIImage imageNamed:@"commonImage"];
+        }
+        else
+        {
+            self->_fileImage.image=[UIImage imageNamed:@"commonImage"];
+        }
+        
+    });
 }
-
 -(void)postTicketCreate
 {
    
@@ -2250,6 +2249,12 @@
          {
              
              [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+             
+         }
+         if([str isEqualToString:@"API disabled"] || [str hasPrefix:@"API disabled"])
+         {
+             
+             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
              
          }
          else{

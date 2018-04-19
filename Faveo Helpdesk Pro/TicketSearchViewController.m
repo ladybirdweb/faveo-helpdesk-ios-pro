@@ -98,26 +98,36 @@
 - (IBAction)segmentedControlAction:(id)sender {
     if(_segmentedControlObject.selectedSegmentIndex==0)
     {
+        if([_seachTextField.text isEqualToString:@""])
+        {
+            [self->utils showAlertWithMessage:@"Enter the data for search ticket." sendViewController:self];
+        }else{
         _tableview1.hidden=NO;
         _tableview2.hidden=YES;
         
-        
+        _segmentedControlObject.selectedSegmentIndex = -1;
         NSLog(@"Ticket Search API Called.");
         [self ticketSearchApiCall:_seachTextField.text];
         [_seachTextField resignFirstResponder];
         [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Ticket Data",nil)];
+        }
     }
     else if(_segmentedControlObject.selectedSegmentIndex==1)
     {
+        if([_seachTextField.text isEqualToString:@""])
+        {
+            [self->utils showAlertWithMessage:@"Enter the data for search user." sendViewController:self];
+        }else{
         _tableview1.hidden=YES;
         _tableview2.hidden=NO;
         
+        _segmentedControlObject.selectedSegmentIndex = -1;
         
         NSLog(@"User Search API Called.");
         [self userSearchApiCall:_seachTextField.text];
         [_seachTextField resignFirstResponder];
         [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting User Data",nil)];
-        
+        }
     }
 }
 
@@ -173,11 +183,16 @@
     [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
         
         
+        NSLog(@"Error is is : %@",error);
+        NSLog(@"Message is is : %@",msg);
+         NSLog(@"JSON is is : %@",json);
         
         if (error || [msg containsString:@"Error"]) {
             [self->refresh endRefreshing];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             if (msg) {
+                
+                NSLog(@"Message is : %@",msg);
                 
                 [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                 
@@ -1212,6 +1227,16 @@
         [Utils isEmpty:lname];
         [Utils isEmpty:userName];
         [Utils isEmpty:profilPic];
+        
+        //sending username from search to edit process
+        if(![Utils isEmpty:userName])
+        {
+            globalVariables.userNameInUserList=userName;
+        }else{
+            globalVariables.userNameInUserList=@"Not Available";
+        }
+        // end user edit process
+        
         
         if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
         {

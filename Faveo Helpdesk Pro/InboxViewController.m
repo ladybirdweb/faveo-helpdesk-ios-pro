@@ -88,33 +88,31 @@
     [super viewDidLoad];
     
     NSLog(@"Naa-Inbox");
-    
-    _searchBar.delegate = self;
+    [self setTitle:NSLocalizedString(@"Inbox",nil)];
+    [self addUIRefresh];
     
     _filteredSampleDataArray = [[NSMutableArray alloc] init];
     statusArrayforChange = [[NSMutableArray alloc] init];
     statusIdforChange = [[NSMutableArray alloc] init];
     uniqueStatusNameArray = [[NSMutableArray alloc] init];
     
+    
+    _searchBar.delegate = self;
     _multistageDropdownMenuView.tag=99;
     
     self.view.backgroundColor=[UIColor grayColor];
     [self.view addSubview:self.multistageDropdownMenuView];
     
     userDefaults=[NSUserDefaults standardUserDefaults];
+    utils=[[Utils alloc]init];
+    globalVariables=[GlobalVariables sharedInstance];
+    
+    _mutableArray=[[NSMutableArray alloc]init];
+    
     
     NSString *refreshedToken = [[FIRInstanceID instanceID] token];
     NSLog(@"refreshed token  %@",refreshedToken);
     
-    [self setTitle:NSLocalizedString(@"Inbox",nil)];
-    [self addUIRefresh];
- //   NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
-    _mutableArray=[[NSMutableArray alloc]init];
-    
-    utils=[[Utils alloc]init];
-    globalVariables=[GlobalVariables sharedInstance];
-   // userDefaults=[NSUserDefaults standardUserDefaults];
-   // NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
     NSLog(@"Role is in Inbox1111111 : %@",globalVariables.roleFromAuthenticateAPI);
     NSLog(@"Role is in Inbox1111111 : %@",globalVariables.roleFromAuthenticateAPI);
@@ -206,11 +204,10 @@
     }
     else{
     
-    [self reload];
-    [self getDependencies];
+  [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
         
- // [[AppDelegate sharedAppdelegate] hideProgressView];
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
+        [self reload];
+        [self getDependencies];
         
     }
     
@@ -220,6 +217,8 @@
 
 
 - (IBAction)searchButtonClicked {
+    
+    [self hideTableViewEditMode];
     
     TicketSearchViewController * search=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketSearchViewControllerId"];
     [self.navigationController pushViewController:search animated:YES];
@@ -243,19 +242,19 @@
     @try{
         NSLog(@"Clicked on Asign");
         if (!selectedArray.count) {
-            
+
             [utils showAlertWithMessage:@"Select The Tickets for Assign" sendViewController:self];
-            
+
         }
         else{
             //selectedIDs
-            
+
             globalVariables.ticketIDListForAssign=selectedIDs;
-            
+
             MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
             [self.navigationController pushViewController:vc animated:YES];
         }
-        
+
     }@catch (NSException *exception)
     {
         NSLog( @"Name: %@", exception.name);
@@ -266,7 +265,7 @@
     @finally
     {
         NSLog( @" I am in clickedOnAssignButton method in Inbox ViewController" );
-        
+
     }
     
 }
@@ -348,6 +347,7 @@
 - (void)reloadTableView
 {
     NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+    
     [self.tableView reloadData];
     for (NSIndexPath *path in indexPaths) {
         [self.tableView selectRowAtIndexPath:path animated:NO scrollPosition:UITableViewScrollPositionNone];
@@ -356,7 +356,8 @@
 
 -(void)reload{
     
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
+    
+   [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
     
     if([globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
     {
@@ -367,7 +368,7 @@
     {
         [refresh endRefreshing];
     
-        
+       
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -496,7 +497,8 @@
                 if ([msg isEqualToString:@"tokenNotRefreshed"]) {
 
                    // [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self->utils showAlertWithMessage:@"Your account credentials were changed, contact to Admin and please log back in." sendViewController:self];
+                    [self->utils showAlertWithMessage:@"Your HELPDESK URL or your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
 
                     return;
                 }
@@ -630,7 +632,7 @@
                     else{
                         NSLog(@"Error message is %@",msg);
                         NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
-                        [self->utils showAlertWithMessage:msg sendViewController:self];
+                        [self->utils showAlertWithMessage:error.localizedDescription sendViewController:self];
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                        
                         return ;
@@ -1208,25 +1210,39 @@
             //                }
             
             
-            if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
-                
-                /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
-                 [cell.overDueLabel setHidden:NO];
+           
+             if ( ( ![[finaldic objectForKey:@"status"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"status"] length] != 0 ) ) {
                  
-                 }else [cell.overDueLabel setHidden:YES];
-                 
-                 } */
-                
-                if([utils compareDates:[finaldic objectForKey:@"duedate"]]){
-                    [cell.overDueLabel setHidden:NO];
-                    [cell.today setHidden:YES];
-                }else
-                {
-                    [cell.overDueLabel setHidden:YES];
-                    [cell.today setHidden:NO];
-                }
-                
-            }
+                 if ([[finaldic objectForKey:@"status"] isEqualToString:@"Halt_SLA"]) {
+                    
+                     [cell.overDueLabel setHidden:YES];
+                     [cell.today setHidden:YES];
+                 }
+                 else
+                 {
+                     if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
+                         
+                         /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+                          [cell.overDueLabel setHidden:NO];
+                          
+                          }else [cell.overDueLabel setHidden:YES];
+                          
+                          } */
+                         
+                         if([utils compareDates:[finaldic objectForKey:@"duedate"]]){
+                             [cell.overDueLabel setHidden:NO];
+                             [cell.today setHidden:YES];
+                         }else
+                         {
+                             [cell.overDueLabel setHidden:YES];
+                             [cell.today setHidden:NO];
+                         }
+                         
+                     }
+                     
+                 }
+             }
+            
             
             
             
@@ -1327,6 +1343,7 @@
     
     if ([tableView isEditing]) {
         
+    
         //taking id from selected rows
         [selectedArray addObject:[finaldic objectForKey:@"id"]];
         
@@ -1409,6 +1426,13 @@
     
 }
 
+// hiding editing mode of table while moving to other views
+-(void)hideTableViewEditMode
+{
+    [self.tableView setEditing:NO animated:YES];
+    navbar.hidden=YES;
+    [self reloadTableView];
+}
 
 #pragma mark - SlideNavigationController Methods -
 
@@ -1429,13 +1453,12 @@
 -(void)NotificationBtnPressed
 
 {
+    [self hideTableViewEditMode];
     
     globalVariables.ticket_number=[tempDict objectForKey:@"ticket_number"];
     globalVariables.Ticket_status=[tempDict objectForKey:@"ticket_status_name"];
     
     NotificationViewController *not=[self.storyboard instantiateViewControllerWithIdentifier:@"Notify"];
-    
-    
     [self.navigationController pushViewController:not animated:YES];
     
 }
@@ -1487,15 +1510,7 @@
         
 #else
         
-        //    [FTPopOverMenu showFromEvent:event
-        //                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
-        
-//        [FTPopOverMenu showFromEvent:event
-//                       withMenuArray:@[NSLocalizedString(@"Change Ticket Status", nil),NSLocalizedString(@"Closed", nil), NSLocalizedString(@"Resolved", nil),NSLocalizedString(@"Deleted", nil)]
-//                          imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
-//                           doneBlock:^(NSInteger selectedIndex) {
-        
-        
+
         //taking status names array for dependecy api
         for (NSDictionary *dicc in self->ticketStatusArray) {
             if ([dicc objectForKey:@"name"]) {
@@ -1535,7 +1550,14 @@
                                    }
                                }
                                
+                               if([self->selectedStatusName isEqualToString:@"Open"] || [self->selectedStatusName isEqualToString:@"open"])
+                               {
+                                   [self->utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Open",nil) sendViewController:self];
+                                   [[AppDelegate sharedAppdelegate] hideProgressView];
+                               }
+                               else{
                                [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
+                               }
                            
                            }
                         dismissBlock:^{

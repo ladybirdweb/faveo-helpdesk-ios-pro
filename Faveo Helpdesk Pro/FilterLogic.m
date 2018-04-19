@@ -220,7 +220,7 @@
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     
     [self reload];
-    //    [self getDependencies];
+    [self getDependencies];
     
     
 }
@@ -806,6 +806,15 @@
             return;
         }
         
+        if ([msg isEqualToString:@"tokenNotRefreshed"]) {
+            
+            // [[AppDelegate sharedAppdelegate] hideProgressView];
+            [self->utils showAlertWithMessage:@"Your HELPDESK URL or your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+            return;
+        }
+        
         if (json) {
             //NSError *error;
             NSLog(@"Thread-NO4--getInboxAPI--%@",json);
@@ -1022,6 +1031,9 @@
     }
     NSLog(@"Thread-NO2-getDependencies()-closed");
 }
+
+
+
 
 -(void)EditTableView:(UIGestureRecognizer*)gesture{
     [self.tableView setEditing:YES animated:YES];
@@ -1758,25 +1770,38 @@
             //                }
             
             
-            if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
+            if ( ( ![[finaldic objectForKey:@"status"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"status"] length] != 0 ) ) {
                 
-                /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
-                 [cell.overDueLabel setHidden:NO];
-                 
-                 }else [cell.overDueLabel setHidden:YES];
-                 
-                 } */
-                
-                if([utils compareDates:[finaldic objectForKey:@"duedate"]]){
-                    [cell.overDueLabel setHidden:NO];
-                    [cell.today setHidden:YES];
-                }else
-                {
+                if ([[finaldic objectForKey:@"status"] isEqualToString:@"Halt_SLA"]) {
+                    
                     [cell.overDueLabel setHidden:YES];
-                    [cell.today setHidden:NO];
+                    [cell.today setHidden:YES];
                 }
-                
+                else
+                {
+                    if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
+                        
+                        /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
+                         [cell.overDueLabel setHidden:NO];
+                         
+                         }else [cell.overDueLabel setHidden:YES];
+                         
+                         } */
+                        
+                        if([utils compareDates:[finaldic objectForKey:@"duedate"]]){
+                            [cell.overDueLabel setHidden:NO];
+                            [cell.today setHidden:YES];
+                        }else
+                        {
+                            [cell.overDueLabel setHidden:YES];
+                            [cell.today setHidden:NO];
+                        }
+                        
+                    }
+                    
+                }
             }
+            
             
             
             
@@ -2075,7 +2100,14 @@
                                    }
                                }
                                
-                               [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
+                               if([self->selectedStatusName isEqualToString:@"Open"] || [self->selectedStatusName isEqualToString:@"open"])
+                               {
+                                   [self->utils showAlertWithMessage:NSLocalizedString(@"Ticket is Already Open",nil) sendViewController:self];
+                                   [[AppDelegate sharedAppdelegate] hideProgressView];
+                               }
+                               else{
+                                   [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
+                               }
                                
                            }
                         dismissBlock:^{

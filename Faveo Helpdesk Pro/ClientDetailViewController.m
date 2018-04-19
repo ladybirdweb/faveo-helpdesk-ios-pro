@@ -220,20 +220,32 @@
             _rolLabel.hidden=YES;
         }
          NSString *isClientActive= [NSString stringWithFormat:@"%@",globalVariables.UserState];
+         NSString *isClientDeactive= [NSString stringWithFormat:@"%@",globalVariables.ActiveDeactiveStateOfUser1];
         [Utils isEmpty:isClientActive];
+         [Utils isEmpty:isClientDeactive];
         
-        if (![Utils isEmpty:isClientActive]) {
-            
-            if ([isClientActive isEqualToString:@"1"])
-               {
-                     _testingLAbel.textColor=[UIColor whiteColor];
+        if(![Utils isEmpty:isClientDeactive])
+        {
+            if ([isClientDeactive isEqualToString:@"1"])
+            {
+                _testingLAbel.textColor=[UIColor whiteColor];
+                _testingLAbel.text=@"DEACTIVE";
+            }
+            else if (![Utils isEmpty:isClientActive]) {
+                
+                if ([isClientActive isEqualToString:@"1"])
+                {
+                    _testingLAbel.textColor=[UIColor whiteColor];
                     _testingLAbel.text=@"ACTIVE";
-               }else
-              {
-                  _testingLAbel.textColor=[UIColor whiteColor];
-                   _testingLAbel.text=@"INACTIVE";
-              }
+                }else
+                {
+                    _testingLAbel.textColor=[UIColor whiteColor];
+                    _testingLAbel.text=@"INACTIVE";
+                }
+            }
+            
         }
+        
     }@catch (NSException *exception)
     {
         

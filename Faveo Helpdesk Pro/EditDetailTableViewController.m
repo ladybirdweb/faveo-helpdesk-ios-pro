@@ -246,16 +246,20 @@
                                 
                                 self->AssignID=[NSString stringWithFormat:@"%@", [assinee objectForKey:@"id"]];
                                 
-                                
-                                if (([[assinee objectForKey:@"email"] isEqual:[NSNull null]] ) || ( [[assinee objectForKey:@"email"] length] == 0 )) {
-                                    // _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-                                    self->_assinTextField.text=NSLocalizedString(@"Not Available",nil);
-                                }else{
+                                 if([NSNull null] != [assinee objectForKey:@"first_name"])
+                                 {
                                     NSString * name= [NSString stringWithFormat:@"%@ %@",[assinee objectForKey:@"first_name"],[assinee objectForKey:@"last_name"]];
                                     
                                     self->_assinTextField.text=name;
                                     // _assinTextField.text= [dic objectForKey:@"assignee_email"];
                                 }
+                                 else if([NSNull null] != [assinee objectForKey:@"email"])
+                                 {
+                                     NSString * name=[assinee objectForKey:@"email"];
+                                     
+                                     self->_assinTextField.text=name;
+                                     // _assinTextField.text= [dic objectForKey:@"assignee_email"];
+                                 }
                             }
                             else
                             {

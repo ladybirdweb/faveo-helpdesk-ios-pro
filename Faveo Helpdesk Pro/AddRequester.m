@@ -155,6 +155,63 @@
 - (IBAction)submitClicked:(id)sender {
     
     
+    if (![_mobileTextField.text isEqualToString:@""]) {
+        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        
+        if([_codeTextField.text isEqualToString:@""])
+        {
+            
+            if (self.navigationController.navigationBarHidden) {
+                [self.navigationController setNavigationBarHidden:NO];
+            }
+            
+            [RMessage showNotificationInViewController:self.navigationController
+                                                 title:NSLocalizedString(@"Warning !", nil)
+                                              subtitle:NSLocalizedString(@"Please Enter Mobile Code.!", nil)
+                                             iconImage:nil
+                                                  type:RMessageTypeWarning
+                                        customTypeName:nil
+                                              duration:RMessageDurationAutomatic
+                                              callback:nil
+                                           buttonTitle:nil
+                                        buttonCallback:nil
+                                            atPosition:RMessagePositionNavBarOverlay
+                                  canBeDismissedByUser:YES];
+            
+            
+        }
+        
+    }
+    else
+        if (![_codeTextField.text isEqualToString:@""]) {
+            // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            
+            if([_mobileTextField.text isEqualToString:@""])
+            {
+                
+                if (self.navigationController.navigationBarHidden) {
+                    [self.navigationController setNavigationBarHidden:NO];
+                }
+                
+                [RMessage showNotificationInViewController:self.navigationController
+                                                     title:NSLocalizedString(@"Warning !", nil)
+                                                  subtitle:NSLocalizedString(@"Please Enter Mobile number.!", nil)
+                                                 iconImage:nil
+                                                      type:RMessageTypeWarning
+                                            customTypeName:nil
+                                                  duration:RMessageDurationAutomatic
+                                                  callback:nil
+                                               buttonTitle:nil
+                                            buttonCallback:nil
+                                                atPosition:RMessagePositionNavBarOverlay
+                                      canBeDismissedByUser:YES];
+                
+                
+            }
+            
+        }
+        else
+    
     if(self.emailTextView.text.length==0 && self.firstNameView.text.length==0 && _lastNameView.text.length==0)
     {
         if (self.navigationController.navigationBarHidden) {

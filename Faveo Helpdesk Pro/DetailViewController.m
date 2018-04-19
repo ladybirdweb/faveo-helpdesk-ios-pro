@@ -219,8 +219,14 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                     
-                        self->_createdDateTextField.text= [self->utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"created_at"]];
-                        
+                        if([NSNull null] != [ticketDict objectForKey:@"created_at"])
+                        {
+                           self->_createdDateTextField.text= [self->utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"created_at"]];
+                        }else
+                        {
+                            self->_createdDateTextField.text=NSLocalizedString(@"Not Available",nil);
+                        }
+                    
                         NSDictionary *userData=[ticketDict objectForKey:@"from"];
                         
                         if (([[userData objectForKey:@"first_name"] isEqual:[NSNull null]] ) || ( [[userData objectForKey:@"first_name"] length] == 0 )) {
@@ -304,13 +310,27 @@
                         //____________________________________________________________________________________________________
                         
                         
-                        self->_emailTextField.text=[userData objectForKey:@"email"];
+                        if([NSNull null] != [userData objectForKey:@"email"])
+                        {
+                           self->_emailTextField.text=[userData objectForKey:@"email"];
+                        }else
+                        {
+                            self->_emailTextField.text=NSLocalizedString(@"Not Available",nil);
+                        }
+                        
+                        
+                        if([NSNull null] != [ticketDict objectForKey:@"updated_at"])
+                        {
+                            self->_lastResponseDateTextField.text=[self->utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"updated_at"]];
+                        }else
+                        {
+                            self->_lastResponseDateTextField.text=NSLocalizedString(@"Not Available",nil);
+                        }
+                        
                        
-                        // cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];
+            
                         
-                        self->_lastResponseDateTextField.text=[self->utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"updated_at"]];
-                      
-                        
+                
                         if (([[ticketDict objectForKey:@"type_name"] isEqual:[NSNull null]] ) || ( [[ticketDict objectForKey:@"type_name"] length] == 0 )) {
                             self->_typeTextField.text= NSLocalizedString(@"Not Available",nil);
                         }else self->_typeTextField.text=[ticketDict objectForKey:@"type_name"];
@@ -348,17 +368,21 @@
                                 self->_assinTextField.text=name;
                             }
                             
-                            
                         }else
                         {
                             self->_assinTextField.text=NSLocalizedString(@"Not Available",nil);
                         }
                         
                     
+                         if([NSNull null] != [ticketDict objectForKey:@"duedate"])
+                         {
+                             self->_dueDateTextField.text= [self->utils getLocalDateTimeFromUTCDueDate:[ticketDict objectForKey:@"duedate"]];
+                         }else
+                         {
+                             self->_dueDateTextField.text=NSLocalizedString(@"Not Available",nil);
+                         }
+                      //  self->_dueDateTextField.text= [self->utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"duedate"]];
                         
-                        self->_dueDateTextField.text= [self->utils getLocalDateTimeFromUTC:[ticketDict objectForKey:@"duedate"]];
-                        
-                       
                         
                         [self.refreshControl endRefreshing];
                         [self->_imgViewLoading setHidden:YES];
