@@ -81,7 +81,8 @@
     NSString *file123;
     NSString *base64Encoded;
      NSString *typeMime;
-    UIActivityIndicatorView *activityIndicator;
+    
+   UIActivityIndicatorView *activityIndicator1;
    
 }
 
@@ -103,7 +104,7 @@
     
     [self split];
     
-    UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 316, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
     
     UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -205,6 +206,13 @@
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
+    
+    //activity indicator
+    activityIndicator1 =
+    [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(145, 255, 100, 100)];
+    activityIndicator1.color=[UIColor blueColor];
+    
+    [self.view addSubview:activityIndicator1];
 }
 
 -(void)dismissKeyboard12
@@ -528,6 +536,7 @@
 - (IBAction)submitClicked:(id)sender {
     
     
+    [activityIndicator1 startAnimating];
     
     @try{
         
@@ -537,6 +546,7 @@
             
             if([_codeTextField.text isEqualToString:@""])
             {
+                 [activityIndicator1 stopAnimating];
                 
                 if (self.navigationController.navigationBarHidden) {
                     [self.navigationController setNavigationBarHidden:NO];
@@ -563,6 +573,8 @@
     
         if(self.emailTextView.text.length==0 && self.firstNameView.text.length==0 && self.helpTopicTextField.text.length==0 && self.subjectView.text.length==0 && self.priorityTextField.text.length==0 && self.textViewMsg.text.length==0)
         {
+             [activityIndicator1 stopAnimating];
+            
             if (self.navigationController.navigationBarHidden) {
                 [self.navigationController setNavigationBarHidden:NO];
             }
@@ -582,7 +594,9 @@
           
             
         }else if (self.emailTextView.text.length==0){
-            //[RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter EMAIL-ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+           
+            [activityIndicator1 stopAnimating];
+            
             if (self.navigationController.navigationBarHidden) {
                 [self.navigationController setNavigationBarHidden:NO];
             }
@@ -602,7 +616,8 @@
             
             
         }else if(![Utils emailValidation:self.emailTextView.text]){
-            // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Invalid EMAIL_ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            
+            [activityIndicator1 stopAnimating];
             
             if (self.navigationController.navigationBarHidden) {
                 [self.navigationController setNavigationBarHidden:NO];
@@ -624,6 +639,8 @@
         } else
             if (self.firstNameView.text.length==0  ) {
                 
+                [activityIndicator1 stopAnimating];
+                
                 if (self.navigationController.navigationBarHidden) {
                     [self.navigationController setNavigationBarHidden:NO];
                 }
@@ -643,6 +660,8 @@
                 
                
             }else if ( self.firstNameView.text.length<2) {
+                
+                [activityIndicator1 stopAnimating];
                 
                 if (self.navigationController.navigationBarHidden) {
                     [self.navigationController setNavigationBarHidden:NO];
@@ -664,7 +683,8 @@
                 
             }else
                if (self.helpTopicTextField.text.length==0) {
-                    // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+                   
+                   [activityIndicator1 stopAnimating];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -685,7 +705,8 @@
                     
                    
                 }else if (self.subjectView.text.length==0) {
-                    // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter SUBJECT",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+                    
+                    [activityIndicator1 stopAnimating];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -705,7 +726,9 @@
                                           canBeDismissedByUser:YES];
                     
                 }else if (self.subjectView.text.length<5) {
-                    // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"SUBJECT requires at least 5 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+                    
+                    [activityIndicator1 stopAnimating];
+                    
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
                     }
@@ -724,7 +747,8 @@
                                           canBeDismissedByUser:YES];
                     
                 }else if (self.textViewMsg.text.length==0){
-                    // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter ticket MESSAGE" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+                    
+                    [activityIndicator1 stopAnimating];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -744,7 +768,8 @@
                                           canBeDismissedByUser:YES];
                   
                 }else if (self.textViewMsg.text.length<10){
-                    // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"MESSAGE requires at least 10 characters" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+                   
+                    [activityIndicator1 stopAnimating];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -765,7 +790,8 @@
                    
                 }
                 else if (self.priorityTextField.text.length==0){
-                    // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select PRIORITY" ,nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+                    
+                    [activityIndicator1 stopAnimating];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -789,7 +815,8 @@
                     NSLog(@"ticketCreated dept_id-%@, help_id-%@ ,sla_id-%@, pri_id-%@, staff_id-%@",dept_id,help_topic_id,sla_id,priority_id,staff_id);
                     
                     if ([_helpTopicTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]||[_priorityTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)] || [_assignTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]) {
-                        //  [RKDropdownAlert title:APP_NAME message:@"Please refresh the Inbox" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+                        
+                        [activityIndicator1 stopAnimating];
                         
                         if (self.navigationController.navigationBarHidden) {
                             [self.navigationController setNavigationBarHidden:NO];
@@ -808,7 +835,7 @@
                                                         atPosition:RMessagePositionNavBarOverlay
                                               canBeDismissedByUser:YES];
                         
-                    }else [self postTicketCreate]; //[self createTicket];
+                    }else [self performSelector:@selector(postTicketCreate) withObject:self afterDelay:5.0];    //[self postTicketCreate]; //[self createTicket];
                     
                 }
         
@@ -825,203 +852,6 @@
         
     }
 }
-
-
-//-(void)createTicket{
-//
-//
-//
-//    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-//    {
-//        //connection unavailable
-//        //[utils showAlertWithMessage:NO_INTERNET sendViewController:self];
-//        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-//
-//    }else{
-//
-//    //    [[AppDelegate sharedAppdelegate] showProgressView];
-//
-//
-//
-//        NSString *code=@"";
-//        if(_codeTextField.text.length>0){
-//            code=[_codeTextField.text substringFromIndex:1];
-//        }
-//
-//        NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
-//        NSLog(@"Stffid1111 is : %@",staffID);
-//        NSLog(@"Stffid1111 is : %@",staffID);
-//
-//        if([staffID isEqualToString:@"(null)"] || [staffID isEqualToString:@""])
-//        {
-//
-//            staffID=@"0";
-//        }
-//
-//        [Utils isEmpty:_ccTextField.text];
-//
-//        NSString *url;
-//        if(![Utils isEmpty:_ccTextField.text])
-//        {
-//            url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@&cc[]=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID,selectedUserEmail];
-//        }
-//        else
-//        {
-//            url=[NSString stringWithFormat:@"%@helpdesk/create?api_key=%@&token=%@&subject=%@&body=%@&first_name=%@&last_name=%@&mobile=%@&code=%@&email=%@&help_topic=%@&priority=%@&assigned=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,[userDefaults objectForKey:@"token"],_subjectView.text,_textViewMsg.text,_firstNameView.text,_lastNameView.text,_mobileView.text,code,_emailTextView.text,help_topic_id,priority_id,staffID];
-//        }
-//        @try{
-//            MyWebservices *webservices=[MyWebservices sharedInstance];
-//
-//            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-//                [[AppDelegate sharedAppdelegate] hideProgressView];
-//
-//                if (error || [msg containsString:@"Error"]) {
-//
-//                    if (msg) {
-//                        if([msg isEqualToString:@"Error-403"])
-//                        {
-//                            [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-//                        }
-//                        else if([msg isEqualToString:@"Error-402"])
-//                        {
-//                            NSLog(@"Message is : %@",msg);
-//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-//                        }
-//                       else if([msg isEqualToString:@"Error-422"])
-//                        {
-//                            NSLog(@"Message is : %@",msg);
-//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
-//                        }
-//                        else if([msg isEqualToString:@"Error-404"])
-//                        {
-//                            NSLog(@"Message is : %@",msg);
-//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-//                        }
-//                        else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
-//                        {
-//                            NSLog(@"Message is : %@",msg);
-//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-//                        }
-//                        else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
-//                        {
-//                            NSLog(@"Message is : %@",msg);
-//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
-//                        }
-//                        else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
-//                        {
-//                             NSLog(@"Message is : %@",msg);
-//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
-//                        }
-//                        else{
-//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-//                            NSLog(@"Error is : %@",msg);
-//                        }
-//
-//                    }else if(error)  {
-//                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-//                        NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
-//                    }
-//
-//                    return ;
-//                }
-//
-//                if ([msg isEqualToString:@"tokenRefreshed"]) {
-//
-//                    [self createTicket];
-//                    NSLog(@"Thread--NO4-call-postCreateTicket");
-//                    return;
-//                }
-//
-//                if (json) {
-//                    NSLog(@"JSON-CreateTicket-%@",json);
-//
-//
-//                    NSString * str= [json objectForKey:@"message"];
-//
-//                    if([[json objectForKey:@"error"] isEqualToString:@"Undefined variable: user_id"] || [json containsObject:@"error"] || [json containsObject:@"file"])
-//                    {
-//
-//                        [self->utils showAlertWithMessage:NSLocalizedString(@"Something Went Wrong.", nil) sendViewController:self];
-//                    }
-//
-//                    if([str isEqualToString:@"Permission denied, you do not have permission to access the requested page.;"] || [str hasPrefix:@"Permission denied"] )
-//
-//                    {
-//                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-//                    }
-//                    else if ([json objectForKey:@"response"]) {
-//                        dispatch_async(dispatch_get_main_queue(), ^{
-//                            // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Ticket created successfully!",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-//
-//
-//                            NSDictionary * dict1=[json objectForKey:@"response"];
-//                            NSString *str= [dict1 objectForKey:@"message"];
-//
-//
-//                            if([str isEqualToString:@"Permission denied, you do not have permission to access the requested page."] || [str hasPrefix:@"Permission denied"])
-//                            {
-//
-//                                [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-//
-//                            }else{
-//
-//                                [RMessage showNotificationInViewController:self.navigationController
-//                                                                     title:NSLocalizedString(@"success", nil)
-//                                                                  subtitle:NSLocalizedString(@"Ticket created successfully.", nil)
-//                                                                 iconImage:nil
-//                                                                      type:RMessageTypeSuccess
-//                                                            customTypeName:nil
-//                                                                  duration:RMessageDurationAutomatic
-//                                                                  callback:nil
-//                                                               buttonTitle:nil
-//                                                            buttonCallback:nil
-//                                                                atPosition:RMessagePositionBottom
-//                                                      canBeDismissedByUser:YES];
-//
-//
-//                                self->_emailTextView.text=@"";
-//                               self-> _firstNameView.text=@"";
-//                                self->_lastNameView.text=@"";
-//                                self->_mobileView.text=@"";
-//                                self->_codeTextField.text=@"";
-//                                self->_helpTopicTextField.text=@"";
-//                               self-> _subjectView.text=@"";
-//                               self-> _priorityTextField.text=@"";
-//                                self->_assignTextField.text=@"";
-//                                self->_textViewMsg.text=@"";
-//
-//                                self->globalVariables.emailAddRequester=@"";
-//                               self-> globalVariables.firstNameAddRequester=@"";
-//                               self-> globalVariables.lastAddRequester=@"";
-//                                self->globalVariables.mobileAddRequester=@"";
-//                               self-> globalVariables.mobileCode=@"";
-//
-//
-//                                InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-//                                [self.navigationController pushViewController:inboxVC animated:YES];
-//                            }
-//                        });
-//                    }
-//                }
-//                NSLog(@"Thread-NO5-postCreateTicket-closed");
-//
-//            }];
-//        }@catch (NSException *exception)
-//        {
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
-//            [utils showAlertWithMessage:exception.name sendViewController:self];
-//            return;
-//        }
-//        @finally
-//        {
-//            NSLog( @" I am in CreateTicket method in CreateTicket ViewController" );
-//
-//        }
-//    }
-//}
-
-
 
 
 
@@ -2066,15 +1896,6 @@
 {
    
     
-//    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//        activityIndicator.frame = CGRectMake(35.0, 0.0, 50.0, 50.0);
-//        activityIndicator.center = self.view.center;
-//        [self.view addSubview: activityIndicator];
-//    
-//        [activityIndicator startAnimating];
-//
-//    
-    
             NSString *code=@"";
             if(_codeTextField.text.length>0){
                 code=[_codeTextField.text substringFromIndex:1];
@@ -2133,13 +1954,6 @@
     [body appendData:[API_KEY dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 
-
-//    NSString *token1 =@"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly93d3cuamFtYm9yZWVibGlzcy5jb20vc2F5YXIvcHVibGljL2FwaS92MS9hdXRoZW50aWNhdGUiLCJpYXQiOjE1MjM0Mzk2NjAsImV4cCI6MTUyMzQzOTkwMCwibmJmIjoxNTIzNDM5NjYwLCJqdGkiOiJEdWJNN1poZmZqTXdQNVl1In0.fgarLkHHqn0-8V1mhuc18nFovOSM2IQhuMOmXrKm7NA";
-//    // token parameter
-//    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-//    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"token\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-//    [body appendData:[token1 dataUsingEncoding:NSUTF8StringEncoding]];
-//    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 
     // subject parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -2249,12 +2063,14 @@
          {
              
              [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+              [activityIndicator1 stopAnimating];
              
          }
          if([str isEqualToString:@"API disabled"] || [str hasPrefix:@"API disabled"])
          {
              
              [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+              [activityIndicator1 stopAnimating];
              
          }
          else{
@@ -2272,6 +2088,18 @@
          }
          
      }//end first if
+    else if ([jsonData objectForKey:@"result"])
+    {
+        NSDictionary * dictResult= [jsonData objectForKey:@"result"];
+        NSString *errorMsg=[dictResult objectForKey:@"error"];
+        
+        if([errorMsg isEqualToString:@"Methon not allowed"] || [errorMsg hasSuffix:@"not allowed"])
+        {
+            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Someting went wrong. Please try again later.."] sendViewController:self];
+             [activityIndicator1 stopAnimating];
+        }
+        
+    }
     else if ([jsonData objectForKey:@"response"])
 
     {
@@ -2315,6 +2143,7 @@
     else{
 
         [self->utils showAlertWithMessage:NSLocalizedString(@"Something Went Wrong.", nil) sendViewController:self];
+         [activityIndicator1 stopAnimating];
 
     }
 

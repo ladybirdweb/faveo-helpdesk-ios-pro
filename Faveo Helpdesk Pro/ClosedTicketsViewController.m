@@ -1820,6 +1820,7 @@
                 if (json) {
                     NSLog(@"JSON-Status-Change-Close-%@",json);
                     
+                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
                     {

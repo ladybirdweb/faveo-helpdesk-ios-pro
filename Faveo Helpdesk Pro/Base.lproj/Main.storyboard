@@ -6264,10 +6264,6 @@
                                                         <outlet property="delegate" destination="Ohi-Ft-6Qm" id="NNC-LO-KaL"/>
                                                     </connections>
                                                 </textView>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LxJ-l4-Wcb">
-                                                    <rect key="frame" x="197" y="50" width="20" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="mZ8-cE-1JO" secondAttribute="bottom" constant="-4" id="6Sp-pc-HUw"/>
@@ -6377,7 +6373,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="736"/>
                     <connections>
-                        <outlet property="activityIndicatorOutlet" destination="LxJ-l4-Wcb" id="2L8-PZ-pfq"/>
                         <outlet property="addCCLabelButton" destination="VtS-aO-RXa" id="0MN-4Z-13N"/>
                         <outlet property="fileImage" destination="qg4-Rr-ijd" id="2lp-39-1T8"/>
                         <outlet property="fileName123" destination="Yly-J1-Xj5" id="53j-6u-TOJ"/>
@@ -6614,15 +6609,12 @@
                                     <outlet property="delegate" destination="Ibp-fx-Nzy" id="OoJ-4u-yOl"/>
                                 </connections>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="JO5-yG-Wzf">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="JO5-yG-Wzf" customClass="MultiSelectSegmentedControl">
                                 <rect key="frame" x="68" y="84" width="286" height="29"/>
                                 <segments>
                                     <segment title="Ticket"/>
                                     <segment title="User"/>
                                 </segments>
-                                <connections>
-                                    <action selector="segmentedControlAction:" destination="Ibp-fx-Nzy" eventType="valueChanged" id="mR8-Kf-yFn"/>
-                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -6644,8 +6636,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="multiSelectControl" destination="JO5-yG-Wzf" id="HVs-1H-qHl"/>
                         <outlet property="seachTextField" destination="P8z-pw-3WV" id="qxT-9Q-gf2"/>
-                        <outlet property="segmentedControlObject" destination="JO5-yG-Wzf" id="b70-kY-w0p"/>
                         <outlet property="tableview1" destination="eek-dO-OGM" id="Feq-K3-6Gq"/>
                         <outlet property="tableview2" destination="jha-hS-BaZ" id="YH8-qw-zbA"/>
                     </connections>

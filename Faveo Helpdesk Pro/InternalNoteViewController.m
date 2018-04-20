@@ -17,6 +17,8 @@
 #import "RMessage.h"
 #import "RMessageView.h"
 #import "AppConstanst.h"
+#import "TicketDetailViewController.h"
+
 
 @interface InternalNoteViewController ()<RMessageProtocol,UITextFieldDelegate>
 {
@@ -149,7 +151,11 @@
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
 
                             
-                            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+                          //  [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+//                            TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+//                            [self.navigationController pushViewController:td animated:YES];
+                            
+                             [self.navigationController popViewControllerAnimated:YES];
                             
         
                         });

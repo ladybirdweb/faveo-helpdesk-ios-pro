@@ -347,7 +347,12 @@
                 
             }
     
-    }else if(![Utils emailValidation:self.emailTextField.text]){
+    }
+    
+    
+     if(_emailTextField.text.length==0 || [_emailTextField.text isEqualToString:@"Not available"])
+    {
+        if(![Utils emailValidation:self.emailTextField.text]){
   
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -355,7 +360,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Error !", nil)
-                                          subtitle:NSLocalizedString(@"Please enter valid email id.", nil)
+                                          subtitle:NSLocalizedString(@"Please enter valid email.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -366,8 +371,9 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
         
+        [[AppDelegate sharedAppdelegate] hideProgressView];
     }
-    
+    }
         
     
     [self doneSubmitMethod];
@@ -403,25 +409,30 @@
                         if([msg isEqualToString:@"Error-403"])
                         {
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else if([msg isEqualToString:@"Error-402"])
                         {
                             NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else if([msg isEqualToString:@"Error-422"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Enter the data for mandatory fields or Enter valid Email. "] sendViewController:self];
+                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else{
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                             NSLog(@"Error is : %@",msg);
+                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         
                     }else if(error)  {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-EditCustomerDetails-Refresh-error == %@",error.localizedDescription);
+                         [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     
                     return ;
@@ -477,6 +488,7 @@
                     }else
                     {
                         [self->utils showAlertWithMessage:@"Something went wrong. Please try again later." sendViewController:self];
+                         [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                     }
                         
@@ -529,6 +541,7 @@
             [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             return;
         }
         @finally
@@ -559,6 +572,7 @@
             [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             return;
         }
         @finally

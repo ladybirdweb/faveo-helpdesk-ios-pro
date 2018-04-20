@@ -1947,7 +1947,7 @@
                 if (json) {
                     NSLog(@"JSON-Status-Change-Close-%@",json);
                     
-                    
+                      [[AppDelegate sharedAppdelegate] hideProgressView];
                     if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
                     {
                         [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change status. ", nil) sendViewController:self];

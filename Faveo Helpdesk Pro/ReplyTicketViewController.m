@@ -28,7 +28,7 @@
 #import "BIZPopupViewController.h"
 #import "NotificationViewController.h"
 #import <HSAttachmentPicker/HSAttachmentPicker.h>
-
+#import "TicketDetailViewController.h"
 
 
 @interface ReplyTicketViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,HSAttachmentPickerDelegate>
@@ -47,6 +47,7 @@
     NSString *file123;
     NSString *base64Encoded;
     NSString *typeMime;
+    
     
 }
 
@@ -107,8 +108,8 @@
     [self.messageTextView setInputAccessoryView:toolBar];
     
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
-    
 
+   
 }
 
 -(void)removeKeyBoard
@@ -119,7 +120,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    _activityIndicatorOutlet.hidden=YES;
     [self viewDidLoad];
     [self FetchCollaboratorAssociatedwithTicket];
 
@@ -144,154 +144,28 @@
     [self presentViewController:popupViewController animated:NO completion:nil];
 }
 
-
-//-(void)viewDidAppear:(BOOL)animated
-
 - (IBAction)submitButtonClicked:(id)sender {
     
-  //  _activityIndicatorOutlet.hidden=NO;
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self->_activityIndicatorOutlet startAnimating];
-//    });
+    UIActivityIndicatorView *activityIndicator1 =
+    [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(145, 100, 100, 100)];
+    activityIndicator1.color=[UIColor blueColor];
     
-    UIActivityIndicatorView *spinningWheel = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(10.0, 11.0, 25.0, 25.0)];
-    [spinningWheel startAnimating];
-    spinningWheel.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-    [self.view addSubview:spinningWheel];
-    
+    [self.view addSubview:activityIndicator1];
+
+     [activityIndicator1 startAnimating];
+  
     if([_messageTextView.text isEqualToString:@""] || [_messageTextView.text length]==0)
     {
         [utils showAlertWithMessage:@"Enter the reply content.It can not be empty." sendViewController:self];
+        [activityIndicator1 stopAnimating]; //working
         
     }else
     {
+      //  [self replyTicketMethodCall];
        
-        //   [self ticketReplyMethodCalledHere];
-        [self replyTicketMethodCall];
-        
-        
+        [self performSelector:@selector(replyTicketMethodCall) withObject:self afterDelay:5.0];
     }
 }
-
-//-(void)ticketReplyMethodCalledHere
-//{
-//
-//     [[AppDelegate sharedAppdelegate] showProgressView];
-//
-//    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-//    {
-//
-//        if (self.navigationController.navigationBarHidden) {
-//            [self.navigationController setNavigationBarHidden:NO];
-//        }
-//
-//        [RMessage showNotificationInViewController:self.navigationController
-//                                             title:NSLocalizedString(@"Error..!", nil)
-//                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
-//                                         iconImage:nil
-//                                              type:RMessageTypeError
-//                                    customTypeName:nil
-//                                          duration:RMessageDurationAutomatic
-//                                          callback:nil
-//                                       buttonTitle:nil
-//                                    buttonCallback:nil
-//                                        atPosition:RMessagePositionNavBarOverlay
-//                              canBeDismissedByUser:YES];
-//
-//    }else{
-//
-//
-//
-//
-//        NSString *url=[NSString stringWithFormat:@"%@helpdesk/reply?api_key=%@&ip=%@&ticket_id=%@&reply_content=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,globalVariables.iD,_messageTextView.text,[userDefaults objectForKey:@"token"]];
-//
-//
-//        NSLog(@"URL is : %@",url);
-//        @try{
-//            MyWebservices *webservices=[MyWebservices sharedInstance];
-//
-//            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-//
-//
-//
-//             //   [[AppDelegate sharedAppdelegate] hideProgressView];
-//
-//                if (error || [msg containsString:@"Error"]) {
-//
-//                    if (msg) {
-//
-//                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-//                         [[AppDelegate sharedAppdelegate] hideProgressView];
-//
-//                    }else if(error)  {
-//                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-//                        NSLog(@"Thread-ticketReply-Refresh-error == %@",error.localizedDescription);
-//                         [[AppDelegate sharedAppdelegate] hideProgressView];
-//                    }
-//
-//                    return ;
-//                }
-//
-//                if ([msg isEqualToString:@"tokenRefreshed"]) {
-//
-//                    [self ticketReplyMethodCalledHere];
-//                    NSLog(@"Thread-ticketReply");
-//                    return;
-//                }
-//
-//                if (json) {
-//                    NSLog(@"JSON-Reply-Ticket-%@",json);
-//
-//                    // NSString * msg=[json objectForKey:@"message"];
-//                    NSString * successMsg=[NSString stringWithFormat:@"%@",[json objectForKey:@"success"]];
-//
-//                    if([successMsg isEqualToString:@"1"])
-//                    {
-//
-//                        [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your reply.", nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-//
-//                        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
-//
-//                        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-//
-//
-//
-//                    }
-//                    else
-//                        if([successMsg isEqualToString:@"false"])
-//                        {
-//
-//                            [self->utils showAlertWithMessage:@"Enter the reply content.It can not be empty." sendViewController:self];
-//                             [[AppDelegate sharedAppdelegate] hideProgressView];
-//                        }
-//                }
-//                else
-//                {
-//                    [self->utils showAlertWithMessage:@"Something went wrong. Please try again." sendViewController:self];
-//                     [[AppDelegate sharedAppdelegate] hideProgressView];
-//                }
-//                NSLog(@"Thread-Ticket-Reply-closed");
-//
-//            }];
-//        }@catch (NSException *exception)
-//        {
-//            [utils showAlertWithMessage:exception.name sendViewController:self];
-//            NSLog( @"Name: %@", exception.name);
-//            NSLog( @"Reason: %@", exception.reason );
-//            [[AppDelegate sharedAppdelegate] hideProgressView];
-//            return;
-//        }
-//        @finally
-//        {
-//            NSLog( @" I am in replatTicket method in TicketDetail ViewController" );
-//
-//        }
-//
-//
-//    }
-//
-//}
-
 
 
 
@@ -641,9 +515,6 @@
         
         @try{
             
-            [[AppDelegate sharedAppdelegate] showProgressView];
-            
-        
             NSString *urlString=[NSString stringWithFormat:@"%@helpdesk/reply?token=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"]];
             
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -716,7 +587,12 @@
                     
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
                     
-                    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+                  //  [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+                    
+//                    TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
+//                    [self.navigationController pushViewController:td animated:YES];
+                    
+                     [self.navigationController popViewControllerAnimated:YES];
                     
                 }
                 else if ([jsonData objectForKey:@"message"])

@@ -220,6 +220,14 @@
                 NSLog(@"Thread--NO4-call-getClients");
                 return;
             }
+            if ([msg isEqualToString:@"tokenNotRefreshed"]) {
+                
+                // [[AppDelegate sharedAppdelegate] hideProgressView];
+                [self->utils showAlertWithMessage:@"Your HELPDESK URL or your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                
+                return;
+            }
             
             if (json) {
                 //NSError *error;

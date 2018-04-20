@@ -23,8 +23,10 @@
 #import "TicketDetailViewController.h"
 #import "ClientDetailViewController.h"
 #import "UIImageView+Letters.h"
+#import "MultiSelectSegmentedControl.h"
 
-@interface TicketSearchViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
+
+@interface TicketSearchViewController ()<MultiSelectSegmentedControlDelegate,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     Utils *utils;
     UIRefreshControl *refresh;
@@ -48,7 +50,7 @@
 @property (strong, nonatomic) NSMutableArray *filteredSampleDataArray;
 
 @property (strong, nonatomic) NSMutableArray *userDataArray;
-
+@property (strong, nonatomic) IBOutlet MultiSelectSegmentedControl *multiSelectControl;
 
 @end
 
@@ -56,6 +58,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setTitle:NSLocalizedString(@"Search",nil)];
+    
     
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
@@ -95,46 +100,97 @@
     return YES;
 }
 
-- (IBAction)segmentedControlAction:(id)sender {
-    if(_segmentedControlObject.selectedSegmentIndex==0)
+-(void)setMultiSelectControl:(MultiSelectSegmentedControl *)multiSelectControl{
+    _multiSelectControl = multiSelectControl;
+    self.multiSelectControl.tag = 2;
+    self.multiSelectControl.delegate = self;
+}
+
+-(void)multiSelect:(MultiSelectSegmentedControl *)multiSelecSegmendedControl didChangeValue:(BOOL)value atIndex:(NSUInteger)index{
+    
+    
+    if(index==0)
     {
-        if([_seachTextField.text isEqualToString:@""])
-        {
-            [self->utils showAlertWithMessage:@"Enter the data for search ticket." sendViewController:self];
-        }else{
+        if([_seachTextField.text isEqualToString:@""]){
+            
+            [self->utils showAlertWithMessage:@"Enter the data for search." sendViewController:self];
+        }
+        _multiSelectControl.selectedSegmentIndex=0;
         _tableview1.hidden=NO;
         _tableview2.hidden=YES;
         
-        _segmentedControlObject.selectedSegmentIndex = -1;
         NSLog(@"Ticket Search API Called.");
         [self ticketSearchApiCall:_seachTextField.text];
         [_seachTextField resignFirstResponder];
         [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Ticket Data",nil)];
-        }
     }
-    else if(_segmentedControlObject.selectedSegmentIndex==1)
-    {
-        if([_seachTextField.text isEqualToString:@""])
-        {
-            [self->utils showAlertWithMessage:@"Enter the data for search user." sendViewController:self];
-        }else{
+    
+    if (index==1) {
+        if([_seachTextField.text isEqualToString:@""]){
+            
+            [self->utils showAlertWithMessage:@"Enter the data for search." sendViewController:self];
+        }
+        
+        _multiSelectControl.selectedSegmentIndex=1;
+       
         _tableview1.hidden=YES;
         _tableview2.hidden=NO;
-        
-        _segmentedControlObject.selectedSegmentIndex = -1;
         
         NSLog(@"User Search API Called.");
         [self userSearchApiCall:_seachTextField.text];
         [_seachTextField resignFirstResponder];
         [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting User Data",nil)];
-        }
     }
+    
+    
 }
+
+
+
+
+
+
+
+
+
+//- (IBAction)segmentedControlAction:(id)sender {
+//    if(_segmentedControlObject.selectedSegmentIndex==0)
+//    {
+//        if([_seachTextField.text isEqualToString:@""])
+//        {
+//            [self->utils showAlertWithMessage:@"Enter the data for search ticket." sendViewController:self];
+//        }else{
+//        _tableview1.hidden=NO;
+//        _tableview2.hidden=YES;
+//
+//        _segmentedControlObject.selectedSegmentIndex = 0;
+//        NSLog(@"Ticket Search API Called.");
+//        [self ticketSearchApiCall:_seachTextField.text];
+//        [_seachTextField resignFirstResponder];
+//        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Ticket Data",nil)];
+//        }
+//    }
+//    else if(_segmentedControlObject.selectedSegmentIndex==1)
+//    {
+//        if([_seachTextField.text isEqualToString:@""])
+//        {
+//            [self->utils showAlertWithMessage:@"Enter the data for search user." sendViewController:self];
+//        }else{
+//        _tableview1.hidden=YES;
+//        _tableview2.hidden=NO;
+//
+//        _segmentedControlObject.selectedSegmentIndex = 1;
+//
+//        NSLog(@"User Search API Called.");
+//        [self userSearchApiCall:_seachTextField.text];
+//        [_seachTextField resignFirstResponder];
+//        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting User Data",nil)];
+//        }
+//    }
+//}
 
 -(void)viewDidAppear:(BOOL)animated{
     [self.seachTextField becomeFirstResponder];
-    
-    
 }
 
 -(void)ticketSearchApiCall:(NSString *)searchText

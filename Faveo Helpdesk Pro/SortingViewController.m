@@ -1469,6 +1469,15 @@
                     return;
                 }
                 
+                if ([msg isEqualToString:@"tokenNotRefreshed"]) {
+                    
+                    // [[AppDelegate sharedAppdelegate] hideProgressView];
+                    [self->utils showAlertWithMessage:@"Your HELPDESK URL or your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    
+                    return;
+                }
+                
                 if (json) {
                     //NSError *error;
                     NSLog(@"Thread-NO4--getInboxAPI--%@",json);
@@ -2794,9 +2803,11 @@
                         if([msg isEqualToString:@"Error-403"])
                         {
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change status. ", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else{
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         //  NSLog(@"Message is : %@",msg);
                         
@@ -2817,7 +2828,7 @@
                 
                 if (json) {
                     NSLog(@"JSON-Status-Change-Close-%@",json);
-                    
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
                     {
@@ -2839,6 +2850,7 @@
                         {
                             
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change status. ", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                             
                         }
                         

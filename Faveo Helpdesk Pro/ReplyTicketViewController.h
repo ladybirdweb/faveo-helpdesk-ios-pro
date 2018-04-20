@@ -34,7 +34,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *fileSize123;
 
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorOutlet;
-
 @end
 

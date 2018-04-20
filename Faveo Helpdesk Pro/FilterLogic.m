@@ -2159,15 +2159,18 @@
                         if([msg isEqualToString:@"Error-403"])
                         {
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change status. ", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else{
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         //  NSLog(@"Message is : %@",msg);
                         
                     }else if(error)  {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-NO4-getTicketStausChange-Refresh-error == %@",error.localizedDescription);
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     
                     return ;
@@ -2182,11 +2185,12 @@
                 
                 if (json) {
                     NSLog(@"JSON-Status-Change-Close-%@",json);
-                    
+                      [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
                     {
                         [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change status. ", nil) sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                     }
                     else{

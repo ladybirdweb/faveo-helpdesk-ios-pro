@@ -19,6 +19,7 @@
 #import "Utils.h"
 #import "AppDelegate.h"
 #import "UIImageView+Letters.h"
+#import "LoginViewController.h"
 
 @import Firebase;
 
@@ -76,10 +77,9 @@
 }
 
 -(void)update{
+
     
-    
-    
-    
+    [self getDependencies];
     userDefaults=[NSUserDefaults standardUserDefaults];
     globalVariables=[GlobalVariables sharedInstance];
     
@@ -262,8 +262,8 @@
                 
                 if ([msg isEqualToString:@"tokenNotRefreshed"]) {
                     
-                    // [[AppDelegate sharedAppdelegate] hideProgressView];
-                    [self->utils showAlertWithMessage:@"Your HELPDESK URL or your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+                    [self showMessageForLogout:@"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+                    
                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     return;
@@ -591,6 +591,52 @@
     [refresh endRefreshing];
      [[AppDelegate sharedAppdelegate] hideProgressView];
 }
+
+
+-(void)showMessageForLogout:(NSString*)message sendViewController:(UIViewController *)viewController
+{
+    UIAlertController *alertController = [UIAlertController   alertControllerWithTitle:APP_NAME message:message  preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction  actionWithTitle:@"Logout"
+                                                            style:UIAlertActionStyleCancel
+                                                          handler:^(UIAlertAction *action)
+                                   {
+                                    
+                                       [self wipeDataInLogout];
+                                       
+                                       if (self.navigationController.navigationBarHidden) {
+                                           [self.navigationController setNavigationBarHidden:NO];
+                                       }
+                                       
+                                       [RMessage showNotificationInViewController:self.navigationController
+                                                                            title:NSLocalizedString(@" Faveo Helpdesk ", nil)
+                                                                         subtitle:NSLocalizedString(@"You've logged out, successfully...!", nil)
+                                                                        iconImage:nil
+                                                                             type:RMessageTypeSuccess
+                                                                   customTypeName:nil
+                                                                         duration:RMessageDurationAutomatic
+                                                                         callback:nil
+                                                                      buttonTitle:nil
+                                                                   buttonCallback:nil
+                                                                       atPosition:RMessagePositionNavBarOverlay
+                                                             canBeDismissedByUser:YES];
+                                       
+                                       UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+                                                                                                bundle: nil];
+                                       UIViewController *vc ;
+                                       
+                                       vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"Login"];
+                                       
+                                       [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc
+                                                                                                withSlideOutAnimation:self.slideOutAnimationEnabled
+                                                                                                        andCompletion:nil];
+                                       
+                                   }];
+    [alertController addAction:cancelAction];
+    
+    [viewController presentViewController:alertController animated:YES completion:nil];
+    
+}
+
 
 
 @end
