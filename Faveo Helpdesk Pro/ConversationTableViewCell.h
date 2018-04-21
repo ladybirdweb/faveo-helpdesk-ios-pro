@@ -8,28 +8,15 @@
 
 
 #import <UIKit/UIKit.h>
-/*!
- @class ConversationTableViewCell
- 
- @brief It allows you to develop Graphical User Interface.
- 
- @discussion This class used for designing and showing conversation between Agent and clients.It is displayed in table view format.
- A table view uses cell objects to draw its visible rows and then caches those objects as long as the rows are visible. Cells inherit from the UITableViewCell class. The table view’s data source provides the cell objects to the table view by implementing the tableView:cellForRowAtIndexPath: method, a required method of the UITableViewDataSource protocol.
- */
+
+@protocol ConversationTableViewCellDelegate;
+
 @interface ConversationTableViewCell : UITableViewCell
 
-/*!
- @property profilePicView
- 
- @brief It is an view used for showing profile picture of user.
- */
+@property (assign, nonatomic) id < ConversationTableViewCellDelegate > delegate;
+
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicView;
 
-/*!
- @property clientNameLabel
- 
- @brief It is label used for definig name of client.
- */
 @property (weak, nonatomic) IBOutlet UILabel *clientNameLabel;
 
 /*!
@@ -61,5 +48,20 @@
 -(void)setUserProfileimage:(NSString*)imageUrl;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIView *view1;
+- (IBAction)clickedOnAttachment:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIImageView *attachImage;
+
+@property (weak, nonatomic) IBOutlet UIButton *attachButtonLabel;
+
+@end
+
+@protocol ConversationTableViewCellDelegate <NSObject>
+
+@optional
+
+- (void)buttonTouchedForCell:(ConversationTableViewCell *)cell;
+
+
 
 @end

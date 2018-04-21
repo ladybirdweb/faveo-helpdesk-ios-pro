@@ -27,6 +27,7 @@
 #import "XLFormRowDescriptor.h"
 #import "UIView+XLFormAdditions.h"
 
+API_AVAILABLE(ios(8.0))
 @interface XLFormImageCell() <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     UIPopoverController *popoverController;

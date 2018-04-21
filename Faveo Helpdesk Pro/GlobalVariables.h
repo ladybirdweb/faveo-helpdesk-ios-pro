@@ -202,5 +202,16 @@
 
 @property (strong, nonatomic) NSString *userID;
 
+@property (strong, nonatomic) NSMutableArray *assigneeIdArrayListToTicketCreate;
+
+@property (strong, nonatomic) NSMutableArray *attachArrayFromConversation;
+
+@property (strong, nonatomic) NSString *roleFromAuthenticateAPI;
+
+@property (strong, nonatomic) NSString *statusIdFor401Error;
+
+@property (strong, nonatomic) NSArray *collaboratorListArray;
+
+
 @end
 

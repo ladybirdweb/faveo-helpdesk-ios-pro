@@ -123,6 +123,7 @@
 -(void)update;
 -(void)reloadd;
 -(void)addUIRefresh;
+-(void)wipeDataInLogout;
 @property (weak, nonatomic) IBOutlet UIView *view1;
 @property (weak, nonatomic) IBOutlet UIView *view2;
 @property (weak, nonatomic) IBOutlet UIView *view3;

@@ -11,10 +11,6 @@
 @interface TicketSearchViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *seachTextField;
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlObject;
-
-- (IBAction)segmentedControlAction:(id)sender;
-
 @property (weak, nonatomic) IBOutlet UITableView *tableview1;
 @property (nonatomic, strong) NSString *path1;
 

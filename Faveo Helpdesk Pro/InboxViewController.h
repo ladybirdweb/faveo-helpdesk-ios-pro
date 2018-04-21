@@ -58,5 +58,11 @@
 @property (strong, nonatomic) NSMutableArray *sampleDataArray;
 @property (strong, nonatomic) NSMutableArray *filteredSampleDataArray;
 
+
+-(void)hideTableViewEditMode;
+
+
+-(void)showMessageForLogout:(NSString*)message sendViewController:(UIViewController *)viewController;
+
 @end
 

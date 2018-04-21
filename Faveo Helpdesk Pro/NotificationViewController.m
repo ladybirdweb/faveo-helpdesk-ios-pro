@@ -23,9 +23,11 @@
 #import "RMessage.h"
 #import "RMessageView.h"
 #import "UIImageView+Letters.h"
+#import "InboxViewController.h"
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
+
 
 
 @interface NotificationViewController ()<RMessageProtocol>
@@ -35,7 +37,7 @@
     NSUserDefaults *userDefaults;
     GlobalVariables *globalVariables;
     NSString *notifyID;
-    
+
 }
 
 @property (nonatomic, strong) NSMutableArray *mutableArray;
@@ -52,24 +54,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"Naa-Inbox");
-    
-    
-       
+
     NSString *refreshedToken = [[FIRInstanceID instanceID] token];
     NSLog(@"refreshed token  %@",refreshedToken);
     
     [self setTitle:NSLocalizedString(@"Notifications",nil)];
     [self addUIRefresh];
-   // NSLog(@"string %@",NSLocalizedString(@"Inbox",nil));
+   
     _mutableArray=[[NSMutableArray alloc]init];
     
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
-    NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
+  
     
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-    [self reload];
+    if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
+    {
+        NSString *msg=@"";
+        [utils showAlertWithMessage:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"API disabled"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    {
+        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Please wait",nil)];
+        [self reload];
+    }
     
 }
 
@@ -118,20 +133,36 @@
             
             
             if (error || [msg containsString:@"Error"]) {
-                [refresh endRefreshing];
+                [self->refresh endRefreshing];
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 if (msg) {
                     if([msg isEqualToString:@"Error-402"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                    }else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-403"] || [msg isEqualToString:@"403"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been changed or You are not an Agent/Admin." sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-403"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been changed or You are not an Agent/Admin." sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-404"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                    }
+                    else{
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Thread-getNotificationViewController-error == %@",error.localizedDescription);
                     }
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-getNotificationViewController-Refresh-error == %@",error.localizedDescription);
                 }
                 return ;
@@ -144,20 +175,29 @@
                 return;
             }
             
+            if ([msg isEqualToString:@"tokenNotRefreshed"]) {
+                
+                // [[AppDelegate sharedAppdelegate] hideProgressView];
+                [self->utils showAlertWithMessage:@"Your HELPDESK URL or your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                
+                return;
+            }
+            
             if (json) {
                 //NSError *error;
                 NSLog(@"Thread-NO4--getInboxAPI--%@",json);
-                _mutableArray = [json objectForKey:@"data"];
+                self->_mutableArray = [json objectForKey:@"data"];
                 
-                _nextPageUrl =[json objectForKey:@"next_page_url"];
-                _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[json objectForKey:@"total"] integerValue];
-                _totalPages=[[json objectForKey:@"last_page"] integerValue];
-                NSLog(@"Thread-NO4.1getInbox-dic--%@", _mutableArray);
+                self->_nextPageUrl =[json objectForKey:@"next_page_url"];
+                self->_currentPage=[[json objectForKey:@"current_page"] integerValue];
+                self->_totalTickets=[[json objectForKey:@"total"] integerValue];
+                self->_totalPages=[[json objectForKey:@"last_page"] integerValue];
+                NSLog(@"Thread-NO4.1getInbox-dic--%@", self->_mutableArray);
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [refresh endRefreshing];
+                        [self->refresh endRefreshing];
                         [self.tableView reloadData];
                     });
                 });
@@ -283,10 +323,10 @@
                 
                 if (msg) {
                     
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-getNotificationViewController-Refresh-error == %@",error.localizedDescription);
                 }
                 return ;
@@ -301,17 +341,18 @@
             
             if (json) {
                 NSLog(@"Thread-NO4--getNotifictionAPI--%@",json);
+                
                 //_indexPaths=[[NSArray alloc]init];
                 //_indexPaths = [json objectForKey:@"data"];
-                _nextPageUrl =[json objectForKey:@"next_page_url"];
-                _currentPage=[[json objectForKey:@"current_page"] integerValue];
-                _totalTickets=[[json objectForKey:@"total"] integerValue];
-                _totalPages=[[json objectForKey:@"last_page"] integerValue];
+                self->_nextPageUrl =[json objectForKey:@"next_page_url"];
+                self->_currentPage=[[json objectForKey:@"current_page"] integerValue];
+                self->_totalTickets=[[json objectForKey:@"total"] integerValue];
+                self->_totalPages=[[json objectForKey:@"last_page"] integerValue];
                 
                 
-                _mutableArray= [_mutableArray mutableCopy];
+                self->_mutableArray= [self->_mutableArray mutableCopy];
                 
-                [_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
+                [self->_mutableArray addObjectsFromArray:[json objectForKey:@"data"]];
                 
             
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -461,6 +502,7 @@
         {
             cell.name.text= [profileDict objectForKey:@"changed_by_user_name"];
         }
+        
         else
         {
             // cell.name.text=@"Not Availabel";
@@ -475,20 +517,26 @@
         {
             [cell.profilePicView setImageWithString:fname color:nil ];
         }
-        else
+        else if( [Utils isEmpty:fname] && [Utils isEmpty:lname] && [Utils isEmpty:userName])//userName
         {
-            [cell.profilePicView setImageWithString:userName color:nil ];
+          // [cell setUserProfileimage:@"systemIcon.png"];
+            cell.profilePicView.image=[UIImage imageNamed:@"systemIcon.png"];
         }
         
-        
-        
-        
-        //   cell.name.text=[NSString stringWithFormat:@"%@ %@",[profileDict objectForKey:@"changed_by_first_name"],[profileDict objectForKey:@"changed_by_last_name"]];
     }
     else{
         
-        [cell setUserProfileimage:@"default_pic.png"];
+        if([[finaldic objectForKey:@"by"] isEqualToString:@"System"])
+        {
+           // [cell setUserProfileimage:@"systemIcon.png"];
+            cell.profilePicView.image=[UIImage imageNamed:@"systemIcon.png"];
+            cell.name.text= NSLocalizedString(@"System",nil);//robot
+        }
+        else{
+            
+         [cell setUserProfileimage:@"default_pic.png"];
          cell.name.text= NSLocalizedString(@"Not Available",nil);
+        }
     }
     
     
@@ -542,6 +590,7 @@
         {
         globalVariables.First_name=  [profileDict objectForKey:@"changed_by_first_name"];
         globalVariables.Last_name= [profileDict objectForKey:@"changed_by_last_name"];
+            globalVariables.Ticket_status=@"Open";
 
         
             
@@ -551,6 +600,7 @@
         {
             globalVariables.First_name= @"";
             globalVariables.Last_name=@"";
+            globalVariables.Ticket_status=@"Open";
             
             [self.navigationController pushViewController:td animated:YES];
             
@@ -592,6 +642,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    
   //  [[self navigationController] setNavigationBarHidden:NO];
     
 }

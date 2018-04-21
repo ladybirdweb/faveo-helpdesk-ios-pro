@@ -257,101 +257,104 @@
             
         }
         
-       
-        
+    
         
         NSString *url = [NSString stringWithFormat:@"%@api/v2/helpdesk/ticket/assign?api_key=%@&token=%@&assign_id=%@&id[]=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"],staffID,globalVariables.ticketIDListForAssign];
         
          NSLog(@"URL is : %@",url);
         
 @try{
-        MyWebservices *webservices=[MyWebservices sharedInstance];
+    MyWebservices *webservices=[MyWebservices sharedInstance];
+    
+    [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         
-        [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+        if (error || [msg containsString:@"Error"]) {
             
-            if (error || [msg containsString:@"Error"]) {
+            if (msg) {
                 
-                if (msg) {
+                if([msg isEqualToString:@"Error-401"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                }
+                else
                     
-                    if([msg isEqualToString:@"Error-403"])
-                    {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
-                    }
-                    else if([msg isEqualToString:@"Error-402"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                    }
-                    else if([msg isEqualToString:@"Error-422"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
-                    }
-                    else if([msg isEqualToString:@"Error-404"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-                    }
-                    else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-                    }
-                    else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
-                    }
-                    else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
-                    }
-                    
-                    else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    }
-                    //  NSLog(@"Message is : %@",msg);
-                    
-                }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-NO4-MultipleTicketAssign-Refresh-error == %@",error.localizedDescription);
+                if([msg isEqualToString:@"Error-403"])
+                {
+                    [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                }
+                else if([msg isEqualToString:@"Error-402"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                }
+                else if([msg isEqualToString:@"Error-422"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                }
+                else if([msg isEqualToString:@"Error-404"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                }
+                else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                }
+                else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                }
+                else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                }
+                else{
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    NSLog(@"Error is : %@",msg);
                 }
                 
-                return ;
+            }else if(error)  {
+                [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
             }
             
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-                
-                [self assign];
-                NSLog(@"Thread--NO4-call-MultipleTicketAssign");
-                return;
-            }
+            return ;
+        }
+        
+        if ([msg isEqualToString:@"tokenRefreshed"]) {
+            
+            [self assign];
+            NSLog(@"Thread--Multiple-Ticket-Assign");
+            return;
+        }
             
             if (json) {
                 NSLog(@"JSON-CreateTicket-%@",json);
+                NSLog(@"JSON-CreateTicket-%@",json);
                 
-               //NSString * str=[json objectForKey:@"success"];
-                NSDictionary * dic1=[json objectForKey:@"message"];
-                
-                NSString * str=[dic1 objectForKey:@"success"];
-                
-                    if ([[json objectForKey:@"success"] isEqualToString:@"assigned successfully"] || [str isEqualToString:@"assigned successfully"] || [str isEqualToString:@"Assigned successfully"])
+                NSString * str1=[NSString stringWithFormat:@"%@",[json objectForKey:@"success"]];
+                NSString * str2=[json objectForKey:@"message"];
+            
+                    if ([str1 isEqualToString:@"1"] || [str2 isEqualToString:@"Assigned successfully"])
                     {
-                        dispatch_async(dispatch_get_main_queue(), ^{
+                       
 
                             [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Assigned Successfully.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
 
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:inboxVC animated:YES];
 
-                        });
+                
 
                     }else{
                         
-                        [utils showAlertWithMessage:@"Something Went Wrong..!" sendViewController:self];
+                        [self->utils showAlertWithMessage:@"Something Went Wrong..!" sendViewController:self];
                         
                     }
             

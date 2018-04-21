@@ -94,23 +94,19 @@
     [self.firstNameTextField setInputAccessoryView:toolBar];
     [self.lastNameTextField setInputAccessoryView:toolBar];
     [self.emailTextField setInputAccessoryView:toolBar];
-    [self.phoneTextField setInputAccessoryView:toolBar];
-    [self.mobileTextField setInputAccessoryView:toolBar];
+ 
     
     _userNameTextField.delegate=self;
     _firstNameTextField.delegate=self;
     _lastNameTextField.delegate=self;
     _emailTextField.delegate=self;
-    _phoneTextField.delegate=self;
-    _mobileTextField.delegate=self;
+    
     
     _userNameTextField.text= [NSString stringWithFormat:@"%@",globalVariables.userNameInUserList];
     _firstNameTextField.text= [NSString stringWithFormat:@"%@",globalVariables.First_name];
     _lastNameTextField.text= [NSString stringWithFormat:@"%@",globalVariables.Last_name];
     _emailTextField.text= [NSString stringWithFormat:@"%@",globalVariables.emailInUserList];
-    _phoneTextField.text= [NSString stringWithFormat:@"%@",globalVariables.phoneNumberInUserList];
-    _mobileTextField.text= [NSString stringWithFormat:@"%@",globalVariables.mobileNumberInUserList];
-    
+   
     NSString *str= [NSString stringWithFormat:@"%@",globalVariables.ActiveDeactiveStateOfUser1];
    
    
@@ -159,8 +155,7 @@
     [_firstNameTextField resignFirstResponder];
     [_lastNameTextField resignFirstResponder];
     [_emailTextField resignFirstResponder];
-    [_phoneTextField resignFirstResponder];
-    [_mobileTextField resignFirstResponder];
+   
     
 }
 - (IBAction)submitButton:(id)sender {
@@ -352,7 +347,12 @@
                 
             }
     
-    }else if(![Utils emailValidation:self.emailTextField.text]){
+    }
+    
+    
+     if(_emailTextField.text.length==0 || [_emailTextField.text isEqualToString:@"Not available"])
+    {
+        if(![Utils emailValidation:self.emailTextField.text]){
   
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -360,7 +360,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Error !", nil)
-                                          subtitle:NSLocalizedString(@"Please enter valid email id.", nil)
+                                          subtitle:NSLocalizedString(@"Please enter valid email.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -371,8 +371,9 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
         
+        [[AppDelegate sharedAppdelegate] hideProgressView];
     }
-    
+    }
         
     
     [self doneSubmitMethod];
@@ -392,7 +393,7 @@
             
             [[AppDelegate sharedAppdelegate] showProgressView];
         
-            NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/edit/%@?api_key=%@&token=%@&user_name=%@&first_name=%@&last_name=%@&email=%@&phone_number=%@&mobile=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.iD,API_KEY,[userDefaults objectForKey:@"token"],_userNameTextField.text,_firstNameTextField.text,_lastNameTextField.text,_emailTextField.text,_phoneTextField.text,_mobileTextField.text];
+            NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user-edit/%@?api_key=%@&token=%@&user_name=%@&first_name=%@&last_name=%@&email=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.userID,API_KEY,[userDefaults objectForKey:@"token"],_userNameTextField.text,_firstNameTextField.text,_lastNameTextField.text,_emailTextField.text];
     @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
@@ -407,26 +408,31 @@
                     if (msg) {
                         if([msg isEqualToString:@"Error-403"])
                         {
-                            [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else if([msg isEqualToString:@"Error-402"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else if([msg isEqualToString:@"Error-422"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Enter the data for mandatory fields or Enter valid Email. "] sendViewController:self];
+                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else{
-                            [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                             NSLog(@"Error is : %@",msg);
+                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         
                     }else if(error)  {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-EditCustomerDetails-Refresh-error == %@",error.localizedDescription);
+                         [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     
                     return ;
@@ -443,9 +449,12 @@
                 if (json) {
                     NSLog(@"JSON-EditCustomerDetails-%@",json);
                         
+                    NSDictionary *userData=[json objectForKey:@"data"];
+                    NSString *msg=[userData objectForKey:@"message"];
+            
+                          
+                    if([msg isEqualToString:@"Updated successfully"]){
                         
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            
                             if (self.navigationController.navigationBarHidden) {
                                 [self.navigationController setNavigationBarHidden:NO];
                             }
@@ -465,21 +474,23 @@
                             
 
                             
-                            globalVariables.userNameInUserList= _userNameTextField.text;
-                            globalVariables.First_name= _firstNameTextField.text;
-                            globalVariables.Last_name=_lastNameTextField.text;
-                            globalVariables.emailInUserList= _emailTextField.text;
-                            globalVariables.phoneNumberInUserList=_phoneTextField.text;
-                            globalVariables.mobileNumberInUserList= _mobileTextField.text;
+                            self->globalVariables.userNameInUserList= self->_userNameTextField.text;
+                            self->globalVariables.First_name= self->_firstNameTextField.text;
+                           self-> globalVariables.Last_name=self->_lastNameTextField.text;
+                            self->globalVariables.emailInUserList=self-> _emailTextField.text;
+                        
                             
-                            globalVariables=[GlobalVariables sharedInstance];
+                            self->globalVariables=[GlobalVariables sharedInstance];
 
                 
                         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
 
-                           
-                            
-                        });
+                    }else
+                    {
+                        [self->utils showAlertWithMessage:@"Something went wrong. Please try again later." sendViewController:self];
+                         [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
+                    }
                         
                         
                     }
@@ -513,16 +524,16 @@
         
         [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Deactivate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
             
-            globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
-            [_switch1 setOn:YES];
-            _switch1.onTintColor= [UIColor redColor];
+            self->globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
+            [self->_switch1 setOn:YES];
+            self->_switch1.onTintColor= [UIColor redColor];
             [self deactivateUser];
         } cancelBlock:^{
             
-            [_switch1 setOn:NO];
+            [self->_switch1 setOn:NO];
             //   _switch1.tintColor = [UIColor greenColor];
-            _switch1.layer.cornerRadius = 16;
-            _switch1.backgroundColor= [UIColor greenColor];
+            self->_switch1.layer.cornerRadius = 16;
+            self->_switch1.backgroundColor= [UIColor greenColor];
         }];
      
      }@catch (NSException *exception)
@@ -530,6 +541,7 @@
             [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             return;
         }
         @finally
@@ -546,20 +558,21 @@
         
         [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Activate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
             
-            [_switch1 setOn:NO];
+            [self->_switch1 setOn:NO];
             //   _switch1.tintColor = [UIColor greenColor];
-            _switch1.layer.cornerRadius = 16;
-            _switch1.backgroundColor= [UIColor greenColor];
+            self->_switch1.layer.cornerRadius = 16;
+            self->_switch1.backgroundColor= [UIColor greenColor];
          [self activeUser];
         } cancelBlock:^{
-            [_switch1 setOn:YES];
-            _switch1.onTintColor= [UIColor redColor];
+            [self->_switch1 setOn:YES];
+            self->_switch1.onTintColor= [UIColor redColor];
         }];
     }@catch (NSException *exception)
         {
             [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             return;
         }
         @finally
@@ -583,7 +596,7 @@
         
         NSString *statusDeActivate= [NSString stringWithFormat:@"%i",1];
         
-        NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/status/%@?token=%@&status=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.iD,[userDefaults objectForKey:@"token"],statusDeActivate];
+        NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/status/%@?token=%@&status=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.userID,[userDefaults objectForKey:@"token"],statusDeActivate];
         
         NSLog(@"%@",url);
      
@@ -600,14 +613,14 @@
                 if (msg) {
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                     }else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Error is : %@",msg);
                     }
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-EditCustomerDetails-DeactivateUser-Refresh-error == %@",error.localizedDescription);
                 }
                 
@@ -649,7 +662,7 @@
                                                     atPosition:RMessagePositionNavBarOverlay
                                           canBeDismissedByUser:YES];
             
-                        globalVariables.ActiveDeactiveStateOfUser=@"deactivated";
+                        self->globalVariables.ActiveDeactiveStateOfUser=@"deactivated";
                         
                      ClientListViewController *list=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientListID"];
                     [self.navigationController pushViewController:list animated:YES];
@@ -736,7 +749,7 @@
         
         NSString *statusActivate= [NSString stringWithFormat:@"%i",0];
         
-       NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/status/%@?token=%@&status=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.iD,[userDefaults objectForKey:@"token"],statusActivate];
+       NSString *url =[NSString stringWithFormat:@"%@api/v2/helpdesk/user/status/%@?token=%@&status=%@",[userDefaults objectForKey:@"baseURL"],globalVariables.userID,[userDefaults objectForKey:@"token"],statusActivate];
         
         NSLog(@"%@",url);
         NSLog(@"%@",url);
@@ -753,14 +766,14 @@
                 if (msg) {
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                     }else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Error is : %@",msg);
                     }
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-EditCustomerDetails-DeactivateUser-Refresh-error == %@",error.localizedDescription);
                 }
                 
@@ -802,7 +815,7 @@
                                                         atPosition:RMessagePositionNavBarOverlay
                                               canBeDismissedByUser:YES];
                         
-                       globalVariables.ActiveDeactiveStateOfUser=@"activated";
+                        self->globalVariables.ActiveDeactiveStateOfUser=@"activated";
                         
                         ClientListViewController *list=[self.storyboard instantiateViewControllerWithIdentifier:@"ClientListID"];
                         [self.navigationController pushViewController:list animated:YES];

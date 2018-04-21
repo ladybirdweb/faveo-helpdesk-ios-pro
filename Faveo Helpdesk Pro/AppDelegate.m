@@ -18,7 +18,7 @@
 #import "IQKeyboardManager.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-
+#import "Utils.h"
 @import Fabric;
 @import Crashlytics;
 @import Firebase;
@@ -225,7 +225,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     
     // Print message ID.
     if (userInfo[kGCMMessageIDKey]) {
-        NSLog(@"Message ID: %@", userInfo[kGCMMessageIDKey]);
+        NSLog(@"Message ID1: %@", userInfo[kGCMMessageIDKey]);
     }
     
     // Print full message.
@@ -251,6 +251,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 // Receive displayed notifications for iOS 10 devices.
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 // Handle incoming notification messages while app is in the foreground.
+
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
        willPresentNotification:(UNNotification *)notification
          withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
@@ -272,29 +273,37 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     // Print full message.
     NSLog(@"data messages555 %@", userInfo);
     
-    NSLog(@"%@",userInfo);
+    NSLog(@"Data121 : %@",userInfo);
     completionHandler();
     
     TicketDetailViewController *td=[mainStoryboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
     
     GlobalVariables *globalVariables=[GlobalVariables sharedInstance];
+   
+   // Utils *utils=[[Utils alloc]init];
     
+@try{
     NSString * scenario=[userInfo objectForKey:@"scenario"];
     if ([scenario isEqualToString:@"tickets"])  {
-        
-        
+     
         globalVariables.iD=[userInfo objectForKey:@"id"];
         
-        
-        NSError *error;
+        NSError *error; // by = System;
+        if([[userInfo objectForKey:@"by"] isEqualToString:@"System"])
+        {
+            globalVariables.First_name=@"";
+            globalVariables.Last_name=@"";
+        }
+        else{
         NSData *data = [[userInfo objectForKey:@"requester"] dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *requester = [NSJSONSerialization JSONObjectWithData:data
                                                                   options:kNilOptions
                                                                     error:&error];
         
-        
-        globalVariables.First_name= [requester objectForKey:@"first_name"];
-        globalVariables.Last_name= [requester objectForKey:@"last_name"];
+    
+              globalVariables.First_name= [requester objectForKey:@"first_name"];
+              globalVariables.Last_name= [requester objectForKey:@"last_name"];
+        }
         
         globalVariables.ticketStatusBool=@"AppDeledateNotificationView";
         globalVariables.Ticket_status=@"Open";
@@ -304,8 +313,6 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
         ///////////////////////////
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }else {
-        
-        
         ClientDetailViewController *cd=[mainStoryboard instantiateViewControllerWithIdentifier:@"ClientDetailVCID"];
         NSError *error;
         NSData *data = [[userInfo objectForKey:@"requester"] dataUsingEncoding:NSUTF8StringEncoding];
@@ -313,7 +320,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
                                                                   options:kNilOptions
                                                                     error:&error];
         
-        globalVariables.iD=[requester objectForKey:@"id"];
+        globalVariables.userID=[requester objectForKey:@"id"];
         globalVariables.First_name= [requester objectForKey:@"first_name"];
         globalVariables.Last_name= [requester objectForKey:@"last_name"];
         
@@ -327,9 +334,21 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
         [(UINavigationController *)self.window.rootViewController pushViewController:cd animated:YES];
         ////////////////////
         [[AppDelegate sharedAppdelegate] hideProgressView];
+        
     }
     
-    
+  }@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        //[utils showAlertWithMessage:exception.name sendViewController:self];
+        //return;
+    }
+    @finally
+    {
+        NSLog( @" I am in cellForAtIndexPath method in Inobx ViewController" );
+        
+    }
 }
 #endif
 // [END ios_10_message_handling]

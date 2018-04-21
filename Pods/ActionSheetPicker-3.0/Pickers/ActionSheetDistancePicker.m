@@ -173,7 +173,11 @@
 
     UILabel  * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, otherSize, 30)];
 
-    label.textAlignment = NSTextAlignmentCenter;
+    if (@available(iOS 6.0, *)) {
+        label.textAlignment = NSTextAlignmentCenter;
+    } else {
+        // Fallback on earlier versions
+    }
 
     label.font = [UIFont boldSystemFontOfSize:20];
 

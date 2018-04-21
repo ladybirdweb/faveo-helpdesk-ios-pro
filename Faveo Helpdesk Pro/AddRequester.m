@@ -155,6 +155,63 @@
 - (IBAction)submitClicked:(id)sender {
     
     
+    if (![_mobileTextField.text isEqualToString:@""]) {
+        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+        
+        if([_codeTextField.text isEqualToString:@""])
+        {
+            
+            if (self.navigationController.navigationBarHidden) {
+                [self.navigationController setNavigationBarHidden:NO];
+            }
+            
+            [RMessage showNotificationInViewController:self.navigationController
+                                                 title:NSLocalizedString(@"Warning !", nil)
+                                              subtitle:NSLocalizedString(@"Please Enter Mobile Code.!", nil)
+                                             iconImage:nil
+                                                  type:RMessageTypeWarning
+                                        customTypeName:nil
+                                              duration:RMessageDurationAutomatic
+                                              callback:nil
+                                           buttonTitle:nil
+                                        buttonCallback:nil
+                                            atPosition:RMessagePositionNavBarOverlay
+                                  canBeDismissedByUser:YES];
+            
+            
+        }
+        
+    }
+    else
+        if (![_codeTextField.text isEqualToString:@""]) {
+            // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+            
+            if([_mobileTextField.text isEqualToString:@""])
+            {
+                
+                if (self.navigationController.navigationBarHidden) {
+                    [self.navigationController setNavigationBarHidden:NO];
+                }
+                
+                [RMessage showNotificationInViewController:self.navigationController
+                                                     title:NSLocalizedString(@"Warning !", nil)
+                                                  subtitle:NSLocalizedString(@"Please Enter Mobile number.!", nil)
+                                                 iconImage:nil
+                                                      type:RMessageTypeWarning
+                                            customTypeName:nil
+                                                  duration:RMessageDurationAutomatic
+                                                  callback:nil
+                                               buttonTitle:nil
+                                            buttonCallback:nil
+                                                atPosition:RMessagePositionNavBarOverlay
+                                      canBeDismissedByUser:YES];
+                
+                
+            }
+            
+        }
+        else
+    
     if(self.emailTextView.text.length==0 && self.firstNameView.text.length==0 && _lastNameView.text.length==0)
     {
         if (self.navigationController.navigationBarHidden) {
@@ -332,45 +389,45 @@
                 if (msg) {
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                     }
                     if([msg isEqualToString:@"Error-402"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-422"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-404"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
                     }
                     else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Error is : %@",msg);
                     }
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-addRequester-Refresh-error == %@",error.localizedDescription);
                 }
                 
@@ -428,11 +485,11 @@
                                               canBeDismissedByUser:YES];
                         
                         
-                        globalVariables.emailAddRequester=_emailTextView.text;
-                        globalVariables.firstNameAddRequester=_firstNameView.text;
-                        globalVariables.lastAddRequester=_lastNameView.text;
-                        globalVariables.mobileAddRequester=_mobileTextField.text;
-                        globalVariables.mobileCode=_codeTextField.text;
+                        self->globalVariables.emailAddRequester=self->_emailTextView.text;
+                        self->globalVariables.firstNameAddRequester=self->_firstNameView.text;
+                       self-> globalVariables.lastAddRequester=self->_lastNameView.text;
+                        self->globalVariables.mobileAddRequester=self->_mobileTextField.text;
+                        self->globalVariables.mobileCode=self->_codeTextField.text;
                         
                         
                         CreateTicketViewController *create=[self.storyboard instantiateViewControllerWithIdentifier:@"CreateTicket"];
@@ -450,14 +507,14 @@
                     
                 {
                     
-                    [utils showAlertWithMessage:NSLocalizedString(@"Email already exist.", nil) sendViewController:self];
+                    [self->utils showAlertWithMessage:NSLocalizedString(@"Email already exist.", nil) sendViewController:self];
         
                 }
                 
                 else
                 {
                     
-                    [utils showAlertWithMessage:NSLocalizedString(@"Email already exist.", nil) sendViewController:self];
+                    [self->utils showAlertWithMessage:NSLocalizedString(@"Email already exist.", nil) sendViewController:self];
                 }
                 
             }

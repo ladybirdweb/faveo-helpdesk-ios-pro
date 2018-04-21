@@ -21,15 +21,25 @@
 #import "RMessage.h"
 #import "RMessageView.h"
 #import "UIImageView+Letters.h"
+#import "AttachmentViewController.h"
+#import "InboxViewController.h"
+#import "LoginViewController.h"
 
-@interface ConversationViewController ()<CNPPopupControllerDelegate,UIWebViewDelegate,RMessageProtocol>{
+
+@interface ConversationViewController ()<ConversationTableViewCellDelegate,CNPPopupControllerDelegate,UIWebViewDelegate,RMessageProtocol>{
     
     Utils *utils;
     NSUserDefaults *userDefaults;
     NSMutableArray *mutableArray;
     GlobalVariables *globalVariable;
     int selectedIndex;
+    NSMutableArray *attachmentArray;
     
+    NSString *fName;
+    NSString *lName;
+    NSString *userName;
+    
+    InboxViewController * inboxPage;
 }
 @property(nonatomic,strong) UILabel *noDataLabel;
 @property (nonatomic, strong) CNPPopupController *popupController;
@@ -51,12 +61,35 @@
     utils=[[Utils alloc]init];
     globalVariable=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
-    //[_activityIndicatorObject startAnimating];
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
-    [self reload];
+    
+    inboxPage=[[InboxViewController alloc]init];
+    
+    attachmentArray=[[NSMutableArray alloc]init];
+
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadd) name:@"reload_data" object:nil];
-    // Do any additional setup after loading the view.
+    
+    
+    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Conversations",nil)];
+   
+    if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
+    {
+        NSString *msg=@"";
+        [utils showAlertWithMessage:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"API disabled"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else{
+       [self reload];
+        
+    }
+    
 }
 
 -(void)reload{
@@ -99,40 +132,56 @@
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 if (msg) {
                     
+                    if([msg isEqualToString:@"Error-401"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                    }
+                    else
+                        
                     if([msg isEqualToString:@"Error-402"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-422"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-404"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-403"] || [msg isEqualToString:@"403"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been changed or You are not an Agent/Admin." sendViewController:self];
+                    }
+                    else{
+                        
+                        [self->utils showAlertWithMessage:msg sendViewController:self];
                     }
                     
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
                 }
                 
@@ -146,12 +195,27 @@
                 return;
             }
             
+            if ([msg isEqualToString:@"tokenNotRefreshed"]) {
+                
+                [self showMessageForLogout:@"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+                
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                
+                return;
+            }
+            
             if (json) {
                 //NSError *error;
-                mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
-            //    NSLog(@"Thread-NO4--getConversationAPI--%@",json);
-                mutableArray=[json copy];
-          //      NSLog(@"Thread-NO4.1getConversation-dic--%@", mutableArray);
+                
+                self->mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
+                
+                NSDictionary *dataConversationDict=[json objectForKey:@"data"];
+               // NSLog(@"DIct11111 is : %@",dataConversationDict);
+                
+                self->mutableArray=[dataConversationDict objectForKey:@"threads"];
+                
+              //  [[AppDelegate sharedAppdelegate] hideProgressView];
+                
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
@@ -187,6 +251,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger numOfSections = 0;
@@ -232,21 +297,74 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ConversationTableViewCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
+     [cell setDelegate:self];
+    
     NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
-    NSLog(@"Final DIct is : %@",finaldic);
+    //NSLog(@"Ticket Thread Dict is : %@",finaldic);
+  
+
+    
+    attachmentArray=[finaldic objectForKey:@"attach"];
     
     
-    NSMutableArray *arr1=[finaldic objectForKey:@"files"];
-     NSLog(@"Arra111  is : %@",arr1);
-//    NSMutableArray *arr2=[arr1 objectAtIndex:indexPath.row];
-//    NSDictionary *fileDictionary=[arr2 objectAtIndex:indexPath.row];
-  //  NSLog(@"Attchemnt dict1111 is : %@",fileDictionary);
-//    NSObject *objectFileAttachment=[fileDictionary objectForKey:@"file"];
-//    NSLog(@"Attachment File is : %@",objectFileAttachment);
+//    globalVariable=[GlobalVariables sharedInstance];
+//    globalVariable.attachmentListFromConversationView=attachmentArray;
     
-@try{
+    if ([attachmentArray count] != 0){
+        
+        cell.attachImage.hidden=NO;
+        cell.attachButtonLabel.hidden=NO;
+       
+       
+        
+        for (int i = 0; i < attachmentArray.count; i++) {
+             globalVariable.attachArrayFromConversation=attachmentArray;
+            
+             NSDictionary *attachDictionary=[attachmentArray objectAtIndex:i];
+            
+            
+         //    NSString *numStr = [NSString stringWithFormat:@"%@", [attachDictionary objectForKey:@"file"]];
+            
+            NSString *fileName=[attachDictionary objectForKey:@"name"];
+            NSString *fileSize=[NSString stringWithFormat:@"%@",[attachDictionary objectForKey:@"size"]];
+            NSString *fileType=[attachDictionary objectForKey:@"type"];
+            
+            NSLog(@"File Name : %@",fileName);
+            NSLog(@"File size : %@",fileSize);
+            NSLog(@"File Type : %@",fileType);
+            
+          //  printf("File Attachemnt(base64 String) : %s\n", [numStr UTF8String]);
+        }
+        
+//        NSIndexPath *path;
+//        NSDictionary *attachDictionary=[attachmentArray objectAtIndex:path.row];
+////        //   NSLog(@"Attchment Dict is: %@",attachDictionary);
+//
+//
+//         NSString *numStr = [NSString stringWithFormat:@"%@", [attachDictionary objectForKey:@"file"]];
+//
+//         NSString *fileName=[attachDictionary objectForKey:@"name"];
+//         NSString *fileSize=[NSString stringWithFormat:@"%@",[attachDictionary objectForKey:@"size"]];
+//         NSString *fileType=[attachDictionary objectForKey:@"type"];
+//
+//         NSLog(@"File Name : %@",fileName);
+//         NSLog(@"File size : %@",fileSize);
+//         NSLog(@"File Type : %@",fileType);
+//
+//         printf("File Attachemnt(base64 String) : %s\n", [numStr UTF8String]);
+        
+    } else
+    {
+        NSLog(@"EMpty aaray");
+        cell.attachImage.hidden=YES;
+        cell.attachButtonLabel.hidden=YES;
+    }
+
+    
+    //created at time
     cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"created_at"]];
   
+    //internal note label
     NSInteger i=[[finaldic objectForKey:@"is_internal"] intValue];
     if (i==0) {
         [cell.internalNoteLabel setHidden:YES];
@@ -254,6 +372,8 @@
     if(i==1){
         [cell.internalNoteLabel setHidden:NO];
     }
+    
+    
     
 //         NSURL *url = [NSURL URLWithString:@"http://www.amazon.com"];
 //        [cell.webView loadRequest:[NSURLRequest requestWithURL:url]];
@@ -272,84 +392,77 @@
         NSString *style = [NSString stringWithFormat:@"<style>div {max-width: %fpx;}</style>", self.view.bounds.size.width - inset];
         body = [NSString stringWithFormat:@"%@%@%@", [body substringToIndex:range.location], style, [body substringFromIndex:range.location]];
     }
+    cell.webView.translatesAutoresizingMaskIntoConstraints = NO;
     [cell.webView loadHTMLString:body baseURL:nil];
     
     
     
-    
-
-   //NSString *system= @"System";
-   NSString *fName=[finaldic objectForKey:@"first_name"];
-   NSString *lName=[finaldic objectForKey:@"last_name"];
-    
-   NSString *userName=[finaldic objectForKey:@"user_name"];
-    
-    [Utils isEmpty:fName];
-   [Utils isEmpty:lName];
-   [Utils isEmpty:userName];
-   
-    
-        
-     if  ([Utils isEmpty:fName] && [Utils isEmpty:lName]){
-         if(![Utils isEmpty:userName]){
-        userName=[NSString stringWithFormat:@"%@",[finaldic objectForKey:@"user_name"]];
-             cell.clientNameLabel.text=userName;
-         }else cell.clientNameLabel.text=@"System";
-    }
-    else if ((![Utils isEmpty:fName] || ![Utils isEmpty:lName]) || (![Utils isEmpty:fName] && ![Utils isEmpty:lName]))
+    if([NSNull null] != [finaldic objectForKey:@"user"])
     {
-       NSString * fName12=[NSString stringWithFormat:@"%@ %@",fName,lName];
+         NSDictionary *userData=[finaldic objectForKey:@"user"];
         
-        cell.clientNameLabel.text=fName12;
+        fName=[userData objectForKey:@"first_name"];
+        lName=[userData objectForKey:@"last_name"];
+        userName=[userData objectForKey:@"user_name"];
+        NSString *userProfilePic=[userData objectForKey:@"profile_pic"];
         
-    }
-  
-// prifile image
-        if([[finaldic objectForKey:@"profile_pic"] hasSuffix:@"system.png"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".jpeg"] || [[finaldic objectForKey:@"profile_pic"] hasSuffix:@".png"] )
-        {
-            [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
+        [Utils isEmpty:fName];
+        [Utils isEmpty:lName];
+        [Utils isEmpty:userName];
+        [Utils isEmpty:userProfilePic];
+        
+        
+        if  ([Utils isEmpty:fName] && [Utils isEmpty:lName]){
+            if(![Utils isEmpty:userName]){
+                userName=[NSString stringWithFormat:@"%@",userName];
+                cell.clientNameLabel.text=userName;
+            }else cell.clientNameLabel.text=@"System";
         }
-         else if(![Utils isEmpty:fName])
+        else if ((![Utils isEmpty:fName] || ![Utils isEmpty:lName]) || (![Utils isEmpty:fName] && ![Utils isEmpty:lName]))
+        {
+            NSString * fName12=[NSString stringWithFormat:@"%@ %@",fName,lName];
+            
+            cell.clientNameLabel.text=fName12;
+            
+        }
+        
+        
+        
+        if([userProfilePic hasSuffix:@"system.png"] || [userProfilePic hasSuffix:@".jpg"] || [userProfilePic hasSuffix:@".jpeg"] || [userProfilePic hasSuffix:@".png"] )
+        {
+            [cell setUserProfileimage:userProfilePic];
+        }
+        else if(![Utils isEmpty:fName])
         {
             [cell.profilePicView setImageWithString:fName color:nil ];
         }
-       else
-       {
-           [cell.profilePicView setImageWithString:userName color:nil ];
-       }
+        else if(![Utils isEmpty:userName])
+        {
+            [cell.profilePicView setImageWithString:userName color:nil ];
+        }
+    
         
-
-
+    }
+    else
+    {
+        cell.clientNameLabel.text=@"System";
+        [cell.profilePicView setImageWithString:@"System" color:nil ];
+    }
    
-
-   // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
     
-//    if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-//    {
-//        [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-//
-//    }
-//    else
-//    {
-//        [cell setUserProfileimage:@"default_pic.png"];
-//    }
-    
-}@catch (NSException *exception)
-    {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
-        NSLog( @"Name: %@", exception.name);
-        NSLog( @"Reason: %@", exception.reason );
-       // return;
-    }
-    @finally
-    {
-        NSLog( @" I am in cellForROwAtIndexPath method in Conversation ViewController" );
-        
-    }
-
-
     return cell;
 }
+
+
+- (void) buttonTouchedForCell:(ConversationTableViewCell *)cell {
+    
+ [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Please Wait...!",nil)];
+    //NSLog(@"1111111111%@",globalVariable.attachArrayFromConversation);
+    globalVariable.attachArrayFromConversation=globalVariable.attachArrayFromConversation;
+    AttachmentViewController *attach=[self.storyboard instantiateViewControllerWithIdentifier:@"attachId"];
+    [self.navigationController pushViewController:attach animated:YES];
+}
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -401,19 +514,6 @@
 }
 
 
-
-//- (void)webViewDidFinishLoad:(UIWebView *)theWebView
-//{
-//    CGSize contentSize = theWebView.scrollView.contentSize;
-//    CGSize viewSize = theWebView.bounds.size;
-//
-//    float rw = viewSize.width / contentSize.width;
-//
-//    theWebView.scrollView.minimumZoomScale = rw;
-//    theWebView.scrollView.maximumZoomScale = rw;
-//    theWebView.scrollView.zoomScale = rw;
-//
-//}
 
 -(void)showWebview:(NSString*)tittle body:(NSString*)body popupStyle:(CNPPopupStyle)popupStyle{
     
@@ -482,6 +582,100 @@ webview.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingF
 -(void)reloadd{
     [self reload];
     // [refreshControl endRefreshing];
+}
+
+
+
+
+-(void)showMessageForLogout:(NSString*)message sendViewController:(UIViewController *)viewController
+{
+    UIAlertController *alertController = [UIAlertController   alertControllerWithTitle:APP_NAME message:message  preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction  actionWithTitle:@"Logout"
+                                                            style:UIAlertActionStyleCancel
+                                                          handler:^(UIAlertAction *action)
+                                   {
+                                       [self logout];
+                                       
+                                       if (self.navigationController.navigationBarHidden) {
+                                           [self.navigationController setNavigationBarHidden:NO];
+                                       }
+                                       
+                                       [RMessage showNotificationInViewController:self.navigationController
+                                                                            title:NSLocalizedString(@" Faveo Helpdesk ", nil)
+                                                                         subtitle:NSLocalizedString(@"You've logged out, successfully...!", nil)
+                                                                        iconImage:nil
+                                                                             type:RMessageTypeSuccess
+                                                                   customTypeName:nil
+                                                                         duration:RMessageDurationAutomatic
+                                                                         callback:nil
+                                                                      buttonTitle:nil
+                                                                   buttonCallback:nil
+                                                                       atPosition:RMessagePositionNavBarOverlay
+                                                             canBeDismissedByUser:YES];
+                                       
+                                       LoginViewController *login=[self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
+                                       [self.navigationController pushViewController: login animated:YES];
+                                   }];
+    [alertController addAction:cancelAction];
+    
+    [viewController presentViewController:alertController animated:YES completion:nil];
+    
+}
+
+-(void)logout
+{
+    
+    [self sendDeviceToken];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+    // get documents path
+    NSString *documentsPath = [paths objectAtIndex:0];
+    // get the path to our Data/plist file
+    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
+    NSError *error;
+    
+    if(![[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error])
+    {
+        NSLog(@"Error while removing the plist %@", error.localizedDescription);
+        //TODO: Handle/Log error
+    }
+    
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *each in cookieStorage.cookies) {
+        [cookieStorage deleteCookie:each];
+    }
+    
+    
+}
+
+-(void)sendDeviceToken{
+    
+    // NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSString *url=[NSString stringWithFormat:@"%@fcmtoken?user_id=%@&fcm_token=%s&os=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"user_id"],"0",@"ios"];
+    
+    
+    MyWebservices *webservices=[MyWebservices sharedInstance];
+    [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
+        if (error || [msg containsString:@"Error"]) {
+            if (msg) {
+                
+                // [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
+            }else if(error)  {
+                //                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
+            }
+            return ;
+        }
+        if (json) {
+            
+            NSLog(@"Thread-sendAPNS-token-json-%@",json);
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+        }
+        
+    }];
+    
 }
 
 

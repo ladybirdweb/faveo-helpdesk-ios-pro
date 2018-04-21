@@ -27,6 +27,8 @@
 #import "BDCustomAlertView.h"
 #import "UITextField+AutoSuggestion.h"
 #import "ReplyTicketViewController.h"
+#import "userSearchDataCell.h"
+#import "UIImageView+Letters.h"
 
 @interface addCCView ()<RMessageProtocol,UITextFieldDelegate,UITextFieldAutoSuggestionDataSource>
 {
@@ -46,6 +48,9 @@
     NSMutableArray *profilePicArray;
     NSMutableArray * UniqueprofilePicArray;
     
+    NSMutableArray *firstNameArray;
+    NSMutableArray *uniquefirstNameArray;
+    
     
     NSString * firstName;
     NSString * lastName;
@@ -56,6 +61,7 @@
     NSNumber *user_id1;
     
     NSNumber *selectedUserId;
+    NSString *selectedFirstName;
     
 }
 @end
@@ -79,6 +85,9 @@
     
     profilePicArray=[[NSMutableArray alloc]init];
     UniqueprofilePicArray=[[NSMutableArray alloc]init];
+    
+    firstNameArray=[[NSMutableArray alloc]init];
+    uniquefirstNameArray=[[NSMutableArray alloc]init];
     
     
     globalVariables=[GlobalVariables sharedInstance];
@@ -137,7 +146,10 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSLog(@"Data is : %@",_userSearchTextField.text);
+    
+    
     [self collaboratorApiMethod:_userSearchTextField.text];
+
     return YES;
 }
 
@@ -150,10 +162,11 @@
         [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
     }else{
-    
         
-        NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/search?token=%@&term=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],valueFromTextField];
-        
+        NSString *searchString=[valueFromTextField stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+        NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/search?token=%@&term=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],searchString];
+      
+    @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -164,51 +177,22 @@
                 if (msg) {
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-402"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                    }
-                    
-                    else if([msg isEqualToString:@"Error-422"]){
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                    }else if([msg isEqualToString:@"Error-422"]){
                         
                         NSLog(@"Message is : %@",msg);
-                    }
-                    else if([msg isEqualToString:@"Error-422"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
-                    }
-                    else if([msg isEqualToString:@"Error-404"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-                    }
-                    else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-                    }
-                    else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
-                    }
-                    else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
-                    }
-                    
-                    else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    }else{
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Error is11 : %@",msg);
                     }
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-Collaborator-Refresh-error == %@",error.localizedDescription);
                 }
                 
@@ -224,102 +208,152 @@
             
             if (json) {
                 NSLog(@"JSON-HelpSupport-%@",json);
-                //   NSLog(@"JSON-HelpSupport-%@",json);
                 
-                usersArray=[json objectForKey:@"users"];
+                self->usersArray=[json objectForKey:@"users"];
                 // NSIndexPath *indexpath;
                 
                 //  NSDictionary *userSearchDictionary=[usersArray objectAtIndex:indexpath.row];
                 
                 
-                
-                for (NSDictionary *dicc in usersArray) {
+                for (NSDictionary *dicc in self->usersArray) {
                     if ([dicc objectForKey:@"first_name"]) {
-                        [userNameArray addObject:[dicc objectForKey:@"email"]];
-                        //  [userLastNameArray addObject:[dicc objectForKey:@"last_name"]];
-                        [staff_idArray addObject:[dicc objectForKey:@"id"]];
-                        [profilePicArray addObject:[dicc objectForKey:@"profile_pic"]];
+                        [self->userNameArray addObject:[dicc objectForKey:@"email"]];
+                        [self->firstNameArray addObject:[NSString stringWithFormat:@"%@ %@",[dicc objectForKey:@"first_name"],[dicc objectForKey:@"last_name"]]];
+                        //   [self->lastNameArray addObject:[dicc objectForKey:@"last_name"]];
+                        [self->staff_idArray addObject:[dicc objectForKey:@"id"]];
+                        [self->profilePicArray addObject:[dicc objectForKey:@"profile_pic"]];
                     }
                     
                 }
                 
-                uniqueNameArray = [NSMutableArray array];
+                self->uniqueNameArray = [NSMutableArray array];
                 
-                for (id obj in userNameArray) {
-                    if (![uniqueNameArray containsObject:obj]) {
-                        [uniqueNameArray addObject:obj];
+                for (id obj in self->userNameArray) {
+                    if (![self->uniqueNameArray containsObject:obj]) {
+                        [self->uniqueNameArray addObject:obj];
                     }
                 }
                 
                 
-                uniqueIdArray = [NSMutableArray array];
+                self->uniqueIdArray = [NSMutableArray array];
                 
-                for (id obj in staff_idArray) {
-                    if (![uniqueIdArray containsObject:obj]) {
-                        [uniqueIdArray addObject:obj];
+                for (id obj in self->staff_idArray) {
+                    if (![self->uniqueIdArray containsObject:obj]) {
+                        [self->uniqueIdArray addObject:obj];
                     }
                 }
                 
-                UniqueprofilePicArray = [NSMutableArray array];
+                self->UniqueprofilePicArray = [NSMutableArray array];
                 
-                for (id obj in profilePicArray) {
-                    if (![UniqueprofilePicArray containsObject:obj]) {
-                        [UniqueprofilePicArray addObject:obj];
+                for (id obj in self->profilePicArray) {
+                    if (![self->UniqueprofilePicArray containsObject:obj]) {
+                        [self->UniqueprofilePicArray addObject:obj];
+                    }
+                }
+                //
+                
+                self->uniquefirstNameArray = [NSMutableArray array];
+                
+                for (id obj in self->firstNameArray) {
+                    if (![self->uniquefirstNameArray containsObject:obj]) {
+                        [self->uniquefirstNameArray addObject:obj];
                     }
                 }
                 
                 
-                NSLog(@"Names are : %@",uniqueNameArray);
-                NSLog(@"Id are : %@",uniqueIdArray);
+                NSLog(@"Names are : %@",self->uniqueNameArray);
+                NSLog(@"Id are : %@",self->uniqueIdArray);
+                NSLog(@"Profiles Names are : %@",self->uniquefirstNameArray);
+                NSLog(@"Profiles IMages are : %@",self->UniqueprofilePicArray);
                 
                 
             }
             
         }];
+        
+     }@catch (NSException *exception)
+        {
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in Add CC method in CC ViewController" );
+            
+        }
     }
-    
 }
 
 
 
 #pragma mark - UITextFieldAutoSuggestionDataSource
 
+#pragma mark - UITextFieldAutoSuggestionDataSource
+
 - (UITableViewCell *)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath forText:(NSString *)text {
     
-    static NSString *cellIdentifier = @"MonthAutoSuggestionCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    //    static NSString *cellIdentifier = @"MonthAutoSuggestionCell";
+    //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    //
+    //    if (!cell) {
+    //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    //    }
     
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    
+    userSearchDataCell *cell=[tableView dequeueReusableCellWithIdentifier:@"userSearchDataCellId"];
+    
+    if (cell == nil)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"userSearchDataCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
     
-    NSArray *months = uniqueNameArray;
-    //    NSArray *image = UniqueprofilePicArray;
+ @try{
+      NSArray *months = uniqueNameArray;
+     //  NSArray *firstName=uniquefirstNameArray;
+     // NSArray *image = UniqueprofilePicArray;
+     
+     
+     if (text.length > 0) {
+         NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@",text];
+         months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
+         //  firstName = [uniquefirstNameArray filteredArrayUsingPredicate:filterPredictate];
+         //  image = [UniqueprofilePicArray filteredArrayUsingPredicate:filterPredictate];
+     }
+     
+     //    cell.userNameLabel.text = firstName[indexPath.row];
+     //    cell.emalLabel.text=months[indexPath.row];
+     
+     cell.userNameLabel.text = months[indexPath.row];
+     cell.emalLabel.text=@"";
+     
+     // [cell setUserProfileimage:[image objectAtIndex:indexPath.row]];
+     [cell.userProfileImage setImageWithString:months[indexPath.row] color:nil ];
     
-    
-    if (text.length > 0) {
-        NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", text];
-        months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
+   }@catch (NSException *exception)
+    {
+        NSLog( @"Name: %@", exception.name);
+        NSLog( @"Reason: %@", exception.reason );
+        [utils showAlertWithMessage:exception.name sendViewController:self];
     }
-    
-    cell.textLabel.text = months[indexPath.row];
-    //cell.imageView.image = [UIImage imageNamed:[image objectAtIndex:indexPath.row]];
-    
-    
-    
-    
-    // NSLog(@"id is : %@",staff_idArray[indexPath.row ]);
-    
+    @finally
+    {
+        NSLog( @" I am in cell for row method in CC ViewController" );
+        
+    }
     return cell;
     
 }
 
 - (NSInteger)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section forText:(NSString *)text {
     
+    
     if (text.length == 0) {
         return uniqueNameArray.count;
     }
-    
+
     NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", text];
     NSInteger count = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate].count;
     return count;
@@ -328,7 +362,7 @@
 
 
 - (CGFloat)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath forText:(NSString *)text {
-    return 50;
+    return 65;
 }
 
 
@@ -342,7 +376,7 @@
         months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
     }
     
-    self.userSearchTextField.text =   months[indexPath.row];
+    _userSearchTextField.text =   months[indexPath.row];
     
     for (NSDictionary *dic in usersArray)
     {
@@ -352,8 +386,10 @@
         {
             selectedUserId= dic[@"id"];
             selectedUserEmail=dic[@"email"];
+            selectedFirstName=dic[@"first_name"];
             
             NSLog(@"id is : %@",selectedUserId);
+            NSLog(@"Name is : %@",selectedFirstName);
             NSLog(@"Email is : %@",selectedUserEmail);
             
         }
@@ -386,24 +422,31 @@
             if (error || [msg containsString:@"Error"]) {
                 
                 if (msg) {
+                    
+                    if([msg isEqualToString:@"Error-401"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                    }
+                    else
                     if([msg isEqualToString:@"Error-403"])
                     {
-                        [utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                        [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                     }
                     else if([msg isEqualToString:@"Error-402"])
                     {
                         NSLog(@"Message is : %@",msg);
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                     }else if([msg isEqualToString:@"Error-422"]){
                         
                         NSLog(@"Message is : %@",msg);
                     }else{
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         NSLog(@"Error is11 : %@",msg);
                     }
                     
                 }else if(error)  {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-Collaborator-Refresh-error == %@",error.localizedDescription);
                 }
                 
@@ -433,6 +476,7 @@
                         {
                             [self getCCCount];
                             [self.navigationController popToViewController:controller animated:YES];
+                           // [self.navigationController popViewControllerAnimated:YES];
                             
                             [RKDropdownAlert title:@"Success" message:@"Added cc Successfully" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
@@ -450,14 +494,14 @@
                     
                     if([obj isKindOfClass:[NSArray class]])
                     {
-                        [utils showAlertWithMessage:[NSString stringWithFormat:@"Entered value is not valid. Please select the proper email."] sendViewController:self];
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Entered value is not valid. Please select the proper email."] sendViewController:self];
                         
                     }
                     
                 }
                 else
                 {
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Something wen wrong. Please try again later."] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Something wen wrong. Please try again later."] sendViewController:self];
                 }
             }
             

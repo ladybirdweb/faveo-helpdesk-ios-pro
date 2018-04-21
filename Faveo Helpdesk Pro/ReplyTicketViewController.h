@@ -26,5 +26,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *viewCCandRemoveCCLabel;
 
 
+@property (weak, nonatomic) IBOutlet UIImageView *fileImage;
+
+@property (weak, nonatomic) IBOutlet UILabel *fileName123;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *fileSize123;
+
+
 @end
 

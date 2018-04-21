@@ -220,20 +220,32 @@
             _rolLabel.hidden=YES;
         }
          NSString *isClientActive= [NSString stringWithFormat:@"%@",globalVariables.UserState];
+         NSString *isClientDeactive= [NSString stringWithFormat:@"%@",globalVariables.ActiveDeactiveStateOfUser1];
         [Utils isEmpty:isClientActive];
+         [Utils isEmpty:isClientDeactive];
         
-        if (![Utils isEmpty:isClientActive]) {
-            
-            if ([isClientActive isEqualToString:@"1"])
-               {
-                     _testingLAbel.textColor=[UIColor whiteColor];
+        if(![Utils isEmpty:isClientDeactive])
+        {
+            if ([isClientDeactive isEqualToString:@"1"])
+            {
+                _testingLAbel.textColor=[UIColor whiteColor];
+                _testingLAbel.text=@"DEACTIVE";
+            }
+            else if (![Utils isEmpty:isClientActive]) {
+                
+                if ([isClientActive isEqualToString:@"1"])
+                {
+                    _testingLAbel.textColor=[UIColor whiteColor];
                     _testingLAbel.text=@"ACTIVE";
-               }else
-              {
-                  _testingLAbel.textColor=[UIColor whiteColor];
-                   _testingLAbel.text=@"INACTIVE";
-              }
+                }else
+                {
+                    _testingLAbel.textColor=[UIColor whiteColor];
+                    _testingLAbel.text=@"INACTIVE";
+                }
+            }
+            
         }
+        
     }@catch (NSException *exception)
     {
         
@@ -298,18 +310,18 @@
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
-             [_activityIndicatorObject stopAnimating];
+            [self->_activityIndicatorObject stopAnimating];
             if (error || [msg containsString:@"Error"]) {
                 
-                [refresh endRefreshing];
+                [self->refresh endRefreshing];
                 
                 if([msg isEqualToString:@"Error-402"])
                 {
                     NSLog(@"Message is : %@",msg);
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                 }
                 else{
-                    [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                 }
             }
             
@@ -322,7 +334,7 @@
             
             if (json) {
                 // NSError *error;
-                mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
+                self->mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
                 NSLog(@"Thread-NO4--getClientTickets111--%@",json);
                 
                 NSString * str= [json objectForKey:@"error"];
@@ -333,16 +345,16 @@
                   //   [utils showAlertWithMessage:@"This is not a Client" sendViewController:self];
                 }
                 
-                mutableArray = [[json objectForKey:@"tickets"] copy];
+                self->mutableArray = [[json objectForKey:@"tickets"] copy];
                 
-                if ( [mutableArray count] == 0){
+                if ( [self->mutableArray count] == 0){
                     
                   //   [utils showAlertWithMessage:@"User have no Tickets" sendViewController:self];
                 }
                 
                 NSDictionary *requester=[json objectForKey:@"requester"];
                 
-                requesterTempDict= [json objectForKey:@"requester"];
+                self->requesterTempDict= [json objectForKey:@"requester"];
                 
 
                      NSString *isDelete= [NSString stringWithFormat:@"%@",[requester objectForKey:@"is_delete"]];
@@ -353,12 +365,12 @@
 
                         if([isDelete isEqualToString:@"1"])
                         {
-                            globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
+                            self->globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
                         }
 
                         if([isDelete isEqualToString:@"0"])
                         {
-                            globalVariables.ActiveDeactiveStateOfUser1=@"Active";
+                            self->globalVariables.ActiveDeactiveStateOfUser1=@"Active";
                         }
                     }
                     else
@@ -371,8 +383,8 @@
                 
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [_activityIndicatorObject stopAnimating];
-                        [refresh endRefreshing];
+                        [self->_activityIndicatorObject stopAnimating];
+                        [self->refresh endRefreshing];
 
 //                        
                         [self.tableView reloadData];
@@ -380,7 +392,7 @@
                 });
             }
             
-            [_activityIndicatorObject stopAnimating];
+            [self->_activityIndicatorObject stopAnimating];
             NSLog(@"Thread-NO5-getClientTickets-closed");
             
         }];
