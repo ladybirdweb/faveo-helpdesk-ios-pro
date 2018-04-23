@@ -177,6 +177,7 @@
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }
     else{
+        
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     [self addUIRefresh];
     [self reload];
@@ -217,6 +218,7 @@
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         [utils showAlertWithMessage:exception.name sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         return;
     }
     @finally
@@ -265,6 +267,7 @@
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         [utils showAlertWithMessage:exception.name sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         return;
     }
     @finally
@@ -305,13 +308,12 @@
 
 -(void)reload{
     
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+    
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     { [refresh endRefreshing];
         //connection unavailable
         [[AppDelegate sharedAppdelegate] hideProgressView];
-        //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
+    
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
         }
@@ -332,8 +334,7 @@
         
     }else{
         
-        //  NSString *url=[NSString stringWithFormat:@"%@helpdesk/unassigned?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
-        
+    
         NSString * apiValue=[NSString stringWithFormat:@"%i",1];
         NSString * showInbox = @"inbox";
         NSString * Alldeparatments=@"All";
@@ -348,7 +349,7 @@
                 
                 if (error || [msg containsString:@"Error"]) {
                     [self->refresh endRefreshing];
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                
                     
                     if (msg) {
                         
@@ -476,7 +477,7 @@
         @finally
         {
             NSLog( @" I am in reload method in Unassigned ViewController" );
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+           
             
         }
         
@@ -1525,7 +1526,7 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
         
-        
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }else{
         
@@ -1535,7 +1536,7 @@
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-                //   NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+            
                 
                 if (error || [msg containsString:@"Error"]) {
                     
@@ -1682,7 +1683,7 @@
         @finally
         {
             NSLog( @" I am in getDependencies method in Inbox ViewController" );
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+        
             
         }
     }

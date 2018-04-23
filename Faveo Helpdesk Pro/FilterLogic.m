@@ -255,6 +255,7 @@
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         [utils showAlertWithMessage:exception.name sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         return;
     }
     @finally
@@ -304,6 +305,7 @@
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         [utils showAlertWithMessage:exception.name sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         return;
     }
     @finally
@@ -349,6 +351,7 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [refresh endRefreshing];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -759,7 +762,7 @@
         
         if (error || [msg containsString:@"Error"]) {
             [self->refresh endRefreshing];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
             if (msg) {
                 
                 if([msg isEqualToString:@"Error-401"])
@@ -808,7 +811,6 @@
         
         if ([msg isEqualToString:@"tokenNotRefreshed"]) {
             
-            // [[AppDelegate sharedAppdelegate] hideProgressView];
             [self->utils showAlertWithMessage:@"Your HELPDESK URL or your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
             
@@ -831,10 +833,10 @@
             
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                   
                     [self->refresh endRefreshing];
-                    
                     [self reloadTableView];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                 });
             });
@@ -850,6 +852,7 @@
     NSLog(@"Thread-NO1-getDependencies()-start");
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         //connection unavailable
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -1025,7 +1028,7 @@
         @finally
         {
             NSLog( @" I am in getDependencies method in Inbox ViewController" );
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+        
             
         }
     }
@@ -1084,8 +1087,7 @@
             [self loadMore];
         }
         else{
-            // [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-            
+        
             [RMessage showNotificationInViewController:self
                                                  title:nil
                                               subtitle:NSLocalizedString(@"All Caught Up", nil)
@@ -1107,8 +1109,7 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-        
-        //   [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+    
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -1129,11 +1130,7 @@
         
         
     }else{
-        
-        
-        //            MyWebservices *webservices=[MyWebservices sharedInstance];
-        //            [webservices getNextPageURL:_nextPageUrl callbackHandler:^(NSError *error,id json,NSString* msg) {
-        
+    
         if([globalVariables.filterId isEqualToString:@"INBOXFilter"])
         {   self.page = _page + 1;
             
@@ -1147,8 +1144,6 @@
             globalVariables.filterId=@"INBOXFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-            
-            //     [webservices getNextPageURLInbox:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
             
             [webservices getNextPageURLInbox:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
@@ -1230,8 +1225,7 @@
             globalVariables.filterId=@"MYTICKETSFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-            // [webservices getNextPageURLMyTickets:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
+        
             [webservices getNextPageURLMyTickets:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 if (error || [msg containsString:@"Error"]) {
                     
@@ -1298,8 +1292,7 @@
             globalVariables.filterId=@"UNASSIGNEDFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-            //   [webservices getNextPageURLUnassigned:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
+        
             [webservices getNextPageURLUnassigned:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
                 if (error || [msg containsString:@"Error"]) {
@@ -1369,8 +1362,7 @@
             globalVariables.filterId=@"CLOSEDFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-            //  [webservices getNextPageURLClosed:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
+        
             [webservices getNextPageURLClosed:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 
                 if (error || [msg containsString:@"Error"]) {
@@ -1439,7 +1431,7 @@
             globalVariables.filterId=@"TRASHFilter";
             
             MyWebservices *webservices=[MyWebservices sharedInstance];
-            //   [webservices getNextPageURLTrash:_path1 pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
+           
             
             [webservices getNextPageURLTrash:url pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
                 

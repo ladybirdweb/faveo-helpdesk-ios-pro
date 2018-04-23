@@ -100,9 +100,7 @@
         [refresh endRefreshing];
         //connection unavailable
         [[AppDelegate sharedAppdelegate] hideProgressView];
-        //[utils showAlertWithMessage:NO_INTERNET sendViewController:self];
-      //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
+    
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
         }
@@ -164,6 +162,7 @@
                 }else if(error)  {
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-getNotificationViewController-Refresh-error == %@",error.localizedDescription);
+                     [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
                 return ;
             }
@@ -211,6 +210,7 @@
             [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+             [[AppDelegate sharedAppdelegate] hideProgressView];
             return;
         }
         @finally
@@ -291,10 +291,7 @@
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
-        //connection unavailable
-        //[utils showAlertWithMessage:NO_INTERNET sendViewController:self];
-       // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
+       [[AppDelegate sharedAppdelegate] hideProgressView];
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
         }

@@ -146,6 +146,8 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+        
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
         }
@@ -162,7 +164,7 @@
                                     buttonCallback:nil
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
-         [[AppDelegate sharedAppdelegate] hideProgressView];
+        
         
     }else if([_parentTicketTextField.text length] == 0 || [_parentTicketTextField.text isEqualToString:@""])
     {
@@ -217,7 +219,6 @@
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            [[AppDelegate sharedAppdelegate] hideProgressView];
             
             if (error || [msg containsString:@"Error"]) {
                 
@@ -227,6 +228,7 @@
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else
                         
@@ -238,32 +240,38 @@
                     else if([msg isEqualToString:@"Error-402"])
                     {
                         [self->utils showAlertWithMessage:NSLocalizedString(@"Your account credentials were changed, contact to Admin and please log back in.", nil) sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                     }
                     else if([msg isEqualToString:@"Error-422"])
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else if([msg isEqualToString:@"Error-404"])
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
                     {
                         NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     
                     else{
@@ -307,10 +315,12 @@
                     if([str isEqualToString:@"tickets from different users"])
                     {
                         [self->utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else
                     {
                          [self->utils showAlertWithMessage:@"Something went wrong...!" sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                 }
                 else{
@@ -329,6 +339,7 @@
                         }else
                         {
                             [self->utils showAlertWithMessage:@"Something went wrong...!" sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         
                     
@@ -343,6 +354,7 @@
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
              [utils showAlertWithMessage:exception.name sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             return;
         }
         @finally

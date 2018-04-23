@@ -261,6 +261,7 @@
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         [utils showAlertWithMessage:exception.name sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         return;
     }
     @finally
@@ -314,6 +315,7 @@
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         [utils showAlertWithMessage:exception.name sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         return;
     }
     @finally
@@ -358,18 +360,13 @@
 -(void)reload{
     
     
-   [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
-    
-    if([globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
-    {
-        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Your role has been changed to user. Please contact to your admin."] sendViewController:self];
-    }
+ //  [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [refresh endRefreshing];
     
-       
+       [[AppDelegate sharedAppdelegate] hideProgressView];
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -391,8 +388,7 @@
         
         
     }else{
-        //  NSString *url=[NSString stringWithFormat:@"%@helpdesk/inbox?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
-        
+    
         NSString * apiValue=[NSString stringWithFormat:@"%i",1];
         NSString * showInbox = @"inbox";
         NSString * Alldeparatments=@"All";
@@ -411,7 +407,7 @@
                 
                 if (error || [msg containsString:@"Error"]) {
                     [self->refresh endRefreshing];
-                   //  [[AppDelegate sharedAppdelegate] hideProgressView];
+
                     
                     if (msg) {
                         
@@ -431,6 +427,7 @@
                         else if([msg isEqualToString:@"Error-403"])
                         {
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                             
                         }
                         else if([msg isEqualToString:@"Error-403"] && [self->globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
@@ -546,7 +543,7 @@
         @finally
         {
             NSLog( @" I am in reload method in Inbox ViewController" );
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+           
             
         }
     }
@@ -558,6 +555,7 @@
     NSLog(@"Thread-NO1-getDependencies()-start");
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         //connection unavailable
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -586,7 +584,7 @@
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-              //   NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+            
             
                 if (error || [msg containsString:@"Error"]) {
                     
@@ -740,7 +738,7 @@
         @finally
         {
             NSLog( @" I am in getDependencies method in Inbox ViewController" );
-             [[AppDelegate sharedAppdelegate] hideProgressView];
+            
             
         }
     }
@@ -759,26 +757,28 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    
-    
     NSInteger numOfSections = 0;
-    if ([_mutableArray count]==0)
-    {
-        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
-        noDataLabel.textColor        = [UIColor blackColor];
-        noDataLabel.textAlignment    = NSTextAlignmentCenter;
-        tableView.backgroundView = noDataLabel;
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
-    }
-    else
-    {
-        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        numOfSections                = 1;
-        tableView.backgroundView = nil;
-    }
     
+     if ([_mutableArray count] != 0)
+     {
+         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+         numOfSections                = 1;
+         tableView.backgroundView = nil;
+         
+     }
+     else{
+         
+         UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+         noDataLabel.text             = NSLocalizedString(@"No Records..!!!",nil);
+         noDataLabel.textColor        = [UIColor blackColor];
+         noDataLabel.textAlignment    = NSTextAlignmentCenter;
+         tableView.backgroundView = noDataLabel;
+         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+         
+         
+     }
+    
+
     return numOfSections;
     
 }
@@ -1206,18 +1206,7 @@
         
         // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         @try{
-            
-            //                if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-            //                {
-            //                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-            //
-            //                }
-            //                else
-            //                {
-            //                    [cell setUserProfileimage:@"default_pic.png"];
-            //                }
-            
-            
+        
            
              if ( ( ![[finaldic objectForKey:@"status"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"status"] length] != 0 ) ) {
                  
@@ -1229,13 +1218,6 @@
                  else
                  {
                      if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
-                         
-                         /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
-                          [cell.overDueLabel setHidden:NO];
-                          
-                          }else [cell.overDueLabel setHidden:YES];
-                          
-                          } */
                          
                          if([utils compareDates:[finaldic objectForKey:@"duedate"]]){
                              [cell.overDueLabel setHidden:NO];
@@ -1258,14 +1240,6 @@
             
             NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"collaborator_count"]];  //collaborator_count
              NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
-//             NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
-//            NSLog(@"CC is : %@",cc);
-//             NSLog(@"CC is : %@",cc);
-//             NSLog(@"COunbt is : %@",attachment1);
-//             NSLog(@"Count is : %@",attachment1);
-//            NSLog(@"Ticket Numbert is : %@",ticketNumber);
-            
-           
             
             
             if([source1 isEqualToString:@"web"] || [source1 isEqualToString:@"Web"])
@@ -1771,14 +1745,7 @@
         [self.navigationController pushViewController:filter animated:YES];
         
     }
-    //    if(titleButtonIndex==0 && rightIndex==1 )
-    //    {
-    //        NSLog(@"clear All");
-    //
-    //        InboxViewController * vc= [self.storyboard instantiateViewControllerWithIdentifier: @"InboxID"];
-    //        [self.navigationController pushViewController:vc animated:YES];
-    //
-    //    }
+   
     // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
     {
@@ -2090,10 +2057,10 @@
             if (error || [msg containsString:@"Error"]) {
                 if (msg) {
                     
-                    // [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+            
                     NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
                 }else if(error)  {
-                    //                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                
                     NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
                 }
                 return ;

@@ -107,14 +107,14 @@
 }
 
 -(void)multiSelect:(MultiSelectSegmentedControl *)multiSelecSegmendedControl didChangeValue:(BOOL)value atIndex:(NSUInteger)index{
-    
+    if([_seachTextField.text isEqualToString:@""]){
+        
+        [self->utils showAlertWithMessage:@"Enter the data for search." sendViewController:self];
+    }else{
     
     if(index==0)
     {
-        if([_seachTextField.text isEqualToString:@""]){
-            
-            [self->utils showAlertWithMessage:@"Enter the data for search." sendViewController:self];
-        }
+        
         _multiSelectControl.selectedSegmentIndex=0;
         _tableview1.hidden=NO;
         _tableview2.hidden=YES;
@@ -126,11 +126,7 @@
     }
     
     if (index==1) {
-        if([_seachTextField.text isEqualToString:@""]){
-            
-            [self->utils showAlertWithMessage:@"Enter the data for search." sendViewController:self];
-        }
-        
+    
         _multiSelectControl.selectedSegmentIndex=1;
        
         _tableview1.hidden=YES;
@@ -141,7 +137,7 @@
         [_seachTextField resignFirstResponder];
         [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting User Data",nil)];
     }
-    
+    }
     
 }
 

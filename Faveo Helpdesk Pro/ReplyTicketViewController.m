@@ -146,18 +146,13 @@
 
 - (IBAction)submitButtonClicked:(id)sender {
     
-    UIActivityIndicatorView *activityIndicator1 =
-    [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(145, 100, 100, 100)];
-    activityIndicator1.color=[UIColor blueColor];
-    
-    [self.view addSubview:activityIndicator1];
 
-     [activityIndicator1 startAnimating];
-  
+    [[AppDelegate sharedAppdelegate] showProgressView];
+    
     if([_messageTextView.text isEqualToString:@""] || [_messageTextView.text length]==0)
     {
         [utils showAlertWithMessage:@"Enter the reply content.It can not be empty." sendViewController:self];
-        [activityIndicator1 stopAnimating]; //working
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }else
     {
@@ -583,6 +578,8 @@
                 if([msg isEqualToString:@"Successfully replied"])
                 {
                     
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    
                     [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your reply.", nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                     
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
@@ -611,6 +608,7 @@
                 else
                 {
                     [self->utils showAlertWithMessage:@"Something went wrong. Please try again." sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
                 NSLog(@"Thread-Ticket-Reply-closed");
                 
@@ -622,6 +620,7 @@
             [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             return;
         }
         @finally

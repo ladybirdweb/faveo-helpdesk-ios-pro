@@ -81,8 +81,7 @@
     NSString *file123;
     NSString *base64Encoded;
      NSString *typeMime;
-    
-   UIActivityIndicatorView *activityIndicator1;
+
    
 }
 
@@ -207,12 +206,6 @@
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
     
-    //activity indicator
-    activityIndicator1 =
-    [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(145, 255, 100, 100)];
-    activityIndicator1.color=[UIColor blueColor];
-    
-    [self.view addSubview:activityIndicator1];
 }
 
 -(void)dismissKeyboard12
@@ -236,8 +229,6 @@
 
 -(void)removeKeyboard{
     [_emailTextView resignFirstResponder];
-    // [_mobileTextField resignFirstResponder];
-    //  [_msgTextField resignFirstResponder];
     [_subjectView resignFirstResponder];
     [_firstNameView resignFirstResponder];
     
@@ -536,17 +527,16 @@
 - (IBAction)submitClicked:(id)sender {
     
     
-    [activityIndicator1 startAnimating];
+   [[AppDelegate sharedAppdelegate] showProgressView];
     
     @try{
         
         
         if (![_mobileView.text isEqualToString:@""]) {
-            // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-            
+        
             if([_codeTextField.text isEqualToString:@""])
             {
-                 [activityIndicator1 stopAnimating];
+                [[AppDelegate sharedAppdelegate] hideProgressView];
                 
                 if (self.navigationController.navigationBarHidden) {
                     [self.navigationController setNavigationBarHidden:NO];
@@ -573,7 +563,7 @@
     
         if(self.emailTextView.text.length==0 && self.firstNameView.text.length==0 && self.helpTopicTextField.text.length==0 && self.subjectView.text.length==0 && self.priorityTextField.text.length==0 && self.textViewMsg.text.length==0)
         {
-             [activityIndicator1 stopAnimating];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             
             if (self.navigationController.navigationBarHidden) {
                 [self.navigationController setNavigationBarHidden:NO];
@@ -595,7 +585,7 @@
             
         }else if (self.emailTextView.text.length==0){
            
-            [activityIndicator1 stopAnimating];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             
             if (self.navigationController.navigationBarHidden) {
                 [self.navigationController setNavigationBarHidden:NO];
@@ -617,7 +607,7 @@
             
         }else if(![Utils emailValidation:self.emailTextView.text]){
             
-            [activityIndicator1 stopAnimating];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             
             if (self.navigationController.navigationBarHidden) {
                 [self.navigationController setNavigationBarHidden:NO];
@@ -639,7 +629,7 @@
         } else
             if (self.firstNameView.text.length==0  ) {
                 
-                [activityIndicator1 stopAnimating];
+                [[AppDelegate sharedAppdelegate] hideProgressView];
                 
                 if (self.navigationController.navigationBarHidden) {
                     [self.navigationController setNavigationBarHidden:NO];
@@ -661,7 +651,7 @@
                
             }else if ( self.firstNameView.text.length<2) {
                 
-                [activityIndicator1 stopAnimating];
+                [[AppDelegate sharedAppdelegate] hideProgressView];
                 
                 if (self.navigationController.navigationBarHidden) {
                     [self.navigationController setNavigationBarHidden:NO];
@@ -684,7 +674,7 @@
             }else
                if (self.helpTopicTextField.text.length==0) {
                    
-                   [activityIndicator1 stopAnimating];
+                   [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -706,7 +696,7 @@
                    
                 }else if (self.subjectView.text.length==0) {
                     
-                    [activityIndicator1 stopAnimating];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -727,7 +717,7 @@
                     
                 }else if (self.subjectView.text.length<5) {
                     
-                    [activityIndicator1 stopAnimating];
+                   [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -748,7 +738,7 @@
                     
                 }else if (self.textViewMsg.text.length==0){
                     
-                    [activityIndicator1 stopAnimating];
+                   [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -769,7 +759,7 @@
                   
                 }else if (self.textViewMsg.text.length<10){
                    
-                    [activityIndicator1 stopAnimating];
+                   [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -791,7 +781,7 @@
                 }
                 else if (self.priorityTextField.text.length==0){
                     
-                    [activityIndicator1 stopAnimating];
+                   [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -816,7 +806,7 @@
                     
                     if ([_helpTopicTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]||[_priorityTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)] || [_assignTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]) {
                         
-                        [activityIndicator1 stopAnimating];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                         if (self.navigationController.navigationBarHidden) {
                             [self.navigationController setNavigationBarHidden:NO];
@@ -1938,11 +1928,7 @@
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"media_attachment[]\"; filename=\"%@\"\r\n", file123] dataUsingEncoding:NSUTF8StringEncoding]];
   //static  [body appendData:[@"Content-Type: ico_sys_netservice.ico\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", typeMime] dataUsingEncoding:NSUTF8StringEncoding]];
-
-    //testing purpose
-//    NSLog(@"Content-Type: ico_sys_netservice.ico\r\n\r\n");
-//    NSLog(@"Data  444444 is : %@",[NSString stringWithFormat:@"Content-Type: %@\r\n", typeMime]);
-//    NSLog(@"Data 444444 is : %@",[NSString stringWithFormat:@"Content-Type: \"%@\"\r\n", typeMime]);
+    
 
     [body appendData:[NSData dataWithData:attachNSData]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -2063,14 +2049,14 @@
          {
              
              [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-              [activityIndicator1 stopAnimating];
+              [[AppDelegate sharedAppdelegate] hideProgressView];
              
          }
          if([str isEqualToString:@"API disabled"] || [str hasPrefix:@"API disabled"])
          {
              
              [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-              [activityIndicator1 stopAnimating];
+             [[AppDelegate sharedAppdelegate] hideProgressView];
              
          }
          else{
@@ -2096,13 +2082,14 @@
         if([errorMsg isEqualToString:@"Methon not allowed"] || [errorMsg hasSuffix:@"not allowed"])
         {
             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Someting went wrong. Please try again later.."] sendViewController:self];
-             [activityIndicator1 stopAnimating];
+             [[AppDelegate sharedAppdelegate] hideProgressView];
         }
         
     }
     else if ([jsonData objectForKey:@"response"])
 
     {
+        
             self->_emailTextView.text=@"";
             self-> _firstNameView.text=@"";
             self->_lastNameView.text=@"";
@@ -2120,6 +2107,7 @@
             self->globalVariables.mobileAddRequester=@"";
             self-> globalVariables.mobileCode=@"";
 
+           [[AppDelegate sharedAppdelegate] hideProgressView];
             [RMessage showNotificationInViewController:self.navigationController
                                                  title:NSLocalizedString(@"success", nil)
                                               subtitle:NSLocalizedString(@"Ticket created successfully.", nil)
@@ -2143,7 +2131,7 @@
     else{
 
         [self->utils showAlertWithMessage:NSLocalizedString(@"Something Went Wrong.", nil) sendViewController:self];
-         [activityIndicator1 stopAnimating];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
 
     }
 

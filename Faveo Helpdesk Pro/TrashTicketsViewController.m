@@ -295,7 +295,7 @@
 
 -(void)reload{
    
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+    //[[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     { [refresh endRefreshing];
@@ -338,7 +338,7 @@
                 
                 if (error || [msg containsString:@"Error"]) {
                     [self->refresh endRefreshing];
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                   
                     
                     if (msg) {
                         
@@ -651,7 +651,7 @@
         @finally
         {
             NSLog( @" I am in getDependencies method in Inbox ViewController" );
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+           
             
         }
     }

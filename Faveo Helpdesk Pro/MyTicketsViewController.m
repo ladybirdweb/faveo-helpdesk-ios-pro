@@ -93,9 +93,7 @@
     
     // A little trick for removing the cell separators
     self.tableView.tableFooterView = [UIView new];
-    
-    /* [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnPressed)]]; */
-    
+
     UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
     [moreButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -226,6 +224,7 @@
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         [utils showAlertWithMessage:exception.name sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         return;
     }
     @finally
@@ -274,6 +273,7 @@
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         [utils showAlertWithMessage:exception.name sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         return;
     }
     @finally
@@ -316,14 +316,12 @@
 
 -(void)reload{
     
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    { [refresh endRefreshing];
-        //connection unavailable
-        [[AppDelegate sharedAppdelegate] hideProgressView];
-        // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+    {
+        [refresh endRefreshing];
         
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -344,10 +342,7 @@
         
         
     }else{
-        
-        
-        //  NSString *url=[NSString stringWithFormat:@"%@helpdesk/my-tickets-agent?api_key=%@&ip=%@&token=%@&user_id=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"],[userDefaults objectForKey:@"user_id"]];
-        
+    
         NSString * apiValue=[NSString stringWithFormat:@"%i",1];
         NSString * showMyTickets = @"mytickets";
         NSString * Alldeparatments=@"All";
@@ -363,7 +358,7 @@
                 
                 if (error || [msg containsString:@"Error"]) {
                     [self->refresh endRefreshing];
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                   
                     
                     if (msg) {
                         
@@ -553,7 +548,6 @@
             [self loadMore];
         }
         else{
-            // [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
             
             [RMessage showNotificationInViewController:self
                                                  title:nil
@@ -568,22 +562,13 @@
                                             atPosition:RMessagePositionBottom
                                   canBeDismissedByUser:YES];
         }
-        
-        /*if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
-         
-         [RKDropdownAlert title:@"" message:@"All Caught Up...!" backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-         } */
     }
 }
-
-
-//-(void)loadMore:(NSString*)user_id{
 
 -(void)loadMore {
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
-        //connection unavailable
-        // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -607,9 +592,7 @@
     }else{
         
         @try{
-            // MyWebservices *webservices=[MyWebservices sharedInstance];
-            // [webservices getNextPageURL:_nextPageUrl user_id:user_id callbackHandler:^(NSError *error,id json,NSString* msg) {
-            
+    
             
             self.page = _page + 1;
             // NSLog(@"Page is : %ld",(long)_page);
@@ -1541,7 +1524,7 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
         
-        
+      [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }else{
         
@@ -1551,7 +1534,7 @@
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-                //   NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+                
                 
                 if (error || [msg containsString:@"Error"]) {
                     
@@ -1606,7 +1589,6 @@
                 }
                 
                 
-                // [[AppDelegate sharedAppdelegate] hideProgressView];
                 if ([msg isEqualToString:@"tokenRefreshed"]) {
                     
                     [self getDependencies];
@@ -1616,7 +1598,7 @@
                 
                 if (json) {
                     
-                    //  NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+            
                     NSDictionary *resultDic = [json objectForKey:@"data"];
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
                     
@@ -1698,7 +1680,7 @@
         @finally
         {
             NSLog( @" I am in getDependencies method in Inbox ViewController" );
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+           
             
         }
     }
@@ -1713,6 +1695,7 @@
     if (!selectedArray.count) {
         
         [utils showAlertWithMessage:@"Select The Tickets First For Changing Ticket Status" sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }else
     {
@@ -1731,14 +1714,6 @@
         
         
 #else
-        
-        //    [FTPopOverMenu showFromEvent:event
-        //                   withMenuArray:@[@"Change Ticket Status",@"          Open",@"          Closed",@"          Resolved",@"          Deleted"]
-        
-        //        [FTPopOverMenu showFromEvent:event
-        //                       withMenuArray:@[NSLocalizedString(@"Change Ticket Status", nil),NSLocalizedString(@"Closed", nil), NSLocalizedString(@"Resolved", nil),NSLocalizedString(@"Deleted", nil)]
-        //                          imageArray:@[@"Pokemon_Go_01",[UIImage imageNamed:@"doneIcon"],[UIImage imageNamed:@"resolvedIcon"],[UIImage imageNamed:@"deleteIcon"]]
-        //                           doneBlock:^(NSInteger selectedIndex) {
         
         
         //taking status names array for dependecy api
@@ -1810,7 +1785,7 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-        
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
         
@@ -1830,7 +1805,7 @@
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
             [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-                [[AppDelegate sharedAppdelegate] hideProgressView];
+               
                 
                 if (error || [msg containsString:@"Error"]) {
                     
@@ -1839,15 +1814,18 @@
                         if([msg isEqualToString:@"Error-403"])
                         {
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change status. ", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         else{
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         //  NSLog(@"Message is : %@",msg);
                         
                     }else if(error)  {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-NO4-getTicketStausChange-Refresh-error == %@",error.localizedDescription);
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     
                     return ;
@@ -1867,6 +1845,7 @@
                     if([[json objectForKey:@"message"] isKindOfClass:[NSArray class]])
                     {
                         [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change status. ", nil) sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                     }
                     else{
@@ -1874,6 +1853,8 @@
                         NSString * msg=[json objectForKey:@"message"];
                         
                         if([msg hasPrefix:@"Status changed"]){
+                            
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                             
                             [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
@@ -1884,7 +1865,7 @@
                         {
                             
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change status. ", nil) sendViewController:self];
-                            
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         
                     }

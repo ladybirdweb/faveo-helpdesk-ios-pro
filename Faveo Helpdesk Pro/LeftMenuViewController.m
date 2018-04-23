@@ -519,11 +519,10 @@
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
             if (error || [msg containsString:@"Error"]) {
                 if (msg) {
-                    
-                    // [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                
                     NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
                 }else if(error)  {
-                    //                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+
                     NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
                 }
                 return ;

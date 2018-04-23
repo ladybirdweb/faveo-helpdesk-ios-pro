@@ -128,17 +128,6 @@
     return YES;
 }
 
-// check below solution later its work or not // date 18 Jan 2018
-//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-//{
-//    if(textfield == yourtextField)
-//    {
-//        [textfield resignFirstResponder];
-//        // Show you custom picker here....
-//        return NO;
-//    }
-//}
-
 
 - (void)countryCodeWasSelected:(NSNumber *)selectedIndex element:(id)element{
     // self.selectedIndex = [selectedIndex intValue];
@@ -156,8 +145,7 @@
     
     
     if (![_mobileTextField.text isEqualToString:@""]) {
-        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-        
+       
         if([_codeTextField.text isEqualToString:@""])
         {
             
@@ -184,8 +172,7 @@
     }
     else
         if (![_codeTextField.text isEqualToString:@""]) {
-            // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-            
+           
             if([_mobileTextField.text isEqualToString:@""])
             {
                 
@@ -233,7 +220,7 @@
         
         
     }else if (self.emailTextView.text.length==0){
-        //[RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter EMAIL-ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+       
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
         }
@@ -253,7 +240,6 @@
         
         
     }else if(![Utils emailValidation:self.emailTextView.text]){
-        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Invalid EMAIL_ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -273,8 +259,7 @@
                               canBeDismissedByUser:YES];
         
     } else if (self.emailTextView.text.length<2) {
-        
-        //[RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"FirstName should have more than 2 characters",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+    
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -295,7 +280,7 @@
         
         
     }else if (self.firstNameView.text.length==0 && self.lastNameView.text.length==0 ){
-        //[RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter EMAIL-ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -316,7 +301,7 @@
         
         
     } else if (self.firstNameView.text.length==0 || self.lastNameView.text.length==0 ){
-        //[RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter EMAIL-ID",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+       
         if (self.firstNameView.text.length==0){
             if (self.navigationController.navigationBarHidden) {
                 [self.navigationController setNavigationBarHidden:NO];
