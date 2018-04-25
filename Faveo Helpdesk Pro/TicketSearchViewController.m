@@ -11,6 +11,7 @@
 #import "GlobalVariables.h"
 #import "MyWebservices.h"
 #import "AppDelegate.h"
+#import "AppConstanst.h"
 #import "RKDropdownAlert.h"
 #import "HexColors.h"
 #import "RMessage.h"
@@ -24,7 +25,7 @@
 #import "ClientDetailViewController.h"
 #import "UIImageView+Letters.h"
 #import "MultiSelectSegmentedControl.h"
-
+#import "Dat.h"
 
 @interface TicketSearchViewController ()<MultiSelectSegmentedControlDelegate,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 {
@@ -37,6 +38,11 @@
     NSString * ticketidIs;
     
     
+    NSMutableArray *usersArray;
+    NSMutableArray *userNameArray;
+    NSMutableArray *firstNameArray;  // it is combination first ad last name
+    NSMutableArray * staff1_idArray;
+    NSMutableArray *profilePicArray;
 }
 
 @property (nonatomic, strong) NSMutableArray *mutableArray;
@@ -69,9 +75,16 @@
     _mutableArray=[[NSMutableArray alloc]init];
     _filteredSampleDataArray = [[NSMutableArray alloc] init];
     _userDataArray = [[NSMutableArray alloc] init];
-    
+
     _tableview1.hidden=YES;
     _tableview2.hidden=YES;
+    
+    
+    usersArray =[[NSMutableArray alloc]init];
+    userNameArray=[[NSMutableArray alloc]init];
+    firstNameArray =[[NSMutableArray alloc]init];
+    staff1_idArray =[[NSMutableArray alloc]init];
+    profilePicArray =[[NSMutableArray alloc]init];
     
     // [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
     
@@ -133,57 +146,13 @@
         _tableview2.hidden=NO;
         
         NSLog(@"User Search API Called.");
-        [self userSearchApiCall:_seachTextField.text];
+        [self collaboratorApiMethod:_seachTextField.text];
         [_seachTextField resignFirstResponder];
         [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting User Data",nil)];
     }
     }
     
 }
-
-
-
-
-
-
-
-
-
-//- (IBAction)segmentedControlAction:(id)sender {
-//    if(_segmentedControlObject.selectedSegmentIndex==0)
-//    {
-//        if([_seachTextField.text isEqualToString:@""])
-//        {
-//            [self->utils showAlertWithMessage:@"Enter the data for search ticket." sendViewController:self];
-//        }else{
-//        _tableview1.hidden=NO;
-//        _tableview2.hidden=YES;
-//
-//        _segmentedControlObject.selectedSegmentIndex = 0;
-//        NSLog(@"Ticket Search API Called.");
-//        [self ticketSearchApiCall:_seachTextField.text];
-//        [_seachTextField resignFirstResponder];
-//        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Ticket Data",nil)];
-//        }
-//    }
-//    else if(_segmentedControlObject.selectedSegmentIndex==1)
-//    {
-//        if([_seachTextField.text isEqualToString:@""])
-//        {
-//            [self->utils showAlertWithMessage:@"Enter the data for search user." sendViewController:self];
-//        }else{
-//        _tableview1.hidden=YES;
-//        _tableview2.hidden=NO;
-//
-//        _segmentedControlObject.selectedSegmentIndex = 1;
-//
-//        NSLog(@"User Search API Called.");
-//        [self userSearchApiCall:_seachTextField.text];
-//        [_seachTextField resignFirstResponder];
-//        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting User Data",nil)];
-//        }
-//    }
-//}
 
 -(void)viewDidAppear:(BOOL)animated{
     [self.seachTextField becomeFirstResponder];
@@ -445,7 +414,7 @@
     }
     
     NSInteger numOfSections = 0;
-    if ([_userDataArray count]==0)
+    if ([usersArray count]==0)
     {
         // CGRectMake(0, -10, tableView.bounds.size.width, tableView.bounds.size.height)
         UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
@@ -482,11 +451,11 @@
     
     if(tableView==_tableview2){
         if (self.currentPage == self.totalPages
-            || self.totalTickets == _userDataArray.count) {
-            return _userDataArray.count;
+            || self.totalTickets == usersArray.count) {
+            return usersArray.count;
         }
         
-        return _userDataArray.count + 1;
+        return usersArray.count + 1;
     }
     
     else
@@ -523,12 +492,12 @@
         }
     }
     
-        if (indexPath.row == [_userDataArray count] - 1 ) {
+        if (indexPath.row == [usersArray count] - 1 ) {
             NSLog(@"nextURL111  %@",_nextPageUrl);
     
             if (( ![_nextPageUrl isEqual:[NSNull null]] ) && ( [_nextPageUrl length] != 0 )) {
     
-              [self loadMoreforSearchResults2];
+            //  [self loadMoreforSearchResults2];
     
     
             }
@@ -875,30 +844,26 @@
     }
     
     @try{
-        //user name deatils
-        NSDictionary *searchUserDictionary=[_userDataArray objectAtIndex:indexPath.row];
-        // NSLog(@"userSearchDictionary is : %@",searchUserDictionary);
+       
         
+        NSDictionary *dict=[usersArray objectAtIndex:indexPath.row];
+     //   NSLog(@"Cell for row 1111 : %@",dict);
         
-        // first name, last name, user name owner name
-        NSDictionary * userDict= [searchUserDictionary objectForKey:@"user"];
+                NSString *fname= [dict objectForKey:@"first_name"];
         
-        NSString *fname= [userDict objectForKey:@"first_name"];
+                NSString *lname= [dict objectForKey:@"last_name"];
         
-        NSString *lname= [userDict objectForKey:@"last_name"];
+                NSString*userName=[dict objectForKey:@"user_name"];
         
-        NSString*userName=[userDict objectForKey:@"user_name"];
+                NSString*profilPic=[dict objectForKey:@"profile_pic"];
         
-        NSString*profilPic=[userDict objectForKey:@"profile_pic"];
+                NSString*emailId=[dict objectForKey:@"email"];
         
-        NSString*emailId=[userDict objectForKey:@"email"];
-        
-        
-        [Utils isEmpty:fname]; //email
-        [Utils isEmpty:lname];
-        [Utils isEmpty:userName];
-        [Utils isEmpty:profilPic];
-        [Utils isEmpty:emailId];
+                [Utils isEmpty:fname]; //email
+                [Utils isEmpty:lname];
+                [Utils isEmpty:userName];
+                [Utils isEmpty:profilPic];
+                [Utils isEmpty:emailId];
         
         
         if  (![Utils isEmpty:fname] || ![Utils isEmpty:lname])
@@ -919,12 +884,12 @@
             else{
                 cell.userNameLabel.text=NSLocalizedString(@"Not Available", nil);
             }
-            
+
         }
         
         if(![Utils isEmpty:emailId])
         {
-            
+
             cell.emalLabel.text=emailId;
         }
         else
@@ -1059,104 +1024,6 @@
     
 }
 
--(void)loadMoreforSearchResults2
-{
-
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
-        //connection unavailable
-        if (self.navigationController.navigationBarHidden) {
-            [self.navigationController setNavigationBarHidden:NO];
-        }
-
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Error..!", nil)
-                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeError
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionNavBarOverlay
-                              canBeDismissedByUser:YES];
-
-
-    }else{
-
-        self.page = _page + 1;
-        // NSLog(@"Page is : %ld",(long)_page);
-
-        NSString *str=_nextPageUrl;
-        NSString *Page = [str substringFromIndex:[str length] - 1];
-
-        //     NSLog(@"String is : %@",szResult);
-        NSLog(@"Page is : %@",Page);
-        NSLog(@"Page is : %@",Page);
-
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-
-
-        [webservices getNextPageURLInboxSearchResults:_path1 searchString:_seachTextField.text  pageNo:Page  callbackHandler:^(NSError *error,id json,NSString* msg) {
-
-            if (error || [msg containsString:@"Error"]) {
-
-                if (msg) {
-
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-
-                }else if(error)  {
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-userSearch-Load-more-Refresh-error == %@",error.localizedDescription);
-                }
-                return ;
-            }
-
-            if ([msg isEqualToString:@"tokenRefreshed"]) {
-
-                [self loadMoreforSearchResults2];
-                //NSLog(@"Thread--NO4-call-getInbox");
-                return;
-            }
-
-            if (json) {
-              //  NSLog(@"Thread-TicketSearch-Load-more-jSON--%@",json);
-
-                NSDictionary * dict1 = [json objectForKey:@"result"];
-
-                self->_nextPageUrl =[dict1 objectForKey:@"next_page_url"];
-                self->_currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
-                self->_totalTickets=[[dict1 objectForKey:@"total"] integerValue];
-                self->_totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
-                self->_path1=[dict1 objectForKey:@"path"];
-
-
-                self->_userDataArray= [self->_userDataArray mutableCopy];
-                
-                [self->_userDataArray addObjectsFromArray:[dict1 objectForKey:@"data"]];
-
-
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        // [self.tableview reloadData];
-                        //                        [self reloadTableView];
-                        [self.tableview2 reloadData];
-
-                    });
-                });
-
-            }
-
-
-        }];
-
-    }
-
-
-}
-
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -1255,14 +1122,8 @@
     else if(tableView==_tableview2)
     {
         
-        //user name deatils
-        NSDictionary *searchDictionary=[_userDataArray objectAtIndex:indexPath.row];
-        NSLog(@"searchDictionary is : %@",searchDictionary);
-        
-        
-        // first name, last name, user name owner name
-        NSDictionary * userDict= [searchDictionary objectForKey:@"user"];
-        
+        NSDictionary *userDict=[usersArray objectAtIndex:indexPath.row];
+       
         NSString *fname= [userDict objectForKey:@"first_name"];
         
         NSString *lname= [userDict objectForKey:@"last_name"];
@@ -1341,6 +1202,114 @@
         
     }
 }
+
+
+
+// This metod is used to add collaborator, it will call API according to enetered data, JSON will receive
+-(void)collaboratorApiMethod:(NSString*)valueFromTextField
+{
+    
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
+    }else{
+        
+        NSString *searchString=[valueFromTextField stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+        NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/search?token=%@&term=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],searchString];
+        @try{
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+                [[AppDelegate sharedAppdelegate] hideProgressView];
+                
+                
+                if (error || [msg containsString:@"Error"]) {
+                    
+                    if (msg) {
+                        if([msg isEqualToString:@"Error-403"])
+                        {
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-402"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                        }else if([msg isEqualToString:@"Error-422"]){
+                            
+                            NSLog(@"Message is : %@",msg);
+                        }else{
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                            NSLog(@"Error is11 : %@",msg);
+                        }
+                        
+                    }else if(error)  {
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                        NSLog(@"Thread-NO4-Collaborator-Refresh-error == %@",error.localizedDescription);
+                    }
+                    
+                    return ;
+                }
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self collaboratorApiMethod:valueFromTextField];
+                    NSLog(@"Thread--NO4-call-Collaborator");
+                    return;
+                }
+                
+                if (json) {
+                    NSLog(@"JSON-HelpSupport-%@",json);
+                
+                    self->usersArray=[json objectForKey:@"users"];
+                    
+                    for (NSDictionary *dicc in self->usersArray) {
+                        if ([dicc objectForKey:@"first_name"]) {
+                            [self->userNameArray addObject:[dicc objectForKey:@"email"]];
+                            [self->firstNameArray addObject:[NSString stringWithFormat:@"%@ %@",[dicc objectForKey:@"first_name"],[dicc objectForKey:@"last_name"]]];
+            
+                            [self->staff1_idArray addObject:[dicc objectForKey:@"id"]];
+                            [self->profilePicArray addObject:[dicc objectForKey:@"profile_pic"]];
+                        }
+
+                    }
+                    
+                    
+                    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            [self.tableview2 reloadData];
+                            
+                        });
+                    });
+
+                    
+                }
+                
+            }];
+            
+        }@catch (NSException *exception)
+        {
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+        }
+        @finally
+        {
+            NSLog( @" I am in add cc for row method in ticket search ViewController" );
+            
+        }
+        
+    }
+    
+}
+
+
+
+
+
+
+
+
 
 @end
 
