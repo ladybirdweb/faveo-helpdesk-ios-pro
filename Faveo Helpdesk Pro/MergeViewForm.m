@@ -46,6 +46,7 @@
 
 @implementation MergeViewForm
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -93,7 +94,7 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
 }
 
-
+// Using this picker, we can select the parent ticket
 - (IBAction)SelectParentTicket:(id)sender {
     
     // [self.view endEditing:YES];
@@ -101,11 +102,12 @@
 
 }
 
+// This is action called when picker view cancelled
 - (void)actionPickerCancelled:(id)sender {
     NSLog(@"Delegate has been informed that ActionSheetPicker was cancelled");
 }
 
-
+//This method used to select the subejct
 - (void)SubjectWasSelected:(NSNumber *)selectedIndex element:(id)element
 {
     subject_id=(globalVariables.idList)[(NSUInteger) [selectedIndex intValue]];
@@ -119,18 +121,20 @@
     
 }
 
-
+// Added naviagtion button on left side of view.
 -(void)Back
 {
     globalVariables.backButtonActionFromMergeViewMenu=@"true";
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
 -(void)removeKeyBoard{
     [_newtitleTextview resignFirstResponder];
     [_reasonTextView resignFirstResponder];
 }
 
-
+// After clicking this cancel button, it will redirect back to inbox page.
 -(void)cancelButton
 {
     NSLog(@"Ckicked on cancel button");
@@ -138,6 +142,8 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
+// This is the main method, after selecting all values which are required to merge the tickets. AFter clicking on merge button, it will call an merge API and gives an JSON.
 -(void)mergeButton
 {
     [[AppDelegate sharedAppdelegate] showProgressView];
@@ -380,6 +386,7 @@
     return YES;
 }
 
+// This method used to control on giving input values in textfield or textviews
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     

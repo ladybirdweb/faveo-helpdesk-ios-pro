@@ -44,6 +44,7 @@
 
 @implementation MultpleTicketAssignTableViewController
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -77,6 +78,7 @@
     [self readFromPlist];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
 }
+
 
 -(void)Back
 {
@@ -153,7 +155,7 @@
 }
 
 
-
+// This picker used to select the assignee
 - (IBAction)selectAssignee:(id)sender {
 @try{
     [self.view endEditing:YES];
@@ -180,6 +182,7 @@
     
 }
 
+// Here we will get select staffs id and staffs email (Assignee email and its id)
 - (void)staffWasSelected:(NSNumber *)selectedIndex element:(id)element
 {
 @try{
@@ -206,6 +209,7 @@
 - (void)actionPickerCancelled:(id)sender {
     NSLog(@"Delegate has been informed that ActionSheetPicker was cancelled");
 }
+// After clicking this button, it will navigate to inbox page
 -(void)cancelButton
 {
     
@@ -215,6 +219,7 @@
     
 }
 
+// After selecting assignee and clicking on assin button this method is called. It will call an API for assign and returns an JSON.
 -(void)assign
 {
     
