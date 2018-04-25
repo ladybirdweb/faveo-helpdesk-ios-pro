@@ -134,26 +134,27 @@
     
     [self setTitle:NSLocalizedString(@"CreateTicket",nil)];
     
-    
+    // UIBar item for attachment button
     UIButton *attachmentButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [attachmentButton setImage:[UIImage imageNamed:@"attach1"] forState:UIControlStateNormal];
     [attachmentButton addTarget:self action:@selector(addAttachmentPickerButton) forControlEvents:UIControlEventTouchUpInside];
     [attachmentButton setFrame:CGRectMake(12, 7, 22, 22)];
     
-    UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [NotificationBtn setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
-    [NotificationBtn addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
-    [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)]; //clearAll  //flipView
+    //UIBar item for clear all button
+    UIButton *clearAll =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [clearAll setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
+    [clearAll addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
+    [clearAll setFrame:CGRectMake(46, 0, 32, 32)]; //clearAll  //flipView
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
     [rightBarButtonItems addSubview:attachmentButton];
-    [rightBarButtonItems addSubview:NotificationBtn];
+    [rightBarButtonItems addSubview:clearAll];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
 
     
     
-    
+    //used for adding/register user button
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTaped:)];
     singleTap.numberOfTapsRequired = 1;
     singleTap.numberOfTouchesRequired = 1;
@@ -217,6 +218,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
+
 - (void)imageTaped:(UIGestureRecognizer *)gestureRecognizer {
     NSLog(@"Image Button Tapped");
     
@@ -253,6 +255,7 @@
 }
 
 
+// after clicking on clear button it will clears all filled data in create ticket form
 -(IBAction)flipView
 {
     NSLog(@"Clciked");
@@ -292,7 +295,7 @@
     
 }
 
-
+//This method used for taking values from Plist file. Plist is one king of database used for temporary storage used in within mobile app
 -(void)readFromPlist{
     // Read plist from bundle and get Root Dictionary out of it
     NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
@@ -844,7 +847,7 @@
 }
 
 
-
+// Button action, after cliking on it will redirect to add requester page
 - (IBAction)addRequesterClicked:(id)sender {
     
     
@@ -914,7 +917,7 @@
 }
 
 
-
+// this method used to control writing data/texts in textfields and textviews.
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     
@@ -1075,6 +1078,7 @@
     return YES;
 }
 
+// This metod is used to add collaborator, it will call API according to enetered data, JSON will receive
 -(void)collaboratorApiMethod:(NSString*)valueFromTextField
 {
     
@@ -1341,6 +1345,7 @@
 }
 
 
+// used for mobile code/ conunty codes.
 -(void)split{
     
     _countryDic = @{
@@ -1668,7 +1673,7 @@
 }
 
 
-
+// Initialize attachment picker menu
 -(void)addAttachmentPickerButton
 {
     _menu = [[HSAttachmentPicker alloc] init];
@@ -1676,6 +1681,8 @@
     [_menu showAttachmentMenu];
     
 }
+
+// It will show attachment picker
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu showController:(UIViewController * _Nonnull)controller completion:(void (^ _Nullable)(void))completion {
     UIPopoverPresentationController *popover = controller.popoverPresentationController;
     if (popover != nil) {
@@ -1685,10 +1692,12 @@
     [self presentViewController:controller animated:true completion:completion];
 }
 
+// if error occured it will show error message
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu showErrorMessage:(NSString * _Nonnull)errorMessage {
     NSLog(@"%@", errorMessage);
 }
 
+// here actaul picker called, here it will show picker view and we can select attachment and after selecting file it will print file name and with its size
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu upload:(NSData * _Nonnull)data filename:(NSString * _Nonnull)filename image:(UIImage * _Nullable)image {
     
     NSLog(@"File Name : %@", filename);
@@ -1882,6 +1891,8 @@
         
     });
 }
+
+// called ticket create method
 -(void)postTicketCreate
 {
    

@@ -467,7 +467,7 @@
         @finally
         {
             NSLog( @" I am in getDependencies method in Inbox ViewController" );
-    
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }
     }

@@ -121,6 +121,7 @@
     [self URLValidationMethod];
 }
 
+//URL validation method
 -(void)URLValidationMethod
 {
     
@@ -300,6 +301,7 @@
 }
 
 
+// login button method
 - (IBAction)btnLogin:(id)sender {
     
     if (((self.userNameTextField.text.length==0 || self.passcodeTextField.text.length==0)))
@@ -524,6 +526,7 @@
     
 }
 
+//It will verify the URL either paid or not
 -(void)verifyBilling{
   
     NSString *url=[NSString stringWithFormat:@"%@?url=%@",BILLING_API,baseURL];
@@ -597,7 +600,7 @@
     return YES;
 }
 
-
+//it will send an token to Firebase with user details (Logged user)
 -(void)sendDeviceToken{
     NSString *refreshedToken =  [[FIRInstanceID instanceID] token];
     NSLog(@"refreshed token  %@",refreshedToken);

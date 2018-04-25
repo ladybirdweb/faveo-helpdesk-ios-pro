@@ -477,7 +477,7 @@
                             [self getCCCount];
                             [self.navigationController popToViewController:controller animated:YES];
                            // [self.navigationController popViewControllerAnimated:YES];
-                            
+                      
                             [RKDropdownAlert title:@"Success" message:@"Added cc Successfully" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
                             return;

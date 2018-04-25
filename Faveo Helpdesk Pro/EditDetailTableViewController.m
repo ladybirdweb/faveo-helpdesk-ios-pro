@@ -171,7 +171,7 @@
                 
                 if (error) {
                     
-                    [self->utils showAlertWithMessage:@"Error" sendViewController:self];
+                    [self->utils showAlertWithMessage:@"Error1" sendViewController:self];
                     NSLog(@"Thread-NO4-getDetail-Refresh-error == %@",error.localizedDescription);
                     
                     return ;
@@ -182,14 +182,17 @@
                     //[_activityIndicatorObject stopAnimating];
                     [self->_imgViewLoading setHidden:YES];
                     
-                    if (msg) {
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                        
-                    }else if([msg isEqualToString:@"Error-422"])
+                    if([msg isEqualToString:@"Error-422"])
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
                     }
+                    else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                    }
+                    
                     else if([msg isEqualToString:@"Error-404"])
                     {
                         NSLog(@"Message is : %@",msg);
@@ -200,11 +203,7 @@
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
                     }
-                    else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
-                    }
+                    
                     else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
                     {
                         NSLog(@"Message is : %@",msg);
@@ -212,6 +211,8 @@
                     }
                     
                     else if(error)  {
+                        
+                        NSLog(@"Error is : %@",error);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
                     }

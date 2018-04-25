@@ -97,9 +97,10 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [self.refreshControl endRefreshing];
-        
+        //[_activityIndicatorObject stopAnimating];
         [[AppDelegate sharedAppdelegate] hideProgressView];
-     
+       // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
         }
@@ -127,7 +128,7 @@
             
             if (error || [msg containsString:@"Error"]) {
                 [self.refreshControl endRefreshing];
-                
+                //[_activityIndicatorObject stopAnimating];
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 if (msg) {
                     
@@ -204,26 +205,27 @@
             }
             
             if (json) {
-               
+                //NSError *error;
                 
                 self->mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
                 
                 NSDictionary *dataConversationDict=[json objectForKey:@"data"];
-               
+               // NSLog(@"DIct11111 is : %@",dataConversationDict);
                 
                 self->mutableArray=[dataConversationDict objectForKey:@"threads"];
-            
+              
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
-                        [self.refreshControl endRefreshing];
+                         [self.tableView reloadData];
+                         [self.refreshControl endRefreshing];
                          [[AppDelegate sharedAppdelegate] hideProgressView];
-        
-                        [self.tableView reloadData];
+                       
+                        
                     });
                 });
             }
-            
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             NSLog(@"Thread-NO5-getConversation-closed");
             
         }];

@@ -588,7 +588,7 @@
                     
 //                    TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
 //                    [self.navigationController pushViewController:td animated:YES];
-                    
+                     [self.view setNeedsDisplay];
                      [self.navigationController popViewControllerAnimated:YES];
                     
                 }

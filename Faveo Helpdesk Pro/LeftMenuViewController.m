@@ -76,6 +76,7 @@
     //[self.tableView reloadData]
 }
 
+
 -(void)update{
 
     
@@ -177,6 +178,8 @@
      [[AppDelegate sharedAppdelegate] hideProgressView];
     
 }
+
+
 -(void)getDependencies{
     
 

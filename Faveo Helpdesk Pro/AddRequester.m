@@ -141,6 +141,7 @@
 }
 
 
+// this method called after clicking on submit button,it will validate entered data in form
 - (IBAction)submitClicked:(id)sender {
     
     
@@ -350,6 +351,8 @@
     }
     
 }
+
+
 -(void)addRequesterMethod{
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
@@ -537,6 +540,7 @@
    // _submitButton.hidden = NO;
 }
 
+// back button added programmatically
 - (IBAction)Back
 {
     BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];

@@ -216,7 +216,7 @@
 
 
 
-
+// Search button action call, after clicking on search icon it will naviagte to search page
 - (IBAction)searchButtonClicked {
     
     [self hideTableViewEditMode];
@@ -227,16 +227,7 @@
     
 }
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    [_searchBar setShowsCancelButton:YES animated:YES];
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    
-    //   [_searchBar resignFirstResponder];
-    
-}
-
+// This method used to assign single or multiple ticket using multiple select feature
 
 -(void)tapDetected{
     
@@ -272,6 +263,7 @@
     
 }
 
+// This method used to merge 2 or more ticket using multiple ticket selection
 -(void)MergeButtonClicked
 {
     NSLog(@"Clicked on merge");
@@ -347,6 +339,7 @@
     
 }
 
+// Handling the tableview even we reload the tablview, edit view will not vanish even we scroll
 - (void)reloadTableView
 {
     NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
@@ -357,6 +350,7 @@
     }
 }
 
+// This method called to get the ticket data.
 -(void)reload{
     
     
@@ -519,10 +513,8 @@
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                        
-                            [self->refresh endRefreshing];
-                            
                             [self reloadTableView];
+                            [self->refresh endRefreshing];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             
                         });
@@ -927,9 +919,9 @@
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
                             [self reloadTableView];
-                            
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
                         });
                     });
                     
