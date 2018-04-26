@@ -55,6 +55,8 @@
 
 @implementation ReplyTicketViewController
 
+
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title=@"Reply Ticket";
@@ -118,6 +120,7 @@
     [_messageTextView resignFirstResponder];
 }
 
+//This method is called before the view controller's view is about to be added to a view hierarchy and before any animations are configured for showing the view.
 -(void)viewWillAppear:(BOOL)animated
 {
     [self viewDidLoad];
@@ -125,6 +128,8 @@
 
     
 }
+
+// After clcking this method, it will move to add cc view controller
 -(void)clickedOnCCSubButton
 {
     addCCView *cc1=[self.storyboard instantiateViewControllerWithIdentifier:@"addCCViewId"];
@@ -144,6 +149,7 @@
     [self presentViewController:popupViewController animated:NO completion:nil];
 }
 
+// After adding reply method when we click on submit method, below method is called
 - (IBAction)submitButtonClicked:(id)sender {
     
 
@@ -169,6 +175,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+// This method fetch the cc list
 -(void)FetchCollaboratorAssociatedwithTicket
 {
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -242,7 +249,7 @@
     
 }
 
-
+//Asks the delegate whether the specified text should be replaced in the text view.
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     
@@ -281,7 +288,7 @@
     return YES;
 }
 
-
+// Here attachment picker will initialize
 -(void)addAttachmentPickerButton
 {
     _menu = [[HSAttachmentPicker alloc] init];
@@ -289,6 +296,7 @@
     [_menu showAttachmentMenu];
     
 }
+//After clicking attachment button, attachment picker is ready to display
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu showController:(UIViewController * _Nonnull)controller completion:(void (^ _Nullable)(void))completion {
     UIPopoverPresentationController *popover = controller.popoverPresentationController;
     if (popover != nil) {
@@ -298,10 +306,13 @@
     [self presentViewController:controller animated:true completion:completion];
 }
 
+// It will show error message, if any error is occured while selecting or displying picker
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu showErrorMessage:(NSString * _Nonnull)errorMessage {
     NSLog(@"%@", errorMessage);
 }
 
+
+// here actaul picker called, here it will show picker view and we can select attachment and after selecting file it will print file name and with its size
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu upload:(NSData * _Nonnull)data filename:(NSString * _Nonnull)filename image:(UIImage * _Nullable)image {
     
     NSLog(@"File Name : %@", filename);
@@ -496,6 +507,7 @@
     });
 }
 
+// It calls the ticket reply api
 -(void)replyTicketMethodCall
 {
    

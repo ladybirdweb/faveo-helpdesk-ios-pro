@@ -42,6 +42,7 @@
 
 @implementation ClientDetailViewController
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -268,12 +269,15 @@
     
 }
 
+//This method is called before the view controller's view is about to be added to a view hierarchy and before any animations are configured for showing the view.
 -(void)viewWillAppear:(BOOL)animated
 {
     globalVariables=[GlobalVariables sharedInstance];
     [self viewDidLoad];
 }
 
+
+// This method calls an API for getting user data, it will returns an JSON which contains 10 records with user details.
 -(void)reload{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -419,6 +423,7 @@
 
 #pragma mark - Table view data source
 
+//This method returns the number of rows (table cells) in a specified section.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger numOfSections = 0;
@@ -443,14 +448,14 @@
     
     return numOfSections;
 }
-
+//This method tells the delegate the table view is about to draw a cell for a particular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
 }
 
-
+//This method asks the data source to return the number of sections in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return [mutableArray count];
@@ -458,7 +463,7 @@
 
 
 
-
+// This method asks the data source for a cell to insert in a particular location of the table view.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     OpenCloseTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"OpenCloseTableViewID"];
@@ -521,6 +526,7 @@
     return cell;
 }
 
+// After clicking on edit button, it will naviagte to edit user details page
 -(void)EditClientProfileMethod
 {
     
@@ -531,6 +537,7 @@
     
 }
 
+// This method tells the delegate that the specified row is now deselected.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
@@ -554,6 +561,7 @@
     
 }
 
+// This method used to show refresh behind the table view.
 -(void)addUIRefresh{
     
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
@@ -576,10 +584,6 @@
     //[refresh endRefreshing];
 }
 
-
-
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     //TODO: Calculate cell height
     return 65.0f;
@@ -587,76 +591,11 @@
 
 -(void)setUserProfileimage:(NSString*)imageUrl
 {
-    //    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-    //    dispatch_async(queue, ^(void) {
-    //
-    //        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
-    //
-    //        UIImage* image = [[UIImage alloc] initWithData:imageData];
-    //        if (image) {
-    //            dispatch_async(dispatch_get_main_queue(), ^{
-    //                self.profileImageView.image = image;
-    //            });
-    //        }
-    //    });
     
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]
                              placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
 }
 
-//- (void)addSubview:(UIView *)subView toView:(UIView*)parentView {
-//    [parentView addSubview:subView];
-//
-//    NSDictionary * views = @{@"subView" : subView,};
-//    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
-//                                                                   options:0
-//                                                                   metrics:0
-//                                                                     views:views];
-//    [parentView addConstraints:constraints];
-//    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
-//                                                          options:0
-//                                                          metrics:0
-//                                                            views:views];
-//    [parentView addConstraints:constraints];
-//}
-
-//- (void)cycleFromViewController:(UIViewController*) oldViewController
-//               toViewController:(UIViewController*) newViewController {
-//    [oldViewController willMoveToParentViewController:nil];
-//    [self addChildViewController:newViewController];
-//    [self addSubview:newViewController.view toView:self.containerView];
-//    newViewController.view.alpha = 0;
-//    [newViewController.view layoutIfNeeded];
-//
-//    [UIView animateWithDuration:0.5
-//                     animations:^{
-//                         newViewController.view.alpha = 1;
-//                         oldViewController.view.alpha = 0;
-//                     }
-//                     completion:^(BOOL finished) {
-//                         [oldViewController.view removeFromSuperview];
-//                         [oldViewController removeFromParentViewController];
-//                         [newViewController didMoveToParentViewController:self];
-//                     }];
-//}
-
-//- (IBAction)indexChanged:(id)sender {
-//
-//    if (self.segmentedControl.selectedSegmentIndex == 0) {
-//        UIViewController *newViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OpenClient"];
-//        newViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-//        [self cycleFromViewController:self.currentViewController toViewController:newViewController];
-//        self.currentViewController = newViewController;
-//        // self.testingLAbel.text = @"Open Ticket";
-//    } else {
-//        UIViewController *newViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CloseClient"];
-//        newViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-//        [self cycleFromViewController:self.currentViewController toViewController:newViewController];
-//        self.currentViewController = newViewController;
-//        //self.testingLAbel.text = @"Closed Ticket";
-//    }
-//
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

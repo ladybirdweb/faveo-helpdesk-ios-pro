@@ -56,6 +56,7 @@
 
 @implementation EditClientDetail
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -135,11 +136,13 @@
 
 }
 
+//Sent to the view controller when the app receives a memory warning.
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+//Notifies the view controller that its view is about to be removed from a view hierarchy.
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
@@ -163,6 +166,7 @@
     [self submit];
 }
 
+// after changing/modifying user data when user clicks on submit method then edit user API is called. Below method validates the enetered data in textfields.
 -(void)submit
 {
     
@@ -382,6 +386,7 @@
 }
 
 
+//after validating all fields if everythig is fine then below method i.e edit user API is called
 -(void)doneSubmitMethod
 {
     
@@ -514,7 +519,7 @@
         }
 }
 
-
+//  This is used to activate or deactivate the user state, Here I used switch in order to change the user status
 - (IBAction)ActivateOrDeactivateCilent:(id)sender {
     
     if([sender isOn]){
@@ -583,7 +588,7 @@
     }
 }
 
-
+// If user swtich to de-active then, below method i.e deactivate the user API called
 -(void)deactivateUser
 {
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -734,6 +739,9 @@
     
     
 }
+
+
+// If user swtich to active then, below method i.e activate the user API called
 -(void)activeUser
 {
     
@@ -870,6 +878,7 @@
 
 #pragma mark - UITextFieldDelegate
 
+//Asks the delegate if the text field should process the pressing of the return button.
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -877,6 +886,7 @@
     return YES;
 }
 
+//Asks the delegate if the specified text should be changed.
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     // verify the text field you wanna validate

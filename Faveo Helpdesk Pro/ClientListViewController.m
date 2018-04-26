@@ -52,6 +52,7 @@
 @implementation ClientListViewController
 
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad]; // userFilterId
     
@@ -91,6 +92,7 @@
     // Do any additional setup after loading the view.
 }
 
+// After clicking this navigation button, it will redirect to search view controller
 - (IBAction)searchButtonClicked {
     
     TicketSearchViewController * search=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketSearchViewControllerId"];
@@ -99,6 +101,7 @@
     
 }
 
+// This method calls an API for getting tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)reload{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -275,6 +278,7 @@
     }
 }
 
+//This method tells the delegate the table view is about to draw a cell for a particular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -305,6 +309,8 @@
     }
 }
 
+
+// This method calls an API for getting next page of user list, it will returns an JSON which contains 10 records with user details.
 -(void)loadMore{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -397,7 +403,7 @@
     }
 }
 
-
+//This method asks the data source to return the number of sections in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.currentPage == self.totalPages
         || self.totalTickets == _mutableArray.count) {
@@ -406,6 +412,7 @@
     return _mutableArray.count + 1;
 }
 
+//This method returns the number of rows (table cells) in a specified section.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger numOfSections = 0;
@@ -428,7 +435,7 @@
     return numOfSections;
 }
 
-
+// This method asks the data source for a cell to insert in a particular location of the table view.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row == [_mutableArray count]) {
@@ -591,6 +598,7 @@
     }
 }
 
+//This method tells the delegate that the specified row is now selected.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
@@ -621,6 +629,8 @@
     [self.navigationController pushViewController:td animated:YES];
 }
 
+
+// This method used to show refresh behind the table view.
 -(void)addUIRefresh{
     
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;

@@ -73,13 +73,8 @@
 @implementation TrashTicketsViewController
 
 
-#pragma mark - SlideNavigationController Methods -
 
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
-{
-    return YES;
-}
-
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTitle:NSLocalizedString(@"Trash Tickets",nil)];
@@ -201,6 +196,8 @@
     // Do any additional setup after loading the view.
 }
 
+
+// After clicking this navigation button, it will redirect to search view controller
 - (IBAction)searchButtonClicked {
     
     TicketSearchViewController * search=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketSearchViewControllerId"];
@@ -209,6 +206,7 @@
     
 }
 
+// After clicking this navigation button, it will redirect to ticket assign view controller
 -(void)tapDetected{
     
     
@@ -231,6 +229,7 @@
     
 }
 
+// After clicking this navigation button, it will redirect to ticket merge view controller
 -(void)MergeButtonClicked
 {
     NSLog(@"Clicked on merge");
@@ -264,6 +263,7 @@
     }
 }
 
+//This method is called before the view controller's view is about to be added to a view hierarchy and before any animations are configured for showing the view.
 -(void)viewWillAppear:(BOOL)animated{
     
     if (self.selectedPath != nil) {
@@ -283,6 +283,7 @@
 }
 
 
+// Handling the tableview even we reload the tableview, edit view will not vanish even we scroll
 - (void)reloadTableView
 {
     NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
@@ -293,6 +294,7 @@
 }
 
 
+// This method calls an API for getting tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)reload{
    
     //[[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
@@ -471,6 +473,7 @@
     }
 }
 
+// This method used to get some values like Agents list, Ticket Status, Ticket counts, Ticket Source, SLA ..etc which are used in various places in project.
 -(void)getDependencies{
     
     NSLog(@"Thread-NO1-getDependencies()-start");
@@ -659,12 +662,13 @@
 }
 
 
+// This method used for implementing the feature of multiple ticket select, using this we can select and deselects the tableview rows and perform further actions on that selected rows.
 -(void)EditTableView:(UIGestureRecognizer*)gesture{
     [self.tableView setEditing:YES animated:YES];
     navbar.hidden=NO;
 }
 
-
+//This method returns the number of rows (table cells) in a specified section.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger numOfSections = 0;
@@ -687,6 +691,7 @@
     return numOfSections;
 }
 
+//This method asks the data source to return the number of sections in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.currentPage == self.totalPages
         || self.totalTickets == _mutableArray.count) {
@@ -695,7 +700,7 @@
     return _mutableArray.count + 1;
 }
 
-
+//This method tells the delegate the table view is about to draw a cell for a particular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //  cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -726,6 +731,7 @@
 }
 
 
+// This method calls an API for getting next page tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)loadMore{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -839,7 +845,7 @@
 }
 
 
-
+// This method asks the data source for a cell to insert in a particular location of the table view.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
@@ -1202,10 +1208,13 @@
 {
     return 3;
 }
+
+// This method asks the data source to verify that the given row is editable.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     return YES;
 }
 
+// This method tells the delegate that the specified row is now selected.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     self.selectedPath = indexPath;
@@ -1262,6 +1271,7 @@
     }
 }
 
+// This method tells the delegate that the specified row is now deselected.
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     self.selectedPath = indexPath;
@@ -1300,14 +1310,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)addBtnPressed{
-    
-    CreateTicketViewController *createTicket=[self.storyboard instantiateViewControllerWithIdentifier:@"CreateTicket"];
-    
-    [self.navigationController pushViewController:createTicket animated:YES];
-    
-}
-
+// After clicking this method, it will navigate to notification view controller
 -(void)NotificationBtnPressed
 {
     NotificationViewController *not=[self.storyboard instantiateViewControllerWithIdentifier:@"Notify"];
@@ -1317,6 +1320,7 @@
     
 }
 
+// This method used to show refresh behind the table view.
 -(void)addUIRefresh{
     
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
@@ -1342,169 +1346,169 @@
 }
 
 
--(void)changeStaus5
-{
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
-        //connection unavailable
-        
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
-        
-    }else{
-        
-        [[AppDelegate sharedAppdelegate] showProgressView];
-        
-        if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
-        {
-            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!", nil) sendViewController:self];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-        }else{
-            
-            //            NSString *str = @"This is a string";
-            //
-            //            str = [str stringByReplacingOccurrencesOfString:@"string"
-            //                                                 withString:@"duck"];
-            
-            selectedIDsForDeleteForever=[NSString stringWithFormat:@"%@",selectedIDs];
-            
-            selectedIDsForDeleteForever= [selectedIDsForDeleteForever stringByReplacingOccurrencesOfString:@"," withString:@"&id[]="];
-            
-            NSString *finalId= [@"&id[]=" stringByAppendingString:selectedIDsForDeleteForever];
-            
-            NSString * url= [NSString stringWithFormat:@"%@api/v2/helpdesk/ticket/delete?api_key=%@&token=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"]];
-            
-            url = [url stringByAppendingString:finalId];
-            NSLog(@"API is : %@",url);
-            
-            
-            MyWebservices *webservices=[MyWebservices sharedInstance];
-            
-            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                
-                if (error || [msg containsString:@"Error"]) {
-                    
-                    if (msg) {
-                        
-                        if([msg isEqualToString:@"Error-403"])
-                        {
-                            [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Delete a ticket", nil) sendViewController:self];
-                        }
-                        else if([msg isEqualToString:@"Error-422"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
-                        }
-                        else if([msg isEqualToString:@"Error-404"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-                        }
-                        else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-                        }
-                        else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
-                        }
-                        else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
-                        }
-                        
-                        else{
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                        }
-                        //  NSLog(@"Message is : %@",msg);
-                        
-                    }else if(error)  {
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                        NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
-                    }
-                    
-                    return ;
-                }
-                
-                if ([msg isEqualToString:@"tokenRefreshed"]) {
-                    
-                    [self changeStaus5];
-                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
-                    return;
-                }
-                @try{
-                    if (json) {
-                        NSLog(@"JSON-CreateTicket-%@",json);
-                        //  NSLog(@"JSON-CreateTicket-%@",json);
-                        
-                        if ([json objectForKey:@"success"]) {
-                            
-                            NSString *str=[json objectForKey:@"success"];
-                            
-                            if([str isEqualToString:@"deleted successfully"])
-                            {
-                                [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                                
-                                TrashTicketsViewController *trash=[self.storyboard instantiateViewControllerWithIdentifier:@"TrashTicketsID"];
-                                [self.navigationController pushViewController:trash animated:YES];
-                                
-                            }else
-                            {
-                                
-                                [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
-                            }
-                            
-                        }else
-                            if ([json objectForKey:@"response"]) {
-                                
-                                id object;
-                                NSDictionary * dict1= [json objectForKey:@"response"];
-                                object = [dict1 objectForKey:@"message"];
-                                
-                                NSLog(@"object is :%@",object);
-                                NSLog(@"object is :%@",object);
-                                
-                                if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Resolved"]){
-                                    
-                                    [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                                    
-                                    TrashTicketsViewController *trash=[self.storyboard instantiateViewControllerWithIdentifier:@"TrashTicketsID"];
-                                    [self.navigationController pushViewController:trash animated:YES];
-                                    
-                                }else
-                                {
-                                    
-                                    [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
-                                    
-                                }
-                                
-                            }
-                        
-                        
-                    } // end json
-                }@catch (NSException *exception)
-                {
-                    NSLog( @"Name: %@", exception.name);
-                    NSLog( @"Reason: %@", exception.reason );
-                    [self->utils showAlertWithMessage:exception.name sendViewController:self];
-                    return;
-                }
-                @finally
-                {
-                    NSLog( @" I am in changeStatus5 method in TrashTicket ViewController" );
-                    
-                }
-                
-            }];
-            // }
-        }
-        
-    }
-}
+//-(void)changeStaus5
+//{
+//    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+//    {
+//        //connection unavailable
+//
+//        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+//
+//
+//    }else{
+//
+//        [[AppDelegate sharedAppdelegate] showProgressView];
+//
+//        if ([Utils isEmpty:selectedIDs] || [selectedIDs isEqualToString:@""] ||[selectedIDs isEqualToString:@"(null)" ] )
+//        {
+//            [utils showAlertWithMessage:NSLocalizedString(@"Please Select The Tickets.!", nil) sendViewController:self];
+//            [[AppDelegate sharedAppdelegate] hideProgressView];
+//        }else{
+//
+//            //            NSString *str = @"This is a string";
+//            //
+//            //            str = [str stringByReplacingOccurrencesOfString:@"string"
+//            //                                                 withString:@"duck"];
+//
+//            selectedIDsForDeleteForever=[NSString stringWithFormat:@"%@",selectedIDs];
+//
+//            selectedIDsForDeleteForever= [selectedIDsForDeleteForever stringByReplacingOccurrencesOfString:@"," withString:@"&id[]="];
+//
+//            NSString *finalId= [@"&id[]=" stringByAppendingString:selectedIDsForDeleteForever];
+//
+//            NSString * url= [NSString stringWithFormat:@"%@api/v2/helpdesk/ticket/delete?api_key=%@&token=%@",[userDefaults objectForKey:@"baseURL"],API_KEY,[userDefaults objectForKey:@"token"]];
+//
+//            url = [url stringByAppendingString:finalId];
+//            NSLog(@"API is : %@",url);
+//
+//
+//            MyWebservices *webservices=[MyWebservices sharedInstance];
+//
+//            [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+//                [[AppDelegate sharedAppdelegate] hideProgressView];
+//
+//                if (error || [msg containsString:@"Error"]) {
+//
+//                    if (msg) {
+//
+//                        if([msg isEqualToString:@"Error-403"])
+//                        {
+//                            [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to Delete a ticket", nil) sendViewController:self];
+//                        }
+//                        else if([msg isEqualToString:@"Error-422"])
+//                        {
+//                            NSLog(@"Message is : %@",msg);
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+//                        }
+//                        else if([msg isEqualToString:@"Error-404"])
+//                        {
+//                            NSLog(@"Message is : %@",msg);
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+//                        }
+//                        else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
+//                        {
+//                            NSLog(@"Message is : %@",msg);
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+//                        }
+//                        else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
+//                        {
+//                            NSLog(@"Message is : %@",msg);
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+//                        }
+//                        else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
+//                        {
+//                            NSLog(@"Message is : %@",msg);
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+//                        }
+//
+//                        else{
+//                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+//                        }
+//                        //  NSLog(@"Message is : %@",msg);
+//
+//                    }else if(error)  {
+//                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+//                        NSLog(@"Thread-NO4-getTicketStaus-Refresh-error == %@",error.localizedDescription);
+//                    }
+//
+//                    return ;
+//                }
+//
+//                if ([msg isEqualToString:@"tokenRefreshed"]) {
+//
+//                    [self changeStaus5];
+//                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
+//                    return;
+//                }
+//                @try{
+//                    if (json) {
+//                        NSLog(@"JSON-CreateTicket-%@",json);
+//                        //  NSLog(@"JSON-CreateTicket-%@",json);
+//
+//                        if ([json objectForKey:@"success"]) {
+//
+//                            NSString *str=[json objectForKey:@"success"];
+//
+//                            if([str isEqualToString:@"deleted successfully"])
+//                            {
+//                                [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+//
+//                                TrashTicketsViewController *trash=[self.storyboard instantiateViewControllerWithIdentifier:@"TrashTicketsID"];
+//                                [self.navigationController pushViewController:trash animated:YES];
+//
+//                            }else
+//                            {
+//
+//                                [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
+//                            }
+//
+//                        }else
+//                            if ([json objectForKey:@"response"]) {
+//
+//                                id object;
+//                                NSDictionary * dict1= [json objectForKey:@"response"];
+//                                object = [dict1 objectForKey:@"message"];
+//
+//                                NSLog(@"object is :%@",object);
+//                                NSLog(@"object is :%@",object);
+//
+//                                if(![object isKindOfClass:[NSArray class]] && [object isEqualToString:@"Status changed to Resolved"]){
+//
+//                                    [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+//
+//                                    TrashTicketsViewController *trash=[self.storyboard instantiateViewControllerWithIdentifier:@"TrashTicketsID"];
+//                                    [self.navigationController pushViewController:trash animated:YES];
+//
+//                                }else
+//                                {
+//
+//                                    [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - Yo don't have permission to Resolve a ticket", nil) sendViewController:self];
+//
+//                                }
+//
+//                            }
+//
+//
+//                    } // end json
+//                }@catch (NSException *exception)
+//                {
+//                    NSLog( @"Name: %@", exception.name);
+//                    NSLog( @"Reason: %@", exception.reason );
+//                    [self->utils showAlertWithMessage:exception.name sendViewController:self];
+//                    return;
+//                }
+//                @finally
+//                {
+//                    NSLog( @" I am in changeStatus5 method in TrashTicket ViewController" );
+//
+//                }
+//
+//            }];
+//            // }
+//        }
+//
+//    }
+//}
 
 //success
 #pragma mark - lazy
@@ -1567,6 +1571,14 @@
     
     return _multistageDropdownMenuView;
     
+}
+
+#pragma mark - SlideNavigationController Methods -
+
+// After clicking this method, it will navigate to notification view controller
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+{
+    return YES;
 }
 
 #pragma mark - CFMultistageDropdownMenuViewDelegate
@@ -1797,6 +1809,8 @@
     
 }
 
+
+// This method used to show some popuop or list which contain some menus. Here it used to change the status of ticket, after clicking this button it will show one view which contains list of status. After clicking on any row, according to its name that status will be changed.
 -(void)onNavButtonTapped:(UIBarButtonItem *)sender event:(UIEvent *)event
 {
     NSLog(@"11111111*********111111111111");

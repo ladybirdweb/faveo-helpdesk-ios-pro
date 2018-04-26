@@ -34,13 +34,10 @@
 
 @implementation SupportViewController
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //arindam.ladybird@gmail.com
-   // _emailTextView.text=@"mallikarjun.h@ladybirdweb.com";
-    // _emailTextView.text=@"test00478@gmail.com";
-   // _emailTextView.text=@"arindam.ladybird@gmail.com";
     _emailTextView.text=@"support@ladybirdweb.com";
     
     globalVariables=[GlobalVariables sharedInstance];
@@ -74,9 +71,7 @@
     
     _submitButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
 }
-//-(void)onTapDone:(UIBarButtonItem*)item{
-//
-//}
+
 
 -(void)onTapCancel:(UIBarButtonItem*)item{
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -91,7 +86,7 @@
 }
 
 
-
+// This method is called to validate the data enetered in textfields, it not fine then it will show error message else it calls the API.
 - (IBAction)ButtonClicked:(id)sender {
     
     if(self.subjectTextView.text.length==0 && self.messageTextView.text.length==0)
@@ -222,6 +217,8 @@
     }
     
 }
+
+//Asks the delegate if the specified text should be changed.
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
 

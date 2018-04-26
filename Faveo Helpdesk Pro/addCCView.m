@@ -68,6 +68,7 @@
 
 @implementation addCCView
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -125,6 +126,8 @@
 {
     [_userSearchTextField resignFirstResponder];
 }
+
+// This method call the fetch collaborator associated with ticket, for getting count and number of cc list
 -(void)getCCCount
 {
     
@@ -143,6 +146,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+// This method asks the delegate whether the specified text should be replaced in the text view.
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSLog(@"Data is : %@",_userSearchTextField.text);
@@ -153,7 +158,7 @@
     return YES;
 }
 
-
+// Add cc api is called here
 -(void)collaboratorApiMethod:(NSString*)valueFromTextField
 {
     

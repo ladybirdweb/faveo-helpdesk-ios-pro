@@ -51,6 +51,7 @@
 
 @implementation NotificationViewController
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"Naa-Inbox");
@@ -93,6 +94,7 @@
     
 }
 
+// This method calls an API for getting notifications list, it will returns an JSON which contains 10 records of notifications details.
 -(void)reload
 {
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -229,6 +231,7 @@
 
 }
 
+//This method returns the number of rows (table cells) in a specified section.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger numOfSections = 0;
@@ -251,6 +254,7 @@
     return numOfSections;
 }
 
+//This method asks the data source to return the number of sections in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.currentPage == self.totalPages
         || self.totalTickets == _mutableArray.count) {
@@ -261,6 +265,7 @@
     return _mutableArray.count + 1;
 }
 
+//This method tells the delegate the table view is about to draw a cell for a particular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -293,6 +298,8 @@
     }
 }
 
+
+// This method calls an API for getting next notifications details, it will returns an JSON which contains 10 records with notifications details.
 -(void)loadMore{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -385,7 +392,7 @@
 }
 
 
-
+// This method asks the data source for a cell to insert in a particular location of the table view.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
@@ -564,6 +571,7 @@
 }
 
 
+// This method tells the delegate that the specified row is now selected.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
       NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
@@ -642,7 +650,7 @@
 }
 
 
-
+//This method is called before the view controller's view is about to be added to a view hierarchy and before any animations are configured for showing the view.
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
@@ -650,6 +658,7 @@
     
 }
 
+// This method used to show refresh behind the table view.
 -(void)addUIRefresh{
     
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;

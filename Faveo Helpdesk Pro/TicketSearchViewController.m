@@ -62,6 +62,7 @@
 
 @implementation TicketSearchViewController
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -97,7 +98,7 @@
 
 
 
-
+// This method asks the delegate whether the specified text should be replaced in the text view.
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
@@ -113,6 +114,7 @@
     return YES;
 }
 
+// This method used to allow select segmented button multiple times (multi-select segmented control)
 -(void)setMultiSelectControl:(MultiSelectSegmentedControl *)multiSelectControl{
     _multiSelectControl = multiSelectControl;
     self.multiSelectControl.tag = 2;
@@ -153,11 +155,12 @@
     }
     
 }
-
+//It notifies the view controller that its view was added to a view hierarchy.
 -(void)viewDidAppear:(BOOL)animated{
     [self.seachTextField becomeFirstResponder];
 }
 
+//After clicking on search ticket, below method is called i.e ticket search API is called
 -(void)ticketSearchApiCall:(NSString *)searchText
 {
     
@@ -190,10 +193,7 @@
     }else{
         
     }
-    //a   NSString *numberOFRecord=@"100";
-    // NSString * url= [NSString stringWithFormat:@"%@api/v1/helpdesk/ticket-search?token=%@&search=%@&records_per_page=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],searchText,numberOFRecord];
     
-    // NSString *urlString = [searchText stringByReplacingOccurancesOfString:@" " withString:@"%20"];
     NSString *urlString=[searchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     
     NSString * url= [NSString stringWithFormat:@"%@api/v1/helpdesk/ticket-search?token=%@&search=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],urlString];
@@ -277,7 +277,7 @@
     
 }
 
-
+// After cliking on user search, below method is called i.r user search (Here I used collaborator search API for searching users)
 -(void)userSearchApiCall:(NSString *)searchText
 {
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -383,7 +383,7 @@
     
 }
 
-
+//This method returns the number of rows (table cells) in a specified section.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
@@ -438,6 +438,8 @@
     return numOfSections;
     
 }
+
+//This method asks the data source to return the number of sections in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(tableView==_tableview1){
@@ -462,6 +464,7 @@
         return 1;
 }
 
+////This method tells the delegate the table view is about to draw a cell for a particular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if(tableView==_tableview1){
@@ -521,6 +524,7 @@
 }
 
 
+// This method asks the data source for a cell to insert in a particular location of the table view.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -928,6 +932,7 @@
     
 }
 
+// This method calls an API for getting next page tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)loadMoreforSearchResults
 {
     
@@ -1024,7 +1029,7 @@
     
 }
 
-
+// This method tells the delegate that the specified row is now selected.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     

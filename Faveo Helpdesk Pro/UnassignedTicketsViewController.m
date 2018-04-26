@@ -71,6 +71,7 @@
 
 @implementation UnassignedTicketsViewController
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTitle:NSLocalizedString(@"Unassigned Tickets",nil)];
@@ -187,6 +188,7 @@
     // Do any additional setup after loading the view.
 }
 
+// After clicking this navigation button, it will redirect to search view controller
 - (IBAction)searchButtonClicked {
     
     TicketSearchViewController * search=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketSearchViewControllerId"];
@@ -195,6 +197,7 @@
     
 }
 
+// After clicking this navigation button, it will redirect to assign tickets view controller
 -(void)assignButtonClicked{
     NSLog(@"Clicked on Asign");
     
@@ -230,6 +233,7 @@
     
 }
 
+// After clicking this navigation button, it will redirect to ticket merge view controller
 -(void)MergeButtonClicked
 {
     NSLog(@"Clicked on merge");
@@ -278,6 +282,7 @@
     
 }
 
+//This method is called before the view controller's view is about to be added to a view hierarchy and before any animations are configured for showing the view.
 -(void)viewWillAppear:(BOOL)animated{
     
     if (self.selectedPath != nil) {
@@ -296,6 +301,7 @@
     
 }
 
+// Handling the tableview even we reload the tableview, edit view will not vanish even we scroll
 - (void)reloadTableView
 {
     NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
@@ -306,6 +312,7 @@
 }
 
 
+// This method calls an API for getting tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)reload{
     
     
@@ -484,13 +491,14 @@
     }
 }
 
+// This method used for implementing the feature of multiple ticket select, using this we can select and deselects the tableview rows and perform further actions on that selected rows.
 
 -(void)EditTableView:(UIGestureRecognizer*)gesture{
     [self.tableView setEditing:YES animated:YES];
     navbar.hidden=NO;
 }
 
-
+//This method returns the number of rows (table cells) in a specified section.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger numOfSections = 0;
@@ -512,6 +520,8 @@
     
     return numOfSections;
 }
+
+//This method asks the data source to return the number of sections in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.currentPage == self.totalPages
         || self.totalTickets == _mutableArray.count) {
@@ -520,6 +530,7 @@
     return _mutableArray.count + 1;
 }
 
+//This method tells the delegate the table view is about to draw a cell for a particular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -550,6 +561,7 @@
     }
 }
 
+// This method calls an API for getting next page tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)loadMore{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -662,7 +674,7 @@
     }
 }
 
-
+// This method asks the data source for a cell to insert in a particular location of the table view.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
@@ -1036,10 +1048,13 @@
 {
     return 3;
 }
+
+// This method asks the data source to verify that the given row is editable.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     return YES;
 }
 
+// This method tells the delegate that the specified row is now selected.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     self.selectedPath = indexPath;
@@ -1096,6 +1111,7 @@
     }
 }
 
+// This method tells the delegate that the specified row is now deselected.
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     self.selectedPath = indexPath;
@@ -1129,13 +1145,8 @@
     }
     
 }
--(void)addBtnPressed{
-    
-    CreateTicketViewController *createTicket=[self.storyboard instantiateViewControllerWithIdentifier:@"CreateTicket"];
-    
-    [self.navigationController pushViewController:createTicket animated:YES];
-    
-}
+
+// After clicking this method, it will navigate to notification view controller
 -(void)NotificationBtnPressed
 {
     NotificationViewController *not=[self.storyboard instantiateViewControllerWithIdentifier:@"Notify"];
@@ -1144,6 +1155,8 @@
     [self.navigationController pushViewController:not animated:YES];
     
 }
+
+// This method used to show refresh behind the table view.
 -(void)addUIRefresh{
     
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
@@ -1174,6 +1187,7 @@
 
 #pragma mark - SlideNavigationController Methods -
 
+// This method used to show or hide slide navigation controller icon on navigation bar
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu
 {
     return YES;
@@ -1505,6 +1519,8 @@
     //    }];
 }
 
+
+// This method used to get some values like Agents list, Ticket Status, Ticket counts, Ticket Source, SLA ..etc which are used in various places in project.
 -(void)getDependencies{
     
     NSLog(@"Thread-NO1-getDependencies()-start");
@@ -1692,7 +1708,7 @@
     NSLog(@"Thread-NO2-getDependencies()-closed");
 }
 
-
+// This method used to show some popuop or list which contain some menus. Here it used to change the status of ticket, after clicking this button it will show one view which contains list of status. After clicking on any row, according to its name that status will be changed.
 -(void)onNavButtonTapped:(UIBarButtonItem *)sender event:(UIEvent *)event
 {
     NSLog(@"11111111*********111111111111");

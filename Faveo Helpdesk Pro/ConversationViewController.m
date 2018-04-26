@@ -47,6 +47,8 @@
 
 @implementation ConversationViewController
 
+
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -92,6 +94,8 @@
     
 }
 
+
+// This method calls an API for getting tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)reload{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -251,6 +255,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+//This method asks the data source to return the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger numOfSections = 0;
@@ -274,19 +279,20 @@
     return numOfSections;
 }
 
-
+//This method tells the delegate the table view is about to draw a cell for a particular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
 }
 
+//This method asks the data source to return the number of sections in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return [mutableArray count];
 }
 
-
+// This method asks the data source for a cell to insert in a particular location of the table view.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     ConversationTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"ConvTableViewCell"];
@@ -452,7 +458,7 @@
     return cell;
 }
 
-
+// After clickin on attachment button on tableview row which contains attachments, it will navigate to view attachment controller.
 - (void) buttonTouchedForCell:(ConversationTableViewCell *)cell {
     
  [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Please Wait...!",nil)];
@@ -462,7 +468,7 @@
     [self.navigationController pushViewController:attach animated:YES];
 }
 
-
+//This method asks the delegate for the height to use for a row in a specified location.
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -479,6 +485,7 @@
     }
 }
 
+// This method tells the delegate that the specified row is now selected.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
    // NSDictionary *finaldic=[mutableArray objectAtIndex:indexPath.row];
@@ -513,7 +520,7 @@
 }
 
 
-
+// It will show web view
 -(void)showWebview:(NSString*)tittle body:(NSString*)body popupStyle:(CNPPopupStyle)popupStyle{
     
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
@@ -560,6 +567,8 @@ webview.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingF
 -(void)webViewDidStartLoad:(UIWebView *)webView{
     
 }
+
+// This method used to show refresh behind the table view.
 -(void)addUIRefresh{
     
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
@@ -585,7 +594,7 @@ webview.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingF
 
 
 
-
+//below 3 methods are used to logout a agent or admin when his login creadentials will change or there role will be changed or HELPDESL URL will change in these scenarious we have to move our from app so these 3 methods are used to achieve it.
 -(void)showMessageForLogout:(NSString*)message sendViewController:(UIViewController *)viewController
 {
     UIAlertController *alertController = [UIAlertController   alertControllerWithTitle:APP_NAME message:message  preferredStyle:UIAlertControllerStyleAlert];

@@ -70,6 +70,7 @@
 
 @implementation EditDetailTableViewController
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -117,6 +118,7 @@
    
 }
 
+//this method tells the delegate that the text or attributes in the specified text view were changed by the user.
 - (void)textViewDidChange:(UITextView *)textView
 {
     CGFloat fixedWidth = textView.frame.size.width;
@@ -126,7 +128,7 @@
     textView.frame = newFrame;
 }
 
-
+//This method notifies the view controller that its view is about to be removed from a view hierarchy.
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
@@ -137,6 +139,7 @@
     [self.subjectTextView resignFirstResponder];
 }
 
+// This method calls an API for getting tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)reload{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -737,7 +740,7 @@
 
 
 
-
+// After clicking on submit/save button below method is called
 -(void)save{
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
@@ -1045,6 +1048,8 @@
     [textField resignFirstResponder];
     return YES;
 }
+
+//This method the delegate if the specified text should be changed.
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     

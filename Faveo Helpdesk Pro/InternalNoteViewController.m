@@ -30,6 +30,7 @@
 
 @implementation InternalNoteViewController
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -62,7 +63,7 @@
     [_contentTextView resignFirstResponder];
 }
 
-
+// After clcking submit/add button this method is called, here it will check that content textvies is empty or not. It it is empty then then it will show error message else it will call add internal note api
 - (IBAction)addButtonAction:(id)sender {
     
     if([_contentTextView.text isEqualToString:@""] || [_contentTextView.text length]==0)
@@ -195,6 +196,7 @@
 
 }
 
+//This method asks the delegate whether the specified text should be replaced in the text view.
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     
