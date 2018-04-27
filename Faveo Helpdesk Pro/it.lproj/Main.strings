@@ -42,7 +42,7 @@
 "Ftd-As-0ie.text" = "Dipartimenti*";
 
 /* Class = "UILabel"; text = "HelpTopics"; ObjectID = "G6t-w8-5gE"; */
-"G6t-w8-5gE.text" = "HelpTopics";
+"G6t-w8-5gE.text" = "Argomenti di aiuto";
 
 /* Class = "UITextField"; placeholder = "Ex: 9999999999"; ObjectID = "Gsy-RY-3zo"; */
 "Gsy-RY-3zo.placeholder" = "Ex: 9999999999";
@@ -51,43 +51,43 @@
 "GzN-Yn-vAw.segmentTitles[0]" = "Conversation";
 
 /* Class = "UISegmentedControl"; GzN-Yn-vAw.segmentTitles[1] = "Detail"; ObjectID = "GzN-Yn-vAw"; */
-"GzN-Yn-vAw.segmentTitles[1]" = "Detail";
+"GzN-Yn-vAw.segmentTitles[1]" = "Dettaglio";
 
 /* Class = "UILabel"; text = "jhbafbas@gmail.com"; ObjectID = "H5i-YI-b5K"; */
 "H5i-YI-b5K.text" = "jhbafbas@gmail.com";
 
 /* Class = "UILabel"; text = "Priority"; ObjectID = "ImK-IA-DcU"; */
-"ImK-IA-DcU.text" = "Priority";
+"ImK-IA-DcU.text" = "Priorità";
 
 /* Class = "UILabel"; text = "Unassigned tickets"; ObjectID = "K2r-lG-27s"; */
-"K2r-lG-27s.text" = "Unassigned tickets";
+"K2r-lG-27s.text" = "Biglietti non assegnati";
 
 /* Class = "UILabel"; text = "Message*"; ObjectID = "KL7-aF-noB"; */
-"KL7-aF-noB.text" = "Message*";
+"KL7-aF-noB.text" = "Messaggio*";
 
 /* Class = "UILabel"; text = "Ticket list"; ObjectID = "Kwa-ua-KzA"; */
-"Kwa-ua-KzA.text" = "Ticket list";
+"Kwa-ua-KzA.text" = "Lista dei biglietti";
 
 /* Class = "UILabel"; text = "COMPANY'S URL"; ObjectID = "NvZ-jN-SUK"; */
 "NvZ-jN-SUK.text" = "Società URL";
 
 /* Class = "UILabel"; text = "Logout"; ObjectID = "Nwy-MN-km4"; */
-"Nwy-MN-km4.text" = "Logout";
+"Nwy-MN-km4.text" = "Disconnettersi";
 
 /* Class = "UITextField"; placeholder = "Select Helptopic"; ObjectID = "OIR-WQ-j9s"; */
 "OIR-WQ-j9s.placeholder" = "Selezionare Helptopic";
 
 /* Class = "UILabel"; text = "Passcode"; ObjectID = "OQM-lN-xDk"; */
-"OQM-lN-xDk.text" = "Passcode";
+"OQM-lN-xDk.text" = "Codice di accesso";
 
 /* Class = "UILabel"; text = "+91 9482189901"; ObjectID = "OTI-p0-kg7"; */
 "OTI-p0-kg7.text" = "+91 9482189901";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "PYi-EK-g8m"; */
-"PYi-EK-g8m.text" = "Status";
+"PYi-EK-g8m.text" = "Stato";
 
 /* Class = "UILabel"; text = "HelpTopics*"; ObjectID = "QyC-lw-kS2"; */
-"QyC-lw-kS2.text" = "HelpTopics*";
+"QyC-lw-kS2.text" = "Argomenti di aiuto*";
 
 /* Class = "UITextField"; placeholder = "Select Status"; ObjectID = "SbQ-76-SUZ"; */
 "SbQ-76-SUZ.placeholder" = "Selezionare Status";
@@ -96,22 +96,22 @@
 "UFg-tX-fNF.text" = "Code";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "Unu-1C-zRF"; */
-"Unu-1C-zRF.normalTitle" = "Submit";
+"Unu-1C-zRF.normalTitle" = "Sottoscrivi";
 
 /* Class = "UILabel"; text = "ACZN-2015-0002015"; ObjectID = "Uyc-xp-Avp"; */
 "Uyc-xp-Avp.text" = "ACZN-2015-0002015";
 
 /* Class = "UITextField"; placeholder = "Select Source"; ObjectID = "VJe-Gu-Kf0"; */
-"VJe-Gu-Kf0.placeholder" = "Selezionare Source";
+"VJe-Gu-Kf0.placeholder" = "Selezionare fonte";
 
 /* Class = "UIButton"; normalTitle = "Login"; ObjectID = "VP0-T6-DvK"; */
-"VP0-T6-DvK.normalTitle" = "Login";
+"VP0-T6-DvK.normalTitle" = "Accesso";
 
 /* Class = "UITextField"; placeholder = "Select Department"; ObjectID = "VRM-vp-sUX"; */
 "VRM-vp-sUX.placeholder" = "Selezionare Dipartimenti";
 
 /* Class = "UILabel"; text = "Client list"; ObjectID = "Xj6-wM-O9Q"; */
-"Xj6-wM-O9Q.text" = "Lista  client";
+"Xj6-wM-O9Q.text" = "Lista  cliente";
 
 /* Class = "UILabel"; text = "Anuj"; ObjectID = "Xmx-EM-axR"; */
 "Xmx-EM-axR.text" = "Anuj";
@@ -132,7 +132,7 @@
 "cF2-G6-BWv.placeholder" = "Selezionare Dept";
 
 /* Class = "UIButton"; normalTitle = "Website"; ObjectID = "dBA-ZM-uZ7"; */
-"dBA-ZM-uZ7.normalTitle" = "Website";
+"dBA-ZM-uZ7.normalTitle" = "Sito web";
 
 /* Class = "UILabel"; text = "version: 1.0"; ObjectID = "dkk-3v-jiw"; */
 "dkk-3v-jiw.text" = "version: 1.0";
@@ -151,16 +151,16 @@
 "ist-CM-MqC.placeholder" = "Ex: +91";
 
 /* Class = "UILabel"; text = "Trash tickets"; ObjectID = "jNK-32-X7O"; */
-"jNK-32-X7O.text" = "Trash tickets";
+"jNK-32-X7O.text" = "Biglietti spazzatura";
 
 /* Class = "UILabel"; text = "Priority*"; ObjectID = "mCO-gF-wNs"; */
-"mCO-gF-wNs.text" = "Priority*";
+"mCO-gF-wNs.text" = "Priorità*";
 
 /* Class = "UILabel"; text = "Email*"; ObjectID = "mEi-tm-bVi"; */
 "mEi-tm-bVi.text" = "Email*";
 
 /* Class = "UILabel"; text = "Sla Plans*"; ObjectID = "mFD-SZ-woH"; */
-"mFD-SZ-woH.text" = "Sla Plans*";
+"mFD-SZ-woH.text" = "Piani Sla*";
 
 /* Class = "UITextField"; placeholder = "Select Sla"; ObjectID = "mxh-V7-yKk"; */
 "mxh-V7-yKk.placeholder" = "Selezionare Sla";
@@ -190,7 +190,7 @@
 "w8G-FB-g9d.normalTitle" = "Salva";
 
 /* Class = "UILabel"; text = "First Name"; ObjectID = "wMb-MW-vQq"; */
-"wMb-MW-vQq.text" = "Nome";
+"wMb-MW-vQq.text" = "Nome di battesimo";
 
 /* Class = "UILabel"; text = "Due Date"; ObjectID = "xFf-Wq-nyR"; */
 "xFf-Wq-nyR.text" = "Data di scadenza";

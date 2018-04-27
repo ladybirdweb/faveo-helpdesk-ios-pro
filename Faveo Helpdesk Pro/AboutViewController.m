@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _versionNumberLabel.text=@"version: 1.8.7";
     _textview.editable=NO;
       [self setTitle:NSLocalizedString(@"About",nil)];
     _websiteButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];

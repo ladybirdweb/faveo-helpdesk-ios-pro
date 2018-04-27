@@ -6,47 +6,158 @@
 //  Copyright © 2017 Ladybird websolutions pvt ltd. All rights reserved.
 //*/
 //
-"Please Enter the URL"="Please Enter the URL";
-"Verifying URL"="Verifying URL";
-"Error verifying URL"="Error verifying URL";
-"Please Enter a valid URL"="Please Enter a valid URL";
-"Verified URL"="Verified URL";
-"Access denied, to use pro version!"="Access denied, to use pro version!";
-"Please Enter Username & Password"="Please Enter Username";
-"Please Enter Password"="Please Enter Password";
-"You have logged in successfully."="You have logged in successfully.";
-"Getting Data"="Getting Data";
-"Refreshing"="Refreshing";
-"CreateTicket"="CreateTicket";
-"Inbox"="Inbox";
-"Trash Tickets"="Trash Tickets";
-"Client List"="Client List";
-"Closed Tickets"="Closed Tickets";
-"Unassigned Tickets"="Unassigned Tickets";
-"My Tickets"="MyTickets";
-"About"="About";
-"Not Available"="Not Available";
-"Select Helptopic"="Select Helptopic";
-"Select CountryCode"="Select CountryCode";
-"Please enter EMAIL-ID"="Please enter EMAIL-ID";
-"Please enter First Name"="Please enter First Name";
-"Please select HELP-TOPIC"="Please select HELP-TOPIC";
-"Please select SLA"="Please select SLA";
-"Please select DEPARTMENT"="Please select DEPARTMENT";
-"Please select PRIORITY"="Please select PRIORITY";
-"Please enter SUBJECT"="Please enter SUBJECT";
-"SUBJECT requires at least 5 characters"="SUBJECT requires at least 5 characters";
-"Please enter ticket MESSAGE"="Please enter ticket MESSAGE";
-"MESSAGE requires at least 10 characters"="MESSAGE requires at least 10 characters";
-"Invalid EMAIL_ID" ="Invalid EMAIL_ID";
-"FirstName should have more than 2 characters"="Name should have more than 2 characters";
-"Ticket created successfully!"="Ticket created successfully!";
-"Internal Notes"="Internal Notes";
-"Message"="Message";
-"Done"="Done";
-"Details"="Details";
-"Ticket Reply"="Ticket Reply";
-"Message*"="Message*";
-"Empty!!!"="Empty!!!";
-"Cc"="Cc";
-"Please wait"="Please wait";
+
+"Refreshing"="منعش";
+"Error"="خطأ";
+"All Caught Up"="جميع اشتعلت";
+
+"Empty"="فارغة";
+"Getting Data"="الحصول على البيانات";
+"Done!"="فعله!";
+"Not Available"="غير متاح";
+"success"="نجاح";
+"Warning"="تحذير";
+"Alert"="محزر";
+"No"="لا";
+"Yes"="نعم فعلا";
+
+"No Records"="لا تسجيلات";
+"Done"="فعله";
+"Success"="نجاح";
+
+"Something is Wrong."="هناك شئ غير صحيح.";
+
+
+
+"Are You Sure to Deactivate ?"="هل أنت متأكد من إلغاء التنشيط؟";
+"Are You Sure to Activate ?"="هل أنت متأكد من تفعيل؟";
+
+"Ticket Status Changed."="تغيير حالة التذاكر.";
+"Ticket is Already Open"="التذكرة مفتوحة بالفعل";
+"Ticket is Already Closed"="تذكرة مغلقة بالفعل";
+"Ticket is Already Resolved"="تم بالفعل حل التذكرة";
+"Ticket is Already Deleted"="التذكرة محذوفة بالفعل";
+
+"All users"="جميع المستخدمين";
+"Agent users"="مستخدمو الوكيل";
+"Active users"="المستخدمين النشطين";
+"Client users"="مستخدمو العميل";
+"Banned users"="المستخدمين المحظورين";
+"Inactive users"="المستخدمون غير النشطين";
+"Deactivated users"="تم إلغاء تنشيط المستخدمين";
+
+"Change Ticket Status"="تغيير حالة التذاكر";
+"Open"="افتح";
+"Closed"="مغلق";
+"Resolved"="حل";
+"Deleted"="تم الحذف";
+
+"Inbox"="صندوق الوارد";
+"MyTickets"="تذاكري";
+"My Tickets"="تذاكري";
+"Ticket Reply"="رد التذاكر";
+"Internal Notes"="ملاحظات داخلية";
+"About"="حول";
+"Closed Tickets"="تذاكر مغلقة";
+"Edit Ticket"="تحرير تذكرة";
+"Notifications"="إخطارات";
+"Edit Profile"="تعديل الملف الشخصي";
+"Client List"="قائمة العملاء";
+"Unassigned Tickets"="تذاكر غير معيّنة";
+"Trash Tickets"="تذاكر القمامة";
+"Merge Tickets"="دمج التذاكر";
+"Ticket Title"="عنوان التذكرة";
+"Ticket Number"="رقم التذكرة";
+"Priority"="أفضلية";
+"Updated at"="تم التحديث في";
+"Created at"="أنشئت في";
+"Due Date"="تاريخ الاستحقاق";
+"Show Filter"="إظهار تصفية";
+"Clear All"="Clear All";
+"Exit"="ىخرج";
+"ASC"="تصاعدي";
+"DES"="تنازلي";
+"Filter"="منقي";
+"Sort by"="ترتيب حسب";
+"Details"="تفاصيل";
+"Message"="رسالة";
+"Cc"="سم مكعب";
+"Please wait"="أرجو الإنتظار";
+
+"Discard Changes ?"="تجاهل التغييرات؟";
+
+"Details Updated successfully"="التفاصيل تم تحديثها بنجاح";
+"Merged Successfully"="دمج بنجاح";
+"Requester Created successfully"="مقدم الطلب تم إنشائه بنجاح";
+"Tickets from different users"="تذاكر من مستخدمين مختلفين";
+"URL Verified successfully"="تم التحقق من عنوان URL بنجاح";
+"You have logged in successfully"="لقد قمت بتسجيل الدخول بنجاح";
+"Updated successfully"="تم التحديث بنجاح";
+"Activated successfully"="تفعيلها بنجاح";
+"Deactivated successfully"="تم إلغاء التنشيط بنجاح";
+
+
+"Email already exist"="البريد الالكتروني موجود بالفعل";
+
+"Please Enter the URL"="يرجى إدخال عنوان URL";
+"Please insert username & password"="يرجى إدخال اسم المستخدم وكلمة المرور";
+"Please insert username"="يرجى إدخال اسم المستخدم";
+"Please insert password"="يرجى إدخال كلمة المرور";
+"Verifying URL"="التحقق من عنوان URL";
+
+"Please Enter Mobile Code"="يرجى إدخال كود الجوال";
+"Please Select The Tickets"="يرجى اختيار التذاكر";
+"Please Select The Parent Ticket"="يرجى اختيار تذكرة الوالدين";
+"Please enter SUBJECT"="يرجى إدخال الموضوع";
+"Please select HELP-TOPIC"="يرجى اختيار موضوع المساعدة";
+"Please select PRIORITY"="يرجى اختيار الاولوية";
+"Select CountryCode"="اختر رمز البلد";
+
+"Please select SOURCE"="يرجى اختيار المصدر";
+"Please fill all mandatory fields"="يرجى ملء جميع الحقول الإلزامية";
+"Enter First Name & Last Name"="أدخل الاسم الأول واسم العائلة";
+"Enter First Name & Email"="أدخل الاسم الأول والبريد الإلكتروني";
+"Enter Last Name & Email"="أدخل اسم العائلة والبريد الإلكتروني";
+"Enter Full Email"="أدخل البريد الإلكتروني الكامل";
+
+"Enter First Name, Last Name & Email"="أدخل الاسم الأول واسم العائلة والبريد الإلكتروني";
+"Please enter username"="الرجاء إدخال اسم المستخدم";
+"Please enter First Name."="يرجى إدخال الاسم الأول.";
+"Please enter Last Name"="يرجى إدخال اسم العائلة";
+"Please enter Email"="يرجى إدخال البريد الإلكتروني";
+"Please enter valid email id"="الرجاء إدخال معرف البريد الإلكتروني الصحيح";
+"Please refresh the Inbox"="يرجى تحديث البريد الوارد";
+
+"FirstName should have more than 2 characters"="يجب أن يكون الاسم الأول أكثر من حرفين";
+"SUBJECT requires at least 5 characters"="الموضوع يتطلب 5 أحرف على الأقل";
+"MESSAGE requires at least 10 characters"="تتطلب الرسالة 10 أحرف على الأقل";
+
+
+"Select Status"="اختر الحالة";
+"Select SLA"="حدد SLA";
+"Select Department"="اختر القسم";
+"Select Priority"="حدد الأولوية";
+"Select Helptopic"="حدد Helptopic";
+"Select Source"="اختر مصدر";
+"Select Ticket Type"="اختر نوع التذكرة";
+"Select Assignee"="حدد Assignee";
+
+
+
+"Permission Denied - You don't have permission to Open a ticket"="رفض الإذن - ليس لديك إذن بفتح تذكرة";
+"Permission Denied - Yo don't have permission to Close a ticket"="رفض الإذن - ليس لدى Yo الإذن بإغلاق تذكرة";
+"Permission Denied - You don't have permission to Resolve a ticket"="رفض الإذن - ليس لديك إذن بحل تذكرة";
+"Permission Denied - You don't have permission to Delete a ticket"="رفض الإذن - ليس لديك إذن بحذف تذكرة";
+
+"Permission denied, you do not have permission to access the requested page."="تم رفض الإذن ، ليس لديك إذن للوصول إلى الصفحة المطلوبة.";
+"Access Denied - You don't have permission."="رفض الوصول - ليس لديك إذن.";
+"There is no Internet Connection"="لا يوجد اتصال إنترنت";
+"The internet connection seems to be down. Please check it."="يبدو أن اتصال الإنترنت قد انخفض. رجاءا تأكد.";
+
+
+"Cannot find specified host. Retype URL"="لا يمكن العثور على مضيف محدد. أعد كتابة عنوان URL";
+"Cannot connect to specified host. Server may be down."="لا يمكن الاتصال بالمضيف المحدد. قد يكون الخادم لأسفل.";
+"Cannot connect to the internet. Service may not be available"="لا يمكن الاتصال بالإنترنت. الخدمة قد لا تكون متاحة";
+
+"Headquarter in Bangalore, Faveo Helpdesk provides Businesses with an automated Helpdesk system to manage customer support. The word Faveo comes from Latin which means to be favourable. Which truly highlights vision and the scope as well as the functionality of the product that Faveo is. Faveo empowers your business with state of art, ticket based support system. In today’s competitive startup scenario customer retention is one of the major challenges. Handling client query diligently is all the difference between retaining or losing a long lasting relationship. The company is driven with passion of providing tools for managing consumer queries for strategic insights and helping companies take those decisive decisions."="المقر الرئيسي في مدينة بانغالور ، توفر شركة Faveo Helpdesk للأنشطة التجارية نظامًا مكتبيًا آليًا لإدارة دعم العملاء. كلمة Faveo تأتي من اللاتينية مما يعني أن تكون مواتية. الذي يسلط الضوء على الرؤية والنطاق بالإضافة إلى وظيفة المنتج الذي يحمله Faveo. تعمل شركة Faveo على تمكين نشاطك التجاري من خلال نظام دعم قائم على التذاكر. في سيناريو بدء التشغيل التنافسي اليوم ، يعد الاحتفاظ بالعملاء أحد التحديات الرئيسية. التعامل مع استعلام العميل بجد هو كل الفرق بين الاحتفاظ أو فقدان علاقة طويلة الأمد. الشركة مدفوعة بشغف توفير أدوات لإدارة استفسارات المستهلكين للحصول على رؤى إستراتيجية ومساعدة الشركات على اتخاذ هذه القرارات الحاسمة.";
+

@@ -6,10 +6,10 @@
 "0LL-vd-wv1.text" = "Achternaam*";
 
 /* Class = "UILabel"; text = "Email"; ObjectID = "6Mo-Z2-qgf"; */
-"6Mo-Z2-qgf.text" = "Email";
+"6Mo-Z2-qgf.text" = "E-mail";
 
 /* Class = "UILabel"; text = "Subject*"; ObjectID = "7x1-4m-H9y"; */
-"7x1-4m-H9y.text" = "Subject*";
+"7x1-4m-H9y.text" = "Onderwerpen*";
 
 /* Class = "UILabel"; text = "Last Name"; ObjectID = "9NB-2Q-SIV"; */
 "9NB-2Q-SIV.text" = "Achternaam";
@@ -27,7 +27,7 @@
 "B1T-Ry-EJE.text" = "Actief";
 
 /* Class = "UILabel"; text = "Subject"; ObjectID = "E1F-Az-9Gv"; */
-"E1F-Az-9Gv.text" = "Subject";
+"E1F-Az-9Gv.text" = "Onderwerpen";
 
 /* Class = "UITextField"; placeholder = "Select Priority"; ObjectID = "Fgz-Q4-nRj"; */
 "Fgz-Q4-nRj.placeholder" = "Kiezen Prioriteit";
@@ -54,7 +54,7 @@
 "K2r-lG-27s.text" = "Niet toegewezen tickets";
 
 /* Class = "UILabel"; text = "Message*"; ObjectID = "KL7-aF-noB"; */
-"KL7-aF-noB.text" = "Message*";
+"KL7-aF-noB.text" = "Bericht*";
 
 /* Class = "UILabel"; text = "Ticket list"; ObjectID = "Kwa-ua-KzA"; */
 "Kwa-ua-KzA.text" = "Ticket lijst";
@@ -81,13 +81,13 @@
 "UFg-tX-fNF.text" = "Code";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "Unu-1C-zRF"; */
-"Unu-1C-zRF.normalTitle" = "Submit";
+"Unu-1C-zRF.normalTitle" = "voorleggen";
 
 /* Class = "UILabel"; text = "ACZN-2015-0002015"; ObjectID = "Uyc-xp-Avp"; */
 "Uyc-xp-Avp.text" = "ACZN-2015-0002015";
 
 /* Class = "UITextField"; placeholder = "Select Source"; ObjectID = "VJe-Gu-Kf0"; */
-"VJe-Gu-Kf0.placeholder" = "Selecteer Source";
+"VJe-Gu-Kf0.placeholder" = "Selecteer Bron";
 
 /* Class = "UIButton"; normalTitle = "Login"; ObjectID = "VP0-T6-DvK"; */
 "VP0-T6-DvK.normalTitle" = "Aanmelden";

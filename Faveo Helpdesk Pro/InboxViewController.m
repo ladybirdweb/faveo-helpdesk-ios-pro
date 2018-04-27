@@ -1230,10 +1230,6 @@
             
             NSString * source1=[finaldic objectForKey:@"source"];
             
-            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"collaborator_count"]];  //collaborator_count
-             NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
-            
-            
             if([source1 isEqualToString:@"web"] || [source1 isEqualToString:@"Web"])
             {
                 cell.sourceImgView.image=[UIImage imageNamed:@"internert"];
@@ -1258,19 +1254,37 @@
             }
             
             
-            if(![cc isEqualToString:@"<null>"] && ![attachment1 isEqualToString:@"0"])
-            {
-                cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
-                cell.attachImgView.image=[UIImage imageNamed:@"attach"];
-            }
-            else if(![cc isEqualToString:@"<null>"] && [attachment1 isEqualToString:@"0"])
-            {
-                 cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
-            }
-            else if([cc isEqualToString:@"<null>"] && ![attachment1 isEqualToString:@"0"])
-            {
-                cell.ccImgView.image=[UIImage imageNamed:@"attach"];
-            }
+//          //  int ccCount = (int)[finaldic valueForKey:@"countcollaborator"];
+            // NSInteger attachCount =(int)[finaldic valueForKey:@"attachment_count"];
+////
+//             if(attachCount>0)
+//             {
+//                  cell.ccImgView.image=[UIImage imageNamed:@"attach"];
+//             }
+           
+//            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
+//            
+//            if(![attachment1 isEqualToString:@"0"])
+//            {
+//                cell.ccImgView.image=[UIImage imageNamed:@"attach"];
+//            }
+            
+                //collaborator_count_relation
+//            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"collaborator_count"]];  //collaborator_count
+//            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
+////countcollaborator
+//
+//            NSLog(@"CC is %@ named",cc);
+//             NSLog(@"CC is %@ named",cc);
+//             NSLog(@"CC is %@ named",cc);
+//
+//             NSLog(@"attachment is %@ named",attachment1);
+//             NSLog(@"attachment is %@ named",attachment1);
+
+            
+    
+            
+            
             
             
             
@@ -1527,7 +1541,10 @@
                                    [[AppDelegate sharedAppdelegate] hideProgressView];
                                }
                                else{
-                               [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
+                                   
+                                   [self askConfirmationForStatusChange];
+                               
+                              // [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
                                }
                            
                            }
@@ -1537,6 +1554,41 @@
         
 #endif
     }
+}
+
+-(void)askConfirmationForStatusChange
+{
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Ticket Status"
+                                 message:@"are you sure you want to change ticket status?"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    //Add Buttons
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"No"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    //Handle your yes please button action here
+                                    
+                                }];
+    
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:@"Yes"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   //Handle no, thanks button
+                                   
+                               [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
+                                
+                               }];
+    
+    //Add your buttons to alert controller
+    
+    [alert addAction:yesButton];
+    [alert addAction:noButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 // This method used to change status of ticket
 -(void)changeStatusMethod:(NSString *)nameOfStatus idIs:(NSString *)idOfStatus

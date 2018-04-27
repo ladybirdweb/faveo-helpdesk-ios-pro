@@ -107,9 +107,8 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     { [refresh endRefreshing];
         //connection unavailable
-        [[AppDelegate sharedAppdelegate] hideProgressView];
-     //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
+       
+     
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
         }
@@ -128,7 +127,7 @@
                               canBeDismissedByUser:YES];
 
         
-    
+     [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }else{
         // http://jamboreebliss.com/sayar/public/api/v2/helpdesk/user/filter?api_key=&token=&role=
@@ -210,7 +209,7 @@
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
                     }
                     else{
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -219,6 +218,7 @@
                 }else if(error)  {
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+                     [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
                 return ;
             }
@@ -231,7 +231,6 @@
             }
             if ([msg isEqualToString:@"tokenNotRefreshed"]) {
                 
-                // [[AppDelegate sharedAppdelegate] hideProgressView];
                 [self->utils showAlertWithMessage:@"Your HELPDESK URL or your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 
@@ -251,9 +250,11 @@
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [self->refresh endRefreshing];
                         [self.tableView reloadData];
+                        [self->refresh endRefreshing];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                       
+                        
                     });
                 });
                

@@ -304,6 +304,7 @@
 		0609ADB520398E2A00DCDC85 /* view122.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view122.png; sourceTree = "<group>"; };
 		0609ADB720399B8000DCDC85 /* deActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deActive.png; sourceTree = "<group>"; };
 		0609ADB820399B8100DCDC85 /* Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Active.png; sourceTree = "<group>"; };
+		0610130C2091A7CE00E348DB /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		06171510205901B700E3E14D /* BIZPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIZPopupViewController.m; sourceTree = "<group>"; };
 		06171511205901B900E3E14D /* UIViewController+BIZChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BIZChildViewController.h"; sourceTree = "<group>"; };
 		06171512205901BA00E3E14D /* BIZPopupViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIZPopupViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -329,6 +330,9 @@
 		0618FA7F204E54C9004D2C3F /* InternalNoteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InternalNoteViewController.m; sourceTree = "<group>"; };
 		0618FA81204E9A87004D2C3F /* addCCView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = addCCView.h; sourceTree = "<group>"; };
 		0618FA82204E9A87004D2C3F /* addCCView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = addCCView.m; sourceTree = "<group>"; };
+		061BC85C2092EF830013EA44 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
+		061BC85D2092EF870013EA44 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Main.strings"; sourceTree = "<group>"; };
+		061BC85E2092EFCE0013EA44 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		061CAA3920525281007EA8B6 /* TicketSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketSearchViewController.h; sourceTree = "<group>"; };
 		061CAA3A20525281007EA8B6 /* TicketSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketSearchViewController.m; sourceTree = "<group>"; };
 		061E30FB2035426800603D22 /* LoginListMenuTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginListMenuTable.h; sourceTree = "<group>"; };
@@ -1964,6 +1968,8 @@
 				D93D3D581EA0BB1800C1EE7E /* ru */,
 				D9166B141FFB4ACE005B4776 /* en */,
 				D9B2220D200C628C00607F11 /* nb */,
+				0610130C2091A7CE00E348DB /* ar */,
+				061BC85E2092EFCE0013EA44 /* pt-PT */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1994,6 +2000,8 @@
 				D93D3D511EA0BACE00C1EE7E /* nl */,
 				D93D3D561EA0BB1000C1EE7E /* ru */,
 				D9B2220B200C628B00607F11 /* nb */,
+				061BC85C2092EF830013EA44 /* ar */,
+				061BC85D2092EF870013EA44 /* pt-PT */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

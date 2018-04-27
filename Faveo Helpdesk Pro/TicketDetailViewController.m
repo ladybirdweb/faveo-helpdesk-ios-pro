@@ -539,7 +539,8 @@
                                }
                         
                                else{
-                                   [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
+                                   [self askConfirmationForStatusChange];
+                                 //  [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
                                }
                                
                            }
@@ -552,7 +553,40 @@
 }
 
 
-
+-(void)askConfirmationForStatusChange
+{
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Ticket Status"
+                                 message:@"are you sure you want to change ticket status?"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    //Add Buttons
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"No"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    //Handle your yes please button action here
+                                    
+                                }];
+    
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:@"Yes"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   //Handle no, thanks button
+                                   
+                                   [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
+                                   
+                               }];
+    
+    //Add your buttons to alert controller
+    
+    [alert addAction:yesButton];
+    [alert addAction:noButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 -(void)changeStatusMethod:(NSString *)nameOfStatus idIs:(NSString *)idOfStatus
 {

@@ -1925,6 +1925,7 @@
                     <size key="freeformSize" width="320" height="600"/>
                     <connections>
                         <outlet property="textview" destination="eVd-3F-lkE" id="xYp-8M-8nN"/>
+                        <outlet property="versionNumberLabel" destination="dkk-3v-jiw" id="7Zb-zb-RHV"/>
                         <outlet property="websiteButton" destination="dBA-ZM-uZ7" id="RqH-xd-YWK"/>
                     </connections>
                 </viewController>
@@ -6303,10 +6304,10 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="GtM-ZM-Z9R" secondAttribute="trailing" constant="64" id="32i-fa-hCR"/>
-                                                <constraint firstItem="GtM-ZM-Z9R" firstAttribute="centerY" secondItem="zBW-Fc-nFz" secondAttribute="centerY" id="6MQ-5v-zgi"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="GtM-ZM-Z9R" secondAttribute="bottom" constant="13" id="UKd-s9-sXX"/>
-                                                <constraint firstItem="GtM-ZM-Z9R" firstAttribute="leading" secondItem="zBW-Fc-nFz" secondAttribute="leadingMargin" constant="87" id="v25-nU-uFB"/>
+                                                <constraint firstItem="GtM-ZM-Z9R" firstAttribute="centerY" secondItem="zBW-Fc-nFz" secondAttribute="centerY" id="JZI-9f-MAG"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="GtM-ZM-Z9R" secondAttribute="bottom" constant="13" id="KU4-fm-aZQ"/>
+                                                <constraint firstItem="GtM-ZM-Z9R" firstAttribute="leading" secondItem="zBW-Fc-nFz" secondAttribute="leadingMargin" constant="87" id="LYe-YH-LXh"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="GtM-ZM-Z9R" secondAttribute="trailing" constant="64" id="WMz-ei-bvF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

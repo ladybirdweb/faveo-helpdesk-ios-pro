@@ -262,10 +262,10 @@
     }
     
     
-    [_activityIndicatorObject startAnimating];
-    [self reload];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
-     [_activityIndicatorObject stopAnimating];
+    
+    [[AppDelegate sharedAppdelegate] showProgressView];
+    [self reload];
     
 }
 
@@ -283,10 +283,7 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [refresh endRefreshing];
-    
-        [_activityIndicatorObject stopAnimating];
-        //[RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
+      
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
         }
@@ -304,6 +301,7 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
 
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }else{
         
@@ -314,9 +312,10 @@
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
-            [self->_activityIndicatorObject stopAnimating];
+           
             if (error || [msg containsString:@"Error"]) {
                 
+                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 [self->refresh endRefreshing];
                 
                 if([msg isEqualToString:@"Error-402"])
@@ -342,7 +341,7 @@
             }
             
             if (json) {
-                // NSError *error;
+                
                 self->mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
                 NSLog(@"Thread-NO4--getClientTickets111--%@",json);
                 
@@ -394,13 +393,14 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         [self.tableView reloadData];
-                        [self->_activityIndicatorObject stopAnimating];
                         [self->refresh endRefreshing];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
                     });
                 });
             }
             
-            [self->_activityIndicatorObject stopAnimating];
+           [[AppDelegate sharedAppdelegate] hideProgressView];
             NSLog(@"Thread-NO5-getClientTickets-closed");
             
         }];
