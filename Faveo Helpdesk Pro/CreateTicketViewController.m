@@ -1851,7 +1851,7 @@
         else if([filename hasSuffix:@".mov"])
         {
             self->typeMime=@"video/quicktime";
-            self->_fileImage.image=[UIImage imageNamed:@"audioCommon"];
+            self->_fileImage.image=[UIImage imageNamed:@"mov"];
         }
         
         else  if([filename hasSuffix:@".wmv"])

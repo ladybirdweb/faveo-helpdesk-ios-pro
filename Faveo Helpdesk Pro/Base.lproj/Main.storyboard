@@ -3894,7 +3894,7 @@
                                                             <rect key="frame" x="8" y="19" width="253" height="31"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" textContentType="tel"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" smartDashesType="no" smartInsertDeleteType="no"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="WD9-tq-Ud1" id="65g-Ns-o3Z"/>
                                                             </connections>
