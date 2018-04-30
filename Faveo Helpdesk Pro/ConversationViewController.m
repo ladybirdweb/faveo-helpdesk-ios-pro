@@ -451,7 +451,8 @@
     else
     {
         cell.clientNameLabel.text=@"System";
-        [cell.profilePicView setImageWithString:@"System" color:nil ];
+        cell.profilePicView.image=[UIImage imageNamed:@"systemIcon.png"];
+       // [cell.profilePicView setImageWithString:@"System" color:nil ];
     }
    
     

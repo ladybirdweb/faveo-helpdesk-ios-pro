@@ -22,6 +22,7 @@
      NSUserDefaults *userDefaults;
     NSMutableArray *fileAttachmentArray;
     NSString *fileName;
+    Utils *utils;
     
     AVPlayer *playr;
     NSString *audioData;
@@ -40,7 +41,7 @@
     globalvariable=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
     fileAttachmentArray=[[NSMutableArray alloc]init];
-    
+    utils=[[Utils alloc]init];
     fileAttachmentArray=globalvariable.attachArrayFromConversation;
   
 }
@@ -360,6 +361,16 @@
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
         
     }
+//    else if([fileName hasSuffix:@".m3u"])
+//    {
+//        NSURL *URL = [NSURL URLWithString:
+//                      [NSString stringWithFormat:@"data:audio/x-mpegurl;base64,%@",
+//                       numStr]];
+//        
+//        //   NSURL *url = [NSURL URLWithString:URL];
+//        [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+//        
+//    }
     else if([fileName hasSuffix:@".aiff"] || [fileName hasSuffix:@".aif"])
     {
         NSURL *URL = [NSURL URLWithString:
@@ -491,12 +502,17 @@
         
     }
     
-    
+   else if([fileName hasSuffix:@".zip"] || [fileName hasSuffix:@".ZIP"])
+   {
+       [utils showAlertWithMessage:NSLocalizedString(@"This file format is not supported for mobile device.", nil) sendViewController:self];
+   }
     
    else{
+       
+   //    [utils showAlertWithMessage:NSLocalizedString(@"This file format is not supported for mobile device.", nil) sendViewController:self];
       // dataFromBase64String from NSData+Base64.h file
            NSData* myData = [NSData dataFromBase64String: numStr];
-       
+
          [_webView loadData:myData
                  //MIMEType:@"application/pdf"
                  MIMEType:typeMime

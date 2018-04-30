@@ -219,13 +219,7 @@
                                  [[AppDelegate sharedAppdelegate] hideProgressView];
                                 return;
                             }
-                            else if(statusCode == 400)
-                            {
-                                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                               
-                                [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
-                                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                            }
+                            
                            else if (statusCode == 401 || statusCode == 400) {
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                
@@ -258,14 +252,33 @@
                     NSLog(@"Get your response == %@", replyStr);
                     
                     @try{
+                        if ([replyStr containsString:@"result"]) {
+                            
+                             NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                            
+                            NSString * msg= [jsonData objectForKey:@"result"];
+                            
+                             if([msg isEqualToString:@"success"])
+                             {
+                                  NSLog(@"Success");
+                                  [self verifyBilling];
+                             }
+                          
+                        }
                         if ([replyStr containsString:@"success"]) {
                             
-                            NSLog(@"Success");
+                            NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                             
-                            [self verifyBilling];
-                            // [[AppDelegate sharedAppdelegate] hideProgressView];
+                            NSString * msg= [jsonData objectForKey:@"message"];
                             
-                        }else{
+                            if([msg isEqualToString:@"API disabled"])
+                            {
+                                [self->utils showAlertWithMessage: NSLocalizedString(@"API is disabled in web, please enable it from Admin panel.", nil) sendViewController:self];
+                                [[AppDelegate sharedAppdelegate] hideProgressView];
+                            }
+                            
+                        }
+                        else{
                             
 
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Error - Please Check Your Helpdesk URL",nil)sendViewController:self];
@@ -391,12 +404,7 @@
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             [self->utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self];
                         }
-                        else if(statusCode == 400)
-                        {
-                            NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [self->utils showAlertWithMessage:@"The request could not be understood by the server due to malformed syntax." sendViewController:self];
-                        }
+                    
                         else if(statusCode == 405)
                         {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
