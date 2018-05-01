@@ -215,6 +215,12 @@
                 
                 NSLog(@"Message is : %@",msg);
                 
+                if([msg isEqualToString:@"Error-402"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
+                }
+                else
                 [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                 
             }else if(error)  {
@@ -326,6 +332,12 @@
             [[AppDelegate sharedAppdelegate] hideProgressView];
             if (msg) {
                 
+                if([msg isEqualToString:@"Error-402"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
+                }
+                else
                 [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                 
             }else if(error)  {

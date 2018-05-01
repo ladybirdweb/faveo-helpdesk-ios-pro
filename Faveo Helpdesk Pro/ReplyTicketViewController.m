@@ -206,11 +206,12 @@
                         {
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                         }
-                        else if([msg isEqualToString:@"Error-402"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                        }else if([msg isEqualToString:@"Error-422"]){
+                  else  if([msg isEqualToString:@"Error-402"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-422"]){
                             
                             NSLog(@"Message is : %@",msg);
                         }else{
@@ -595,15 +596,12 @@
                     [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your reply.", nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                     
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
-                    
-                  //  [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-                    
-//                    TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-//                    [self.navigationController pushViewController:td animated:YES];
+                
                      [self.view setNeedsDisplay];
                      [self.navigationController popViewControllerAnimated:YES];
                     
                 }
+                
                 else if ([jsonData objectForKey:@"message"])
                 {
                     
@@ -624,6 +622,16 @@
                 }
                 NSLog(@"Thread-Ticket-Reply-closed");
                 
+            }
+            if ([jsonData objectForKey:@"result"]){
+                
+                NSDictionary *resultDict=[jsonData objectForKey:@"result"];
+                
+                 if([[resultDict objectForKey:@"fails"] isEqualToString:@"Access denied"])
+                 {
+                      [self->utils showAlertWithMessage:@"Access Denied - You role or login credentials has been changed." sendViewController:self];
+                      [[AppDelegate sharedAppdelegate] hideProgressView];
+                 }
                 
             }
             

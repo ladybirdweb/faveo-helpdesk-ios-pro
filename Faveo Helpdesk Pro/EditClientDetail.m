@@ -416,11 +416,10 @@
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
-                        else if([msg isEqualToString:@"Error-402"])
+                       else if([msg isEqualToString:@"Error-402"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                             [[AppDelegate sharedAppdelegate] hideProgressView];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
                         }
                         else if([msg isEqualToString:@"Error-422"])
                         {

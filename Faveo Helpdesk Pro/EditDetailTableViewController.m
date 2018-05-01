@@ -190,6 +190,13 @@
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
                     }
+                    
+                    else if([msg isEqualToString:@"Error-402"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
+                    }
+                    
                     else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
                     {
                         NSLog(@"Message is : %@",msg);
@@ -838,11 +845,12 @@
                             [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been changed or You are not an Agent/Admin." sendViewController:self];
                         }
                         
-                        else if([msg isEqualToString:@"Error-402"])
+                        if([msg isEqualToString:@"Error-402"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
                         }
+                        
                         else{
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         }

@@ -112,14 +112,20 @@
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
             [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-                [[AppDelegate sharedAppdelegate] hideProgressView];
+               
                 if (error || [msg containsString:@"Error"]) {
+                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (msg) {
                         if([msg isEqualToString:@"Error-401"])
                         {
                             NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-402"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
                         }
                         else{
                         
@@ -130,6 +136,7 @@
                     }else if(error)  {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-InternalNote-Refresh-error == %@",error.localizedDescription);
+                         [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     
                     return ;

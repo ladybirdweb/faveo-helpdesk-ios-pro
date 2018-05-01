@@ -620,7 +620,7 @@
                         
                         if([msg isEqualToString:@"Error-403"])
                         {
-                            [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change status. ", nil) sendViewController:self];
+                            [self->utils showAlertWithMessage:NSLocalizedString(@"Permission Denied - You don't have permission to change ticket status. ", nil) sendViewController:self];
                         }
                         else{
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
