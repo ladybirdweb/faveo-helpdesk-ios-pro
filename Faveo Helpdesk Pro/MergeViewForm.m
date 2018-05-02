@@ -336,6 +336,7 @@
                     NSString * response1=[dict1 objectForKey:@"message"];
                     NSString * msg=@"merged successfully";
                     
+                     [[AppDelegate sharedAppdelegate] showProgressView];
                         if([response1 isEqualToString: msg])
                         {
                             [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Merged Successfully.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];

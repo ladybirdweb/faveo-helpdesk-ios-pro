@@ -251,14 +251,7 @@
                     NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     
                     NSLog(@"Get your response == %@", replyStr);
-                    // if status code is 402 the json is
-                    //                    {
-                    //                        "result": {
-                    //                            "fails": "api disabled"
-                    //                        }
-                    //                    }
-                    
-                    
+                
                     @try{
                         if ([replyStr containsString:@"success"]) {
                             
@@ -376,13 +369,15 @@
                     NSLog(@"Status code in Login : %ld",(long)statusCode);
                     
                     if (statusCode != 200) {
+                        
                         if(statusCode == 400)
                         {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+                            [self->utils showAlertWithMessage:@"Invalid Credentials. Enter valid username and password" sendViewController:self];
                         }
-                       else if(statusCode == 404)
+                        else
+                      if(statusCode == 404)
                         {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -512,12 +507,30 @@
                 }else {
                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     
-                    if ([replyStr containsString:@"invalid_credentials"]) {
+                    if ([replyStr containsString:@"message"]) {
                         
+                        NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                        
+                        NSString *msg=[jsonData objectForKey:@"message"];
+                        
+                        if([msg isEqualToString:@"invalid_credentials"])
+                        {
+                            [self->utils showAlertWithMessage:@"Invalid Credentials.Enter valid username or password" sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"API disabled"])
+                        {
+                            [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+                        }
+                        
+                        else{
+                            
                         [self->utils showAlertWithMessage:@"Enter valid username or password" sendViewController:self];
+                            
+                        }
                     }else{
                         
-                        [self->utils showAlertWithMessage:@"invalid_credentials" sendViewController:self];
+                        [self->utils showAlertWithMessage:@"Whoops! Something went Wrong! Please try again." sendViewController:self];
+                        
                     }
                 }
                 
@@ -569,26 +582,42 @@
             if (json) {
                 NSLog(@"Thread-sendAPNS-token-json-%@",json);
                
-                NSLog(@"Billing successful!");
-                dispatch_async(dispatch_get_main_queue(), ^{
+                NSString * resultMsg= [json objectForKey:@"result"];
                 
+                if([resultMsg isEqualToString:@"fails"])
+                {
+                     [self->utils showAlertWithMessage:@"Your HELPDESK URL is not verified. This URL is not found in FAVEO HELPDESK BILLING." sendViewController:self];
                     
-                    [RMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)
-                                               subtitle:NSLocalizedString(@"URL Verified successfully !", nil)
-                                                   type:RMessageTypeSuccess
-                                         customTypeName:nil
-                                               callback:nil];
-    
-                    [self.companyURLview setHidden:YES];
-                    [self.loginView setHidden:NO];
-                    [self->utils viewSlideInFromRightToLeft:self.loginView];
+                     [[AppDelegate sharedAppdelegate] hideProgressView];
+                }
+                else if([resultMsg isEqualToString:@"success"])
+                {
+                    NSLog(@"Billing successful!");
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        
+                        [RMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)
+                                                   subtitle:NSLocalizedString(@"URL Verified successfully !", nil)
+                                                       type:RMessageTypeSuccess
+                                             customTypeName:nil
+                                                   callback:nil];
+                        
+                        [self.companyURLview setHidden:YES];
+                        [self.loginView setHidden:NO];
+                        [self->utils viewSlideInFromRightToLeft:self.loginView];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
+                    });
+                    [self->userdefaults setObject:[self->baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
+                    [self->userdefaults synchronize];
+                    
+                }else{
+                    
+                    [self->utils showAlertWithMessage:@"Something went wrong in Billing. Please try later." sendViewController:self];
+                    
                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                    
-                });
-                [self->userdefaults setObject:[self->baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
-                [self->userdefaults synchronize];
-                
-                
+                }
+            
             }
             
         }];

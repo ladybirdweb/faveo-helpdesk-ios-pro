@@ -1314,15 +1314,6 @@
     
 }
 
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 3;
-}
-
-// This method asks the data source to verify that the given row is editable.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    return YES;
-}
 
 
 // This method tells the delegate that the specified row is now selected.

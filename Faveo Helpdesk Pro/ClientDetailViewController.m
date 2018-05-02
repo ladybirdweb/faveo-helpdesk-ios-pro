@@ -493,14 +493,88 @@
     
    // cell.ticketSubLbl.text=[finaldic objectForKey:@"title"];
     
-    if ( ( ![[finaldic objectForKey:@"title"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"title"] length] != 0 ) )
-    {
-        cell.ticketSubLbl.text=[finaldic objectForKey:@"title"];
+//    if ( ( ![[finaldic objectForKey:@"title"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"title"] length] != 0 ) )
+//    {
+//        cell.ticketSubLbl.text=[finaldic objectForKey:@"title"];
+//    }
+//    else
+//    {
+//        cell.ticketSubLbl.text= NSLocalizedString(@"Not Available",nil);
+//    }
+    
+     NSString *encodedString =[finaldic objectForKey:@"title"];
+    
+    [Utils isEmpty:encodedString];
+    
+    if  ([Utils isEmpty:encodedString]){
+        cell.ticketSubLbl.text=@"No Title";
     }
     else
     {
-        cell.ticketSubLbl.text= NSLocalizedString(@"Not Available",nil);
+        
+        NSMutableString *decodedString = [[NSMutableString alloc] init];
+        
+        if ([encodedString hasPrefix:@"=?UTF-8?Q?"] || [encodedString hasSuffix:@"?="])
+        {
+            NSScanner *scanner = [NSScanner scannerWithString:encodedString];
+            NSString *buf = nil;
+            //  NSMutableString *decodedString = [[NSMutableString alloc] init];
+            
+            while ([scanner scanString:@"=?UTF-8?Q?" intoString:NULL]
+                   || ([scanner scanUpToString:@"=?UTF-8?Q?" intoString:&buf] && [scanner scanString:@"=?UTF-8?Q?" intoString:NULL])) {
+                if (buf != nil) {
+                    [decodedString appendString:buf];
+                }
+                
+                buf = nil;
+                
+                NSString *encodedRange;
+                
+                if (![scanner scanUpToString:@"?=" intoString:&encodedRange]) {
+                    break; // Invalid encoding
+                }
+                
+                [scanner scanString:@"?=" intoString:NULL]; // Skip the terminating "?="
+                
+                // Decode the encoded portion (naively using UTF-8 and assuming it really is Q encoded)
+                // I'm doing this really naively, but it should work
+                
+                // Firstly I'm encoding % signs so I can cheat and turn this into a URL-encoded string, which NSString can decode
+                encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"%" withString:@"=25"];
+                
+                // Turn this into a URL-encoded string
+                encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"=" withString:@"%"];
+                
+                
+                // Remove the underscores
+                encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+                
+                // [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                
+                NSString *str1= [encodedRange stringByRemovingPercentEncoding];
+                [decodedString appendString:str1];
+                
+                
+            }
+            
+            NSLog(@"Decoded string = %@", decodedString);
+            cell.ticketSubLbl.text= [NSString stringWithFormat:@"%@",decodedString];
+        
+        }
+        else{
+            
+            // cell.ticketSubLabel.text= encodedString;
+            cell.ticketSubLbl.text= [NSString stringWithFormat:@"%@",encodedString];
+            
+        }
+        
     }
+    ///////////////////////////////////////////////////
+    
+    
+    
+    
+    
     
  
     if ([[finaldic objectForKey:@"ticket_status_name"] isEqualToString:@"Open"]) {
