@@ -179,7 +179,7 @@
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }
     else{
-        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Data",nil)];
+        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
     [self addUIRefresh];
     [self reload];
     [self getDependencies];
@@ -358,7 +358,7 @@
                 if (error || [msg containsString:@"Error"]) {
                     [self->refresh endRefreshing];
                    
-                    
+                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     if (msg) {
                         
                         if([msg isEqualToString:@"Error-401"])
@@ -981,9 +981,9 @@
             
             NSString * source1=[finaldic objectForKey:@"source"];
             
-            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countcollaborator"]];
-            
-            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
+//            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"countcollaborator"]];
+//
+//            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
             
             
             if([source1 isEqualToString:@"web"] || [source1 isEqualToString:@"Web"])
@@ -1012,20 +1012,52 @@
             
             
             
+//
+//            if(![cc isEqualToString:@"<null>"] && ![attachment1 isEqualToString:@"0"])
+//            {
+//                cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
+//                cell.attachImgView.image=[UIImage imageNamed:@"attach"];
+//            }
+//            else if(![cc isEqualToString:@"<null>"] && [attachment1 isEqualToString:@"0"])
+//            {
+//                cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
+//            }
+//            else if([cc isEqualToString:@"<null>"] && ![attachment1 isEqualToString:@"0"])
+//            {
+//                cell.ccImgView.image=[UIImage imageNamed:@"attach"];
+//            }
             
-            if(![cc isEqualToString:@"<null>"] && ![attachment1 isEqualToString:@"0"])
+            //  collaborator_count_relation
+            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"collaborator_count"]];  //collaborator_count
+            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
+            //countcollaborator
+            
+            NSLog(@"CC is %@ named",cc);
+            NSLog(@"CC is %@ named",cc);
+            NSLog(@"CC is %@ named",cc);
+            //
+            NSLog(@"attachment is %@ named",attachment1);
+            NSLog(@"attachment is %@ named",attachment1);
+            
+            if(![cc isEqualToString:@"<null>"])
             {
                 cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
-                cell.attachImgView.image=[UIImage imageNamed:@"attach"];
+                
             }
-            else if(![cc isEqualToString:@"<null>"] && [attachment1 isEqualToString:@"0"])
+            
+            if(![attachment1 isEqualToString:@"0"])
             {
-                cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
+                if([cc isEqualToString:@"<null>"])
+                {
+                    cell.ccImgView.image=[UIImage imageNamed:@"attach"];
+                }else
+                {
+                    cell.attachImgView.image=[UIImage imageNamed:@"attach"];
+                    
+                }
+                
             }
-            else if([cc isEqualToString:@"<null>"] && ![attachment1 isEqualToString:@"0"])
-            {
-                cell.ccImgView.image=[UIImage imageNamed:@"attach"];
-            }
+            
             
             //priority color
             NSDictionary *priorityDict=[finaldic objectForKey:@"priority"];

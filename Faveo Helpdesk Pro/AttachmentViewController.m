@@ -27,6 +27,8 @@
     AVPlayer *playr;
     NSString *audioData;
     
+    
+    
 }
 @end
 
@@ -36,6 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title =@"Attachments Data";
     [[AppDelegate sharedAppdelegate] hideProgressView];
     
     globalvariable=[GlobalVariables sharedInstance];
@@ -44,6 +47,8 @@
     utils=[[Utils alloc]init];
     fileAttachmentArray=globalvariable.attachArrayFromConversation;
   
+  //  self.tableview1.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _webView.hidden=YES;
 }
 
 //This method is called before the view controller's view is about to be added to a view hierarchy and before any animations are configured for showing the view.
@@ -224,6 +229,9 @@
 // This method tells the delegate that the specified row is now selected.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+     _webView.hidden=NO;
+    
+    [[AppDelegate sharedAppdelegate] showProgressView];
     [_webView reload];
     
     NSDictionary *attachDictionary=[fileAttachmentArray objectAtIndex:indexPath.row];
@@ -339,6 +347,8 @@
         
       //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+        
 
     }
     else if([fileName hasSuffix:@".wav"])
@@ -349,6 +359,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     else if([fileName hasSuffix:@".aac"])
@@ -359,6 +370,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
 //    else if([fileName hasSuffix:@".m3u"])
@@ -379,6 +391,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     
@@ -391,6 +404,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     
@@ -405,6 +419,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     
@@ -416,6 +431,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     else if([fileName hasSuffix:@".mkv"])
@@ -426,6 +442,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     else if([fileName hasSuffix:@".flv"]) //application/metastream
@@ -437,6 +454,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     else if([fileName hasSuffix:@".wmv"])
@@ -447,6 +465,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     
@@ -458,6 +477,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     
@@ -469,6 +489,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     else if([fileName hasSuffix:@".vob"]) //video/mpeg //video/dvd
@@ -479,6 +500,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     else if([fileName hasSuffix:@".mp4"])
@@ -489,6 +511,7 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     else if([fileName hasSuffix:@".mov"])
@@ -499,12 +522,14 @@
         
         //   NSURL *url = [NSURL URLWithString:URL];
         [_webView loadRequest:[NSURLRequest requestWithURL:URL]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }
     
    else if([fileName hasSuffix:@".zip"] || [fileName hasSuffix:@".ZIP"])
    {
        [utils showAlertWithMessage:NSLocalizedString(@"This file format is not supported for mobile device.", nil) sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
    }
     
    else{
@@ -518,6 +543,7 @@
                  MIMEType:typeMime
                  textEncodingName:@"NSUTF8StringEncoding"
                    baseURL:[NSURL URLWithString:@"https://www.google.co.in/"]];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
        
 
      }
@@ -529,7 +555,7 @@
     [self.view addSubview:_webView];
     _webView.mediaPlaybackRequiresUserAction = NO;
     
-    
+  //  [[AppDelegate sharedAppdelegate] hideProgressView];
 }
 
 

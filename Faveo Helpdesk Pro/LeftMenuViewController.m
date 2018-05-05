@@ -63,8 +63,7 @@
     [self getDependencies];
     [self.tableView reloadData];
     [self update];
-    
-    
+
     
 }
 

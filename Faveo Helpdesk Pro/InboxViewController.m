@@ -207,7 +207,7 @@
     }
     else{
     
-  [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
+       [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
         
         [self reload];
         [self getDependencies];
@@ -453,12 +453,7 @@
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
-                        else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                        }
+                        
                         else{
                             
                             NSLog(@"Message is : %@",msg);
@@ -1255,36 +1250,37 @@
             }
             
             
-//          //  int ccCount = (int)[finaldic valueForKey:@"countcollaborator"];
-            // NSInteger attachCount =(int)[finaldic valueForKey:@"attachment_count"];
-////
-//             if(attachCount>0)
-//             {
-//                  cell.ccImgView.image=[UIImage imageNamed:@"attach"];
-//             }
-           
-//            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
-//            
-//            if(![attachment1 isEqualToString:@"0"])
-//            {
-//                cell.ccImgView.image=[UIImage imageNamed:@"attach"];
-//            }
-            
-                //collaborator_count_relation
-//            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"collaborator_count"]];  //collaborator_count
-//            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
-////countcollaborator
-//
-//            NSLog(@"CC is %@ named",cc);
-//             NSLog(@"CC is %@ named",cc);
-//             NSLog(@"CC is %@ named",cc);
-//
-//             NSLog(@"attachment is %@ named",attachment1);
-//             NSLog(@"attachment is %@ named",attachment1);
 
+              //  collaborator_count_relation
+            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"collaborator_count"]];  //collaborator_count
+            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
+//countcollaborator
+
+            NSLog(@"CC is %@ named",cc);
+             NSLog(@"CC is %@ named",cc);
+             NSLog(@"CC is %@ named",cc);
+//
+             NSLog(@"attachment is %@ named",attachment1);
+             NSLog(@"attachment is %@ named",attachment1);
+
+            if(![cc isEqualToString:@"<null>"])
+            {
+                cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
+                
+            }
             
-    
-            
+            if(![attachment1 isEqualToString:@"0"])
+            {
+                if([cc isEqualToString:@"<null>"])
+                {
+                    cell.ccImgView.image=[UIImage imageNamed:@"attach"];
+                }else
+                {
+                    cell.attachImgView.image=[UIImage imageNamed:@"attach"];
+                    
+                }
+                
+            }
             
             
             

@@ -354,6 +354,7 @@
                 }
             }
             NSLog(@"Thread-NO5-postMerge-closed");
+             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }];
 }@catch (NSException *exception)

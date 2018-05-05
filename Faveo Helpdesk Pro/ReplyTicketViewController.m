@@ -29,7 +29,7 @@
 #import "NotificationViewController.h"
 #import <HSAttachmentPicker/HSAttachmentPicker.h>
 #import "TicketDetailViewController.h"
-
+#import "ViewCCList.h"
 
 @interface ReplyTicketViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,HSAttachmentPickerDelegate>
 {
@@ -83,14 +83,16 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     
     _addCCLabelButton.userInteractionEnabled=YES;
-    _viewCCandRemoveCCLabel.userInteractionEnabled=YES;
-    
+    _viewCCLabel.userInteractionEnabled=YES;
+
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickedOnCCSubButton)];
+     UITapGestureRecognizer *tapGesture2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewCCorRemoceCCButton)];
+    
     _addCCLabelButton.userInteractionEnabled=YES;
-    UITapGestureRecognizer *tapGesture2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewCCorRemoceCCButton)];
+    _viewCCLabel.userInteractionEnabled=YES;
     
     [_addCCLabelButton addGestureRecognizer:tapGesture];
-    [_viewCCandRemoveCCLabel addGestureRecognizer:tapGesture2];
+    [_viewCCLabel addGestureRecognizer:tapGesture2];
     
     
     if(globalVariables.ccCount==0)
@@ -142,11 +144,19 @@
     
     NSLog(@"Clicked");
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *smallViewController = [storyboard instantiateViewControllerWithIdentifier:@"SampleTableCellTableViewCellId"];
+    if ([ccListArray count] > 0) {
+        globalVariables.ccListArray1=ccListArray;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ViewCCList *smallViewController = [storyboard instantiateViewControllerWithIdentifier:@"ccListID"];
+        
+        BIZPopupViewController *popupViewController = [[BIZPopupViewController alloc] initWithContentViewController:smallViewController contentSize:CGSizeMake(300, 300)];
+        [self presentViewController:popupViewController animated:NO completion:nil];
+    }
+    else{
+        
+        [utils showAlertWithMessage:@"There is no cc available." sendViewController:self];
+    }
     
-    BIZPopupViewController *popupViewController = [[BIZPopupViewController alloc] initWithContentViewController:smallViewController contentSize:CGSizeMake(250, 300)];
-    [self presentViewController:popupViewController animated:NO completion:nil];
 }
 
 // After adding reply method when we click on submit method, below method is called
@@ -239,6 +249,7 @@
                 //  NSDictionary * dict1=[json objectForKey:@"collaborator"];
                 
                 self->ccListArray=[json objectForKey:@"collaborator"];
+               
                 self->globalVariables.ccCount=[NSString stringWithFormat:@"%lu",(unsigned long)self->ccListArray.count];//array1.count;
                 //NSLog(@"Array count is : %lu",(unsigned long)array1.count);
                 NSLog(@"Array count is : %@",self->globalVariables.ccCount);
@@ -467,7 +478,7 @@
     else if([filename hasSuffix:@".mov"])
     {
         self->typeMime=@"video/quicktime";
-        self->_fileImage.image=[UIImage imageNamed:@"audioCommon"];
+        self->_fileImage.image=[UIImage imageNamed:@"mov"];
     }
     
     else  if([filename hasSuffix:@".wmv"])
@@ -651,9 +662,6 @@
         
     }
 }
-
-
-
 
 @end
 

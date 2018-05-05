@@ -33,6 +33,9 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *fileSize123;
 
+@property (weak, nonatomic) IBOutlet UILabel *viewCCLabel;
+
+
 
 @end
 
