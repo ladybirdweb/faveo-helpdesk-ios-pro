@@ -469,7 +469,7 @@
             return usersArray.count;
         }
         
-        return usersArray.count + 1;
+        return usersArray.count;
     }
     
     else

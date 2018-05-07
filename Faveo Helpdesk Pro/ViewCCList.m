@@ -210,6 +210,7 @@
 
 -(void)removeCCApiCallMethod:(NSString *)emailId
 {
+    [[AppDelegate sharedAppdelegate] showProgressView];
     
     NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/remove?token=%@&ticket_id=%@&email=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],globalvariable.iD,emailId];
     
@@ -250,7 +251,8 @@
                 
             }else if(error)  {
                 [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                NSLog(@"Thread-NO4-CollaboratorFetch-Refresh-error == %@",error.localizedDescription);
+                NSLog(@"Thread-NO4-CollaboratorRemove-Refresh-error == %@",error.localizedDescription);
+                [[AppDelegate sharedAppdelegate] hideProgressView];
             }
             
             return ;
@@ -273,10 +275,7 @@
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
-                   //  ViewCCList *smallViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ccListID"];
-                    
-                    
-                    
+                
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
                     }
@@ -296,9 +295,14 @@
                     
                     [self dismissViewControllerAnimated:YES completion:nil];
                     [self.navigationController popViewControllerAnimated:YES];
-                  //   [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:3] animated:YES];
-            
+                
                 });
+                
+            }
+            else
+            {
+                [self->utils showAlertWithMessage:@"Whoops! Something went wrong here." sendViewController:self];
+                [[AppDelegate sharedAppdelegate] hideProgressView];
                 
             }
         }

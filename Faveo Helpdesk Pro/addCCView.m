@@ -417,15 +417,15 @@
     }else{
         
         NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/create?token=%@&ticket_id=%@&email=%@&user_id=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],globalVariables.iD,selectedUserEmail,selectedUserId];
-        
+        [[AppDelegate sharedAppdelegate] showProgressView];
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
             
             
             if (error || [msg containsString:@"Error"]) {
-                
+                [[AppDelegate sharedAppdelegate] hideProgressView];
                 if (msg) {
                     
                     if([msg isEqualToString:@"Error-401"])
@@ -453,6 +453,7 @@
                 }else if(error)  {
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-Collaborator-Refresh-error == %@",error.localizedDescription);
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
                 
                 return ;
@@ -479,12 +480,15 @@
                         //Do not forget to import AnOldViewController.h
                         if ([controller isKindOfClass:[ReplyTicketViewController class]])
                         {
+                            ReplyTicketViewController *viewC;
                             [self getCCCount];
+                            
                             [self.navigationController popToViewController:controller animated:YES];
                            // [self.navigationController popViewControllerAnimated:YES];
                       
                             [RKDropdownAlert title:@"Success" message:@"Added cc Successfully" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
+                            [viewC viewDidLoad];
                             return;
                         }
                     }
@@ -500,6 +504,7 @@
                     if([obj isKindOfClass:[NSArray class]])
                     {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Entered value is not valid. Please select the proper email."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                     }
                     
@@ -507,6 +512,7 @@
                 else
                 {
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Something wen wrong. Please try again later."] sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
             }
             

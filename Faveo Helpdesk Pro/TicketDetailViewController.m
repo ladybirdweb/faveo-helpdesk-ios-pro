@@ -119,7 +119,7 @@
     }
     else{
     
-    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting data",nil)];
+  //  [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting data",nil)];
     [self getDependencies];
     }
     
@@ -321,11 +321,13 @@
                 
                 if (error || [msg containsString:@"Error"]) {
                     
+                     [[AppDelegate sharedAppdelegate] hideProgressView];
+                    
                     if( [msg containsString:@"Error-401"])
                         
                     {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Your Credential Has been changed"] sendViewController:self];
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                       
                         
                     }
                     else
@@ -333,7 +335,7 @@
                             
                         {
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                           
                             
                         }
                     
@@ -341,7 +343,7 @@
                             
                         {
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                           
                             
                         }
                     
@@ -349,7 +351,7 @@
                             
                         {
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
                             
                         }
                     
@@ -357,7 +359,7 @@
                         {
                             NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
                         }
                     
                     
@@ -365,7 +367,7 @@
                             NSLog(@"Error message is %@",msg);
                             NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
                             [self->utils showAlertWithMessage:msg sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                           
                             
                             return ;
                         }
@@ -464,7 +466,7 @@
         @finally
         {
             NSLog( @" I am in getDependencies method in Inbox ViewController" );
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+           
             
         }
     }

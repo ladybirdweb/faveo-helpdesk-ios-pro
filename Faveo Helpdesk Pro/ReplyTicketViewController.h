@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableview1;
 @property (weak, nonatomic) IBOutlet UILabel *addCCLabelButton;
 
+- (void)viewDidLoad;
 - (IBAction)submitButtonClicked:(id)sender;
 
 
