@@ -53,6 +53,8 @@
     NSMutableArray * status_idArray;
     NSMutableArray * source_idArray;
     NSMutableArray * staff_idArray;
+    
+    NSMutableArray * assignArray;
 
 }
 
@@ -86,6 +88,7 @@
     type_id=[[NSNumber alloc]init];
     staff_id=[[NSNumber alloc]init];
     
+    assignArray = [[NSMutableArray alloc]init];
     
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Done",nil) style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
@@ -537,6 +540,8 @@
             }
         }
         
+        
+        
         _deptArray=[deptMU copy];
         _helptopicsArray=[helptopicMU copy];
         _slaPlansArray=[slaMU copy];
@@ -544,7 +549,15 @@
         _statusArray=[statusMU copy];
         _sourceArray=[sourceMU copy];
         _typeArray=[typeMU copy];
-        _assignArray=[staffMU copy];
+        assignArray=[staffMU copy];
+        
+        
+      _helptopicsArray = [_helptopicsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+      _priorityArray = [_priorityArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+      _sourceArray = [_sourceArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+      _typeArray =  [_typeArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
+        //[assignArray sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         
     }@catch (NSException *exception)
     {
@@ -698,11 +711,11 @@
 @try{
     [self.view endEditing:YES];
     [_assinTextField resignFirstResponder];
-    if (!_assignArray||!_assignArray.count) {
+    if (!assignArray||!assignArray.count) {
         _assinTextField.text=NSLocalizedString(@"Not Available",nil);
         source_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
      }
 }@catch (NSException *exception)
     {
@@ -724,7 +737,7 @@
     staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
     NSLog(@"Id is : %@",staff_id);
     
-    self.assinTextField.text = (_assignArray)[(NSUInteger) [selectedIndex intValue]];
+    self.assinTextField.text = (assignArray)[(NSUInteger) [selectedIndex intValue]];
     NSLog(@"TextField value is : %@", _assinTextField.text);
 }
 

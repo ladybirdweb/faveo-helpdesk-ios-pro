@@ -68,7 +68,7 @@
 
 
 
-@property (nonatomic, strong) NSMutableArray * assignArray;
+//@property (nonatomic, strong) NSMutableArray * assignArray;
 
 
 @property (weak, nonatomic) IBOutlet UITextField *assinTextField;

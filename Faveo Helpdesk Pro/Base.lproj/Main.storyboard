@@ -3898,7 +3898,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8l2-cR-vC7">
-                                                            <rect key="frame" x="3" y="53" width="282" height="0.66666666666666663"/>
+                                                            <rect key="frame" x="3" y="53" width="282" height="0.6666666666666643"/>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="ZMH-1U-t4H"/>
@@ -6083,7 +6083,7 @@
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="109" id="dIF-4a-eGA"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                            <color key="textColor" red="0.97905264250000001" green="0.77521144320000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" red="0.74082454060000003" green="0.3227530488" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JbI-Mx-pJJ">
@@ -6224,7 +6224,7 @@
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="197" id="6v6-ka-C4q"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="15"/>
-                                                            <color key="textColor" red="0.97905264250000001" green="0.77521144320000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" red="0.74082454060000003" green="0.3227530488" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -6259,7 +6259,7 @@
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="Jwg-7C-zpD"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="15"/>
-                                                            <color key="textColor" red="0.97905264250000001" green="0.77521144320000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" red="0.74082454060000003" green="0.3227530488" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xL3-p2-0lA">
@@ -6306,7 +6306,7 @@
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="109" id="gUi-yP-cPQ"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="17"/>
-                                                            <color key="textColor" red="0.97905264250000001" green="0.77521144320000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" red="0.74082454060000003" green="0.3227530488" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7w-jk-BUn">
@@ -6508,7 +6508,7 @@
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="vGq-r1-Ara"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="18"/>
-                                                            <color key="textColor" red="1" green="0.4336371933" blue="0.78928040759999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" red="0.74082454060000003" green="0.3227530488" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -6548,7 +6548,7 @@
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="109" id="D0U-s1-nSD"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="17"/>
-                                                            <color key="textColor" red="1" green="0.4336371933" blue="0.78928040759999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" red="0.74082454060000003" green="0.3227530488" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nho-IP-7KA">
