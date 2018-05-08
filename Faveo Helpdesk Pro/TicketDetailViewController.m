@@ -117,6 +117,18 @@
         [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"user"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"Your role has beed changed to user. Contact to your Admin and try to login again." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Methon not allowed"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
     else{
     
   //  [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting data",nil)];
@@ -384,7 +396,8 @@
                 
                 if (json) {
                     
-                    //  NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
                     NSDictionary *resultDic = [json objectForKey:@"data"];
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
                     
@@ -465,7 +478,7 @@
         }
         @finally
         {
-            NSLog( @" I am in getDependencies method in Inbox ViewController" );
+            NSLog( @" I am in getDependencies method in ticket detail ViewController" );
            
             
         }

@@ -170,7 +170,7 @@
 -(void)submit
 {
     
-    if(_userNameTextField.text.length==0 && _firstNameTextField.text.length==0 && _lastNameTextField.text.length==0 && _emailTextField.text.length==0)
+    if(_userNameTextField.text.length==0 || _firstNameTextField.text.length==0 || _lastNameTextField.text.length==0 || _emailTextField.text.length==0)
     {
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -178,7 +178,7 @@
         
         [RMessage showNotificationInViewController:self.navigationController
                                              title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Please fill all mandatory fields.", nil)
+                                          subtitle:NSLocalizedString(@"Please fill mandatory fields.", nil)
                                          iconImage:nil
                                               type:RMessageTypeWarning
                                     customTypeName:nil
@@ -190,199 +190,11 @@
                               canBeDismissedByUser:YES];
         
         
-    }else if (_firstNameTextField.text.length==0 && _lastNameTextField.text.length==0 &&_emailTextField.text.length==0){
-        
-        if(_firstNameTextField.text.length==0 && _lastNameTextField.text.length==0)
-            
-        {
-            if (self.navigationController.navigationBarHidden) {
-                [self.navigationController setNavigationBarHidden:NO];
-            }
-            
-            [RMessage showNotificationInViewController:self.navigationController
-                                                 title:NSLocalizedString(@"Warning !", nil)
-                                              subtitle:NSLocalizedString(@"Enter First Name & Last Name.", nil)
-                                             iconImage:nil
-                                                  type:RMessageTypeWarning
-                                        customTypeName:nil
-                                              duration:RMessageDurationAutomatic
-                                              callback:nil
-                                           buttonTitle:nil
-                                        buttonCallback:nil
-                                            atPosition:RMessagePositionNavBarOverlay
-                                  canBeDismissedByUser:YES];
-        }else if(_firstNameTextField.text.length==0 && _emailTextField.text.length==0)
-        {
-            if (self.navigationController.navigationBarHidden) {
-                [self.navigationController setNavigationBarHidden:NO];
-            }
-            
-            [RMessage showNotificationInViewController:self.navigationController
-                                                 title:NSLocalizedString(@"Warning !", nil)
-                                              subtitle:NSLocalizedString(@"Enter First Name & Email", nil)
-                                             iconImage:nil
-                                                  type:RMessageTypeWarning
-                                        customTypeName:nil
-                                              duration:RMessageDurationAutomatic
-                                              callback:nil
-                                           buttonTitle:nil
-                                        buttonCallback:nil
-                                            atPosition:RMessagePositionNavBarOverlay
-                                  canBeDismissedByUser:YES];
-        }else if(_lastNameTextField.text.length==0 && _emailTextField.text.length==0)
-        {
-            if (self.navigationController.navigationBarHidden) {
-                [self.navigationController setNavigationBarHidden:NO];
-            }
-            
-            [RMessage showNotificationInViewController:self.navigationController
-                                                 title:NSLocalizedString(@"Warning !", nil)
-                                              subtitle:NSLocalizedString(@"Enter Last Name & Email", nil)
-                                             iconImage:nil
-                                                  type:RMessageTypeWarning
-                                        customTypeName:nil
-                                              duration:RMessageDurationAutomatic
-                                              callback:nil
-                                           buttonTitle:nil
-                                        buttonCallback:nil
-                                            atPosition:RMessagePositionNavBarOverlay
-                                  canBeDismissedByUser:YES];
-        }else{
-
-        
-        if (self.navigationController.navigationBarHidden) {
-            [self.navigationController setNavigationBarHidden:NO];
-        }
-        
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Warning !", nil)
-                                          subtitle:NSLocalizedString(@"Enter First Name, Last Name & Email.", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeWarning
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionNavBarOverlay
-                              canBeDismissedByUser:YES];
-        
-        }
-    }else if (_userNameTextField.text.length==0 || _firstNameTextField.text.length==0 || _lastNameTextField || _emailTextField.text.length==0){
-        
-        if(_userNameTextField.text.length==0)
-            {
-                if (self.navigationController.navigationBarHidden)
-                {
-                   [self.navigationController setNavigationBarHidden:NO];
-                }
-        
-                 [RMessage showNotificationInViewController:self.navigationController
-                                             title:nil
-                                          subtitle:NSLocalizedString(@"Please enter username.", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeWarning
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionNavBarOverlay
-                              canBeDismissedByUser:YES];
-        
-            } else if(_firstNameTextField.text.length==0)
-            {
-                if (self.navigationController.navigationBarHidden)
-                {
-                    [self.navigationController setNavigationBarHidden:NO];
-                }
-                
-                [RMessage showNotificationInViewController:self.navigationController
-                                                     title:nil
-                                                  subtitle:NSLocalizedString(@"Please enter First Name.", nil)
-                                                 iconImage:nil
-                                                      type:RMessageTypeWarning
-                                            customTypeName:nil
-                                                  duration:RMessageDurationAutomatic
-                                                  callback:nil
-                                               buttonTitle:nil
-                                            buttonCallback:nil
-                                                atPosition:RMessagePositionNavBarOverlay
-                                      canBeDismissedByUser:YES];
-            
-            } if(_lastNameTextField.text.length==0)
-            {
-                if (self.navigationController.navigationBarHidden)
-                {
-                    [self.navigationController setNavigationBarHidden:NO];
-                }
-                
-                [RMessage showNotificationInViewController:self.navigationController
-                                                     title:nil
-                                                  subtitle:NSLocalizedString(@"Please enter Last Name.", nil)
-                                                 iconImage:nil
-                                                      type:RMessageTypeWarning
-                                            customTypeName:nil
-                                                  duration:RMessageDurationAutomatic
-                                                  callback:nil
-                                               buttonTitle:nil
-                                            buttonCallback:nil
-                                                atPosition:RMessagePositionNavBarOverlay
-                                      canBeDismissedByUser:YES];
-            }if(_emailTextField.text.length==0)
-            {
-                if (self.navigationController.navigationBarHidden)
-                {
-                    [self.navigationController setNavigationBarHidden:NO];
-                }
-                
-                [RMessage showNotificationInViewController:self.navigationController
-                                                     title:nil
-                                                  subtitle:NSLocalizedString(@"Please enter Email.", nil)
-                                                 iconImage:nil
-                                                      type:RMessageTypeWarning
-                                            customTypeName:nil
-                                                  duration:RMessageDurationAutomatic
-                                                  callback:nil
-                                               buttonTitle:nil
-                                            buttonCallback:nil
-                                                atPosition:RMessagePositionNavBarOverlay
-                                      canBeDismissedByUser:YES];
-                
-            }
-    
     }
+     else{
+             [self doneSubmitMethod];
     
-    
-     if(_emailTextField.text.length==0 || [_emailTextField.text isEqualToString:@"Not available"])
-    {
-        if(![Utils emailValidation:self.emailTextField.text]){
-  
-        if (self.navigationController.navigationBarHidden) {
-            [self.navigationController setNavigationBarHidden:NO];
-        }
-        
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Error !", nil)
-                                          subtitle:NSLocalizedString(@"Please enter valid email.", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeWarning
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionNavBarOverlay
-                              canBeDismissedByUser:YES];
-        
-        [[AppDelegate sharedAppdelegate] hideProgressView];
-    }
-    }
-        
-    
-    [self doneSubmitMethod];
-    
-
+     }
 }
 
 

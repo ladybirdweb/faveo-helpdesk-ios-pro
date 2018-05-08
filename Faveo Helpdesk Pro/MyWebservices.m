@@ -72,29 +72,13 @@
         }
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
             
-          //  NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
-            
-//            if (statusCode != 200) {
-//                
-//                if(statusCode==401)
-//                {
-//                    NSLog(@"status111 : %ld",(long)statusCode);
-//                    NSLog(@"status111 : %ld",(long)statusCode);
-//                    self->globalVariables.statusIdFor401Error=@"401";
-//                    NSLog(@"glob status111 : %@",self->globalVariables.statusIdFor401Error);
-//                    NSLog(@"glob status111 : %@",self->globalVariables.statusIdFor401Error);
-//                    
-//                }
-//                NSLog(@"Thread--refreshToken--dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-//                return ;
-//            }
-//            
+ 
         
             NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
             NSLog(@"Thread--refreshToken--Get your response == %@", replyStr);
             
-            if ([replyStr containsString:@"success"] || [replyStr containsString:@"data"]) {
+            if ([replyStr containsString:@"success"] || [replyStr containsString:@"data"] || [replyStr containsString:@"result"]) {
                 
                 NSError *error=nil;
                 NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
@@ -102,8 +86,21 @@
                     return;
                 }
                 
-                if([replyStr containsString:@"message"])
+                if([replyStr containsString:@"result"])
                 {
+                    
+                    NSDictionary * erroDict = [jsonData objectForKey:@"result"];
+                    NSString *errorMessage = [erroDict objectForKey:@"error"];
+                    
+                    if([errorMessage isEqualToString:@"Methon not allowed"])
+                    {
+                        NSString *msg =@"Methon not allowed";
+                         [self->_userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+                    }
+                    
+                }
+            else  if([replyStr containsString:@"message"])
+                 {
                     NSString *msg=[jsonData objectForKey:@"message"];
                     
                     
@@ -116,6 +113,7 @@
                     {
                         [self->_userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
                     }
+                    
                 }
                 else{
                 NSDictionary *userDataDict=[jsonData objectForKey:@"data"];
@@ -126,9 +124,7 @@
                 
                 [self->_userDefaults setObject:tokenString forKey:@"token"];
                 
-                // [_userDefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
-                //                NSDictionary *jsonData1=[jsonData objectForKey:@"user_id"];
-                //                [_userDefaults setObject:[jsonData1 objectForKey:@"id"] forKey:@"user_id"];
+
                 
                 NSDictionary *userDetailsDict=[userDataDict objectForKey:@"user"];
                 NSLog(@"Data is: %@",userDetailsDict);
@@ -139,6 +135,7 @@
                 NSLog(@"Role from Web Services class : %@",role123);
                 
                 self->globalVariables.roleFromAuthenticateAPI=role123;
+                [self->_userDefaults setObject:role123 forKey:@"msgFromRefreshToken"];
                 
                 [self->_userDefaults setObject:userId forKey:@"user_id"];
                 

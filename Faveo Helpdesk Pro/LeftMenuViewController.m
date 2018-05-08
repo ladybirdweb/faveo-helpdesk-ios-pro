@@ -96,6 +96,18 @@
         [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"user"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"Your role has beed changed to user. Contact to your Admin and try to login again." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Methon not allowed"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
     
     NSLog(@"Role : %@",[userDefaults objectForKey:@"role"]);
     _user_role.text=[[userDefaults objectForKey:@"role"] uppercaseString];

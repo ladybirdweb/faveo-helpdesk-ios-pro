@@ -283,117 +283,117 @@
     
 }
 
-// After cliking on user search, below method is called i.r user search (Here I used collaborator search API for searching users)
--(void)userSearchApiCall:(NSString *)searchText
-{
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
-    {
-        [refresh endRefreshing];
-        
-        [[AppDelegate sharedAppdelegate] hideProgressView];
-        
-        
-        if (self.navigationController.navigationBarHidden) {
-            [self.navigationController setNavigationBarHidden:NO];
-        }
-        
-        [RMessage showNotificationInViewController:self.navigationController
-                                             title:NSLocalizedString(@"Error..!", nil)
-                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
-                                         iconImage:nil
-                                              type:RMessageTypeError
-                                    customTypeName:nil
-                                          duration:RMessageDurationAutomatic
-                                          callback:nil
-                                       buttonTitle:nil
-                                    buttonCallback:nil
-                                        atPosition:RMessagePositionNavBarOverlay
-                              canBeDismissedByUser:YES];
-        
-        
-        
-    }else{
-        
-    }
-    
-    NSString *urlString=[searchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    
-    NSString * url= [NSString stringWithFormat:@"%@api/v1/helpdesk/ticket-search?token=%@&search=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],urlString];
-    NSLog(@"URL is : %@",url);
-    
-    
-    MyWebservices *webservices=[MyWebservices sharedInstance];
-    [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-        
-        
-        
-        if (error || [msg containsString:@"Error"]) {
-            [self->refresh endRefreshing];
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            if (msg) {
-                
-                if([msg isEqualToString:@"Error-402"])
-                {
-                    NSLog(@"Message is : %@",msg);
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
-                }
-                else
-                [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                
-            }else if(error)  {
-                [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                NSLog(@"Thread-user-Search-Refresh-error == %@",error.localizedDescription);
-            }
-            return ;
-        }
-        
-        if ([msg isEqualToString:@"tokenRefreshed"]) {
-            
-            [self userSearchApiCall:searchText];
-            NSLog(@"Thread-user-Search-call");
-            return;
-        }
-        
-        if (json) {
-            //NSError *error;
-            NSLog(@"Thread-user-SearchAPI-Json-%@",json);
-            
-            
-            self->_userDataArray=[[NSMutableArray alloc]initWithCapacity:11];
-            
-            NSDictionary * dict1 = [json objectForKey:@"result"];
-            
-            self->_userDataArray = [dict1 objectForKey:@"data"];
-            
-            //  NSLog(@"Mutable User Array is--%@",_userDataArray);
-            
-            
-            self->_nextPageUrl =[dict1 objectForKey:@"next_page_url"];
-            // NSLog(@"Next page url is : %@",_nextPageUrl);
-            
-            self->_path1=[dict1 objectForKey:@"path"];
-            
-            self->_currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
-            self->_totalTickets=[[dict1 objectForKey:@"total"] integerValue];
-            self->_totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
-            
-            
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                    
-                    [self.tableview2 reloadData];
-                    //  [self.tableview1 reloadData];
-                });
-            });
-            
-        }
-        NSLog(@"Thread-NO5-Search-closed");
-        
-    }];
-    
-    
-}
+//// After cliking on user search, below method is called i.r user search (Here I used collaborator search API for searching users)
+//-(void)userSearchApiCall:(NSString *)searchText
+//{
+//    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+//    {
+//        [refresh endRefreshing];
+//
+//        [[AppDelegate sharedAppdelegate] hideProgressView];
+//
+//
+//        if (self.navigationController.navigationBarHidden) {
+//            [self.navigationController setNavigationBarHidden:NO];
+//        }
+//
+//        [RMessage showNotificationInViewController:self.navigationController
+//                                             title:NSLocalizedString(@"Error..!", nil)
+//                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+//                                         iconImage:nil
+//                                              type:RMessageTypeError
+//                                    customTypeName:nil
+//                                          duration:RMessageDurationAutomatic
+//                                          callback:nil
+//                                       buttonTitle:nil
+//                                    buttonCallback:nil
+//                                        atPosition:RMessagePositionNavBarOverlay
+//                              canBeDismissedByUser:YES];
+//
+//
+//
+//    }else{
+//
+//    }
+//
+//    NSString *urlString=[searchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+//
+//    NSString * url= [NSString stringWithFormat:@"%@api/v1/helpdesk/ticket-search?token=%@&search=%@",[userDefaults objectForKey:@"baseURL"],[userDefaults objectForKey:@"token"],urlString];
+//    NSLog(@"URL is : %@",url);
+//
+//
+//    MyWebservices *webservices=[MyWebservices sharedInstance];
+//    [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
+//
+//
+//
+//        if (error || [msg containsString:@"Error"]) {
+//            [self->refresh endRefreshing];
+//            [[AppDelegate sharedAppdelegate] hideProgressView];
+//            if (msg) {
+//
+//                if([msg isEqualToString:@"Error-402"])
+//                {
+//                    NSLog(@"Message is : %@",msg);
+//                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
+//                }
+//                else
+//                [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+//
+//            }else if(error)  {
+//                [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+//                NSLog(@"Thread-user-Search-Refresh-error == %@",error.localizedDescription);
+//            }
+//            return ;
+//        }
+//
+//        if ([msg isEqualToString:@"tokenRefreshed"]) {
+//
+//            [self userSearchApiCall:searchText];
+//            NSLog(@"Thread-user-Search-call");
+//            return;
+//        }
+//
+//        if (json) {
+//            //NSError *error;
+//            NSLog(@"Thread-user-SearchAPI-Json-%@",json);
+//
+//
+//            self->_userDataArray=[[NSMutableArray alloc]initWithCapacity:11];
+//
+//            NSDictionary * dict1 = [json objectForKey:@"result"];
+//
+//            self->_userDataArray = [dict1 objectForKey:@"data"];
+//
+//            //  NSLog(@"Mutable User Array is--%@",_userDataArray);
+//
+//
+//            self->_nextPageUrl =[dict1 objectForKey:@"next_page_url"];
+//            // NSLog(@"Next page url is : %@",_nextPageUrl);
+//
+//            self->_path1=[dict1 objectForKey:@"path"];
+//
+//            self->_currentPage=[[dict1 objectForKey:@"current_page"] integerValue];
+//            self->_totalTickets=[[dict1 objectForKey:@"total"] integerValue];
+//            self->_totalPages=[[dict1 objectForKey:@"last_page"] integerValue];
+//
+//
+//            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [[AppDelegate sharedAppdelegate] hideProgressView];
+//
+//                    [self.tableview2 reloadData];
+//                    //  [self.tableview1 reloadData];
+//                });
+//            });
+//
+//        }
+//        NSLog(@"Thread-NO5-Search-closed");
+//
+//    }];
+//
+//
+//}
 
 //This method returns the number of rows (table cells) in a specified section.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

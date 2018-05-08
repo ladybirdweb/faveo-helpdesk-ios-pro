@@ -205,6 +205,18 @@
         [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"user"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"Your role has beed changed to user. Contact to your Admin and try to login again." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Methon not allowed"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
     else{
     
        [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
@@ -403,32 +415,14 @@
                     
                     if (msg) {
                         
-                        if([msg isEqualToString:@"Error-401"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                        }
-                        else
-                        if([msg isEqualToString:@"Error-402"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                        }
-                        else if([msg isEqualToString:@"Error-403"])
+
+                       if([msg isEqualToString:@"Error-403"])
                         {
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             
                         }
-                        else if([msg isEqualToString:@"Error-403"] && [self->globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
-                        {
-                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                           
-                        }
-                        
+                    
                         else if([msg isEqualToString:@"Error-422"])
                         {
                             NSLog(@"Message is : %@",msg);
