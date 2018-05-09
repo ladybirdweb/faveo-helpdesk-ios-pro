@@ -105,8 +105,8 @@
         }
         
         NSString *fname= [NSString stringWithFormat:@"%@",globalVariables.First_name];
-         NSString *lname= [NSString stringWithFormat:@"%@",globalVariables.Last_name];
-     NSString *userName= [NSString stringWithFormat:@"%@",globalVariables.userNameInUserList];
+        NSString *lname= [NSString stringWithFormat:@"%@",globalVariables.Last_name];
+        NSString *userName= [NSString stringWithFormat:@"%@",globalVariables.userNameInUserList];
         
         [Utils isEmpty:fname];
         [Utils isEmpty:lname];

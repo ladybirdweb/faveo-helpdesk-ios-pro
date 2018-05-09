@@ -324,6 +324,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
         globalVariables.First_name= [requester objectForKey:@"first_name"];
         globalVariables.Last_name= [requester objectForKey:@"last_name"];
         
+        globalVariables.userNameInUserList= [requester objectForKey:@"user_name"];
         globalVariables.emailInUserList= [requester objectForKey:@"email"];
         
         globalVariables.mobileCode1= @"";

@@ -74,23 +74,35 @@
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Conversations",nil)];
    
-    if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
-    {
-        NSString *msg=@"";
-        [utils showAlertWithMessage:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again." sendViewController:self];
-        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
-        [[AppDelegate sharedAppdelegate] hideProgressView];
-    }
-    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"API disabled"])
-    {   NSString *msg=@"";
-        [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
-        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
-        [[AppDelegate sharedAppdelegate] hideProgressView];
-    }
-    else{
+//    if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
+//    {
+//        NSString *msg=@"";
+//        [utils showAlertWithMessage:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again." sendViewController:self];
+//        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+//        [[AppDelegate sharedAppdelegate] hideProgressView];
+//    }
+//    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"API disabled"])
+//    {   NSString *msg=@"";
+//        [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+//        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+//        [[AppDelegate sharedAppdelegate] hideProgressView];
+//    }
+//    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"user"])
+//    {   NSString *msg=@"";
+//        [utils showAlertWithMessage:@"Your role has beed changed to user. Contact to your Admin and try to login again." sendViewController:self];
+//        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+//        [[AppDelegate sharedAppdelegate] hideProgressView];
+//    }
+//    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Methon not allowed"])
+//    {   NSString *msg=@"";
+//        [utils showAlertWithMessage:@"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+//        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+//        [[AppDelegate sharedAppdelegate] hideProgressView];
+//    }
+//    else{
        [self reload];
         
-    }
+   // }
     
 }
 

@@ -319,8 +319,14 @@
     {
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        if([exception.reason isEqualToString:@"-[NSNull isEqualToString:]: unrecognized selector sent to instance 0x1b5190878"])
+        {
+            [utils showAlertWithMessage:@"Can not merge these ticket, because this tickets having empty email." sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+        }else{
         [utils showAlertWithMessage:exception.name sendViewController:self];
         [[AppDelegate sharedAppdelegate] hideProgressView];
+        }
         return;
     }
     @finally
@@ -722,7 +728,7 @@
             
         }
     }
-    NSLog(@"Thread-NO2-getDependencies()-closed");
+    
 }
 
 
