@@ -52,6 +52,7 @@
 @implementation ClientListViewController
 
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad]; // userFilterId
     
@@ -91,6 +92,7 @@
     // Do any additional setup after loading the view.
 }
 
+// After clicking this navigation button, it will redirect to search view controller
 - (IBAction)searchButtonClicked {
     
     TicketSearchViewController * search=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketSearchViewControllerId"];
@@ -99,14 +101,14 @@
     
 }
 
+// This method calls an API for getting tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)reload{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     { [refresh endRefreshing];
         //connection unavailable
-        [[AppDelegate sharedAppdelegate] hideProgressView];
-     //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
+       
+     
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
         }
@@ -125,7 +127,7 @@
                               canBeDismissedByUser:YES];
 
         
-    
+     [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }else{
         // http://jamboreebliss.com/sayar/public/api/v2/helpdesk/user/filter?api_key=&token=&role=
@@ -197,11 +199,17 @@
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
                     }
+                    else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                    }
+                    
                     else if([msg isEqualToString:@"Error-404"])
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
                     }
                     else{
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -210,6 +218,7 @@
                 }else if(error)  {
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
+                     [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
                 return ;
             }
@@ -222,7 +231,6 @@
             }
             if ([msg isEqualToString:@"tokenNotRefreshed"]) {
                 
-                // [[AppDelegate sharedAppdelegate] hideProgressView];
                 [self->utils showAlertWithMessage:@"Your HELPDESK URL or your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 
@@ -242,9 +250,11 @@
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [self->refresh endRefreshing];
                         [self.tableView reloadData];
+                        [self->refresh endRefreshing];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                       
+                        
                     });
                 });
                
@@ -269,6 +279,7 @@
     }
 }
 
+//This method tells the delegate the table view is about to draw a cell for a particular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -299,6 +310,8 @@
     }
 }
 
+
+// This method calls an API for getting next page of user list, it will returns an JSON which contains 10 records with user details.
 -(void)loadMore{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -391,7 +404,7 @@
     }
 }
 
-
+//This method asks the data source to return the number of sections in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.currentPage == self.totalPages
         || self.totalTickets == _mutableArray.count) {
@@ -400,6 +413,7 @@
     return _mutableArray.count + 1;
 }
 
+//This method returns the number of rows (table cells) in a specified section.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger numOfSections = 0;
@@ -422,7 +436,7 @@
     return numOfSections;
 }
 
-
+// This method asks the data source for a cell to insert in a particular location of the table view.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row == [_mutableArray count]) {
@@ -585,6 +599,7 @@
     }
 }
 
+//This method tells the delegate that the specified row is now selected.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
@@ -615,6 +630,8 @@
     [self.navigationController pushViewController:td animated:YES];
 }
 
+
+// This method used to show refresh behind the table view.
 -(void)addUIRefresh{
     
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;

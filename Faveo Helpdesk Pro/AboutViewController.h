@@ -46,5 +46,6 @@
 - (IBAction)btnClicked:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextView *textview;
 
+@property (weak, nonatomic) IBOutlet UILabel *versionNumberLabel;
 
 @end

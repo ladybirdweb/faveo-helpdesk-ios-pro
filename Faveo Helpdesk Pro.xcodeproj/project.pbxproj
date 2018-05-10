@@ -141,6 +141,7 @@
 		06AB96DC2045311500FDE260 /* SupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AB96DB2045311500FDE260 /* SupportViewController.m */; };
 		06B8B01D20287E4300E5E8CA /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */; };
 		06BB2A3B202C3B3F00B33C43 /* systemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06BB2A3A202C3B3E00B33C43 /* systemIcon.png */; };
+		06C93256209C75BA00E9D715 /* ViewCCList.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C93255209C75BA00E9D715 /* ViewCCList.m */; };
 		06CB597320639398001680AD /* tools.png in Resources */ = {isa = PBXBuildFile; fileRef = 06CB597220639397001680AD /* tools.png */; };
 		06CB597620639817001680AD /* AttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CB597520639817001680AD /* AttachmentViewController.m */; };
 		A78A1930079407E49185951F /* libPods-Faveo Helpdesk Pro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0CE4AF7BE3727B7D5114AF /* libPods-Faveo Helpdesk Pro.a */; };
@@ -304,6 +305,7 @@
 		0609ADB520398E2A00DCDC85 /* view122.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view122.png; sourceTree = "<group>"; };
 		0609ADB720399B8000DCDC85 /* deActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deActive.png; sourceTree = "<group>"; };
 		0609ADB820399B8100DCDC85 /* Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Active.png; sourceTree = "<group>"; };
+		0610130C2091A7CE00E348DB /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		06171510205901B700E3E14D /* BIZPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIZPopupViewController.m; sourceTree = "<group>"; };
 		06171511205901B900E3E14D /* UIViewController+BIZChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BIZChildViewController.h"; sourceTree = "<group>"; };
 		06171512205901BA00E3E14D /* BIZPopupViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIZPopupViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -329,6 +331,9 @@
 		0618FA7F204E54C9004D2C3F /* InternalNoteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InternalNoteViewController.m; sourceTree = "<group>"; };
 		0618FA81204E9A87004D2C3F /* addCCView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = addCCView.h; sourceTree = "<group>"; };
 		0618FA82204E9A87004D2C3F /* addCCView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = addCCView.m; sourceTree = "<group>"; };
+		061BC85C2092EF830013EA44 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
+		061BC85D2092EF870013EA44 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Main.strings"; sourceTree = "<group>"; };
+		061BC85E2092EFCE0013EA44 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		061CAA3920525281007EA8B6 /* TicketSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketSearchViewController.h; sourceTree = "<group>"; };
 		061CAA3A20525281007EA8B6 /* TicketSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketSearchViewController.m; sourceTree = "<group>"; };
 		061E30FB2035426800603D22 /* LoginListMenuTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginListMenuTable.h; sourceTree = "<group>"; };
@@ -462,6 +467,8 @@
 		06B8B01B20287E4200E5E8CA /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
 		06BB2A3A202C3B3E00B33C43 /* systemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = systemIcon.png; sourceTree = "<group>"; };
+		06C93254209C75BA00E9D715 /* ViewCCList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewCCList.h; sourceTree = "<group>"; };
+		06C93255209C75BA00E9D715 /* ViewCCList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewCCList.m; sourceTree = "<group>"; };
 		06CB597220639397001680AD /* tools.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tools.png; sourceTree = "<group>"; };
 		06CB597420639817001680AD /* AttachmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachmentViewController.h; sourceTree = "<group>"; };
 		06CB597520639817001680AD /* AttachmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachmentViewController.m; sourceTree = "<group>"; };
@@ -718,6 +725,8 @@
 				0618FA7C204E5367004D2C3F /* ReplyTicketViewController.m */,
 				0618FA81204E9A87004D2C3F /* addCCView.h */,
 				0618FA82204E9A87004D2C3F /* addCCView.m */,
+				06C93254209C75BA00E9D715 /* ViewCCList.h */,
+				06C93255209C75BA00E9D715 /* ViewCCList.m */,
 				0618FA7E204E54C9004D2C3F /* InternalNoteViewController.h */,
 				0618FA7F204E54C9004D2C3F /* InternalNoteViewController.m */,
 				061CAA3920525281007EA8B6 /* TicketSearchViewController.h */,
@@ -1870,6 +1879,7 @@
 				0634EBB62038755F002CB4E8 /* UserAgentFilterView.m in Sources */,
 				06099CCE203AD21A0060831A /* MergeTicketViewCell2.m in Sources */,
 				D9AE083B2007236700DD9E94 /* CFMultistageDropdownMenuView.m in Sources */,
+				06C93256209C75BA00E9D715 /* ViewCCList.m in Sources */,
 				061E311420357C6400603D22 /* otherFeatureMenuList.m in Sources */,
 				D9AAFAB91F5D475400891CA5 /* FTPopOverMenu.m in Sources */,
 				D9EB9F631E07C2D00001115F /* Data.m in Sources */,
@@ -1964,6 +1974,8 @@
 				D93D3D581EA0BB1800C1EE7E /* ru */,
 				D9166B141FFB4ACE005B4776 /* en */,
 				D9B2220D200C628C00607F11 /* nb */,
+				0610130C2091A7CE00E348DB /* ar */,
+				061BC85E2092EFCE0013EA44 /* pt-PT */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1994,6 +2006,8 @@
 				D93D3D511EA0BACE00C1EE7E /* nl */,
 				D93D3D561EA0BB1000C1EE7E /* ru */,
 				D9B2220B200C628B00607F11 /* nb */,
+				061BC85C2092EF830013EA44 /* ar */,
+				061BC85D2092EF870013EA44 /* pt-PT */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

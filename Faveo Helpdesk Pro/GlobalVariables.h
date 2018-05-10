@@ -212,6 +212,8 @@
 
 @property (strong, nonatomic) NSArray *collaboratorListArray;
 
+@property (strong, nonatomic) NSArray *ccListArray1;
+
 
 @end
 

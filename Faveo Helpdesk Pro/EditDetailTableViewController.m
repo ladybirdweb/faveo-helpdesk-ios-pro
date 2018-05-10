@@ -53,6 +53,8 @@
     NSMutableArray * status_idArray;
     NSMutableArray * source_idArray;
     NSMutableArray * staff_idArray;
+    
+    NSMutableArray * assignArray;
 
 }
 
@@ -70,6 +72,7 @@
 
 @implementation EditDetailTableViewController
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -85,6 +88,7 @@
     type_id=[[NSNumber alloc]init];
     staff_id=[[NSNumber alloc]init];
     
+    assignArray = [[NSMutableArray alloc]init];
     
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Done",nil) style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
@@ -117,6 +121,7 @@
    
 }
 
+//this method tells the delegate that the text or attributes in the specified text view were changed by the user.
 - (void)textViewDidChange:(UITextView *)textView
 {
     CGFloat fixedWidth = textView.frame.size.width;
@@ -126,7 +131,7 @@
     textView.frame = newFrame;
 }
 
-
+//This method notifies the view controller that its view is about to be removed from a view hierarchy.
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
@@ -137,6 +142,7 @@
     [self.subjectTextView resignFirstResponder];
 }
 
+// This method calls an API for getting tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)reload{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -171,7 +177,7 @@
                 
                 if (error) {
                     
-                    [self->utils showAlertWithMessage:@"Error" sendViewController:self];
+                    [self->utils showAlertWithMessage:@"Error1" sendViewController:self];
                     NSLog(@"Thread-NO4-getDetail-Refresh-error == %@",error.localizedDescription);
                     
                     return ;
@@ -182,14 +188,24 @@
                     //[_activityIndicatorObject stopAnimating];
                     [self->_imgViewLoading setHidden:YES];
                     
-                    if (msg) {
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                        
-                    }else if([msg isEqualToString:@"Error-422"])
+                    if([msg isEqualToString:@"Error-422"])
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
                     }
+                    
+                    else if([msg isEqualToString:@"Error-402"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
+                    }
+                    
+                    else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                    }
+                    
                     else if([msg isEqualToString:@"Error-404"])
                     {
                         NSLog(@"Message is : %@",msg);
@@ -200,11 +216,7 @@
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
                     }
-                    else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
-                    }
+                    
                     else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
                     {
                         NSLog(@"Message is : %@",msg);
@@ -212,6 +224,8 @@
                     }
                     
                     else if(error)  {
+                        
+                        NSLog(@"Error is : %@",error);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-NO4-getInbox-Refresh-error == %@",error.localizedDescription);
                     }
@@ -526,6 +540,8 @@
             }
         }
         
+        
+        
         _deptArray=[deptMU copy];
         _helptopicsArray=[helptopicMU copy];
         _slaPlansArray=[slaMU copy];
@@ -533,7 +549,15 @@
         _statusArray=[statusMU copy];
         _sourceArray=[sourceMU copy];
         _typeArray=[typeMU copy];
-        _assignArray=[staffMU copy];
+        assignArray=[staffMU copy];
+        
+        
+      _helptopicsArray = [_helptopicsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+      _priorityArray = [_priorityArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+      _sourceArray = [_sourceArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+      _typeArray =  [_typeArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
+        //[assignArray sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         
     }@catch (NSException *exception)
     {
@@ -687,11 +711,11 @@
 @try{
     [self.view endEditing:YES];
     [_assinTextField resignFirstResponder];
-    if (!_assignArray||!_assignArray.count) {
+    if (!assignArray||!assignArray.count) {
         _assinTextField.text=NSLocalizedString(@"Not Available",nil);
         source_id=0;
     }else{
-        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+        [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
      }
 }@catch (NSException *exception)
     {
@@ -713,7 +737,7 @@
     staff_id=(staff_idArray)[(NSUInteger) [selectedIndex intValue]];
     NSLog(@"Id is : %@",staff_id);
     
-    self.assinTextField.text = (_assignArray)[(NSUInteger) [selectedIndex intValue]];
+    self.assinTextField.text = (assignArray)[(NSUInteger) [selectedIndex intValue]];
     NSLog(@"TextField value is : %@", _assinTextField.text);
 }
 
@@ -736,7 +760,7 @@
 
 
 
-
+// After clicking on submit/save button below method is called
 -(void)save{
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
@@ -834,11 +858,12 @@
                             [self->utils showAlertWithMessage:@"Access Denied. Either your credentials has been changed or You are not an Agent/Admin." sendViewController:self];
                         }
                         
-                        else if([msg isEqualToString:@"Error-402"])
+                        if([msg isEqualToString:@"Error-402"])
                         {
                             NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
                         }
+                        
                         else{
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                         }
@@ -1044,6 +1069,8 @@
     [textField resignFirstResponder];
     return YES;
 }
+
+//This method the delegate if the specified text should be changed.
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     

@@ -115,12 +115,21 @@
 
 
 
+//- (IBAction)urlButton:(id)sender {
+//
+//    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Verifying URL","")];
+//    [self performSelector:@selector(URLValidationMethod) withObject:self afterDelay:1.0];
+//    //[self URLValidationMethod];
+//}
+
+// After cling next arroe this method is called
 - (IBAction)urlButton:(id)sender {
     
     
     [self URLValidationMethod];
 }
 
+// This method validates the URL
 -(void)URLValidationMethod
 {
     
@@ -128,7 +137,6 @@
     
     
     if (self.urlTextfield.text.length==0){
-        // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please Enter the URL", "")  backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
         
         [utils showAlertWithMessage:@"Please Enter the URL" sendViewController:self];
         
@@ -146,8 +154,6 @@
             
             if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
             {
-    
-                //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
                 
                 [RMessage
                  showNotificationWithTitle:NSLocalizedString(@"Something failed", nil)
@@ -215,23 +221,24 @@
                             else if(statusCode == 400)
                             {
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                                [[AppDelegate sharedAppdelegate] hideProgressView];
+                                
                                 [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+                                [[AppDelegate sharedAppdelegate] hideProgressView];
                             }
-                           else if (statusCode == 401 || statusCode == 400) {
+                            else if (statusCode == 401 || statusCode == 400) {
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
                                 [self->utils showAlertWithMessage: NSLocalizedString(@"API is disabled in web, please enable it from Admin panel.", nil) sendViewController:self];
                                 //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
                                 return;
                             }
-                           else if (statusCode == 500) {
-                               NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                               [[AppDelegate sharedAppdelegate] hideProgressView];
-                               [self->utils showAlertWithMessage: NSLocalizedString(@"Internal Server Error. Something has gone wrong on the website's server", nil) sendViewController:self];
-                               //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
-                               return;
-                           }
+                            else if (statusCode == 500) {
+                                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                                [[AppDelegate sharedAppdelegate] hideProgressView];
+                                [self->utils showAlertWithMessage: NSLocalizedString(@"Internal Server Error. Something has gone wrong on the website's server", nil) sendViewController:self];
+                                //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
+                                return;
+                            }
                             else{
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                                 [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -245,22 +252,34 @@
                     NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     
                     NSLog(@"Get your response == %@", replyStr);
-                    // if status code is 402 the json is
-//                    {
-//                        "result": {
-//                            "fails": "api disabled"
-//                        }
-//                    }
-                    
-                    
-                    @try{
-                        if ([replyStr containsString:@"success"]) {
+                
+                    @try{  //result
+                        if ([replyStr containsString:@"message"]) {
                             
-                            NSLog(@"Success");
+                            NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                             
-                            [self verifyBilling];
+                            NSString *msg = [jsonData objectForKey:@"message"];
+                            if([msg isEqualToString:@"API disabled"])
+                            {
+                                [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+                                [[AppDelegate sharedAppdelegate] hideProgressView];
+                                
+                            }
                             
+                        }else if ([replyStr containsString:@"result"]) {
                             
+                         NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                            
+                         NSString *msg = [jsonData objectForKey:@"result"];
+                            
+                            if([msg isEqualToString:@"success"])
+                            {
+                                NSLog(@"Success");
+                                
+                                [self verifyBilling];
+                                
+                            }
+                           
                         }else{
                             
                             [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -272,7 +291,7 @@
                         NSLog( @"Name: %@", exception.name);
                         NSLog( @"Reason: %@", exception.reason );
                         [self->utils showAlertWithMessage:exception.name sendViewController:self];
-
+                        
                         return;
                     }
                     @finally
@@ -290,6 +309,9 @@
             [utils showAlertWithMessage:NSLocalizedString(@"Please Enter a valid URL",nil) sendViewController:self];
     }
 }
+
+
+
 -(void)viewDidAppear:(BOOL)animated{
     [self.urlTextfield becomeFirstResponder];
 
@@ -308,6 +330,7 @@
 }
 
 
+// login button method
 - (IBAction)btnLogin:(id)sender {
     
     if (((self.userNameTextField.text.length==0 || self.passcodeTextField.text.length==0)))
@@ -325,8 +348,7 @@
     else {
         if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
         {
-            //connection unavailable
-           // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+           
             [RMessage
              showNotificationWithTitle:NSLocalizedString(@"Something failed", nil)
              subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check it!", nil)
@@ -367,30 +389,15 @@
                     NSLog(@"Status code in Login : %ld",(long)statusCode);
                     
                     if (statusCode != 200) {
-                         if (statusCode == 401) {
-                            NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [self->utils showAlertWithMessage: NSLocalizedString(@"API is disabled in web, please enable it from Admin panel.", nil) sendViewController:self];
-                            //[utils showAlertWithMessage:@"Wrong Username or Password" sendViewController:self];
-                            return;
-                        }else if(statusCode == 400)
-                        {
-                            NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
-                        }
-                       else if(statusCode == 404)
+                        
+                    
+                      if(statusCode == 404)
                         {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             [self->utils showAlertWithMessage:@"The requested URL was not found on this server." sendViewController:self];
                         }
-                        else if(statusCode == 400)
-                        {
-                            NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [self->utils showAlertWithMessage:@"The request could not be understood by the server due to malformed syntax." sendViewController:self];
-                        }
+                    
                         else if(statusCode == 405)
                         {
                             NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
@@ -403,128 +410,136 @@
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             [self->utils showAlertWithMessage:@"Internal Server Error. Something has gone wrong on the website's server." sendViewController:self];
                         }
-                        else{
-                            NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                            [self->utils showAlertWithMessage:NSLocalizedString(@"Unknown Error !", nil)sendViewController:self];
-                            return;
-                        }
+                        
                     }
                     
                 }
                 
                 NSString *replyStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 
-        
+                NSLog(@"Login Response is : %@",replyStr);
                 
+                NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                NSLog(@"JSON is : %@",jsonData);
         
-                if ([replyStr containsString:@"success"] || [replyStr containsString:@"data"]) {
+                //main if 1
+                if ([replyStr containsString:@"success"] && [replyStr containsString:@"message"] ) {
                     
-                    @try{
+            
+                        NSString *msg=[jsonData objectForKey:@"message"];
                         
-                        NSDictionary *jsonData=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                        
-                        NSLog(@"JSON is : %@",jsonData);
-                        NSLog(@"JSON is : %@",jsonData);
-                        
-                        // [userdefaults setObject:[jsonData objectForKey:@"token"] forKey:@"token"];
-                       
-                        NSDictionary *userDataDict=[jsonData objectForKey:@"data"];
-                        NSString *tokenString=[NSString stringWithFormat:@"%@",[userDataDict objectForKey:@"token"]];
-                        NSLog(@"Token is : %@",tokenString);
-                        
-                        [self->userdefaults setObject:[userDataDict objectForKey:@"token"] forKey:@"token"];
-                        
-                        NSDictionary *userDetailsDict=[userDataDict objectForKey:@"user"];
-                        
-                        NSString * userId=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"id"]];
-                        
-                        NSString * firstName=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"first_name"]];
-                        
-                        NSString * lastName=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"last_name"]];
-                        
-                        NSString * userName=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"user_name"]];
-                        
-                      //  NSString * userEmail=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"email"]];
-                        
-                        NSString * userProfilePic=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"profile_pic"]];
-                        
-                         NSString * userRole=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"role"]];
-                        
-                        
-                        
-                        
-                        [self->userdefaults setObject:userId forKey:@"user_id"];
-                        [self->userdefaults setObject:userProfilePic forKey:@"profile_pic"];
-                        [self->userdefaults setObject:userRole forKey:@"role"];
-                        
-                        NSString *profileName;
-                        if ([userName isEqualToString:@""]) {
-                            profileName=userName;
-                        }else{
-                            profileName=[NSString stringWithFormat:@"%@ %@",firstName,lastName];
-                        }
-                        
-                        
-                        [self->userdefaults setObject:profileName forKey:@"profile_name"];
-                        [self->userdefaults setObject:self->baseURL forKey:@"baseURL"];
-                        [self->userdefaults setObject:self.userNameTextField.text forKey:@"username"];
-                        
-                        [self->userdefaults setObject:self.passcodeTextField.text forKey:@"password"];
-                        [self->userdefaults setBool:YES forKey:@"loginSuccess"];
-                        [self->userdefaults synchronize];
-                        
-                
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            
-                        if([userRole isEqualToString:@"admin"] || [userRole isEqualToString:@"agent"]){
-                          
-                                [RKDropdownAlert title:NSLocalizedString(@"Welcome.",nil) message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
-                    
-                            
-                            [self sendDeviceToken];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                            InboxViewController *inboxVC=[self.storyboard  instantiateViewControllerWithIdentifier:@"InboxID"];
-                            [self.navigationController pushViewController:inboxVC animated:YES];
-                            //[self.navigationController popViewControllerAnimated:YES];
-                            [[self navigationController] setNavigationBarHidden:NO];
-                        }else
+                            if([msg isEqualToString:@"Invalid credentials"])
                             {
-                                [self->utils showAlertWithMessage:@"Invalid entry for user. This app is used by Agent and Admin only." sendViewController:self];
+                                [self->utils showAlertWithMessage:@"Invalid Credentials.Enter valid username or password" sendViewController:self];
                                  [[AppDelegate sharedAppdelegate] hideProgressView];
                             }
-                        });
-                    }
-                    @catch (NSException *exception)
-                    {
-                        NSLog( @"Name: %@", exception.name);
-                        NSLog( @"Reason: %@", exception.reason );
-                        [self->utils showAlertWithMessage:exception.name sendViewController:self];
-
-                        return;
-                    }
-                    @finally
-                    {
-                        NSLog( @" I am in Login method in Login ViewController" );
+                            else if([msg isEqualToString:@"API disabled"])
+                            {
+                                [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+                                 [[AppDelegate sharedAppdelegate] hideProgressView];
+                            }
+                            
+                }
                         
-                    }
+               else         //success = true
+               if ([replyStr containsString:@"success"] && [replyStr containsString:@"data"] ) {
+                        {
+                            
+                            NSDictionary *userDataDict=[jsonData objectForKey:@"data"];
+                            NSString *tokenString=[NSString stringWithFormat:@"%@",[userDataDict objectForKey:@"token"]];
+                            NSLog(@"Token is : %@",tokenString);
+                            
+                            [self->userdefaults setObject:[userDataDict objectForKey:@"token"] forKey:@"token"];
+                            
+                            NSDictionary *userDetailsDict=[userDataDict objectForKey:@"user"];
+                            
+                            NSString * userId=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"id"]];
+                            
+                            NSString * firstName=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"first_name"]];
+                            
+                            NSString * lastName=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"last_name"]];
+                            
+                            NSString * userName=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"user_name"]];
+                            
+                            NSString * userProfilePic=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"profile_pic"]];
+                            
+                            NSString * userRole=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"role"]];
+                            
+                            
+                            
+                            
+                            [self->userdefaults setObject:userId forKey:@"user_id"];
+                            [self->userdefaults setObject:userProfilePic forKey:@"profile_pic"];
+                            [self->userdefaults setObject:userRole forKey:@"role"];
+                            
+                            NSString *profileName;
+                            if ([userName isEqualToString:@""]) {
+                                profileName=userName;
+                            }else{
+                                profileName=[NSString stringWithFormat:@"%@ %@",firstName,lastName];
+                            }
+                            
+                            
+                            [self->userdefaults setObject:profileName forKey:@"profile_name"];
+                            [self->userdefaults setObject:self->baseURL forKey:@"baseURL"];
+                            [self->userdefaults setObject:self.userNameTextField.text forKey:@"username"];
+                            
+                            [self->userdefaults setObject:self.passcodeTextField.text forKey:@"password"];
+                            [self->userdefaults setBool:YES forKey:@"loginSuccess"];
+                            [self->userdefaults synchronize];
+                            
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                
+                                if([userRole isEqualToString:@"admin"] || [userRole isEqualToString:@"agent"]){
+                                    
+                                    [RKDropdownAlert title:NSLocalizedString(@"Welcome.",nil) message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                                    
+                                    
+                                    
+                                    [self sendDeviceToken];
+                                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                                    InboxViewController *inboxVC=[self.storyboard  instantiateViewControllerWithIdentifier:@"InboxID"];
+                                    [self.navigationController pushViewController:inboxVC animated:YES];
+                                    //[self.navigationController popViewControllerAnimated:YES];
+                                    [[self navigationController] setNavigationBarHidden:NO];
+                                }else
+                                {
+                                    [self->utils showAlertWithMessage:@"Invalid entry for user. This app is used by Agent and Admin only." sendViewController:self];
+                                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                                }
+                            });
+                            
+                            
+                        }   //end sucess=true if  here
                     
-                }else {
+                        
+                }else
+                {
+                    
+                    
+                    [self->utils showAlertWithMessage:@"Whoops! Something went Wrong! Please try again." sendViewController:self];
                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     
-                    if ([replyStr containsString:@"invalid_credentials"]) {
-                        
-                        [self->utils showAlertWithMessage:@"Enter valid username or password" sendViewController:self];
-                    }else{
-                        
-                        [self->utils showAlertWithMessage:@"invalid_credentials" sendViewController:self];
-                    }
                 }
                 
                 
-                NSLog(@"Got response %@ with error %@.\n", response, error);
+                
+                //end sucess =true type
+//                    @catch (NSException *exception)
+//                    {
+//                        NSLog( @"Name: %@", exception.name);
+//                        NSLog( @"Reason: %@", exception.reason );
+//                        [self->utils showAlertWithMessage:exception.name sendViewController:self];
+//                        [[AppDelegate sharedAppdelegate] hideProgressView];
+//                        return;
+//                    }
+//                    @finally
+//                    {
+//                        NSLog( @" I am in Login method in Login ViewController" );
+//
+//                    }
+              
+        
             }] resume];
             
         }
@@ -533,67 +548,89 @@
     
 }
 
+//It will verify the URL either paid or not
 -(void)verifyBilling{
-  
+    
     NSString *url=[NSString stringWithFormat:@"%@?url=%@",BILLING_API,baseURL];
     NSLog(@"url at VeryfuBillingIS : %@",url);
-   
-@try{
-    MyWebservices *webservices=[MyWebservices sharedInstance];
-    [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-        if (error || [msg containsString:@"Error"]) {
-            [[AppDelegate sharedAppdelegate] hideProgressView];
-            if (msg) {
-                if([msg isEqualToString:@"Error-402"])
-                {
-                    NSLog(@"Message is : %@",msg);
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                }
-                
-                else{
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                    NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
-                }
-                
-            }else if(error)  {
-                [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
-            }
-            return ;
-        }
+    
+    @try{
         
-        if (json) {
-            NSLog(@"Thread-sendAPNS-token-json-%@",json);
-            // if([[json objectForKey:@"result"] isEqualToString:@"success"]){
-            NSLog(@"Billing successful!");
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                //  [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Verified URL",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                
-                [RMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)
-                                           subtitle:NSLocalizedString(@"URL Verified successfully !", nil)
-                                               type:RMessageTypeSuccess
-                                     customTypeName:nil
-                                           callback:nil];
+        MyWebservices *webservices=[MyWebservices sharedInstance];
+        
+        [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
+            
+            if (error || [msg containsString:@"Error"]) {
                 
                 [[AppDelegate sharedAppdelegate] hideProgressView];
-                [self.companyURLview setHidden:YES];
-                [self.loginView setHidden:NO];
-                [self->utils viewSlideInFromRightToLeft:self.loginView];
-            });
-            [self->userdefaults setObject:[self->baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
-            [self->userdefaults synchronize];
-        
+                
+                if (msg) {
+                    if([msg isEqualToString:@"Error-402"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
+                    }
+                    
+                    else{
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                        NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
+                    }
+                    
+                }else if(error)  {
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
+                }
+                return ;
+            }
             
-        }
-        
-    }];
-}@catch (NSException *exception)
+            if (json) {
+                NSLog(@"Thread-sendAPNS-token-json-%@",json);
+               
+                NSString * resultMsg= [json objectForKey:@"result"];
+                
+                if([resultMsg isEqualToString:@"fails"])
+                {
+                     [self->utils showAlertWithMessage:@"Your HELPDESK URL is not verified. This URL is not found in FAVEO HELPDESK BILLING." sendViewController:self];
+                    
+                     [[AppDelegate sharedAppdelegate] hideProgressView];
+                }
+                else if([resultMsg isEqualToString:@"success"])
+                {
+                    NSLog(@"Billing successful!");
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        
+                        [RMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)
+                                                   subtitle:NSLocalizedString(@"URL Verified successfully !", nil)
+                                                       type:RMessageTypeSuccess
+                                             customTypeName:nil
+                                                   callback:nil];
+                        
+                        [self.companyURLview setHidden:YES];
+                        [self.loginView setHidden:NO];
+                        [self->utils viewSlideInFromRightToLeft:self.loginView];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
+                    });
+                    [self->userdefaults setObject:[self->baseURL stringByAppendingString:@"api/v1/"] forKey:@"companyURL"];
+                    [self->userdefaults synchronize];
+                    
+                }else{
+                    
+                    [self->utils showAlertWithMessage:@"Something went wrong in Billing. Please try later." sendViewController:self];
+                    
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                }
+            
+            }
+            
+        }];
+    }@catch (NSException *exception)
     {
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         [utils showAlertWithMessage:exception.name sendViewController:self];
-
+        
         return;
     }
     @finally
@@ -608,7 +645,7 @@
     return YES;
 }
 
-
+//it will send an token to Firebase with user details (Logged user)
 -(void)sendDeviceToken{
     NSString *refreshedToken =  [[FIRInstanceID instanceID] token];
     NSLog(@"refreshed token  %@",refreshedToken);
@@ -621,10 +658,10 @@
         if (error || [msg containsString:@"Error"]) {
             if (msg) {
                 
-                // [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+        
                 NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
             }else if(error)  {
-                //                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                //
                 NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
             }
             return ;
@@ -648,82 +685,6 @@
         
     }
 }
-
-- (IBAction)googleClicked:(id)sender {
-    
-//    NSURL *url = [NSURL URLWithString:@"http://www.jamboreebliss.com/avinash/Faveo-Helpdesk-Pro/public/social/login/redirect/google"];
-//    if ([[UIApplication sharedApplication] canOpenURL:url]) {
-//        [[UIApplication sharedApplication] openURL:url];
-//    }else {
-//
-//    }
-    
-    NSString *url=[NSString stringWithFormat:@"%@social/login/facebook",baseURL];
-    NSLog(@"URL at social login : %@",url);
-    
-    @try{
-        MyWebservices *webservices=[MyWebservices sharedInstance];
-        [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-            if (error || [msg containsString:@"Error"]) {
-                [[AppDelegate sharedAppdelegate] hideProgressView];
-                if (msg) {
-                    if([msg isEqualToString:@"Error-402"])
-                    {
-                        NSLog(@"Message is : %@",msg);
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                    }else{
-                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
-                        NSLog(@"Thread-verifySocialFacebook-error == %@",error.localizedDescription);
-                    }
-                    
-                }else if(error)  {
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
-                    NSLog(@"Thread-verifySocialFacebook-error == %@",error.localizedDescription);
-                }
-                return ;
-            }
-            
-            if (json) {
-                NSLog(@"JSO-verifySocialFacebook-is: %@",json);
-            
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    NSString * str=[json objectForKey:@"result"];
-                    if([str isEqualToString:@"success"])
-                    {
-                        
-                        NSString *str2=[self->baseURL stringByAppendingString:@"social/login/facebook"];
-                   NSURL *url = [NSURL URLWithString:str2];
-                    if ([[UIApplication sharedApplication] canOpenURL:url])
-                       {
-                             [[UIApplication sharedApplication] openURL:url];
-                       }else {
-                        
-                            }
-                        
-                    }
-                
-                });
-
-            }
-            
-        }];
-    }@catch (NSException *exception)
-    {
-        [utils showAlertWithMessage:exception.name sendViewController:self];
-        NSLog( @"Name: %@", exception.name);
-        NSLog( @"Reason: %@", exception.reason );
-        return;
-    }
-    @finally
-    {
-        NSLog( @" I am in getDependencies method in Login ViewController" );
-        
-    }
-    
-    
-}
-
 
 
 @end

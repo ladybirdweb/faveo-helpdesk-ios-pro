@@ -132,7 +132,7 @@
 "cF2-G6-BWv.placeholder" = "Sélectionner Dept";
 
 /* Class = "UIButton"; normalTitle = "Website"; ObjectID = "dBA-ZM-uZ7"; */
-"dBA-ZM-uZ7.normalTitle" = "Website";
+"dBA-ZM-uZ7.normalTitle" = "Site Internet";
 
 /* Class = "UILabel"; text = "version: 1.0"; ObjectID = "dkk-3v-jiw"; */
 "dkk-3v-jiw.text" = "version: 1.0";
@@ -174,7 +174,7 @@
 "p7x-HL-8O0.text" = "Nom d'utilisateur";
 
 /* Class = "UILabel"; text = "Source"; ObjectID = "trq-0Z-m8M"; */
-"trq-0Z-m8M.text" = "Source";
+"trq-0Z-m8M.text" = "La source";
 
 /* Class = "UITextField"; placeholder = "Select Priority"; ObjectID = "uMQ-L7-CIX"; */
 "uMQ-L7-CIX.placeholder" = "Sélectionner Priorité";

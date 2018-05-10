@@ -30,6 +30,7 @@
 
 @implementation InternalNoteViewController
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -62,7 +63,7 @@
     [_contentTextView resignFirstResponder];
 }
 
-
+// After clcking submit/add button this method is called, here it will check that content textvies is empty or not. It it is empty then then it will show error message else it will call add internal note api
 - (IBAction)addButtonAction:(id)sender {
     
     if([_contentTextView.text isEqualToString:@""] || [_contentTextView.text length]==0)
@@ -111,14 +112,20 @@
             MyWebservices *webservices=[MyWebservices sharedInstance];
             
             [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-                [[AppDelegate sharedAppdelegate] hideProgressView];
+               
                 if (error || [msg containsString:@"Error"]) {
+                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (msg) {
                         if([msg isEqualToString:@"Error-401"])
                         {
                             NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                        }
+                        else if([msg isEqualToString:@"Error-402"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
                         }
                         else{
                         
@@ -129,6 +136,7 @@
                     }else if(error)  {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                         NSLog(@"Thread-InternalNote-Refresh-error == %@",error.localizedDescription);
+                         [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     
                     return ;
@@ -154,7 +162,7 @@
                           //  [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
 //                            TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
 //                            [self.navigationController pushViewController:td animated:YES];
-                            
+                             [self.view setNeedsDisplay];
                              [self.navigationController popViewControllerAnimated:YES];
                             
         
@@ -195,6 +203,7 @@
 
 }
 
+//This method asks the delegate whether the specified text should be replaced in the text view.
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     

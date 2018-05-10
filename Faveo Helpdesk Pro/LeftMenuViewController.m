@@ -63,8 +63,7 @@
     [self getDependencies];
     [self.tableView reloadData];
     [self update];
-    
-    
+
     
 }
 
@@ -75,6 +74,7 @@
     [self.tableView reloadData];
     //[self.tableView reloadData]
 }
+
 
 -(void)update{
 
@@ -93,6 +93,18 @@
     else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"API disabled"])
     {   NSString *msg=@"";
         [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"user"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"Your role has beed changed to user. Contact to your Admin and try to login again." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Methon not allowed"])
+    {   NSString *msg=@"";
+        [utils showAlertWithMessage:@"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
         [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }
@@ -152,31 +164,55 @@
     NSInteger unasigned = [globalVariables.UnassignedCount integerValue];
     NSInteger my_tickets = [globalVariables.MyticketsCount integerValue];
     
+    NSLog(@"My tickets are : %ld",(long)my_tickets);
+    
     if(open>99){
         _c1.text=@"99+";
-    }else
-        _c1.text=@(open).stringValue;
+    }else if(open<10){
+        _c1.text=[NSString stringWithFormat:@"0%ld",(long)open];
+    }
+    else{
+        _c1.text=@(open).stringValue; }
+    
     if(closed>99){
         _c4.text=@"99+";
-    }else
-        _c4.text=@(closed).stringValue;
+    }
+    else if(closed<10){
+        _c4.text=[NSString stringWithFormat:@"0%ld",(long)closed];
+    }else{
+        _c4.text=@(closed).stringValue; }
+    
     if(trash>99){
         _c5.text=@"99+";
+    }
+    else if(trash<10){
+        _c5.text=[NSString stringWithFormat:@"0%ld",(long)trash];
     }else
         _c5.text=@(trash).stringValue;
+    
     if(unasigned>99){
         _c3.text=@"99+";
-    }else
+    }else if(unasigned<10){
+        _c3.text=[NSString stringWithFormat:@"0%ld",(long)unasigned];
+    }
+    else
         _c3.text=@(unasigned).stringValue;
+    
     if(my_tickets>99){
         _c2.text=@"99+";
-    }else
+    }
+    else if(my_tickets<10){
+        _c2.text=[NSString stringWithFormat:@"0%ld",(long)my_tickets];
+    }
+    else
         _c2.text=@(my_tickets).stringValue;
     
     [self.tableView reloadData];
      [[AppDelegate sharedAppdelegate] hideProgressView];
     
 }
+
+
 -(void)getDependencies{
     
 
@@ -519,11 +555,10 @@
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
             if (error || [msg containsString:@"Error"]) {
                 if (msg) {
-                    
-                    // [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+                
                     NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
                 }else if(error)  {
-                    //                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+
                     NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
                 }
                 return ;

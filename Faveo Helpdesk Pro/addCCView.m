@@ -68,6 +68,7 @@
 
 @implementation addCCView
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -125,6 +126,8 @@
 {
     [_userSearchTextField resignFirstResponder];
 }
+
+// This method call the fetch collaborator associated with ticket, for getting count and number of cc list
 -(void)getCCCount
 {
     
@@ -143,6 +146,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+// This method asks the delegate whether the specified text should be replaced in the text view.
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSLog(@"Data is : %@",_userSearchTextField.text);
@@ -153,7 +158,7 @@
     return YES;
 }
 
-
+// Add cc api is called here
 -(void)collaboratorApiMethod:(NSString*)valueFromTextField
 {
     
@@ -412,15 +417,15 @@
     }else{
         
         NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/create?token=%@&ticket_id=%@&email=%@&user_id=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],globalVariables.iD,selectedUserEmail,selectedUserId];
-        
+        [[AppDelegate sharedAppdelegate] showProgressView];
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
             
             
             if (error || [msg containsString:@"Error"]) {
-                
+                [[AppDelegate sharedAppdelegate] hideProgressView];
                 if (msg) {
                     
                     if([msg isEqualToString:@"Error-401"])
@@ -448,6 +453,7 @@
                 }else if(error)  {
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
                     NSLog(@"Thread-NO4-Collaborator-Refresh-error == %@",error.localizedDescription);
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
                 
                 return ;
@@ -474,12 +480,15 @@
                         //Do not forget to import AnOldViewController.h
                         if ([controller isKindOfClass:[ReplyTicketViewController class]])
                         {
+                            ReplyTicketViewController *viewC;
                             [self getCCCount];
+                            
                             [self.navigationController popToViewController:controller animated:YES];
                            // [self.navigationController popViewControllerAnimated:YES];
-                            
+                      
                             [RKDropdownAlert title:@"Success" message:@"Added cc Successfully" backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
+                            [viewC viewDidLoad];
                             return;
                         }
                     }
@@ -495,6 +504,7 @@
                     if([obj isKindOfClass:[NSArray class]])
                     {
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Entered value is not valid. Please select the proper email."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                     }
                     
@@ -502,6 +512,7 @@
                 else
                 {
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Something wen wrong. Please try again later."] sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
             }
             

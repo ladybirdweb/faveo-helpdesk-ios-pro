@@ -82,7 +82,7 @@
     NSString *base64Encoded;
      NSString *typeMime;
     
-   UIActivityIndicatorView *activityIndicator1;
+   NSArray *ticketStatusArray;
    
 }
 
@@ -132,29 +132,31 @@
     
     
     [self readFromPlist];
+    [self getDependencies];
     
     [self setTitle:NSLocalizedString(@"CreateTicket",nil)];
     
-    
+    // UIBar item for attachment button
     UIButton *attachmentButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [attachmentButton setImage:[UIImage imageNamed:@"attach1"] forState:UIControlStateNormal];
     [attachmentButton addTarget:self action:@selector(addAttachmentPickerButton) forControlEvents:UIControlEventTouchUpInside];
     [attachmentButton setFrame:CGRectMake(12, 7, 22, 22)];
     
-    UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [NotificationBtn setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
-    [NotificationBtn addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
-    [NotificationBtn setFrame:CGRectMake(46, 0, 32, 32)]; //clearAll  //flipView
+    //UIBar item for clear all button
+    UIButton *clearAll =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [clearAll setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
+    [clearAll addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
+    [clearAll setFrame:CGRectMake(46, 0, 32, 32)]; //clearAll  //flipView
     
     UIView *rightBarButtonItems = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
     [rightBarButtonItems addSubview:attachmentButton];
-    [rightBarButtonItems addSubview:NotificationBtn];
+    [rightBarButtonItems addSubview:clearAll];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButtonItems];
 
     
     
-    
+    //used for adding/register user button
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTaped:)];
     singleTap.numberOfTapsRequired = 1;
     singleTap.numberOfTouchesRequired = 1;
@@ -207,12 +209,7 @@
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     // Do any additional setup after loading the view.
     
-    //activity indicator
-    activityIndicator1 =
-    [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(145, 255, 100, 100)];
-    activityIndicator1.color=[UIColor blueColor];
     
-    [self.view addSubview:activityIndicator1];
 }
 
 -(void)dismissKeyboard12
@@ -224,6 +221,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
+
 - (void)imageTaped:(UIGestureRecognizer *)gestureRecognizer {
     NSLog(@"Image Button Tapped");
     
@@ -236,8 +234,6 @@
 
 -(void)removeKeyboard{
     [_emailTextView resignFirstResponder];
-    // [_mobileTextField resignFirstResponder];
-    //  [_msgTextField resignFirstResponder];
     [_subjectView resignFirstResponder];
     [_firstNameView resignFirstResponder];
     
@@ -262,6 +258,7 @@
 }
 
 
+// after clicking on clear button it will clears all filled data in create ticket form
 -(IBAction)flipView
 {
     NSLog(@"Clciked");
@@ -301,7 +298,7 @@
     
 }
 
-
+//This method used for taking values from Plist file. Plist is one king of database used for temporary storage used in within mobile app
 -(void)readFromPlist{
     // Read plist from bundle and get Root Dictionary out of it
     NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
@@ -416,6 +413,10 @@
         _priorityArray=[priMU copy];
         _staffArray=[staffMU copy];
         
+        _helptopicsArray = [_helptopicsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        _priorityArray = [_priorityArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        
+      //  [yourArray sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         
         NSLog(@"Staff Name Array : %@",_staffArray);
         NSLog(@"STaff id Array : %@",staff_idArray);
@@ -442,21 +443,23 @@
 }
 
 
+
 - (IBAction)staffClicked:(id)sender {
+    
     @try{
         [self.view endEditing:YES];
         if (!_staffArray||!_staffArray.count) {
             _assignTextField.text=NSLocalizedString(@"Not Available",nil);
-             staff_id=0;
-         }else{
-        
-           [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
+            staff_id=0;
+        }else{
+            
+            [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:_staffArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
         }
     }@catch (NSException *exception)
     {
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
-         [utils showAlertWithMessage:exception.name sendViewController:self];
+        [utils showAlertWithMessage:exception.name sendViewController:self];
         return;
     }
     @finally
@@ -536,17 +539,16 @@
 - (IBAction)submitClicked:(id)sender {
     
     
-    [activityIndicator1 startAnimating];
+   [[AppDelegate sharedAppdelegate] showProgressView];
     
     @try{
         
         
         if (![_mobileView.text isEqualToString:@""]) {
-            // [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-            
+        
             if([_codeTextField.text isEqualToString:@""])
             {
-                 [activityIndicator1 stopAnimating];
+                [[AppDelegate sharedAppdelegate] hideProgressView];
                 
                 if (self.navigationController.navigationBarHidden) {
                     [self.navigationController setNavigationBarHidden:NO];
@@ -573,7 +575,7 @@
     
         if(self.emailTextView.text.length==0 && self.firstNameView.text.length==0 && self.helpTopicTextField.text.length==0 && self.subjectView.text.length==0 && self.priorityTextField.text.length==0 && self.textViewMsg.text.length==0)
         {
-             [activityIndicator1 stopAnimating];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             
             if (self.navigationController.navigationBarHidden) {
                 [self.navigationController setNavigationBarHidden:NO];
@@ -595,7 +597,7 @@
             
         }else if (self.emailTextView.text.length==0){
            
-            [activityIndicator1 stopAnimating];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             
             if (self.navigationController.navigationBarHidden) {
                 [self.navigationController setNavigationBarHidden:NO];
@@ -617,7 +619,7 @@
             
         }else if(![Utils emailValidation:self.emailTextView.text]){
             
-            [activityIndicator1 stopAnimating];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             
             if (self.navigationController.navigationBarHidden) {
                 [self.navigationController setNavigationBarHidden:NO];
@@ -639,7 +641,7 @@
         } else
             if (self.firstNameView.text.length==0  ) {
                 
-                [activityIndicator1 stopAnimating];
+                [[AppDelegate sharedAppdelegate] hideProgressView];
                 
                 if (self.navigationController.navigationBarHidden) {
                     [self.navigationController setNavigationBarHidden:NO];
@@ -661,7 +663,7 @@
                
             }else if ( self.firstNameView.text.length<2) {
                 
-                [activityIndicator1 stopAnimating];
+                [[AppDelegate sharedAppdelegate] hideProgressView];
                 
                 if (self.navigationController.navigationBarHidden) {
                     [self.navigationController setNavigationBarHidden:NO];
@@ -684,7 +686,7 @@
             }else
                if (self.helpTopicTextField.text.length==0) {
                    
-                   [activityIndicator1 stopAnimating];
+                   [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -706,7 +708,7 @@
                    
                 }else if (self.subjectView.text.length==0) {
                     
-                    [activityIndicator1 stopAnimating];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -727,7 +729,7 @@
                     
                 }else if (self.subjectView.text.length<5) {
                     
-                    [activityIndicator1 stopAnimating];
+                   [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -748,7 +750,7 @@
                     
                 }else if (self.textViewMsg.text.length==0){
                     
-                    [activityIndicator1 stopAnimating];
+                   [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -769,7 +771,7 @@
                   
                 }else if (self.textViewMsg.text.length<10){
                    
-                    [activityIndicator1 stopAnimating];
+                   [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -791,7 +793,7 @@
                 }
                 else if (self.priorityTextField.text.length==0){
                     
-                    [activityIndicator1 stopAnimating];
+                   [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
@@ -816,7 +818,7 @@
                     
                     if ([_helpTopicTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]||[_priorityTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)] || [_assignTextField.text isEqualToString:NSLocalizedString(@"Not Available",nil)]) {
                         
-                        [activityIndicator1 stopAnimating];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                         if (self.navigationController.navigationBarHidden) {
                             [self.navigationController setNavigationBarHidden:NO];
@@ -854,7 +856,7 @@
 }
 
 
-
+// Button action, after cliking on it will redirect to add requester page
 - (IBAction)addRequesterClicked:(id)sender {
     
     
@@ -924,7 +926,7 @@
 }
 
 
-
+// this method used to control writing data/texts in textfields and textviews.
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     
@@ -1085,6 +1087,7 @@
     return YES;
 }
 
+// This metod is used to add collaborator, it will call API according to enetered data, JSON will receive
 -(void)collaboratorApiMethod:(NSString*)valueFromTextField
 {
     
@@ -1351,6 +1354,7 @@
 }
 
 
+// used for mobile code/ conunty codes.
 -(void)split{
     
     _countryDic = @{
@@ -1678,7 +1682,7 @@
 }
 
 
-
+// Initialize attachment picker menu
 -(void)addAttachmentPickerButton
 {
     _menu = [[HSAttachmentPicker alloc] init];
@@ -1686,6 +1690,8 @@
     [_menu showAttachmentMenu];
     
 }
+
+// It will show attachment picker
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu showController:(UIViewController * _Nonnull)controller completion:(void (^ _Nullable)(void))completion {
     UIPopoverPresentationController *popover = controller.popoverPresentationController;
     if (popover != nil) {
@@ -1695,10 +1701,12 @@
     [self presentViewController:controller animated:true completion:completion];
 }
 
+// if error occured it will show error message
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu showErrorMessage:(NSString * _Nonnull)errorMessage {
     NSLog(@"%@", errorMessage);
 }
 
+// here actaul picker called, here it will show picker view and we can select attachment and after selecting file it will print file name and with its size
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu upload:(NSData * _Nonnull)data filename:(NSString * _Nonnull)filename image:(UIImage * _Nullable)image {
     
     NSLog(@"File Name : %@", filename);
@@ -1852,7 +1860,7 @@
         else if([filename hasSuffix:@".mov"])
         {
             self->typeMime=@"video/quicktime";
-            self->_fileImage.image=[UIImage imageNamed:@"audioCommon"];
+            self->_fileImage.image=[UIImage imageNamed:@"mov"];
         }
         
         else  if([filename hasSuffix:@".wmv"])
@@ -1892,6 +1900,8 @@
         
     });
 }
+
+// called ticket create method
 -(void)postTicketCreate
 {
    
@@ -1938,11 +1948,7 @@
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"media_attachment[]\"; filename=\"%@\"\r\n", file123] dataUsingEncoding:NSUTF8StringEncoding]];
   //static  [body appendData:[@"Content-Type: ico_sys_netservice.ico\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", typeMime] dataUsingEncoding:NSUTF8StringEncoding]];
-
-    //testing purpose
-//    NSLog(@"Content-Type: ico_sys_netservice.ico\r\n\r\n");
-//    NSLog(@"Data  444444 is : %@",[NSString stringWithFormat:@"Content-Type: %@\r\n", typeMime]);
-//    NSLog(@"Data 444444 is : %@",[NSString stringWithFormat:@"Content-Type: \"%@\"\r\n", typeMime]);
+    
 
     [body appendData:[NSData dataWithData:attachNSData]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -2063,14 +2069,14 @@
          {
              
              [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-              [activityIndicator1 stopAnimating];
+              [[AppDelegate sharedAppdelegate] hideProgressView];
              
          }
          if([str isEqualToString:@"API disabled"] || [str hasPrefix:@"API disabled"])
          {
              
              [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-              [activityIndicator1 stopAnimating];
+             [[AppDelegate sharedAppdelegate] hideProgressView];
              
          }
          else{
@@ -2096,13 +2102,14 @@
         if([errorMsg isEqualToString:@"Methon not allowed"] || [errorMsg hasSuffix:@"not allowed"])
         {
             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Someting went wrong. Please try again later.."] sendViewController:self];
-             [activityIndicator1 stopAnimating];
+             [[AppDelegate sharedAppdelegate] hideProgressView];
         }
         
     }
     else if ([jsonData objectForKey:@"response"])
 
     {
+        
             self->_emailTextView.text=@"";
             self-> _firstNameView.text=@"";
             self->_lastNameView.text=@"";
@@ -2120,6 +2127,7 @@
             self->globalVariables.mobileAddRequester=@"";
             self-> globalVariables.mobileCode=@"";
 
+           [[AppDelegate sharedAppdelegate] hideProgressView];
             [RMessage showNotificationInViewController:self.navigationController
                                                  title:NSLocalizedString(@"success", nil)
                                               subtitle:NSLocalizedString(@"Ticket created successfully.", nil)
@@ -2143,10 +2151,199 @@
     else{
 
         [self->utils showAlertWithMessage:NSLocalizedString(@"Something Went Wrong.", nil) sendViewController:self];
-         [activityIndicator1 stopAnimating];
+         [[AppDelegate sharedAppdelegate] hideProgressView];
 
     }
 
+}
+
+
+-(void)getDependencies{
+    
+    NSLog(@"Thread-NO1-getDependencies()-start");
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+    {
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+        //connection unavailable
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
+        
+        
+    }else{
+        
+        NSString *url=[NSString stringWithFormat:@"%@helpdesk/dependency?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
+        
+        NSLog(@"URL is : %@",url);
+        @try{
+            MyWebservices *webservices=[MyWebservices sharedInstance];
+            [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
+                
+                
+                if (error || [msg containsString:@"Error"]) {
+                    
+                    if( [msg containsString:@"Error-401"])
+                        
+                    {
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Your Credential Has been changed"] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
+                    }
+                    else
+                        if( [msg containsString:@"Error-429"])
+                            
+                        {
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"your request counts exceed our limit"] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
+                        }
+                    
+                        else if( [msg isEqualToString:@"Error-403"] && [self->globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
+                            
+                        {
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
+                        }
+                    
+                        else if( [msg containsString:@"Error-403"])
+                            
+                        {
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
+                        }
+                    
+                        else if([msg isEqualToString:@"Error-404"])
+                        {
+                            NSLog(@"Message is : %@",msg);
+                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        }
+                    
+                    
+                        else{
+                            NSLog(@"Error message is %@",msg);
+                            NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
+                            [self->utils showAlertWithMessage:error.localizedDescription sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
+                            return ;
+                        }
+                }
+                
+                
+                if ([msg isEqualToString:@"tokenRefreshed"]) {
+                    
+                    [self getDependencies];
+                    NSLog(@"Thread--NO4-call-getDependecies");
+                    return;
+                }
+                
+            
+                if (json) {
+                    
+                    //  NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    NSDictionary *resultDic = [json objectForKey:@"data"];
+                    NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
+                    
+                    for (int i = 0; i < ticketCountArray.count; i++) {
+                        NSString *name = [[ticketCountArray objectAtIndex:i]objectForKey:@"name"];
+                        NSString *count = [[ticketCountArray objectAtIndex:i]objectForKey:@"count"];
+                        if ([name isEqualToString:@"Open"]) {
+                            self->globalVariables.OpenCount=count;
+                            
+                        }else if ([name isEqualToString:@"Closed"]) {
+                            self->globalVariables.ClosedCount=count;
+                        }else if ([name isEqualToString:@"Deleted"]) {
+                            self->globalVariables.DeletedCount=count;
+                        }else if ([name isEqualToString:@"unassigned"]) {
+                            self->globalVariables.UnassignedCount=count;
+                        }else if ([name isEqualToString:@"mytickets"]) {
+                            self->globalVariables.MyticketsCount=count;
+                        }
+                    }
+                    
+                    self->ticketStatusArray=[resultDic objectForKey:@"status"];
+                    
+                    for (int i = 0; i < self->ticketStatusArray.count; i++) {
+                        NSString *statusName = [[self->ticketStatusArray objectAtIndex:i]objectForKey:@"name"];
+                        NSString *statusId = [[self->ticketStatusArray objectAtIndex:i]objectForKey:@"id"];
+                        
+                        if ([statusName isEqualToString:@"Open"]) {
+                            self->globalVariables.OpenStausId=statusId;
+                            self->globalVariables.OpenStausLabel=statusName;
+                        }else if ([statusName isEqualToString:@"Resolved"]) {
+                            self->globalVariables.ResolvedStausId=statusId;
+                            self->globalVariables.ResolvedStausLabel=statusName;
+                        }else if ([statusName isEqualToString:@"Closed"]) {
+                            self->globalVariables.ClosedStausId=statusId;
+                            self->globalVariables.ClosedStausLabel=statusName;
+                        }else if ([statusName isEqualToString:@"Deleted"]) {
+                            self->globalVariables.DeletedStausId=statusId;
+                            self->globalVariables.DeletedStausLabel=statusName;
+                        }else if ([statusName isEqualToString:@"Request for close"]) {
+                            self->globalVariables.RequestCloseStausId=statusId;
+                        }else if ([statusName isEqualToString:@"Spam"]) {
+                            self->globalVariables.SpamStausId=statusId;
+                        }
+                    }
+                    
+                    
+                    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+                    
+                    // get documents path
+                    NSString *documentsPath = [paths objectAtIndex:0];
+                    
+                    // get the path to our Data/plist file
+                    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
+                    NSError *writeError = nil;
+                    
+                    NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:resultDic format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&writeError];
+                    
+                    if(plistData)
+                    {
+                        [plistData writeToFile:plistPath atomically:YES];
+                        NSLog(@"Data saved sucessfully");
+                    }
+                    else
+                    {
+                        NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
+                    
+                }
+                NSLog(@"Thread-NO5-getDependencies-closed");
+            }
+             ];
+        }@catch (NSException *exception)
+        {
+            NSLog( @"Name: %@", exception.name);
+            NSLog( @"Reason: %@", exception.reason );
+            [utils showAlertWithMessage:exception.name sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            return;
+        }
+        @finally
+        {
+            NSLog( @" I am in getDependencies method in Inbox ViewController" );
+            
+            
+        }
+    }
+    NSLog(@"Thread-NO2-getDependencies()-closed");
 }
 
 

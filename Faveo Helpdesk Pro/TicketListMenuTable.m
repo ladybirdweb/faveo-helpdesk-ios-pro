@@ -30,7 +30,7 @@
     
     questions=[NSArray arrayWithObjects:@"1. All about tickets",@"2. Ticket Replay and Internal Note",@"3. Ticket sorting and filtration",@"4. Changing status of ticket", nil];
     
-    subHeading=[NSArray arrayWithObjects:@"Ticket create, edit and view ticket",@"Some information, malliakrjun hanagandi",@"Some information, malliakrjun hanagandi",@"Some information, malliakrjun hanagandi", nil];
+    subHeading=[NSArray arrayWithObjects:@"Ticket create, edit and view ticket details.",@"How to give reply to ticket, add internal note",@"sorting, filtering a ticket based on some parameters",@"open, close, delete, spam, resolved ..etc", nil];
    // images=[NSArray arrayWithObjects:@"loginHelpSection",@"ticket2",@"userHelpSection",@"otherFeatures", nil];
 }
 

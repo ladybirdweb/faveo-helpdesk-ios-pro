@@ -42,6 +42,7 @@
 
 @implementation ClientDetailViewController
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -104,8 +105,8 @@
         }
         
         NSString *fname= [NSString stringWithFormat:@"%@",globalVariables.First_name];
-         NSString *lname= [NSString stringWithFormat:@"%@",globalVariables.Last_name];
-     NSString *userName= [NSString stringWithFormat:@"%@",globalVariables.userNameInUserList];
+        NSString *lname= [NSString stringWithFormat:@"%@",globalVariables.Last_name];
+        NSString *userName= [NSString stringWithFormat:@"%@",globalVariables.userNameInUserList];
         
         [Utils isEmpty:fname];
         [Utils isEmpty:lname];
@@ -261,28 +262,28 @@
     }
     
     
-    [_activityIndicatorObject startAnimating];
-    [self reload];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
-     [_activityIndicatorObject stopAnimating];
+    
+    [[AppDelegate sharedAppdelegate] showProgressView];
+    [self reload];
     
 }
 
+//This method is called before the view controller's view is about to be added to a view hierarchy and before any animations are configured for showing the view.
 -(void)viewWillAppear:(BOOL)animated
 {
     globalVariables=[GlobalVariables sharedInstance];
     [self viewDidLoad];
 }
 
+
+// This method calls an API for getting user data, it will returns an JSON which contains 10 records with user details.
 -(void)reload{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [refresh endRefreshing];
-    
-        [_activityIndicatorObject stopAnimating];
-        //[RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
-        
+      
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
         }
@@ -300,6 +301,7 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
 
+         [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }else{
         
@@ -310,15 +312,21 @@
         MyWebservices *webservices=[MyWebservices sharedInstance];
         [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
             
-            [self->_activityIndicatorObject stopAnimating];
+           
             if (error || [msg containsString:@"Error"]) {
                 
+                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 [self->refresh endRefreshing];
                 
                 if([msg isEqualToString:@"Error-402"])
                 {
                     NSLog(@"Message is : %@",msg);
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
+                }
+                else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
+                {
+                    NSLog(@"Message is : %@",msg);
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
                 }
                 else{
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -333,7 +341,7 @@
             }
             
             if (json) {
-                // NSError *error;
+                
                 self->mutableArray=[[NSMutableArray alloc]initWithCapacity:10];
                 NSLog(@"Thread-NO4--getClientTickets111--%@",json);
                 
@@ -383,16 +391,16 @@
                 
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self->_activityIndicatorObject stopAnimating];
-                        [self->refresh endRefreshing];
-
-//                        
+                        
                         [self.tableView reloadData];
+                        [self->refresh endRefreshing];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
                     });
                 });
             }
             
-            [self->_activityIndicatorObject stopAnimating];
+           [[AppDelegate sharedAppdelegate] hideProgressView];
             NSLog(@"Thread-NO5-getClientTickets-closed");
             
         }];
@@ -415,6 +423,7 @@
 
 #pragma mark - Table view data source
 
+//This method returns the number of rows (table cells) in a specified section.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger numOfSections = 0;
@@ -439,14 +448,14 @@
     
     return numOfSections;
 }
-
+//This method tells the delegate the table view is about to draw a cell for a particular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
 }
 
-
+//This method asks the data source to return the number of sections in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return [mutableArray count];
@@ -454,7 +463,7 @@
 
 
 
-
+// This method asks the data source for a cell to insert in a particular location of the table view.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     OpenCloseTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"OpenCloseTableViewID"];
@@ -484,14 +493,88 @@
     
    // cell.ticketSubLbl.text=[finaldic objectForKey:@"title"];
     
-    if ( ( ![[finaldic objectForKey:@"title"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"title"] length] != 0 ) )
-    {
-        cell.ticketSubLbl.text=[finaldic objectForKey:@"title"];
+//    if ( ( ![[finaldic objectForKey:@"title"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"title"] length] != 0 ) )
+//    {
+//        cell.ticketSubLbl.text=[finaldic objectForKey:@"title"];
+//    }
+//    else
+//    {
+//        cell.ticketSubLbl.text= NSLocalizedString(@"Not Available",nil);
+//    }
+    
+     NSString *encodedString =[finaldic objectForKey:@"title"];
+    
+    [Utils isEmpty:encodedString];
+    
+    if  ([Utils isEmpty:encodedString]){
+        cell.ticketSubLbl.text=@"No Title";
     }
     else
     {
-        cell.ticketSubLbl.text= NSLocalizedString(@"Not Available",nil);
+        
+        NSMutableString *decodedString = [[NSMutableString alloc] init];
+        
+        if ([encodedString hasPrefix:@"=?UTF-8?Q?"] || [encodedString hasSuffix:@"?="])
+        {
+            NSScanner *scanner = [NSScanner scannerWithString:encodedString];
+            NSString *buf = nil;
+            //  NSMutableString *decodedString = [[NSMutableString alloc] init];
+            
+            while ([scanner scanString:@"=?UTF-8?Q?" intoString:NULL]
+                   || ([scanner scanUpToString:@"=?UTF-8?Q?" intoString:&buf] && [scanner scanString:@"=?UTF-8?Q?" intoString:NULL])) {
+                if (buf != nil) {
+                    [decodedString appendString:buf];
+                }
+                
+                buf = nil;
+                
+                NSString *encodedRange;
+                
+                if (![scanner scanUpToString:@"?=" intoString:&encodedRange]) {
+                    break; // Invalid encoding
+                }
+                
+                [scanner scanString:@"?=" intoString:NULL]; // Skip the terminating "?="
+                
+                // Decode the encoded portion (naively using UTF-8 and assuming it really is Q encoded)
+                // I'm doing this really naively, but it should work
+                
+                // Firstly I'm encoding % signs so I can cheat and turn this into a URL-encoded string, which NSString can decode
+                encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"%" withString:@"=25"];
+                
+                // Turn this into a URL-encoded string
+                encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"=" withString:@"%"];
+                
+                
+                // Remove the underscores
+                encodedRange = [encodedRange stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+                
+                // [decodedString appendString:[encodedRange stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                
+                NSString *str1= [encodedRange stringByRemovingPercentEncoding];
+                [decodedString appendString:str1];
+                
+                
+            }
+            
+            NSLog(@"Decoded string = %@", decodedString);
+            cell.ticketSubLbl.text= [NSString stringWithFormat:@"%@",decodedString];
+        
+        }
+        else{
+            
+            // cell.ticketSubLabel.text= encodedString;
+            cell.ticketSubLbl.text= [NSString stringWithFormat:@"%@",encodedString];
+            
+        }
+        
     }
+    ///////////////////////////////////////////////////
+    
+    
+    
+    
+    
     
  
     if ([[finaldic objectForKey:@"ticket_status_name"] isEqualToString:@"Open"]) {
@@ -517,6 +600,7 @@
     return cell;
 }
 
+// After clicking on edit button, it will naviagte to edit user details page
 -(void)EditClientProfileMethod
 {
     
@@ -527,6 +611,7 @@
     
 }
 
+// This method tells the delegate that the specified row is now deselected.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
@@ -550,6 +635,7 @@
     
 }
 
+// This method used to show refresh behind the table view.
 -(void)addUIRefresh{
     
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
@@ -572,10 +658,6 @@
     //[refresh endRefreshing];
 }
 
-
-
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     //TODO: Calculate cell height
     return 65.0f;
@@ -583,76 +665,11 @@
 
 -(void)setUserProfileimage:(NSString*)imageUrl
 {
-    //    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-    //    dispatch_async(queue, ^(void) {
-    //
-    //        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
-    //
-    //        UIImage* image = [[UIImage alloc] initWithData:imageData];
-    //        if (image) {
-    //            dispatch_async(dispatch_get_main_queue(), ^{
-    //                self.profileImageView.image = image;
-    //            });
-    //        }
-    //    });
     
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]
                              placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
 }
 
-//- (void)addSubview:(UIView *)subView toView:(UIView*)parentView {
-//    [parentView addSubview:subView];
-//
-//    NSDictionary * views = @{@"subView" : subView,};
-//    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
-//                                                                   options:0
-//                                                                   metrics:0
-//                                                                     views:views];
-//    [parentView addConstraints:constraints];
-//    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
-//                                                          options:0
-//                                                          metrics:0
-//                                                            views:views];
-//    [parentView addConstraints:constraints];
-//}
-
-//- (void)cycleFromViewController:(UIViewController*) oldViewController
-//               toViewController:(UIViewController*) newViewController {
-//    [oldViewController willMoveToParentViewController:nil];
-//    [self addChildViewController:newViewController];
-//    [self addSubview:newViewController.view toView:self.containerView];
-//    newViewController.view.alpha = 0;
-//    [newViewController.view layoutIfNeeded];
-//
-//    [UIView animateWithDuration:0.5
-//                     animations:^{
-//                         newViewController.view.alpha = 1;
-//                         oldViewController.view.alpha = 0;
-//                     }
-//                     completion:^(BOOL finished) {
-//                         [oldViewController.view removeFromSuperview];
-//                         [oldViewController removeFromParentViewController];
-//                         [newViewController didMoveToParentViewController:self];
-//                     }];
-//}
-
-//- (IBAction)indexChanged:(id)sender {
-//
-//    if (self.segmentedControl.selectedSegmentIndex == 0) {
-//        UIViewController *newViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OpenClient"];
-//        newViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-//        [self cycleFromViewController:self.currentViewController toViewController:newViewController];
-//        self.currentViewController = newViewController;
-//        // self.testingLAbel.text = @"Open Ticket";
-//    } else {
-//        UIViewController *newViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CloseClient"];
-//        newViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-//        [self cycleFromViewController:self.currentViewController toViewController:newViewController];
-//        self.currentViewController = newViewController;
-//        //self.testingLAbel.text = @"Closed Ticket";
-//    }
-//
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

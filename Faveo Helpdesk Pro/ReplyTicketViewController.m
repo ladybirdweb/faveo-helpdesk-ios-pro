@@ -29,7 +29,7 @@
 #import "NotificationViewController.h"
 #import <HSAttachmentPicker/HSAttachmentPicker.h>
 #import "TicketDetailViewController.h"
-
+#import "ViewCCList.h"
 
 @interface ReplyTicketViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,HSAttachmentPickerDelegate>
 {
@@ -55,6 +55,8 @@
 
 @implementation ReplyTicketViewController
 
+
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title=@"Reply Ticket";
@@ -81,14 +83,16 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     
     _addCCLabelButton.userInteractionEnabled=YES;
-    _viewCCandRemoveCCLabel.userInteractionEnabled=YES;
-    
+    _viewCCLabel.userInteractionEnabled=YES;
+
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickedOnCCSubButton)];
+     UITapGestureRecognizer *tapGesture2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewCCorRemoceCCButton)];
+    
     _addCCLabelButton.userInteractionEnabled=YES;
-    UITapGestureRecognizer *tapGesture2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewCCorRemoceCCButton)];
+    _viewCCLabel.userInteractionEnabled=YES;
     
     [_addCCLabelButton addGestureRecognizer:tapGesture];
-    [_viewCCandRemoveCCLabel addGestureRecognizer:tapGesture2];
+    [_viewCCLabel addGestureRecognizer:tapGesture2];
     
     
     if(globalVariables.ccCount==0)
@@ -118,6 +122,7 @@
     [_messageTextView resignFirstResponder];
 }
 
+//This method is called before the view controller's view is about to be added to a view hierarchy and before any animations are configured for showing the view.
 -(void)viewWillAppear:(BOOL)animated
 {
     [self viewDidLoad];
@@ -125,6 +130,8 @@
 
     
 }
+
+// After clcking this method, it will move to add cc view controller
 -(void)clickedOnCCSubButton
 {
     addCCView *cc1=[self.storyboard instantiateViewControllerWithIdentifier:@"addCCViewId"];
@@ -137,27 +144,31 @@
     
     NSLog(@"Clicked");
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *smallViewController = [storyboard instantiateViewControllerWithIdentifier:@"SampleTableCellTableViewCellId"];
+    if ([ccListArray count] > 0) {
+        globalVariables.ccListArray1=ccListArray;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ViewCCList *smallViewController = [storyboard instantiateViewControllerWithIdentifier:@"ccListID"];
+        
+        BIZPopupViewController *popupViewController = [[BIZPopupViewController alloc] initWithContentViewController:smallViewController contentSize:CGSizeMake(300, 300)];
+        [self presentViewController:popupViewController animated:NO completion:nil];
+    }
+    else{
+        
+        [utils showAlertWithMessage:@"There is no cc available." sendViewController:self];
+    }
     
-    BIZPopupViewController *popupViewController = [[BIZPopupViewController alloc] initWithContentViewController:smallViewController contentSize:CGSizeMake(250, 300)];
-    [self presentViewController:popupViewController animated:NO completion:nil];
 }
 
+// After adding reply method when we click on submit method, below method is called
 - (IBAction)submitButtonClicked:(id)sender {
     
-    UIActivityIndicatorView *activityIndicator1 =
-    [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(145, 100, 100, 100)];
-    activityIndicator1.color=[UIColor blueColor];
-    
-    [self.view addSubview:activityIndicator1];
 
-     [activityIndicator1 startAnimating];
-  
+    [[AppDelegate sharedAppdelegate] showProgressView];
+    
     if([_messageTextView.text isEqualToString:@""] || [_messageTextView.text length]==0)
     {
         [utils showAlertWithMessage:@"Enter the reply content.It can not be empty." sendViewController:self];
-        [activityIndicator1 stopAnimating]; //working
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         
     }else
     {
@@ -174,6 +185,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+// This method fetch the cc list
 -(void)FetchCollaboratorAssociatedwithTicket
 {
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -204,11 +216,12 @@
                         {
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
                         }
-                        else if([msg isEqualToString:@"Error-402"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                        }else if([msg isEqualToString:@"Error-422"]){
+                  else  if([msg isEqualToString:@"Error-402"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
+                    }
+                    else if([msg isEqualToString:@"Error-422"]){
                             
                             NSLog(@"Message is : %@",msg);
                         }else{
@@ -236,6 +249,7 @@
                 //  NSDictionary * dict1=[json objectForKey:@"collaborator"];
                 
                 self->ccListArray=[json objectForKey:@"collaborator"];
+               
                 self->globalVariables.ccCount=[NSString stringWithFormat:@"%lu",(unsigned long)self->ccListArray.count];//array1.count;
                 //NSLog(@"Array count is : %lu",(unsigned long)array1.count);
                 NSLog(@"Array count is : %@",self->globalVariables.ccCount);
@@ -247,7 +261,7 @@
     
 }
 
-
+//Asks the delegate whether the specified text should be replaced in the text view.
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     
@@ -286,7 +300,7 @@
     return YES;
 }
 
-
+// Here attachment picker will initialize
 -(void)addAttachmentPickerButton
 {
     _menu = [[HSAttachmentPicker alloc] init];
@@ -294,6 +308,7 @@
     [_menu showAttachmentMenu];
     
 }
+//After clicking attachment button, attachment picker is ready to display
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu showController:(UIViewController * _Nonnull)controller completion:(void (^ _Nullable)(void))completion {
     UIPopoverPresentationController *popover = controller.popoverPresentationController;
     if (popover != nil) {
@@ -303,10 +318,13 @@
     [self presentViewController:controller animated:true completion:completion];
 }
 
+// It will show error message, if any error is occured while selecting or displying picker
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu showErrorMessage:(NSString * _Nonnull)errorMessage {
     NSLog(@"%@", errorMessage);
 }
 
+
+// here actaul picker called, here it will show picker view and we can select attachment and after selecting file it will print file name and with its size
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu upload:(NSData * _Nonnull)data filename:(NSString * _Nonnull)filename image:(UIImage * _Nullable)image {
     
     NSLog(@"File Name : %@", filename);
@@ -460,7 +478,7 @@
     else if([filename hasSuffix:@".mov"])
     {
         self->typeMime=@"video/quicktime";
-        self->_fileImage.image=[UIImage imageNamed:@"audioCommon"];
+        self->_fileImage.image=[UIImage imageNamed:@"mov"];
     }
     
     else  if([filename hasSuffix:@".wmv"])
@@ -501,6 +519,7 @@
     });
 }
 
+// It calls the ticket reply api
 -(void)replyTicketMethodCall
 {
    
@@ -583,18 +602,17 @@
                 if([msg isEqualToString:@"Successfully replied"])
                 {
                     
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    
                     [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your reply.", nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                     
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
-                    
-                  //  [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-                    
-//                    TicketDetailViewController *td=[self.storyboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-//                    [self.navigationController pushViewController:td animated:YES];
-                    
+                
+                     [self.view setNeedsDisplay];
                      [self.navigationController popViewControllerAnimated:YES];
                     
                 }
+                
                 else if ([jsonData objectForKey:@"message"])
                 {
                     
@@ -611,9 +629,20 @@
                 else
                 {
                     [self->utils showAlertWithMessage:@"Something went wrong. Please try again." sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
                 NSLog(@"Thread-Ticket-Reply-closed");
                 
+            }
+            if ([jsonData objectForKey:@"result"]){
+                
+                NSDictionary *resultDict=[jsonData objectForKey:@"result"];
+                
+                 if([[resultDict objectForKey:@"fails"] isEqualToString:@"Access denied"])
+                 {
+                      [self->utils showAlertWithMessage:@"Access Denied - You role or login credentials has been changed." sendViewController:self];
+                      [[AppDelegate sharedAppdelegate] hideProgressView];
+                 }
                 
             }
             
@@ -622,6 +651,7 @@
             [utils showAlertWithMessage:exception.name sendViewController:self];
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             return;
         }
         @finally
@@ -632,9 +662,6 @@
         
     }
 }
-
-
-
 
 @end
 

@@ -85,6 +85,8 @@
 
 @implementation InboxViewController
 
+
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -193,19 +195,35 @@
     if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
     {
         NSString *msg=@"";
-         [utils showAlertWithMessage:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again." sendViewController:self];
-        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        // [utils showAlertWithMessage:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again." sendViewController:self];
+         [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+         [self showMessageForLogout:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again." sendViewController:self];
          [[AppDelegate sharedAppdelegate] hideProgressView];
     }
     else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"API disabled"])
     {   NSString *msg=@"";
-        [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
+      //  [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
         [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"user"])
+    {   NSString *msg=@"";
+       // [utils showAlertWithMessage:@"Your role has beed changed to user. Contact to your Admin and try to login again." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [self showMessageForLogout:@"Your role has beed changed to user. Contact to your Admin and try to login again." sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+    }
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Methon not allowed"])
+    {   NSString *msg=@"";
+      //  [utils showAlertWithMessage:@"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+        [self showMessageForLogout:@"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }
     else{
     
-  [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
+       [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
         
         [self reload];
         [self getDependencies];
@@ -216,7 +234,7 @@
 
 
 
-
+// It is button action, after clicking this button it will navigate to Search view Controller view
 - (IBAction)searchButtonClicked {
     
     [self hideTableViewEditMode];
@@ -227,17 +245,7 @@
     
 }
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    [_searchBar setShowsCancelButton:YES animated:YES];
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    
-    //   [_searchBar resignFirstResponder];
-    
-}
-
-
+// This method used to assign single or multiple ticket using multiple select feature
 -(void)tapDetected{
     
     @try{
@@ -261,6 +269,7 @@
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
         [utils showAlertWithMessage:exception.name sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         return;
     }
     @finally
@@ -271,6 +280,7 @@
     
 }
 
+// This method used to merge 2 or more ticket using multiple ticket selection
 -(void)MergeButtonClicked
 {
     NSLog(@"Clicked on merge");
@@ -313,7 +323,14 @@
     {
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
+        if([exception.reason isEqualToString:@"-[NSNull isEqualToString:]: unrecognized selector sent to instance 0x1b5190878"])
+        {
+            [utils showAlertWithMessage:@"Can not merge these ticket, because this tickets having empty email." sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+        }else{
         [utils showAlertWithMessage:exception.name sendViewController:self];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+        }
         return;
     }
     @finally
@@ -324,7 +341,7 @@
 }
 
 
-
+//This method is called before the view controller's view is about to be added to a view hierarchy and before any animations are configured for showing the view.
 -(void)viewWillAppear:(BOOL)animated{
     
     if (self.selectedPath != nil) {
@@ -345,6 +362,7 @@
     
 }
 
+// Handling the tableview even we reload the tablview, edit view will not vanish even we scroll
 - (void)reloadTableView
 {
     NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
@@ -355,21 +373,14 @@
     }
 }
 
+// This method calls an API for getting tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)reload{
-    
-    
-   [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Tickets",nil)];
-    
-    if([globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
-    {
-        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Your role has been changed to user. Please contact to your admin."] sendViewController:self];
-    }
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [refresh endRefreshing];
     
-       
+       [[AppDelegate sharedAppdelegate] hideProgressView];
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -391,8 +402,7 @@
         
         
     }else{
-        //  NSString *url=[NSString stringWithFormat:@"%@helpdesk/inbox?api_key=%@&ip=%@&token=%@",[userDefaults objectForKey:@"companyURL"],API_KEY,IP,[userDefaults objectForKey:@"token"]];
-        
+    
         NSString * apiValue=[NSString stringWithFormat:@"%i",1];
         NSString * showInbox = @"inbox";
         NSString * Alldeparatments=@"All";
@@ -411,35 +421,18 @@
                 
                 if (error || [msg containsString:@"Error"]) {
                     [self->refresh endRefreshing];
-                   //  [[AppDelegate sharedAppdelegate] hideProgressView];
+
                     
                     if (msg) {
                         
-                        if([msg isEqualToString:@"Error-401"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                        }
-                        else
-                        if([msg isEqualToString:@"Error-402"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"API is disabled in web, please enable it from Admin panel."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                        }
-                        else if([msg isEqualToString:@"Error-403"])
+
+                       if([msg isEqualToString:@"Error-403"])
                         {
                             [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                             
                         }
-                        else if([msg isEqualToString:@"Error-403"] && [self->globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"])
-                        {
-                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials/Role has been changed. Contact to Admin and try to login again."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                           
-                        }
-                        
+                    
                         else if([msg isEqualToString:@"Error-422"])
                         {
                             NSLog(@"Message is : %@",msg);
@@ -464,12 +457,7 @@
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
-                        else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
-                        {
-                            NSLog(@"Message is : %@",msg);
-                            [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                        }
+                        
                         else{
                             
                             NSLog(@"Message is : %@",msg);
@@ -522,10 +510,8 @@
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                        
-                            [self->refresh endRefreshing];
-                            
                             [self reloadTableView];
+                            [self->refresh endRefreshing];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             
                         });
@@ -546,18 +532,20 @@
         @finally
         {
             NSLog( @" I am in reload method in Inbox ViewController" );
-            [[AppDelegate sharedAppdelegate] hideProgressView];
+           
             
         }
     }
     
 }
 
+// This method used to get some values like Agents list, Ticket Status, Ticket counts, Ticket Source, SLA ..etc which are used in various places in project.
 -(void)getDependencies{
     
     NSLog(@"Thread-NO1-getDependencies()-start");
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         //connection unavailable
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -586,7 +574,7 @@
         @try{
             MyWebservices *webservices=[MyWebservices sharedInstance];
             [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
-              //   NSLog(@"Thread-NO3-getDependencies-start-error-%@-json-%@-msg-%@",error,json,msg);
+            
             
                 if (error || [msg containsString:@"Error"]) {
                     
@@ -740,15 +728,15 @@
         @finally
         {
             NSLog( @" I am in getDependencies method in Inbox ViewController" );
-             [[AppDelegate sharedAppdelegate] hideProgressView];
+            
             
         }
     }
-    NSLog(@"Thread-NO2-getDependencies()-closed");
+    
 }
 
 
-
+// This method used for implementing the feature of multiple ticket select, using this we can select and deselects the tableview rows and perform futher actions on that seleected rows.
 -(void)EditTableView:(UIGestureRecognizer*)gesture{
     [self.tableView setEditing:YES animated:YES];
     navbar.hidden=NO;
@@ -756,34 +744,37 @@
     // [selectedTicketOwner removeAllObjects];
 }
 
-
+//This method asks the data source to return the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    
-    
     NSInteger numOfSections = 0;
-    if ([_mutableArray count]==0)
-    {
-        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        noDataLabel.text             =  NSLocalizedString(@"No Records..!!!",nil);
-        noDataLabel.textColor        = [UIColor blackColor];
-        noDataLabel.textAlignment    = NSTextAlignmentCenter;
-        tableView.backgroundView = noDataLabel;
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
-    }
-    else
-    {
-        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        numOfSections                = 1;
-        tableView.backgroundView = nil;
-    }
+    
+     if ([_mutableArray count] != 0)
+     {
+         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+         numOfSections                = 1;
+         tableView.backgroundView = nil;
+         
+     }
+     else{
+         
+         UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+         noDataLabel.text             = NSLocalizedString(@"No Records..!!!",nil);
+         noDataLabel.textColor        = [UIColor blackColor];
+         noDataLabel.textAlignment    = NSTextAlignmentCenter;
+         tableView.backgroundView = noDataLabel;
+         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+         
+         
+     }
     
     return numOfSections;
     
 }
 
 
+
+// This method returns the number of rows (table cells) in a specified section.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     
@@ -797,7 +788,7 @@
 }
 
 
-
+// This method tells the delegate the table view is about to draw a cell for a particular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
@@ -833,6 +824,7 @@
     
 }
 
+// This method calls an API for getting next page tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)loadMore{
     
     
@@ -927,9 +919,9 @@
                     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
                             [self reloadTableView];
-                            
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
                         });
                     });
                     
@@ -954,7 +946,7 @@
 }
 
 
-
+// This method asks the data source for a cell to insert in a particular location of the table view.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
@@ -1206,18 +1198,7 @@
         
         // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
         @try{
-            
-            //                if (  ![[finaldic objectForKey:@"profile_pic"] isEqual:[NSNull null]]   )
-            //                {
-            //                    [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
-            //
-            //                }
-            //                else
-            //                {
-            //                    [cell setUserProfileimage:@"default_pic.png"];
-            //                }
-            
-            
+        
            
              if ( ( ![[finaldic objectForKey:@"status"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"status"] length] != 0 ) ) {
                  
@@ -1229,13 +1210,6 @@
                  else
                  {
                      if ( ( ![[finaldic objectForKey:@"duedate"] isEqual:[NSNull null]] ) && ( [[finaldic objectForKey:@"duedate"] length] != 0 ) ) {
-                         
-                         /* if([utils compareDates:[finaldic objectForKey:@"overdue_date"]]){
-                          [cell.overDueLabel setHidden:NO];
-                          
-                          }else [cell.overDueLabel setHidden:YES];
-                          
-                          } */
                          
                          if([utils compareDates:[finaldic objectForKey:@"duedate"]]){
                              [cell.overDueLabel setHidden:NO];
@@ -1255,18 +1229,6 @@
             
             
             NSString * source1=[finaldic objectForKey:@"source"];
-            
-            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"collaborator_count"]];  //collaborator_count
-             NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
-//             NSString *ticketNumber=[finaldic objectForKey:@"ticket_number"];
-//            NSLog(@"CC is : %@",cc);
-//             NSLog(@"CC is : %@",cc);
-//             NSLog(@"COunbt is : %@",attachment1);
-//             NSLog(@"Count is : %@",attachment1);
-//            NSLog(@"Ticket Numbert is : %@",ticketNumber);
-            
-           
-            
             
             if([source1 isEqualToString:@"web"] || [source1 isEqualToString:@"Web"])
             {
@@ -1292,19 +1254,38 @@
             }
             
             
-            if(![cc isEqualToString:@"<null>"] && ![attachment1 isEqualToString:@"0"])
+
+              //  collaborator_count_relation
+            NSString *cc= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"collaborator_count"]];  //collaborator_count
+            NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
+//countcollaborator
+
+            NSLog(@"CC is %@ named",cc);
+             NSLog(@"CC is %@ named",cc);
+             NSLog(@"CC is %@ named",cc);
+//
+             NSLog(@"attachment is %@ named",attachment1);
+             NSLog(@"attachment is %@ named",attachment1);
+
+            if(![cc isEqualToString:@"<null>"])
             {
                 cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
-                cell.attachImgView.image=[UIImage imageNamed:@"attach"];
+                
             }
-            else if(![cc isEqualToString:@"<null>"] && [attachment1 isEqualToString:@"0"])
+            
+            if(![attachment1 isEqualToString:@"0"])
             {
-                 cell.ccImgView.image=[UIImage imageNamed:@"cc1"];
+                if([cc isEqualToString:@"<null>"])
+                {
+                    cell.ccImgView.image=[UIImage imageNamed:@"attach"];
+                }else
+                {
+                    cell.attachImgView.image=[UIImage imageNamed:@"attach"];
+                    
+                }
+                
             }
-            else if([cc isEqualToString:@"<null>"] && ![attachment1 isEqualToString:@"0"])
-            {
-                cell.ccImgView.image=[UIImage imageNamed:@"attach"];
-            }
+            
             
             
             
@@ -1333,15 +1314,9 @@
     
 }
 
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 3;
-}
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    return YES;
-}
 
 
+// This method tells the delegate that the specified row is now selected.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
   
@@ -1400,6 +1375,7 @@
     }
 }
 
+// This method tells the delegate that the specified row is now deselected.
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     self.selectedPath = indexPath;
@@ -1443,21 +1419,13 @@
 }
 
 #pragma mark - SlideNavigationController Methods -
-
+// This method used to show or hide slide navigation controller icon on navigation bar
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu
 {
     return YES;
 }
 
--(void)addBtnPressed{
-    
-    
-    CreateTicketViewController *createTicket=[self.storyboard instantiateViewControllerWithIdentifier:@"CreateTicket"];
-    
-    [self.navigationController pushViewController:createTicket animated:YES];
-    
-}
-
+// After clicking this method, it will navigate to notification view controller
 -(void)NotificationBtnPressed
 
 {
@@ -1472,7 +1440,7 @@
 }
 
 
-
+// This methodn used to show refresh behind the table view.
 -(void)addUIRefresh{
     
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
@@ -1492,6 +1460,7 @@
 }
 
 
+// This method used to show some popuop or list which contain some menus. Here it used to change the status of ticket, after clicking this button it will show one view which contains list of status. After clicking on any row, according to its name that status will be changed.
 -(void)onNavButtonTapped:(UIBarButtonItem *)sender event:(UIEvent *)event
 {
     NSLog(@"11111111*********111111111111");
@@ -1564,7 +1533,10 @@
                                    [[AppDelegate sharedAppdelegate] hideProgressView];
                                }
                                else{
-                               [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
+                                   
+                                   [self askConfirmationForStatusChange];
+                               
+                              // [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
                                }
                            
                            }
@@ -1576,9 +1548,41 @@
     }
 }
 
-
-
-
+-(void)askConfirmationForStatusChange
+{
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Ticket Status"
+                                 message:@"are you sure you want to change ticket status?"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    //Add Buttons
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"No"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    //Handle your yes please button action here
+                                    
+                                }];
+    
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:@"Yes"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   //Handle no, thanks button
+                                   
+                               [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
+                                
+                               }];
+    
+    //Add your buttons to alert controller
+    
+    [alert addAction:yesButton];
+    [alert addAction:noButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+// This method used to change status of ticket
 -(void)changeStatusMethod:(NSString *)nameOfStatus idIs:(NSString *)idOfStatus
 {
     
@@ -1682,7 +1686,7 @@
     
 }
 
-
+// This method used to reload view
 -(void)reloadd{
     [self reload];
     //    [refresh endRefreshing];
@@ -1771,14 +1775,7 @@
         [self.navigationController pushViewController:filter animated:YES];
         
     }
-    //    if(titleButtonIndex==0 && rightIndex==1 )
-    //    {
-    //        NSLog(@"clear All");
-    //
-    //        InboxViewController * vc= [self.storyboard instantiateViewControllerWithIdentifier: @"InboxID"];
-    //        [self.navigationController pushViewController:vc animated:YES];
-    //
-    //    }
+   
     // sort by - Tciket title
     if(titleButtonIndex==1 && leftIndex==0 && rightIndex==0 )
     {
@@ -2090,10 +2087,10 @@
             if (error || [msg containsString:@"Error"]) {
                 if (msg) {
                     
-                    // [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
+            
                     NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
                 }else if(error)  {
-                    //                [utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                
                     NSLog(@"Thread-postAPNS-toserver-error == %@",error.localizedDescription);
                 }
                 return ;

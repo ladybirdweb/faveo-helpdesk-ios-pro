@@ -46,6 +46,7 @@
 
 @implementation MergeViewForm
 
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -93,7 +94,7 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
 }
 
-
+// Using this picker, we can select the parent ticket
 - (IBAction)SelectParentTicket:(id)sender {
     
     // [self.view endEditing:YES];
@@ -101,11 +102,12 @@
 
 }
 
+// This is action called when picker view cancelled
 - (void)actionPickerCancelled:(id)sender {
     NSLog(@"Delegate has been informed that ActionSheetPicker was cancelled");
 }
 
-
+//This method used to select the subejct
 - (void)SubjectWasSelected:(NSNumber *)selectedIndex element:(id)element
 {
     subject_id=(globalVariables.idList)[(NSUInteger) [selectedIndex intValue]];
@@ -119,18 +121,20 @@
     
 }
 
-
+// Added naviagtion button on left side of view.
 -(void)Back
 {
     globalVariables.backButtonActionFromMergeViewMenu=@"true";
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
 -(void)removeKeyBoard{
     [_newtitleTextview resignFirstResponder];
     [_reasonTextView resignFirstResponder];
 }
 
-
+// After clicking this cancel button, it will redirect back to inbox page.
 -(void)cancelButton
 {
     NSLog(@"Ckicked on cancel button");
@@ -138,6 +142,8 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
+// This is the main method, after selecting all values which are required to merge the tickets. AFter clicking on merge button, it will call an merge API and gives an JSON.
 -(void)mergeButton
 {
     [[AppDelegate sharedAppdelegate] showProgressView];
@@ -145,6 +151,8 @@
    
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
+        
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -162,7 +170,7 @@
                                     buttonCallback:nil
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
-         [[AppDelegate sharedAppdelegate] hideProgressView];
+        
         
     }else if([_parentTicketTextField.text length] == 0 || [_parentTicketTextField.text isEqualToString:@""])
     {
@@ -217,7 +225,6 @@
         MyWebservices *webservices=[MyWebservices sharedInstance];
         
         [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
-            [[AppDelegate sharedAppdelegate] hideProgressView];
             
             if (error || [msg containsString:@"Error"]) {
                 
@@ -227,6 +234,7 @@
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else
                         
@@ -238,32 +246,38 @@
                     else if([msg isEqualToString:@"Error-402"])
                     {
                         [self->utils showAlertWithMessage:NSLocalizedString(@"Your account credentials were changed, contact to Admin and please log back in.", nil) sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                     }
                     else if([msg isEqualToString:@"Error-422"])
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Unprocessable Entity. Please try again later."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else if([msg isEqualToString:@"Error-404"])
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else if([msg isEqualToString:@"Error-405"] ||[msg isEqualToString:@"405"])
                     {
                         NSLog(@"Message is : %@",msg);
                             [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The requested URL was not found on this server."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else if([msg isEqualToString:@"Error-500"] ||[msg isEqualToString:@"500"])
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
                     {
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     
                     else{
@@ -307,10 +321,12 @@
                     if([str isEqualToString:@"tickets from different users"])
                     {
                         [self->utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                     else
                     {
                          [self->utils showAlertWithMessage:@"Something went wrong...!" sendViewController:self];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
                     }
                 }
                 else{
@@ -320,6 +336,7 @@
                     NSString * response1=[dict1 objectForKey:@"message"];
                     NSString * msg=@"merged successfully";
                     
+                     [[AppDelegate sharedAppdelegate] hideProgressView];
                         if([response1 isEqualToString: msg])
                         {
                             [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Merged Successfully.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
@@ -329,6 +346,7 @@
                         }else
                         {
                             [self->utils showAlertWithMessage:@"Something went wrong...!" sendViewController:self];
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
                         }
                         
                     
@@ -336,6 +354,7 @@
                 }
             }
             NSLog(@"Thread-NO5-postMerge-closed");
+             [[AppDelegate sharedAppdelegate] hideProgressView];
             
         }];
 }@catch (NSException *exception)
@@ -343,6 +362,7 @@
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );
              [utils showAlertWithMessage:exception.name sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
             return;
         }
         @finally
@@ -368,6 +388,7 @@
     return YES;
 }
 
+// This method used to control on giving input values in textfield or textviews
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     

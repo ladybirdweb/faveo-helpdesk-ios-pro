@@ -6,47 +6,158 @@
  Copyright © 2017 Ladybird websolutions pvt ltd. All rights reserved.
  */
 
-"Please Enter the URL"="";
-"Verifying URL"="";
-"Error verifying URL"="";
-"Please Enter a valid URL"="";
-"Verified URL"="";
-"Access denied, to use pro version!"="";
-"Please Enter Username"="";
-"Please Enter Password"="";
-"Thank you, you have logged in successfully."="";
-"Getting Data"="";
-"Refreshing"="";
-"CreateTicket"="";
-"Inbox"="";
-"Trash Tickets"="";
-"Client List"="";
-"Closed Tickets"="";
-"UnassignedTickets"="";
-"MyTickets"="";
-"About"="";
-"Not Available"="";
-"Select Helptopic"="";
-"Select CountryCode"="";
-"Please enter EMAIL-ID"="";
-"Please enter First Name"="";
-"Please select HELP-TOPIC"="";
-"Please select SLA"="";
-"Please select DEPARTMENT"="";
-"Please select PRIORITY"="";
-"Please enter SUBJECT"="";
-"SUBJECT requires at least 5 characters"="";
-"Please enter ticket MESSAGE"="";
-"MESSAGE requires at least 10 characters"="";
-"Invalid EMAIL_ID" ="";
-"Name should have more than 2 characters"="";
-"Ticket created successfully!"="";
-"Internal Note"="";
-"Message"="";
-"Done"="";
-"Ticket Reply"="";
-"Message*"="";
-"Empty!!!"="Vazio!!!";
-"Cc"="Cc";
-"Please wait"="por favor espera";
+"Refreshing"="Refrescante";
+"Error"="Erro";
+"All Caught Up"="Todos apanhados";
+
+"Empty"="Vazio";
+"Getting Data"="Obtendo dados";
+"Done!"="Feito!";
+"Not Available"="Não disponível";
+"success"="sucesso";
+"Warning"="Atenção";
+"Alert"="Alerta";
+"No"="Não";
+"Yes"="sim";
+
+"No Records"="Não há registros";
+"Done"="Feito";
+"Success"="Sucesso";
+
+"Something is Wrong."="Algo está errado.";
+
+
+
+"Are You Sure to Deactivate ?"="Você está certo de desativar?";
+"Are You Sure to Activate ?"="Você tem certeza de ativar?";
+
+"Ticket Status Changed."="Status do ticket alterado";
+"Ticket is Already Open"="O ticket já está aberto";
+"Ticket is Already Closed"="O ticket já está fechado";
+"Ticket is Already Resolved"="O ticket já está resolvido";
+"Ticket is Already Deleted"="O ticket já foi excluído";
+
+"All users"="Todos os usuários";
+"Agent users"="Usuários do agente";
+"Active users"="Usuários ativos";
+"Client users"="Usuários clientes";
+"Banned users"="Usuários banidos";
+"Inactive users"="Usuários inativos";
+"Deactivated users"="Usuários desativados";
+
+"Change Ticket Status"="Alterar status do ticket";
+"Open"="Aberto";
+"Closed"="Fechadas";
+"Resolved"="Resolvido";
+"Deleted"="Excluído";
+
+"Inbox"="Caixa de entrada";
+"MyTickets"="MyTickets";
+"My Tickets"="Meus ingressos";
+"Ticket Reply"="Ticket Reply";
+"Internal Notes"="Notas Internas";
+"About"="Sobre";
+"Closed Tickets"="Bilhetes fechados";
+"Edit Ticket"="Editar passagem";
+"Notifications"="Notificações";
+"Edit Profile"="Editar Perfil";
+"Client List"="Lista de clientes";
+"Unassigned Tickets"="Bilhetes não atribuídos";
+"Trash Tickets"="Bilhetes de lixo";
+"Merge Tickets"="Mesclar ingressos";
+"Ticket Title"="Título do Bilhete";
+"Ticket Number"="Número do bilhete";
+"Priority"="Prioridade";
+"Updated at"="Atualizado em";
+"Created at"="Criado em";
+"Due Date"="Data de Vencimento";
+"Show Filter"="Mostrar filtro";
+"Clear All"="Limpar tudo";
+"Exit"="Saída";
+"ASC"="";
+"DES"="";
+"Filter"="Filtro";
+"Sort by"="Ordenar por";
+"Details"="Detalhes";
+"Message"="mensagem";
+"Cc"="";
+"Please wait"="Por favor, espere";
+
+"Discard Changes ?"="Descartar mudanças ?";
+
+"Details Updated successfully"="Detalhes atualizados com sucesso";
+"Merged Successfully"="Fundido com sucesso";
+"Requester Created successfully"="Solicitante criado com sucesso";
+"Tickets from different users"="Ingressos de diferentes usuários";
+"URL Verified successfully"="URL verificado com sucesso";
+"You have logged in successfully"="Você logou com sucesso";
+"Updated successfully"="Atualizado com sucesso";
+"Activated successfully"="Ativado com sucesso";
+"Deactivated successfully"="Desativado com sucesso";
+
+
+"Email already exist"="Email já existe";
+
+"Please Enter the URL"="Por favor insira o URL";
+"Please insert username & password"="Por favor, insira nome de usuário e senha";
+"Please insert username"="Por favor, insira o nome de usuário";
+"Please insert password"="Por favor, insira a senha";
+"Verifying URL"="Verificando URL";
+
+"Please Enter Mobile Code"="Por favor, insira o código do celular";
+"Please Select The Tickets"="Por favor selecione os ingressos";
+"Please Select The Parent Ticket"="Por favor selecione The Parent Ticket";
+"Please enter SUBJECT"="Por favor insira SUBJECT";
+"Please select HELP-TOPIC"="Por favor selecione HELP-TOPIC";
+"Please select PRIORITY"="Por favor selecione PRIORIDADE";
+"Select CountryCode"="Selecione CountryCode";
+
+"Please select SOURCE"="Por favor selecione SOURCE";
+"Please fill all mandatory fields"="Por favor, preencha todos os campos obrigatórios";
+"Enter First Name & Last Name"="Digite o primeiro nome e sobrenome";
+"Enter First Name & Email"="Digite o primeiro nome e o email";
+"Enter Last Name & Email"="Digite o sobrenome e o email";
+"Enter Full Email"="Digite o email completo";
+
+"Enter First Name, Last Name & Email"="Digite o primeiro nome, sobrenome e e-mail";
+"Please enter username"="Por favor insira o nome de usuário";
+"Please enter First Name."="Por favor, insira o primeiro nome.";
+"Please enter Last Name"="Por favor insira o Sobrenome";
+"Please enter Email"="Por favor insira o email";
+"Please enter valid email id"="Por favor, insira um e-mail válido";
+"Please refresh the Inbox"="Por favor, atualize a caixa de entrada";
+
+"FirstName should have more than 2 characters"="FirstName deve ter mais de 2 caracteres";
+"SUBJECT requires at least 5 characters"="SUBJECT requer pelo menos 5 caracteres";
+"MESSAGE requires at least 10 characters"="MENSAGEM requer pelo menos 10 caracteres";
+
+
+"Select Status"="Selecione o status";
+"Select SLA"="Selecione SLA";
+"Select Department"="Selecione Departamento";
+"Select Priority"="Selecione Prioridade";
+"Select Helptopic"="Selecione Helptópico";
+"Select Source"="Selecione a fonte";
+"Select Ticket Type"="Selecione o tipo de ticket";
+"Select Assignee"="Selecione o destinatário";
+
+
+
+"Permission Denied - You don't have permission to Open a ticket"="Permissão negada - você não tem permissão para abrir um ticket";
+"Permission Denied - Yo don't have permission to Close a ticket"="Permissão negada - Você não tem permissão para fechar um ticket";
+"Permission Denied - You don't have permission to Resolve a ticket"="Permissão negada - você não tem permissão para resolver um ticket";
+"Permission Denied - You don't have permission to Delete a ticket"="Permissão negada - você não tem permissão para excluir um ticket";
+
+"Permission denied, you do not have permission to access the requested page."="Permissão negada, você não tem permissão para acessar a página solicitada.";
+"Access Denied - You don't have permission."="Acesso Negado - Você não tem permissão.";
+"There is no Internet Connection"="Não há conexão com a Internet";
+"The internet connection seems to be down. Please check it."="A conexão com a internet parece estar inoperante. Por favor verifique isto.";
+
+
+"Cannot find specified host. Retype URL"="Não é possível encontrar o host especificado. Redigite o URL";
+"Cannot connect to specified host. Server may be down."="Não é possível conectar-se ao host especificado. Servidor pode estar inoperante.";
+"Cannot connect to the internet. Service may not be available"="Não é possível conectar-se à internet. O serviço pode não estar disponível";
+
+"Headquarter in Bangalore, Faveo Helpdesk provides Businesses with an automated Helpdesk system to manage customer support. The word Faveo comes from Latin which means to be favourable. Which truly highlights vision and the scope as well as the functionality of the product that Faveo is. Faveo empowers your business with state of art, ticket based support system. In today’s competitive startup scenario customer retention is one of the major challenges. Handling client query diligently is all the difference between retaining or losing a long lasting relationship. The company is driven with passion of providing tools for managing consumer queries for strategic insights and helping companies take those decisive decisions."="Sediada em Bangalore, a Faveo Helpdesk fornece às empresas um sistema automatizado de assistência técnica para gerenciar o suporte ao cliente. A palavra Faveo vem do latim, o que significa ser favorável. O que realmente destaca a visão e o escopo, bem como a funcionalidade do produto que o Faveo é. A Faveo capacita sua empresa com o estado da arte, sistema de suporte baseado em ingressos. No atual cenário de startups competitivo, a retenção de clientes é um dos maiores desafios. Lidar com a consulta do cliente com diligência é toda a diferença entre manter ou perder um relacionamento duradouro. A empresa é motivada pela paixão de fornecer ferramentas para gerenciar as consultas dos consumidores para obter insights estratégicos e ajudar as empresas a tomarem essas decisões decisivas.";
+
 

@@ -54,6 +54,8 @@
 
 @implementation DetailViewController
 
+
+//This method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -92,11 +94,14 @@
     // Do any additional setup after loading the view.
 }
 
+//This method notifies the view controller that its view is about to be removed from a view hierarchy.
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
 }
 
+
+// This method calls an API for getting tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)reload{
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
@@ -443,7 +448,7 @@
     return animation;
 }
 
-
+//This method the delegate if the specified text should be changed.
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     
