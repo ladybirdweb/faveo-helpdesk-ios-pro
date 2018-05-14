@@ -37,7 +37,7 @@
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
 
-@interface InboxViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate,UISearchDisplayDelegate,UISearchBarDelegate>{
+@interface InboxViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
     Utils *utils;
     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
@@ -99,8 +99,6 @@
     statusIdforChange = [[NSMutableArray alloc] init];
     uniqueStatusNameArray = [[NSMutableArray alloc] init];
     
-    
-    _searchBar.delegate = self;
     _multistageDropdownMenuView.tag=99;
     
     self.view.backgroundColor=[UIColor grayColor];
