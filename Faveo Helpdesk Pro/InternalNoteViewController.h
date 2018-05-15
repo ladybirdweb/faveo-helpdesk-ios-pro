@@ -15,5 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 - (IBAction)addButtonAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *noteTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *noteContentLabel;
 
 @end
