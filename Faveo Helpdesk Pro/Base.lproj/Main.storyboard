@@ -6320,7 +6320,7 @@
                                                             </connections>
                                                         </textView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7w-jk-BUn">
-                                                            <rect key="frame" x="10" y="119" width="355" height="0.66666666666666663"/>
+                                                            <rect key="frame" x="10" y="119" width="355" height="0.6666666666666714"/>
                                                             <color key="backgroundColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
                                                     </subviews>

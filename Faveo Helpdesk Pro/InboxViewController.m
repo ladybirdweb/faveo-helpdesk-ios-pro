@@ -619,6 +619,11 @@
                     else{
                         NSLog(@"Error message is %@",msg);
                         NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
+                        if([error.localizedDescription isEqualToString:@"The request timed out."])
+                        {
+                            [self->utils showAlertWithMessage:@"The request timed out" sendViewController:self];
+                        }else
+                            
                         [self->utils showAlertWithMessage:error.localizedDescription sendViewController:self];
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                        

@@ -19,6 +19,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "Utils.h"
+
 @import Fabric;
 @import Crashlytics;
 @import Firebase;
@@ -34,6 +35,7 @@
 // running iOS 10 and above. Implement FIRMessagingDelegate to receive data message via FCM for
 // devices running iOS 10 and above.
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+
 @interface AppDelegate () <FIRMessagingDelegate>
 @end
 #endif
@@ -61,12 +63,15 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     
     [[IQKeyboardManager sharedManager] setEnable:YES];
     
+    
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     
     // it is deprecated
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     [FIRApp configure];
+    
+    
     [Fabric.sharedSDK setDebug:YES];
     [Fabric with:@[[Crashlytics class]]];
     
@@ -505,6 +510,9 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 {
     return (AppDelegate*)[[UIApplication sharedApplication] delegate];
 }
+
+
+
 #pragma mark - Progress Hud Show and Hide
 - (void)showProgressView
 {
