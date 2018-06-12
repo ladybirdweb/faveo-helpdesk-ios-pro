@@ -53,6 +53,8 @@
     [self.contentTextView setInputAccessoryView:toolBar];
     
     _addButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    _noteTitleLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"#00AEEF"];
+    _noteContentLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"#00AEEF"];
     
 }
 

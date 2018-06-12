@@ -311,6 +311,9 @@
                     
                     //    NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
                     NSDictionary *resultDic = [json objectForKey:@"data"];
+                    
+                     self->globalVariables.dependencyDataDict=[json objectForKey:@"data"];
+                    
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
                     
                     for (int i = 0; i < ticketCountArray.count; i++) {

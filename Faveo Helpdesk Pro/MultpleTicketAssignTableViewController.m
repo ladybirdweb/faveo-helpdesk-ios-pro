@@ -98,8 +98,10 @@
         {
             plistPath = [[NSBundle mainBundle] pathForResource:@"faveoData" ofType:@"plist"];
         }
-        NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+     //   NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
         //    NSLog(@"resultDic--%@",resultDic);
+    
+       NSDictionary *resultDic = globalVariables.dependencyDataDict;
     
         NSMutableArray *staffsArray=[resultDic objectForKey:@"staffs"];
     
@@ -138,6 +140,9 @@
         } // end for loop
     
         _assignArray=[staffMU copy];
+    
+    NSLog(@"Assignee List is : %@",_assignArray);
+    NSLog(@"Assignee List is : %@",_assignArray);
         
 }@catch (NSException *exception)
     {
@@ -281,14 +286,7 @@
             
             if (msg) {
                 
-                if([msg isEqualToString:@"Error-401"])
-                {
-                    NSLog(@"Message is : %@",msg);
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again."] sendViewController:self];
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                }
-                else
-                    
+    
                 if([msg isEqualToString:@"Error-403"])
                 {
                     [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
@@ -324,12 +322,7 @@
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Internal Server Error.Something has gone wrong on the website's server."] sendViewController:self];
                     [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
-                else if([msg isEqualToString:@"Error-400"] ||[msg isEqualToString:@"400"])
-                {
-                    NSLog(@"Message is : %@",msg);
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"The request could not be understood by the server due to malformed syntax."] sendViewController:self];
-                    [[AppDelegate sharedAppdelegate] hideProgressView];
-                }
+            
                 else{
                     [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
                     [[AppDelegate sharedAppdelegate] hideProgressView];

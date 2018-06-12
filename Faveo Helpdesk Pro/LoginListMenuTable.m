@@ -71,8 +71,8 @@
     {
 //        LoginDetailPage2 * two=[self.storyboard instantiateViewControllerWithIdentifier:@"LoginDetailPage2Id"];
 //        [self.navigationController pushViewController:two animated:YES];
-        LoginDetailPage1 * one=[self.storyboard instantiateViewControllerWithIdentifier:@"LoginDetailPage1Id"];
-        [self.navigationController pushViewController:one animated:YES];
+//        LoginDetailPage1 * one=[self.storyboard instantiateViewControllerWithIdentifier:@"LoginDetailPage1Id"];
+//        [self.navigationController pushViewController:one animated:YES];
     }
     
 }

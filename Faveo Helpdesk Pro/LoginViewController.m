@@ -3,7 +3,7 @@
 //  SideMEnuDemo
 //
 //  Created on 18/08/16.
-//  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
+//  Copyright © 2016 Ladybird websolutions pvt Ltd. All rights reserved.
 //
 
 #import "LoginViewController.h"
@@ -25,6 +25,7 @@
 
 
 @import Crashlytics;
+
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
 @import Firebase;
@@ -115,17 +116,10 @@
 
 
 
-//- (IBAction)urlButton:(id)sender {
-//
-//    [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Verifying URL","")];
-//    [self performSelector:@selector(URLValidationMethod) withObject:self afterDelay:1.0];
-//    //[self URLValidationMethod];
-//}
-
 // After cling next arroe this method is called
 - (IBAction)urlButton:(id)sender {
     
-    
+   // [self performSelector:@selector(URLValidationMethod) withObject:self afterDelay:1.0];
     [self URLValidationMethod];
 }
 

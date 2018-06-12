@@ -19,4 +19,10 @@ pod 'Firebase/Crash'
 pod "UITextField_AutoSuggestion"
 pod 'HSAttachmentPicker'
 
+ # ignore all warnings from all pods
+    inhibit_all_warnings!
+
+  # ignore warnings from a specific pod
+    pod 'ActionSheetPicker-3.0', :inhibit_warnings => true
+
 end

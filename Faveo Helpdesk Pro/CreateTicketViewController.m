@@ -131,8 +131,10 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     
     
-    [self readFromPlist];
     [self getDependencies];
+    
+    [self readFromPlist];
+   
     
     [self setTitle:NSLocalizedString(@"CreateTicket",nil)];
     
@@ -310,7 +312,9 @@
         {
             plistPath = [[NSBundle mainBundle] pathForResource:@"faveoData" ofType:@"plist"];
         }
-        NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    //    NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+       
+        NSDictionary *resultDic = globalVariables.dependencyDataDict;
         NSLog(@"resultDic--%@",resultDic);
         
         NSArray *deptArray=[resultDic objectForKey:@"departments"];
@@ -2046,7 +2050,7 @@
 
     NSLog(@"Request is : %@",request);
 //
-    //return and test
+    //return and test //need to add
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
 
@@ -2257,8 +2261,11 @@
             
                 if (json) {
                     
-                    //  NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    
                     NSDictionary *resultDic = [json objectForKey:@"data"];
+                    
+                    self->globalVariables.dependencyDataDict=[json objectForKey:@"data"];
+                    
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
                     
                     for (int i = 0; i < ticketCountArray.count; i++) {
@@ -2315,6 +2322,10 @@
                     
                     NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:resultDic format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&writeError];
                     
+                    NSLog(@"Plist data is: %@",plistData);
+                    NSLog(@"Plist data is: %@",plistData);
+                    NSLog(@"Plist data is: %@",plistData);
+                    
                     if(plistData)
                     {
                         [plistData writeToFile:plistPath atomically:YES];
@@ -2322,7 +2333,7 @@
                     }
                     else
                     {
-                        NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
+                        NSLog(@"Error in saveData: %@", writeError.localizedDescription);        }
                     
                 }
                 NSLog(@"Thread-NO5-getDependencies-closed");

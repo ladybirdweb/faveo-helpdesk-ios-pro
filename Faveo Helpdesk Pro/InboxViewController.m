@@ -37,7 +37,7 @@
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
 
-@interface InboxViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate,UISearchDisplayDelegate,UISearchBarDelegate>{
+@interface InboxViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
     Utils *utils;
     UIRefreshControl *refresh;
     NSUserDefaults *userDefaults;
@@ -99,8 +99,6 @@
     statusIdforChange = [[NSMutableArray alloc] init];
     uniqueStatusNameArray = [[NSMutableArray alloc] init];
     
-    
-    _searchBar.delegate = self;
     _multistageDropdownMenuView.tag=99;
     
     self.view.backgroundColor=[UIColor grayColor];
@@ -621,6 +619,11 @@
                     else{
                         NSLog(@"Error message is %@",msg);
                         NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
+                        if([error.localizedDescription isEqualToString:@"The request timed out."])
+                        {
+                            [self->utils showAlertWithMessage:@"The request timed out" sendViewController:self];
+                        }else
+                            
                         [self->utils showAlertWithMessage:error.localizedDescription sendViewController:self];
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                        
@@ -648,6 +651,8 @@
                     
                   //  NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
                     NSDictionary *resultDic = [json objectForKey:@"data"];
+                    self->globalVariables.dependencyDataDict=[json objectForKey:@"data"];
+                    
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
                     
                     for (int i = 0; i < ticketCountArray.count; i++) {
@@ -699,10 +704,15 @@
                     NSString *documentsPath = [paths objectAtIndex:0];
                     
                     // get the path to our Data/plist file
-                    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
+                    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData1.plist"];
                     NSError *writeError = nil;
                     
                     NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:resultDic format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&writeError];
+                    
+                    NSLog(@"Dict data is : %@",resultDic);
+                    NSLog(@"Plist data is : %@",plistData);
+                    NSLog(@"Plist data is : %@",plistData);
+                    
                     
                     if(plistData)
                     {

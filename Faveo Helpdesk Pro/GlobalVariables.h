@@ -214,6 +214,8 @@
 
 @property (strong, nonatomic) NSArray *ccListArray1;
 
+@property (strong, nonatomic) NSDictionary *dependencyDataDict;
+
 
 @end
 
