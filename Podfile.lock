@@ -18,17 +18,17 @@ PODS:
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseCore (3.4.5):
     - GoogleInterchangeUtilities (~> 1.2)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseCrash (1.1.4):
     - FirebaseAnalytics (~> 3.5)
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
     - GoogleToolboxForMac/Logger (~> 2.1)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseInstanceID (1.0.8)
   - FirebaseMessaging (1.2.1):
     - FirebaseAnalytics (~> 3.4)
@@ -42,7 +42,7 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.0)
   - GoogleToolboxForMac/Logger (2.1.0):
     - GoogleToolboxForMac/Defines (= 2.1.0)
-  - GoogleToolboxForMac/NSData+zlib (2.1.0):
+  - "GoogleToolboxForMac/NSData+zlib (2.1.0)":
     - GoogleToolboxForMac/Defines (= 2.1.0)
   - HexColors (4.0.0)
   - HSAttachmentPicker (1.0.2)
@@ -79,6 +79,33 @@ DEPENDENCIES:
   - UITextField_AutoSuggestion
   - XLForm (~> 3.0)
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - ActionSheetPicker-3.0
+    - CNPPopupController
+    - Crashlytics
+    - Fabric
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseCrash
+    - FirebaseInstanceID
+    - FirebaseMessaging
+    - GoogleInterchangeUtilities
+    - GoogleSymbolUtilities
+    - GoogleToolboxForMac
+    - HexColors
+    - HSAttachmentPicker
+    - IQKeyboardManager
+    - MBProgressHUD
+    - NSDate-Time-Ago
+    - PPTopMostController
+    - RKDropdownAlert
+    - RMessage
+    - SDWebImage
+    - UITextField_AutoSuggestion
+    - XLForm
+
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
   CNPPopupController: 59b06290762f68beab5fb0bbfa87eb4dcbefb7de
@@ -105,6 +132,6 @@ SPEC CHECKSUMS:
   UITextField_AutoSuggestion: dca08de21c8de3f6054dda085087a04b5b326208
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: 0ba30de4ec47fc8e38b79d18deed73b4e7ddea8b
+PODFILE CHECKSUM: 6d907af8f8a4a87aa915f65ade8a7116f8de85bb
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0
