@@ -98,8 +98,10 @@
         {
             plistPath = [[NSBundle mainBundle] pathForResource:@"faveoData" ofType:@"plist"];
         }
-        NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+     //   NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
         //    NSLog(@"resultDic--%@",resultDic);
+    
+       NSDictionary *resultDic = globalVariables.dependencyDataDict;
     
         NSMutableArray *staffsArray=[resultDic objectForKey:@"staffs"];
     

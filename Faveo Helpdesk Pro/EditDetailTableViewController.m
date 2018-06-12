@@ -421,8 +421,11 @@
         {
             plistPath = [[NSBundle mainBundle] pathForResource:@"faveoData" ofType:@"plist"];
         }
-        NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-           NSLog(@"resultDic--%@",resultDic);
+     //   NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+        
+         NSDictionary *resultDic = globalVariables.dependencyDataDict;
+         NSLog(@"resultDic--%@",resultDic);
+        
         NSArray *deptArray=[resultDic objectForKey:@"departments"];
         NSArray *helpTopicArray=[resultDic objectForKey:@"helptopics"];
         NSArray *prioritiesArray=[resultDic objectForKey:@"priorities"];
