@@ -462,8 +462,10 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                 
                             [self reloadTableView];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
                             [self->refresh endRefreshing];
+                            
+                            [[AppDelegate sharedAppdelegate] hideProgressView];
+                            
                             
                         });
                     });

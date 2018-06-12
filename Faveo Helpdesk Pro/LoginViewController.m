@@ -488,10 +488,11 @@
                                     
                                     [RKDropdownAlert title:NSLocalizedString(@"Welcome.",nil) message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                                     
-                                    
-                                    
+                                
                                     [self sendDeviceToken];
-                                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                                    
+                                     [[AppDelegate sharedAppdelegate] hideProgressView];
+                                   
                                     InboxViewController *inboxVC=[self.storyboard  instantiateViewControllerWithIdentifier:@"InboxID"];
                                     [self.navigationController pushViewController:inboxVC animated:YES];
                                     //[self.navigationController popViewControllerAnimated:YES];
