@@ -120,6 +120,7 @@
     [self.userSearchTextField setInputAccessoryView:toolBar];
     
     _addButton.backgroundColor=[UIColor hx_colorWithHexRGBAString:@"#00aeef"];
+    _searchLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"#00AEEF"];
     
 }
 -(void)removeKeyBoard

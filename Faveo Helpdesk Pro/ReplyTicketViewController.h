@@ -36,6 +36,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *viewCCLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *msgLabel;
 
 
 @end

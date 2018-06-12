@@ -340,9 +340,9 @@
         
         [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Deactivate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
             
-            self->globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
-            [self->_switch1 setOn:YES];
-            self->_switch1.onTintColor= [UIColor redColor];
+//            self->globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
+//            [self->_switch1 setOn:YES];
+//            self->_switch1.onTintColor= [UIColor redColor];
             [self deactivateUser];
         } cancelBlock:^{
             
@@ -374,10 +374,10 @@
         
         [customAlert showAlertWithTitle:NSLocalizedString(@"Alert !", nil) message:NSLocalizedString(@"Are You Sure to Activate ?", nil) cancelButtonTitle:NSLocalizedString(@"No", nil) successButtonTitle:NSLocalizedString(@"Yes", nil) withSuccessBlock:^{
             
-            [self->_switch1 setOn:NO];
-            //   _switch1.tintColor = [UIColor greenColor];
-            self->_switch1.layer.cornerRadius = 16;
-            self->_switch1.backgroundColor= [UIColor greenColor];
+//            [self->_switch1 setOn:NO];
+//            //   _switch1.tintColor = [UIColor greenColor];
+//            self->_switch1.layer.cornerRadius = 16;
+//            self->_switch1.backgroundColor= [UIColor greenColor];
          [self activeUser];
         } cancelBlock:^{
             [self->_switch1 setOn:YES];
@@ -461,6 +461,10 @@
                
                     dispatch_async(dispatch_get_main_queue(), ^{
                     
+                        self->globalVariables.ActiveDeactiveStateOfUser1=@"deActive";
+                        [self->_switch1 setOn:YES];
+                        self->_switch1.onTintColor= [UIColor redColor];
+                        
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
                     }
@@ -487,6 +491,13 @@
                 }else
                     
                 {
+                    
+                    [self->_switch1 setOn:NO];
+                    //   _switch1.tintColor = [UIColor greenColor];
+                    self->_switch1.layer.cornerRadius = 16;
+                    self->_switch1.backgroundColor= [UIColor greenColor];
+                    
+                    
                     msg= [json objectForKey:@"error"];
                     NSLog(@"Message is : %@",msg);
                     
@@ -509,14 +520,23 @@
                                                 buttonCallback:nil
                                                     atPosition:RMessagePositionNavBarOverlay
                                           canBeDismissedByUser:YES];
-                    }else
+                    }
+                   else if([msg isEqualToString:@"no permission"])
+                       
+                   {
+            
+                       [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                       [[AppDelegate sharedAppdelegate] hideProgressView];
+                       
+                   }
+                    else
                     {
                         if (self.navigationController.navigationBarHidden) {
                             [self.navigationController setNavigationBarHidden:NO];
                         }
                         
                         [RMessage showNotificationInViewController:self.navigationController
-                                                             title:NSLocalizedString(@"Error", nil)
+                                                             title:NSLocalizedString(@"Error.", nil)
                                                           subtitle:NSLocalizedString(@"Something went wrong.", nil)
                                                          iconImage:nil
                                                               type:RMessageTypeWarning
@@ -617,6 +637,11 @@
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
+                        [self->_switch1 setOn:NO];
+                        //   _switch1.tintColor = [UIColor greenColor];
+                        self->_switch1.layer.cornerRadius = 16;
+                        self->_switch1.backgroundColor= [UIColor greenColor];
+                        
                         if (self.navigationController.navigationBarHidden) {
                             [self.navigationController setNavigationBarHidden:NO];
                         }
@@ -640,19 +665,27 @@
                         [self.navigationController pushViewController:list animated:YES];
                         
                     });
-                }else
+                }
+                else {
                     
+                    [self->_switch1 setOn:YES];
+                    self->_switch1.onTintColor= [UIColor redColor];
+                    
+                msg= [json objectForKey:@"error"];
+                NSLog(@"Message is : %@",msg);
+                
+                
+                if([msg isEqualToString:@"user not found"])
                 {
-                    
                     if (self.navigationController.navigationBarHidden) {
                         [self.navigationController setNavigationBarHidden:NO];
                     }
                     
                     [RMessage showNotificationInViewController:self.navigationController
-                                                         title:NSLocalizedString(@"Error", nil)
-                                                      subtitle:NSLocalizedString(@"Something is Wrong.", nil)
+                                                         title:NSLocalizedString(@"This is not user.", nil)
+                                                      subtitle:NSLocalizedString(@"You cant activate Agent from here.", nil)
                                                      iconImage:nil
-                                                          type:RMessageTypeSuccess
+                                                          type:RMessageTypeWarning
                                                 customTypeName:nil
                                                       duration:RMessageDurationAutomatic
                                                       callback:nil
@@ -660,7 +693,34 @@
                                                 buttonCallback:nil
                                                     atPosition:RMessagePositionNavBarOverlay
                                           canBeDismissedByUser:YES];
+                }
+                else if([msg isEqualToString:@"no permission"])
                     
+                {
+                
+                    [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    
+                }
+                else
+                {
+                    if (self.navigationController.navigationBarHidden) {
+                        [self.navigationController setNavigationBarHidden:NO];
+                    }
+                    
+                    [RMessage showNotificationInViewController:self.navigationController
+                                                         title:NSLocalizedString(@"Error.", nil)
+                                                      subtitle:NSLocalizedString(@"Something went wrong.", nil)
+                                                     iconImage:nil
+                                                          type:RMessageTypeWarning
+                                                customTypeName:nil
+                                                      duration:RMessageDurationAutomatic
+                                                      callback:nil
+                                                   buttonTitle:nil
+                                                buttonCallback:nil
+                                                    atPosition:RMessagePositionNavBarOverlay
+                                          canBeDismissedByUser:YES];
+                }
                 }
             } // end if json
             

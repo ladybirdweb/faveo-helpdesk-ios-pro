@@ -1477,7 +1477,6 @@
 				D9DBD33D1E07ACFC00219F93 /* Sources */,
 				D9DBD33E1E07ACFC00219F93 /* Frameworks */,
 				D9DBD33F1E07ACFC00219F93 /* Resources */,
-				E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */,
 				51E3D0AC653ABB0DCA94B68D /* [CP] Copy Pods Resources */,
 				0643C94D2046AA8B007DC824 /* CopyFiles */,
 				06B2068D205FBE3F00FF03BE /* ShellScript */,
@@ -1773,21 +1772,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E4329CD6FE0E5B2D3A559196 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Faveo Helpdesk Pro/Pods-Faveo Helpdesk Pro-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2150,53 +2134,7 @@
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				"OTHER_LDFLAGS[arch=*]" = (
-					"$(inherited)",
-					"-ObjC",
-					"-l\"ActionSheetPicker-3.0\"",
-					"-l\"CNPPopupController\"",
-					"-l\"GoogleToolboxForMac\"",
-					"-l\"HexColors\"",
-					"-l\"IQKeyboardManager\"",
-					"-l\"MBProgressHUD\"",
-					"-l\"NSDate-Time-Ago\"",
-					"-l\"PPTopMostController\"",
-					"-l\"RKDropdownAlert\"",
-					"-l\"RMessage\"",
-					"-l\"SDWebImage\"",
-					"-l\"XLForm\"",
-					"-l\"c++\"",
-					"-l\"sqlite3\"",
-					"-l\"z\"",
-					"-framework",
-					"\"AddressBook\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"FirebaseAnalytics\"",
-					"-framework",
-					"\"FirebaseCore\"",
-					"-framework",
-					"\"FirebaseInstanceID\"",
-					"-framework",
-					"\"FirebaseMessaging\"",
-					"-framework",
-					"\"Foundation\"",
-					"-framework",
-					"\"GoogleInterchangeUtilities\"",
-					"-framework",
-					"\"GoogleSymbolUtilities\"",
-					"-framework",
-					"\"ImageIO\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"StoreKit\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-framework",
-					"\"UIKit\"",
-				);
+				"OTHER_LDFLAGS[arch=*]" = "$(inherited) -ObjC -l\"ActionSheetPicker-3.0\" -l\"CNPPopupController\" -l\"GoogleToolboxForMac\" -l\"HexColors\" -l\"IQKeyboardManager\" -l\"MBProgressHUD\" -l\"NSDate-Time-Ago\" -l\"PPTopMostController\" -l\"RKDropdownAlert\" -l\"RMessage\" -l\"SDWebImage\" -l\"XLForm\" -l\"c++\" -l\"sqlite3\" -l\"z\" -framework \"AddressBook\" -framework \"CoreGraphics\" -framework \"FirebaseAnalytics\" -framework \"FirebaseCore\" -framework \"FirebaseInstanceID\" -framework \"FirebaseMessaging\" -framework \"Foundation\" -framework \"GoogleInterchangeUtilities\" -framework \"GoogleSymbolUtilities\" -framework \"ImageIO\" -framework \"QuartzCore\" -framework \"StoreKit\" -framework \"SystemConfiguration\" -framework \"UIKit\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2219,53 +2157,7 @@
 				INFOPLIST_FILE = "Faveo Helpdesk Pro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				"OTHER_LDFLAGS[arch=*]" = (
-					"$(inherited)",
-					"-ObjC",
-					"-l\"ActionSheetPicker-3.0\"",
-					"-l\"CNPPopupController\"",
-					"-l\"GoogleToolboxForMac\"",
-					"-l\"HexColors\"",
-					"-l\"IQKeyboardManager\"",
-					"-l\"MBProgressHUD\"",
-					"-l\"NSDate-Time-Ago\"",
-					"-l\"PPTopMostController\"",
-					"-l\"RKDropdownAlert\"",
-					"-l\"RMessage\"",
-					"-l\"SDWebImage\"",
-					"-l\"XLForm\"",
-					"-l\"c++\"",
-					"-l\"sqlite3\"",
-					"-l\"z\"",
-					"-framework",
-					"\"AddressBook\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"FirebaseAnalytics\"",
-					"-framework",
-					"\"FirebaseCore\"",
-					"-framework",
-					"\"FirebaseInstanceID\"",
-					"-framework",
-					"\"FirebaseMessaging\"",
-					"-framework",
-					"\"Foundation\"",
-					"-framework",
-					"\"GoogleInterchangeUtilities\"",
-					"-framework",
-					"\"GoogleSymbolUtilities\"",
-					"-framework",
-					"\"ImageIO\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"StoreKit\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-framework",
-					"\"UIKit\"",
-				);
+				"OTHER_LDFLAGS[arch=*]" = "$(inherited) -ObjC -l\"ActionSheetPicker-3.0\" -l\"CNPPopupController\" -l\"GoogleToolboxForMac\" -l\"HexColors\" -l\"IQKeyboardManager\" -l\"MBProgressHUD\" -l\"NSDate-Time-Ago\" -l\"PPTopMostController\" -l\"RKDropdownAlert\" -l\"RMessage\" -l\"SDWebImage\" -l\"XLForm\" -l\"c++\" -l\"sqlite3\" -l\"z\" -framework \"AddressBook\" -framework \"CoreGraphics\" -framework \"FirebaseAnalytics\" -framework \"FirebaseCore\" -framework \"FirebaseInstanceID\" -framework \"FirebaseMessaging\" -framework \"Foundation\" -framework \"GoogleInterchangeUtilities\" -framework \"GoogleSymbolUtilities\" -framework \"ImageIO\" -framework \"QuartzCore\" -framework \"StoreKit\" -framework \"SystemConfiguration\" -framework \"UIKit\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ladybirdwebsolutions.FaveoHelpdeskPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

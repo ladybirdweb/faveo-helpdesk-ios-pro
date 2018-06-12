@@ -60,8 +60,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title=@"Reply Ticket";
-    
-    
+ 
     self.tableview1.separatorColor=[UIColor clearColor];
     
     
@@ -97,11 +96,16 @@
     
     if(globalVariables.ccCount==0)
     {
-        _addCCLabelButton.text=@"Add cc";
+        _viewCCLabel.text=@"View cc";
     }else
     {
-        _addCCLabelButton.text=[NSString stringWithFormat:@"Add cc (%@ Recipients)",globalVariables.ccCount];
+        _viewCCLabel.text=[NSString stringWithFormat:@"View cc (%@ Recipients)",globalVariables.ccCount];
     }
+    
+    _addCCLabelButton.textColor= [UIColor hx_colorWithHexRGBAString:@"#00AEEF"];
+    _viewCCLabel.textColor= [UIColor hx_colorWithHexRGBAString:@"#00AEEF"];
+    _msgLabel.textColor= [UIColor hx_colorWithHexRGBAString:@"#00AEEF"];
+    
     
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
