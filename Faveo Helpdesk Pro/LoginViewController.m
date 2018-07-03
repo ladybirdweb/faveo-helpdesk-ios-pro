@@ -476,7 +476,7 @@
                             
                             [self->userdefaults setObject:profileName forKey:@"profile_name"];
                             [self->userdefaults setObject:self->baseURL forKey:@"baseURL"];
-                            [self->userdefaults setObject:self.userNameTextField.text forKey:@"username"];
+                            [self->userdefaults setObject:self->_userNameTextField.text forKey:@"username"];
                             
                             [self->userdefaults setObject:self.passcodeTextField.text forKey:@"password"];
                             [self->userdefaults setBool:YES forKey:@"loginSuccess"];
@@ -639,6 +639,7 @@
 {
     return YES;
 }
+
 
 //it will send an token to Firebase with user details (Logged user)
 -(void)sendDeviceToken{

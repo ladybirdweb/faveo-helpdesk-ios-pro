@@ -2050,7 +2050,7 @@
 
     NSLog(@"Request is : %@",request);
 //
-    //return and test
+    //return and test //need to add
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
 
@@ -2132,6 +2132,7 @@
             self-> globalVariables.mobileCode=@"";
 
            [[AppDelegate sharedAppdelegate] hideProgressView];
+        
             [RMessage showNotificationInViewController:self.navigationController
                                                  title:NSLocalizedString(@"success", nil)
                                               subtitle:NSLocalizedString(@"Ticket created successfully.", nil)
@@ -2261,7 +2262,7 @@
             
                 if (json) {
                     
-                    //  NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
+                    
                     NSDictionary *resultDic = [json objectForKey:@"data"];
                     
                     self->globalVariables.dependencyDataDict=[json objectForKey:@"data"];

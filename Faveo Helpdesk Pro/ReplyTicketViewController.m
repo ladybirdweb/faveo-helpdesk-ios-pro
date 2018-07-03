@@ -167,7 +167,8 @@
 - (IBAction)submitButtonClicked:(id)sender {
     
 
-    [[AppDelegate sharedAppdelegate] showProgressView];
+     [[AppDelegate sharedAppdelegate] showProgressView];
+     [_messageTextView resignFirstResponder];
     
     if([_messageTextView.text isEqualToString:@""] || [_messageTextView.text length]==0)
     {
@@ -265,9 +266,20 @@
     
 }
 
+//- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+//    return NO;
+//}
+
 //Asks the delegate whether the specified text should be replaced in the text view.
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
+    
+    if (range.length == 0) {
+        if ([text isEqualToString:@"\n"]) {
+            _messageTextView.text = [NSString stringWithFormat:@"%@\n\t",_messageTextView.text];
+            return NO;
+        }
+    }
     
     if(textView == _messageTextView)
     {
@@ -526,6 +538,7 @@
 // It calls the ticket reply api
 -(void)replyTicketMethodCall
 {
+   
    
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
