@@ -78,6 +78,15 @@
             
             NSLog(@"Thread--refreshToken--Get your response == %@", replyStr);
             
+            if([replyStr hasPrefix:@"<!DOCTYPE html>"] || [replyStr containsString:@"<!DOCTYPE html>"] || [replyStr hasSuffix:@"<!DOCTYPE html>"])
+            {
+                NSString * msg = @"urlchanged";
+                
+                [self->_userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+                NSLog(@"Thread--token-Not-Refreshed");
+                
+            }
+            else
             if ([replyStr containsString:@"success"] || [replyStr containsString:@"data"] || [replyStr containsString:@"result"]) {
                 
                 NSError *error=nil;
@@ -86,67 +95,73 @@
                     return;
                 }
                 
-                if([replyStr containsString:@"result"])
-                {
-                    
-                    NSDictionary * erroDict = [jsonData objectForKey:@"result"];
-                    NSString *errorMessage = [erroDict objectForKey:@"error"];
-                    
-                    if([errorMessage isEqualToString:@"Methon not allowed"])
+                NSLog(@"JSON Data is : %@",jsonData);
+                NSLog(@"JSON Data is : %@",jsonData);
+                
+            
+                    if([replyStr containsString:@"result"])
                     {
-                        NSString *msg =@"Methon not allowed";
-                         [self->_userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+                        
+                        NSDictionary * erroDict = [jsonData objectForKey:@"result"];
+                        NSString *errorMessage = [erroDict objectForKey:@"error"];
+                        
+                        if([errorMessage isEqualToString:@"Methon not allowed"])
+                        {
+                            NSString *msg =@"Methon not allowed";
+                            [self->_userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+                        }
+                        
                     }
-                    
-                }
-            else  if([replyStr containsString:@"message"])
-                 {
-                    NSString *msg=[jsonData objectForKey:@"message"];
-                    
-                    
-                    if([msg isEqualToString:@"Invalid credentials"])
+                    else  if([replyStr containsString:@"message"])
                     {
-                        [self->_userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+                        NSString *msg=[jsonData objectForKey:@"message"];
+                        
+                        
+                        if([msg isEqualToString:@"Invalid credentials"])
+                        {
+                            [self->_userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+                        }
+                        
+                        else if([msg isEqualToString:@"API disabled"])
+                        {
+                            [self->_userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+                        }
+                        
                     }
-                    
-                    else if([msg isEqualToString:@"API disabled"])
-                    {
-                        [self->_userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
+                    else{
+                        NSDictionary *userDataDict=[jsonData objectForKey:@"data"];
+                        
+                        
+                        NSString *tokenString=[NSString stringWithFormat:@"%@",[userDataDict objectForKey:@"token"]];
+                        NSLog(@"Token is : %@",tokenString);
+                        
+                        [self->_userDefaults setObject:tokenString forKey:@"token"];
+                        
+                        
+                        
+                        NSDictionary *userDetailsDict=[userDataDict objectForKey:@"user"];
+                        NSLog(@"Data is: %@",userDetailsDict);
+                        
+                        NSString * userId=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"id"]];
+                        
+                        NSString *role123=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"role"]];//role
+                        NSLog(@"Role from Web Services class : %@",role123);
+                        
+                        self->globalVariables.roleFromAuthenticateAPI=role123;
+                        [self->_userDefaults setObject:role123 forKey:@"msgFromRefreshToken"];
+                        
+                        [self->_userDefaults setObject:userId forKey:@"user_id"];
+                        
+                        [self->_userDefaults synchronize];
+                        self->globalVariables=[GlobalVariables sharedInstance];
+                        
+                        result=@"tokenRefreshed";
+                        NSLog(@"Thread--refreshToken-tokenRefreshed");
                     }
-                    
-                }
-                else{
-                NSDictionary *userDataDict=[jsonData objectForKey:@"data"];
                 
-                
-                NSString *tokenString=[NSString stringWithFormat:@"%@",[userDataDict objectForKey:@"token"]];
-                NSLog(@"Token is : %@",tokenString);
-                
-                [self->_userDefaults setObject:tokenString forKey:@"token"];
-                
-
-                
-                NSDictionary *userDetailsDict=[userDataDict objectForKey:@"user"];
-                NSLog(@"Data is: %@",userDetailsDict);
-                
-                NSString * userId=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"id"]];
-                
-                NSString *role123=[NSString stringWithFormat:@"%@",[userDetailsDict objectForKey:@"role"]];//role
-                NSLog(@"Role from Web Services class : %@",role123);
-                
-                self->globalVariables.roleFromAuthenticateAPI=role123;
-                [self->_userDefaults setObject:role123 forKey:@"msgFromRefreshToken"];
-                
-                [self->_userDefaults setObject:userId forKey:@"user_id"];
-                
-                [self->_userDefaults synchronize];
-                self->globalVariables=[GlobalVariables sharedInstance];
-                
-                result=@"tokenRefreshed";
-                NSLog(@"Thread--refreshToken-tokenRefreshed");
-            }
-        }
-      }
+          } //end main if
+        
+      } // end response class/method
         
         dispatch_semaphore_signal(sem);
     }] resume];
