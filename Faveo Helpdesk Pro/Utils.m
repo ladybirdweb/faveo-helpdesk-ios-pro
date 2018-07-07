@@ -65,20 +65,17 @@
     [views.layer addAnimation:transition forKey:nil];
 }
 
+
 + (BOOL)validateUrl: (NSString *) url {
     
-//    NSString *theURL =
-//    @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-//    
-//    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", theURL];
     
     NSURL* urls = [NSURL URLWithString:url];
-    if (urls == nil) {
-       
+    if (urls == nil && ([url hasPrefix:@"http://"] || [url hasPrefix:@"https://"] )) {
+        
         NSLog(@"Nope %@ is not a proper URL", url);
-         return NO;
+        return NO;
     }
-   return YES;
+    return YES;
 }
 
 -(void)showAlertWithMessage:(NSString*)message sendViewController:(UIViewController *)viewController

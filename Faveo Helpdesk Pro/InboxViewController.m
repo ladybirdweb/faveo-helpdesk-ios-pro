@@ -212,7 +212,7 @@
         [self showMessageForLogout:@"Your role has beed changed to user. Contact to your Admin and try to login again." sendViewController:self];
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }
-    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Methon not allowed"])
+    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Methon not allowed"] || [[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"urlchanged"])
     {   NSString *msg=@"";
       //  [utils showAlertWithMessage:@"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
         [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];

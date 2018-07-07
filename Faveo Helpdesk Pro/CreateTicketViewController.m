@@ -2132,6 +2132,7 @@
             self-> globalVariables.mobileCode=@"";
 
            [[AppDelegate sharedAppdelegate] hideProgressView];
+        
             [RMessage showNotificationInViewController:self.navigationController
                                                  title:NSLocalizedString(@"success", nil)
                                               subtitle:NSLocalizedString(@"Ticket created successfully.", nil)

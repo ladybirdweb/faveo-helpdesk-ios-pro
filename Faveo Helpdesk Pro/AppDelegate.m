@@ -64,12 +64,15 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     [[IQKeyboardManager sharedManager] setEnable:YES];
     
     
+  //  [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     
     // it is deprecated
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
-    [FIRApp configure];
+    // [START configure_firebase]
+       [FIRApp configure];
+    // [END configure_firebase]
     
     
     [Fabric.sharedSDK setDebug:YES];
@@ -133,7 +136,6 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     
     //till here
     
-    
     [self setApplicationApperance];
     
     //[self registerRemoteNotifications:application];
@@ -144,6 +146,10 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
         //        globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
         //        globalVariables.title=[userInfo objectForKey:@"title"];
     }
+    
+    
+    //**************************************************************************
+    
     
     mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     
@@ -181,32 +187,21 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     return YES;
 }
 
-//-(void)registerRemoteNotifications:(UIApplication*)application{
-//
-//    if ([UNUserNotificationCenter class])
-//    {
-//        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-//        center.delegate = self;
-//        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert)
-//                              completionHandler:^(BOOL granted, NSError * _Nullable error) {
-//                                  if (!error) {
-//                                      NSLog(@"request authorization succeeded!");
-//
-//                                  }
-//                              }];
-//    }else if ([application respondsToSelector:@selector (registerUserNotificationSettings:)])
-//    {
-//        UIUserNotificationSettings *settings =
-//        [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert) categories:nil];
-//        [application registerUserNotificationSettings:settings];
-//    }else
-//    {
-//        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-//        [application registerForRemoteNotificationTypes:myTypes];
-//    }
-//
-//    [application registerForRemoteNotifications];
-//}
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    // Print message ID.
+    if (userInfo[kGCMMessageIDKey]) {
+        NSLog(@"Message ID1: %@", userInfo[kGCMMessageIDKey]);
+    }
+    
+    // Print full message.
+    NSLog(@"userInfo888  %@", userInfo);
+    
+}
+
+
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
@@ -226,31 +221,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    
-    // Print message ID.
-    if (userInfo[kGCMMessageIDKey]) {
-        NSLog(@"Message ID1: %@", userInfo[kGCMMessageIDKey]);
-    }
-    
-    // Print full message.
-    NSLog(@"userInfo888  %@", userInfo);
-    
-    ///////////////////////////////////
-    ////    ***imp***
-    //        [self application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:^(UIBackgroundFetchResult result){
-    //            TicketDetailViewController *td=[mainStoryboard instantiateViewControllerWithIdentifier:@"TicketDetailVCID"];
-    //            // NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
-    //            GlobalVariables *globalVariables=[GlobalVariables sharedInstance];
-    //            globalVariables.iD=[userInfo objectForKey:@"id"];
-    //            //globalVariables.ticket_number=[userInfo objectForKey:@"ticket_number"];
-    //            //globalVariables.title=[userInfo objectForKey:@"title"];
-    //
-    //            [(UINavigationController *)self.window.rootViewController pushViewController:td animated:YES];
-    //
-    //        }];
-    //////////////////////////////////
-}
+
 
 // [START ios_10_message_handling]
 // Receive displayed notifications for iOS 10 devices.
@@ -357,23 +328,11 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     }
 }
 #endif
-// [END ios_10_message_handling]
-
-//// With "FirebaseAppDelegateProxyEnabled": NO
-//- (void)application:(UIApplication *)application
-//didReceiveRemoteNotification:(NSDictionary *)userInfo
-//fetchCompletionHandler:
-//(void (^)(UIBackgroundFetchResult))completionHandler {
-//    // Let FCM know about the message for analytics etc.
-//    [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
-//    // handle your message.
-//}
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
-    
-    
+
     // If you are receiving a notification message while your app is in the background,
     // this callback will not be fired till the user taps on the notification launching the application.
     // TODO: Handle data of notification
@@ -391,15 +350,25 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
 }
 
+
+
 // [START ios_10_data_message_handling]
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 // Receive data message on iOS 10 devices while app is in the foreground.
 - (void)applicationReceivedRemoteMessage:(FIRMessagingRemoteMessage *)remoteMessage {
     // Print full message
     NSLog(@"remote messages123%@", remoteMessage.appData);
+    
+    // appData: is The downstream message received by the application.
+   // @property(nonatomic, readonly, strong, nonnull) NSDictionary *appData;
 }
 #endif
 // [END ios_10_data_message_handling]
+
+
+
+
+
 
 // [START refresh_token]
 - (void)tokenRefreshNotification:(NSNotification *)notification {
@@ -418,6 +387,9 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 }
 // [END refresh_token]
 
+
+
+
 - (void)messaging:(nonnull FIRMessaging *)messaging didRefreshRegistrationToken:(nonnull NSString *)fcmToken {
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     [userDefaults setObject:fcmToken forKey:@"FCM_TOKEN"];
@@ -433,6 +405,9 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     NSLog(@"refreshed token  %@",refreshedToken);
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     NSString *url=[NSString stringWithFormat:@"%@fcmtoken?user_id=%@&fcm_token=%@&os=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"user_id"],[[FIRInstanceID instanceID] token],@"ios"];
+    
+    NSLog(@"API call is : %@",url);
+    NSLog(@"API call is : %@",url);
     MyWebservices *webservices=[MyWebservices sharedInstance];
     [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg){
         if (error || [msg containsString:@"Error"]) {
@@ -486,17 +461,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 }
 // [END disconnect_from_fcm]
 
-////Called when a notification is delivered to a foreground app.
-//-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
-//    NSLog(@"User Info : %@",notification.request.content.userInfo);
-//    completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
-//}
-//
-////Called to let your app know which action was selected by the user for a given notification.
-//-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
-//    NSLog(@"User Info : %@",response.notification.request.content.userInfo);
-//    completionHandler();
-//}
+
 
 -(void)setApplicationApperance
 {

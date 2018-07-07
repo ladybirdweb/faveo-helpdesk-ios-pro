@@ -918,7 +918,7 @@
                                                             <rect key="frame" x="12" y="20" width="354" height="32"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="Le1-ZY-MtZ" id="rEp-ta-TVB"/>
                                                             </connections>
@@ -977,7 +977,7 @@
                                                             <rect key="frame" x="12" y="20" width="354" height="32"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes" keyboardType="namePhonePad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="Le1-ZY-MtZ" id="gXY-oM-6z8"/>
                                                             </connections>
@@ -1035,7 +1035,7 @@
                                                     <rect key="frame" x="36" y="20" width="346" height="30.666666666666671"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes" keyboardType="namePhonePad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="Le1-ZY-MtZ" id="hzy-YN-qeR"/>
                                                     </connections>
@@ -1746,7 +1746,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version: 1.8.8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkk-3v-jiw">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version: 1.8.9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkk-3v-jiw">
                                                 <rect key="frame" x="123" y="61" width="73" height="15"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2034,7 +2034,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999999999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQK-HK-ch8">
-                                        <rect key="frame" x="46" y="145" width="74" height="15"/>
+                                        <rect key="frame" x="45" y="145" width="74" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="74" id="JwQ-X1-NtQ"/>
                                         </constraints>
@@ -2075,7 +2075,7 @@
                                     <constraint firstItem="l2X-Ya-5Zb" firstAttribute="top" secondItem="l00-Pf-NGh" secondAttribute="bottom" constant="34" id="f9h-M1-uWT"/>
                                     <constraint firstItem="TLE-mm-17Z" firstAttribute="top" secondItem="4lh-RG-lnI" secondAttribute="bottom" constant="8" id="fhu-Xt-wp8"/>
                                     <constraint firstAttribute="trailing" secondItem="B1T-Ry-EJE" secondAttribute="trailing" constant="13" id="fu1-bz-tIa"/>
-                                    <constraint firstItem="fQK-HK-ch8" firstAttribute="leading" secondItem="TLE-mm-17Z" secondAttribute="trailing" constant="11" id="kIE-AQ-7eZ"/>
+                                    <constraint firstItem="fQK-HK-ch8" firstAttribute="leading" secondItem="TLE-mm-17Z" secondAttribute="trailing" constant="10" id="kIE-AQ-7eZ"/>
                                     <constraint firstItem="Xmx-EM-axR" firstAttribute="leading" secondItem="qFj-e0-5Rw" secondAttribute="leading" constant="8" id="l64-uq-FHP"/>
                                     <constraint firstItem="aDk-wO-wnH" firstAttribute="top" secondItem="Xmx-EM-axR" secondAttribute="bottom" constant="13" id="mKb-HA-8gW"/>
                                     <constraint firstItem="4lh-RG-lnI" firstAttribute="top" secondItem="aDk-wO-wnH" secondAttribute="bottom" constant="9" id="mqO-w8-rzw"/>
@@ -3688,7 +3688,7 @@
                                                             <rect key="frame" x="12" y="20" width="354" height="32"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="WD9-tq-Ud1" id="Zm1-1V-Pgk"/>
                                                             </connections>
@@ -3747,7 +3747,7 @@
                                                             <rect key="frame" x="12" y="20" width="354" height="32"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="WD9-tq-Ud1" id="3uK-8r-Eal"/>
                                                             </connections>
@@ -3806,7 +3806,7 @@
                                                             <rect key="frame" x="12" y="20" width="354" height="32"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="WD9-tq-Ud1" id="hdK-Qg-GLe"/>
                                                             </connections>
@@ -3908,7 +3908,7 @@
                                                             <rect key="frame" x="8" y="19" width="253" height="31"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" smartDashesType="no" smartInsertDeleteType="no"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="tel"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="WD9-tq-Ud1" id="65g-Ns-o3Z"/>
                                                             </connections>
@@ -4498,7 +4498,7 @@
                                                             <rect key="frame" x="5" y="20" width="351" height="30"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="QIn-H5-RBr" id="UTa-jo-kzt"/>
                                                             </connections>
@@ -4824,7 +4824,7 @@
                                                     <rect key="frame" x="30" y="24" width="351" height="34"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" smartDashesType="no" smartQuotesType="no" textContentType="name"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="no" smartDashesType="no" smartQuotesType="no" textContentType="name"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="Y5y-Nt-4pc" id="UpC-GB-O2r"/>
                                                     </connections>
@@ -5285,7 +5285,7 @@
                                                                 <constraint firstAttribute="height" constant="46" id="Ldh-oo-Pjl"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                             <connections>
                                                                 <action selector="selectAssignee:" destination="frR-iS-a0I" eventType="touchDown" id="LP3-ek-uRD"/>
                                                                 <outlet property="delegate" destination="frR-iS-a0I" id="4pV-zh-imN"/>
@@ -6614,7 +6614,7 @@
                                 <rect key="frame" x="20" y="28" width="374" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                 <connections>
                                     <outlet property="delegate" destination="Ibp-fx-Nzy" id="ehW-ux-YXW"/>
                                 </connections>
@@ -6782,7 +6782,7 @@
                                                             <rect key="frame" x="12" y="19.999999999999996" width="354" height="41.666666666666657"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes" keyboardType="namePhonePad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="iG0-ID-rfq" id="siG-BE-q69"/>
                                                             </connections>

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TicketSearchViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UITextField *seachTextField;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview1;

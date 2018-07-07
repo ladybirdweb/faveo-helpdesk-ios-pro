@@ -476,7 +476,7 @@
                             
                             [self->userdefaults setObject:profileName forKey:@"profile_name"];
                             [self->userdefaults setObject:self->baseURL forKey:@"baseURL"];
-                            [self->userdefaults setObject:self.userNameTextField.text forKey:@"username"];
+                            [self->userdefaults setObject:self->_userNameTextField.text forKey:@"username"];
                             
                             [self->userdefaults setObject:self.passcodeTextField.text forKey:@"password"];
                             [self->userdefaults setBool:YES forKey:@"loginSuccess"];
@@ -488,10 +488,11 @@
                                     
                                     [RKDropdownAlert title:NSLocalizedString(@"Welcome.",nil) message:NSLocalizedString(@"You have logged in successfully.",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                                     
-                                    
-                                    
+                                
                                     [self sendDeviceToken];
-                                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                                    
+                                     [[AppDelegate sharedAppdelegate] hideProgressView];
+                                   
                                     InboxViewController *inboxVC=[self.storyboard  instantiateViewControllerWithIdentifier:@"InboxID"];
                                     [self.navigationController pushViewController:inboxVC animated:YES];
                                     //[self.navigationController popViewControllerAnimated:YES];
@@ -638,6 +639,7 @@
 {
     return YES;
 }
+
 
 //it will send an token to Firebase with user details (Logged user)
 -(void)sendDeviceToken{
