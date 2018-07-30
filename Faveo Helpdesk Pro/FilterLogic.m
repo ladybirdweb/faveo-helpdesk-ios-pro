@@ -140,7 +140,7 @@
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
     
-    NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
+//    NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
     UIButton *moreButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [moreButton setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];

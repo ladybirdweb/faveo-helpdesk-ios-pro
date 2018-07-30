@@ -99,13 +99,7 @@
     
     userDefaults=[NSUserDefaults standardUserDefaults];
     
-    
-    //    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
-    //                                    initWithTitle:@"Clear"
-    //                                    style:UIBarButtonItemStylePlain
-    //                                    target:self
-    //                                    action:@selector(flipView)];
-    //    self.navigationItem.rightBarButtonItem = clearButton;
+ 
     UIButton *clearButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [clearButton setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
     [clearButton addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
@@ -133,8 +127,7 @@
     
     [self readFromPlist];
     
-    
-    // Do any additional setup after loading the view.
+
 }
 
 
@@ -165,8 +158,13 @@
         {
             plistPath = [[NSBundle mainBundle] pathForResource:@"faveoData" ofType:@"plist"];
         }
-        NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-        //    NSLog(@"resultDic--%@",resultDic);
+    //    NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+       
+        NSDictionary *resultDic = globalVariables.dependencyDataDict;
+        NSLog(@"resultDic--%@",resultDic);
+        
+        
+        
         NSArray *deptArray=[resultDic objectForKey:@"departments"];
         NSArray *helpTopicArray=[resultDic objectForKey:@"helptopics"];
         NSArray *prioritiesArray=[resultDic objectForKey:@"priorities"];
