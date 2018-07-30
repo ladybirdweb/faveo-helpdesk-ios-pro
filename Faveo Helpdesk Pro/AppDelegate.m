@@ -64,7 +64,6 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     [[IQKeyboardManager sharedManager] setEnable:YES];
     
     
-  //  [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     
     // it is deprecated

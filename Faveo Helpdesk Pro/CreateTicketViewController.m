@@ -1908,8 +1908,7 @@
 // called ticket create method
 -(void)postTicketCreate
 {
-   
-    
+
             NSString *code=@"";
             if(_codeTextField.text.length>0){
                 code=[_codeTextField.text substringFromIndex:1];

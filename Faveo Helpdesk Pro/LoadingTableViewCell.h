@@ -1,11 +1,10 @@
 //
 //  LoadingTableViewCell.h
-//  SideMEnuDemo
+//  Faveo Helpdesk Client App
 //
-//  Created by Narendra on 05/12/16.
-//  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
+//  Created by Mallikarjun on 23/07/18.
+//  Copyright © 2018 Ladybird Web Solution Pvt Ltd. All rights reserved.
 //
-
 
 #import <UIKit/UIKit.h>
 /*!
