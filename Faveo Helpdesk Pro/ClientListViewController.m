@@ -15,7 +15,6 @@
 #import "MyWebservices.h"
 #import "AppDelegate.h"
 #import "LoadingTableViewCell.h"
-#import "RKDropdownAlert.h"
 #import "HexColors.h"
 #import "GlobalVariables.h"
 #import "RMessage.h"
@@ -24,6 +23,8 @@
 #import "ClientFilter.h"
 #import "UIImageView+Letters.h"
 #import "TicketSearchViewController.h"
+#import "TableViewAnimationKitHeaders.h"
+
 
 @interface ClientListViewController ()<RMessageProtocol,AWNavigationMenuItemDataSource, AWNavigationMenuItemDelegate>{
 
@@ -45,6 +46,7 @@
 
 @property (nonatomic, strong) AWNavigationMenuItem *menuItem;
 @property (nonatomic, strong) NSArray<NSString *> *titles;
+@property (nonatomic, assign) NSInteger animationType;
 
 
 @end
@@ -76,6 +78,8 @@
     self.menuItem.dataSource = self;
     self.menuItem.delegate = self;
     
+    _animationType = 5;
+    
     UIButton *search =  [UIButton buttonWithType:UIButtonTypeCustom];
     [search setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
     [search addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -100,6 +104,19 @@
     
     
 }
+
+- (void)loadAnimation {
+    
+    [self.tableView reloadData];
+    [self starAnimationWithTableView:self.tableView];
+    
+}
+- (void)starAnimationWithTableView:(UITableView *)tableView {
+    
+    [TableViewAnimationKit showWithAnimationType:self.animationType tableView:tableView];
+    
+}
+
 
 // This method calls an API for getting tickets, it will returns an JSON which contains 10 records with ticket details.
 -(void)reload{
@@ -251,6 +268,7 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         [self.tableView reloadData];
+                        [self loadAnimation];
                         [self->refresh endRefreshing];
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                        

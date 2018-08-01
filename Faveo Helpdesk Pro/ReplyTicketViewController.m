@@ -16,7 +16,6 @@
 #import "AppConstanst.h"
 #import "MyWebservices.h"
 #import "AppDelegate.h"
-#import "RKDropdownAlert.h"
 #import "IQKeyboardManager.h"
 #import "Dat.h"
 #import "RMessage.h"
@@ -195,7 +194,24 @@
 {
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+       // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
         
     }else{
         
@@ -543,8 +559,25 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         //connection unavailable
-        //[utils showAlertWithMessage:NO_INTERNET sendViewController:self];
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
         
     }else{
         
@@ -621,7 +654,22 @@
                     
                     [[AppDelegate sharedAppdelegate] hideProgressView];
                     
-                    [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your reply.", nil)backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                    if (self.navigationController.navigationBarHidden) {
+                        [self.navigationController setNavigationBarHidden:NO];
+                    }
+                    
+                    [RMessage showNotificationInViewController:self.navigationController
+                                                         title:NSLocalizedString(@"success.", nil)
+                                                      subtitle:NSLocalizedString(@"Posted your reply.", nil)
+                                                     iconImage:nil
+                                                          type:RMessageTypeError
+                                                customTypeName:nil
+                                                      duration:RMessageDurationAutomatic
+                                                      callback:nil
+                                                   buttonTitle:nil
+                                                buttonCallback:nil
+                                                    atPosition:RMessagePositionNavBarOverlay
+                                          canBeDismissedByUser:YES];
                     
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
                 

@@ -18,7 +18,6 @@
 #import "AppConstanst.h"
 #import "MyWebservices.h"
 #import "AppDelegate.h"
-#import "RKDropdownAlert.h"
 #import "IQKeyboardManager.h"
 #import "Dat.h"
 #import "RMessage.h"
@@ -362,8 +361,10 @@
     
     /*----------------Get Selected Value[Multiple selection]-----------------*/
     
+
+//
     if([ArryData containsObject:@"Sales"] || [ArryData containsObject:@"Support"] || [ArryData containsObject:@"Operation"])
-        
+
     {
         _departmentTextField.text= [ArryData componentsJoinedByString:@","];
     }
@@ -389,6 +390,7 @@
     {
         _statusTextField.text= [ArryData componentsJoinedByString:@","];
     }
+    
     
     
 }

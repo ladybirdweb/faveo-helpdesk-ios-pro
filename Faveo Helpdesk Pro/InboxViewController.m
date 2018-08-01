@@ -17,7 +17,6 @@
 #import "MyWebservices.h"
 #import "GlobalVariables.h"
 #import "LoadingTableViewCell.h"
-#import "RKDropdownAlert.h"
 #import "HexColors.h"
 #import "RMessage.h"
 #import "RMessageView.h"
@@ -33,6 +32,9 @@
 #import "UIImageView+Letters.h"
 #import "TicketSearchViewController.h"
 #import "LoginViewController.h"
+#import "TableViewAnimationKitHeaders.h"
+
+
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
@@ -79,6 +81,9 @@
 @property (nonatomic, strong) CFMultistageDropdownMenuView *multistageDropdownMenuView;
 @property (nonatomic, strong) CFMultistageConditionTableView *multistageConditionTableView;
 @property (nonatomic) int pageInt;
+
+@property (nonatomic, assign) NSInteger animationType;
+
 
 @end
 
@@ -142,6 +147,9 @@
     selectedArray = [[NSMutableArray alloc] init];
     selectedSubjectArray = [[NSMutableArray alloc] init];
     selectedTicketOwner = [[NSMutableArray alloc] init];
+    
+    _animationType = 5;
+   
     
     self.tableView.allowsMultipleSelectionDuringEditing = true;
     UILongPressGestureRecognizer *lpGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(EditTableView:)];
@@ -226,11 +234,24 @@
         [self reload];
         [self getDependencies];
         
+        
+        
     }
     
 }
 
+- (void)loadAnimation {
+    
+    [self.tableView reloadData];
+    [self starAnimationWithTableView:self.tableView];
+    
+}
 
+- (void)starAnimationWithTableView:(UITableView *)tableView {
+    
+    [TableViewAnimationKit showWithAnimationType:self.animationType tableView:tableView];
+  
+}
 
 // It is button action, after clicking this button it will navigate to Search view Controller view
 - (IBAction)searchButtonClicked {
@@ -509,6 +530,7 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
                             [self reloadTableView];
+                            [self loadAnimation];
                             [self->refresh endRefreshing];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             
@@ -930,6 +952,7 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
                             [self reloadTableView];
+                            //[self loadAnimation];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                         });
@@ -1603,7 +1626,7 @@
     {
         //connection unavailable
         
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+      //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
         
     }else{
@@ -1671,7 +1694,24 @@
                         
                         if([msg hasPrefix:@"Status changed"]){
                             
-                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                          //  [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                            if (self.navigationController.navigationBarHidden) {
+                                [self.navigationController setNavigationBarHidden:NO];
+                            }
+                            
+                            [RMessage showNotificationInViewController:self.navigationController
+                                                                 title:NSLocalizedString(@"success.", nil)
+                                                              subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                                                             iconImage:nil
+                                                                  type:RMessageTypeSuccess
+                                                        customTypeName:nil
+                                                              duration:RMessageDurationAutomatic
+                                                              callback:nil
+                                                           buttonTitle:nil
+                                                        buttonCallback:nil
+                                                            atPosition:RMessagePositionNavBarOverlay
+                                                  canBeDismissedByUser:YES];
                             
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:inboxVC animated:YES];

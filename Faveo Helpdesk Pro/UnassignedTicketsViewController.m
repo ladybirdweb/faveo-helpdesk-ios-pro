@@ -17,7 +17,6 @@
 #import "AppDelegate.h"
 #import "GlobalVariables.h"
 #import "LoadingTableViewCell.h"
-#import "RKDropdownAlert.h"
 #import "HexColors.h"
 #import "RMessage.h"
 #import "RMessageView.h"
@@ -31,6 +30,7 @@
 #import "MultpleTicketAssignTableViewController.h"
 #import "UIImageView+Letters.h"
 #import "TicketSearchViewController.h"
+#import "TableViewAnimationKitHeaders.h"
 
 
 @interface UnassignedTicketsViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
@@ -67,6 +67,9 @@
 @property (nonatomic, strong) NSString *path1;
 @property (nonatomic) NSInteger page;
 @property (nonatomic, strong) CFMultistageDropdownMenuView *multistageDropdownMenuView;
+@property (nonatomic, assign) NSInteger animationType;
+
+
 @end
 
 @implementation UnassignedTicketsViewController
@@ -127,6 +130,7 @@
     UIImage *image2 = [UIImage imageNamed:@"x1"];
     
     
+    _animationType = 5;
     
     // UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Assign"];
     UINavigationItem* navItem = [[UINavigationItem alloc] init];
@@ -187,6 +191,20 @@
     }
     // Do any additional setup after loading the view.
 }
+
+- (void)loadAnimation {
+    
+    [self.tableView reloadData];
+    [self starAnimationWithTableView:self.tableView];
+    
+}
+
+- (void)starAnimationWithTableView:(UITableView *)tableView {
+    
+    [TableViewAnimationKit showWithAnimationType:self.animationType tableView:tableView];
+    
+}
+
 
 // After clicking this navigation button, it will redirect to search view controller
 - (IBAction)searchButtonClicked {
@@ -462,6 +480,7 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                         
                             [self reloadTableView];
+                            [self loadAnimation];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             [self->refresh endRefreshing];
                             
@@ -1877,8 +1896,22 @@
     {
         //connection unavailable
         
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
         
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
         
     }else{
         
@@ -1940,9 +1973,23 @@
                         NSString * msg=[json objectForKey:@"message"];
                         
                         if([msg hasPrefix:@"Status changed"]){
+                        
+                            if (self.navigationController.navigationBarHidden) {
+                                [self.navigationController setNavigationBarHidden:NO];
+                            }
                             
-                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-                            
+                            [RMessage showNotificationInViewController:self.navigationController
+                                                                 title:NSLocalizedString(@"success", nil)
+                                                              subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                                                             iconImage:nil
+                                                                  type:RMessageTypeSuccess
+                                                        customTypeName:nil
+                                                              duration:RMessageDurationAutomatic
+                                                              callback:nil
+                                                           buttonTitle:nil
+                                                        buttonCallback:nil
+                                                            atPosition:RMessagePositionNavBarOverlay
+                                                  canBeDismissedByUser:YES];
                             UnassignedTicketsViewController *unassigned=[self.storyboard instantiateViewControllerWithIdentifier:@"UnassignedTicketsID"];
                             [self.navigationController pushViewController:unassigned animated:YES];
                             

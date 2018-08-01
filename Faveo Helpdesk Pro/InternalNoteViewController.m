@@ -13,7 +13,6 @@
 #import "Utils.h"
 #import "MyWebservices.h"
 #import "GlobalVariables.h"
-#import "RKDropdownAlert.h"
 #import "RMessage.h"
 #import "RMessageView.h"
 #import "AppConstanst.h"
@@ -156,7 +155,24 @@
                     
                     if ([json objectForKey:@"thread"]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [RKDropdownAlert title:NSLocalizedString(@"success", nil) message:NSLocalizedString(@"Posted your note.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                            
+                            if (self.navigationController.navigationBarHidden) {
+                                [self.navigationController setNavigationBarHidden:NO];
+                            }
+                            
+                            [RMessage showNotificationInViewController:self.navigationController
+                                                                 title:NSLocalizedString(@"success.", nil)
+                                                              subtitle:NSLocalizedString(@"Posted your note.", nil)
+                                                             iconImage:nil
+                                                                  type:RMessageTypeSuccess
+                                                        customTypeName:nil
+                                                              duration:RMessageDurationAutomatic
+                                                              callback:nil
+                                                           buttonTitle:nil
+                                                        buttonCallback:nil
+                                                            atPosition:RMessagePositionNavBarOverlay
+                                                  canBeDismissedByUser:YES];
                             
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
 

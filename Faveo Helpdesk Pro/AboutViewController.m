@@ -8,7 +8,7 @@
 
 #import "AboutViewController.h"
 #import "HexColors.h"
-#import "RKDropdownAlert.h"
+
 
 @interface AboutViewController ()
 

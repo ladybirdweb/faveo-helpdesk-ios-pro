@@ -15,7 +15,6 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "GlobalVariables.h"
-#import "RKDropdownAlert.h"
 #import "IQKeyboardManager.h"
 #import "NotificationViewController.h"
 #import "RMessage.h"

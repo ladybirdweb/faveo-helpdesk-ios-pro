@@ -16,7 +16,6 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "GlobalVariables.h"
-#import "RKDropdownAlert.h"
 #import "IQKeyboardManager.h"
 #import "NotificationViewController.h"
 #import "RMessage.h"
@@ -753,14 +752,20 @@
     
     
     if (self.subjectTextView.text.length==0) {
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter SUBJECT",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+     
+        [self->utils showAlertWithMessage:NSLocalizedString(@"Alert: Please enter the subject field.", nil) sendViewController:self];
+        
     }else if (self.helpTopicTextField.text.length==0) {
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+    
+        [self->utils showAlertWithMessage:NSLocalizedString(@"Alert: Please select Helptopic.", nil) sendViewController:self];
     }else if (self.priorityTextField.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select PRIORITY" ,nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+      
+        [self->utils showAlertWithMessage:NSLocalizedString(@"Alert: Please select Priority.", nil) sendViewController:self];
     }else  if (self.sourceTextField.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select SOURCE" ,@"Please select SOURCE") backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-    }else  {
+        
+        [self->utils showAlertWithMessage:NSLocalizedString(@"Alert: Please select the Ticket Source.", nil) sendViewController:self];
+    }else
+    {
         [self save];
     }
     

@@ -18,7 +18,7 @@
 #import "MyWebservices.h"
 #import "GlobalVariables.h"
 #import "LoadingTableViewCell.h"
-#import "RKDropdownAlert.h"
+
 #import "HexColors.h"
 #import "RMessage.h"
 #import "RMessageView.h"
@@ -33,6 +33,8 @@
 #import "UIImageView+Letters.h"
 #import "MultpleTicketAssignTableViewController.h"
 #import "TicketSearchViewController.h"
+#import "TableViewAnimationKitHeaders.h"
+
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
@@ -82,6 +84,9 @@
 
 @property (nonatomic, strong) CFMultistageDropdownMenuView *multistageDropdownMenuView;
 @property (nonatomic, strong) CFMultistageConditionTableView *multistageConditionTableView;
+
+@property (nonatomic, assign) NSInteger animationType;
+
 
 @end
 
@@ -143,7 +148,8 @@
     //    [moreButton setFrame:CGRectMake(46, 0, 32, 32)];
     [moreButton setFrame:CGRectMake(10, 0, 35, 35)];
     
-    
+    _animationType = 5;
+
     UIButton *NotificationBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     [NotificationBtn setImage:[UIImage imageNamed:@"notification.png"] forState:UIControlStateNormal];
     [NotificationBtn addTarget:self action:@selector(NotificationBtnPressed) forControlEvents:UIControlEventTouchUpInside];
@@ -214,6 +220,20 @@
     [self getDependencies];
     
 }
+
+- (void)loadAnimation {
+    
+    [self.tableView reloadData];
+    [self starAnimationWithTableView:self.tableView];
+    
+}
+
+- (void)starAnimationWithTableView:(UITableView *)tableView {
+    
+    [TableViewAnimationKit showWithAnimationType:self.animationType tableView:tableView];
+    
+}
+
 
 // After clickig this button, it will naviagte to search view controller
 - (IBAction)searchButtonClicked {
@@ -1507,6 +1527,7 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
                             [self reloadTableView];
+                            [self loadAnimation];
                             [self->refresh endRefreshing];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             
@@ -2859,7 +2880,24 @@
     {
         //connection unavailable
         
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+        
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
         
         
     }else{
@@ -2925,7 +2963,23 @@
                         
                         if([msg hasPrefix:@"Status changed"]){
                             
-                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                    
+                            if (self.navigationController.navigationBarHidden) {
+                                [self.navigationController setNavigationBarHidden:NO];
+                            }
+                            
+                            [RMessage showNotificationInViewController:self.navigationController
+                                                                 title:NSLocalizedString(@"success.", nil)
+                                                              subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                                                             iconImage:nil
+                                                                  type:RMessageTypeSuccess
+                                                        customTypeName:nil
+                                                              duration:RMessageDurationAutomatic
+                                                              callback:nil
+                                                           buttonTitle:nil
+                                                        buttonCallback:nil
+                                                            atPosition:RMessagePositionNavBarOverlay
+                                                  canBeDismissedByUser:YES];
                             
                             SortingViewController *sort=[self.storyboard instantiateViewControllerWithIdentifier:@"sortID"];
                             [self.navigationController pushViewController:sort animated:YES];
