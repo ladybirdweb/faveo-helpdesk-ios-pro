@@ -495,7 +495,7 @@
                                                                  title:NSLocalizedString(@"Success.", nil)
                                                               subtitle:NSLocalizedString(@"Added cc Successfully.", nil)
                                                              iconImage:nil
-                                                                  type:RMessageTypeError
+                                                                  type:RMessageTypeSuccess
                                                         customTypeName:nil
                                                               duration:RMessageDurationAutomatic
                                                               callback:nil

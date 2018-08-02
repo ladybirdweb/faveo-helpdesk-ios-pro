@@ -30,6 +30,8 @@
 #import "TicketDetailViewController.h"
 #import "ViewCCList.h"
 
+
+
 @interface ReplyTicketViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,HSAttachmentPickerDelegate>
 {
     Utils *utils;
@@ -153,6 +155,12 @@
         ViewCCList *smallViewController = [storyboard instantiateViewControllerWithIdentifier:@"ccListID"];
         
         BIZPopupViewController *popupViewController = [[BIZPopupViewController alloc] initWithContentViewController:smallViewController contentSize:CGSizeMake(300, 300)];
+        
+//          Sample *smallViewController = [storyboard instantiateViewControllerWithIdentifier:@"sample"];
+//
+//          BIZPopupViewController *popupViewController = [[BIZPopupViewController alloc] initWithContentViewController:smallViewController contentSize:CGSizeMake(380, 300)];
+        
+        
         [self presentViewController:popupViewController animated:NO completion:nil];
     }
     else{

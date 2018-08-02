@@ -42,9 +42,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>For attaching photos and video.</string>
+	<string>For selection of photos and video.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) photos and video use.</string>
+	<string>For selection of photos and video.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
