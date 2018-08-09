@@ -130,7 +130,7 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     
     
-    [self getDependencies];
+  //  [self getDependencies];
     
     [self readFromPlist];
    
@@ -423,6 +423,7 @@
         
         NSLog(@"Staff Name Array : %@",_staffArray);
         NSLog(@"STaff id Array : %@",staff_idArray);
+        
         globalVariables.assigneeIdArrayListToTicketCreate=staff_idArray;
         
     }@catch (NSException *exception)
@@ -541,6 +542,8 @@
 
 - (IBAction)submitClicked:(id)sender {
     
+    
+  //  selectedUserEmail
     
    [[AppDelegate sharedAppdelegate] showProgressView];
     
@@ -975,7 +978,7 @@
             // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
             
             //        // in case you need to limit the max number of characters
-            if ([textView.text stringByReplacingCharactersInRange:range withString:text].length > 15) {
+            if ([textView.text stringByReplacingCharactersInRange:range withString:text].length > 20) {
                 return NO;
             }
             
@@ -1029,7 +1032,7 @@
             return  YES;
         }
         
-        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >100)
+        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >500)
         {
             return NO;
         }
@@ -1060,7 +1063,7 @@
             return  YES;
         }
         
-        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >100)
+        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >500)
         {
             return NO;
         }
@@ -1938,6 +1941,7 @@
                 staffID=@"0";
             }
 //
+    
     NSLog(@"MEME111111111111 is : %@",typeMime);
     NSLog(@"MEME111111111111 is : %@",typeMime);
 
@@ -1991,13 +1995,21 @@
     [body appendData:[_textViewMsg.text dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 
+    
     // collaborator parameter
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"cc[]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[selectedUserEmail dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-
-
+    
+    if(![_ccTextField.text isEqualToString:@""]){
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"cc[]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[selectedUserEmail dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    }else
+    {
+        
+        
+    }
+     
+    
 
     // first name parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
