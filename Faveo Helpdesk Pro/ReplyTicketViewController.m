@@ -670,7 +670,7 @@
                                                          title:NSLocalizedString(@"success.", nil)
                                                       subtitle:NSLocalizedString(@"Posted your reply.", nil)
                                                      iconImage:nil
-                                                          type:RMessageTypeError
+                                                          type:RMessageTypeSuccess
                                                 customTypeName:nil
                                                       duration:RMessageDurationAutomatic
                                                       callback:nil

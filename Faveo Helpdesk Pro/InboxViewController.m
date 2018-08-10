@@ -198,6 +198,7 @@
     [navbar setItems:@[navItem]];
     [self.view addSubview:navbar];
     
+
     if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
     {
         NSString *msg=@"";
@@ -213,7 +214,7 @@
 
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }
-    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"user"])
+    else if( [globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"] || [[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"user"])
     {   NSString *msg=@"";
        // [utils showAlertWithMessage:@"Your role has beed changed to user. Contact to your Admin and try to login again." sendViewController:self];
         [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
@@ -646,7 +647,7 @@
                             [self->utils showAlertWithMessage:@"The request timed out" sendViewController:self];
                         }else
                             
-                        [self->utils showAlertWithMessage:error.localizedDescription sendViewController:self];
+                        [self->utils showAlertWithMessage:@"The request timed out" sendViewController:self];
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                        
                         return ;
