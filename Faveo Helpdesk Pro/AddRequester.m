@@ -432,6 +432,16 @@
                 return;
             }
             
+            if([json isKindOfClass:[NSDictionary class]]){
+                
+                NSString * file = [json objectForKey:@"file"];
+                
+                if([file hasSuffix:@"RouteCollection.php"]){
+                  
+                [self->utils showAlertWithMessage:NSLocalizedString(@"Something went wrong at back end server.", nil) sendViewController:self];
+                }
+            }
+            else{
   
             NSArray * arr1=json;
             NSLog(@"Arrtay is 12345 : %@",arr1);
@@ -510,7 +520,10 @@
                 
             }
             
+            }
         }];
+            
+        
     
      }@catch (NSException *exception)
         {

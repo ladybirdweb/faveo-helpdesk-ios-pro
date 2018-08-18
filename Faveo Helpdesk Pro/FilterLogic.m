@@ -776,8 +776,8 @@
     MyWebservices *webservices=[MyWebservices sharedInstance];
     globalVariables.urlFromFilterLogicView=url;
     NSLog(@"URL is : %@",url);
-    NSLog(@"URL is : %@",url);
-    NSLog(@"URL is : %@",url);
+   // NSLog(@"URL is : %@",url);
+   // NSLog(@"URL is : %@",url);
     
     [webservices httpResponseGET:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
         
@@ -842,7 +842,7 @@
         
         if (json) {
             //NSError *error;
-            NSLog(@"Thread-NO4--getInboxAPI--%@",json);
+        //    NSLog(@"Thread-NO4--getInboxAPI--%@",json);
             NSDictionary *data1Dict=[json objectForKey:@"data"];
             
             self->_mutableArray = [data1Dict objectForKey:@"data"];

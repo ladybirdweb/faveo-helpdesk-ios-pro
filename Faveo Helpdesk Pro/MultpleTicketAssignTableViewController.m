@@ -281,11 +281,20 @@
     [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
         [[AppDelegate sharedAppdelegate] hideProgressView];
         
+        NSLog(@"Message : %@",msg);
+        NSLog(@"Message : %@",msg);
+        
+        
         if (error || [msg containsString:@"Error"]) {
             
             if (msg) {
                 
-    
+                
+                if([msg isEqualToString:@"Error-400"])
+                {
+                    [self->utils showAlertWithMessage:NSLocalizedString(@"Something went wrong in back end server. Please try later.", nil) sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                }else
                 if([msg isEqualToString:@"Error-403"])
                 {
                     [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];

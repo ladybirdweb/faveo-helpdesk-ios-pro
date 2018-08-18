@@ -347,7 +347,18 @@
         {
             [utils showAlertWithMessage:@"Can not merge these ticket, because this tickets having empty email." sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
-        }else{
+        }
+        else if([exception.reason isEqualToString:@"-[NSNull isEqualToString:]: unrecognized selector sent to instance 0x1b74c5878"])
+        {
+            [utils showAlertWithMessage:@"Can not merge these ticket, because this tickets having empty email." sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+        }else if([exception.reason hasPrefix:@"-[NSNull isEqualToString:]"])
+        {
+            [utils showAlertWithMessage:@"Can not merge these ticket, because this tickets having empty email." sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+        }
+        else
+        {
         [utils showAlertWithMessage:exception.name sendViewController:self];
         [[AppDelegate sharedAppdelegate] hideProgressView];
         }

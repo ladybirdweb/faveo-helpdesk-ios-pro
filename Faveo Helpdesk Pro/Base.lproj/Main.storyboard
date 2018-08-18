@@ -2849,8 +2849,8 @@
                                             <constraint firstAttribute="height" constant="1" id="BA2-4G-h55"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMPANY'S URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NvZ-jN-SUK">
-                                        <rect key="frame" x="21" y="8" width="98" height="25"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Helpdesk URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NvZ-jN-SUK">
+                                        <rect key="frame" x="21" y="8" width="80.333333333333329" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="Q1E-N6-ck2"/>
                                         </constraints>
@@ -6455,7 +6455,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9u7-cc-N81">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="62"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rD3-YK-PMa">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rD3-YK-PMa">
                                                             <rect key="frame" x="126" y="45" width="165" height="0.0"/>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
@@ -6471,9 +6471,12 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="rD3-YK-PMa" secondAttribute="bottom" constant="17" id="G3n-NB-Drk"/>
                                                         <constraint firstItem="DrZ-JS-zNs" firstAttribute="centerY" secondItem="9u7-cc-N81" secondAttribute="centerY" id="IXg-TX-8qi"/>
                                                         <constraint firstItem="DrZ-JS-zNs" firstAttribute="centerX" secondItem="9u7-cc-N81" secondAttribute="centerX" id="IzH-aJ-YxC"/>
                                                         <constraint firstItem="rD3-YK-PMa" firstAttribute="top" secondItem="DrZ-JS-zNs" secondAttribute="bottom" constant="4" id="QfP-Lj-gPJ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="rD3-YK-PMa" secondAttribute="trailing" constant="123" id="ZIN-Bl-5FW"/>
+                                                        <constraint firstItem="rD3-YK-PMa" firstAttribute="leading" secondItem="9u7-cc-N81" secondAttribute="leading" constant="126" id="wRs-eb-88k"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
