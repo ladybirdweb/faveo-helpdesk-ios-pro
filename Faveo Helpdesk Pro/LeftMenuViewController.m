@@ -91,6 +91,7 @@
     }
     else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"API disabled"])
     {   NSString *msg=@"";
+    
         [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
         [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
         [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -121,9 +122,12 @@
                               placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
     }else
     {
-        [_user_profileImage setImageWithString:[userDefaults objectForKey:@"profile_name"] color:nil ];
+     //   NSString * name = [NSString];
+        NSString * name = [NSString stringWithFormat:@"%@",[userDefaults objectForKey:@"profile_name"]];
+        [_user_profileImage setImageWithString:[name substringToIndex:2] color:nil ];
     }
     
+
 
 //    [_user_profileImage sd_setImageWithURL:[NSURL URLWithString:[userDefaults objectForKey:@"profile_pic"]]
 //                          placeholderImage:[UIImage imageNamed:@"default_pic.png"]];

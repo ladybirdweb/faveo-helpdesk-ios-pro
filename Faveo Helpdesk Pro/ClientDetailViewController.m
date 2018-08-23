@@ -178,11 +178,12 @@
           }else if(![Utils isEmpty:fname])
           {
               // [cell.profilePicView setImageWithString:fname color:nil ];
-              
+              fname = [fname substringToIndex:2];
               [_profileImageView setImageWithString:fname color:nil];
           }
          else
           {
+               userName = [userName substringToIndex:2];
                [_profileImageView setImageWithString:userName color:nil];
           }
       

@@ -580,11 +580,13 @@
              [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
          }else
          {
+             clientFirstName = [clientFirstName substringToIndex:2];
              [cell.profilePicView setImageWithString:clientFirstName color:nil ];
          }
          
      }
      else{
+         email = [email substringToIndex:2];
          [cell.profilePicView setImageWithString:email color:nil ];
      }
    // [cell setUserProfileimage:[finaldic objectForKey:@"profile_pic"]];
