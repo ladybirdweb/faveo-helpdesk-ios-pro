@@ -17,7 +17,6 @@
 #import "AppDelegate.h"
 #import "LoadingTableViewCell.h"
 #import "GlobalVariables.h"
-#import "RKDropdownAlert.h"
 #import "HexColors.h"
 #import "RMessage.h"
 #import "RMessageView.h"
@@ -31,6 +30,8 @@
 #import "MultpleTicketAssignTableViewController.h"
 #import "UIImageView+Letters.h"
 #import "TicketSearchViewController.h"
+#import "TableViewAnimationKitHeaders.h"
+
 
 @interface TrashTicketsViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
     
@@ -67,6 +68,8 @@
 @property (nonatomic, assign) NSInteger totalTickets;
 @property (nonatomic, strong) NSString *path1;
 @property (nonatomic, strong) NSString *nextPageUrl;
+@property (nonatomic, assign) NSInteger animationType;
+
 @property (nonatomic, strong) CFMultistageDropdownMenuView *multistageDropdownMenuView;
 @end
 
@@ -118,6 +121,8 @@
     //To set Gesture on Tableview for multiselection
     count1=0;
     
+    _animationType = 5;
+
     selectedArray = [[NSMutableArray alloc] init];
     selectedSubjectArray = [[NSMutableArray alloc] init];
     selectedTicketOwner = [[NSMutableArray alloc] init];
@@ -195,6 +200,20 @@
     }
     
     // Do any additional setup after loading the view.
+}
+
+
+- (void)loadAnimation {
+    
+    [self.tableView reloadData];
+    [self starAnimationWithTableView:self.tableView];
+    
+}
+
+- (void)starAnimationWithTableView:(UITableView *)tableView {
+    
+    [TableViewAnimationKit showWithAnimationType:self.animationType tableView:tableView];
+    
 }
 
 
@@ -447,6 +466,7 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                 
                             [self reloadTableView];
+                            [self loadAnimation];
                             [self->refresh endRefreshing];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             
@@ -986,10 +1006,12 @@
             }
             else if(![Utils isEmpty:fname])
             {
+                fname = [fname substringToIndex:2];
                 [cell.profilePicView setImageWithString:fname color:nil ];
             }
             else
             {
+                userName = [userName substringToIndex:2];
                 [cell.profilePicView setImageWithString:userName color:nil ];
             }
             
@@ -1981,7 +2003,24 @@
     {
         //connection unavailable
         
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
+        
+        if(self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
         
         
     }else{
@@ -2045,7 +2084,23 @@
                         
                         if([msg hasPrefix:@"Status changed"]){
                             
-                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                            if (self.navigationController.navigationBarHidden) {
+                                [self.navigationController setNavigationBarHidden:NO];
+                            }
+                            
+                            [RMessage showNotificationInViewController:self.navigationController
+                                                                 title:NSLocalizedString(@"success.", nil)
+                                                              subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                                                             iconImage:nil
+                                                                  type:RMessageTypeSuccess
+                                                        customTypeName:nil
+                                                              duration:RMessageDurationAutomatic
+                                                              callback:nil
+                                                           buttonTitle:nil
+                                                        buttonCallback:nil
+                                                            atPosition:RMessagePositionNavBarOverlay
+                                                  canBeDismissedByUser:YES];
                             
                             TrashTicketsViewController *trash=[self.storyboard instantiateViewControllerWithIdentifier:@"TrashTicketsID"];
                             [self.navigationController pushViewController:trash animated:YES];

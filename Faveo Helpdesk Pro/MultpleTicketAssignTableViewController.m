@@ -22,7 +22,6 @@
 #import "AppConstanst.h"
 #import "MyWebservices.h"
 #import "AppDelegate.h"
-#import "RKDropdownAlert.h"
 #import "MultpleTicketAssignTableViewController.h"
 
 @interface MultpleTicketAssignTableViewController ()
@@ -282,11 +281,20 @@
     [webservices httpResponsePOST:url parameter:@"" callbackHandler:^(NSError *error,id json,NSString* msg) {
         [[AppDelegate sharedAppdelegate] hideProgressView];
         
+        NSLog(@"Message : %@",msg);
+        NSLog(@"Message : %@",msg);
+        
+        
         if (error || [msg containsString:@"Error"]) {
             
             if (msg) {
                 
-    
+                
+                if([msg isEqualToString:@"Error-400"])
+                {
+                    [self->utils showAlertWithMessage:NSLocalizedString(@"Something went wrong in back end server. Please try later.", nil) sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                }else
                 if([msg isEqualToString:@"Error-403"])
                 {
                     [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
@@ -357,8 +365,25 @@
                        
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         
-                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Assigned Successfully.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
-
+                          //  [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Assigned Successfully.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        
+                        if (self.navigationController.navigationBarHidden) {
+                            [self.navigationController setNavigationBarHidden:NO];
+                        }
+                        
+                        [RMessage showNotificationInViewController:self.navigationController
+                                                             title:NSLocalizedString(@"success.", nil)
+                                                          subtitle:NSLocalizedString(@"Assigned Successfully.", nil)
+                                                         iconImage:nil
+                                                              type:RMessageTypeSuccess
+                                                    customTypeName:nil
+                                                          duration:RMessageDurationAutomatic
+                                                          callback:nil
+                                                       buttonTitle:nil
+                                                    buttonCallback:nil
+                                                        atPosition:RMessagePositionNavBarOverlay
+                                              canBeDismissedByUser:YES];
+                        
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:inboxVC animated:YES];
 

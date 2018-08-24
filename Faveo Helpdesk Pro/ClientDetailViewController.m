@@ -17,7 +17,6 @@
 #import "OpenCloseTableViewCell.h"
 #import "GlobalVariables.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "RKDropdownAlert.h"
 #import "RMessage.h"
 #import "RMessageView.h"
 #import "EditClientDetail.h"
@@ -179,11 +178,12 @@
           }else if(![Utils isEmpty:fname])
           {
               // [cell.profilePicView setImageWithString:fname color:nil ];
-              
+              fname = [fname substringToIndex:2];
               [_profileImageView setImageWithString:fname color:nil];
           }
          else
           {
+               userName = [userName substringToIndex:2];
                [_profileImageView setImageWithString:userName color:nil];
           }
       

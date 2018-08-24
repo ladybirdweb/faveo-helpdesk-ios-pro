@@ -1,53 +1,211 @@
-///*
-//  Localization.strings
-//  Faveo Helpdesk Pro
-//
-//  Created by Narendra on 03/04/17.
-//  Copyright © 2017 Ladybird websolutions pvt ltd. All rights reserved.
-//*/
-//
-"Please Enter the URL"="Please Enter the URL";
-"Verifying URL"="Verifying URL";
-"Error verifying URL"="Error verifying URL";
-"Please Enter a valid URL"="Please Enter a valid URL";
-"Verified URL"="Verified URL";
-"Access denied, to use pro version!"="Access denied, to use pro version!";
-"Please Enter Username & Password"="Please Enter Username";
-"Please Enter Password"="Please Enter Password";
-"You have logged in successfully."="You have logged in successfully.";
-"Getting Data"="Getting Data";
+
 "Refreshing"="Refreshing";
-"CreateTicket"="CreateTicket";
-"Inbox"="Inbox";
-"Trash Tickets"="Trash Tickets";
-"Client List"="Client List";
-"Closed Tickets"="Closed Tickets";
-"Unassigned Tickets"="Unassigned Tickets";
-"My Tickets"="MyTickets";
-"About"="About";
-"Not Available"="Not Available";
-"Select Helptopic"="Select Helptopic";
-"Select CountryCode"="Select CountryCode";
-"Please enter EMAIL-ID"="Please enter EMAIL-ID";
-"Please enter First Name"="Please enter First Name";
-"Please select HELP-TOPIC"="Please select HELP-TOPIC";
-"Please select SLA"="Please select SLA";
-"Please select DEPARTMENT"="Please select DEPARTMENT";
-"Please select PRIORITY"="Please select PRIORITY";
-"Please enter SUBJECT"="Please enter SUBJECT";
-"SUBJECT requires at least 5 characters"="SUBJECT requires at least 5 characters";
-"Please enter ticket MESSAGE"="Please enter ticket MESSAGE";
-"MESSAGE requires at least 10 characters"="MESSAGE requires at least 10 characters";
-"Invalid EMAIL_ID" ="Invalid EMAIL_ID";
-"FirstName should have more than 2 characters"="Name should have more than 2 characters";
-"Ticket created successfully!"="Ticket created successfully!";
-"Internal Notes"="Internal Notes";
-"Message"="Message";
+"Error"="Error";
+"Empty"="Empty";
+"Getting Data"="Getting Data";
 "Done"="Done";
-"Details"="Details";
+"Not Available"="Not Available";
+"success"="Success";
+"Warning"="Warning";
+"Alert"="Alert";
+"No"="No";
+"Yes"="Yes";
+"All Caught Up"="All Caught Up";
+"No Records"="No Records";
+
+
+"Something is Wrong."="Something is Wrong";
+
+
+
+"Are You Sure to Deactivate ?"="Are you sure to deactivate ?";
+"Are You Sure to Activate ?"="Are you sure to activate ?";
+
+"Ticket Status Changed"="Ticket Status Changed";
+"Ticket is Already Open"="Ticket is Already Open";
+"Ticket is Already Closed"="Ticket is Already Closed";
+"Ticket is Already Resolved"="Ticket is Already Resolved";
+"Ticket is Already Deleted"="Ticket is Already Deleted";
+
+"All users"="All Users";
+"Agent users"="Agent Users";
+"Active users"="Active Users";
+"Client users"="Client Users";
+"Banned users"="Banned Users";
+"Inactive users"="Inactive Users";
+"Deactivated users"="Deactivated Users";
+
+"Change Ticket Status"="Change Ticket Status";
+"Open"="Open";
+"Closed"="Closed";
+"Resolved"="Resolved";
+"Deleted"="Deleted";
+
+"Inbox"="Inbox";
+"My Tickets"="My Tickets";
 "Ticket Reply"="Ticket Reply";
-"Message*"="Message*";
-"Empty!!!"="Empty!!!";
+"Internal Notes"="Internal Notes";
+"About"="About";
+"Closed Tickets"="Closed Tickets";
+"Edit Ticket"="Edit Ticket";
+"Notifications"="Notifications";
+"Edit Profile"="Edit Profile";
+"Client List"="Client List";
+"Unassigned Tickets"="Unassigned Tickets";
+"Trash Tickets"="Trash Tickets";
+"Merge Tickets"="Merge Tickets";
+"Ticket Title"="Ticket Title";
+"Ticket Number"="Ticket Number";
+"Priority"="Priority";
+"Updated at"="Updated at";
+"Created at"="Created at";
+"Due Date"="Due Date";
+"Show Filter"="Show Filter";
+"Clear All"="Clear All";
+"Exit"="Exit";
+"ASC"="ASC";
+"DES"="DES";
+"Filter"="Filter";
+"Sort by"="Sort by";
+"Details"="Details";
+"Message"="Message";
 "Cc"="Cc";
-"Please wait"="Please wait";
+"Please wait"="Please Wait";
+
+"Discard Changes ?"="Discard Changes ?";
+
+"Details Updated successfully"="Details Updated Successfully";
+"Merged Successfully"="Merged Successfully";
+"Requester Created successfully"="Requester Created Successfully";
+"Tickets from different users"="Tickets From Different Users";
+"URL Verified successfully"="URL Verified Successfully";
+"You have logged in successfully"="You Have Logged in Successfully";
+"Updated successfully"="Updated Successfully";
+"Activated successfully"="Activated Successfully";
+"Deactivated successfully"="Deactivated Successfully";
+
+
+"Email already exist"="Email Already Exist";
+
+"Please Enter the URL"="Please Enter The URL";
+"Please insert username & password"="Please Insert Username & Password";
+"Please insert username"="Please Insert Username";
+"Please insert password"="Please Insert Password";
+"Verifying URL"="Verifying URL";
+
+"Please Enter Mobile Code"="Please Enter Mobile Code";
+"Please Select The Tickets"="Please Select the Tickets";
+"Please Select The Parent Ticket"="Please Select The Parent Ticket";
+"Please enter SUBJECT"="Please Enter Subject";
+"Please select HELP-TOPIC"="Please Select HelpTopic";
+"Please select PRIORITY"="Please select Priority";
+"Select CountryCode"="Select Country Code";
+"Please select SOURCE"="Please Select Source";
+"Please fill all mandatory fields"="Please Fill All Mandatory Fields";
+"Enter First Name & Last Name"="Enter First Name & Last Name";
+"Enter First Name & Email"="Enter First Name & Email";
+"Enter Last Name & Email"="Enter Last Name & Email";
+"Enter Full Email"="Enter Email";
+
+"Enter First Name, Last Name & Email"="Enter First Name, Last Name & Email";
+"Please enter username"="Please Enter Username";
+"Please enter First Name."="Please Enter First Name.";
+"Please enter Last Name"="Please Enter Last Name";
+"Please enter Email"="Please Enter Email";
+"Please enter valid email id"="Please Enter Valid Email";
+
+
+"FirstName should have more than 2 characters"="First Name Should Have More Than 2 Characters";
+"SUBJECT requires at least 5 characters"="Subject Requires At Least 5 Characters";
+"MESSAGE requires at least 10 characters"="Message Requires At Least 10 Characters";
+
+"Select Status"="Select Status";
+"Select SLA"="Select SLA";
+"Select Department"="Select Department";
+"Select Priority"="Select Priority";
+"Select Helptopic"="Select HelpTopic";
+"Select Source"="Select Source";
+"Select Ticket Type"="Select Ticket Type";
+"Select Assignee"="Select Assignee";
+
+"Permission Denied - You don't have permission to Open a ticket"="Permission Denied - You don't have permission to open a ticket.";
+"Permission Denied - Yo don't have permission to Close a ticket"="Permission Denied - Yo don't have permission to close a ticket.";
+"Permission Denied - You don't have permission to Resolve a ticket"="Permission Denied - You don't have permission to resolve a ticket.";
+"Permission Denied - You don't have permission to Delete a ticket"="Permission Denied - You don't have permission to delete a ticket.";
+
+
+"Permission denied, you do not have permission to access the requested page."="Permission denied, you do not have permission to access the requested page.";
+"Access Denied - You don't have permission."="Access Denied - You don't have permission";
+"There is no Internet Connection"="There is no Internet Connection.";
+"The internet connection seems to be down. Please check it."="The internet connection seems to be down. Please check it.";
+
+"Cannot find specified host. Retype URL"="Cannot find specified host. Retype URL.";
+"Cannot connect to specified host. Server may be down."="Cannot connect to specified host. Server may be down.";
+"Cannot connect to the internet. Service may not be available"="Cannot connect to the internet. Service may not be available.";
+
+
+"Headquarter in Bangalore, Faveo Helpdesk provides Businesses with an automated Helpdesk system to manage customer support. The word Faveo comes from Latin which means to be favourable. Which truly highlights vision and the scope as well as the functionality of the product that Faveo is. Faveo empowers your business with state of art, ticket based support system. In today’s competitive startup scenario customer retention is one of the major challenges. Handling client query diligently is all the difference between retaining or losing a long lasting relationship. The company is driven with passion of providing tools for managing consumer queries for strategic insights and helping companies take those decisive decisions."= "Headquarter in Bangalore, Faveo Helpdesk provides businesses with an automated Helpdesk system to manage customer support. The word Faveo comes from Latin which means to be favourable. Which truly highlights vision and the scope as well as the functionality of the product that Faveo is. Faveo empowers your business with state of the art, ticket based support system. In today’s competitive startup scenario customer retention is one of the major challenges. Handling client query diligently is all the difference between retaining or losing a long lasting relationship. The company is driven with passion of providing tools for managing consumer queries for strategic insights and helping companies take those decisive decisions.";
+
+"Delete forever"="Delete Forever";
+"Select The Tickets for Assign" = "Select The Tickets For Assign";
+"Select The Tickets for Merge" = "Select The Tickets For Merge";
+"Assigned Successfully." = "Assigned Successfully";
+
+"New Version" = "New Version";
+"Version is available on AppStore" = "Version is Available on App Store";
+
+"Select 2 or more Tickets for Merge" = "Select 2 or More Tickets For Merge";
+"API is disabled in web, please enable it" = "API is Disabled in your Helpdesk at Admin Panel, please enable it";
+"Your account credentials were changed, contact to Admin and please log back in." = "Your Account Credentials Were Changed, Contact to Admin and Please Log Back in.";
+
+"Select The Tickets First For Changing Ticket Status" = "Select The Tickets First For Changing Ticket Status.";
+
+
+"New Version" = "New Version";
+"Version is available on AppStore" = "Version is Available on App Store";
+
+
+"Oops! Looks like your login credentials have been changed, please contact your admin." = "Oops! Looks like your login credentials have been changed, please contact your admin.";
+
+"Oops! Something went wrong!
+Please logout from your existing account and login with the new credentials." = "Oops! Something went wrong!
+Please logout from your existing account and login with the new credentials.";
+
+
+"This is not user" = "This is Not User";
+"You cant deactivate Agent from here." = "You can't Deactivate Agent From Here";
+
+"Your HELPDESK URL is not verified. This URL is not found in FAVEO HELPDESK BILLING." = "Your HELPDESK URL is not verified. This URL is not found in FAVEO HELPDESK BILLING.";
+
+"Internal Server Error. Something has gone wrong on the website's server" = "Internal Server Error. Something has gone wrong on the website's server.";
+
+"API is disabled in web, please enable it from Admin panel." = "API is disabled in web, please enable it from Admin panel.";
+
+"Error - Please Check Your Helpdesk URL" = "Error - Please Check Your Helpdesk URL";
+
+"Invalid entry for user. This app is used by Agent and Admin only." = "Invalid entry for user. This app is used by agent and admin only.";
+
+"Whoops! Something went Wrong! Please try again." = "Whoops! Something went Wrong! Please try again";
+
+
+"Access denied - Either your role has been changed or your login credential has been changed." = "Access denied - Either your role has been changed or your login credential has been changed.";
+
+"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again." = "Access Denied.  Your credentials has been changed. Contact to Admin and try to login again.";
+
+"Your role has beed changed to user. Contact to your Admin and try to login again." = "Your role has beed changed to user. Contact to your Admin and try to login again.";
+
+
+"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." = "Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in.";
+
+"Enter the data for search." = "Enter the data for search";
+
+"The body field is required.It can not be empty." = "The body field is required. It can Not be Empty.";
+
+"There is no cc available." = "There is No CC available";
+
+"Enter the reply content.It can not be empty." = "Enter The Reply Content. It can Not be Empty.";
+
+
+
+
 

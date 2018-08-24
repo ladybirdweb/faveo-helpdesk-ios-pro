@@ -8,7 +8,6 @@
 
 #import "ConversationViewController.h"
 #import "ConversationTableViewCell.h"
-#import "CNPPopupController.h"
 #import "AppDelegate.h"
 #import "Utils.h"
 #import "Reachability.h"
@@ -16,7 +15,6 @@
 #import "MyWebservices.h"
 #import "HexColors.h"
 #import "GlobalVariables.h"
-#import "RKDropdownAlert.h"
 #import "NotificationViewController.h"
 #import "RMessage.h"
 #import "RMessageView.h"
@@ -26,7 +24,7 @@
 #import "LoginViewController.h"
 
 
-@interface ConversationViewController ()<ConversationTableViewCellDelegate,CNPPopupControllerDelegate,UIWebViewDelegate,RMessageProtocol>{
+@interface ConversationViewController ()<ConversationTableViewCellDelegate,UIWebViewDelegate,RMessageProtocol>{
     
     Utils *utils;
     NSUserDefaults *userDefaults;
@@ -42,7 +40,6 @@
     InboxViewController * inboxPage;
 }
 @property(nonatomic,strong) UILabel *noDataLabel;
-@property (nonatomic, strong) CNPPopupController *popupController;
 @end
 
 @implementation ConversationViewController
@@ -74,35 +71,9 @@
     
     [[AppDelegate sharedAppdelegate] showProgressViewWithText:NSLocalizedString(@"Getting Conversations",nil)];
    
-//    if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
-//    {
-//        NSString *msg=@"";
-//        [utils showAlertWithMessage:@"Access Denied.  Your credentials has been changed. Contact to Admin and try to login again." sendViewController:self];
-//        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
-//        [[AppDelegate sharedAppdelegate] hideProgressView];
-//    }
-//    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"API disabled"])
-//    {   NSString *msg=@"";
-//        [utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
-//        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
-//        [[AppDelegate sharedAppdelegate] hideProgressView];
-//    }
-//    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"user"])
-//    {   NSString *msg=@"";
-//        [utils showAlertWithMessage:@"Your role has beed changed to user. Contact to your Admin and try to login again." sendViewController:self];
-//        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
-//        [[AppDelegate sharedAppdelegate] hideProgressView];
-//    }
-//    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Methon not allowed"])
-//    {   NSString *msg=@"";
-//        [utils showAlertWithMessage:@"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
-//        [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
-//        [[AppDelegate sharedAppdelegate] hideProgressView];
-//    }
-//    else{
+
        [self reload];
-        
-   // }
+  
     
 }
 
@@ -113,9 +84,9 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
         [self.refreshControl endRefreshing];
-        //[_activityIndicatorObject stopAnimating];
+       
         [[AppDelegate sharedAppdelegate] hideProgressView];
-       // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+    
         
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -451,10 +422,12 @@
         }
         else if(![Utils isEmpty:fName])
         {
+            fName = [fName substringToIndex:2];
             [cell.profilePicView setImageWithString:fName color:nil ];
         }
         else if(![Utils isEmpty:userName])
         {
+            userName = [userName substringToIndex:2];
             [cell.profilePicView setImageWithString:userName color:nil ];
         }
     
@@ -532,47 +505,6 @@
     
 }
 
-
-// It will show web view
--(void)showWebview:(NSString*)tittle body:(NSString*)body popupStyle:(CNPPopupStyle)popupStyle{
-    
-    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
-    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-    paragraphStyle.alignment = NSTextAlignmentCenter;
-    
-    NSAttributedString *title = [[NSAttributedString alloc] initWithString:tittle attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:14], NSParagraphStyleAttributeName : paragraphStyle}];
-    
-    UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.numberOfLines = 0;
-    titleLabel.attributedText = title;
-    
-    //    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
-    //    customView.backgroundColor = [UIColor hx_colorWithHexString:@"#00aeef"];
-    //     [customView addSubview:titleLabel];
-    
-    UIWebView *webview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,self.view.frame.size.height/2)];
-    // webview.scalesPageToFit = YES;
-    webview.autoresizesSubviews = YES;
-    //webview.delegate=self;
-webview.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
-    
-    NSRange range = [body rangeOfString:@"<body"];
-    
-    if(range.location != NSNotFound) {
-        // Adjust style for mobile
-        float inset = 40;
-        NSString *style = [NSString stringWithFormat:@"<style>div {max-width: %fpx;}</style>", self.view.bounds.size.width - inset];
-        body = [NSString stringWithFormat:@"%@%@%@", [body substringToIndex:range.location], style, [body substringFromIndex:range.location]];
-    }
-    [webview loadHTMLString:body baseURL:nil];
-    
-    
-    self.popupController = [[CNPPopupController alloc] initWithContents:@[titleLabel,webview]];
-    self.popupController.theme = [CNPPopupTheme defaultTheme];
-    self.popupController.theme.popupStyle = popupStyle;
-    self.popupController.delegate = self;
-    [self.popupController presentPopupControllerAnimated:YES];
-}
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     

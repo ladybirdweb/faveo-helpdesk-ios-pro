@@ -17,7 +17,6 @@
 #import "MyWebservices.h"
 #import "GlobalVariables.h"
 #import "LoadingTableViewCell.h"
-#import "RKDropdownAlert.h"
 #import "HexColors.h"
 #import "RMessage.h"
 #import "RMessageView.h"
@@ -33,6 +32,9 @@
 #import "UIImageView+Letters.h"
 #import "TicketSearchViewController.h"
 #import "LoginViewController.h"
+#import "TableViewAnimationKitHeaders.h"
+
+
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
@@ -79,6 +81,9 @@
 @property (nonatomic, strong) CFMultistageDropdownMenuView *multistageDropdownMenuView;
 @property (nonatomic, strong) CFMultistageConditionTableView *multistageConditionTableView;
 @property (nonatomic) int pageInt;
+
+@property (nonatomic, assign) NSInteger animationType;
+
 
 @end
 
@@ -143,6 +148,9 @@
     selectedSubjectArray = [[NSMutableArray alloc] init];
     selectedTicketOwner = [[NSMutableArray alloc] init];
     
+    _animationType = 5;
+   
+    
     self.tableView.allowsMultipleSelectionDuringEditing = true;
     UILongPressGestureRecognizer *lpGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(EditTableView:)];
     [lpGesture setMinimumPressDuration:1];
@@ -190,6 +198,7 @@
     [navbar setItems:@[navItem]];
     [self.view addSubview:navbar];
     
+
     if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
     {
         NSString *msg=@"";
@@ -205,7 +214,7 @@
 
         [[AppDelegate sharedAppdelegate] hideProgressView];
     }
-    else if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"user"])
+    else if( [globalVariables.roleFromAuthenticateAPI isEqualToString:@"user"] || [[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"user"])
     {   NSString *msg=@"";
        // [utils showAlertWithMessage:@"Your role has beed changed to user. Contact to your Admin and try to login again." sendViewController:self];
         [self->userDefaults setObject:msg forKey:@"msgFromRefreshToken"];
@@ -226,11 +235,24 @@
         [self reload];
         [self getDependencies];
         
+        
+        
     }
     
 }
 
+- (void)loadAnimation {
+    
+    [self.tableView reloadData];
+    [self starAnimationWithTableView:self.tableView];
+    
+}
 
+- (void)starAnimationWithTableView:(UITableView *)tableView {
+    
+    [TableViewAnimationKit showWithAnimationType:self.animationType tableView:tableView];
+  
+}
 
 // It is button action, after clicking this button it will navigate to Search view Controller view
 - (IBAction)searchButtonClicked {
@@ -325,7 +347,18 @@
         {
             [utils showAlertWithMessage:@"Can not merge these ticket, because this tickets having empty email." sendViewController:self];
             [[AppDelegate sharedAppdelegate] hideProgressView];
-        }else{
+        }
+        else if([exception.reason isEqualToString:@"-[NSNull isEqualToString:]: unrecognized selector sent to instance 0x1b74c5878"])
+        {
+            [utils showAlertWithMessage:@"Can not merge these ticket, because this tickets having empty email." sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+        }else if([exception.reason hasPrefix:@"-[NSNull isEqualToString:]"])
+        {
+            [utils showAlertWithMessage:@"Can not merge these ticket, because this tickets having empty email." sendViewController:self];
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+        }
+        else
+        {
         [utils showAlertWithMessage:exception.name sendViewController:self];
         [[AppDelegate sharedAppdelegate] hideProgressView];
         }
@@ -509,6 +542,7 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
                             [self reloadTableView];
+                            [self loadAnimation];
                             [self->refresh endRefreshing];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             
@@ -624,7 +658,7 @@
                             [self->utils showAlertWithMessage:@"The request timed out" sendViewController:self];
                         }else
                             
-                        [self->utils showAlertWithMessage:error.localizedDescription sendViewController:self];
+                        [self->utils showAlertWithMessage:@"The request timed out" sendViewController:self];
                         [[AppDelegate sharedAppdelegate] hideProgressView];
                        
                         return ;
@@ -697,31 +731,6 @@
                         }
                     }
                     
-                    
-                    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-                    
-                    // get documents path
-                    NSString *documentsPath = [paths objectAtIndex:0];
-                    
-                    // get the path to our Data/plist file
-                    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData1.plist"];
-                    NSError *writeError = nil;
-                    
-                    NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:resultDic format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&writeError];
-                    
-                    NSLog(@"Dict data is : %@",resultDic);
-                    NSLog(@"Plist data is : %@",plistData);
-                    NSLog(@"Plist data is : %@",plistData);
-                    
-                    
-                    if(plistData)
-                    {
-                        [plistData writeToFile:plistPath atomically:YES];
-                        NSLog(@"Data saved sucessfully");
-                    }
-                    else
-                    {
-                        NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
                     
                 }
                 NSLog(@"Thread-NO5-getDependencies-closed");
@@ -930,6 +939,7 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
                             [self reloadTableView];
+                            //[self loadAnimation];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                         
                         });
@@ -1096,10 +1106,12 @@
             }
             else if(![Utils isEmpty:fname])
             {
+                fname = [fname substringToIndex:2];
                 [cell.profilePicView setImageWithString:fname color:nil ];
             }
             else
             {
+                userName = [userName substringToIndex:2];
                 [cell.profilePicView setImageWithString:userName color:nil ];
             }
             
@@ -1603,7 +1615,7 @@
     {
         //connection unavailable
         
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+      //  [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
         
         
     }else{
@@ -1671,7 +1683,24 @@
                         
                         if([msg hasPrefix:@"Status changed"]){
                             
-                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                          //  [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                            if (self.navigationController.navigationBarHidden) {
+                                [self.navigationController setNavigationBarHidden:NO];
+                            }
+                            
+                            [RMessage showNotificationInViewController:self.navigationController
+                                                                 title:NSLocalizedString(@"success.", nil)
+                                                              subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                                                             iconImage:nil
+                                                                  type:RMessageTypeSuccess
+                                                        customTypeName:nil
+                                                              duration:RMessageDurationAutomatic
+                                                              callback:nil
+                                                           buttonTitle:nil
+                                                        buttonCallback:nil
+                                                            atPosition:RMessagePositionNavBarOverlay
+                                                  canBeDismissedByUser:YES];
                             
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:inboxVC animated:YES];

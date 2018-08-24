@@ -138,6 +138,8 @@
 		0672AF97204D28CF006D7918 /* test.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0672AF95204D28CF006D7918 /* test.xib */; };
 		067605FA202B2C8800D9EFE6 /* ATAppUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */; };
 		0689708F20318A3700702313 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0689708E20318A3700702313 /* ConversationTableViewCell.xib */; };
+		06916589211181D1006B5625 /* UITableView+XSAnimationKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 06916587211181D0006B5625 /* UITableView+XSAnimationKit.m */; };
+		0691658A211181D1006B5625 /* TableViewAnimationKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 06916588211181D1006B5625 /* TableViewAnimationKit.m */; };
 		06AB96DC2045311500FDE260 /* SupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AB96DB2045311500FDE260 /* SupportViewController.m */; };
 		06B8B01D20287E4300E5E8CA /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B8B01C20287E4200E5E8CA /* UIImageView+Letters.m */; };
 		06BB2A3B202C3B3F00B33C43 /* systemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06BB2A3A202C3B3E00B33C43 /* systemIcon.png */; };
@@ -462,6 +464,12 @@
 		067605F8202B2C8800D9EFE6 /* ATAppUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAppUpdater.h; sourceTree = "<group>"; };
 		067605F9202B2C8800D9EFE6 /* ATAppUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATAppUpdater.m; sourceTree = "<group>"; };
 		0689708E20318A3700702313 /* ConversationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationTableViewCell.xib; sourceTree = "<group>"; };
+		06916583211181CC006B5625 /* UITableView+XSAnimationKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+XSAnimationKit.h"; sourceTree = "<group>"; };
+		06916584211181CD006B5625 /* TableViewAnimationKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewAnimationKit.h; sourceTree = "<group>"; };
+		06916585211181CE006B5625 /* TableViewAnimationKitConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewAnimationKitConfig.h; sourceTree = "<group>"; };
+		06916586211181CF006B5625 /* TableViewAnimationKitHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewAnimationKitHeaders.h; sourceTree = "<group>"; };
+		06916587211181D0006B5625 /* UITableView+XSAnimationKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+XSAnimationKit.m"; sourceTree = "<group>"; };
+		06916588211181D1006B5625 /* TableViewAnimationKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewAnimationKit.m; sourceTree = "<group>"; };
 		06AB96DA2045311500FDE260 /* SupportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupportViewController.h; sourceTree = "<group>"; };
 		06AB96DB2045311500FDE260 /* SupportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupportViewController.m; sourceTree = "<group>"; };
 		06B8B01B20287E4200E5E8CA /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
@@ -1124,6 +1132,19 @@
 			path = ATAppUpdater;
 			sourceTree = "<group>";
 		};
+		0691658221118196006B5625 /* TableVIewAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				06916584211181CD006B5625 /* TableViewAnimationKit.h */,
+				06916588211181D1006B5625 /* TableViewAnimationKit.m */,
+				06916585211181CE006B5625 /* TableViewAnimationKitConfig.h */,
+				06916586211181CF006B5625 /* TableViewAnimationKitHeaders.h */,
+				06916583211181CC006B5625 /* UITableView+XSAnimationKit.h */,
+				06916587211181D0006B5625 /* UITableView+XSAnimationKit.m */,
+			);
+			path = TableVIewAnimation;
+			sourceTree = "<group>";
+		};
 		06B8B01A20287E4200E5E8CA /* UIImageView+Letters */ = {
 			isa = PBXGroup;
 			children = (
@@ -1164,6 +1185,7 @@
 				064D64FB206F5A54004202CB /* NSData+Base64.m */,
 				064B779C208A170E006497F2 /* MultiSelectSegmentedControl.h */,
 				064B779D208A170F006497F2 /* MultiSelectSegmentedControl.m */,
+				0691658221118196006B5625 /* TableVIewAnimation */,
 				0617150F2059018A00E3E14D /* TableViewPopUp */,
 				060DE577205162BA005EFB6E /* TextField Kit */,
 				D9EB9FC21E07C44D0001115F /* Reachability */,
@@ -1866,6 +1888,7 @@
 				06C93256209C75BA00E9D715 /* ViewCCList.m in Sources */,
 				061E311420357C6400603D22 /* otherFeatureMenuList.m in Sources */,
 				D9AAFAB91F5D475400891CA5 /* FTPopOverMenu.m in Sources */,
+				0691658A211181D1006B5625 /* TableViewAnimationKit.m in Sources */,
 				D9EB9F631E07C2D00001115F /* Data.m in Sources */,
 				0609ADB3203987E000DCDC85 /* UserAndAgentMenuListCell2.m in Sources */,
 				064D64FC206F5A54004202CB /* NSData+Base64.m in Sources */,
@@ -1907,6 +1930,7 @@
 				0634EB8720384095002CB4E8 /* FIlterAndSort2.m in Sources */,
 				061E31242035845800603D22 /* otherFeatureMenuListCell.m in Sources */,
 				D9EB9FA01E07C3270001115F /* LoginViewController.m in Sources */,
+				06916589211181D1006B5625 /* UITableView+XSAnimationKit.m in Sources */,
 				D9EB9FA21E07C3270001115F /* ClientListViewController.m in Sources */,
 				0618FA83204E9A87004D2C3F /* addCCView.m in Sources */,
 				D9EB9FBC1E07C4490001115F /* SlideNavigationController.m in Sources */,
@@ -2138,14 +2162,12 @@
 					"$(inherited)",
 					"-ObjC",
 					"-l\"ActionSheetPicker-3.0\"",
-					"-l\"CNPPopupController\"",
 					"-l\"GoogleToolboxForMac\"",
 					"-l\"HexColors\"",
 					"-l\"IQKeyboardManager\"",
 					"-l\"MBProgressHUD\"",
 					"-l\"NSDate-Time-Ago\"",
 					"-l\"PPTopMostController\"",
-					"-l\"RKDropdownAlert\"",
 					"-l\"RMessage\"",
 					"-l\"SDWebImage\"",
 					"-l\"XLForm\"",
@@ -2207,14 +2229,12 @@
 					"$(inherited)",
 					"-ObjC",
 					"-l\"ActionSheetPicker-3.0\"",
-					"-l\"CNPPopupController\"",
 					"-l\"GoogleToolboxForMac\"",
 					"-l\"HexColors\"",
 					"-l\"IQKeyboardManager\"",
 					"-l\"MBProgressHUD\"",
 					"-l\"NSDate-Time-Ago\"",
 					"-l\"PPTopMostController\"",
-					"-l\"RKDropdownAlert\"",
 					"-l\"RMessage\"",
 					"-l\"SDWebImage\"",
 					"-l\"XLForm\"",
@@ -2264,7 +2284,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk ProTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ladybirdwebsolutions.Faveo-Helpdesk-ProTests";
@@ -2280,7 +2300,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8VY8B59STG;
 				INFOPLIST_FILE = "Faveo Helpdesk ProTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ladybirdwebsolutions.Faveo-Helpdesk-ProTests";

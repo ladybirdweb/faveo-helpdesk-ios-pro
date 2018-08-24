@@ -16,7 +16,6 @@
 #import "AppConstanst.h"
 #import "MyWebservices.h"
 #import "AppDelegate.h"
-#import "RKDropdownAlert.h"
 #import "IQKeyboardManager.h"
 #import "Dat.h"
 #import "RMessage.h"
@@ -131,7 +130,7 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     
     
-    [self getDependencies];
+  //  [self getDependencies];
     
     [self readFromPlist];
    
@@ -424,6 +423,7 @@
         
         NSLog(@"Staff Name Array : %@",_staffArray);
         NSLog(@"STaff id Array : %@",staff_idArray);
+        
         globalVariables.assigneeIdArrayListToTicketCreate=staff_idArray;
         
     }@catch (NSException *exception)
@@ -542,6 +542,8 @@
 
 - (IBAction)submitClicked:(id)sender {
     
+    
+  //  selectedUserEmail
     
    [[AppDelegate sharedAppdelegate] showProgressView];
     
@@ -976,7 +978,7 @@
             // limit the input to only the stuff in this character set, so no emoji or cirylic or any other insane characters
             
             //        // in case you need to limit the max number of characters
-            if ([textView.text stringByReplacingCharactersInRange:range withString:text].length > 15) {
+            if ([textView.text stringByReplacingCharactersInRange:range withString:text].length > 20) {
                 return NO;
             }
             
@@ -1030,7 +1032,7 @@
             return  YES;
         }
         
-        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >100)
+        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >500)
         {
             return NO;
         }
@@ -1061,7 +1063,7 @@
             return  YES;
         }
         
-        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >100)
+        if([textView.text stringByReplacingCharactersInRange:range withString:text].length >500)
         {
             return NO;
         }
@@ -1097,7 +1099,22 @@
     
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
         
     }else{
     
@@ -1908,8 +1925,7 @@
 // called ticket create method
 -(void)postTicketCreate
 {
-   
-    
+
             NSString *code=@"";
             if(_codeTextField.text.length>0){
                 code=[_codeTextField.text substringFromIndex:1];
@@ -1925,6 +1941,7 @@
                 staffID=@"0";
             }
 //
+    
     NSLog(@"MEME111111111111 is : %@",typeMime);
     NSLog(@"MEME111111111111 is : %@",typeMime);
 
@@ -1978,13 +1995,21 @@
     [body appendData:[_textViewMsg.text dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 
+    
     // collaborator parameter
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"cc[]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[selectedUserEmail dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-
-
+    
+    if(![_ccTextField.text isEqualToString:@""]){
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"cc[]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[selectedUserEmail dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    }else
+    {
+        
+        
+    }
+     
+    
 
     // first name parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];

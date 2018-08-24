@@ -18,7 +18,6 @@
 #import "AppConstanst.h"
 #import "MyWebservices.h"
 #import "AppDelegate.h"
-#import "RKDropdownAlert.h"
 #import "IQKeyboardManager.h"
 #import "Dat.h"
 #import "RMessage.h"
@@ -99,13 +98,7 @@
     
     userDefaults=[NSUserDefaults standardUserDefaults];
     
-    
-    //    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
-    //                                    initWithTitle:@"Clear"
-    //                                    style:UIBarButtonItemStylePlain
-    //                                    target:self
-    //                                    action:@selector(flipView)];
-    //    self.navigationItem.rightBarButtonItem = clearButton;
+ 
     UIButton *clearButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [clearButton setImage:[UIImage imageNamed:@"clearAll"] forState:UIControlStateNormal];
     [clearButton addTarget:self action:@selector(flipView) forControlEvents:UIControlEventTouchUpInside];
@@ -133,8 +126,7 @@
     
     [self readFromPlist];
     
-    
-    // Do any additional setup after loading the view.
+
 }
 
 
@@ -156,17 +148,22 @@
 
 -(void)readFromPlist{
     // Read plist from bundle and get Root Dictionary out of it
-    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0];
-    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
-    
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsPath = [paths objectAtIndex:0];
+//    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
+//    
     @try{
-        if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
-        {
-            plistPath = [[NSBundle mainBundle] pathForResource:@"faveoData" ofType:@"plist"];
-        }
-        NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-        //    NSLog(@"resultDic--%@",resultDic);
+//        if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
+//        {
+//            plistPath = [[NSBundle mainBundle] pathForResource:@"faveoData" ofType:@"plist"];
+//        }
+//    //    NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+//
+        NSDictionary *resultDic = globalVariables.dependencyDataDict;
+        NSLog(@"resultDic--%@",resultDic);
+        
+        
+        
         NSArray *deptArray=[resultDic objectForKey:@"departments"];
         NSArray *helpTopicArray=[resultDic objectForKey:@"helptopics"];
         NSArray *prioritiesArray=[resultDic objectForKey:@"priorities"];
@@ -364,8 +361,10 @@
     
     /*----------------Get Selected Value[Multiple selection]-----------------*/
     
+
+//
     if([ArryData containsObject:@"Sales"] || [ArryData containsObject:@"Support"] || [ArryData containsObject:@"Operation"])
-        
+
     {
         _departmentTextField.text= [ArryData componentsJoinedByString:@","];
     }
@@ -391,6 +390,7 @@
     {
         _statusTextField.text= [ArryData componentsJoinedByString:@","];
     }
+    
     
     
 }

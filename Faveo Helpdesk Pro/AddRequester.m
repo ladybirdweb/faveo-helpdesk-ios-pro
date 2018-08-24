@@ -10,7 +10,6 @@
 #import "AppConstanst.h"
 #import "MyWebservices.h"
 #import "AppDelegate.h"
-#import "RKDropdownAlert.h"
 #import "IQKeyboardManager.h"
 #import "Dat.h"
 #import "RMessage.h"
@@ -344,8 +343,24 @@
 -(void)addRequesterMethod{
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
     }else{
         
         [[AppDelegate sharedAppdelegate] showProgressView];
@@ -417,6 +432,16 @@
                 return;
             }
             
+            if([json isKindOfClass:[NSDictionary class]]){
+                
+                NSString * file = [json objectForKey:@"file"];
+                
+                if([file hasSuffix:@"RouteCollection.php"]){
+                  
+                [self->utils showAlertWithMessage:NSLocalizedString(@"Something went wrong at back end server.", nil) sendViewController:self];
+                }
+            }
+            else{
   
             NSArray * arr1=json;
             NSLog(@"Arrtay is 12345 : %@",arr1);
@@ -495,7 +520,10 @@
                 
             }
             
+            }
         }];
+            
+        
     
      }@catch (NSException *exception)
         {

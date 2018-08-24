@@ -14,7 +14,6 @@
 #import "Utils.h"
 #import "MyWebservices.h"
 #import "GlobalVariables.h"
-#import "RKDropdownAlert.h"
 #import "HexColors.h"
 #import "LoadingTableViewCell.h"
 #import "TicketDetailViewController.h"
@@ -24,6 +23,8 @@
 #import "RMessageView.h"
 #import "UIImageView+Letters.h"
 #import "InboxViewController.h"
+#import "TableViewAnimationKitHeaders.h"
+
 
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
@@ -46,6 +47,7 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, assign) NSInteger totalTickets;
 @property (nonatomic, strong) NSString *nextPageUrl;
+@property (nonatomic, assign) NSInteger animationType;
 
 @end
 
@@ -69,6 +71,8 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
   
     
+    _animationType = 5;
+    
     if([[userDefaults objectForKey:@"msgFromRefreshToken"] isEqualToString:@"Invalid credentials"])
     {
         NSString *msg=@"";
@@ -91,6 +95,18 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    
+}
+
+- (void)loadAnimation {
+    
+    [self.tableView reloadData];
+    [self starAnimationWithTableView:self.tableView];
+    
+}
+- (void)starAnimationWithTableView:(UITableView *)tableView {
+    
+    [TableViewAnimationKit showWithAnimationType:self.animationType tableView:tableView];
     
 }
 
@@ -193,19 +209,24 @@
             
             if (json) {
                 //NSError *error;
-                NSLog(@"Thread-NO4--getInboxAPI--%@",json);
+              //  NSLog(@"Thread-NO4--getInboxAPI--%@",json);
                 self->_mutableArray = [json objectForKey:@"data"];
                 
                 self->_nextPageUrl =[json objectForKey:@"next_page_url"];
                 self->_currentPage=[[json objectForKey:@"current_page"] integerValue];
                 self->_totalTickets=[[json objectForKey:@"total"] integerValue];
                 self->_totalPages=[[json objectForKey:@"last_page"] integerValue];
-                NSLog(@"Thread-NO4.1getInbox-dic--%@", self->_mutableArray);
+                
+             //   NSLog(@"Thread-NO4.1getInbox-dic--%@", self->_mutableArray);
+                
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [[AppDelegate sharedAppdelegate] hideProgressView];
-                        [self->refresh endRefreshing];
+                        
                         [self.tableView reloadData];
+                        [self loadAnimation];
+                        [self->refresh endRefreshing];
+                        [[AppDelegate sharedAppdelegate] hideProgressView];
+                       
                     });
                 });
                 
@@ -350,7 +371,7 @@
             }
             
             if (json) {
-                NSLog(@"Thread-NO4--getNotifictionAPI--%@",json);
+           //     NSLog(@"Thread-NO4--getNotifictionAPI--%@",json);
                 
                 //_indexPaths=[[NSArray alloc]init];
                 //_indexPaths = [json objectForKey:@"data"];
@@ -367,6 +388,7 @@
             
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        
                         [self.tableView reloadData];
                                             });
                 });
@@ -425,7 +447,7 @@
         }
         
         NSDictionary *finaldic=[_mutableArray objectAtIndex:indexPath.row];
-        NSLog(@"Dict is : %@", finaldic);
+     //   NSLog(@"Dict is : %@", finaldic);
         
     
 @try{

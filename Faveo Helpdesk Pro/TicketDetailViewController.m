@@ -7,7 +7,6 @@
 //
 
 #import "TicketDetailViewController.h"
-#import "CNPPopupController.h"
 #import "Utils.h"
 #import "HexColors.h"
 #import "AppDelegate.h"
@@ -15,7 +14,6 @@
 #import "Reachability.h"
 #import "MyWebservices.h"
 #import "GlobalVariables.h"
-#import "RKDropdownAlert.h"
 #import "RMessage.h"
 #import "RMessageView.h" 
 #import "NotificationViewController.h"
@@ -30,7 +28,7 @@
 
 //#import "ReplyViewController.h"
 
-@interface TicketDetailViewController () <CNPPopupControllerDelegate,RMessageProtocol>{
+@interface TicketDetailViewController () <RMessageProtocol>{
     Utils *utils;
     NSUserDefaults *userDefaults;
     UITextField *textFieldCc;
@@ -51,9 +49,7 @@
     NSString *selectedStatusId;
 }
 
-//-(void)replyBtnPressed;
-//-(void)internalNotePressed;
-@property (nonatomic, strong) CNPPopupController *popupController;
+
 @property (strong, nonatomic) LGPlusButtonsView *plusButtonsViewMain;
 
 
@@ -617,7 +613,23 @@
     {
         //connection unavailable
         
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
         
         
     }else{
@@ -676,7 +688,25 @@
                         
                         if([msg hasPrefix:@"Status changed"]){
                             
-                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            //[RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                            if (self.navigationController.navigationBarHidden) {
+                                [self.navigationController setNavigationBarHidden:NO];
+                            }
+                            
+                            [RMessage showNotificationInViewController:self.navigationController
+                                                                 title:NSLocalizedString(@"success.", nil)
+                                                              subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                                                             iconImage:nil
+                                                                  type:RMessageTypeSuccess
+                                                        customTypeName:nil
+                                                              duration:RMessageDurationAutomatic
+                                                              callback:nil
+                                                           buttonTitle:nil
+                                                        buttonCallback:nil
+                                                            atPosition:RMessagePositionNavBarOverlay
+                                                  canBeDismissedByUser:YES];
+                            
                             
                             InboxViewController *inboxVC=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
                             [self.navigationController pushViewController:inboxVC animated:YES];

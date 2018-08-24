@@ -17,7 +17,6 @@
 #import "MyWebservices.h"
 #import "GlobalVariables.h"
 #import "LoadingTableViewCell.h"
-#import "RKDropdownAlert.h"
 #import "HexColors.h"
 #import "RMessage.h"
 #import "RMessageView.h"
@@ -31,6 +30,8 @@
 #import "MultpleTicketAssignTableViewController.h"
 #import "UIImageView+Letters.h"
 #import "TicketSearchViewController.h"
+#import "TableViewAnimationKitHeaders.h"
+
 
 @interface MyTicketsViewController ()<RMessageProtocol,CFMultistageDropdownMenuViewDelegate>{
     
@@ -67,7 +68,12 @@
 @property (nonatomic, strong) NSString *path1;
 @property (nonatomic, assign) NSInteger totalTickets;
 @property (nonatomic, strong) NSString *nextPageUrl;
+
+@property (nonatomic, assign) NSInteger animationType;
+
+
 @property (nonatomic, strong) CFMultistageDropdownMenuView *multistageDropdownMenuView;
+
 @end
 
 @implementation MyTicketsViewController
@@ -158,6 +164,9 @@
     [img addGestureRecognizer:singleTap];
     
     
+    _animationType = 5;
+
+    
     navItem.titleView = img;
     
     
@@ -193,6 +202,20 @@
     }
     // Do any additional setup after loading the view.
 }
+
+- (void)loadAnimation {
+    
+    [self.tableView reloadData];
+    [self starAnimationWithTableView:self.tableView];
+    
+}
+
+- (void)starAnimationWithTableView:(UITableView *)tableView {
+    
+    [TableViewAnimationKit showWithAnimationType:self.animationType tableView:tableView];
+    
+}
+
 
 // After clicking this naviagtion button, it will navigate to search view controller
 - (IBAction)searchButtonClicked {
@@ -470,6 +493,7 @@
                             
                             
                             [self reloadTableView];
+                            [self loadAnimation];
                             [self->refresh endRefreshing];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                            
@@ -834,10 +858,12 @@
             }
             else if(![Utils isEmpty:fname])
             {
+                fname = [fname substringToIndex:2];
                 [cell.profilePicView setImageWithString:fname color:nil ];
             }
             else
             {
+                userName = [userName substringToIndex:2];
                 [cell.profilePicView setImageWithString:userName color:nil ];
             }
             
@@ -1864,7 +1890,24 @@
     {
         //connection unavailable
         [[AppDelegate sharedAppdelegate] hideProgressView];
-        [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+       // [RKDropdownAlert title:APP_NAME message:NO_INTERNET backgroundColor:[UIColor hx_colorWithHexRGBAString:FAILURE_COLOR] textColor:[UIColor whiteColor]];
+        if (self.navigationController.navigationBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }
+        
+        [RMessage showNotificationInViewController:self.navigationController
+                                             title:NSLocalizedString(@"Error..!", nil)
+                                          subtitle:NSLocalizedString(@"There is no Internet Connection...!", nil)
+                                         iconImage:nil
+                                              type:RMessageTypeError
+                                    customTypeName:nil
+                                          duration:RMessageDurationAutomatic
+                                          callback:nil
+                                       buttonTitle:nil
+                                    buttonCallback:nil
+                                        atPosition:RMessagePositionNavBarOverlay
+                              canBeDismissedByUser:YES];
+        
         
         
     }else{
@@ -1934,7 +1977,26 @@
                             
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             
-                            [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                        //    [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
+                            
+                            if (self.navigationController.navigationBarHidden) {
+                                [self.navigationController setNavigationBarHidden:NO];
+                            }
+                            
+                            [RMessage showNotificationInViewController:self.navigationController
+                                                                 title:NSLocalizedString(@"success.", nil)
+                                                              subtitle:NSLocalizedString(@"Ticket Status Changed.", nil)
+                                                             iconImage:nil
+                                                                  type:RMessageTypeSuccess
+                                                        customTypeName:nil
+                                                              duration:RMessageDurationAutomatic
+                                                              callback:nil
+                                                           buttonTitle:nil
+                                                        buttonCallback:nil
+                                                            atPosition:RMessagePositionNavBarOverlay
+                                                  canBeDismissedByUser:YES];
+                            
+                            
                             
                             MyTicketsViewController *mytickets=[self.storyboard instantiateViewControllerWithIdentifier:@"MyTicketsID"];
                             [self.navigationController pushViewController:mytickets animated:YES];

@@ -16,7 +16,6 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "GlobalVariables.h"
-#import "RKDropdownAlert.h"
 #import "IQKeyboardManager.h"
 #import "NotificationViewController.h"
 #import "RMessage.h"
@@ -688,6 +687,7 @@
     }
 
 }
+
 - (IBAction)typeClicked:(id)sender {
 @try{
     [self.view endEditing:YES];
@@ -749,18 +749,26 @@
     NSLog(@"TextField value is : %@", _assinTextField.text);
 }
 
+
+
 - (IBAction)saveClicked:(id)sender {
     
     
     if (self.subjectTextView.text.length==0) {
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please enter SUBJECT",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+     
+        [self->utils showAlertWithMessage:NSLocalizedString(@"Alert: Please enter the subject field.", nil) sendViewController:self];
+        
     }else if (self.helpTopicTextField.text.length==0) {
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select HELP-TOPIC",nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+    
+        [self->utils showAlertWithMessage:NSLocalizedString(@"Alert: Please select Helptopic.", nil) sendViewController:self];
     }else if (self.priorityTextField.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select PRIORITY" ,nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
+      
+        [self->utils showAlertWithMessage:NSLocalizedString(@"Alert: Please select Priority.", nil) sendViewController:self];
     }else  if (self.sourceTextField.text.length==0){
-        [RKDropdownAlert title:APP_NAME message:NSLocalizedString(@"Please select SOURCE" ,@"Please select SOURCE") backgroundColor:[UIColor hx_colorWithHexRGBAString:ALERT_COLOR] textColor:[UIColor whiteColor]];
-    }else  {
+        
+        [self->utils showAlertWithMessage:NSLocalizedString(@"Alert: Please select the Ticket Source.", nil) sendViewController:self];
+    }else
+    {
         [self save];
     }
     
@@ -791,19 +799,22 @@
                               canBeDismissedByUser:YES];
         
     }else{
+        
         if (_typeTextField.text.length!=0) {
             type_id=[NSNumber numberWithInteger:1+[_typeArray indexOfObject:_typeTextField.text]];
+        }else if([_typeTextField.text isEqualToString:@"Not Available"]){
+            type_id=0;
         }else type_id=0;
         
         priority_id=[NSNumber numberWithInteger:1+[_priorityArray indexOfObject:_priorityTextField.text]];
         help_topic_id = [NSNumber numberWithInteger:1+[_helptopicsArray indexOfObject:_helpTopicTextField.text]];
         sla_id = [NSNumber numberWithInteger:1+[_slaPlansArray indexOfObject:_slaTextField.text]];
-        source_id = [NSNumber numberWithInteger:1+[_sourceArray indexOfObject:_sourceTextField.text]];
+        source_id = [NSNumber numberWithInteger:[_sourceArray indexOfObject:_sourceTextField.text]];
         status_id = [NSNumber numberWithInteger:1+[_statusArray indexOfObject:_statusTextField.text]];
         
         
         NSLog(@"Tciket SOirce is : %@",source_id);
-         NSLog(@"Tciket SOirce is : %@",source_id);
+        NSLog(@"Tciket SOirce is : %@",source_id);
         
         
     //  staff_id = [NSNumber numberWithInteger:1+[_assignArray indexOfObject:_assinTextField.text]];
@@ -1003,6 +1014,9 @@
     
     //may have originated from textField or barButtonItem, use an IBOutlet instead of element
     self.sourceTextField.text = (_sourceArray)[(NSUInteger) [selectedIndex intValue]];
+    
+    NSLog(@"is is : %@",source_id);
+    NSLog(@"source textfiled is: %@", _sourceTextField.text);
 }
 - (void)typeWasSelected:(NSNumber *)selectedIndex element:(id)element {
     type_id=(type_idArray)[(NSUInteger) [selectedIndex intValue]];
