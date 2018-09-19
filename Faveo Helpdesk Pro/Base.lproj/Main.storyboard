@@ -2872,9 +2872,6 @@
                                             <constraint firstAttribute="height" constant="33" id="krX-36-BEt"/>
                                         </constraints>
                                         <state key="normal" image="ic_forward"/>
-                                        <connections>
-                                            <action selector="urlButton:" destination="99b-SL-Zyv" eventType="touchUpInside" id="TZU-XP-JIH"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2989,9 +2986,6 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="btnLogin:" destination="99b-SL-Zyv" eventType="touchUpInside" id="OJ3-eh-PRp"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3027,14 +3021,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="SED-D7-QlW"/>
                     <nil key="simulatedTopBarMetrics"/>
-                    <connections>
-                        <outlet property="companyURLview" destination="BFl-VH-PD8" id="hMg-Nx-Ajx"/>
-                        <outlet property="loginButton" destination="VP0-T6-DvK" id="mvg-0L-LqJ"/>
-                        <outlet property="loginView" destination="jeQ-mr-T6r" id="GZi-Lk-VKT"/>
-                        <outlet property="passcodeTextField" destination="Ihd-1f-DFh" id="11l-Od-gCX"/>
-                        <outlet property="urlTextfield" destination="w0x-e5-ocS" id="w2h-RG-Lhn"/>
-                        <outlet property="userNameTextField" destination="Cfj-9g-P0h" id="2Wn-60-NAm"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cWc-zr-QgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
