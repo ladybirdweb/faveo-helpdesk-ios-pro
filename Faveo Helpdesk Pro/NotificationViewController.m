@@ -545,9 +545,15 @@
         {
             [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
         }
-        else if(![Utils isEmpty:fname])
+        else
+        if(![Utils isEmpty:fname])
         {
             [cell.profilePicView setImageWithString:fname color:nil ];
+        }
+        else
+        if(![Utils isEmpty:userName])
+        {
+            [cell.profilePicView setImageWithString:userName color:nil ];
         }
         else if( [Utils isEmpty:fname] && [Utils isEmpty:lname] && [Utils isEmpty:userName])//userName
         {
