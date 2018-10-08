@@ -373,8 +373,6 @@
             if (json) {
            //     NSLog(@"Thread-NO4--getNotifictionAPI--%@",json);
                 
-                //_indexPaths=[[NSArray alloc]init];
-                //_indexPaths = [json objectForKey:@"data"];
                 self->_nextPageUrl =[json objectForKey:@"next_page_url"];
                 self->_currentPage=[[json objectForKey:@"current_page"] integerValue];
                 self->_totalTickets=[[json objectForKey:@"total"] integerValue];

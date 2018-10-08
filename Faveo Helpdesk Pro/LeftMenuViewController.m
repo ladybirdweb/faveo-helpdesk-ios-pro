@@ -36,6 +36,7 @@
 
 @implementation LeftMenuViewController
 
+//following method provided by SlideMenuViewController to enable side-menu
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self.slideOutAnimationEnabled = YES;
@@ -43,6 +44,7 @@
     return [super initWithCoder:aDecoder];
 }
 
+//Following method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView() method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -54,6 +56,7 @@
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
+    
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
    

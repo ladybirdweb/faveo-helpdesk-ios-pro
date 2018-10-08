@@ -113,22 +113,27 @@
  */
 @property (weak, nonatomic) IBOutlet UILabel *trash_countLabel;
 
+//following properties are used to create view for showing count label of ticket
+@property (weak, nonatomic) IBOutlet UIView *view1;
+@property (weak, nonatomic) IBOutlet UIView *view2;
+@property (weak, nonatomic) IBOutlet UIView *view3;
+@property (weak, nonatomic) IBOutlet UIView *view4;
+@property (weak, nonatomic) IBOutlet UIView *view5;
 
+//following properties are used to show ticket count values
 @property (weak, nonatomic) IBOutlet UILabel *c1;
 @property (weak, nonatomic) IBOutlet UILabel *c2;
 @property (weak, nonatomic) IBOutlet UILabel *c3;
 @property (weak, nonatomic) IBOutlet UILabel *c4;
 @property (weak, nonatomic) IBOutlet UILabel *c5;
 
+//declared this methods publicly
 -(void)update;
 -(void)reloadd;
 -(void)addUIRefresh;
 -(void)wipeDataInLogout;
-@property (weak, nonatomic) IBOutlet UIView *view1;
-@property (weak, nonatomic) IBOutlet UIView *view2;
-@property (weak, nonatomic) IBOutlet UIView *view3;
-@property (weak, nonatomic) IBOutlet UIView *view4;
 
-@property (weak, nonatomic) IBOutlet UIView *view5;
+
+
 
 @end

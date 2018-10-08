@@ -34,6 +34,7 @@
 
 @implementation AddRequester
 
+//This method is called after the view controller has loaded its view hierarchy into memory.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -83,7 +84,7 @@
 }
 
 
-
+//Following method notifies the view controller that its view is about to be removed from a view hierarchy.
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     // _submitButton.userInteractionEnabled = false;
@@ -91,12 +92,6 @@
     
 }
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 -(void)removeKeyBoard
 {
@@ -140,7 +135,7 @@
 }
 
 
-// this method called after clicking on submit button,it will validate entered data in form
+// This method called after clicking on submit button,it will validate entered data in form
 - (IBAction)submitClicked:(id)sender {
     
     
@@ -556,7 +551,7 @@
    // _submitButton.hidden = NO;
 }
 
-// back button added programmatically
+// back button added programmatically to go back on create ticket VC
 - (IBAction)Back
 {
     BDCustomAlertView *customAlert = [[BDCustomAlertView alloc] init];
@@ -570,6 +565,7 @@
     
 }
 
+// The text field calls this method whenever user actions cause its text to change. Use this method to validate text as it is typed by the user. For example, you could use this method to prevent the user from entering anything but numerical values.
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
@@ -579,9 +575,8 @@
         if ([string isEqualToString:@" "]) {
             if (!textField.text.length)
                 return NO;
-            //                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
-            //                            return NO;
-        }
+
+           }
         
         // allow backspace
         if ([textField.text stringByReplacingCharactersInRange:range withString:string].length < textField.text.length) {
@@ -633,8 +628,7 @@
         if ([string isEqualToString:@" "]) {
             if (!textField.text.length)
                 return NO;
-            //                        if ([[textField.text stringByReplacingCharactersInRange:range withString:string] rangeOfString:@"  "].length)
-            //                            return NO;
+
         }
         
         // allow backspace
@@ -661,7 +655,7 @@
 }
 
 
-
+//The text field calls this method whenever the user taps the return button. You can use this method to implement any custom behavior when the button is tapped. 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
   // [textField resignFirstResponder];
