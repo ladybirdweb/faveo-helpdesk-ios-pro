@@ -1570,11 +1570,14 @@
 }
 
 
+
+// This method used to get some values like Agents list, Ticket Status, Ticket counts, Ticket Source, SLA ..etc which are used in various places in project.
 -(void)getDependencies{
     
     NSLog(@"Thread-NO1-getDependencies()-start");
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {
+        [[AppDelegate sharedAppdelegate] hideProgressView];
         //connection unavailable
         if (self.navigationController.navigationBarHidden) {
             [self.navigationController setNavigationBarHidden:NO];
@@ -1593,7 +1596,7 @@
                                         atPosition:RMessagePositionNavBarOverlay
                               canBeDismissedByUser:YES];
         
-      [[AppDelegate sharedAppdelegate] hideProgressView];
+        
         
     }else{
         
@@ -1650,7 +1653,12 @@
                         else{
                             NSLog(@"Error message is %@",msg);
                             NSLog(@"Thread-NO4-getdependency-Refresh-error == %@",error.localizedDescription);
-                            [self->utils showAlertWithMessage:msg sendViewController:self];
+                            if([error.localizedDescription isEqualToString:@"The request timed out."])
+                            {
+                                [self->utils showAlertWithMessage:@"The request timed out" sendViewController:self];
+                            }else
+                                
+                                [self->utils showAlertWithMessage:@"The request timed out" sendViewController:self];
                             [[AppDelegate sharedAppdelegate] hideProgressView];
                             
                             return ;
@@ -1665,10 +1673,20 @@
                     return;
                 }
                 
+                if ([msg isEqualToString:@"tokenNotRefreshed"]) {
+                    
+                  //  [self showMessageForLogout:@"Your HELPDESK URL or Your Login credentials were changed, contact to Admin and please log back in." sendViewController:self];
+                    
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                    
+                    return;
+                }
                 if (json) {
                     
-            
+                    //  NSLog(@"Thread-NO4-getDependencies-dependencyAPI--%@",json);
                     NSDictionary *resultDic = [json objectForKey:@"data"];
+                    self->globalVariables.dependencyDataDict=[json objectForKey:@"data"];
+                    
                     NSArray *ticketCountArray=[resultDic objectForKey:@"tickets_count"];
                     
                     for (int i = 0; i < ticketCountArray.count; i++) {
@@ -1714,26 +1732,6 @@
                     }
                     
                     
-                    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-                    
-                    // get documents path
-                    NSString *documentsPath = [paths objectAtIndex:0];
-                    
-                    // get the path to our Data/plist file
-                    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
-                    NSError *writeError = nil;
-                    
-                    NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:resultDic format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&writeError];
-                    
-                    if(plistData)
-                    {
-                        [plistData writeToFile:plistPath atomically:YES];
-                        NSLog(@"Data saved sucessfully");
-                    }
-                    else
-                    {
-                        NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
-                    
                 }
                 NSLog(@"Thread-NO5-getDependencies-closed");
             }
@@ -1749,12 +1747,15 @@
         @finally
         {
             NSLog( @" I am in getDependencies method in Inbox ViewController" );
-           
+            
             
         }
     }
-    NSLog(@"Thread-NO2-getDependencies()-closed");
+    
 }
+
+
+
 
 // This method used to show some popuop or list which contain some menus. Here it used to change the status of ticket, after clicking this button it will show one view which contains list of status. After clicking on any row, according to its name that status will be changed.
 -(void)onNavButtonTapped:(UIBarButtonItem *)sender event:(UIEvent *)event

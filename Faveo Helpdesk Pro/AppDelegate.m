@@ -201,7 +201,6 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 }
 
 
-
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     [[FIRInstanceID instanceID] setAPNSToken:deviceToken type:FIRInstanceIDAPNSTokenTypeUnknown];

@@ -484,9 +484,15 @@
                             
                             [self->userdefaults setObject:profileName forKey:@"profile_name"];
                             [self->userdefaults setObject:self->baseURL forKey:@"baseURL"];
+                            
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                
                             [self->userdefaults setObject:self->_userNameTextField.text forKey:@"username"];
                             
                             [self->userdefaults setObject:self.passcodeTextField.text forKey:@"password"];
+                            
+                            });
+                            
                             [self->userdefaults setBool:YES forKey:@"loginSuccess"];
                             [self->userdefaults synchronize];
                             
@@ -571,6 +577,11 @@
                         NSLog(@"Message is : %@",msg);
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Access denied - Either your role has been changed or your login credential has been changed."] sendViewController:self];
                     }
+                    if([msg isEqualToString:@"Error-404"])
+                    {
+                        NSLog(@"Message is : %@",msg);
+                        [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error 404 - Issue with Billing API while validating your Helpdesk URL. Contact to   Helpdesk Support."] sendViewController:self];
+                    }
                     
                     else{
                         [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",msg] sendViewController:self];
@@ -578,7 +589,8 @@
                     }
                     
                 }else if(error)  {
-                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                   // [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error-%@",error.localizedDescription] sendViewController:self];
+                    [self->utils showAlertWithMessage:[NSString stringWithFormat:@"Error - Issue with Billing API while validating your Helpdesk URL. Contact to   Helpdesk Support."] sendViewController:self];
                     NSLog(@"Thread-verifyBilling-error == %@",error.localizedDescription);
                 }
                 return ;
