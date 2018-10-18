@@ -122,7 +122,7 @@
 }
 
 
-// Following method validates the URL entered by user
+// This method validates the URL
 
 -(void)URLValidationMethod
 {
