@@ -74,7 +74,7 @@
 @property (nonatomic, strong) NSArray *indexPaths;
 @property (nonatomic, assign) NSInteger totalPages;
 @property (nonatomic, assign) NSInteger currentPage;
-@property (nonatomic, assign) NSInteger totalTickets; //
+@property (nonatomic, assign) NSInteger totalTickets; 
 @property (nonatomic, strong) NSString *nextPageUrl;
 @property (nonatomic, strong) NSString *path1;
 
@@ -235,26 +235,25 @@
         [self reload];
         [self getDependencies];
         
-        
-        
     }
     
 }
 
+// It is the method used for loading animation
 - (void)loadAnimation {
     
     [self.tableView reloadData];
     [self starAnimationWithTableView:self.tableView];
     
 }
-
+// This method show the animation for specified tableView
 - (void)starAnimationWithTableView:(UITableView *)tableView {
     
     [TableViewAnimationKit showWithAnimationType:self.animationType tableView:tableView];
   
 }
 
-// It is button action, after clicking this button it will navigate to Search view Controller view
+// It is button action, after clicking this button it will navigate to Search VC
 - (IBAction)searchButtonClicked {
     
     [self hideTableViewEditMode];
@@ -277,7 +276,6 @@
         }
         else{
             //selectedIDs
-
             globalVariables.ticketIDListForAssign=selectedIDs;
 
             MultpleTicketAssignTableViewController * vc=[self.storyboard instantiateViewControllerWithIdentifier:@"multipleAssignID"];
@@ -300,7 +298,8 @@
     
 }
 
-// This method used to merge 2 or more ticket using multiple ticket selection
+// This method used to merge 2 or more ticket using multiple ticket selection. After clicking this button it will redirect to merge tickets view
+
 -(void)MergeButtonClicked
 {
     NSLog(@"Clicked on merge");
@@ -1141,9 +1140,6 @@
         // NSString *encodedString = @"=?UTF-8?Q?Re:_Robin_-_Implementing_Faveo_H?= =?UTF-8?Q?elp_Desk._Let=E2=80=99s_get_you_started.?=";
         
         
-        
-        
-        
         NSString *encodedString =[finaldic objectForKey:@"title"];
         
         //   NSString *encodedString =@"Sample Ticket Titile";
@@ -1663,7 +1659,7 @@
                 if ([msg isEqualToString:@"tokenRefreshed"]) {
                     
                    [self changeStatusMethod:self->selectedStatusName idIs:self->selectedStatusId];
-                    NSLog(@"Thread--NO4-call-postTicketStatusChange");
+                    NSLog(@"Thread-call-postTicketStatusChange");
                     return;
                 }
                 
@@ -1683,7 +1679,6 @@
                         
                         if([msg hasPrefix:@"Status changed"]){
                             
-                          //  [RKDropdownAlert title: NSLocalizedString(@"success.", nil) message:NSLocalizedString(@"Ticket Status Changed.", nil) backgroundColor:[UIColor hx_colorWithHexRGBAString:SUCCESS_COLOR] textColor:[UIColor whiteColor]];
                             
                             if (self.navigationController.navigationBarHidden) {
                                 [self.navigationController setNavigationBarHidden:NO];
@@ -1716,7 +1711,7 @@
                     }
                 }
                 
-                NSLog(@"Thread-NO5-postTicketStatusChange-closed");
+                NSLog(@"Thread-postTicketStatusChange-closed");
                 
             }];
         }
@@ -1736,6 +1731,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+// test line 
 #pragma mark - lazy
 
 - (CFMultistageDropdownMenuView *)multistageDropdownMenuView

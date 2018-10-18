@@ -100,15 +100,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     [self split];
     
+    //A control that displays one or more buttons along the bottom edge of your interface.This is used to show done button - used to remove/hide keyboard.
     UIToolbar *toolBar= [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 316, 44)];
     UIBarButtonItem *removeBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain  target:self action:@selector(removeKeyBoard)];
     
     UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     [toolBar setItems:[NSArray arrayWithObjects:space,removeBtn, nil]];
+    
     [self.textViewMsg setInputAccessoryView:toolBar];
     [self.mobileView setInputAccessoryView:toolBar];
     [self.subjectView setInputAccessoryView:toolBar];
@@ -116,7 +117,7 @@
     [self.lastNameView setInputAccessoryView:toolBar];
     [self.emailTextView setInputAccessoryView:toolBar];
     
-    
+    // Returns a new instance of the receiving class.
     sla_id=[[NSNumber alloc]init];
     dept_id=[[NSNumber alloc]init];
     help_topic_id=[[NSNumber alloc]init];
@@ -127,11 +128,10 @@
     userDefaults=[NSUserDefaults standardUserDefaults];
     globalVariables=[GlobalVariables sharedInstance];
     
+    //Used to show or enable autoTool bat on keyboard
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
     
-    
-  //  [self getDependencies];
-    
+   
     [self readFromPlist];
    
     
@@ -219,9 +219,12 @@
 
 }
 
+// Following method tells this object that one or more new touches occurred in a view or window.
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
+
+/* Following method used to give action to the Image using UIGestureRecognizer features. A gesture-recognizer object—or, simply, a gesture recognizer—decouples the logic for recognizing a sequence of touches (or other input) and acting on that recognition. When one of these objects recognizes a common gesture or, in some cases, a change in the gesture, it sends an action message to each designated target object. */
 
 - (void)imageTaped:(UIGestureRecognizer *)gestureRecognizer {
     NSLog(@"Image Button Tapped");
@@ -232,7 +235,7 @@
     
 }
 
-
+// This methid hide/remove the keyboard after clicking on done button which on toolbar
 -(void)removeKeyboard{
     [_emailTextView resignFirstResponder];
     [_subjectView resignFirstResponder];
@@ -241,10 +244,8 @@
     
 }
 
-
 -(void)removeKeyBoard
 {
-    
     [self.textViewMsg resignFirstResponder];
     [_mobileView resignFirstResponder];
     [_emailTextView resignFirstResponder];
@@ -259,10 +260,11 @@
 }
 
 
-// after clicking on clear button it will clears all filled data in create ticket form
+// After clicking on clear button it will clears all filled data in create ticket form
 -(IBAction)flipView
 {
-    NSLog(@"Clciked");
+    NSLog(@"Clicked");
+    
     _emailTextView.text=@"";
     _firstNameView.text=@"";
     _lastNameView.text=@"";
@@ -282,6 +284,7 @@
     globalVariables.mobileCode=@"";
     
 }
+
 //-(void)viewWillAppear:(BOOL)animated
 //{
 //    _emailTextView.text=globalVariables.emailAddRequester;
@@ -294,14 +297,16 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     // _submitButton.userInteractionEnabled = false;
-    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];
     
 }
 
 //This method used for taking values from Plist file. Plist is one king of database used for temporary storage used in within mobile app
 -(void)readFromPlist{
+  
+   /*
     // Read plist from bundle and get Root Dictionary out of it
+   
     NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0];
     NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
@@ -311,29 +316,35 @@
         {
             plistPath = [[NSBundle mainBundle] pathForResource:@"faveoData" ofType:@"plist"];
         }
-    //    NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-       
+        
+        
+        NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    
+    */
+    
+    @try{
+        
         NSDictionary *resultDic = globalVariables.dependencyDataDict;
-        NSLog(@"resultDic--%@",resultDic);
+    //    NSLog(@"resultDic--%@",resultDic);
         
-        NSArray *deptArray=[resultDic objectForKey:@"departments"];
-        NSArray *helpTopicArray=[resultDic objectForKey:@"helptopics"];
-        NSArray *prioritiesArray=[resultDic objectForKey:@"priorities"];
-        NSArray *slaArray=[resultDic objectForKey:@"sla"];
-        NSArray *sourcesArray=[resultDic objectForKey:@"sources"];
-        NSMutableArray *staffsArray=[resultDic objectForKey:@"staffs"];
-        NSArray *statusArray=[resultDic objectForKey:@"status"];
-        NSArray *teamArray=[resultDic objectForKey:@"teams"];
-        NSLog(@"resultDic2--%@,%@,%@,%@,%@,%@,%@,%@",deptArray,helpTopicArray,prioritiesArray,slaArray,sourcesArray,staffsArray,statusArray,teamArray);
+     //   NSArray *deptArray=[resultDic objectForKey:@"departments"];
+          NSArray *helpTopicArray=[resultDic objectForKey:@"helptopics"];
+          NSArray *prioritiesArray=[resultDic objectForKey:@"priorities"];
+    //    NSArray *slaArray=[resultDic objectForKey:@"sla"];
+    //    NSArray *sourcesArray=[resultDic objectForKey:@"sources"];
+          NSMutableArray *staffsArray=[resultDic objectForKey:@"staffs"];
+    //    NSArray *statusArray=[resultDic objectForKey:@"status"];
+    //    NSArray *teamArray=[resultDic objectForKey:@"teams"];
+    //    NSLog(@"resultDic2--%@,%@,%@,%@,%@,%@,%@,%@",deptArray,helpTopicArray,prioritiesArray,slaArray,sourcesArray,staffsArray,statusArray,teamArray);
         
-        NSMutableArray *deptMU=[[NSMutableArray alloc]init];
-        NSMutableArray *slaMU=[[NSMutableArray alloc]init];
+     //   NSMutableArray *deptMU=[[NSMutableArray alloc]init];
+     //   NSMutableArray *slaMU=[[NSMutableArray alloc]init];
         NSMutableArray *helptopicMU=[[NSMutableArray alloc]init];
         NSMutableArray *priMU=[[NSMutableArray alloc]init];
         NSMutableArray *staffMU=[[NSMutableArray alloc]init];
         
-        dept_idArray=[[NSMutableArray alloc]init];
-        sla_idArray=[[NSMutableArray alloc]init];
+     //   dept_idArray=[[NSMutableArray alloc]init];
+     //   sla_idArray=[[NSMutableArray alloc]init];
         helpTopic_idArray=[[NSMutableArray alloc]init];
         pri_idArray=[[NSMutableArray alloc]init];
         staff_idArray=[[NSMutableArray alloc]init];
@@ -373,14 +384,14 @@
         }
         
         
-        for (NSDictionary *dicc in deptArray) {
-            if ([dicc objectForKey:@"name"]) {
-                
-                [deptMU addObject:[dicc objectForKey:@"name"]];
-                [dept_idArray addObject:[dicc objectForKey:@"id"]];
-            }
-            
-        }
+//        for (NSDictionary *dicc in deptArray) {
+//            if ([dicc objectForKey:@"name"]) {
+//
+//                [deptMU addObject:[dicc objectForKey:@"name"]];
+//                [dept_idArray addObject:[dicc objectForKey:@"id"]];
+//            }
+//
+//        }
         
         priDicc1=[NSDictionary dictionaryWithObjects:priMU forKeys:pri_idArray];
         
@@ -393,14 +404,14 @@
             
         }
         
-        for (NSDictionary *dicc in slaArray) {
-            if ([dicc objectForKey:@"name"]) {
-                [slaMU addObject:[dicc objectForKey:@"name"]];
-                [sla_idArray addObject:[dicc objectForKey:@"id"]];
-                
-            }
-            
-        }
+//        for (NSDictionary *dicc in slaArray) {
+//            if ([dicc objectForKey:@"name"]) {
+//                [slaMU addObject:[dicc objectForKey:@"name"]];
+//                [sla_idArray addObject:[dicc objectForKey:@"id"]];
+//
+//            }
+//
+//        }
         
         for (NSDictionary *dicc in helpTopicArray) {
             if ([dicc objectForKey:@"topic"]) {
@@ -410,11 +421,11 @@
             }
         }
         
-        _deptArray=[deptMU copy];
-        _helptopicsArray=[helptopicMU copy];
-        _slaPlansArray=[slaMU copy];
-        _priorityArray=[priMU copy];
-        _staffArray=[staffMU copy];
+      //  _deptArray=[deptMU copy];
+          _helptopicsArray=[helptopicMU copy];
+      //  _slaPlansArray=[slaMU copy];
+          _priorityArray=[priMU copy];
+          _staffArray=[staffMU copy];
         
         _helptopicsArray = [_helptopicsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         _priorityArray = [_priorityArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
@@ -447,7 +458,7 @@
 }
 
 
-
+// Assignee TextField clicked
 - (IBAction)staffClicked:(id)sender {
     
     @try{
@@ -473,6 +484,7 @@
     }
 }
 
+// Clicke on country code textField
 - (IBAction)countryCodeClicked:(id)sender {
     @try{
         [self.view endEditing:YES];
@@ -491,7 +503,7 @@
     }
 }
 
-
+// Clicke on HelpTopic TextField
 - (IBAction)helpTopicClicked:(id)sender {
     @try{
     [self.view endEditing:YES];
@@ -514,6 +526,8 @@
         
     }
 }
+
+//CLicked on Priority TextField
 - (IBAction)priorityClicked:(id)sender {
     @try{
           [self.view endEditing:YES];
@@ -539,17 +553,15 @@
 }
 
 
-
+//Clicked on submit button login view
 - (IBAction)submitClicked:(id)sender {
-    
-    
-  //  selectedUserEmail
-    
+
+   //show progressview
    [[AppDelegate sharedAppdelegate] showProgressView];
     
     @try{
         
-        
+        //checks mobile textField and code textField is empty
         if (![_mobileView.text isEqualToString:@""]) {
         
             if([_codeTextField.text isEqualToString:@""])
@@ -578,7 +590,7 @@
             
         }
         
-    
+       //Checking and validating the textField and showing appropriate alert message to user
         if(self.emailTextView.text.length==0 && self.firstNameView.text.length==0 && self.helpTopicTextField.text.length==0 && self.subjectView.text.length==0 && self.priorityTextField.text.length==0 && self.textViewMsg.text.length==0)
         {
             [[AppDelegate sharedAppdelegate] hideProgressView];
@@ -1082,7 +1094,7 @@
 }
 
 
-
+// Following method is asks the delegate if the specified text should be changed.
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSLog(@"Data is : %@",_ccTextField.text);
@@ -1093,7 +1105,8 @@
     return YES;
 }
 
-// This metod is used to add collaborator, it will call API according to enetered data, JSON will receive
+// This metod is used to search and add collaborator to this ticket
+
 -(void)collaboratorApiMethod:(NSString*)valueFromTextField
 {
     
@@ -1118,7 +1131,9 @@
         
     }else{
     
+        // replacing space to %20
         NSString *searchString=[valueFromTextField stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+        
         NSString *url =[NSString stringWithFormat:@"%@helpdesk/collaborator/search?token=%@&term=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"],searchString];
 @try{
         MyWebservices *webservices=[MyWebservices sharedInstance];
@@ -1246,13 +1261,6 @@
 
 - (UITableViewCell *)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath forText:(NSString *)text {
     
-//    static NSString *cellIdentifier = @"MonthAutoSuggestionCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//
-//    if (!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-//    }
-    
     
     userSearchDataCell *cell=[tableView dequeueReusableCellWithIdentifier:@"userSearchDataCellId"];
     
@@ -1265,26 +1273,26 @@
 @try{
     NSArray *months = uniqueNameArray;
   //  NSArray *firstName=uniquefirstNameArray;
-   // NSArray *image = UniqueprofilePicArray;
+  // NSArray *image = UniqueprofilePicArray;
     
     
     if (text.length > 0) {
         NSPredicate *filterPredictate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@",text];
         months = [uniqueNameArray filteredArrayUsingPredicate:filterPredictate];
       //  firstName = [uniquefirstNameArray filteredArrayUsingPredicate:filterPredictate];
-       //  image = [UniqueprofilePicArray filteredArrayUsingPredicate:filterPredictate];
+      //  image = [UniqueprofilePicArray filteredArrayUsingPredicate:filterPredictate];
     }
     
-//    cell.userNameLabel.text = firstName[indexPath.row];
-//    cell.emalLabel.text=months[indexPath.row];
+  // cell.userNameLabel.text = firstName[indexPath.row];
+  // cell.emalLabel.text=months[indexPath.row];
     
     cell.userNameLabel.text = months[indexPath.row];
     cell.emalLabel.text=@"";
     
-   // [cell setUserProfileimage:[image objectAtIndex:indexPath.row]];
+  // [cell setUserProfileimage:[image objectAtIndex:indexPath.row]];
      [cell.userProfileImage setImageWithString:months[indexPath.row] color:nil ];
 
-}@catch (NSException *exception)
+ }@catch (NSException *exception)
     {
         NSLog( @"Name: %@", exception.name);
         NSLog( @"Reason: %@", exception.reason );
@@ -1298,6 +1306,7 @@
     return cell;
     
 }
+
 
 - (NSInteger)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section forText:(NSString *)text {
     
@@ -1352,6 +1361,7 @@
 
 #pragma mark - UITextFieldDelegate
 
+// Following method aks the delegate if editing should begin in the specified text field.
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if(textField==_ccTextField)
     {
@@ -1362,7 +1372,7 @@
 }
 
 
-
+// Following method asks the delegate if the text field should process the pressing of the return button.
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -1701,6 +1711,8 @@
             @"886", @"TW", @"255", @"TZ", @"670", @"TL", @"58", @"VE",
             @"84", @"VN", @"1", @"VG", @"1", @"VI", nil];
 }
+
+
 
 
 // Initialize attachment picker menu

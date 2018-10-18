@@ -373,8 +373,6 @@
             if (json) {
            //     NSLog(@"Thread-NO4--getNotifictionAPI--%@",json);
                 
-                //_indexPaths=[[NSArray alloc]init];
-                //_indexPaths = [json objectForKey:@"data"];
                 self->_nextPageUrl =[json objectForKey:@"next_page_url"];
                 self->_currentPage=[[json objectForKey:@"current_page"] integerValue];
                 self->_totalTickets=[[json objectForKey:@"total"] integerValue];
@@ -545,9 +543,15 @@
         {
             [cell setUserProfileimage:[profileDict objectForKey:@"profile_pic"]];
         }
-        else if(![Utils isEmpty:fname])
+        else
+        if(![Utils isEmpty:fname])
         {
             [cell.profilePicView setImageWithString:fname color:nil ];
+        }
+        else
+        if(![Utils isEmpty:userName])
+        {
+            [cell.profilePicView setImageWithString:userName color:nil ];
         }
         else if( [Utils isEmpty:fname] && [Utils isEmpty:lname] && [Utils isEmpty:userName])//userName
         {

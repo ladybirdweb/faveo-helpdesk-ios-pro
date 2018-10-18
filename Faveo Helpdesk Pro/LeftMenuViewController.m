@@ -36,6 +36,7 @@
 
 @implementation LeftMenuViewController
 
+//following method provided by SlideMenuViewController to enable side-menu
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self.slideOutAnimationEnabled = YES;
@@ -43,6 +44,7 @@
     return [super initWithCoder:aDecoder];
 }
 
+//Following method is called after the view controller has loaded its view hierarchy into memory. This method is called regardless of whether the view hierarchy was loaded from a nib file or created programmatically in the loadView() method.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -54,6 +56,7 @@
     utils=[[Utils alloc]init];
     globalVariables=[GlobalVariables sharedInstance];
     userDefaults=[NSUserDefaults standardUserDefaults];
+    
     NSLog(@"device_token %@",[userDefaults objectForKey:@"deviceToken"]);
     
    
@@ -359,27 +362,6 @@
                             self->globalVariables.SpamStausId=statusId;
                         }
                     }
-                    
-                    
-                    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-                    
-                    // get documents path
-                    NSString *documentsPath = [paths objectAtIndex:0];
-                    
-                    // get the path to our Data/plist file
-                    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
-                    NSError *writeError = nil;
-                    
-                    NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:resultDic format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&writeError];
-                    
-                    if(plistData)
-                    {
-                        [plistData writeToFile:plistPath atomically:YES];
-                        NSLog(@"Data saved sucessfully");
-                    }
-                    else
-                    {
-                        NSLog(@"Error in saveData: %@", writeError.localizedDescription);               }
                     
                 }
                 NSLog(@"Thread-NO5-getDependencies-closed");
