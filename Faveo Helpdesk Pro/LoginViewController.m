@@ -608,7 +608,7 @@
                     
                      [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
-                else if([resultMsg isEqualToString:@"success"])
+                else if([resultMsg isEqualToString:@"success"]) 
                 {
                     NSLog(@"Billing successful!");
                     dispatch_async(dispatch_get_main_queue(), ^{

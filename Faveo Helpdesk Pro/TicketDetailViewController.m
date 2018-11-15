@@ -275,6 +275,7 @@
 
 - (void)cycleFromViewController:(UIViewController*) oldViewController
                toViewController:(UIViewController*) newViewController {
+    
     [oldViewController willMoveToParentViewController:nil];
     [self addChildViewController:newViewController];
     [self addSubview:newViewController.view toView:self.containerView];

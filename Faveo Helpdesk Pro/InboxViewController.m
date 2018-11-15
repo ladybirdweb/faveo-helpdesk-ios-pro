@@ -1108,12 +1108,19 @@
                 fname = [fname substringToIndex:2];
                 [cell.profilePicView setImageWithString:fname color:nil ];
             }
-            else
+            else if(![Utils isEmpty:userName])
             {
                 userName = [userName substringToIndex:2];
                 [cell.profilePicView setImageWithString:userName color:nil ];
             }
-            
+            else if([Utils isEmpty:fname] && [Utils isEmpty:lname] && [Utils isEmpty:userName]){
+                
+                [cell.profilePicView setImageWithString:@"N" color:nil ];
+            }
+            else{
+                [cell setUserProfileimage:[customerDict objectForKey:@"profile_pic"]];
+                
+            }
             
             //updated time of ticket
             cell.timeStampLabel.text=[utils getLocalDateTimeFromUTC:[finaldic objectForKey:@"updated_at"]];

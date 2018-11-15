@@ -81,7 +81,7 @@
 -(void)update{
 
     
-    [self getDependencies];
+  //  [self getDependencies];
     userDefaults=[NSUserDefaults standardUserDefaults];
     globalVariables=[GlobalVariables sharedInstance];
     
@@ -127,7 +127,7 @@
     {
      //   NSString * name = [NSString];
         NSString * name = [NSString stringWithFormat:@"%@",[userDefaults objectForKey:@"profile_name"]];
-        [_user_profileImage setImageWithString:[name substringToIndex:2] color:nil ];
+        [_user_profileImage setImageWithString:[name substringToIndex:1] color:nil ];
     }
     
 

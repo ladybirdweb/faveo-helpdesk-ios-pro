@@ -54,7 +54,7 @@
 
 - (IBAction)typeClicked:(id)sender;
 
-- (IBAction)statusClicked:(id)sender;
+//- (IBAction)statusClicked:(id)sender;
 - (IBAction)helpTopicClicked:(id)sender;
 
 
