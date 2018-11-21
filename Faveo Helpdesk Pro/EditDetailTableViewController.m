@@ -793,9 +793,11 @@
         
     }else{
         
+        
          if([_typeTextField.text isEqualToString:@"Not Available"]){
              type_id = [NSNumber numberWithInt:0];
              NSLog(@"Id 1 is: %@",type_id);
+             
          }else if(![_typeTextField.text isEqualToString:@"Not Available"]) {
              
              type_id= [NSNumber numberWithInteger:1+[_typeArray indexOfObject:_typeTextField.text]];

@@ -305,74 +305,64 @@
             if (json) {
                 NSLog(@"JSON-Merge-Function%@",json);
                
-                NSDictionary *dict1= [json objectForKey:@"response"];
                 
-                NSObject * response1=[dict1 objectForKey:@"message"];
-               
-                //checking response is king of dictionary
-                if([response1 isKindOfClass:[NSDictionary class]])
-                {
-                    NSDictionary *dict1= [json objectForKey:@"response"];
+                if([NSNull null] != [json objectForKey:@"message"]) {
                     
-                    NSDictionary * dict2=[dict1 objectForKey:@"message"];
-                    NSString *str=[dict2 objectForKey:@"message"];
+                    NSDictionary *msgDict = [json objectForKey:@"message"];
                     
-                    if([str isEqualToString:@"tickets from different users"])
-                    {
+                    NSString * msg  = [msgDict objectForKey:@"message"];
+                    
+                    if([msg isEqualToString:@"merged successfully"]){
+                     
+                        if (self.navigationController.navigationBarHidden) {
+                            [self.navigationController setNavigationBarHidden:NO];
+                        }
+                        
+                        [RMessage showNotificationInViewController:self.navigationController
+                                                             title:NSLocalizedString(@"success.", nil)
+                                                          subtitle:NSLocalizedString(@"Merged Successfully.", nil)
+                                                         iconImage:nil
+                                                              type:RMessageTypeSuccess
+                                                    customTypeName:nil
+                                                          duration:RMessageDurationAutomatic
+                                                          callback:nil
+                                                       buttonTitle:nil
+                                                    buttonCallback:nil
+                                                        atPosition:RMessagePositionNavBarOverlay
+                                              canBeDismissedByUser:YES];
+                        
+                        InboxViewController *create=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
+                        [self.navigationController pushViewController:create animated:YES];
+                        
+                    }
+                    else if([msg isEqualToString:@"tickets from different users"]){
+                        
                         [self->utils showAlertWithMessage:@"You can't merge these tickets because tickets from different users" sendViewController:self];
                         [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
                     }
-                    else
-                    {
-                         [self->utils showAlertWithMessage:@"Something went wrong...!" sendViewController:self];
+                    else{
+                        
+                        [self->utils showAlertWithMessage:@"Something went wrong...!" sendViewController:self];
                         [[AppDelegate sharedAppdelegate] hideProgressView];
+                        
                     }
+                    
                 }
                 else{
                     
-                    NSDictionary *dict1= [json objectForKey:@"response"];
-                    
-                    NSString * response1=[dict1 objectForKey:@"message"];
-                    NSString * msg=@"merged successfully";
-                    
-                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                        if([response1 isEqualToString: msg])
-                        {
-                           
-                            if (self.navigationController.navigationBarHidden) {
-                                [self.navigationController setNavigationBarHidden:NO];
-                            }
-                            
-                            [RMessage showNotificationInViewController:self.navigationController
-                                                                 title:NSLocalizedString(@"success.", nil)
-                                                              subtitle:NSLocalizedString(@"Merged Successfully.", nil)
-                                                             iconImage:nil
-                                                                  type:RMessageTypeSuccess
-                                                        customTypeName:nil
-                                                              duration:RMessageDurationAutomatic
-                                                              callback:nil
-                                                           buttonTitle:nil
-                                                        buttonCallback:nil
-                                                            atPosition:RMessagePositionNavBarOverlay
-                                                  canBeDismissedByUser:YES];
-                            
-                            InboxViewController *create=[self.storyboard instantiateViewControllerWithIdentifier:@"InboxID"];
-                            [self.navigationController pushViewController:create animated:YES];
-                        }else
-                        {
-                            [self->utils showAlertWithMessage:@"Something went wrong...!" sendViewController:self];
-                            [[AppDelegate sharedAppdelegate] hideProgressView];
-                        }
-                        
-                    
+                    [self->utils showAlertWithMessage:@"Something went wrong...!" sendViewController:self];
+                    [[AppDelegate sharedAppdelegate] hideProgressView];
                     
                 }
+
             }
             NSLog(@"Thread-NO5-postMerge-closed");
-             [[AppDelegate sharedAppdelegate] hideProgressView];
+            // [[AppDelegate sharedAppdelegate] hideProgressView];
             
-        }];
-}@catch (NSException *exception)
+         }];
+   
+   }@catch (NSException *exception)
         {
             NSLog( @"Name: %@", exception.name);
             NSLog( @"Reason: %@", exception.reason );

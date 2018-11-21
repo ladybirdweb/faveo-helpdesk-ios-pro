@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  SideMEnuDemo
 //
-//  Created by Narendra on 17/08/16.
+//  Created by Mallikarjun on 17/08/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -488,6 +488,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 - (void)showProgressViewWithText:(NSString *)text
 {
     MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:self.window animated:YES];
+   
     HUD.label.text = text;
     // HUD.dimBackground = YES;
     self.progressView = HUD;
