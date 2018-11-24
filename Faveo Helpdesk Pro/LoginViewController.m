@@ -90,21 +90,16 @@
 }
 
 
-
-
-
-
 -(void)textFieldFinished:(id)sender
 {
     [_urlTextfield resignFirstResponder];
 }
 
+
 //Following method notifies the view controller that its view is about to be added to a view hierarchy.
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[self navigationController] setNavigationBarHidden:YES];
-    
-   // self.urlTextfield.text=@"http://";
     
     [utils viewSlideInFromRightToLeft:self.companyURLview];
     [self.loginView setHidden:YES];
@@ -440,6 +435,18 @@
                                 [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
                                  [[AppDelegate sharedAppdelegate] hideProgressView];
                             }
+                            else{
+                                
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    //update UI here
+                                    [self->utils showAlertWithMessage:msg sendViewController:self];
+                                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                                    
+                                });
+                               
+                                
+                            }
+                    
                             
                 }
                         
