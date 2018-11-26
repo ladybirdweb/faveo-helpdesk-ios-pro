@@ -553,10 +553,10 @@
         NSLog(@"Type Array : %@",_typeArray);
         NSLog(@"Assignee Array : %@",assignArray);
         
-      _helptopicsArray = [_helptopicsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-      _priorityArray = [_priorityArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-      _sourceArray = [_sourceArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-      _typeArray =  [_typeArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+//      _helptopicsArray = [_helptopicsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+//      _priorityArray = [_priorityArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+//      _sourceArray = [_sourceArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+//      _typeArray =  [_typeArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
         //[assignArray sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         
@@ -714,7 +714,7 @@
     [_assinTextField resignFirstResponder];
     if (!assignArray||!assignArray.count) {
         _assinTextField.text=NSLocalizedString(@"Not Available",nil);
-        source_id=0;
+        staff_id=0;
     }else{
         [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select Assignee",nil) rows:assignArray initialSelection:0 target:self successAction:@selector(staffWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
      }
@@ -760,7 +760,12 @@
     }else  if (self.sourceTextField.text.length==0){
         
         [self->utils showAlertWithMessage:NSLocalizedString(@"Alert: Please select the Ticket Source.", nil) sendViewController:self];
-    }else
+    }
+    if ([self.typeTextField.text isEqualToString:@"Not Available"]){
+        
+        [self->utils showAlertWithMessage:NSLocalizedString(@"Alert: Please select the Ticket Type.", nil) sendViewController:self];
+    }
+    else
     {
         [self save];
     }
@@ -921,9 +926,8 @@
                         
                     {
                         [self->utils showAlertWithMessage:NSLocalizedString(@"Access Denied - You don't have permission.", nil) sendViewController:self];
-                    }else
-                    
-                    if ([json objectForKey:@"result"]) {
+                    }
+                    else if ([json objectForKey:@"result"]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                          
                             if (self.navigationController.navigationBarHidden) {
@@ -1054,6 +1058,8 @@
     
     //may have originated from textField or barButtonItem, use an IBOutlet instead of element
     self.helpTopicTextField.text = (_helptopicsArray)[(NSUInteger) [selectedIndex intValue]];
+    NSLog(@"Id is : %@",help_topic_id);
+    NSLog(@"Type textfiled is: %@", _helpTopicTextField.text);
 }
 
 //- (void)slaWasSelected:(NSNumber *)selectedIndex element:(id)element {
@@ -1078,6 +1084,9 @@
     
     //may have originated from textField or barButtonItem, use an IBOutlet instead of element
     self.priorityTextField.text = (_priorityArray)[(NSUInteger) [selectedIndex intValue]];
+    
+    NSLog(@"Id is : %@",priority_id);
+    NSLog(@"Type textfiled is: %@", _priorityTextField.text);
 }
 
 

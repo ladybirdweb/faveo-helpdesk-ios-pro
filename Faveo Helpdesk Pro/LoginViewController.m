@@ -424,7 +424,9 @@
                     
             
                         NSString *msg=[jsonData objectForKey:@"message"];
-                        
+                    
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         
                             if([msg isEqualToString:@"Invalid credentials"])
                             {
                                 [self->utils showAlertWithMessage:@"Invalid Credentials.Enter valid username or password" sendViewController:self];
@@ -436,18 +438,14 @@
                                  [[AppDelegate sharedAppdelegate] hideProgressView];
                             }
                             else{
-                                
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    //update UI here
+                        
                                     [self->utils showAlertWithMessage:msg sendViewController:self];
                                     [[AppDelegate sharedAppdelegate] hideProgressView];
-                                    
-                                });
-                               
                                 
                             }
                     
-                            
+                         });
+                         
                 }
                         
                else         //success = true

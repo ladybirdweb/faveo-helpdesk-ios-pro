@@ -562,10 +562,8 @@
     @try{
         
         //checks mobile textField and code textField is empty
-        if (![_mobileView.text isEqualToString:@""]) {
+        if (![_mobileView.text isEqualToString:@""] && [_codeTextField.text isEqualToString:@""]) {
         
-            if([_codeTextField.text isEqualToString:@""])
-            {
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 
                 if (self.navigationController.navigationBarHidden) {
@@ -574,7 +572,7 @@
                 
                 [RMessage showNotificationInViewController:self.navigationController
                                                      title:NSLocalizedString(@"Warning !", nil)
-                                                  subtitle:NSLocalizedString(@"Please Enter Mobile Code.!", nil)
+                                                  subtitle:NSLocalizedString(@"Please Enter Mobile Code.", nil)
                                                  iconImage:nil
                                                       type:RMessageTypeWarning
                                             customTypeName:nil
@@ -585,10 +583,31 @@
                                                 atPosition:RMessagePositionNavBarOverlay
                                       canBeDismissedByUser:YES];
                 
-                
+            }
+        else if ([_mobileView.text isEqualToString:@""] && ![_codeTextField.text isEqualToString:@""]) {
+            
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+            if (self.navigationController.navigationBarHidden) {
+                [self.navigationController setNavigationBarHidden:NO];
             }
             
+            [RMessage showNotificationInViewController:self.navigationController
+                                                 title:NSLocalizedString(@"Warning !", nil)
+                                              subtitle:NSLocalizedString(@"Please Enter Mobile Number.", nil)
+                                             iconImage:nil
+                                                  type:RMessageTypeWarning
+                                        customTypeName:nil
+                                              duration:RMessageDurationAutomatic
+                                              callback:nil
+                                           buttonTitle:nil
+                                        buttonCallback:nil
+                                            atPosition:RMessagePositionNavBarOverlay
+                                  canBeDismissedByUser:YES];
+            
         }
+        else
+        
         
        //Checking and validating the textField and showing appropriate alert message to user
         if(self.emailTextView.text.length==0 && self.firstNameView.text.length==0 && self.helpTopicTextField.text.length==0 && self.subjectView.text.length==0 && self.priorityTextField.text.length==0 && self.textViewMsg.text.length==0)
