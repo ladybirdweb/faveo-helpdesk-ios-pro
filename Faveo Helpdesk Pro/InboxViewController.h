@@ -36,15 +36,72 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 
+/*!
+ @method NotificationBtnPressed
+ 
+ @brief This is an button method.
+ 
+ @discussion After clicking this button it will navigates to the Notifications page which contains all list of notifications.
+ 
+ @code
+ 
+-(void)NotificationBtnPressed;
+ 
+ @endcode
+ 
+ */
 -(void)NotificationBtnPressed;
 
+/*!
+ @property page
+ 
+ @brief This is an integer property.
+ 
+ @discussion It used to represent the current page.
+ */
 @property (nonatomic) NSInteger page;
 
+/*!
+ @property searchBar
+ 
+ @brief This is an search bar property.
+ 
+ @discussion Used to create an search bar. Used to search an user or tickets.
+ */
 @property (strong, nonatomic) UISearchBar *searchBar;
+
+/*!
+ @property sampleDataArray
+ 
+ @brief This is an Array property.
+ 
+ @discussion This array represents that it contains some sample data used for internal purpose.
+ */
 @property (strong, nonatomic) NSMutableArray *sampleDataArray;
+
+/*!
+ @property filteredSampleDataArray
+ 
+ @brief This is an Array property.
+ 
+ @discussion It used to store filtered data.
+ */
 @property (strong, nonatomic) NSMutableArray *filteredSampleDataArray;
 
-
+/*!
+ @method hideTableViewEditMode
+ 
+ @brief This is Button method
+ 
+ @discussion It used to hide the tableView editing method.
+ 
+ @code
+ 
+ - (IBAction)btnLogin:(id)sender;
+ 
+ @endcode
+ 
+ */
 -(void)hideTableViewEditMode;
 
 

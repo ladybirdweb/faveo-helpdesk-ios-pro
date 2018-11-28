@@ -180,12 +180,25 @@
 @property (nonatomic, assign) NSInteger selectedIndex;
 
 
-
+/*!
+ @property assignArray
+ 
+ @brief This property defines an array which contains a list of assignee/agent names
+ */
 @property (nonatomic, strong) NSMutableArray * assignArray;
 
-
+/*!
+ @property assinTextField
+ 
+ @brief This textField property used to show assignee/agent name
+ */
 @property (weak, nonatomic) IBOutlet UITextField *assinTextField;
 
+/*!
+ @property subjectTextView
+ 
+ @brief This textView property used to show ticket subject
+ */
 @property (weak, nonatomic) IBOutlet UITextView *subjectTextView;
 
 @end

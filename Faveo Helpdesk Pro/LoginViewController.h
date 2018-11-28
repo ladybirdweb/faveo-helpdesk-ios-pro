@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "IQPreviousNextView.h"
+
 
 /*!
  @class LoginViewController
@@ -110,4 +110,5 @@
 
  */
 - (IBAction)urlButton:(id)sender;
+
 @end

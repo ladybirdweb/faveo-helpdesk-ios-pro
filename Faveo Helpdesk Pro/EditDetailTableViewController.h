@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+/*!
+ @class EditDetailTableViewController
+ 
+ @brief This class used for edit ticket.
+ 
+ @discussion By changing ticket properties like subject, status, type and assignee of the ticket user can able to update the ticket details only if agent/admin having permission of edit ticket else it will show an warning like you do not permission.
+ 
+ */
 @interface EditDetailTableViewController : UITableViewController<UITextFieldDelegate>
 
 

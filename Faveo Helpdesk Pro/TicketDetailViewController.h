@@ -56,9 +56,25 @@
  */
 @property(nonatomic,strong) NSString *ticketNumber;
 
+/*!
+ @property ticketLabel
+ 
+ @brief This lebel property used for dislaying ticket name.
+ */
 @property (weak, nonatomic) IBOutlet UILabel *ticketLabel;
 
+/*!
+ @property nameLabel
+ 
+ @brief This property used for dislaying owner name.
+ */
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+/*!
+ @property statusLabel
+ 
+ @brief This property used for dislaying ticket status.
+ */
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 

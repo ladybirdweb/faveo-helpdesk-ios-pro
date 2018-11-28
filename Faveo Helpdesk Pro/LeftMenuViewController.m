@@ -502,31 +502,6 @@
     [self sendDeviceToken];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-    // get documents path
-    NSString *documentsPath = [paths objectAtIndex:0];
-    // get the path to our Data/plist file
-    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
-    NSError *error;
-    @try{
-        if(![[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error])
-        {
-            NSLog(@"Error while removing the plist %@", error.localizedDescription);
-            //TODO: Handle/Log error
-        }
-    }@catch (NSException *exception)
-    {
-        NSLog( @"Name: %@", exception.name);
-        NSLog( @"Reason: %@", exception.reason );
-        [utils showAlertWithMessage:exception.name sendViewController:self];
-        return;
-    }
-    @finally
-    {
-        NSLog( @" I am in LogOut method in Leftmenu ViewController" );
-        
-    }
-    
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (NSHTTPCookie *each in cookieStorage.cookies) {
         [cookieStorage deleteCookie:each];
