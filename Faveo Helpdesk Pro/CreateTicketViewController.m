@@ -562,10 +562,8 @@
     @try{
         
         //checks mobile textField and code textField is empty
-        if (![_mobileView.text isEqualToString:@""]) {
+        if (![_mobileView.text isEqualToString:@""] && [_codeTextField.text isEqualToString:@""]) {
         
-            if([_codeTextField.text isEqualToString:@""])
-            {
                 [[AppDelegate sharedAppdelegate] hideProgressView];
                 
                 if (self.navigationController.navigationBarHidden) {
@@ -574,7 +572,7 @@
                 
                 [RMessage showNotificationInViewController:self.navigationController
                                                      title:NSLocalizedString(@"Warning !", nil)
-                                                  subtitle:NSLocalizedString(@"Please Enter Mobile Code.!", nil)
+                                                  subtitle:NSLocalizedString(@"Please Enter Mobile Code.", nil)
                                                  iconImage:nil
                                                       type:RMessageTypeWarning
                                             customTypeName:nil
@@ -585,10 +583,31 @@
                                                 atPosition:RMessagePositionNavBarOverlay
                                       canBeDismissedByUser:YES];
                 
-                
+            }
+        else if ([_mobileView.text isEqualToString:@""] && ![_codeTextField.text isEqualToString:@""]) {
+            
+            [[AppDelegate sharedAppdelegate] hideProgressView];
+            
+            if (self.navigationController.navigationBarHidden) {
+                [self.navigationController setNavigationBarHidden:NO];
             }
             
+            [RMessage showNotificationInViewController:self.navigationController
+                                                 title:NSLocalizedString(@"Warning !", nil)
+                                              subtitle:NSLocalizedString(@"Please Enter Mobile Number.", nil)
+                                             iconImage:nil
+                                                  type:RMessageTypeWarning
+                                        customTypeName:nil
+                                              duration:RMessageDurationAutomatic
+                                              callback:nil
+                                           buttonTitle:nil
+                                        buttonCallback:nil
+                                            atPosition:RMessagePositionNavBarOverlay
+                                  canBeDismissedByUser:YES];
+            
         }
+        else
+        
         
        //Checking and validating the textField and showing appropriate alert message to user
         if(self.emailTextView.text.length==0 && self.firstNameView.text.length==0 && self.helpTopicTextField.text.length==0 && self.subjectView.text.length==0 && self.priorityTextField.text.length==0 && self.textViewMsg.text.length==0)
@@ -1640,6 +1659,7 @@
                     @"Zanzibar"                                     : @"+255",
                     @"Zimbabwe"                                     : @"+263"
                     };
+    
     _countryArray=[_countryDic allKeys];
     _codeArray=[_countryDic allValues];
     NSLog(@"keys %@",[_countryDic allKeys]);
@@ -1943,6 +1963,10 @@
                 code=[_codeTextField.text substringFromIndex:1];
             }
 
+            NSLog(@"code is : %@",code);
+            NSLog(@"code is : %@",code);
+    
+    
             NSString *staffID= [NSString stringWithFormat:@"%@",staff_id];
             NSLog(@"Stffid1111 is : %@",staffID);
             NSLog(@"Stffid1111 is : %@",staffID);
@@ -1955,13 +1979,9 @@
 //
     
     NSLog(@"MEME111111111111 is : %@",typeMime);
-    NSLog(@"MEME111111111111 is : %@",typeMime);
-
-    NSLog(@"MEME22222222222 is : %@",file123);
     NSLog(@"MEME22222222222 is : %@",file123);
 
-//    //NSString *urlString = @"http://www.jamboreebliss.com/sayar/public/api/v1/helpdesk/create";
-//
+
     NSString *urlString=[NSString stringWithFormat:@"%@helpdesk/create?token=%@",[userDefaults objectForKey:@"companyURL"],[userDefaults objectForKey:@"token"]];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -2057,8 +2077,9 @@
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"email\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[_emailTextView.text dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
     NSString * help_id=[NSString stringWithFormat:@"%@",help_topic_id];
-     NSString * prio_id=[NSString stringWithFormat:@"%@",priority_id];
+    NSString * prio_id=[NSString stringWithFormat:@"%@",priority_id];
 
     // help topic parameter
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];

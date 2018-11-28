@@ -2,7 +2,7 @@
 //  AppConstanst.h
 //  SideMEnuDemo
 //
-//  Created by Narendra on 21/10/16.
+//  Created by Mallikarjun on 21/10/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -18,7 +18,7 @@
 #define API_KEY @"9p41T2XFZ34YRZJUNQAdmM7iV0Rr1CjN"
 #define NO_INTERNET @"There is no Internet Connection"
 #define IP @""
-#define APP_VERSION @"1.0"
+#define APP_VERSION @"1.9.4"
 
 //#define BILLING_API @"https://www.faveohelpdesk.com/billing/public/api/check-url"
 #define BILLING_API @"https://billing.faveohelpdesk.com/api/check-url"

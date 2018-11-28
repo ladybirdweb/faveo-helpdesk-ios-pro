@@ -25,6 +25,7 @@
 {
     BOOL searching;
 }
+
 /*!
  @property tableView
  

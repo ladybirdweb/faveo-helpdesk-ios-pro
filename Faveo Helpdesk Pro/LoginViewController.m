@@ -90,21 +90,16 @@
 }
 
 
-
-
-
-
 -(void)textFieldFinished:(id)sender
 {
     [_urlTextfield resignFirstResponder];
 }
 
+
 //Following method notifies the view controller that its view is about to be added to a view hierarchy.
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[self navigationController] setNavigationBarHidden:YES];
-    
-   // self.urlTextfield.text=@"http://";
     
     [utils viewSlideInFromRightToLeft:self.companyURLview];
     [self.loginView setHidden:YES];
@@ -429,7 +424,9 @@
                     
             
                         NSString *msg=[jsonData objectForKey:@"message"];
-                        
+                    
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         
                             if([msg isEqualToString:@"Invalid credentials"])
                             {
                                 [self->utils showAlertWithMessage:@"Invalid Credentials.Enter valid username or password" sendViewController:self];
@@ -440,7 +437,15 @@
                                 [self->utils showAlertWithMessage:@"API is disabled in web, please enable it from Admin panel." sendViewController:self];
                                  [[AppDelegate sharedAppdelegate] hideProgressView];
                             }
-                            
+                            else{
+                        
+                                    [self->utils showAlertWithMessage:msg sendViewController:self];
+                                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                                
+                            }
+                    
+                         });
+                         
                 }
                         
                else         //success = true
@@ -608,7 +613,7 @@
                     
                      [[AppDelegate sharedAppdelegate] hideProgressView];
                 }
-                else if([resultMsg isEqualToString:@"success"])
+                else if([resultMsg isEqualToString:@"success"]) 
                 {
                     NSLog(@"Billing successful!");
                     dispatch_async(dispatch_get_main_queue(), ^{
