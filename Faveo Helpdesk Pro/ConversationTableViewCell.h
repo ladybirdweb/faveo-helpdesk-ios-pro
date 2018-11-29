@@ -33,6 +33,18 @@
  */
 @property (weak, nonatomic) IBOutlet UILabel *timeStampLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *attachImage;
+
+@property (weak, nonatomic) IBOutlet UIButton *attachButtonLabel;
+
+
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
+@property (weak, nonatomic) IBOutlet UIView *view1;
+
+
+-(IBAction)clickedOnAttachment:(id)sender;
+
 /*!
  @method setUserProfileimage
  
@@ -43,16 +55,9 @@
  @code
  [self.profilePicView sd_setImageWithURL:[NSURL URLWithString:imageUrl]
  placeholderImage:[UIImage imageNamed:@"default_pic.png"]];
-
+ 
  */
 -(void)setUserProfileimage:(NSString*)imageUrl;
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
-@property (weak, nonatomic) IBOutlet UIView *view1;
-- (IBAction)clickedOnAttachment:(id)sender;
-
-@property (weak, nonatomic) IBOutlet UIImageView *attachImage;
-
-@property (weak, nonatomic) IBOutlet UIButton *attachButtonLabel;
 
 @end
 
@@ -61,7 +66,5 @@
 @optional
 
 - (void)buttonTouchedForCell:(ConversationTableViewCell *)cell;
-
-
 
 @end

@@ -130,10 +130,27 @@
  */
 @property(nonatomic,strong) NSString * clientId;
 
+/*!
+ @property mobileLabel
+ 
+ @brief It is an label that will show mobile number of the client.
+ */
 @property (weak, nonatomic) IBOutlet UILabel *mobileLabel;
 
+
+/*!
+ @property companyLabel
+ 
+ @brief It is an label that will show company name of the client.
+ */
 @property (weak, nonatomic) IBOutlet UILabel *companyLabel;
 
+
+/*!
+ @property rolLabel
+ 
+ @brief It is an label that will show tole of the client.
+ */
 @property (weak, nonatomic) IBOutlet UILabel *rolLabel;
 
 @end

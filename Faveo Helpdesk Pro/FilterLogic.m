@@ -229,6 +229,7 @@
     
 }
 
+// This method used to show tableview animation while loading into the TableView.
 - (void)loadAnimation {
     
     [self.tableView reloadData];

@@ -88,6 +88,7 @@
     
 }
 
+//This method Notifies the view controller that its view is about to be removed from a view hierarchy.
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:true];

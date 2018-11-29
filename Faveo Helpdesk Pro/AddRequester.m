@@ -111,6 +111,7 @@
     [ActionSheetStringPicker showPickerWithTitle:NSLocalizedString(@"Select CountryCode",nil) rows:_countryArray initialSelection:0 target:self successAction:@selector(countryCodeWasSelected:element:) cancelAction:@selector(actionPickerCancelled:) origin:sender];
 }
 
+// This method Asks the delegate if editing should begin in the specified text field.
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     // Here You can do additional code or task instead of writing with keyboard
@@ -334,7 +335,7 @@
     
 }
 
-
+// Add Requster API is called.
 -(void)addRequesterMethod{
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
     {

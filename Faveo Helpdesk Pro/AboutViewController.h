@@ -29,6 +29,25 @@
 @property (weak, nonatomic) IBOutlet UIButton *websiteButton;
 
 /*!
+ @property textview
+ 
+ @brief This is textView property.
+ 
+ @discussion This textView contains a company details.
+ */
+@property (weak, nonatomic) IBOutlet UITextView *textview;
+
+/*!
+ @property versionNumberLabel
+ 
+ @brief This is label property.
+ 
+ @discussion This label used to show current/latest version of the app.
+ */
+@property (weak, nonatomic) IBOutlet UILabel *versionNumberLabel;
+
+
+/*!
  @method btnClicked
  
  @brief This in an Button.
@@ -36,7 +55,7 @@
  
  @code
  
-- (IBAction)btnClicked:(id)sender;
+ - (IBAction)btnClicked:(id)sender;
  
  @endocde
  
@@ -44,8 +63,5 @@
  */
 
 - (IBAction)btnClicked:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextView *textview;
-
-@property (weak, nonatomic) IBOutlet UILabel *versionNumberLabel;
 
 @end

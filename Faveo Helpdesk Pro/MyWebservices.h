@@ -113,11 +113,10 @@ typedef void (^ApiResponse)(NSError* , id);
  
  @param block It perform some action.
  
- @brief It passes user id to next page.So that, we can get data.
+ @brief It passes user id to next page.So that, we can get next ticket data.
 
  */
 -(void)getNextPageURL:(NSString*)url user_id:(NSString*)uid callbackHandler:(callbackHandler)block;
-
 
 
 -(void)getNextPageURLInbox:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;

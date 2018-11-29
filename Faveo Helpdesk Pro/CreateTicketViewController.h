@@ -224,7 +224,7 @@
 
  @endocde
  */
-
+- (IBAction)priorityClicked:(id)sender;
 
 /*!
  @method submitClicked
