@@ -12,12 +12,9 @@
 /*!
  @class InboxViewController
  
- @brief This class contains list of tickets.
+ @brief This class contains list of oepn Tickets
  
- @discussion This class contains a table view and it gives a list of Clients. After clicking a particular ticket we can see name of client, email id, profile picture, contact number.
- Also it will show client is active and inactive.
- It contains a list of messages that he was created.
- 
+ @discussion This class uses a table view and it gives a list of tickets. Every ticket contain ticket number, subject, profile picture and contact number of client. After clicking a particular ticket it will moves to conversation page. Here we will see conversation between Agent and client.
  */
 
 @interface InboxViewController : UIViewController<SlideNavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate>

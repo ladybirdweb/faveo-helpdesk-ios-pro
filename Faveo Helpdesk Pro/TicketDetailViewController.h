@@ -79,7 +79,7 @@
 
 
 /*!
- @method addBtnPressed
+ @method indexChanged
  
  @brief This in an Button. After clicking perticluar ticket it redirect to redirect to Ticket Detail page.
  

@@ -17,7 +17,6 @@
 
  */
 
-
 @interface ClientDetailViewController : UIViewController
 
 /*!
@@ -51,7 +50,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 
 /*!
- @property testingLAbel
+ @property phoneLabel
  
  @brief This is name label for showing label of a phone.
  */

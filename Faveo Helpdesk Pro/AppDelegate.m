@@ -50,12 +50,14 @@
     UIStoryboard *mainStoryboard;
 }
 @property (nonatomic, strong) MBProgressHUD *progressView;
+
 @end
 
 @implementation AppDelegate
 
 NSString *const kGCMMessageIDKey = @"gcm.message_id";
 
+// It tells the delegate that the launch process is almost done and the app is almost ready to run.
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // [[IQKeyboardManager sharedManager] setEnabled:true];
@@ -187,7 +189,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 }
 
 
-
+// It called when your app has received a remote notification.
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     // Print message ID.
@@ -200,7 +202,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     
 }
 
-
+// It tells the delegate that the app successfully registered with Apple Push Notification service (APNs).
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     [[FIRInstanceID instanceID] setAPNSToken:deviceToken type:FIRInstanceIDAPNSTokenTypeUnknown];
@@ -214,6 +216,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     
 }
 
+// It sent to the delegate when Apple Push Notification service cannot successfully complete the registration process.
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
     NSLog(@"Failed to register deviceToken:%@",error.localizedDescription);
     
@@ -327,6 +330,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 }
 #endif
 
+// It tells the app that a remote notification arrived that indicates there is data to be fetched.
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
@@ -398,6 +402,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
 }
 
+// It will send the device token to the firebase and receives an refreshed token from the firebase.
 -(void)sendDeviceToken:(NSString*)refreshedToken{
     
     NSLog(@"refreshed token  %@",refreshedToken);
@@ -503,18 +508,19 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
         }); });
 }
 
+// It tells the delegate that the app is about to become inactive.
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     NSLog(@"");
 }
 
-
+// It tells the delegate that the app is about to enter the foreground.
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-
+// It tells the delegate when the app is about to terminate.
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
