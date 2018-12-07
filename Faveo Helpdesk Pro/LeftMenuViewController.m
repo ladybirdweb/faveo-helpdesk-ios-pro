@@ -69,9 +69,7 @@
     
 }
 
-
-
-
+//This method Notifies the view controller that its view is about to be added to a view hierarchy.
 -(void)viewWillAppear:(BOOL)animated{
     [self.tableView reloadData];
     //[self.tableView reloadData]
@@ -79,7 +77,6 @@
 
 
 -(void)update{
-
     
   //  [self getDependencies];
     userDefaults=[NSUserDefaults standardUserDefaults];
@@ -218,7 +215,7 @@
     
 }
 
-
+// This method used to get some values like Agents list, Ticket Status, Ticket counts, Ticket Source, SLA ..etc which are used in various places in project.
 -(void)getDependencies{
     
 
@@ -384,11 +381,13 @@
 }
 
 
+// This method Sent to the view controller when the app receives a memory warning.
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+// This method Tells the delegate that the specified row is now selected.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
@@ -486,6 +485,7 @@
                                                                      andCompletion:nil];
 }
 
+// This method Asks the delegate for the height to use for a row in a specified location.
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -501,31 +501,6 @@
     
     [self sendDeviceToken];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-    // get documents path
-    NSString *documentsPath = [paths objectAtIndex:0];
-    // get the path to our Data/plist file
-    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
-    NSError *error;
-    @try{
-        if(![[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error])
-        {
-            NSLog(@"Error while removing the plist %@", error.localizedDescription);
-            //TODO: Handle/Log error
-        }
-    }@catch (NSException *exception)
-    {
-        NSLog( @"Name: %@", exception.name);
-        NSLog( @"Reason: %@", exception.reason );
-        [utils showAlertWithMessage:exception.name sendViewController:self];
-        return;
-    }
-    @finally
-    {
-        NSLog( @" I am in LogOut method in Leftmenu ViewController" );
-        
-    }
     
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (NSHTTPCookie *each in cookieStorage.cookies) {
@@ -572,12 +547,14 @@
     }
 }
 
+// This method Tells the delegate the table view is about to draw a cell for a particular row.
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
 }
 
+// This method tells the delegate that a specified row is about to be selected.
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     // first 3 rows in any section should not be selectable

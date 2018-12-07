@@ -34,7 +34,6 @@
  
  @brief It is textfiled that allows a user to enter his email address.
  */
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextView *emailTextView;
 
 /*!
@@ -42,7 +41,6 @@
  
  @brief It is textfiled that allows a user to enter his first name.
  */
-@property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (weak, nonatomic) IBOutlet UITextView *firstNameView;
 
 /*!
@@ -50,7 +48,6 @@
  
  @brief It is textfiled that allows a user to enter his last name.
  */
-@property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet UITextView *lastNameView;
 
 /*!
@@ -65,7 +62,6 @@
  
  @brief It is textfiled that allows a user to enter his mobile number.
  */
-@property (weak, nonatomic) IBOutlet UITextField *mobileTextField;
 @property (weak, nonatomic) IBOutlet UITextView *mobileView;
 
 /*!
@@ -94,9 +90,6 @@
  
  @brief It is textfiled that allows a user to write a subject.
  */
-
-@property (weak, nonatomic) IBOutlet UITextField *subjectTextField;
-//@property (weak, nonatomic) IBOutlet UITextField *msgTextField;
 @property (weak, nonatomic) IBOutlet UITextView *subjectView;
 
 /*!
@@ -173,6 +166,13 @@
  */
 @property (nonatomic, strong) NSArray * codeArray;
 
+/*!
+ @property staffArray
+ 
+ @brief This is array that represents list of Agent Lists.
+ 
+ @discussion An object representing a static ordered collection, for use instead of an Array constant in cases that require reference semantics.
+ */
 @property (nonatomic, strong) NSMutableArray * staffArray;
 
 /*!
@@ -224,7 +224,7 @@
 
  @endocde
  */
-
+- (IBAction)priorityClicked:(id)sender;
 
 /*!
  @method submitClicked
@@ -253,27 +253,79 @@
 
  @endocde
  */
+- (IBAction)countryCodeClicked:(id)sender;
 
-
-
+/*!
+ @method staffClicked
+ 
+ @brief This will gives List of all agent list.
+ 
+ @code
+ 
+ - (IBAction)staffClicked:(id)sender;
+ 
+ @endocde
+ */
 - (IBAction)staffClicked:(id)sender;
 
 
 
-- (IBAction)countryCodeClicked:(id)sender;
-
+/*!
+ @method addRequesterClicked
+ 
+ @brief This is an button method and used to add user.
+ 
+ @code
+ 
+ - (IBAction)addRequesterClicked:(id)sender;
+ 
+ @endocde
+ */
 - (IBAction)addRequesterClicked:(id)sender;
 
+/*!
+ @property addReqImg
+ 
+ @brief This is an property of type image used show an image Icon.
+ 
+ @discussion This is used to shown an image for register button. After clicking on this button it will navigate to the register user page.
+ */
 @property (weak, nonatomic) IBOutlet UIImageView *addReqImg;
 
-
+/*!
+ @property ccTextField
+ 
+ @brief This is an textField property.
+ 
+ @discussion This is used to add cc (user mail) to the ticket.
+ */
 @property (weak, nonatomic) IBOutlet UITextField *ccTextField;
 
-
+/*!
+ @property fileImage
+ 
+ @brief This is an Image Property.
+ 
+ @discussion This is used to show an icon (attachment type) of selected attachment.
+ */
 @property (weak, nonatomic) IBOutlet UIImageView *fileImage;
+
+/*!
+ @property fileName123
+ 
+ @brief This is an Label Property.
+ 
+ @discussion This is used to show file name of the selected attachment.
+ */
 @property (weak, nonatomic) IBOutlet UILabel *fileName123;
 
-
+/*!
+ @property fileSize123
+ 
+ @brief This is an Label Property.
+ 
+ @discussion This is used to show file size of the selected attachment.
+ */
 @property (weak, nonatomic) IBOutlet UILabel *fileSize123;
 
 

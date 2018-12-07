@@ -1359,8 +1359,8 @@
 			children = (
 				06CB597220639397001680AD /* tools.png */,
 				D9A2FCB11F18942800C829DD /* NotificationTableViewCell.h */,
-				D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */,
 				D9A2FCB21F18942800C829DD /* NotificationTableViewCell.m */,
+				D9CF41AC1F4C15320087BBFA /* NotificationTableViewCell.xib */,
 				D9EB9F651E07C2F00001115F /* TicketTableViewCell.h */,
 				D9EB9F661E07C2F00001115F /* TicketTableViewCell.m */,
 				D9EB9F671E07C2F00001115F /* TicketTableViewCell.xib */,

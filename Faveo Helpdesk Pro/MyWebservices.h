@@ -2,7 +2,7 @@
 //  MyWebservices.h
 //  SideMEnuDemo
 //
-//  Created by Narendra on 16/10/16.
+//  Created on 16/10/16.
 //  Copyright © 2016 Ladybird websolutions pvt ltd. All rights reserved.
 //
 
@@ -63,21 +63,22 @@ typedef void (^ApiResponse)(NSError* , id);
  @method httpResponsePOST
  @param urlString This is url.
  @param parameter This is defines an id.
- @param block wskdnwskj
- @brief snsjkd
- @discussion sbdnjks
+ @param block It executes some code
+ @brief It calls an POST API call
+ @discussion Use POST APIs to create new subordinate resources, e.g. a file is subordinate to a directory containing it or a row is subordinate to a database table. Talking strictly in terms of REST, POST methods are used to create a new resource into the collection of resources.
  */
+
 -(void)httpResponsePOST:(NSString *)urlString
               parameter:(id)parameter
         callbackHandler:(callbackHandler)block;
 
 /*!
  @method httpResponseGET
- @param urlString dsknskd
- @param parameter dkdks
- @param block wskdnwskj
- @brief snsjkd
- @discussion sbdnjks
+ @param urlString It contains url
+ @param parameter It takes parameter from the URL
+ @param block It executes some code
+ @brief It will call GET API call.
+ @discussion Use GET requests to retrieve resource representation/information only – and not to modify it in any way. As GET requests do not change the state of the resource, these are said to be safe methods. Additionally, GET APIs should be idempotent, which means that making multiple identical requests must produce the same result every time until another API (POST or PUT) has changed the state of the resource on the server.
  */
 -(void)httpResponseGET:(NSString *)urlString
              parameter:(id)parameter
@@ -113,11 +114,10 @@ typedef void (^ApiResponse)(NSError* , id);
  
  @param block It perform some action.
  
- @brief It passes user id to next page.So that, we can get data.
+ @brief It passes user id to next page.So that, we can get next ticket data.
 
  */
 -(void)getNextPageURL:(NSString*)url user_id:(NSString*)uid callbackHandler:(callbackHandler)block;
-
 
 
 -(void)getNextPageURLInbox:(NSString*)url pageNo:(NSString*)pageInt callbackHandler:(callbackHandler)block;
@@ -134,6 +134,15 @@ typedef void (^ApiResponse)(NSError* , id);
 
 
 //+(NSURLSessionTask *)callPATCHAPIWithAPIName:(NSString *)apiName andCompletionHandler:(void(^)(id result, NSInteger responseCode, NSError *error))completionHandler;
+
+/*!
+ @method callPATCHAPIWithAPIName
+ @param urlString It contains url
+ @param parameter It takes parameter from the URL
+ @param block It executes some code
+ @brief It will call PATCH API call.
+ @discussion HTTP PATCH requests are to make partial update on a resource. If you see PUT requests also modify a resource entity so to make more clear – PATCH method is the correct choice for partially updating an existing resource and PUT should only be used if you’re replacing a resource in its entirety.
+ */
 
 -(void)callPATCHAPIWithAPIName:(NSString *)urlString
                      parameter:(id)parameter

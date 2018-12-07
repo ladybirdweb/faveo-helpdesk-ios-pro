@@ -26,6 +26,21 @@
  */
 @property (nonatomic,retain) UIActivityIndicatorView *activityIndicatorObject;
 
+
+/*!
+ @method reload
+ 
+ @brief This is an button action method.
+ 
+ @discussion this method is used to call some methods which used in this class for updatig some values and showing in UI
+ 
+ @code
+ 
+ -(void)reload;
+ 
+ @endcode
+ */
 -(void)reload;
+
 
 @end

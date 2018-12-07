@@ -19,14 +19,14 @@
 @interface ClientListTableViewCell : UITableViewCell
 
 /*!
- @property ticket_number
+ @property clientNameLabel
  
  @brief It is label used for definig name of user.
  */
 @property (weak, nonatomic) IBOutlet UILabel *clientNameLabel;
 
 /*!
- @property clientNameLabel
+ @property emailIdLabel
  
  @brief It is label used for definig email id of user.
  */

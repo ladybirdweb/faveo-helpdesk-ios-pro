@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "IQPreviousNextView.h"
+
 
 /*!
  @class LoginViewController
@@ -18,7 +18,6 @@
              At First when app will launch after that URL view appear, So here User enters their company URL if that URL is valid then it goes to login activity page.
              Here user gives username/email and password to access profile. After Successfully login it will goes to Inbox page, and here user can see list of tickets, if not then It Will Show Error.
  */
-
 @interface LoginViewController : UIViewController <UITextFieldDelegate>
 
 /*!
@@ -110,4 +109,5 @@
 
  */
 - (IBAction)urlButton:(id)sender;
+
 @end

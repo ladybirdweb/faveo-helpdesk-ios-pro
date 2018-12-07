@@ -84,23 +84,13 @@
     globalVariables.backButtonActionFromMergeViewMenu=@"true";
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+// Here metadata of the assignne is called ans stored and used for assignee purpose.
 -(void)readFromPlist{
     
 @try{
-    // Read plist from bundle and get Root Dictionary out of it
-    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0];
-    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"faveoData.plist"];
-    
-    
-        if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
-        {
-            plistPath = [[NSBundle mainBundle] pathForResource:@"faveoData" ofType:@"plist"];
-        }
-     //   NSDictionary *resultDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-        //    NSLog(@"resultDic--%@",resultDic);
-    
-       NSDictionary *resultDic = globalVariables.dependencyDataDict;
+        NSDictionary *resultDic = globalVariables.dependencyDataDict;
     
         NSMutableArray *staffsArray=[resultDic objectForKey:@"staffs"];
     

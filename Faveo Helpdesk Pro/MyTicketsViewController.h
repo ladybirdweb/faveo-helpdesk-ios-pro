@@ -18,6 +18,12 @@
 
 @interface MyTicketsViewController :UIViewController<SlideNavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate>
 
-
+/*!
+ @property page
+ 
+ @brief This is an integer property
+ 
+ @discussion It used to represent the page number.
+ */
 @property (nonatomic) NSInteger page;
 @end
