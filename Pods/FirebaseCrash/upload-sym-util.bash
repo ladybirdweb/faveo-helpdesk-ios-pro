@@ -1,3 +1,6 @@
+#!/bin/bash
+echo "$RANDOM"  # Supported in bash. No warnings.
+
 # Output a clickable message.  This will not count as a warning or
 # error.
 

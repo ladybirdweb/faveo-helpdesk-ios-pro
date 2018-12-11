@@ -1285,12 +1285,12 @@
             NSString *attachment1= [NSString stringWithFormat:@"%@",[finaldic objectForKey:@"attachment_count"]];
 //countcollaborator
 
-            NSLog(@"CC is %@ named",cc);
-             NSLog(@"CC is %@ named",cc);
-             NSLog(@"CC is %@ named",cc);
+            // NSLog(@"CC is %@ named",cc);
+            // NSLog(@"CC is %@ named",cc);
+            // NSLog(@"CC is %@ named",cc);
 //
-             NSLog(@"attachment is %@ named",attachment1);
-             NSLog(@"attachment is %@ named",attachment1);
+            // NSLog(@"attachment is %@ named",attachment1);
+            // NSLog(@"attachment is %@ named",attachment1);
 
             if(![cc isEqualToString:@"<null>"])
             {
@@ -1310,9 +1310,6 @@
                 }
                 
             }
-            
-            
-            
             
             //priority color
             NSDictionary *priorityDict=[finaldic objectForKey:@"priority"];

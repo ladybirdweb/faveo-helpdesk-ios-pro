@@ -196,7 +196,11 @@
                                 break;
                         }
                        
-                        [self->utils showAlertWithMessage:self->errorMsg sendViewController:self];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            //update UI here
+                            [self->utils showAlertWithMessage:self->errorMsg sendViewController:self];
+                        });
+                        
                         
                         NSLog(@"dataTaskWithRequest error: %@", self->errorMsg);
                         return;
@@ -236,9 +240,12 @@
                             }
                             else{
                                 NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
-                               
-                                [self->utils showAlertWithMessage:@"Unknown Error!" sendViewController:self];
-                                 [[AppDelegate sharedAppdelegate] hideProgressView];
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    //update UI here
+                                    [self->utils showAlertWithMessage:@"Unknown Error!" sendViewController:self];
+                                    [[AppDelegate sharedAppdelegate] hideProgressView];
+                                });
+                                
                                 return;
                             }
                         }
