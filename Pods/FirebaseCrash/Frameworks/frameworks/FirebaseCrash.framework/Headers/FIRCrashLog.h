@@ -142,7 +142,7 @@ void FIRCrashNSLog(NSString *format, ...) {
  *   crash reporter.  Excessively long messages will be truncated
  *   safely but that will introduce a delay in submitting the message.
  *
- *
+ * @param Message A log message
  *
  * @see FIRCrashLog(format, ...)
  */
