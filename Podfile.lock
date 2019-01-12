@@ -49,7 +49,7 @@ PODS:
   - MBProgressHUD (1.0.0)
   - NSDate-Time-Ago (1.0.1)
   - PPTopMostController (0.0.1)
-  - RMessage (2.1.0):
+  - RMessage (2.3.2):
     - HexColors (~> 4.0)
     - PPTopMostController
   - SDWebImage (3.8.2):
@@ -76,7 +76,7 @@ DEPENDENCIES:
   - XLForm (~> 3.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - ActionSheetPicker-3.0
     - Crashlytics
     - Fabric
@@ -107,7 +107,7 @@ SPEC CHECKSUMS:
   Firebase: 387f37c7dca894a02708da9ff35ba147040eae9e
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
   FirebaseCore: 1e383fdfe37b6b5d6ff88e84204bdee30276af0f
-  FirebaseCrash: 34f0349908ec87945a5ae96c402e7201a3f3aede
+  FirebaseCrash: 16dd3d538dcd28ad0e7599ff2fd86194c60fa73a
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   FirebaseMessaging: acf66347e43c5637c697060c3001d25c809a4131
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
@@ -119,11 +119,11 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   NSDate-Time-Ago: e9de167d0659ebe465c273e833e7b582f061fc41
   PPTopMostController: 4e6f1e5f8c645bdcc74cd837a20f607ff262c048
-  RMessage: 52acb5fcb2ccb6e76959dc1087070ae3e73b8f8c
+  RMessage: 761f8ff71247b8d72d0c4a0be5a8e6ce8dfdedd0
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   UITextField_AutoSuggestion: dca08de21c8de3f6054dda085087a04b5b326208
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: cd63c0dca56aca0ec424a20badc53388a7acdd29
+PODFILE CHECKSUM: d3622afd12650757d09afa1178482db2c0a8c3e0
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

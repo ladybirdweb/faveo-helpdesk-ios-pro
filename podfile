@@ -5,13 +5,12 @@ pod 'NSDate-Time-Ago'
 pod 'HexColors'
 pod 'IQKeyboardManager'
 pod 'MBProgressHUD', '~> 1.0.0'
-
+pod "RMessage"
 pod 'ActionSheetPicker-3.0'
 pod 'Firebase/Core'
 pod 'Firebase/Messaging'
 pod 'SDWebImage'
 pod 'XLForm', '~> 3.0'
-pod "RMessage"
 pod 'Fabric', '~> 1.7.3'
 pod 'Crashlytics', '~> 3.10.0'
 pod 'Firebase/Crash'

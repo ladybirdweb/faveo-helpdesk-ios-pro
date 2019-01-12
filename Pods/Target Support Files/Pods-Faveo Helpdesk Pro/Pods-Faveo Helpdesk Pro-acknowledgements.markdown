@@ -574,7 +574,7 @@ Except as contained in this notice, the name(s) of (the) Author shall not be use
 
 ## RMessage
 
-Copyright (c) 2014 Rendezvous, Inc. Adonis Peralta <donileo@gmail.com>
+Copyright (c) 2016 TouchSix, Inc. Adonis Peralta <donileo@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
