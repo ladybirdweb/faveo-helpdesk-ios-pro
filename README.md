@@ -8,11 +8,11 @@ Faveo iOS app works along with Faveo Helpdesk Pro edition web application. This 
 Faveo iOS app is designed & developed by <a href="http://www.ladybirdweb.com/" target="_blank">Ladybird Web Solution Pvt Ltd</a>.
 
 Website
---------------------------
+-----------------------
 Visit our website for more information on services offered by us <a href="http://www.faveohelpdesk.com/" target="_blank">www.faveohelpdesk.com</a>
 
 Faveo Service Desk Pro
---------------------------
+-----------------------
 Join Faveo discussion group and stay tuned to latest updates. 
 <a href="https://www.linkedin.com/groups/8429668" target="_blank">Join here</a>
 
